@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="رضوان – Nagriva. تطوير مواقع ويب احترافية، مونتاج فيديو، وإنشاء مدونات محسّنة. أحوّل أفكارك إلى مشاريع رقمية مربحة." />
+  <meta name="keywords" content="تطوير مواقع, مونتاج فيديو, إنشاء مدونات, فريلانسر, Nagriva, رضوان" />
+  <meta name="author" content="رضوان – Nagriva" />
+  <meta property="og:title" content="Nagriva – خدمات رقمية بقلم رضوان" />
+  <meta property="og:description" content="مواقع ويب، مونتاج فيديو، وإنشاء مدونات تحقق نتائج حقيقية." />
+  <meta property="og:type" content="website" />
+  <title> Nagriva – خدمات رقمية </title>
+  <link rel="icon" type="image/png" href="../nagriva-logo/Nagriva-logo-icon-.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- Logo -->
+      <a href="#home" class="nav-logo">
+        <img src="../nagriva-logo/Nagriva-logo-icon-.png" alt="Nagriva" class="logo-img" />
+      </a>
+
+      <!-- Nav Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">من أنا</a></li>
+        <li><a href="#services" class="nav-link">الخدمات</a></li>
+        <li><a href="#pricing" class="nav-link">الأسعار</a></li>
+        <li><a href="#portfolio" class="nav-link">أعمالي</a></li>
+        <li><a href="#testimonials" class="nav-link">آراء العملاء</a></li>
+          <li><a href="#contact" class="nav-link">تواصل معي</a></li>
+      </ul>
+
+      <!-- Divider -->
+      <div class="nav-divider"></div>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- Search Icon -->
+        <button class="nav-icon-btn" id="searchToggle" aria-label="بحث" title="بحث">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="nav-icon-btn theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+
+        <!-- CTA Button -->
+        <a href="#contact" class="nav-cta">احجز استشارة مجانية</a>
+
+        <!-- Hamburger -->
+        <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== SEARCH MODAL ===== -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="بحث">
+    <div class="search-modal">
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon-inner"></i>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="ابحث عن خدمة..."
+          autocomplete="off"
+          aria-label="ابحث عن خدمة"
+        />
+        <button class="search-close-btn" id="searchClose" aria-label="إغلاق البحث">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="search-results" id="searchResults">
+        <p class="search-hint"><i class="fa-solid fa-lightbulb"></i> ابحث عن خدماتي أو مشاريعي</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+         رضوان متاح لمشاريع جديدة
+        </div>
+        <h1 class="hero-title">
+         أحوّل أفكارك إلى مشاريع 
+          <span class="gradient-text"> رقمية</span>
+        </h1>
+
+        <p class="hero-desc">
+          مرحباً، أنا <strong>رضوان</strong>. لا أبني مجرد مواقع أو فيديوهات — أبني أدوات تجلب لك عملاء حقيقيين وتنمو معك. عملاؤي يرون نتائج قابلة للقياس خلال 30 يوماً.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary btn-hero-cta">
+            احجز استشارة مجانية <i class="fa-solid fa-rocket"></i>
+          </a>
+          <a href="#portfolio" class="btn btn-ghost">
+            شاهد نتائج العملاء <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+        <p class="hero-urgency">
+          <i class="fa-solid fa-fire"></i>
+          عدد محدود من المشاريع متاح هذا الشهر — لا تفوّت الفرصة
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">+50</span>
+            <span class="stat-label">مشروع مُنجز</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">رضا العملاء</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">3 أيام</span>
+            <span class="stat-label">متوسط التسليم</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="mockup-wrapper">
+          <div class="mockup-browser">
+            <div class="browser-bar">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <div class="browser-url"><i class="fa-solid fa-lock"></i> nagriva.com</div>
+            </div>
+            <div class="browser-screen">
+              <div class="screen-hero-bar"></div>
+              <div class="screen-nav"></div>
+              <div class="screen-cards">
+                <div class="screen-card"></div>
+                <div class="screen-card"></div>
+                <div class="screen-card"></div>
+              </div>
+              <div class="screen-lines">
+                <div class="screen-line w-80"></div>
+                <div class="screen-line w-60"></div>
+                <div class="screen-line w-70"></div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-card card-1">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>تم إطلاق المشروع!</span>
+          </div>
+          <div class="floating-card card-2">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>+240% زيارات</span>
+          </div>
+          <div class="floating-card card-3">
+            <i class="fa-solid fa-star"></i>
+            <span>تقييم 5.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>اسحب للأسفل</span>
+      <i class="fa-solid fa-chevron-down bounce"></i>
+    </div>
+  </section>
+
+  <!-- ===== TRUSTED CLIENTS ===== -->
+  <section class="trusted-clients" id="trusted-clients">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">ثقة حقيقية</span>
+        <h2 class="section-title">عملاء وثقوا بي <span class="gradient-text">وحققوا نتائج حقيقية</span></h2>
+        <p class="section-desc">عملاؤي وثقوا بي وحققوا نتائج قابلة للقياس — اقرأ قصصهم</p>
+      </div>
+
+      <!-- Brand logos row -->
+      <div class="brands-row">
+        <div class="brand-logo"><i class="fa-brands fa-shopify"></i> ShopBrand</div>
+        <div class="brand-logo"><i class="fa-brands fa-youtube"></i> YT Channel</div>
+        <div class="brand-logo"><i class="fa-solid fa-building"></i> TechCo</div>
+        <div class="brand-logo"><i class="fa-solid fa-store"></i> FashionStore</div>
+        <div class="brand-logo"><i class="fa-solid fa-chart-line"></i> GrowthSaaS</div>
+        <div class="brand-logo"><i class="fa-solid fa-dumbbell"></i> FitCoach</div>
+      </div>
+
+      <div class="clients-grid">
+
+        <div class="client-card" data-delay="0">
+          <div class="client-card-header">
+            <img src="https://i.pravatar.cc/64?img=5" alt="سارة محمد" class="client-photo" />
+            <div class="client-meta">
+              <strong class="client-name">سارة محمد</strong>
+              <span class="client-role">صاحبة متجر أزياء إلكتروني</span>
+              <div class="stars-row">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="client-quote">
+            "بعد إطلاق متجري مع رضوان، <strong>ارتفعت مبيعاتي 200% خلال شهرين فقط.</strong> كنت أبيع عبر واتساب والطلبات كانت شحيحة — الآن لدي تدفق يومي من العملاء الحقيقيين."
+          </p>
+          <div class="result-pill">
+            <i class="fa-solid fa-arrow-trend-up"></i> +200% مبيعات
+          </div>
+        </div>
+
+        <div class="client-card client-card--featured" data-delay="100">
+          <div class="client-card-header">
+            <img src="https://i.pravatar.cc/64?img=12" alt="كريم دياب" class="client-photo" />
+            <div class="client-meta">
+              <strong class="client-name">كريم دياب</strong>
+              <span class="client-role">صانع محتوى يوتيوب</span>
+              <div class="stars-row">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="client-quote">
+            "منذ تعاملت مع Nagriva، <strong>قفز عدد مشتركي من 500 إلى 15,000 خلال 3 أشهر.</strong> المحتوى الاحترافي غيّر كل شيء. أوصي به لكل صانع محتوى جاد."
+          </p>
+          <div class="result-pill">
+            <i class="fa-solid fa-users"></i> +14,500 مشترك
+          </div>
+        </div>
+
+        <div class="client-card" data-delay="200">
+          <div class="client-card-header">
+            <img src="https://i.pravatar.cc/64?img=47" alt="Adam Turner" class="client-photo" />
+            <div class="client-meta">
+              <strong class="client-name">Adam Turner</strong>
+              <span class="client-role">Fitness Coach, UK</span>
+              <div class="stars-row">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="client-quote">
+            "Ridwan built my landing page in 5 days and <strong>I got my first 3 paying clients within 2 weeks of launch.</strong> The ROI was incredible — best investment I made for my business."
+          </p>
+          <div class="result-pill">
+            <i class="fa-solid fa-calendar-check"></i> أول 3 عملاء في أسبوعين
+          </div>
+        </div>
+
+        <div class="client-card" data-delay="300">
+          <div class="client-card-header">
+            <img src="https://i.pravatar.cc/64?img=32" alt="ليلى التميمي" class="client-photo" />
+            <div class="client-meta">
+              <strong class="client-name">ليلى التميمي</strong>
+              <span class="client-role">مؤسسة شركة SaaS</span>
+              <div class="stars-row">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="client-quote">
+            "مدونتنا انتقلت من صفر إلى <strong>8,000 زيارة عضوية شهرياً خلال 4 أشهر.</strong> رضوان لا يكتب محتوى فقط — يبني استراتيجية نمو حقيقية."
+          </p>
+          <div class="result-pill">
+            <i class="fa-solid fa-globe"></i> 8,000 زيارة/شهر
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MY OFFER ===== -->
+  <section class="offers" id="offers">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">ماذا أقدّم لك</span>
+        <h2 class="section-title">عروض <span class="gradient-text">تحقق نتائج حقيقية</span></h2>
+        <p class="section-desc">لست هنا لبيع خدمات فقط — أنا هنا لمساعدتك على تحقيق أهداف قابلة للقياس.</p>
+      </div>
+      <div class="offers-grid">
+
+        <!-- عرض 1 -->
+        <div class="offer-card" data-delay="0">
+          <div class="offer-top">
+            <div class="offer-icon-wrap icon-purple">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="offer-result-badge">+120% زيارات</div>
+          </div>
+          <h3 class="offer-title">موقع ويب يجلب عملاء</h3>
+          <p class="offer-desc">موقع احترافي مُحسَّن لمحركات البحث، مصمم لتحويل الزوار إلى عملاء — لا مجرد بطاقة تعريفية.</p>
+          <ul class="offer-includes">
+            <li><i class="fa-solid fa-check"></i> تصميم مخصص بالكامل + تجاوب تام</li>
+            <li><i class="fa-solid fa-check"></i> تحسين SEO شامل من اليوم الأول</li>
+            <li><i class="fa-solid fa-check"></i> صفحات مُصمَّمة لرفع التحويل</li>
+            <li><i class="fa-solid fa-check"></i> دعم كامل بعد التسليم</li>
+          </ul>
+          <div class="offer-meta">
+            <div class="offer-meta-item">
+              <i class="fa-solid fa-clock"></i>
+              <span>5–7 أيام تسليم</span>
+            </div>
+            <div class="offer-price-badge">
+              <span>يبدأ من</span>
+              <strong>$199</strong>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-service">احصل على موقعك <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+
+        <!-- عرض 2 -->
+        <div class="offer-card offer-card--featured" data-delay="100">
+          <div class="offer-top">
+            <div class="offer-icon-wrap icon-blue">
+              <i class="fa-solid fa-film"></i>
+            </div>
+            <div class="offer-result-badge offer-result-badge--blue">×3 تفاعل</div>
+          </div>
+          <h3 class="offer-title">فيديو يرفع تفاعلك 3 أضعاف</h3>
+          <p class="offer-desc">محتوى مرئي احترافي يسحب الانتباه في أول 3 ثوانٍ ويجعل جمهورك يتفاعل ويشارك.</p>
+          <ul class="offer-includes">
+            <li><i class="fa-solid fa-check"></i> مونتاج احترافي بمستوى وكالات</li>
+            <li><i class="fa-solid fa-check"></i> موشن جرافيك + ترجمات تفاعلية</li>
+            <li><i class="fa-solid fa-check"></i> تصحيح ألوان سينمائي</li>
+            <li><i class="fa-solid fa-check"></i> مراجعات حتى رضاك الكامل</li>
+          </ul>
+          <div class="offer-meta">
+            <div class="offer-meta-item">
+              <i class="fa-solid fa-clock"></i>
+              <span>24–48 ساعة تسليم</span>
+            </div>
+            <div class="offer-price-badge">
+              <span>يبدأ من</span>
+              <strong>$49</strong>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-service-featured">احجز الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+
+        <!-- عرض 3 -->
+        <div class="offer-card" data-delay="200">
+          <div class="offer-top">
+            <div class="offer-icon-wrap icon-teal">
+              <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <div class="offer-result-badge offer-result-badge--teal">صفحة 1 جوجل</div>
+          </div>
+          <h3 class="offer-title">محتوى يتصدر نتائج البحث</h3>
+          <p class="offer-desc">مقالات SEO متخصصة تجلب زيارات عضوية مجانية وتجعلك مرجعاً في مجالك على جوجل.</p>
+          <ul class="offer-includes">
+            <li><i class="fa-solid fa-check"></i> بحث متعمق في الكلمات المفتاحية</li>
+            <li><i class="fa-solid fa-check"></i> محتوى طويل يتصدر المنافسة</li>
+            <li><i class="fa-solid fa-check"></i> تحسين SEO داخل الصفحة بالكامل</li>
+            <li><i class="fa-solid fa-check"></i> تقرير أداء مفصّل</li>
+          </ul>
+          <div class="offer-meta">
+            <div class="offer-meta-item">
+              <i class="fa-solid fa-clock"></i>
+              <span>2–3 أيام تسليم</span>
+            </div>
+            <div class="offer-price-badge">
+              <span>يبدأ من</span>
+              <strong>$39</strong>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-service">ابدأ مدونتك <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ME ===== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-image-col">
+          <div class="about-img-wrap">
+            <div class="about-img-circle">
+              <img src="https://i.ibb.co/yFNB0b7x/redwan.jpg" alt="رضوان" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+            </div>
+            <div class="about-img-ring"></div>
+            <div class="about-badge-float">
+              <i class="fa-solid fa-certificate"></i>
+              <span>فريلانسر محترف</span>
+            </div>
+            <div class="about-exp-float">
+              <span class="about-exp-num">+50</span>
+              <span class="about-exp-label">مشروع</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-content">
+          <span class="section-label">من أنا</span>
+          <h2 class="section-title">مرحباً، أنا <span class="gradient-text">رضوان أيت لحادج</span></h2>
+          <p class="about-story">
+            فريلانسر متخصص في الخدمات الرقمية، بدأت رحلتي في عالم الويب والمحتوى الرقمي منذ سنوات. أساعد رواد الأعمال والشركات على بناء هويتهم الرقمية وتحقيق نتائج حقيقية وقابلة للقياس.
+          </p>
+          <p class="about-story">
+            لا أهتم فقط بتسليم مشروع — بل أهتم بنجاح عملك. كل مشروع أعمل عليه هو فرصة لأترك أثراً حقيقياً في مسيرتك التجارية.
+          </p>
+          <ul class="about-bullets">
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>+50 مشروع مُنجز بنجاح لعملاء من دول مختلفة</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>تسليم سريع في المواعيد المحددة دائماً — بدون تأخير</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>تركيز كامل على احتياجاتك ونتائجك، لا على الأشكال فقط</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>تواصل مستمر وشفاف طوال فترة العمل</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">
+            اعمل معي الآن <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">ماذا أقدّم</span>
+        <h2 class="section-title">خدمات مصمّمة <span class="gradient-text">لتحقيق النتائج</span></h2>
+        <p class="section-desc">كل خدمة مصممة لمساعدة عملك على النمو — بلا مبالغات، فقط نتائج حقيقية.</p>
+      </div>
+      <div class="services-grid">
+
+        <!-- خدمة 1 -->
+        <div class="service-card" data-delay="0">
+          <div class="service-icon-wrap icon-purple">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <div class="service-tag">الأكثر طلباً</div>
+          <h3 class="service-title">تطوير مواقع ويب احترافية</h3>
+          <p class="service-desc">
+            احصل على موقع سريع وعصري يمثل علامتك التجارية ويحول الزوار إلى عملاء حقيقيين.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> تصميم مخصص ومتجاوب</li>
+            <li><i class="fa-solid fa-check"></i> بنية محسّنة لمحركات البحث</li>
+            <li><i class="fa-solid fa-check"></i> تحميل سريع وأمان عالٍ</li>
+            <li><i class="fa-solid fa-check"></i> التسليم خلال 3–7 أيام</li>
+          </ul>
+          <a href="#contact" class="btn btn-service">
+            احصل على موقعك <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+
+        <!-- خدمة 2 -->
+        <div class="service-card service-card--featured" data-delay="100">
+          <div class="service-icon-wrap icon-blue">
+            <i class="fa-solid fa-film"></i>
+          </div>
+          <h3 class="service-title">مونتاج فيديو عالي التأثير</h3>
+          <p class="service-desc">
+            حوّل مقاطع الفيديو الخام إلى محتوى احترافي مميز يسحر جمهورك ويرفع نسب التفاعل.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> ريلز، يوتيوب وإعلانات</li>
+            <li><i class="fa-solid fa-check"></i> موشن جرافيك وترجمات</li>
+            <li><i class="fa-solid fa-check"></i> تصحيح ألوان وتصميم صوتي</li>
+            <li><i class="fa-solid fa-check"></i> التسليم خلال 24–48 ساعة</li>
+          </ul>
+          <a href="#contact" class="btn btn-service-featured">
+            احجز الخدمة <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+
+        <!-- خدمة 3 -->
+        <div class="service-card" data-delay="200">
+          <div class="service-icon-wrap icon-teal">
+            <i class="fa-solid fa-pen-nib"></i>
+          </div>
+          <h3 class="service-title">إنشاء مدونات محسّنة لـ SEO</h3>
+          <p class="service-desc">
+            جذب زيارات عضوية بمقالات متعمقة وجذابة تتصدر جوجل وتجعلك مرجعاً في مجالك.
+          </p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> بحث شامل عن الكلمات المفتاحية</li>
+            <li><i class="fa-solid fa-check"></i> محتوى طويل ومتخصص</li>
+            <li><i class="fa-solid fa-check"></i> تحسين SEO داخل الصفحة</li>
+            <li><i class="fa-solid fa-check"></i> التسليم خلال 2–3 أيام</li>
+          </ul>
+          <a href="#contact" class="btn btn-service">
+            ابدأ مدونتك <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MID-CTA AFTER SERVICES ===== -->
+  <div class="mid-cta">
+    <div class="container">
+      <div class="mid-cta-inner">
+        <p class="mid-cta-text">مستعد لتحويل فكرتك إلى واقع رقمي مربح؟</p>
+        <div class="mid-cta-actions">
+          <a href="#contact" class="btn btn-primary">احجز استشارة مجانية <i class="fa-solid fa-rocket"></i></a>
+          <a href="#pricing" class="btn btn-ghost">استعرض الأسعار</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">كيف أعمل</span>
+        <h2 class="section-title">4 خطوات بسيطة <span class="gradient-text">لمشروع ناجح</span></h2>
+        <p class="section-desc">من الفكرة إلى التسليم — عملية واضحة وشفافة بدون تعقيد.</p>
+      </div>
+      <div class="steps-row">
+        <div class="step-card" data-delay="0">
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+          <div class="step-num">01</div>
+          <h3 class="step-title">أرسل فكرتك</h3>
+          <p class="step-desc">أخبرني بفكرتك وأهدافك عبر نموذج التواصل أو واتساب مباشرة.</p>
+        </div>
+        <div class="step-connector"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="step-card" data-delay="100">
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+          </div>
+          <div class="step-num">02</div>
+          <h3 class="step-title">أحلل وأقترح</h3>
+          <p class="step-desc">أدرس احتياجاتك وأقدم لك خطة واضحة مع جدول زمني وسعر شفاف.</p>
+        </div>
+        <div class="step-connector"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="step-card" data-delay="200">
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <div class="step-num">03</div>
+          <h3 class="step-title">أبدأ البناء</h3>
+          <p class="step-desc">أعمل على مشروعك بكامل التركيز مع تحديثات دورية للاطمئنان.</p>
+        </div>
+        <div class="step-connector"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="step-card" data-delay="300">
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-box-open"></i>
+          </div>
+          <div class="step-num">04</div>
+          <h3 class="step-title">تستلم مشروعك</h3>
+          <p class="step-desc">تستلم مشروعاً مكتملاً وجاهزاً للانطلاق مع دعم ما بعد التسليم.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">الأسعار</span>
+        <h2 class="section-title">استثمار يستحق <span class="gradient-text">كل دولار</span></h2>
+        <p class="section-desc">اختر الخطة المناسبة لمشروعك — لا رسوم خفية، شفافية تامة.</p>
+      </div>
+
+      <div class="pricing-tabs">
+        <button class="pricing-tab active" data-service="website">
+          <i class="fa-solid fa-code"></i> مواقع ويب
+        </button>
+        <button class="pricing-tab" data-service="video">
+          <i class="fa-solid fa-film"></i> مونتاج فيديو
+        </button>
+        <button class="pricing-tab" data-service="blog">
+          <i class="fa-solid fa-pen-nib"></i> مدونات SEO
+        </button>
+      </div>
+
+      <!-- Website Pricing -->
+      <div class="pricing-cards-wrap active" id="pricing-website">
+        <div class="pricing-grid">
+          <div class="pricing-card" data-delay="0">
+            <div class="pricing-plan-name">Starter</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$199</span>
+            </div>
+            <p class="pricing-desc">مثالي للأعمال الناشئة والمواقع الشخصية</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> موقع حتى 5 صفحات</li>
+              <li><i class="fa-solid fa-check"></i> تصميم متجاوب (جوال + سطح مكتب)</li>
+              <li><i class="fa-solid fa-check"></i> نموذج تواصل</li>
+              <li><i class="fa-solid fa-check"></i> تحسين SEO أساسي</li>
+              <li><i class="fa-solid fa-check"></i> مراجعة واحدة مجانية</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 5 أيام</div>
+            <a href="#contact" class="btn btn-service">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+
+          <div class="pricing-card pricing-card--featured" data-delay="100">
+            <div class="pricing-badge">الأكثر طلباً</div>
+            <div class="pricing-plan-name">Standard</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$399</span>
+            </div>
+            <p class="pricing-desc">للأعمال الجادة التي تريد حضوراً احترافياً</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> موقع حتى 10 صفحات</li>
+              <li><i class="fa-solid fa-check"></i> تصميم مخصص بالكامل</li>
+              <li><i class="fa-solid fa-check"></i> SEO متقدم + تحميل سريع</li>
+              <li><i class="fa-solid fa-check"></i> تكامل مع Google Analytics</li>
+              <li><i class="fa-solid fa-check"></i> لوحة تحكم سهلة</li>
+              <li><i class="fa-solid fa-check"></i> دعم شهر كامل</li>
+              <li><i class="fa-solid fa-check"></i> مراجعتان مجانيتان</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 7 أيام</div>
+            <a href="#contact" class="btn btn-service-featured">ابدأ مشروعك <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+
+          <div class="pricing-card" data-delay="200">
+            <div class="pricing-plan-name">Premium</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$699</span>
+            </div>
+            <p class="pricing-desc">للشركات التي تريد متجراً أو موقعاً متكاملاً</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> موقع كامل / متجر إلكتروني</li>
+              <li><i class="fa-solid fa-check"></i> تصميم Enterprise مخصص</li>
+              <li><i class="fa-solid fa-check"></i> SEO شامل + تسريع متقدم</li>
+              <li><i class="fa-solid fa-check"></i> بوابة دفع + نظام إدارة</li>
+              <li><i class="fa-solid fa-check"></i> أمان SSL + نسخ احتياطية</li>
+              <li><i class="fa-solid fa-check"></i> دعم 3 أشهر كاملة</li>
+              <li><i class="fa-solid fa-check"></i> مراجعات غير محدودة</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 14 يوم</div>
+            <a href="#contact" class="btn btn-service">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Pricing -->
+      <div class="pricing-cards-wrap" id="pricing-video">
+        <div class="pricing-grid">
+          <div class="pricing-card" data-delay="0">
+            <div class="pricing-plan-name">Starter</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$49</span>
+            </div>
+            <p class="pricing-desc">مونتاج بسيط لمحتوى السوشيال ميديا</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> مقطع واحد حتى 3 دقائق</li>
+              <li><i class="fa-solid fa-check"></i> قص ومونتاج أساسي</li>
+              <li><i class="fa-solid fa-check"></i> موسيقى خلفية</li>
+              <li><i class="fa-solid fa-check"></i> تصدير HD</li>
+              <li><i class="fa-solid fa-check"></i> مراجعة واحدة مجانية</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 24 ساعة</div>
+            <a href="#contact" class="btn btn-service">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+
+          <div class="pricing-card pricing-card--featured" data-delay="100">
+            <div class="pricing-badge">الأكثر طلباً</div>
+            <div class="pricing-plan-name">Standard</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$99</span>
+            </div>
+            <p class="pricing-desc">مونتاج احترافي ليوتيوب والإعلانات</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> حتى 10 دقائق</li>
+              <li><i class="fa-solid fa-check"></i> موشن جرافيك وترجمات</li>
+              <li><i class="fa-solid fa-check"></i> تصحيح ألوان احترافي</li>
+              <li><i class="fa-solid fa-check"></i> تصميم صوتي</li>
+              <li><i class="fa-solid fa-check"></i> تصدير 4K</li>
+              <li><i class="fa-solid fa-check"></i> مراجعتان مجانيتان</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 48 ساعة</div>
+            <a href="#contact" class="btn btn-service-featured">ابدأ مشروعك <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+
+          <div class="pricing-card" data-delay="200">
+            <div class="pricing-plan-name">Premium</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$249</span>
+            </div>
+            <p class="pricing-desc">إنتاج فيديو متكامل مع هوية بصرية</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> مشروع فيديو كامل</li>
+              <li><i class="fa-solid fa-check"></i> هوية بصرية متحركة</li>
+              <li><i class="fa-solid fa-check"></i> موشن جرافيك متقدم</li>
+              <li><i class="fa-solid fa-check"></i> تصميم صوتي سينمائي</li>
+              <li><i class="fa-solid fa-check"></i> صور مصغّرة احترافية</li>
+              <li><i class="fa-solid fa-check"></i> مراجعات غير محدودة</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 5 أيام</div>
+            <a href="#contact" class="btn btn-service">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Pricing -->
+      <div class="pricing-cards-wrap" id="pricing-blog">
+        <div class="pricing-grid">
+          <div class="pricing-card" data-delay="0">
+            <div class="pricing-plan-name">Starter</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$39</span>
+            </div>
+            <p class="pricing-desc">مقال محسّن لمحركات البحث</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> مقال 1000–1500 كلمة</li>
+              <li><i class="fa-solid fa-check"></i> بحث كلمات مفتاحية</li>
+              <li><i class="fa-solid fa-check"></i> تحسين SEO أساسي</li>
+              <li><i class="fa-solid fa-check"></i> عنوان ووصف جذاب</li>
+              <li><i class="fa-solid fa-check"></i> مراجعة واحدة مجانية</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 2 يوم</div>
+            <a href="#contact" class="btn btn-service">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+
+          <div class="pricing-card pricing-card--featured" data-delay="100">
+            <div class="pricing-badge">الأكثر طلباً</div>
+            <div class="pricing-plan-name">Standard</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$79</span>
+            </div>
+            <p class="pricing-desc">محتوى متعمق يتصدر نتائج جوجل</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> مقال 2000–3000 كلمة</li>
+              <li><i class="fa-solid fa-check"></i> بحث شامل ومتعمق</li>
+              <li><i class="fa-solid fa-check"></i> SEO داخل الصفحة متقدم</li>
+              <li><i class="fa-solid fa-check"></i> روابط داخلية وخارجية</li>
+              <li><i class="fa-solid fa-check"></i> صور وتقسيم احترافي</li>
+              <li><i class="fa-solid fa-check"></i> مراجعتان مجانيتان</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 3 أيام</div>
+            <a href="#contact" class="btn btn-service-featured">ابدأ مشروعك <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+
+          <div class="pricing-card" data-delay="200">
+            <div class="pricing-plan-name">Premium</div>
+            <div class="pricing-price">
+              <span class="price-from">يبدأ من</span>
+              <span class="price-amount">$199</span>
+            </div>
+            <p class="pricing-desc">استراتيجية محتوى كاملة لسيطرة جوجل</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> 5 مقالات شاملة</li>
+              <li><i class="fa-solid fa-check"></i> استراتيجية كلمات مفتاحية</li>
+              <li><i class="fa-solid fa-check"></i> تقويم تحريري شهري</li>
+              <li><i class="fa-solid fa-check"></i> تقرير أداء SEO</li>
+              <li><i class="fa-solid fa-check"></i> مراجعات غير محدودة</li>
+              <li><i class="fa-solid fa-check"></i> دعم شهر كامل</li>
+            </ul>
+            <div class="pricing-delivery"><i class="fa-solid fa-clock"></i> التسليم: 10 أيام</div>
+            <a href="#contact" class="btn btn-service">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <p class="pricing-note">
+        <i class="fa-solid fa-circle-info"></i>
+        الأسعار تقريبية وتختلف حسب متطلبات المشروع.
+        <a href="#contact">تواصل معي</a> للحصول على عرض سعر مخصص ومجاني.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== TRUST BADGES ===== -->
+  <section class="trust-section">
+    <div class="container">
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <i class="fa-solid fa-bolt"></i>
+          <span>تسليم سريع</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>100% رضا العملاء</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-gem"></i>
+          <span>جودة احترافية</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-headset"></i>
+          <span>دعم مستمر</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span>مراجعات مجانية</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY CHOOSE ME ===== -->
+  <section class="why-me" id="why-me">
+    <div class="container">
+      <div class="why-inner">
+        <div class="why-left">
+          <span class="section-label">لماذا تختارني</span>
+          <h2 class="section-title">لا أبيع خدمات —<br /><span class="gradient-text">أبني نتائج حقيقية</span></h2>
+          <p class="why-desc">
+            المئات من المستقلين يبيعون نفس الخدمات. الفرق؟ أنا أفكر كصاحب عمل، لا كمنفذ طلب. كل قرار أتخذه مبني على ما يحقق لك النمو الفعلي.
+          </p>
+          <a href="#contact" class="btn btn-primary">
+            احصل على عرض سعر مجاني <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+        <div class="why-right">
+          <div class="why-grid">
+            <div class="why-card">
+              <div class="why-icon">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h4>نهج قائم على النتائج</h4>
+              <p>لا تصاميم جميلة بدون هدف. كل قرار مبني لزيادة التحويلات والمبيعات وتنمية أعمالك فعلياً.</p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <h4>تسليم خاطف — بدون تأخير</h4>
+              <p>المواقع خلال 7 أيام، الفيديوهات خلال 48 ساعة. أحترم وقتك لأنك مشغول ببناء مشروعك.</p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon">
+                <i class="fa-solid fa-building"></i>
+              </div>
+              <h4>فهم حقيقي للأعمال</h4>
+              <p>أفهم كيف تعمل الأسواق الرقمية. لا أنفذ فقط — أقترح، أحسّن، وأبني بعقلية صاحب العمل.</p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon">
+                <i class="fa-solid fa-comments"></i>
+              </div>
+              <h4>تواصل مباشر وشفاف</h4>
+              <p>لا وسطاء، لا إخفاء للمعلومات. أنت تتحدث معي مباشرة — تحديثات دورية طوال المشروع.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO ===== -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">أعمالي</span>
+        <h2 class="section-title">دراسات حالة <span class="gradient-text">بنتائج موثّقة</span></h2>
+        <p class="section-desc">لا صور فحسب — مشكلة حقيقية، حل حقيقي، نتيجة قابلة للقياس. انقر على أي مشروع لتقرأ القصة كاملة.</p>
+      </div>
+
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="web">مواقع</button>
+        <button class="filter-btn" data-filter="video">فيديو</button>
+        <button class="filter-btn" data-filter="blog">مدونات</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+
+        <div class="portfolio-card" data-category="web"
+          data-title="متجر أزياء إلكتروني"
+          data-tag="موقع ويب"
+          data-problem="كان العميل يعتمد على البيع عبر واتساب فقط بدون موقع احترافي، مما كان يُضعف مصداقيته ويفقده عملاء."
+          data-solution="بنيت متجراً على Shopify بتصميم مخصص يعكس هوية العلامة التجارية مع صفحات منتجات محسّنة وتجربة شراء سلسة."
+          data-result="ارتفعت المبيعات 60% في الشهر الأول، وأصبح المتجر المصدر الرئيسي للطلبات.">
+          <div class="portfolio-img">
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=360&fit=crop&auto=format" alt="متجر أزياء إلكتروني" loading="lazy" />
+            <div class="portfolio-overlay">
+              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">موقع ويب</span>
+            <h4>متجر أزياء إلكتروني</h4>
+            <p>متجر مبني على Shopify بتصميم مخصص وصفحات منتجات وتحسين تجربة الشراء.</p>
+            <button class="btn-case-study portfolio-modal-trigger">
+              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="video"
+          data-title="إعلان ترويجي للعلامة التجارية"
+          data-tag="مونتاج فيديو"
+          data-problem="كانت العلامة التجارية تفتقر لمحتوى مرئي احترافي يعكس قيمتها، مما أثّر على معدلات التفاعل على السوشيال ميديا."
+          data-solution="أنتجت فيديو ترويجياً مدته 30 ثانية مع موشن جرافيك مخصص، تصحيح ألوان سينمائي، وتصميم صوتي احترافي."
+          data-result="حقق الفيديو 150,000 مشاهدة خلال أسبوعين، ورفع نسبة التفاعل 3 أضعاف.">
+          <div class="portfolio-img portfolio-img--video">
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=360&fit=crop&auto=format" alt="إعلان ترويجي للعلامة التجارية" loading="lazy" />
+            <span class="video-badge"><i class="fa-solid fa-circle-play"></i> فيديو</span>
+            <div class="portfolio-overlay">
+              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="LXb3EKWsInQ" aria-label="مشاهدة الفيديو">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">فيديو</span>
+            <h4>إعلان ترويجي للعلامة التجارية</h4>
+            <p>فيديو ترويجي مدته 30 ثانية مع موشن جرافيك وتصحيح ألوان وصوت سينمائي.</p>
+            <button class="btn-case-study portfolio-modal-trigger">
+              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="blog"
+          data-title="مدونة نمو SaaS"
+          data-tag="مدونة SEO"
+          data-problem="كان الموقع يحصل على أقل من 500 زيارة شهرياً بدون استراتيجية محتوى واضحة، في سوق تنافسي جداً."
+          data-solution="وضعت استراتيجية محتوى شاملة من 12 مقالاً تستهدف كلمات مفتاحية عالية النية مع SEO متقدم داخل الصفحة."
+          data-result="8,000 زيارة عضوية شهرياً خلال 4 أشهر، وتصدّر 15 كلمة مفتاحية تنافسية في جوجل.">
+          <div class="portfolio-img">
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=360&fit=crop&auto=format" alt="مدونة نمو SaaS" loading="lazy" />
+            <div class="portfolio-overlay">
+              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">مدونة</span>
+            <h4>مدونة نمو SaaS</h4>
+            <p>استراتيجية محتوى من 12 مقالاً تستهدف كلمات مفتاحية عالية النية، حققت 8 آلاف زيارة شهرياً.</p>
+            <button class="btn-case-study portfolio-modal-trigger">
+              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="web"
+          data-title="صفحة هبوط للتدريب الرياضي"
+          data-tag="موقع ويب"
+          data-problem="كان المدرب الرياضي يفقد عملاء محتملين بسبب غياب صفحة هبوط قوية تشرح خدماته وتقنعهم بالاشتراك."
+          data-solution="صممت صفحة هبوط عالية التحويل بتسلسل إقناعي منطقي: عرض القيمة، الدليل الاجتماعي، الأسعار، ثم نموذج الاشتراك."
+          data-result="ضاعفت الاشتراكات الشهرية 3 مرات خلال أول 30 يوماً من الإطلاق.">
+          <div class="portfolio-img">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=360&fit=crop&auto=format" alt="صفحة هبوط للتدريب الرياضي" loading="lazy" />
+            <div class="portfolio-overlay">
+              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">موقع ويب</span>
+            <h4>صفحة هبوط للتدريب الرياضي</h4>
+            <p>صفحة هبوط عالية التحويل لمدرب رياضي عبر الإنترنت، ضاعفت الاشتراكات 3 مرات.</p>
+            <button class="btn-case-study portfolio-modal-trigger">
+              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="video"
+          data-title="سلسلة مقدمات قناة يوتيوب"
+          data-tag="مونتاج فيديو"
+          data-problem="كانت القناة تفتقر لهوية بصرية متسقة، مما أدى إلى تجربة مشاهدة غير احترافية وضعف في الاحتفاظ بالمشتركين."
+          data-solution="صممت وأنتجت سلسلة من 5 مقدمات ببراندينج متحرك مخصص وهوية بصرية متسقة تعكس شخصية القناة."
+          data-result="ارتفعت نسبة الاحتفاظ بالمشاهدين 40%، وزادت قيمة العلامة التجارية للقناة بشكل ملحوظ.">
+          <div class="portfolio-img portfolio-img--video">
+            <img src="https://blog.khamsat.com/wp-content/uploads/2022/04/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D9%81%D9%8A%D8%AF%D9%8A%D9%88%D9%87%D8%A7%D8%AA-%D9%8A%D9%88%D8%AA%D9%8A%D9%88%D8%A8-%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A9-%D9%84%D8%B4%D9%87%D8%B1-%D8%B1%D9%85%D8%B6%D8%A7%D9%86.png" alt="سلسلة مقدمات قناة يوتيوب" loading="lazy" />
+            <span class="video-badge"><i class="fa-solid fa-circle-play"></i> فيديو</span>
+            <div class="portfolio-overlay">
+              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="9No-FiEInLA" aria-label="مشاهدة الفيديو">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">فيديو</span>
+            <h4>سلسلة مقدمات قناة يوتيوب</h4>
+            <p>سلسلة من 5 مقدمات ببراندينج متحرك وهوية بصرية متسقة.</p>
+            <button class="btn-case-study portfolio-modal-trigger">
+              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="blog"
+          data-title="مدونة الاستثمار العقاري"
+          data-tag="مدونة SEO"
+          data-problem="كان الموقع العقاري غير مرئي في جوجل رغم محتواه الجيد، بسبب غياب بنية SEO صحيحة واستهداف الكلمات المفتاحية الخاطئة."
+          data-solution="أعدت هيكلة المحتوى بالكامل مع استراتيجية شاملة تستهدف أكثر من 40 كلمة مفتاحية تنافسية في مجال العقارات."
+          data-result="تصدّر الموقع 40+ كلمة مفتاحية خلال 6 أشهر، مع نمو الزيارات العضوية من 200 إلى 12,000 شهرياً.">
+          <div class="portfolio-img">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=360&fit=crop&auto=format" alt="مدونة الاستثمار العقاري" loading="lazy" />
+            <div class="portfolio-overlay">
+              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">مدونة</span>
+            <h4>مدونة الاستثمار العقاري</h4>
+            <p>مركز محتوى متخصص يتصدر أكثر من 40 كلمة مفتاحية تنافسية خلال 6 أشهر.</p>
+            <button class="btn-case-study portfolio-modal-trigger">
+              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MID-CTA AFTER PORTFOLIO ===== -->
+  <div class="mid-cta mid-cta--accent">
+    <div class="container">
+      <div class="mid-cta-inner">
+        <p class="mid-cta-text">هل أعجبك ما رأيت؟ مشروعك القادم يمكن أن يكون هنا</p>
+        <div class="mid-cta-actions">
+          <a href="#contact" class="btn btn-primary">احصل على عرض خلال 24 ساعة <i class="fa-solid fa-chart-line"></i></a>
+          <a href="#contact" class="btn btn-ghost">دعني أقيّم مشروعك مجاناً</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">آراء العملاء</span>
+        <h2 class="section-title">ماذا يقول <span class="gradient-text">عملائي</span></h2>
+      </div>
+      <div class="testimonials-grid">
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testi-text">
+            "رضوان بنى موقعنا في أقل من أسبوع والنتيجة مذهلة. مبيعاتنا ارتفعت 60% في الشهر الأول. من أفضل الاستثمارات التي قمنا بها."
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">س</div>
+            <div>
+              <strong>سارة م.</strong>
+              <span>صاحبة متجر إلكتروني</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card testi-card--featured">
+          <div class="testi-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testi-text">
+            "المونتاج في مستوى آخر تماماً. قناتي على يوتيوب انتقلت من 500 إلى 15 ألف مشترك في 3 أشهر بعد التعامل مع Nagriva. نظيف، سريع، ودقيق."
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">ك</div>
+            <div>
+              <strong>كريم د.</strong>
+              <span>صانع محتوى يوتيوب</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testi-text">
+            "مدونتنا أصبحت في المرتبة الأولى لـ 12 كلمة مفتاحية خلال شهرين فقط. مقالات رضوان متعمقة ومكتوبة باحترافية وتجلب زيارات حقيقية. أنصح به بشدة!"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">ل</div>
+            <div>
+              <strong>ليلى ت.</strong>
+              <span>مؤسسة شركة SaaS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPECIAL OFFER ===== -->
+  <section class="special-offer" id="special-offer">
+    <div class="container">
+      <div class="special-offer-inner">
+        <div class="offer-fire-badge">
+          <i class="fa-solid fa-fire"></i>
+          عرض خاص لفترة محدودة
+        </div>
+        <h2 class="special-offer-title">
+          موقع ويب يجلب عملاء حقيقيين<br />
+          <span class="gradient-text">في 7 أيام أو استرداد كامل للمبلغ</span>
+        </h2>
+        <p class="special-offer-desc">
+          ضمان لا تجده في أي مكان آخر — إذا لم تكن راضياً بالكامل، أسترد لك المبلغ 100% بدون أسئلة.
+        </p>
+
+        <div class="special-offer-points">
+          <div class="special-point"><i class="fa-solid fa-circle-check"></i> تسليم خلال 7 أيام مضمون</div>
+          <div class="special-point"><i class="fa-solid fa-circle-check"></i> ضمان استرداد 100%</div>
+          <div class="special-point"><i class="fa-solid fa-circle-check"></i> مراجعات غير محدودة</div>
+          <div class="special-point"><i class="fa-solid fa-circle-check"></i> دعم لمدة شهر كامل</div>
+        </div>
+
+        <div class="urgency-spots">
+          <i class="fa-solid fa-hourglass-half"></i>
+          متبقي فقط <strong>3 أماكن</strong> هذا الشهر
+        </div>
+
+        <div class="countdown-block">
+          <div class="countdown-label-text">ينتهي العرض خلال:</div>
+          <div class="countdown-timer">
+            <div class="cd-unit">
+              <span class="cd-num" id="cdDays">00</span>
+              <span class="cd-lbl">يوم</span>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit">
+              <span class="cd-num" id="cdHours">00</span>
+              <span class="cd-lbl">ساعة</span>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit">
+              <span class="cd-num" id="cdMins">00</span>
+              <span class="cd-lbl">دقيقة</span>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit">
+              <span class="cd-num" id="cdSecs">00</span>
+              <span class="cd-lbl">ثانية</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn btn-primary btn-offer-main">
+          احجز مكانك الآن <i class="fa-solid fa-rocket"></i>
+        </a>
+        <p class="offer-guarantee-note">
+          <i class="fa-solid fa-lock"></i> آمن 100% — لا رسوم خفية — ضمان استرداد كامل
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEAD CAPTURE ===== -->
+  <section class="lead-capture" id="lead-capture">
+    <div class="container">
+      <div class="lead-capture-inner">
+        <div class="lead-icon-wrap">
+          <i class="fa-solid fa-file-lines"></i>
+        </div>
+        <h2 class="lead-title">احصل على خطة مجانية لمشروعك</h2>
+        <p class="lead-desc">
+          أرسل بريدك الإلكتروني وسأرسل لك خطة مخصصة لتطوير مشروعك الرقمي — مجاناً وخلال 24 ساعة.
+        </p>
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="lead-row">
+            <input
+              type="email"
+              class="lead-input"
+              id="leadEmail"
+              placeholder="أدخل بريدك الإلكتروني..."
+              required
+            />
+            <button type="submit" class="btn btn-primary">
+              أرسل لي الخطة <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+        <div class="lead-success hidden" id="leadSuccess">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>تم الإرسال! سأتواصل معك خلال 24 ساعة بخطتك المجانية.</span>
+        </div>
+        <p class="lead-note">
+          <i class="fa-solid fa-shield-halved"></i> خصوصيتك مضمونة — لن نشارك بريدك مع أي طرف
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRE-CONTACT CTA ===== -->
+  <section class="pre-contact-cta">
+    <div class="container">
+      <div class="pre-cta-inner">
+        <div class="pre-cta-icon"><i class="fa-solid fa-handshake"></i></div>
+        <h2 class="pre-cta-title">جاهز للحصول على نتائج حقيقية؟</h2>
+        <p class="pre-cta-desc">انضم إلى أكثر من 50 عميلاً حققوا نتائج موثّقة. أرسل فكرتك الآن وسأرد عليك خلال 24 ساعة بخطة وسعر.</p>
+        <div class="pre-cta-actions">
+          <a href="#contact" class="btn btn-primary btn-lg">احجز استشارتك المجانية الآن <i class="fa-solid fa-rocket"></i></a>
+          <a href="https://wa.me/212728427278" class="btn btn-whatsapp" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
+          </a>
+        </div>
+        <div class="pre-cta-reassure">
+          <span><i class="fa-solid fa-clock"></i> رد خلال 24 ساعة</span>
+          <span><i class="fa-solid fa-lock"></i> استشارة مجانية</span>
+          <span><i class="fa-solid fa-shield-halved"></i> بدون التزام</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA / CONTACT ===== -->
+  <section class="cta-section" id="contact">
+    <div class="cta-bg">
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+    <div class="container">
+
+      <!-- Section Header -->
+      <div class="contact-header">
+        <span class="section-label">تواصل معي</span>
+        <h2 class="cta-title">لنبني <span class="cta-highlight">مشروعك</span> معاً</h2>
+        <p class="cta-desc">أخبرني بفكرتك وسأرد عليك خلال 24 ساعة بخطة وجدول زمني وسعر شفاف.</p>
+      </div>
+
+      <!-- Two-Column Layout -->
+      <div class="contact-layout">
+
+        <!-- Left: Info Panel -->
+        <div class="contact-info-panel">
+          <div class="contact-info-top">
+            <h3 class="contact-info-title">ابدأ محادثتنا</h3>
+            <p class="contact-info-sub">أنا هنا للإجابة على كل أسئلتك ومساعدتك في اتخاذ القرار الصحيح.</p>
+          </div>
+
+          <ul class="contact-info-list">
+            <li class="contact-info-item">
+              <div class="contact-info-icon-wrap icon-purple">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="contact-info-text">
+                <span class="contact-info-label">البريد الإلكتروني</span>
+                <a href="mailto:Redwanaitlhadj16@gmail.com" class="contact-info-value">Redwanaitlhadj16@gmail.com</a>
+              </div>
+            </li>
+            <li class="contact-info-item">
+              <div class="contact-info-icon-wrap icon-green">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div class="contact-info-text">
+                <span class="contact-info-label">واتساب</span>
+                <a href="https://wa.me/212728427278" class="contact-info-value" target="_blank" rel="noopener">تواصل مباشرة</a>
+              </div>
+            </li>
+            <li class="contact-info-item">
+              <div class="contact-info-icon-wrap icon-blue">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+              <div class="contact-info-text">
+                <span class="contact-info-label">وقت الرد</span>
+                <span class="contact-info-value">خلال 24 ساعة</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="contact-trust-row">
+            <div class="contact-trust-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>استشارة مجانية</span>
+            </div>
+            <div class="contact-trust-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>بدون التزام</span>
+            </div>
+            <div class="contact-trust-item">
+              <i class="fa-solid fa-lock"></i>
+              <span>خصوصية تامة</span>
+            </div>
+          </div>
+
+          <div class="contact-wa-btn-wrap">
+            <a href="https://wa.me/212728427278" class="btn btn-whatsapp btn-wa-full" target="_blank" rel="noopener">
+              <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب الآن
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-wrap">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name"><i class="fa-solid fa-user"></i> اسمك</label>
+                <input type="text" id="name" name="name" placeholder="رضوان" required />
+              </div>
+              <div class="form-group">
+                <label for="email"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="service"><i class="fa-solid fa-layer-group"></i> الخدمة المطلوبة</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>اختر الخدمة&hellip;</option>
+                <option value="website">🌐 تطوير موقع ويب</option>
+                <option value="video">🎬 مونتاج فيديو</option>
+                <option value="blog">✍️ إنشاء مدونة</option>
+                <option value="other">⚡ أخرى / خدمات متعددة</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message"><i class="fa-solid fa-pen-to-square"></i> أخبرني عن مشروعك</label>
+              <textarea id="message" name="message" rows="5" placeholder="صف فكرتك وأهدافك وأي متطلبات خاصة…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-submit" id="submitBtn">
+              <span id="btnText">إرسال الرسالة <i class="fa-solid fa-paper-plane"></i></span>
+              <span id="btnLoader" class="hidden"><i class="fa-solid fa-spinner fa-spin"></i> جارٍ الإرسال…</span>
+            </button>
+            <p class="form-privacy-note"><i class="fa-solid fa-shield-halved"></i> بياناتك محمية — لن نشاركها مع أي طرف ثالث</p>
+          </form>
+          <div class="form-success hidden" id="formSuccess">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>تم استلام رسالتك!</h3>
+            <p>شكراً لتواصلك. <strong>سأرد عليك خلال 24 ساعة</strong> بخطة واضحة وسعر مناسب.</p>
+            <a href="https://wa.me/212728427278" class="btn btn-whatsapp" target="_blank" rel="noopener" style="margin-top:8px">
+              <i class="fa-brands fa-whatsapp"></i> أو تواصل عبر واتساب الآن
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <H1>Nagriva</H1>
+          <p>نبني التميز الرقمي — مشروع واحد في كل مرة.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="إنستغرام" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="لينكد إن" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="يوتيوب" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" aria-label="تويتر" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="بيهانس" class="social-link"><i class="fa-brands fa-behance"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h5>الخدمات</h5>
+            <ul>
+              <li><a href="#services">تطوير مواقع ويب</a></li>
+              <li><a href="#services">مونتاج فيديو</a></li>
+              <li><a href="#services">إنشاء مدونات</a></li>
+              <li><a href="#pricing">الأسعار</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>التنقل</h5>
+            <ul>
+              <li><a href="#home">الرئيسية</a></li>
+              <li><a href="#about">من أنا</a></li>
+              <li><a href="#how-it-works">كيف أعمل</a></li>
+              <li><a href="#portfolio">أعمالي</a></li>
+              <li><a href="#testimonials">آراء العملاء</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>تواصل معي</h5>
+            <ul>
+              <li><a href="#contact">ابدأ مشروعاً</a></li>
+              <li><a href="mailto:Redwanaitlhadj16@gmail.com">راسلني</a></li>
+              <li><a href="https://wa.me/212728427278" target="_blank" rel="noopener">واتساب</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Nagriva. جميع الحقوق محفوظة. </p>
+        <p class="footer-tagline">بواسطة Redouane Ait El-Hadj</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="العودة للأعلى">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- ===== PORTFOLIO MODAL ===== -->
+  <div class="portfolio-modal" id="portfolioModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== VIDEO MODAL ===== -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="مشاهدة الفيديو">
+    <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+    <div class="video-modal-box">
+      <button class="video-modal-close" id="videoModalClose" aria-label="إغلاق">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="video-modal-player">
+        <iframe id="videoModalIframe" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== WHATSAPP FLOAT ===== -->
+  <a href="https://wa.me/212728427278" class="whatsapp-float" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="wa-float-label">تواصل الآن</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
