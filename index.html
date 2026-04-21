@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="  Nagriva. تطوير مواقع ويب احترافية، مونتاج فيديو، وإنشاء مدونات محسّنة. أحوّل أفكارك إلى مشاريع رقمية مربحة." />
-  <meta name="keywords" content="تطوير مواقع, مونتاج فيديو, إنشاء مدونات, فريلانسر, Nagriva, " />
-  <meta name="author" content=" Nagriva" />
-  <meta property="og:title" content="Nagriva – خدمات رقمية " />
+  <meta name="description"
+    content="رضوان – Nagriva. تطوير مواقع ويب احترافية، مونتاج فيديو، وإنشاء مدونات محسّنة. أحوّل أفكارك إلى مشاريع رقمية مربحة." />
+  <meta name="keywords" content="تطوير مواقع, مونتاج فيديو, إنشاء مدونات, فريلانسر, Nagriva, رضوان" />
+  <meta name="author" content="رضوان – Nagriva" />
+  <meta property="og:title" content="Nagriva – خدمات رقمية بقلم رضوان" />
   <meta property="og:description" content="مواقع ويب، مونتاج فيديو، وإنشاء مدونات تحقق نتائج حقيقية." />
   <meta property="og:type" content="website" />
   <title> Nagriva – خدمات رقمية </title>
-  <link rel="icon" type="image/png" href="Nagriva-logo-icon-.png" />
+  <link rel="icon" type="https://i.ibb.co/QFBNBrkn/Nagriva-logo-icon.png" />
+  <link rel="icon" type="image/png" href="../nagriva-logo/Nagriva-logo-icon.png" />
+  <script>
+    (function () {
+      var s = localStorage.getItem('nagriva-theme');
+      var t = s || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      if (t === 'light') document.documentElement.classList.add('light-mode');
+    })();
+  </script>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+
 <body>
 
   <!-- ===== NAVBAR ===== -->
@@ -29,12 +41,12 @@
 
       <!-- Nav Links -->
       <ul class="nav-links" id="navLinks">
-        <li><a href="#about" class="nav-link">من أنا</a></li>
         <li><a href="#services" class="nav-link">الخدمات</a></li>
-        <li><a href="#pricing" class="nav-link">الأسعار</a></li>
         <li><a href="#portfolio" class="nav-link">أعمالي</a></li>
-        <li><a href="#testimonials" class="nav-link">آراء العملاء</a></li>
-          <li><a href="#contact" class="nav-link">تواصل معي</a></li>
+        <li><a href="#trusted-clients" class="nav-link">النتائج</a></li>
+        <li><a href="#contact" class="nav-link">تواصل</a></li>
+        <li class="mobile-cta-item"><a href="#contact" class="mobile-cta">ابدأ مشروعك <i
+              class="fa-solid fa-arrow-left"></i></a></li>
       </ul>
 
       <!-- Divider -->
@@ -47,13 +59,8 @@
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
-        <!-- Theme Toggle -->
-        <button class="nav-icon-btn theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
-          <i class="fa-solid fa-moon" id="themeIcon"></i>
-        </button>
-
         <!-- CTA Button -->
-        <a href="#contact" class="nav-cta">احجز استشارة مجانية</a>
+        <a href="#contact" class="nav-cta">ابدأ مشروعك <i class="fa-solid fa-arrow-left"></i></a>
 
         <!-- Hamburger -->
         <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">
@@ -68,14 +75,8 @@
     <div class="search-modal">
       <div class="search-input-wrap">
         <i class="fa-solid fa-magnifying-glass search-icon-inner"></i>
-        <input
-          type="text"
-          id="searchInput"
-          class="search-input"
-          placeholder="ابحث عن خدمة..."
-          autocomplete="off"
-          aria-label="ابحث عن خدمة"
-        />
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن خدمة..." autocomplete="off"
+          aria-label="ابحث عن خدمة" />
         <button class="search-close-btn" id="searchClose" aria-label="إغلاق البحث">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -97,27 +98,26 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-         Nagriva متاح لمشاريع جديدة
+           متاح لمشاريع جديدة
         </div>
         <h1 class="hero-title">
-         أحوّل أفكارك إلى مشاريع 
-          <span class="gradient-text"> رقمية</span>
+          أحوّل موقعك إلى آلة تجلب
+          <span class="gradient-text"> عملاء خلال 30 يوم</span>
         </h1>
-
         <p class="hero-desc">
-          مرحباً، نحن <strong>Nagriva</strong>. لا أبني مجرد مواقع أو فيديوهات — أبني أدوات تجلب لك عملاء حقيقيين وتنمو معك. عملاؤي يرون نتائج قابلة للقياس خلال 30 يوماً.
+          أنا <strong>رضوان</strong>. أساعدك على بناء موقع أو محتوى ليس مجرد مظهر جمالي — بل نظام رقمي يجلب لك عملاء حقيقيين
+          وينمّي مشروعك بسرعة، بدون تعقيد.
         </p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary btn-hero-cta">
-            احجز استشارة مجانية <i class="fa-solid fa-rocket"></i>
+            ابدأ مشروعك الآن <i class="fa-solid fa-rocket"></i>
           </a>
           <a href="#portfolio" class="btn btn-ghost">
             شاهد نتائج العملاء <i class="fa-solid fa-arrow-left"></i>
           </a>
         </div>
         <p class="hero-urgency">
-          <i class="fa-solid fa-fire"></i>
-          عدد محدود من المشاريع متاح هذا الشهر — لا تفوّت الفرصة
+          🔥 لم يتبق سوى 3 أماكن هذا الشهر — تواصل معي قبل فوات الأوان
         </p>
         <div class="hero-stats">
           <div class="stat">
@@ -136,30 +136,50 @@
           </div>
         </div>
       </div>
+
       <div class="hero-visual">
         <div class="mockup-wrapper">
-          <div class="mockup-browser">
-            <div class="browser-bar">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-              <div class="browser-url"><i class="fa-solid fa-lock"></i> nagriva.com</div>
-            </div>
-            <div class="browser-screen">
-              <div class="screen-hero-bar"></div>
-              <div class="screen-nav"></div>
-              <div class="screen-cards">
-                <div class="screen-card"></div>
-                <div class="screen-card"></div>
-                <div class="screen-card"></div>
-              </div>
-              <div class="screen-lines">
-                <div class="screen-line w-80"></div>
-                <div class="screen-line w-60"></div>
-                <div class="screen-line w-70"></div>
+          <!-- Stacked result cards visual -->
+          <div class="result-card-stack">
+
+            <div class="result-card result-card--back">
+              <div class="rc-tag rc-tag--teal"><i class="fa-solid fa-pen-nib"></i> مدونة SEO</div>
+              <div class="rc-metric">8,000</div>
+              <div class="rc-label">زيارة شهرياً</div>
+              <div class="rc-bar-row">
+                <div class="rc-bar" style="width:80%;background:linear-gradient(90deg,#0ea5e9,#06b6d4)"></div>
               </div>
             </div>
+
+            <div class="result-card result-card--mid">
+              <div class="rc-tag rc-tag--blue"><i class="fa-solid fa-film"></i> مونتاج فيديو</div>
+              <div class="rc-metric">150K</div>
+              <div class="rc-label">مشاهدة في أسبوع</div>
+              <div class="rc-bar-row">
+                <div class="rc-bar" style="width:90%;background:linear-gradient(90deg,#2563eb,#7c3aed)"></div>
+              </div>
+            </div>
+
+            <div class="result-card result-card--front">
+              <div class="rc-tag rc-tag--purple"><i class="fa-solid fa-globe"></i> موقع ويب</div>
+              <div class="rc-metric">+200%</div>
+              <div class="rc-label">زيادة في المبيعات</div>
+              <div class="rc-chart">
+                <div class="rc-bar-group">
+                  <div class="rc-bar-v" style="height:30%"></div>
+                  <div class="rc-bar-v" style="height:50%"></div>
+                  <div class="rc-bar-v" style="height:40%"></div>
+                  <div class="rc-bar-v" style="height:70%"></div>
+                  <div class="rc-bar-v" style="height:60%"></div>
+                  <div class="rc-bar-v" style="height:90%"></div>
+                  <div class="rc-bar-v rc-bar-v--accent" style="height:100%"></div>
+                </div>
+              </div>
+            </div>
+
           </div>
+
+          <!-- Floating badges -->
           <div class="floating-card card-1">
             <i class="fa-solid fa-circle-check"></i>
             <span>تم إطلاق المشروع!</span>
@@ -175,6 +195,7 @@
         </div>
       </div>
     </div>
+
     <div class="hero-scroll-hint">
       <span>اسحب للأسفل</span>
       <i class="fa-solid fa-chevron-down bounce"></i>
@@ -216,7 +237,8 @@
             </div>
           </div>
           <p class="client-quote">
-            "بعد إطلاق متجري مع رضوان، <strong>ارتفعت مبيعاتي 200% خلال شهرين فقط.</strong> كنت أبيع عبر واتساب والطلبات كانت شحيحة — الآن لدي تدفق يومي من العملاء الحقيقيين."
+            "بعد إطلاق متجري مع رضوان، <strong>ارتفعت مبيعاتي 200% خلال شهرين فقط.</strong> كنت أبيع عبر واتساب والطلبات
+            كانت شحيحة — الآن لدي تدفق يومي من العملاء الحقيقيين."
           </p>
           <div class="result-pill">
             <i class="fa-solid fa-arrow-trend-up"></i> +200% مبيعات
@@ -237,7 +259,8 @@
             </div>
           </div>
           <p class="client-quote">
-            "منذ تعاملت مع Nagriva، <strong>قفز عدد مشتركي من 500 إلى 15,000 خلال 3 أشهر.</strong> المحتوى الاحترافي غيّر كل شيء. أوصي به لكل صانع محتوى جاد."
+            "منذ تعاملت مع Nagriva، <strong>قفز عدد مشتركي من 500 إلى 15,000 خلال 3 أشهر.</strong> المحتوى الاحترافي
+            غيّر كل شيء. أوصي به لكل صانع محتوى جاد."
           </p>
           <div class="result-pill">
             <i class="fa-solid fa-users"></i> +14,500 مشترك
@@ -258,7 +281,8 @@
             </div>
           </div>
           <p class="client-quote">
-            "Ridwan built my landing page in 5 days and <strong>I got my first 3 paying clients within 2 weeks of launch.</strong> The ROI was incredible — best investment I made for my business."
+            "Ridwan built my landing page in 5 days and <strong>I got my first 3 paying clients within 2 weeks of
+              launch.</strong> The ROI was incredible — best investment I made for my business."
           </p>
           <div class="result-pill">
             <i class="fa-solid fa-calendar-check"></i> أول 3 عملاء في أسبوعين
@@ -279,7 +303,8 @@
             </div>
           </div>
           <p class="client-quote">
-            "مدونتنا انتقلت من صفر إلى <strong>8,000 زيارة عضوية شهرياً خلال 4 أشهر.</strong> Nagriva لا يكتب محتوى فقط — يبني استراتيجية نمو حقيقية."
+            "مدونتنا انتقلت من صفر إلى <strong>8,000 زيارة عضوية شهرياً خلال 4 أشهر.</strong> رضوان لا يكتب محتوى فقط —
+            يبني استراتيجية نمو حقيقية."
           </p>
           <div class="result-pill">
             <i class="fa-solid fa-globe"></i> 8,000 زيارة/شهر
@@ -309,7 +334,8 @@
             <div class="offer-result-badge">+120% زيارات</div>
           </div>
           <h3 class="offer-title">موقع ويب يجلب عملاء</h3>
-          <p class="offer-desc">موقع احترافي مُحسَّن لمحركات البحث، مصمم لتحويل الزوار إلى عملاء — لا مجرد بطاقة تعريفية.</p>
+          <p class="offer-desc">موقع احترافي مُحسَّن لمحركات البحث، مصمم لتحويل الزوار إلى عملاء — لا مجرد بطاقة
+            تعريفية.</p>
           <ul class="offer-includes">
             <li><i class="fa-solid fa-check"></i> تصميم مخصص بالكامل + تجاوب تام</li>
             <li><i class="fa-solid fa-check"></i> تحسين SEO شامل من اليوم الأول</li>
@@ -394,54 +420,123 @@
   <!-- ===== ABOUT ME ===== -->
   <section class="about" id="about">
     <div class="container">
-      <div class="about-inner">
-        <div class="about-image-col">
-          <div class="about-img-wrap">
-            <div class="about-img-circle">
-              <img src="https://i.ibb.co/yFNB0b7x/redwan.jpg" alt="Nagriva" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+      <div class="about-wrap">
+
+        <!-- ── Photo Column ── -->
+        <div class="about-photo-col">
+          <div class="about-img-wrapper">
+
+            <!-- Spinning gradient ring -->
+            <div class="about-ring-spin"></div>
+
+            <!-- Floating badge: experience -->
+            <div class="about-badge about-badge--exp">
+              <i class="fa-solid fa-star"></i>
+              <span>+3 سنوات خبرة</span>
             </div>
-            <div class="about-img-ring"></div>
-            <div class="about-badge-float">
-              <i class="fa-solid fa-certificate"></i>
-              <span>فريلانسر محترف</span>
+
+            <!-- Floating badge: projects -->
+            <div class="about-badge about-badge--proj">
+              <i class="fa-solid fa-bolt"></i>
+              <span>+50 مشروع</span>
             </div>
-            <div class="about-exp-float">
-              <span class="about-exp-num">+50</span>
-              <span class="about-exp-label">مشروع</span>
+
+            <!-- Photo with gradient ring -->
+            <div class="about-img-ring">
+              <img src="https://i.ibb.co/yFNB0b7x/redwan.jpg" alt="رضوان أيت لحادج" />
             </div>
+
+            <!-- Available badge -->
+            <div class="about-available">
+              <span class="about-dot"></span>
+              متاح للعمل
+            </div>
+
+          </div>
+
+          <!-- Name & title -->
+          <div class="about-photo-info">
+            <p class="about-name-under">رضوان أيت الحاج</p>
+            <p class="about-title-under">مطور مواقع · منتج فيديو · مستشار رقمي</p>
+          </div>
+
+          <!-- Social links -->
+          <div class="about-social-row">
+            <a href="https://wa.me/212728427278" class="about-social-link about-social-link--wa" target="_blank" rel="noopener" aria-label="واتساب">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/nagri_va/" class="about-social-link" target="_blank" rel="noopener" aria-label="إنستغرام">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61575750526639" class="about-social-link" target="_blank" rel="noopener" aria-label="فيسبوك">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com/@nagriva" class="about-social-link" target="_blank" rel="noopener" aria-label="يوتيوب">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://x.com/nagri_va" class="about-social-link" target="_blank" rel="noopener" aria-label="تويتر X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
           </div>
         </div>
-        <div class="about-content">
+
+        <!-- ── Content ── -->
+        <div class="about-body">
           <span class="section-label">من أنا</span>
-          <h2 class="section-title">مرحباً، أنا <span class="gradient-text">رضوان أيت لحادج</span></h2>
+          <h2 class="section-title">أساعدك على تحويل فكرتك إلى مشروع <span class="gradient-text">يحقق نتائج</span></h2>
+
           <p class="about-story">
-            فريلانسر متخصص في الخدمات الرقمية، بدأت رحلتي في عالم الويب والمحتوى الرقمي منذ سنوات. أساعد رواد الأعمال والشركات على بناء هويتهم الرقمية وتحقيق نتائج حقيقية وقابلة للقياس.
+            أنا متخصص في بناء الحلول الرقمية التي لا تركز فقط على المظهر، بل على تحقيق نتائج حقيقية. أعمل مع رواد
+            الأعمال وأصحاب المشاريع لمساعدتهم على جذب العملاء عبر الإنترنت، من خلال مواقع احترافية ومحتوى استراتيجي مصمم
+            للنمو.
           </p>
           <p class="about-story">
-            لا أهتم فقط بتسليم مشروع — بل أهتم بنجاح عملك. كل مشروع أعمل عليه هو فرصة لأترك أثراً حقيقياً في مسيرتك التجارية.
+            هدفي ليس فقط تسليم مشروع، بل بناء نظام رقمي متكامل يساعدك على تحقيق دخل مستمر وتوسيع حضورك الرقمي بثقة.
           </p>
-          <ul class="about-bullets">
-            <li>
-              <i class="fa-solid fa-circle-check"></i>
-              <span>+50 مشروع مُنجز بنجاح لعملاء من دول مختلفة</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-circle-check"></i>
-              <span>تسليم سريع في المواعيد المحددة دائماً — بدون تأخير</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-circle-check"></i>
-              <span>تركيز كامل على احتياجاتك ونتائجك، لا على الأشكال فقط</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-circle-check"></i>
-              <span>تواصل مستمر وشفاف طوال فترة العمل</span>
-            </li>
-          </ul>
-          <a href="#contact" class="btn btn-primary">
-            اعمل معي الآن <i class="fa-solid fa-arrow-left"></i>
-          </a>
+
+          <!-- Stats strip -->
+          <div class="about-stats">
+            <div class="about-stat-item">
+              <strong>+50</strong>
+              <span>مشروع منجز</span>
+            </div>
+            <div class="about-stat-divider"></div>
+            <div class="about-stat-item">
+              <strong>+3</strong>
+              <span>سنوات خبرة</span>
+            </div>
+            <div class="about-stat-divider"></div>
+            <div class="about-stat-item">
+              <strong>100%</strong>
+              <span>رضا العملاء</span>
+            </div>
+            <div class="about-stat-divider"></div>
+            <div class="about-stat-item">
+              <strong>10+</strong>
+              <span>دول حول العالم</span>
+            </div>
+          </div>
+
+          <!-- Skill chips -->
+          <div class="about-skills">
+            <span class="skill-chip"><i class="fa-solid fa-code"></i> تطوير مواقع</span>
+            <span class="skill-chip"><i class="fa-solid fa-video"></i> مونتاج فيديو</span>
+            <span class="skill-chip"><i class="fa-solid fa-magnifying-glass-chart"></i> SEO</span>
+            <span class="skill-chip"><i class="fa-solid fa-palette"></i> هوية بصرية</span>
+            <span class="skill-chip"><i class="fa-solid fa-pen-nib"></i> تصميم UI</span>
+          </div>
+
+          <!-- CTAs -->
+          <div class="about-cta-row">
+            <a href="#contact" class="btn btn-primary">
+              اعمل معي الآن <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <a href="https://drive.google.com/file/d/1LfSN8Dlvmejs_ZOAk7D210VeQ30zV5rj/view" target="_blank" rel="noopener" class="btn btn-cv">
+              <i class="fa-solid fa-file-arrow-down"></i> تحميل السيرة الذاتية
+            </a>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -456,65 +551,120 @@
       </div>
       <div class="services-grid">
 
-        <!-- خدمة 1 -->
+        <!-- خدمة 1: تطوير مواقع -->
         <div class="service-card" data-delay="0">
-          <div class="service-icon-wrap icon-purple">
-            <i class="fa-solid fa-code"></i>
+          <div class="sc-image-wrap">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="تطوير مواقع ويب"
+              class="sc-image" loading="lazy" />
+            <span class="sc-category-tag">Website</span>
           </div>
-          <div class="service-tag">الأكثر طلباً</div>
-          <h3 class="service-title">تطوير مواقع ويب احترافية</h3>
-          <p class="service-desc">
-            احصل على موقع سريع وعصري يمثل علامتك التجارية ويحول الزوار إلى عملاء حقيقيين.
-          </p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> تصميم مخصص ومتجاوب</li>
-            <li><i class="fa-solid fa-check"></i> بنية محسّنة لمحركات البحث</li>
-            <li><i class="fa-solid fa-check"></i> تحميل سريع وأمان عالٍ</li>
-            <li><i class="fa-solid fa-check"></i> التسليم خلال 3–7 أيام</li>
-          </ul>
-          <a href="#contact" class="btn btn-service">
-            احصل على موقعك <i class="fa-solid fa-arrow-left"></i>
-          </a>
+          <div class="sc-body">
+            <div class="sc-top-row">
+              <div class="service-icon-wrap icon-purple">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <div class="sc-badge badge-purple">+85% تحويل</div>
+            </div>
+            <div class="service-tag">الأكثر طلباً</div>
+            <h3 class="service-title">تطوير مواقع ويب احترافية</h3>
+            <p class="service-desc">موقع سريع وعصري يمثل علامتك التجارية ويحوّل الزوار إلى عملاء — بدون تعقيد.</p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> تصميم مخصص ومتجاوب</li>
+              <li><i class="fa-solid fa-check"></i> بنية محسّنة لمحركات البحث</li>
+              <li><i class="fa-solid fa-check"></i> تحميل سريع وأمان عالٍ</li>
+            </ul>
+            <div class="sc-trust">
+              <span class="sc-trust-item"><i class="fa-solid fa-star"></i> 4.9/5</span>
+              <span class="sc-trust-item"><i class="fa-solid fa-users"></i> +30 عميل</span>
+              <span class="sc-trust-item"><i class="fa-solid fa-clock"></i> 3–7 أيام</span>
+            </div>
+            <div class="sc-divider"></div>
+            <div class="sc-actions">
+              <a href="#contact" class="btn sc-btn-primary">
+                اطلب الخدمة <i class="fa-solid fa-arrow-left"></i>
+              </a>
+              <a href="#portfolio" class="btn sc-btn-ghost">
+                معاينة الأعمال
+              </a>
+            </div>
+          </div>
         </div>
 
-        <!-- خدمة 2 -->
+        <!-- خدمة 2: فيديو (featured) -->
         <div class="service-card service-card--featured" data-delay="100">
-          <div class="service-icon-wrap icon-blue">
-            <i class="fa-solid fa-film"></i>
+          <div class="sc-image-wrap">
+            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80" alt="مونتاج فيديو"
+              class="sc-image" loading="lazy" />
+            <span class="sc-category-tag tag-blue">Video</span>
+            <span class="sc-popular-ribbon">⭐ الأكثر حجزاً</span>
           </div>
-          <h3 class="service-title">مونتاج فيديو عالي التأثير</h3>
-          <p class="service-desc">
-            حوّل مقاطع الفيديو الخام إلى محتوى احترافي مميز يسحر جمهورك ويرفع نسب التفاعل.
-          </p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> ريلز، يوتيوب وإعلانات</li>
-            <li><i class="fa-solid fa-check"></i> موشن جرافيك وترجمات</li>
-            <li><i class="fa-solid fa-check"></i> تصحيح ألوان وتصميم صوتي</li>
-            <li><i class="fa-solid fa-check"></i> التسليم خلال 24–48 ساعة</li>
-          </ul>
-          <a href="#contact" class="btn btn-service-featured">
-            احجز الخدمة <i class="fa-solid fa-arrow-left"></i>
-          </a>
+          <div class="sc-body">
+            <div class="sc-top-row">
+              <div class="service-icon-wrap icon-blue">
+                <i class="fa-solid fa-film"></i>
+              </div>
+              <div class="sc-badge badge-blue">10K+ مشاهدة</div>
+            </div>
+            <h3 class="service-title">مونتاج فيديو عالي التأثير</h3>
+            <p class="service-desc">حوّل مقاطع الخام إلى محتوى احترافي يسحر جمهورك ويرفع نسب التفاعل بشكل ملحوظ.</p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> ريلز، يوتيوب وإعلانات</li>
+              <li><i class="fa-solid fa-check"></i> موشن جرافيك وترجمات</li>
+              <li><i class="fa-solid fa-check"></i> تصحيح ألوان وتصميم صوتي</li>
+            </ul>
+            <div class="sc-trust">
+              <span class="sc-trust-item"><i class="fa-solid fa-star"></i> 5.0/5</span>
+              <span class="sc-trust-item"><i class="fa-solid fa-users"></i> +50 عميل</span>
+              <span class="sc-trust-item"><i class="fa-solid fa-clock"></i> 24–48 ساعة</span>
+            </div>
+            <div class="sc-divider"></div>
+            <div class="sc-actions">
+              <a href="#contact" class="btn sc-btn-primary sc-btn-featured">
+                اطلب الخدمة <i class="fa-solid fa-arrow-left"></i>
+              </a>
+              <a href="#portfolio" class="btn sc-btn-ghost">
+                معاينة الأعمال
+              </a>
+            </div>
+          </div>
         </div>
 
-        <!-- خدمة 3 -->
+        <!-- خدمة 3: مدونات -->
         <div class="service-card" data-delay="200">
-          <div class="service-icon-wrap icon-teal">
-            <i class="fa-solid fa-pen-nib"></i>
+          <div class="sc-image-wrap">
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80" alt="إنشاء مدونات"
+              class="sc-image" loading="lazy" />
+            <span class="sc-category-tag tag-teal">Blogging</span>
           </div>
-          <h3 class="service-title">إنشاء مدونات محسّنة لـ SEO</h3>
-          <p class="service-desc">
-            جذب زيارات عضوية بمقالات متعمقة وجذابة تتصدر جوجل وتجعلك مرجعاً في مجالك.
-          </p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> بحث شامل عن الكلمات المفتاحية</li>
-            <li><i class="fa-solid fa-check"></i> محتوى طويل ومتخصص</li>
-            <li><i class="fa-solid fa-check"></i> تحسين SEO داخل الصفحة</li>
-            <li><i class="fa-solid fa-check"></i> التسليم خلال 2–3 أيام</li>
-          </ul>
-          <a href="#contact" class="btn btn-service">
-            ابدأ مدونتك <i class="fa-solid fa-arrow-left"></i>
-          </a>
+          <div class="sc-body">
+            <div class="sc-top-row">
+              <div class="service-icon-wrap icon-teal">
+                <i class="fa-solid fa-pen-nib"></i>
+              </div>
+              <div class="sc-badge badge-teal">صفحة 1 جوجل</div>
+            </div>
+            <h3 class="service-title">إنشاء مدونات محسّنة لـ SEO</h3>
+            <p class="service-desc">مقالات متعمقة وجذابة تتصدر نتائج جوجل وتجعلك المرجع الأول في مجالك.</p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> بحث شامل عن الكلمات المفتاحية</li>
+              <li><i class="fa-solid fa-check"></i> محتوى طويل ومتخصص</li>
+              <li><i class="fa-solid fa-check"></i> تحسين SEO داخل الصفحة</li>
+            </ul>
+            <div class="sc-trust">
+              <span class="sc-trust-item"><i class="fa-solid fa-star"></i> 4.8/5</span>
+              <span class="sc-trust-item"><i class="fa-solid fa-users"></i> +25 عميل</span>
+              <span class="sc-trust-item"><i class="fa-solid fa-clock"></i> 2–3 أيام</span>
+            </div>
+            <div class="sc-divider"></div>
+            <div class="sc-actions">
+              <a href="#contact" class="btn sc-btn-primary">
+                اطلب الخدمة <i class="fa-solid fa-arrow-left"></i>
+              </a>
+              <a href="#portfolio" class="btn sc-btn-ghost">
+                معاينة الأعمال
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -578,6 +728,52 @@
           <h3 class="step-title">تستلم مشروعك</h3>
           <p class="step-desc">تستلم مشروعاً مكتملاً وجاهزاً للانطلاق مع دعم ما بعد التسليم.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MANIFESTO ===== -->
+  <section class="manifesto" id="manifesto">
+    <div class="container">
+      <div class="manifesto-inner">
+
+        <div class="manifesto-left">
+          <span class="manifesto-eyebrow">خلف الكواليس</span>
+          <h2 class="manifesto-title">
+            معظم المستقلين<br />
+            ينفّذون ما تطلبه.<br />
+            <span class="gradient-text">أنا أبني ما تحتاجه.</span>
+          </h2>
+          <p class="manifesto-body">
+            الفرق؟ أنا لا أبدأ بـ "كيف تريد الموقع؟"<br />
+            أبدأ بـ "ماذا يجب أن يحقق هذا الموقع لعملك؟"
+          </p>
+          <p class="manifesto-body">
+            كل قرار تصميمي، كل كلمة، كل زر — مبني على هدف واحد: نتيجة قابلة للقياس. لا جماليات فارغة.
+          </p>
+          <a href="#contact" class="btn btn-primary">
+            دعني أثبت لك ذلك <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+
+        <div class="manifesto-right">
+          <div class="manifesto-card" data-delay="0">
+            <span class="mc-tag">مبدأ #1</span>
+            <p class="mc-quote">"الجمال بدون هدف هو فن معلّق على الجدار — لا يبيع."</p>
+            <p class="mc-explain">كل تصميم أبنيه يبدأ بسؤال: لماذا؟</p>
+          </div>
+          <div class="manifesto-card manifesto-card--offset" data-delay="100">
+            <span class="mc-tag mc-tag--blue">مبدأ #2</span>
+            <p class="mc-quote">"أنت لا تدفع مقابل ساعات عملي — تدفع مقابل نتيجة عملك."</p>
+            <p class="mc-explain">أسعاري مبنية على القيمة، لا على الوقت.</p>
+          </div>
+          <div class="manifesto-card" data-delay="200">
+            <span class="mc-tag mc-tag--teal">مبدأ #3</span>
+            <p class="mc-quote">"قليلون يقرؤون أرقام عملائهم. أنا أبدأ دائماً من البيانات."</p>
+            <p class="mc-explain">تقرير أداء مفصّل مع كل مشروع.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -839,7 +1035,8 @@
           <span class="section-label">لماذا تختارني</span>
           <h2 class="section-title">لا أبيع خدمات —<br /><span class="gradient-text">أبني نتائج حقيقية</span></h2>
           <p class="why-desc">
-            المئات من المستقلين يبيعون نفس الخدمات. الفرق؟ أنا أفكر كصاحب عمل، لا كمنفذ طلب. كل قرار أتخذه مبني على ما يحقق لك النمو الفعلي.
+            المئات من المستقلين يبيعون نفس الخدمات. الفرق؟ أنا أفكر كصاحب عمل، لا كمنفذ طلب. كل قرار أتخذه مبني على ما
+            يحقق لك النمو الفعلي.
           </p>
           <a href="#contact" class="btn btn-primary">
             احصل على عرض سعر مجاني <i class="fa-solid fa-arrow-left"></i>
@@ -887,7 +1084,8 @@
       <div class="section-header">
         <span class="section-label">أعمالي</span>
         <h2 class="section-title">دراسات حالة <span class="gradient-text">بنتائج موثّقة</span></h2>
-        <p class="section-desc">لا صور فحسب — مشكلة حقيقية، حل حقيقي، نتيجة قابلة للقياس. انقر على أي مشروع لتقرأ القصة كاملة.</p>
+        <p class="section-desc">لا صور فحسب — مشكلة حقيقية، حل حقيقي، نتيجة قابلة للقياس. انقر على أي مشروع لتقرأ القصة
+          كاملة.</p>
       </div>
 
       <div class="portfolio-filters">
@@ -899,14 +1097,13 @@
 
       <div class="portfolio-grid" id="portfolioGrid">
 
-        <div class="portfolio-card" data-category="web"
-          data-title="متجر أزياء إلكتروني"
-          data-tag="موقع ويب"
+        <div class="portfolio-card" data-category="web" data-title="متجر أزياء إلكتروني" data-tag="موقع ويب"
           data-problem="كان العميل يعتمد على البيع عبر واتساب فقط بدون موقع احترافي، مما كان يُضعف مصداقيته ويفقده عملاء."
           data-solution="بنيت متجراً على Shopify بتصميم مخصص يعكس هوية العلامة التجارية مع صفحات منتجات محسّنة وتجربة شراء سلسة."
           data-result="ارتفعت المبيعات 60% في الشهر الأول، وأصبح المتجر المصدر الرئيسي للطلبات.">
           <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=360&fit=crop&auto=format" alt="متجر أزياء إلكتروني" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=360&fit=crop&auto=format"
+              alt="متجر أزياء إلكتروني" loading="lazy" />
             <div class="portfolio-overlay">
               <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
                 <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -914,26 +1111,28 @@
             </div>
           </div>
           <div class="portfolio-info">
-            <span class="portfolio-tag">موقع ويب</span>
+            <span class="portfolio-tag"><i class="fa-solid fa-globe"></i> موقع ويب</span>
             <h4>متجر أزياء إلكتروني</h4>
             <p>متجر مبني على Shopify بتصميم مخصص وصفحات منتجات وتحسين تجربة الشراء.</p>
+            <span class="portfolio-metric"><i class="fa-solid fa-arrow-trend-up"></i> +60% مبيعات خلال شهر</span>
             <button class="btn-case-study portfolio-modal-trigger">
-              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
             </button>
           </div>
         </div>
 
-        <div class="portfolio-card" data-category="video"
-          data-title="إعلان ترويجي للعلامة التجارية"
+        <div class="portfolio-card" data-category="video" data-title="إعلان ترويجي للعلامة التجارية"
           data-tag="مونتاج فيديو"
           data-problem="كانت العلامة التجارية تفتقر لمحتوى مرئي احترافي يعكس قيمتها، مما أثّر على معدلات التفاعل على السوشيال ميديا."
           data-solution="أنتجت فيديو ترويجياً مدته 30 ثانية مع موشن جرافيك مخصص، تصحيح ألوان سينمائي، وتصميم صوتي احترافي."
           data-result="حقق الفيديو 150,000 مشاهدة خلال أسبوعين، ورفع نسبة التفاعل 3 أضعاف.">
           <div class="portfolio-img portfolio-img--video">
-            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=360&fit=crop&auto=format" alt="إعلان ترويجي للعلامة التجارية" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=360&fit=crop&auto=format"
+              alt="إعلان ترويجي للعلامة التجارية" loading="lazy" />
             <span class="video-badge"><i class="fa-solid fa-circle-play"></i> فيديو</span>
             <div class="portfolio-overlay">
-              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="LXb3EKWsInQ" aria-label="مشاهدة الفيديو">
+              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="RYEZJDqXKu8"
+                aria-label="مشاهدة الفيديو">
                 <i class="fa-solid fa-play"></i>
               </button>
               <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
@@ -942,23 +1141,23 @@
             </div>
           </div>
           <div class="portfolio-info">
-            <span class="portfolio-tag">فيديو</span>
+            <span class="portfolio-tag"><i class="fa-solid fa-film"></i> فيديو</span>
             <h4>إعلان ترويجي للعلامة التجارية</h4>
             <p>فيديو ترويجي مدته 30 ثانية مع موشن جرافيك وتصحيح ألوان وصوت سينمائي.</p>
+            <span class="portfolio-metric"><i class="fa-solid fa-eye"></i> +150K مشاهدة في أسبوعين</span>
             <button class="btn-case-study portfolio-modal-trigger">
-              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+              استكشف المشروع <i class="fa-solid fa-arrow-left"></i>
             </button>
           </div>
         </div>
 
-        <div class="portfolio-card" data-category="blog"
-          data-title="مدونة نمو SaaS"
-          data-tag="مدونة SEO"
+        <div class="portfolio-card" data-category="blog" data-title="مدونة نمو SaaS" data-tag="مدونة SEO"
           data-problem="كان الموقع يحصل على أقل من 500 زيارة شهرياً بدون استراتيجية محتوى واضحة، في سوق تنافسي جداً."
           data-solution="وضعت استراتيجية محتوى شاملة من 12 مقالاً تستهدف كلمات مفتاحية عالية النية مع SEO متقدم داخل الصفحة."
           data-result="8,000 زيارة عضوية شهرياً خلال 4 أشهر، وتصدّر 15 كلمة مفتاحية تنافسية في جوجل.">
           <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=360&fit=crop&auto=format" alt="مدونة نمو SaaS" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=360&fit=crop&auto=format"
+              alt="مدونة نمو SaaS" loading="lazy" />
             <div class="portfolio-overlay">
               <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
                 <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -966,23 +1165,23 @@
             </div>
           </div>
           <div class="portfolio-info">
-            <span class="portfolio-tag">مدونة</span>
+            <span class="portfolio-tag"><i class="fa-solid fa-pen-nib"></i> مدونة</span>
             <h4>مدونة نمو SaaS</h4>
             <p>استراتيجية محتوى من 12 مقالاً تستهدف كلمات مفتاحية عالية النية، حققت 8 آلاف زيارة شهرياً.</p>
+            <span class="portfolio-metric"><i class="fa-solid fa-chart-line"></i> +8K زيارة عضوية / شهر</span>
             <button class="btn-case-study portfolio-modal-trigger">
-              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
             </button>
           </div>
         </div>
 
-        <div class="portfolio-card" data-category="web"
-          data-title="صفحة هبوط للتدريب الرياضي"
-          data-tag="موقع ويب"
+        <div class="portfolio-card" data-category="web" data-title="صفحة هبوط للتدريب الرياضي" data-tag="موقع ويب"
           data-problem="كان المدرب الرياضي يفقد عملاء محتملين بسبب غياب صفحة هبوط قوية تشرح خدماته وتقنعهم بالاشتراك."
           data-solution="صممت صفحة هبوط عالية التحويل بتسلسل إقناعي منطقي: عرض القيمة، الدليل الاجتماعي، الأسعار، ثم نموذج الاشتراك."
           data-result="ضاعفت الاشتراكات الشهرية 3 مرات خلال أول 30 يوماً من الإطلاق.">
           <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=360&fit=crop&auto=format" alt="صفحة هبوط للتدريب الرياضي" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=360&fit=crop&auto=format"
+              alt="صفحة هبوط للتدريب الرياضي" loading="lazy" />
             <div class="portfolio-overlay">
               <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
                 <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -990,26 +1189,28 @@
             </div>
           </div>
           <div class="portfolio-info">
-            <span class="portfolio-tag">موقع ويب</span>
+            <span class="portfolio-tag"><i class="fa-solid fa-globe"></i> موقع ويب</span>
             <h4>صفحة هبوط للتدريب الرياضي</h4>
             <p>صفحة هبوط عالية التحويل لمدرب رياضي عبر الإنترنت، ضاعفت الاشتراكات 3 مرات.</p>
+            <span class="portfolio-metric"><i class="fa-solid fa-bolt"></i> 3× اشتراكات في 30 يوم</span>
             <button class="btn-case-study portfolio-modal-trigger">
-              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
             </button>
           </div>
         </div>
 
-        <div class="portfolio-card" data-category="video"
-          data-title="سلسلة مقدمات قناة يوتيوب"
-          data-tag="مونتاج فيديو"
+        <div class="portfolio-card" data-category="video" data-title="سلسلة مقدمات قناة يوتيوب" data-tag="مونتاج فيديو"
           data-problem="كانت القناة تفتقر لهوية بصرية متسقة، مما أدى إلى تجربة مشاهدة غير احترافية وضعف في الاحتفاظ بالمشتركين."
           data-solution="صممت وأنتجت سلسلة من 5 مقدمات ببراندينج متحرك مخصص وهوية بصرية متسقة تعكس شخصية القناة."
           data-result="ارتفعت نسبة الاحتفاظ بالمشاهدين 40%، وزادت قيمة العلامة التجارية للقناة بشكل ملحوظ.">
           <div class="portfolio-img portfolio-img--video">
-            <img src="https://blog.khamsat.com/wp-content/uploads/2022/04/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D9%81%D9%8A%D8%AF%D9%8A%D9%88%D9%87%D8%A7%D8%AA-%D9%8A%D9%88%D8%AA%D9%8A%D9%88%D8%A8-%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A9-%D9%84%D8%B4%D9%87%D8%B1-%D8%B1%D9%85%D8%B6%D8%A7%D9%86.png" alt="سلسلة مقدمات قناة يوتيوب" loading="lazy" />
+            <img
+              src="https://blog.khamsat.com/wp-content/uploads/2022/04/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D9%81%D9%8A%D8%AF%D9%8A%D9%88%D9%87%D8%A7%D8%AA-%D9%8A%D9%88%D8%AA%D9%8A%D9%88%D8%A8-%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A9-%D9%84%D8%B4%D9%87%D8%B1-%D8%B1%D9%85%D8%B6%D8%A7%D9%86.png"
+              alt="سلسلة مقدمات قناة يوتيوب" loading="lazy" />
             <span class="video-badge"><i class="fa-solid fa-circle-play"></i> فيديو</span>
             <div class="portfolio-overlay">
-              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="9No-FiEInLA" aria-label="مشاهدة الفيديو">
+              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="pQpFebyALV0"
+                aria-label="مشاهدة الفيديو">
                 <i class="fa-solid fa-play"></i>
               </button>
               <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
@@ -1018,23 +1219,23 @@
             </div>
           </div>
           <div class="portfolio-info">
-            <span class="portfolio-tag">فيديو</span>
+            <span class="portfolio-tag"><i class="fa-solid fa-film"></i> فيديو</span>
             <h4>سلسلة مقدمات قناة يوتيوب</h4>
             <p>سلسلة من 5 مقدمات ببراندينج متحرك وهوية بصرية متسقة.</p>
+            <span class="portfolio-metric"><i class="fa-solid fa-users"></i> +40% احتفاظ بالمشاهدين</span>
             <button class="btn-case-study portfolio-modal-trigger">
-              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+              استكشف المشروع <i class="fa-solid fa-arrow-left"></i>
             </button>
           </div>
         </div>
 
-        <div class="portfolio-card" data-category="blog"
-          data-title="مدونة الاستثمار العقاري"
-          data-tag="مدونة SEO"
+        <div class="portfolio-card" data-category="blog" data-title="مدونة الاستثمار العقاري" data-tag="مدونة SEO"
           data-problem="كان الموقع العقاري غير مرئي في جوجل رغم محتواه الجيد، بسبب غياب بنية SEO صحيحة واستهداف الكلمات المفتاحية الخاطئة."
           data-solution="أعدت هيكلة المحتوى بالكامل مع استراتيجية شاملة تستهدف أكثر من 40 كلمة مفتاحية تنافسية في مجال العقارات."
           data-result="تصدّر الموقع 40+ كلمة مفتاحية خلال 6 أشهر، مع نمو الزيارات العضوية من 200 إلى 12,000 شهرياً.">
           <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=360&fit=crop&auto=format" alt="مدونة الاستثمار العقاري" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=360&fit=crop&auto=format"
+              alt="مدونة الاستثمار العقاري" loading="lazy" />
             <div class="portfolio-overlay">
               <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
                 <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -1042,11 +1243,12 @@
             </div>
           </div>
           <div class="portfolio-info">
-            <span class="portfolio-tag">مدونة</span>
+            <span class="portfolio-tag"><i class="fa-solid fa-pen-nib"></i> مدونة</span>
             <h4>مدونة الاستثمار العقاري</h4>
             <p>مركز محتوى متخصص يتصدر أكثر من 40 كلمة مفتاحية تنافسية خلال 6 أشهر.</p>
+            <span class="portfolio-metric"><i class="fa-solid fa-magnifying-glass-chart"></i> +40 كلمة مفتاحية متصدرة</span>
             <button class="btn-case-study portfolio-modal-trigger">
-              عرض دراسة الحالة <i class="fa-solid fa-arrow-left"></i>
+              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
             </button>
           </div>
         </div>
@@ -1061,7 +1263,8 @@
       <div class="mid-cta-inner">
         <p class="mid-cta-text">هل أعجبك ما رأيت؟ مشروعك القادم يمكن أن يكون هنا</p>
         <div class="mid-cta-actions">
-          <a href="#contact" class="btn btn-primary">احصل على عرض خلال 24 ساعة <i class="fa-solid fa-chart-line"></i></a>
+          <a href="#contact" class="btn btn-primary">احصل على عرض خلال 24 ساعة <i
+              class="fa-solid fa-chart-line"></i></a>
           <a href="#contact" class="btn btn-ghost">دعني أقيّم مشروعك مجاناً</a>
         </div>
       </div>
@@ -1084,7 +1287,8 @@
             <i class="fa-solid fa-star"></i>
           </div>
           <p class="testi-text">
-            "Nagriva بنى موقعنا في أقل من أسبوع والنتيجة مذهلة. مبيعاتنا ارتفعت 60% في الشهر الأول. من أفضل الاستثمارات التي قمنا بها."
+            "رضوان بنى موقعنا في أقل من أسبوع والنتيجة مذهلة. مبيعاتنا ارتفعت 60% في الشهر الأول. من أفضل الاستثمارات
+            التي قمنا بها."
           </p>
           <div class="testi-author">
             <div class="testi-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">س</div>
@@ -1102,7 +1306,8 @@
             <i class="fa-solid fa-star"></i>
           </div>
           <p class="testi-text">
-            "المونتاج في مستوى آخر تماماً. قناتي على يوتيوب انتقلت من 500 إلى 15 ألف مشترك في 3 أشهر بعد التعامل مع Nagriva. نظيف، سريع، ودقيق."
+            "المونتاج في مستوى آخر تماماً. قناتي على يوتيوب انتقلت من 500 إلى 15 ألف مشترك في 3 أشهر بعد التعامل مع
+            Nagriva. نظيف، سريع، ودقيق."
           </p>
           <div class="testi-author">
             <div class="testi-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">ك</div>
@@ -1120,7 +1325,8 @@
             <i class="fa-solid fa-star"></i>
           </div>
           <p class="testi-text">
-            "مدونتنا أصبحت في المرتبة الأولى لـ 12 كلمة مفتاحية خلال شهرين فقط. مقالات Nagriva متعمقة ومكتوبة باحترافية وتجلب زيارات حقيقية. أنصح به بشدة!"
+            "مدونتنا أصبحت في المرتبة الأولى لـ 12 كلمة مفتاحية خلال شهرين فقط. مقالات رضوان متعمقة ومكتوبة باحترافية
+            وتجلب زيارات حقيقية. أنصح به بشدة!"
           </p>
           <div class="testi-author">
             <div class="testi-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">ل</div>
@@ -1211,13 +1417,7 @@
         </p>
         <form class="lead-form" id="leadForm" novalidate>
           <div class="lead-row">
-            <input
-              type="email"
-              class="lead-input"
-              id="leadEmail"
-              placeholder="أدخل بريدك الإلكتروني..."
-              required
-            />
+            <input type="email" class="lead-input" id="leadEmail" placeholder="أدخل بريدك الإلكتروني..." required />
             <button type="submit" class="btn btn-primary">
               أرسل لي الخطة <i class="fa-solid fa-paper-plane"></i>
             </button>
@@ -1240,9 +1440,11 @@
       <div class="pre-cta-inner">
         <div class="pre-cta-icon"><i class="fa-solid fa-handshake"></i></div>
         <h2 class="pre-cta-title">جاهز للحصول على نتائج حقيقية؟</h2>
-        <p class="pre-cta-desc">انضم إلى أكثر من 50 عميلاً حققوا نتائج موثّقة. أرسل فكرتك الآن وسأرد عليك خلال 24 ساعة بخطة وسعر.</p>
+        <p class="pre-cta-desc">انضم إلى أكثر من 50 عميلاً حققوا نتائج موثّقة. أرسل فكرتك الآن وسأرد عليك خلال 24 ساعة
+          بخطة وسعر.</p>
         <div class="pre-cta-actions">
-          <a href="#contact" class="btn btn-primary btn-lg">احجز استشارتك المجانية الآن <i class="fa-solid fa-rocket"></i></a>
+          <a href="#contact" class="btn btn-primary btn-lg">احجز استشارتك المجانية الآن <i
+              class="fa-solid fa-rocket"></i></a>
           <a href="https://wa.me/212728427278" class="btn btn-whatsapp" target="_blank" rel="noopener">
             <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
           </a>
@@ -1262,121 +1464,190 @@
       <div class="blob blob-3"></div>
       <div class="blob blob-4"></div>
     </div>
+    <div class="contact-grid-bg"></div>
     <div class="container">
 
       <!-- Section Header -->
       <div class="contact-header">
-        <span class="section-label">تواصل معي</span>
-        <h2 class="cta-title">لنبني <span class="cta-highlight">مشروعك</span> معاً</h2>
-        <p class="cta-desc">أخبرني بفكرتك وسأرد عليك خلال 24 ساعة بخطة وجدول زمني وسعر شفاف.</p>
+        <span class="section-label">ابدأ مشروعك</span>
+        <h2 class="cta-title">حوّل فكرتك إلى <span class="cta-highlight">مشروع رابح</span></h2>
+        <p class="cta-desc">أخبرني عن فكرتك — وسأرد عليك خلال 24 ساعة بخطة واضحة وسعر شفاف.</p>
       </div>
 
-      <!-- Two-Column Layout -->
-      <div class="contact-layout">
+      <!-- Wizard Container -->
+      <div class="wizard-container">
 
-        <!-- Left: Info Panel -->
-        <div class="contact-info-panel">
-          <div class="contact-info-top">
-            <h3 class="contact-info-title">ابدأ محادثتنا</h3>
-            <p class="contact-info-sub">أنا هنا للإجابة على كل أسئلتك ومساعدتك في اتخاذ القرار الصحيح.</p>
+        <!-- Step Progress -->
+        <div class="wizard-steps">
+          <div class="wizard-step active" data-step="1">
+            <div class="step-circle"><span>1</span></div>
+            <span class="step-label">الخدمة</span>
           </div>
-
-          <ul class="contact-info-list">
-            <li class="contact-info-item">
-              <div class="contact-info-icon-wrap icon-purple">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-              <div class="contact-info-text">
-                <span class="contact-info-label">البريد الإلكتروني</span>
-                <a href="mailto:Redwanaitlhadj16@gmail.com" class="contact-info-value">Redwanaitlhadj16@gmail.com</a>
-              </div>
-            </li>
-            <li class="contact-info-item">
-              <div class="contact-info-icon-wrap icon-green">
-                <i class="fa-brands fa-whatsapp"></i>
-              </div>
-              <div class="contact-info-text">
-                <span class="contact-info-label">واتساب</span>
-                <a href="https://wa.me/212728427278" class="contact-info-value" target="_blank" rel="noopener">تواصل مباشرة</a>
-              </div>
-            </li>
-            <li class="contact-info-item">
-              <div class="contact-info-icon-wrap icon-blue">
-                <i class="fa-solid fa-clock"></i>
-              </div>
-              <div class="contact-info-text">
-                <span class="contact-info-label">وقت الرد</span>
-                <span class="contact-info-value">خلال 24 ساعة</span>
-              </div>
-            </li>
-          </ul>
-
-          <div class="contact-trust-row">
-            <div class="contact-trust-item">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>استشارة مجانية</span>
-            </div>
-            <div class="contact-trust-item">
-              <i class="fa-solid fa-shield-halved"></i>
-              <span>بدون التزام</span>
-            </div>
-            <div class="contact-trust-item">
-              <i class="fa-solid fa-lock"></i>
-              <span>خصوصية تامة</span>
-            </div>
+          <div class="step-line" id="line-1-2"></div>
+          <div class="wizard-step" data-step="2">
+            <div class="step-circle"><span>2</span></div>
+            <span class="step-label">تفاصيلك</span>
           </div>
-
-          <div class="contact-wa-btn-wrap">
-            <a href="https://wa.me/212728427278" class="btn btn-whatsapp btn-wa-full" target="_blank" rel="noopener">
-              <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب الآن
-            </a>
+          <div class="step-line" id="line-2-3"></div>
+          <div class="wizard-step" data-step="3">
+            <div class="step-circle"><span>3</span></div>
+            <span class="step-label">المراجعة</span>
           </div>
         </div>
 
-        <!-- Right: Form -->
-        <div class="contact-form-wrap">
-          <form class="contact-form" id="contactForm" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name"><i class="fa-solid fa-user"></i> اسمك</label>
-                <input type="text" id="name" name="name" placeholder="Nagriva" required />
+        <!-- Animated Progress Bar -->
+        <div class="wizard-progress-track">
+          <div class="wizard-progress-fill" id="wizardProgress"></div>
+        </div>
+
+        <!-- Form -->
+        <form class="contact-form wizard-form" id="contactForm" novalidate>
+
+          <!-- Hidden select kept for JS submission logic -->
+          <select id="service" name="service" required class="hidden-select" aria-hidden="true" tabindex="-1">
+            <option value="" disabled selected>اختر الخدمة…</option>
+            <option value="website">🌐 تطوير موقع ويب</option>
+            <option value="video">🎬 مونتاج فيديو</option>
+            <option value="blog">✍️ إنشاء مدونة</option>
+            <option value="other">⚡ أخرى / خدمات متعددة</option>
+          </select>
+
+          <!-- Panel 1: Choose Service -->
+          <div class="wizard-panel" id="panel-1" data-panel="1">
+            <div class="panel-header">
+              <h3 class="panel-title">ماذا تحتاج؟</h3>
+              <p class="panel-sub">اختر الخدمة المناسبة وسأبني لك خطة مخصصة</p>
+            </div>
+            <div class="service-cards">
+              <div class="service-card sc-stagger" data-value="website" style="--sc-delay:0ms">
+                <div class="service-card-icon icon-blue"><i class="fa-solid fa-globe"></i></div>
+                <div class="service-card-name">موقع ويب</div>
+                <div class="service-card-desc">متجر، بورتفوليو، أو موقع خدمات</div>
+                <div class="service-card-check"><i class="fa-solid fa-check"></i></div>
               </div>
-              <div class="form-group">
-                <label for="email"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني</label>
-                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              <div class="service-card sc-stagger" data-value="video" style="--sc-delay:80ms">
+                <div class="service-card-icon icon-orange"><i class="fa-solid fa-film"></i></div>
+                <div class="service-card-name">مونتاج فيديو</div>
+                <div class="service-card-desc">محتوى احترافي لمنصاتك</div>
+                <div class="service-card-check"><i class="fa-solid fa-check"></i></div>
               </div>
+              <div class="service-card sc-stagger" data-value="blog" style="--sc-delay:160ms">
+                <div class="service-card-icon icon-green"><i class="fa-solid fa-pen-nib"></i></div>
+                <div class="service-card-name">مدونة</div>
+                <div class="service-card-desc">محتوى محسّن لمحركات البحث</div>
+                <div class="service-card-check"><i class="fa-solid fa-check"></i></div>
+              </div>
+              <div class="service-card sc-stagger" data-value="other" style="--sc-delay:240ms">
+                <div class="service-card-icon icon-purple"><i class="fa-solid fa-bolt"></i></div>
+                <div class="service-card-name">خدمات متعددة</div>
+                <div class="service-card-desc">مشروع متكامل أو حزمة مخصصة</div>
+                <div class="service-card-check"><i class="fa-solid fa-check"></i></div>
+              </div>
+            </div>
+            <div class="wizard-nav wizard-nav-end">
+              <button type="button" class="btn btn-primary wizard-next" id="nextStep1" disabled>
+                التالي <i class="fa-solid fa-arrow-left"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 2: Contact Info + Project Details -->
+          <div class="wizard-panel hidden" id="panel-2" data-panel="2">
+            <div class="panel-header">
+              <h3 class="panel-title">من أنت؟</h3>
+              <p class="panel-sub">حتى أتواصل معك بخطة مخصصة لمشروعك</p>
             </div>
             <div class="form-group">
-              <label for="service"><i class="fa-solid fa-layer-group"></i> الخدمة المطلوبة</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>اختر الخدمة&hellip;</option>
-                <option value="website">🌐 تطوير موقع ويب</option>
-                <option value="video">🎬 مونتاج فيديو</option>
-                <option value="blog">✍️ إنشاء مدونة</option>
-                <option value="other">⚡ أخرى / خدمات متعددة</option>
-              </select>
+              <label for="name"><i class="fa-solid fa-user"></i> اسمك الكريم</label>
+              <input type="text" id="name" name="name" placeholder="رضوان" required autocomplete="name" />
+              <span class="form-helper">الاسم الذي سأناديك به في ردي 👋</span>
             </div>
             <div class="form-group">
-              <label for="message"><i class="fa-solid fa-pen-to-square"></i> أخبرني عن مشروعك</label>
-              <textarea id="message" name="message" rows="5" placeholder="صف فكرتك وأهدافك وأي متطلبات خاصة…" required></textarea>
+              <label for="email"><i class="fa-solid fa-envelope"></i> بريدك الإلكتروني</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+              <span class="form-helper">سأرسل إليك الخطة المفصّلة هنا</span>
             </div>
-            <button type="submit" class="btn btn-submit" id="submitBtn">
-              <span id="btnText">إرسال الرسالة <i class="fa-solid fa-paper-plane"></i></span>
-              <span id="btnLoader" class="hidden"><i class="fa-solid fa-spinner fa-spin"></i> جارٍ الإرسال…</span>
-            </button>
+            <div class="form-group">
+              <label for="message"><i class="fa-solid fa-pen-to-square"></i> تفاصيل المشروع</label>
+              <textarea id="message" name="message" rows="4" placeholder="صف فكرتك وأهدافك وأي متطلبات خاصة…" required></textarea>
+              <span class="form-helper">كلما كانت التفاصيل أكثر، كان ردي أكثر دقة ✨</span>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-ghost wizard-back">
+                <i class="fa-solid fa-arrow-right"></i> السابق
+              </button>
+              <button type="button" class="btn btn-primary wizard-next" id="nextStep2">
+                مراجعة الطلب <i class="fa-solid fa-arrow-left"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 3: Review & Submit -->
+          <div class="wizard-panel hidden" id="panel-3" data-panel="3">
+            <div class="panel-header">
+              <h3 class="panel-title">راجع طلبك <i class="fa-solid fa-eye"></i></h3>
+              <p class="panel-sub">تحقق من التفاصيل قبل الإرسال — يمكنك التعديل في أي وقت</p>
+            </div>
+            <div class="review-summary" id="reviewSummary">
+              <!-- Populated by JS -->
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-ghost wizard-back">
+                <i class="fa-solid fa-arrow-right"></i> تعديل
+              </button>
+              <button type="submit" class="btn btn-submit" id="submitBtn">
+                <span id="btnText">ابدأ مشروعي <i class="fa-solid fa-rocket"></i></span>
+                <span id="btnLoader" class="hidden"><i class="fa-solid fa-spinner fa-spin"></i> جارٍ الإرسال…</span>
+              </button>
+            </div>
+            <div class="submit-trust-badges">
+              <span><i class="fa-solid fa-circle-check"></i> رد خلال 24 ساعة</span>
+              <span><i class="fa-solid fa-users"></i> +50 عميل راضٍ</span>
+              <span><i class="fa-solid fa-lock"></i> خصوصية تامة</span>
+            </div>
             <p class="form-privacy-note"><i class="fa-solid fa-shield-halved"></i> بياناتك محمية — لن نشاركها مع أي طرف ثالث</p>
-          </form>
-          <div class="form-success hidden" id="formSuccess">
-            <i class="fa-solid fa-circle-check"></i>
-            <h3>تم استلام رسالتك!</h3>
-            <p>شكراً لتواصلك. <strong>سأرد عليك خلال 24 ساعة</strong> بخطة واضحة وسعر مناسب.</p>
-            <a href="https://wa.me/212728427278" class="btn btn-whatsapp" target="_blank" rel="noopener" style="margin-top:8px">
-              <i class="fa-brands fa-whatsapp"></i> أو تواصل عبر واتساب الآن
-            </a>
           </div>
+
+        </form>
+
+        <!-- Success State -->
+        <div class="form-success hidden" id="formSuccess">
+          <div class="success-anim"><i class="fa-solid fa-check"></i></div>
+          <h3>تم استلام رسالتك!</h3>
+          <p>شكراً لتواصلك. <strong>سأرد عليك خلال 24 ساعة</strong> بخطة واضحة وسعر مناسب.</p>
+          <a href="https://wa.me/212728427278" class="btn btn-whatsapp" target="_blank" rel="noopener"
+            style="margin-top:8px">
+            <i class="fa-brands fa-whatsapp"></i> أو تواصل عبر واتساب الآن
+          </a>
         </div>
 
       </div>
+
+      <!-- Bottom Contact Strip -->
+      <div class="contact-strip">
+        <a href="mailto:Redwanaitlhadj16@gmail.com" class="contact-pill pill-email">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Redwanaitlhadj16@gmail.com</span>
+        </a>
+        <span class="strip-divider"></span>
+        <a href="https://wa.me/212728427278" class="contact-pill pill-wa" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>واتساب مباشرة</span>
+        </a>
+        <span class="strip-divider"></span>
+        <div class="contact-pill pill-time">
+          <i class="fa-solid fa-clock"></i>
+          <span>رد خلال 24 ساعة</span>
+        </div>
+      </div>
+
+      <!-- Trust Row -->
+      <div class="contact-trust-bottom">
+        <span><i class="fa-solid fa-circle-check"></i> استشارة مجانية</span>
+        <span><i class="fa-solid fa-shield-halved"></i> بدون التزام</span>
+        <span><i class="fa-solid fa-lock"></i> خصوصية تامة</span>
+      </div>
+
     </div>
   </section>
 
@@ -1388,11 +1659,11 @@
           <H1>Nagriva</H1>
           <p>نبني التميز الرقمي — مشروع واحد في كل مرة.</p>
           <div class="footer-social">
-            <a href="#" aria-label="إنستغرام" class="social-link"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="لينكد إن" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" aria-label="يوتيوب" class="social-link"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" aria-label="تويتر" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" aria-label="بيهانس" class="social-link"><i class="fa-brands fa-behance"></i></a>
+            <a href="https://wa.me/212728427278" aria-label="واتساب" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/nagri_va/" aria-label="إنستغرام" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61575750526639" aria-label="فيسبوك" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.youtube.com/@nagriva" aria-label="يوتيوب" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://x.com/nagri_va" aria-label="تويتر X" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
           </div>
         </div>
         <div class="footer-links">
@@ -1425,6 +1696,77 @@
           </div>
         </div>
       </div>
+      <!-- ===== PAYMENT METHODS ===== -->
+      <div class="payment-section">
+        <div class="payment-header">
+          <svg class="payment-lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span class="payment-title">طرق دفع آمنة</span>
+        </div>
+        <div class="payment-logos">
+
+          <!-- Visa -->
+          <div class="payment-logo" aria-label="Visa" title="Visa">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 500" aria-hidden="true">
+              <path d="M293.2 348.7l33.4-195.7h53.4l-33.4 195.7h-53.4zm246.7-191c-10.6-3.9-27.1-8.1-47.7-8.1-52.6 0-89.7 26.4-90 64.3-.3 28 26.6 43.6 46.9 52.9 20.8 9.5 27.8 15.6 27.7 24.1-.1 13-16.6 18.9-32 18.9-21.4 0-32.7-2.9-50.2-10.1l-6.9-3.1-7.5 43.5c12.5 5.4 35.5 10.1 59.4 10.3 56 0 92.4-26.1 92.8-66.5.2-22.2-14.1-39.1-44.9-53-18.7-9-30.2-15-30.1-24.2 0-8.1 9.7-16.7 30.7-16.7 17.5-.3 30.2 3.5 40.1 7.4l4.8 2.2 7.2-41.9zm136.9-4.7h-41.1c-12.7 0-22.2 3.4-27.8 16l-78.9 177.8h55.8s9.1-23.8 11.2-29h68.2c1.6 6.8 6.5 29 6.5 29h49.3l-43.2-193.8zm-65.9 126.5c4.4-11.2 21.2-54.3 21.2-54.3-.3.5 4.4-11.3 7.1-18.6l3.6 16.8s10.2 46.5 12.3 56.1h-44.2zm-406-126.5l-52.1 133.5-5.6-27c-9.7-31-40.1-64.6-74.1-81.4l47.7 170.5 56.4-.1 83.9-195.5h-56.2z" fill="currentColor"/>
+              <path d="M146.9 153h-85.7l-.7 3.9c66.7 16 110.8 54.6 129.1 101l-18.6-88.8c-3.2-12.2-12.5-15.7-24.1-16.1z" fill="currentColor" opacity=".6"/>
+            </svg>
+          </div>
+
+          <!-- Mastercard -->
+          <div class="payment-logo" aria-label="Mastercard" title="Mastercard">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.4 108" aria-hidden="true">
+              <circle cx="52.8" cy="54" r="36.8" fill="currentColor" opacity=".9"/>
+              <circle cx="99.6" cy="54" r="36.8" fill="currentColor" opacity=".5"/>
+              <path d="M76.2 26.3a36.8 36.8 0 0 1 0 55.4 36.8 36.8 0 0 1 0-55.4z" fill="currentColor" opacity=".7"/>
+            </svg>
+          </div>
+
+          <!-- PayPal -->
+          <div class="payment-logo" aria-label="PayPal" title="PayPal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 33" aria-hidden="true">
+              <path d="M46.2 6.7H36.9c-.7 0-1.3.5-1.4 1.1l-3.8 24.1c-.1.5.3.9.8.9h4.4c.7 0 1.3-.5 1.4-1.1l1-6.5c.1-.7.7-1.1 1.4-1.1h2.9c5.9 0 9.3-2.9 10.2-8.5.4-2.5 0-4.4-1.1-5.7-1.3-1.5-3.5-2.2-6.5-2.2zm1 8.4c-.5 3.1-2.9 3.1-5.2 3.1h-1.3l.9-5.9c.1-.4.4-.7.8-.7h.6c1.6 0 3.1 0 3.9.9.5.5.6 1.4.3 2.6zM72.9 14.9h-4.4c-.4 0-.8.3-.8.7l-.2 1.3-.3-.5c-1-1.4-3.1-1.9-5.2-1.9-4.9 0-9.1 3.7-9.9 8.9-.4 2.6.2 5.1 1.7 6.8 1.3 1.6 3.3 2.3 5.6 2.3 3.9 0 6.1-2.5 6.1-2.5l-.2 1.3c-.1.5.3.9.8.9h4c.7 0 1.3-.5 1.4-1.1l2.3-14.8c.1-.6-.3-1.4-.9-1.4zm-6.2 8.6c-.4 2.5-2.4 4.2-4.9 4.2-1.3 0-2.3-.4-2.9-1.2-.6-.8-.9-1.9-.7-3.1.4-2.5 2.4-4.2 4.9-4.2 1.2 0 2.2.4 2.9 1.2.6.9.8 2 .7 3.1zM96.4 14.9h-4.5c-.5 0-.9.2-1.2.6l-6.8 10-2.9-9.6c-.2-.6-.7-1-1.4-1h-4.4c-.5 0-.9.5-.8 1l5.4 15.9-5.1 7.2c-.3.5 0 1.1.6 1.1h4.5c.5 0 .9-.2 1.2-.6L97 16c.3-.5 0-1.1-.6-1.1z" fill="currentColor"/>
+              <path d="M108.4 6.7H99c-.7 0-1.3.5-1.4 1.1l-3.8 24.1c-.1.5.3.9.8.9h4.7c.5 0 .9-.4 1-.8l1.1-6.8c.1-.7.7-1.1 1.4-1.1h2.9c5.9 0 9.3-2.9 10.2-8.5.4-2.5 0-4.4-1.1-5.7-1.4-1.5-3.6-2.2-6.4-2.2zm1 8.4c-.5 3.1-2.9 3.1-5.2 3.1h-1.3l.9-5.9c.1-.4.4-.7.8-.7h.6c1.6 0 3.1 0 3.9.9.5.5.6 1.4.3 2.6zM134.9 14.9h-4.4c-.4 0-.8.3-.8.7l-.2 1.3-.3-.5c-1-1.4-3.1-1.9-5.2-1.9-4.9 0-9.1 3.7-9.9 8.9-.4 2.6.2 5.1 1.7 6.8 1.3 1.6 3.3 2.3 5.6 2.3 3.9 0 6.1-2.5 6.1-2.5l-.2 1.3c-.1.5.3.9.8.9h4c.7 0 1.3-.5 1.4-1.1l2.3-14.8c.1-.6-.3-1.4-.9-1.4zm-6.1 8.6c-.4 2.5-2.4 4.2-4.9 4.2-1.3 0-2.3-.4-2.9-1.2-.6-.8-.9-1.9-.7-3.1.4-2.5 2.4-4.2 4.9-4.2 1.2 0 2.2.4 2.9 1.2.6.9.8 2 .7 3.1z" fill="currentColor" opacity=".7"/>
+            </svg>
+          </div>
+
+          <!-- Stripe -->
+          <div class="payment-logo" aria-label="Stripe" title="Stripe">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 25" aria-hidden="true">
+              <path d="M5.5 9.9c0-.9.7-1.2 1.9-1.2 1.7 0 3.8.5 5.5 1.4V5.4C11.1 4.6 9.3 4.3 7.4 4.3 3 4.3.3 6.6.3 10c0 5.3 7.3 4.4 7.3 6.7 0 1-.9 1.4-2.1 1.4-1.9 0-4.2-.8-6-1.8v4.8c2 .9 4.1 1.3 6 1.3 4.5 0 7.5-2.2 7.5-5.7C13 11.3 5.5 12.4 5.5 9.9zm14.3-8.6L15 2.2l-.1 15.5 5.1-1.1.1-15.3zm6.7 4.1l-.3 1.3-.2-.4c-.8-1.2-2-1.7-3.6-1.7-3.4 0-6.5 2.6-6.5 7 0 4.1 2.8 6.9 6.5 6.9 1.7 0 2.9-.6 3.7-1.7l.2 1.4h4.6V5.4h-4.4zm-.3 8.3c-.5 1.2-1.5 1.9-2.7 1.9-2.2 0-3.4-1.6-3.4-3.9 0-2.3 1.2-3.9 3.4-3.9 1.2 0 2.2.7 2.7 1.9v4zm11.3-8.6c-1.4 0-2.7.5-3.5 1.7V5.4h-5v16.8h5.1v-9c.6-1 1.5-1.6 2.6-1.6 1 0 1.6.4 2.1.9l1.9-4.2c-.7-.8-1.8-1.3-3.2-1.3zm10.2.5h-5.2l-.1 15.4 5.1-1.1.1-4.9 1.8 5.1 4.8-1 .1-.1-2.7-6.5 2.5-7.4-4.6.1-1.8 5.4V5.6z" fill="currentColor"/>
+            </svg>
+          </div>
+
+          <!-- Apple Pay -->
+          <div class="payment-logo" aria-label="Apple Pay" title="Apple Pay">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165.52 105.965" aria-hidden="true">
+              <path d="M40.295 16.558c-2.798 3.24-7.246 5.793-11.694 5.428-.555-4.448 1.625-9.173 4.197-12.08 2.798-3.353 7.687-5.793 11.66-5.974.445 4.621-1.361 9.173-4.163 12.626zm4.117 6.523c-6.456-.373-11.967 3.666-15.04 3.666-3.116 0-7.838-3.474-12.974-3.382-6.68.104-12.877 3.873-16.29 9.844-6.995 12.029-1.84 29.865 4.957 39.673 3.319 4.866 7.289 10.237 12.515 10.051 4.951-.195 6.866-3.195 12.863-3.195 5.971 0 7.694 3.195 12.938 3.1 5.431-.097 8.853-4.866 12.172-9.737 3.787-5.524 5.366-10.905 5.462-11.189-.123-.054-10.472-4.037-10.583-15.993-.104-9.973 8.134-14.745 8.505-14.977-4.638-6.862-11.896-7.62-14.525-7.861z" fill="currentColor"/>
+              <path d="M80.232 8.86v52.582h8.158V44.64h11.289c10.304 0 17.538-7.065 17.538-17.917 0-10.852-7.086-17.863-17.25-17.863H80.232zm8.158 6.883h9.408c7.073 0 11.121 3.768 11.121 10.37 0 6.6-4.048 10.405-11.154 10.405H88.39V15.743zm44.265 46.197c5.116 0 9.854-2.59 12.006-6.707h.168v6.3h7.549V35.6c0-7.574-6.051-12.454-15.359-12.454-8.636 0-15.022 4.948-15.254 11.74h7.353c.612-3.226 3.574-5.344 7.617-5.344 4.925 0 7.683 2.295 7.683 6.524v2.862l-10.053.611c-9.343.57-14.393 4.384-14.393 11.023 0 6.706 5.222 11.379 12.683 11.379zm2.151-6.266c-4.291 0-7.021-2.059-7.021-5.209 0-3.258 2.63-5.15 7.651-5.454l8.938-.577v2.929c0 4.854-4.127 8.311-9.568 8.311zm34.077 20.003c7.96 0 11.708-3.038 14.975-12.216l14.344-40.29h-8.329l-9.615 31.112h-.168L171.46 23.572h-8.533l13.8 38.232-.744 2.329c-1.241 3.935-3.262 5.453-6.87 5.453-.637 0-1.875-.07-2.379-.137v6.393c.491.136 2.585.204 3.207.204z" fill="currentColor"/>
+            </svg>
+          </div>
+
+          <!-- Google Pay -->
+          <div class="payment-logo" aria-label="Google Pay" title="Google Pay">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" aria-hidden="true">
+              <path d="M55.7 23.6v7.2H53V11.9h7c1.7 0 3.1.6 4.3 1.7 1.2 1.1 1.8 2.5 1.8 4.1 0 1.6-.6 3-1.8 4.1-1.2 1.1-2.6 1.7-4.3 1.7h-4.3zm0-9.1v6.5h4.4c1 0 1.8-.4 2.5-1.1.6-.7 1-1.4 1-2.2 0-.8-.3-1.5-1-2.2-.7-.7-1.5-1-2.5-1h-4.4zM70.6 18.3c1.8 0 3.3.5 4.3 1.5 1.1 1 1.6 2.4 1.6 4.1v8.9h-2.5v-2h-.1c-1 1.7-2.4 2.5-4.1 2.5-1.5 0-2.7-.4-3.7-1.3-1-.9-1.5-2-1.5-3.3 0-1.4.5-2.5 1.6-3.3 1-.8 2.4-1.2 4.2-1.2 1.5 0 2.7.3 3.7.8v-.6c0-1-.4-1.8-1.1-2.5-.7-.7-1.6-1-2.6-1-1.5 0-2.7.6-3.6 1.9l-2.3-1.5c1.3-1.9 3.1-2 5.1-2zm-3 9.4c0 .7.3 1.2.8 1.7.6.4 1.2.7 1.9.7 1 0 2-.4 2.8-1.2.8-.8 1.2-1.7 1.2-2.7-.7-.6-1.8-.9-3.2-.9-1 0-1.8.2-2.5.7-.6.4-1 1-.9 1.7zm18.5-9l-8.3 19.4H75l3.1-6.7-5.5-12.7h2.9L79.4 27h.1l3.7-8.3h2.9z" fill="currentColor"/>
+              <path d="M39.5 21.7c0-.8-.1-1.6-.2-2.4H25v4.5h8.1c-.4 1.9-1.4 3.5-3 4.6v3.8h4.8c2.8-2.6 4.6-6.5 4.6-10.5z" fill="currentColor" opacity=".8"/>
+              <path d="M25 37.5c4.1 0 7.5-1.4 10-3.7l-4.8-3.8c-1.4.9-3.1 1.5-5.2 1.5-4 0-7.3-2.7-8.5-6.3H11.6v3.9C14.1 34.8 19.2 37.5 25 37.5z" fill="currentColor" opacity=".6"/>
+              <path d="M16.5 25.2c-.3-.9-.5-1.9-.5-2.9 0-1 .2-2 .5-2.9v-3.9H11.6C10.6 17.5 10 19.9 10 22.3c0 2.4.6 4.8 1.6 6.8l4.9-3.9z" fill="currentColor" opacity=".5"/>
+              <path d="M25 13c2.2 0 4.2.8 5.8 2.3l4.4-4.4C32.4 8.3 29 7 25 7c-5.8 0-10.9 2.7-13.4 7.1l4.9 3.9C17.7 15.7 21 13 25 13z" fill="currentColor" opacity=".7"/>
+            </svg>
+          </div>
+
+        </div>
+        <p class="payment-trust-msg">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="payment-shield-icon">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          جميع المعاملات آمنة ومشفرة.
+        </p>
+      </div>
+
       <div class="footer-bottom">
         <p>&copy; <span id="year"></span> Nagriva. جميع الحقوق محفوظة. </p>
         <p class="footer-tagline">بواسطة Redouane Ait El-Hadj</p>
@@ -1461,11 +1803,13 @@
   </div>
 
   <!-- ===== WHATSAPP FLOAT ===== -->
-  <a href="https://wa.me/212728427278" class="whatsapp-float" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <a href="https://wa.me/212728427278" class="whatsapp-float" target="_blank" rel="noopener"
+    aria-label="تواصل عبر واتساب">
     <i class="fa-brands fa-whatsapp"></i>
-    <span class="wa-float-label">تواصل الآن</span>
+    <span class="wa-float-label">ابدأ مشروعك</span>
   </a>
 
   <script src="script.js"></script>
 </body>
+
 </html>
