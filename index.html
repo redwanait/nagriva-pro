@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="رضوان – Nagriva. تطوير مواقع ويب احترافية، مونتاج فيديو، وإنشاء مدونات محسّنة. أحوّل أفكارك إلى مشاريع رقمية مربحة." />
-  <meta name="keywords" content="تطوير مواقع, مونتاج فيديو, إنشاء مدونات, فريلانسر, Nagriva, رضوان" />
-  <meta name="author" content="رضوان – Nagriva" />
-  <meta property="og:title" content="Nagriva – خدمات رقمية بقلم رضوان" />
+    content="Nagriva. تطوير مواقع ويب احترافية، مونتاج فيديو، وإنشاء مدونات محسّنة. أحوّل أفكارك إلى مشاريع رقمية مربحة." />
+  <meta name="keywords" content="تطوير مواقع, مونتاج فيديو, إنشاء مدونات, فريلانسر, Nagriva" />
+  <meta name="author" content="Nagriva" />
+  <meta property="og:title" content="Nagriva – خدمات رقمية" />
   <meta property="og:description" content="مواقع ويب، مونتاج فيديو، وإنشاء مدونات تحقق نتائج حقيقية." />
   <meta property="og:type" content="website" />
   <title> Nagriva – خدمات رقمية </title>
@@ -16,8 +16,7 @@
   <script>
     (function () {
       var s = localStorage.getItem('nagriva-theme');
-      var t = s || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-      if (t === 'light') document.documentElement.classList.add('light-mode');
+      if (s === 'light') document.documentElement.classList.add('light-mode');
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
@@ -56,6 +55,11 @@
         <!-- Search Icon -->
         <button class="nav-icon-btn" id="searchToggle" aria-label="بحث" title="بحث">
           <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="nav-icon-btn" id="themeToggle" aria-label="تبديل المظهر" title="تبديل المظهر">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
         </button>
 
         <!-- CTA Button -->
@@ -104,7 +108,7 @@
           <span class="gradient-text"> عملاء خلال 30 يوم</span>
         </h1>
         <p class="hero-desc">
-          أنا <strong>رضوان</strong>. أساعدك على بناء موقع أو محتوى ليس مجرد مظهر جمالي — بل نظام رقمي يجلب لك عملاء حقيقيين
+          أساعدك على بناء موقع أو محتوى ليس مجرد مظهر جمالي — بل نظام رقمي يجلب لك عملاء حقيقيين
           وينمّي مشروعك بسرعة، بدون تعقيد.
         </p>
         <div class="hero-actions">
@@ -236,7 +240,7 @@
             </div>
           </div>
           <p class="client-quote">
-            "بعد إطلاق متجري مع رضوان، <strong>ارتفعت مبيعاتي 200% خلال شهرين فقط.</strong> كنت أبيع عبر واتساب والطلبات
+            "بعد إطلاق متجري مع Nagriva، <strong>ارتفعت مبيعاتي 200% خلال شهرين فقط.</strong> كنت أبيع عبر واتساب والطلبات
             كانت شحيحة — الآن لدي تدفق يومي من العملاء الحقيقيين."
           </p>
           <div class="result-pill">
@@ -280,7 +284,7 @@
             </div>
           </div>
           <p class="client-quote">
-            "Ridwan built my landing page in 5 days and <strong>I got my first 3 paying clients within 2 weeks of
+            "Nagriva built my landing page in 5 days and <strong>I got my first 3 paying clients within 2 weeks of
               launch.</strong> The ROI was incredible — best investment I made for my business."
           </p>
           <div class="result-pill">
@@ -302,7 +306,7 @@
             </div>
           </div>
           <p class="client-quote">
-            "مدونتنا انتقلت من صفر إلى <strong>8,000 زيارة عضوية شهرياً خلال 4 أشهر.</strong> رضوان لا يكتب محتوى فقط —
+            "مدونتنا انتقلت من صفر إلى <strong>8,000 زيارة عضوية شهرياً خلال 4 أشهر.</strong> Nagriva لا يكتب محتوى فقط —
             يبني استراتيجية نمو حقيقية."
           </p>
           <div class="result-pill">
@@ -348,7 +352,7 @@
             </div>
             <div class="offer-price-badge">
               <span>يبدأ من</span>
-              <strong>$199</strong>
+              <strong>600 د.م</strong>
             </div>
           </div>
           <a href="#contact" class="btn btn-service">احصل على موقعك <i class="fa-solid fa-arrow-left"></i></a>
@@ -377,7 +381,7 @@
             </div>
             <div class="offer-price-badge">
               <span>يبدأ من</span>
-              <strong>$49</strong>
+              <strong>200 د.م</strong>
             </div>
           </div>
           <a href="#contact" class="btn btn-service-featured">احجز الخدمة <i class="fa-solid fa-arrow-left"></i></a>
@@ -406,7 +410,7 @@
             </div>
             <div class="offer-price-badge">
               <span>يبدأ من</span>
-              <strong>$39</strong>
+              <strong>250 د.م</strong>
             </div>
           </div>
           <a href="#contact" class="btn btn-service">ابدأ مدونتك <i class="fa-solid fa-arrow-left"></i></a>
@@ -442,7 +446,7 @@
 
             <!-- Photo with gradient ring -->
             <div class="about-img-ring">
-              <img src="https://i.ibb.co/yFNB0b7x/redwan.jpg" alt="رضوان أيت لحادج" />
+              <img src="https://i.ibb.co/yFNB0b7x/redwan.jpg" alt="Nagriva" />
             </div>
 
             <!-- Available badge -->
@@ -455,7 +459,7 @@
 
           <!-- Name & title -->
           <div class="about-photo-info">
-            <p class="about-name-under">رضوان أيت الحادج</p>
+            <p class="about-name-under">رضوان أيت لحادج</p>
             <p class="about-title-under">مطور مواقع · منتج فيديو · مستشار رقمي</p>
           </div>
 
@@ -464,7 +468,7 @@
             <a href="https://wa.me/212728427278" class="about-social-link about-social-link--wa" target="_blank" rel="noopener" aria-label="واتساب">
               <i class="fa-brands fa-whatsapp"></i>
             </a>
-            <a href="https://www.instagram.com/nagriva.co/" class="about-social-link" target="_blank" rel="noopener" aria-label="إنستغرام">
+            <a href="https://www.instagram.com/nagri_va/" class="about-social-link" target="_blank" rel="noopener" aria-label="إنستغرام">
               <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://www.facebook.com/profile.php?id=61575750526639" class="about-social-link" target="_blank" rel="noopener" aria-label="فيسبوك">
@@ -621,7 +625,7 @@
               <a href="#contact" class="btn sc-btn-primary sc-btn-featured">
                 اطلب الخدمة <i class="fa-solid fa-arrow-left"></i>
               </a>
-              <a href="https://www.instagram.com/redwan.edit/?__pwa=1" target="_blank" rel="noopener noreferrer" class="btn sc-btn-ghost">
+              <a href="#portfolio" class="btn sc-btn-ghost">
                 معاينة الأعمال
               </a>
             </div>
@@ -805,7 +809,7 @@
             <div class="pricing-plan-name">Starter</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$43</span>
+              <span class="price-amount">300 د.م</span>
             </div>
             <p class="pricing-desc">مثالي للأعمال الناشئة والمواقع الشخصية</p>
             <ul class="pricing-features">
@@ -824,7 +828,7 @@
             <div class="pricing-plan-name">Standard</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$64</span>
+              <span class="price-amount">600 د.م</span>
             </div>
             <p class="pricing-desc">للأعمال الجادة التي تريد حضوراً احترافياً</p>
             <ul class="pricing-features">
@@ -844,7 +848,7 @@
             <div class="pricing-plan-name">Premium</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$80</span>
+              <span class="price-amount">800 د.م</span>
             </div>
             <p class="pricing-desc">للشركات التي تريد متجراً أو موقعاً متكاملاً</p>
             <ul class="pricing-features">
@@ -869,7 +873,7 @@
             <div class="pricing-plan-name">Starter</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$21</span>
+              <span class="price-amount">200 د.م</span>
             </div>
             <p class="pricing-desc">مونتاج بسيط لمحتوى السوشيال ميديا</p>
             <ul class="pricing-features">
@@ -888,7 +892,7 @@
             <div class="pricing-plan-name">Standard</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$35</span>
+              <span class="price-amount">350 د.م</span>
             </div>
             <p class="pricing-desc">مونتاج احترافي ليوتيوب والإعلانات</p>
             <ul class="pricing-features">
@@ -907,7 +911,7 @@
             <div class="pricing-plan-name">Premium</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$75</span>
+              <span class="price-amount">500 د.م</span>
             </div>
             <p class="pricing-desc">إنتاج فيديو متكامل مع هوية بصرية</p>
             <ul class="pricing-features">
@@ -931,7 +935,7 @@
             <div class="pricing-plan-name">Starter</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$20</span>
+              <span class="price-amount">250 د.م</span>
             </div>
             <p class="pricing-desc">مقال محسّن لمحركات البحث</p>
             <ul class="pricing-features">
@@ -950,7 +954,7 @@
             <div class="pricing-plan-name">Standard</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$30</span>
+              <span class="price-amount">350 د.م</span>
             </div>
             <p class="pricing-desc">محتوى متعمق يتصدر نتائج جوجل</p>
             <ul class="pricing-features">
@@ -969,7 +973,7 @@
             <div class="pricing-plan-name">Premium</div>
             <div class="pricing-price">
               <span class="price-from">يبدأ من</span>
-              <span class="price-amount">$50</span>
+              <span class="price-amount">750 د.م</span>
             </div>
             <p class="pricing-desc">استراتيجية محتوى كاملة لسيطرة جوجل</p>
             <ul class="pricing-features">
@@ -1286,7 +1290,7 @@
             <i class="fa-solid fa-star"></i>
           </div>
           <p class="testi-text">
-            "رضوان بنى موقعنا في أقل من أسبوع والنتيجة مذهلة. مبيعاتنا ارتفعت 60% في الشهر الأول. من أفضل الاستثمارات
+            "Nagriva بنى موقعنا في أقل من أسبوع والنتيجة مذهلة. مبيعاتنا ارتفعت 60% في الشهر الأول. من أفضل الاستثمارات
             التي قمنا بها."
           </p>
           <div class="testi-author">
@@ -1324,7 +1328,7 @@
             <i class="fa-solid fa-star"></i>
           </div>
           <p class="testi-text">
-            "مدونتنا أصبحت في المرتبة الأولى لـ 12 كلمة مفتاحية خلال شهرين فقط. مقالات رضوان متعمقة ومكتوبة باحترافية
+            "مدونتنا أصبحت في المرتبة الأولى لـ 12 كلمة مفتاحية خلال شهرين فقط. مقالات Nagriva متعمقة ومكتوبة باحترافية
             وتجلب زيارات حقيقية. أنصح به بشدة!"
           </p>
           <div class="testi-author">
@@ -1558,7 +1562,7 @@
             </div>
             <div class="form-group">
               <label for="name"><i class="fa-solid fa-user"></i> اسمك الكريم</label>
-              <input type="text" id="name" name="name" placeholder="رضوان" required autocomplete="name" />
+              <input type="text" id="name" name="name" placeholder="أحمد" required autocomplete="name" />
               <span class="form-helper">الاسم الذي سأناديك به في ردي 👋</span>
             </div>
             <div class="form-group">
@@ -1659,7 +1663,7 @@
           <p>نبني التميز الرقمي — مشروع واحد في كل مرة.</p>
           <div class="footer-social">
             <a href="https://wa.me/212728427278" aria-label="واتساب" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/nagriva.co/" aria-label="إنستغرام" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.instagram.com/nagri_va/" aria-label="إنستغرام" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/profile.php?id=61575750526639" aria-label="فيسبوك" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.youtube.com/@nagriva" aria-label="يوتيوب" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://x.com/nagri_va" aria-label="تويتر X" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
@@ -1809,6 +1813,8 @@
   </a>
 
   <script src="script.js"></script>
+  <!-- Vercel Web Analytics -->
+<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
 
 </html>
