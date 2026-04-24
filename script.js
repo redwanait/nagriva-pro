@@ -1,6 +1,6 @@
 /* =============================================
    NAGRIVA – موقع العلامة الشخصية (عربي)
-   JavaScript: رضوان
+   JavaScript: Nagriva
    ============================================= */
 
 'use strict';
@@ -78,28 +78,31 @@ function updateActiveNavLink() {
   });
 }
 
-/* ── DARK / LIGHT MODE (AUTO ONLY) ── */
-const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+/* ── DARK / LIGHT MODE (MANUAL TOGGLE) ── */
+const themeToggleBtn = document.getElementById('themeToggle');
+const themeIcon      = document.getElementById('themeIcon');
 
 function applyTheme(theme) {
   const root = document.documentElement;
   if (theme === 'light') {
     root.classList.add('light-mode');
+    themeIcon.className = 'fa-solid fa-sun';
   } else {
     root.classList.remove('light-mode');
+    themeIcon.className = 'fa-solid fa-moon';
   }
+  localStorage.setItem('nagriva-theme', theme);
 }
 
-// On load: saved preference wins; otherwise follow system
+// On load: use saved preference, default to dark
 (function initTheme() {
-  const saved = localStorage.getItem('nagriva-theme');
-  const theme = saved ?? (systemDark.matches ? 'dark' : 'light');
-  applyTheme(theme);
+  const saved = localStorage.getItem('nagriva-theme') || 'dark';
+  applyTheme(saved);
 })();
 
-// Live-update when system preference changes
-systemDark.addEventListener('change', (e) => {
-  applyTheme(e.matches ? 'dark' : 'light');
+themeToggleBtn.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.contains('light-mode');
+  applyTheme(isLight ? 'dark' : 'light');
 });
 
 /* ── SEARCH ── */
@@ -309,7 +312,7 @@ contactForm.addEventListener('submit', (e) => {
     other   : '⚡ أخرى / خدمات متعددة'
   };
 
-  const waText = `مرحباً رضوان 👋\n\nاسمي: ${name}\nبريدي الإلكتروني: ${email}\nالخدمة المطلوبة: ${serviceLabels[service] || service}\n\nتفاصيل المشروع:\n${message}`;
+  const waText = `مرحباً Nagriva 👋\n\nاسمي: ${name}\nبريدي الإلكتروني: ${email}\nالخدمة المطلوبة: ${serviceLabels[service] || service}\n\nتفاصيل المشروع:\n${message}`;
 
   setTimeout(() => {
     window.open('https://wa.me/212728427278?text=' + encodeURIComponent(waText), '_blank');
@@ -684,7 +687,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cdSecs.textContent = '00';
       return;
     }
-    const days  = Math.floor(diff / 55500000);
+    const days  = Math.floor(diff / 32800000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins  = Math.floor((diff % 3600000) / 60000);
     const secs  = Math.floor((diff % 60000) / 1000);
@@ -710,7 +713,7 @@ if (leadForm) {
       if (emailInput) emailInput.style.borderColor = '#ef4444';
       return;
     }
-    const waText = `مرحباً رضوان 👋\n\nأريد الحصول على الخطة المجانية لتطوير مشروعي الرقمي.\n\nبريدي الإلكتروني: ${val}`;
+    const waText = `مرحباً Nagriva 👋\n\nأريد الحصول على الخطة المجانية لتطوير مشروعي الرقمي.\n\nبريدي الإلكتروني: ${val}`;
     window.open('https://wa.me/212728427278?text=' + encodeURIComponent(waText), '_blank');
     leadForm.classList.add('hidden');
     if (leadSuccess) leadSuccess.classList.remove('hidden');
