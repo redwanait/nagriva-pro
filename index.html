@@ -28,50 +28,114 @@
 </head>
 
 <body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="cursor-glow-trail" id="cursorTrail"></div>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <!-- Logo -->
       <a href="#home" class="nav-logo">
         <img src="https://i.ibb.co/whb6zsgm/nagriva-logo-1-removebg-preview.png" alt="Nagriva" class="logo-img" />
       </a>
 
-      <!-- Nav Links -->
       <ul class="nav-links" id="navLinks">
         <li><a href="#services" class="nav-link">الخدمات</a></li>
         <li><a href="#portfolio" class="nav-link">أعمالي</a></li>
-        <li><a href="#trusted-clients" class="nav-link">النتائج</a></li>
+        <li><a href="#testimonials" class="nav-link">آراء العملاء</a></li>
         <li><a href="#contact" class="nav-link">تواصل</a></li>
         <li class="mobile-cta-item"><a href="#contact" class="mobile-cta">ابدأ مشروعك <i
               class="fa-solid fa-arrow-left"></i></a></li>
       </ul>
 
-      <!-- Divider -->
       <div class="nav-divider"></div>
 
-      <!-- Nav Actions -->
       <div class="nav-actions">
-        <!-- Search Icon -->
         <button class="nav-icon-btn" id="searchToggle" aria-label="بحث" title="بحث">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
-        <!-- Theme Toggle -->
         <button class="nav-icon-btn" id="themeToggle" aria-label="تبديل المظهر" title="تبديل المظهر">
           <i class="fa-solid fa-moon" id="themeIcon"></i>
         </button>
 
-        <!-- CTA Button -->
         <a href="#contact" class="nav-cta">ابدأ مشروعك <i class="fa-solid fa-arrow-left"></i></a>
 
-        <!-- Hamburger -->
         <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </nav>
+
+  <!-- ===== MOBILE SIDEBAR (phones only) ===== -->
+  <div class="mobile-menu-overlay" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <div class="mobile-sidebar" id="mobileSidebar" role="dialog" aria-modal="true" aria-label="القائمة">
+      <div class="ms-top">
+        <a href="#home" class="ms-logo" tabindex="-1">
+          <img src="https://i.ibb.co/whb6zsgm/nagriva-logo-1-removebg-preview.png" alt="Nagriva" class="ms-logo-img" />
+        </a>
+        <div class="ms-actions">
+          <button class="ms-icon-btn" id="mobileSearchToggle" aria-label="بحث" tabindex="-1">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button class="ms-icon-btn" id="mobileThemeToggle" aria-label="تبديل المظهر" tabindex="-1">
+            <i class="fa-solid fa-moon" id="mobileThemeIcon"></i>
+          </button>
+          <button class="ms-close-btn" id="mobileMenuClose" aria-label="إغلاق القائمة" tabindex="-1">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <nav class="ms-nav">
+        <a href="#services" class="ms-link" tabindex="-1">
+          <span class="ms-link-icon"><i class="fa-solid fa-layer-group"></i></span>
+          <span class="ms-link-text">الخدمات</span>
+          <span class="ms-link-dot"></span>
+        </a>
+        <a href="#portfolio" class="ms-link" tabindex="-1">
+          <span class="ms-link-icon"><i class="fa-solid fa-briefcase"></i></span>
+          <span class="ms-link-text">أعمالي</span>
+          <span class="ms-link-dot"></span>
+        </a>
+        <a href="#testimonials" class="ms-link" tabindex="-1">
+          <span class="ms-link-icon"><i class="fa-solid fa-comments"></i></span>
+          <span class="ms-link-text">آراء العملاء</span>
+          <span class="ms-link-dot"></span>
+        </a>
+        <a href="#contact" class="ms-link" tabindex="-1">
+          <span class="ms-link-icon"><i class="fa-solid fa-envelope"></i></span>
+          <span class="ms-link-text">تواصل</span>
+          <span class="ms-link-dot"></span>
+        </a>
+      </nav>
+      <div class="ms-cta-wrap">
+        <a href="#contact" class="ms-cta" tabindex="-1">
+          ابدأ مشروعك الآن
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="ms-bottom">
+        <div class="ms-info-row">
+          <div class="ms-info-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>ضمان الجودة</span>
+          </div>
+          <div class="ms-info-item">
+            <i class="fa-solid fa-headset"></i>
+            <span>دعم 24/7</span>
+          </div>
+        </div>
+        <div class="ms-divider"></div>
+        <div class="ms-social-row">
+          <a href="https://wa.me/212728427278" class="ms-social-icon" aria-label="واتساب" target="_blank" rel="noopener" tabindex="-1"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/nagri_va/" class="ms-social-icon" aria-label="إنستغرام" target="_blank" rel="noopener" tabindex="-1"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61575750526639" class="ms-social-icon" aria-label="فيسبوك" target="_blank" rel="noopener" tabindex="-1"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/nagri_va" class="ms-social-icon" aria-label="تويتر" target="_blank" rel="noopener" tabindex="-1"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== SEARCH MODAL ===== -->
   <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="بحث">
@@ -90,39 +154,66 @@
     </div>
   </div>
 
-  <!-- ===== HERO ===== -->
+  <!-- ===== 1. HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-bg">
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="gradient-mesh"></div>
       <div class="grid-overlay"></div>
+      <div class="grain-overlay"></div>
     </div>
     <div class="container hero-container">
       <div class="hero-content">
-        <div class="hero-badge">
+        <div class="hero-badge" data-delay="0">
           <span class="badge-dot"></span>
-           متاح لمشاريع جديدة
+          <span>متاح لمشاريع جديدة</span>
+          <span class="badge-pulse-ring"></span>
         </div>
-        <h1 class="hero-title">
-          أحوّل موقعك إلى آلة تجلب
-          <span class="gradient-text"> عملاء خلال 30 يوم</span>
+
+        <h1 class="hero-title" data-delay="100">
+          أحوّل موقعك إلى
+          <span class="gradient-text">آلة جلب عملاء</span>
+          <br class="title-break" />
+          تنمو بذكاء
         </h1>
-        <p class="hero-desc">
-          أساعدك على بناء موقع أو محتوى ليس مجرد مظهر جمالي — بل نظام رقمي يجلب لك عملاء حقيقيين
-          وينمّي مشروعك بسرعة، بدون تعقيد.
+
+        <p class="hero-desc" data-delay="200">
+          ليس مجرد تصميم جذاب. نبني لك نظامًا رقميًا متكاملًا يجلب لك عملاء حقيقيين،
+          ويعمل على تنمية مشروعك <strong>على مدار الساعة</strong> — بدون تعقيد.
         </p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary btn-hero-cta">
+
+        <div class="hero-actions" data-delay="300">
+          <a href="#contact" class="btn btn-primary btn-hero-cta hero-glow-btn">
+            <span class="btn-glow"></span>
             ابدأ مشروعك الآن <i class="fa-solid fa-rocket"></i>
           </a>
-          <a href="#portfolio" class="btn btn-ghost">
-            شاهد نتائج العملاء <i class="fa-solid fa-arrow-left"></i>
+          <a href="#portfolio" class="btn btn-ghost btn-hero-ghost">
+            <span>شاهد النتائج</span>
+            <i class="fa-solid fa-arrow-left"></i>
           </a>
         </div>
-        <p class="hero-urgency">
-          🔥 لم يتبق سوى 3 أماكن هذا الشهر — تواصل معي قبل فوات الأوان
-        </p>
-        <div class="hero-stats">
+
+        <div class="trust-row" data-delay="400">
+          <div class="trust-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>ضمان استعادة الأموال</span>
+          </div>
+          <div class="trust-badge-divider"></div>
+          <div class="trust-badge">
+            <i class="fa-solid fa-headset"></i>
+            <span>دعم فني 30 يوم</span>
+          </div>
+          <div class="trust-badge-divider"></div>
+          <div class="trust-badge">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>عقد رسمي</span>
+          </div>
+        </div>
+
+        <div class="hero-stats" data-delay="400">
           <div class="stat">
             <span class="stat-number">+50</span>
             <span class="stat-label">مشروع مُنجز</span>
@@ -140,411 +231,209 @@
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="mockup-wrapper">
-          <!-- Stacked result cards visual -->
-          <div class="result-card-stack">
+      <div class="hero-visual" data-delay="150">
+        <div class="mockup-wrapper analytics-mockup">
+          <div class="analytics-orbit" aria-hidden="true"></div>
 
-            <div class="result-card result-card--back">
-              <div class="rc-tag rc-tag--teal"><i class="fa-solid fa-pen-nib"></i> مدونة SEO</div>
-              <div class="rc-metric">8,000</div>
-              <div class="rc-label">زيارة شهرياً</div>
-              <div class="rc-bar-row">
-                <div class="rc-bar" style="width:80%;background:linear-gradient(90deg,#0ea5e9,#06b6d4)"></div>
+          <div class="premium-dashboard" aria-label="لوحة تحليلات Nagriva">
+            <div class="dashboard-glow" aria-hidden="true"></div>
+
+            <div class="dash-topbar">
+              <div class="dash-brand">
+                <div class="dash-mark"><i class="fa-solid fa-chart-simple"></i></div>
+                <div>
+                  <span class="dash-kicker">تحليلات الموقع</span>
+                  <h2>نمو الأداء الرقمي</h2>
+                </div>
+              </div>
+              <div class="dash-period">
+                <i class="fa-regular fa-calendar"></i>
+                <span>آخر 30 يوم</span>
               </div>
             </div>
 
-            <div class="result-card result-card--mid">
-              <div class="rc-tag rc-tag--blue"><i class="fa-solid fa-film"></i> مونتاج فيديو</div>
-              <div class="rc-metric">150K</div>
-              <div class="rc-label">مشاهدة في أسبوع</div>
-              <div class="rc-bar-row">
-                <div class="rc-bar" style="width:90%;background:linear-gradient(90deg,#2563eb,#7c3aed)"></div>
+            <div class="dash-metrics">
+              <div class="dash-metric dash-metric-main">
+                <span class="metric-label">زيارات الموقع</span>
+                <strong>150K</strong>
+                <small><i class="fa-solid fa-arrow-trend-up"></i> +240% نمو</small>
+              </div>
+              <div class="dash-metric">
+                <span class="metric-label">زيادة المبيعات</span>
+                <strong>200%+</strong>
+                <small>معدل تحويل أعلى</small>
+              </div>
+              <div class="dash-metric">
+                <span class="metric-label">جودة العملاء</span>
+                <strong>5.0</strong>
+                <small>رضا العملاء</small>
               </div>
             </div>
 
-            <div class="result-card result-card--front">
-              <div class="rc-tag rc-tag--purple"><i class="fa-solid fa-globe"></i> موقع ويب</div>
-              <div class="rc-metric">+200%</div>
-              <div class="rc-label">زيادة في المبيعات</div>
-              <div class="rc-chart">
-                <div class="rc-bar-group">
-                  <div class="rc-bar-v" style="height:30%"></div>
-                  <div class="rc-bar-v" style="height:50%"></div>
-                  <div class="rc-bar-v" style="height:40%"></div>
-                  <div class="rc-bar-v" style="height:70%"></div>
-                  <div class="rc-bar-v" style="height:60%"></div>
-                  <div class="rc-bar-v" style="height:90%"></div>
-                  <div class="rc-bar-v rc-bar-v--accent" style="height:100%"></div>
+            <div class="chart-panel">
+              <div class="chart-head">
+                <div>
+                  <span>Performance</span>
+                  <strong>زيارات الموقع</strong>
+                </div>
+                <span class="chart-pill">Live growth</span>
+              </div>
+
+              <svg class="analytics-line-chart" viewBox="0 0 520 220" role="img" aria-label="رسم بياني لنمو زيارات الموقع">
+                <defs>
+                  <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0%" stop-color="#60a5fa" />
+                    <stop offset="48%" stop-color="#a855f7" />
+                    <stop offset="100%" stop-color="#c084fc" />
+                  </linearGradient>
+                  <linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#a855f7" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#2563eb" stop-opacity="0" />
+                  </linearGradient>
+                  <filter id="lineGlow" x="-20%" y="-50%" width="140%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <g class="chart-grid-lines">
+                  <path d="M20 42H500" />
+                  <path d="M20 92H500" />
+                  <path d="M20 142H500" />
+                  <path d="M20 192H500" />
+                </g>
+                <path class="chart-area" d="M20 168 C80 146 88 106 142 116 C198 127 204 69 268 78 C334 87 342 37 396 51 C438 62 464 40 500 26 L500 206 L20 206 Z" />
+                <path class="chart-line chart-line-shadow" d="M20 168 C80 146 88 106 142 116 C198 127 204 69 268 78 C334 87 342 37 396 51 C438 62 464 40 500 26" />
+                <path class="chart-line" d="M20 168 C80 146 88 106 142 116 C198 127 204 69 268 78 C334 87 342 37 396 51 C438 62 464 40 500 26" />
+                <g class="active-point">
+                  <circle cx="500" cy="26" r="16" />
+                  <circle cx="500" cy="26" r="6" />
+                </g>
+              </svg>
+            </div>
+
+            <div class="dash-widgets">
+              <div class="dash-widget donut-widget">
+                <div class="donut-chart" aria-hidden="true">
+                  <span>72%</span>
+                </div>
+                <div>
+                  <span class="widget-label">Organic</span>
+                  <strong>SEO Traffic</strong>
+                </div>
+              </div>
+
+              <div class="dash-widget bars-widget">
+                <div class="mini-bars" aria-hidden="true">
+                  <span style="height: 38%"></span>
+                  <span style="height: 58%"></span>
+                  <span style="height: 44%"></span>
+                  <span style="height: 76%"></span>
+                  <span style="height: 66%"></span>
+                  <span style="height: 92%"></span>
+                </div>
+                <div>
+                  <span class="widget-label">Conversions</span>
+                  <strong>+200%</strong>
+                </div>
+              </div>
+
+              <div class="dash-widget traffic-widget">
+                <span class="widget-label">مصادر الزيارات</span>
+                <div class="traffic-row">
+                  <span>بحث</span>
+                  <strong>58%</strong>
+                </div>
+                <div class="traffic-row">
+                  <span>إعلانات</span>
+                  <strong>27%</strong>
                 </div>
               </div>
             </div>
-
           </div>
 
-          <!-- Floating badges -->
-          <div class="floating-card card-1">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>تم إطلاق المشروع!</span>
+          <div class="floating-card card-1 analytics-float">
+            <div class="fc-icon fc-icon-success"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="fc-body">
+              <span class="fc-label">تم الإطلاق</span>
+              <span class="fc-value">خلال 3 أيام</span>
+            </div>
           </div>
-          <div class="floating-card card-2">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>+240% زيارات</span>
+
+          <div class="floating-card card-2 analytics-float">
+            <div class="fc-icon fc-icon-brand"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="fc-body">
+              <span class="fc-label">زيادة المبيعات</span>
+              <span class="fc-value">200%+</span>
+            </div>
           </div>
-          <div class="floating-card card-3">
-            <i class="fa-solid fa-star"></i>
-            <span>تقييم 5.0</span>
+
+          <div class="floating-card card-3 analytics-float">
+            <div class="fc-icon fc-icon-star"><i class="fa-solid fa-star"></i></div>
+            <div class="fc-body">
+              <span class="fc-label">تقييم العميل</span>
+              <span class="fc-value">5.0</span>
+            </div>
+          </div>
+
+          <div class="floating-card card-4 analytics-float">
+            <div class="fc-icon fc-icon-accent"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div class="fc-body">
+              <span class="fc-label">SEO ranking</span>
+              <span class="fc-value">#1</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="hero-scroll-hint">
-      <span>اسحب للأسفل</span>
-      <i class="fa-solid fa-chevron-down bounce"></i>
+    <div class="hero-ticker">
+      <div class="hero-ticker-track">
+        <span>✦ نتائج مثبتة</span>
+        <span class="ticker-sep">•</span>
+        <span>تصميم عصري</span>
+        <span class="ticker-sep">•</span>
+        <span>تحسين محركات البحث</span>
+        <span class="ticker-sep">•</span>
+        <span>تجربة مستخدم استثنائية</span>
+        <span class="ticker-sep">•</span>
+        <span>دعم فني متواصل</span>
+        <span class="ticker-sep">•</span>
+        <span>تسليم سريع</span>
+        <span class="ticker-sep">•</span>
+        <span>✦ نتائج مثبتة</span>
+        <span class="ticker-sep">•</span>
+        <span>تصميم عصري</span>
+        <span class="ticker-sep">•</span>
+        <span>تحسين محركات البحث</span>
+        <span class="ticker-sep">•</span>
+        <span>تجربة مستخدم استثنائية</span>
+        <span class="ticker-sep">•</span>
+        <span>دعم فني متواصل</span>
+        <span class="ticker-sep">•</span>
+        <span>تسليم سريع</span>
+      </div>
     </div>
   </section>
 
-  <!-- ===== TRUSTED CLIENTS ===== -->
-  <section class="trusted-clients" id="trusted-clients">
+  <!-- ===== 2. TRUSTED BY ===== -->
+  <section class="trusted-by" id="trusted-by">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">ثقة حقيقية</span>
-        <h2 class="section-title">عملاء وثقوا بي <span class="gradient-text">وحققوا نتائج حقيقية</span></h2>
-        <p class="section-desc">عملاؤي وثقوا بي وحققوا نتائج قابلة للقياس — اقرأ قصصهم</p>
-      </div>
-
-      <!-- Brand logos row -->
-      <div class="brands-row">
-        <div class="brand-logo"><i class="fa-brands fa-shopify"></i> ShopBrand</div>
-        <div class="brand-logo"><i class="fa-brands fa-youtube"></i> YT Channel</div>
-        <div class="brand-logo"><i class="fa-solid fa-building"></i> TechCo</div>
-        <div class="brand-logo"><i class="fa-solid fa-store"></i> FashionStore</div>
-        <div class="brand-logo"><i class="fa-solid fa-chart-line"></i> GrowthSaaS</div>
-        <div class="brand-logo"><i class="fa-solid fa-dumbbell"></i> FitCoach</div>
-      </div>
-
-      <div class="clients-grid">
-
-        <div class="client-card" data-delay="0">
-          <div class="client-card-header">
-            <img src="https://i.pravatar.cc/64?img=5" alt="سارة محمد" class="client-photo" />
-            <div class="client-meta">
-              <strong class="client-name">سارة محمد</strong>
-              <span class="client-role">صاحبة متجر أزياء إلكتروني</span>
-              <div class="stars-row">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="client-quote">
-            "بعد إطلاق متجري مع Nagriva، <strong>ارتفعت مبيعاتي 200% خلال شهرين فقط.</strong> كنت أبيع عبر واتساب والطلبات
-            كانت شحيحة — الآن لدي تدفق يومي من العملاء الحقيقيين."
-          </p>
-          <div class="result-pill">
-            <i class="fa-solid fa-arrow-trend-up"></i> +200% مبيعات
-          </div>
-        </div>
-
-        <div class="client-card client-card--featured" data-delay="100">
-          <div class="client-card-header">
-            <img src="https://i.pravatar.cc/64?img=12" alt="كريم دياب" class="client-photo" />
-            <div class="client-meta">
-              <strong class="client-name">كريم دياب</strong>
-              <span class="client-role">صانع محتوى يوتيوب</span>
-              <div class="stars-row">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="client-quote">
-            "منذ تعاملت مع Nagriva، <strong>قفز عدد مشتركي من 500 إلى 15,000 خلال 3 أشهر.</strong> المحتوى الاحترافي
-            غيّر كل شيء. أوصي به لكل صانع محتوى جاد."
-          </p>
-          <div class="result-pill">
-            <i class="fa-solid fa-users"></i> +14,500 مشترك
-          </div>
-        </div>
-
-        <div class="client-card" data-delay="200">
-          <div class="client-card-header">
-            <img src="https://i.pravatar.cc/64?img=47" alt="Adam Turner" class="client-photo" />
-            <div class="client-meta">
-              <strong class="client-name">Adam Turner</strong>
-              <span class="client-role">Fitness Coach, UK</span>
-              <div class="stars-row">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="client-quote">
-            "Nagriva built my landing page in 5 days and <strong>I got my first 3 paying clients within 2 weeks of
-              launch.</strong> The ROI was incredible — best investment I made for my business."
-          </p>
-          <div class="result-pill">
-            <i class="fa-solid fa-calendar-check"></i> أول 3 عملاء في أسبوعين
-          </div>
-        </div>
-
-        <div class="client-card" data-delay="300">
-          <div class="client-card-header">
-            <img src="https://i.pravatar.cc/64?img=32" alt="ليلى التميمي" class="client-photo" />
-            <div class="client-meta">
-              <strong class="client-name">ليلى التميمي</strong>
-              <span class="client-role">مؤسسة شركة SaaS</span>
-              <div class="stars-row">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="client-quote">
-            "مدونتنا انتقلت من صفر إلى <strong>8,000 زيارة عضوية شهرياً خلال 4 أشهر.</strong> Nagriva لا يكتب محتوى فقط —
-            يبني استراتيجية نمو حقيقية."
-          </p>
-          <div class="result-pill">
-            <i class="fa-solid fa-globe"></i> 8,000 زيارة/شهر
-          </div>
-        </div>
-
+      <div class="trusted-logos">
+        <div class="trusted-logo-item"><i class="fa-brands fa-shopify"></i> ShopBrand</div>
+        <div class="trusted-logo-item"><i class="fa-brands fa-youtube"></i> YT Channel</div>
+        <div class="trusted-logo-item"><i class="fa-solid fa-building"></i> TechCo</div>
+        <div class="trusted-logo-item"><i class="fa-solid fa-store"></i> FashionStore</div>
+        <div class="trusted-logo-item"><i class="fa-solid fa-chart-line"></i> GrowthSaaS</div>
+        <div class="trusted-logo-item"><i class="fa-solid fa-dumbbell"></i> FitCoach</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== MY OFFER ===== -->
-  <section class="offers" id="offers">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">ماذا أقدّم لك</span>
-        <h2 class="section-title">عروض <span class="gradient-text">تحقق نتائج حقيقية</span></h2>
-        <p class="section-desc">لست هنا لبيع خدمات فقط — أنا هنا لمساعدتك على تحقيق أهداف قابلة للقياس.</p>
-      </div>
-      <div class="offers-grid">
-
-        <!-- عرض 1 -->
-        <div class="offer-card" data-delay="0">
-          <div class="offer-top">
-            <div class="offer-icon-wrap icon-purple">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <div class="offer-result-badge">+120% زيارات</div>
-          </div>
-          <h3 class="offer-title">موقع ويب يجلب عملاء</h3>
-          <p class="offer-desc">موقع احترافي مُحسَّن لمحركات البحث، مصمم لتحويل الزوار إلى عملاء — لا مجرد بطاقة
-            تعريفية.</p>
-          <ul class="offer-includes">
-            <li><i class="fa-solid fa-check"></i> تصميم مخصص بالكامل + تجاوب تام</li>
-            <li><i class="fa-solid fa-check"></i> تحسين SEO شامل من اليوم الأول</li>
-            <li><i class="fa-solid fa-check"></i> صفحات مُصمَّمة لرفع التحويل</li>
-            <li><i class="fa-solid fa-check"></i> دعم كامل بعد التسليم</li>
-          </ul>
-          <div class="offer-meta">
-            <div class="offer-meta-item">
-              <i class="fa-solid fa-clock"></i>
-              <span>5–7 أيام تسليم</span>
-            </div>
-            <div class="offer-price-badge">
-              <span>يبدأ من</span>
-              <strong>600 د.م</strong>
-            </div>
-          </div>
-          <a href="#contact" class="btn btn-service">احصل على موقعك <i class="fa-solid fa-arrow-left"></i></a>
-        </div>
-
-        <!-- عرض 2 -->
-        <div class="offer-card offer-card--featured" data-delay="100">
-          <div class="offer-top">
-            <div class="offer-icon-wrap icon-blue">
-              <i class="fa-solid fa-film"></i>
-            </div>
-            <div class="offer-result-badge offer-result-badge--blue">×3 تفاعل</div>
-          </div>
-          <h3 class="offer-title">فيديو يرفع تفاعلك 3 أضعاف</h3>
-          <p class="offer-desc">محتوى مرئي احترافي يسحب الانتباه في أول 3 ثوانٍ ويجعل جمهورك يتفاعل ويشارك.</p>
-          <ul class="offer-includes">
-            <li><i class="fa-solid fa-check"></i> مونتاج احترافي بمستوى وكالات</li>
-            <li><i class="fa-solid fa-check"></i> موشن جرافيك + ترجمات تفاعلية</li>
-            <li><i class="fa-solid fa-check"></i> تصحيح ألوان سينمائي</li>
-            <li><i class="fa-solid fa-check"></i> مراجعات حتى رضاك الكامل</li>
-          </ul>
-          <div class="offer-meta">
-            <div class="offer-meta-item">
-              <i class="fa-solid fa-clock"></i>
-              <span>24–48 ساعة تسليم</span>
-            </div>
-            <div class="offer-price-badge">
-              <span>يبدأ من</span>
-              <strong>200 د.م</strong>
-            </div>
-          </div>
-          <a href="#contact" class="btn btn-service-featured">احجز الخدمة <i class="fa-solid fa-arrow-left"></i></a>
-        </div>
-
-        <!-- عرض 3 -->
-        <div class="offer-card" data-delay="200">
-          <div class="offer-top">
-            <div class="offer-icon-wrap icon-teal">
-              <i class="fa-solid fa-pen-nib"></i>
-            </div>
-            <div class="offer-result-badge offer-result-badge--teal">صفحة 1 جوجل</div>
-          </div>
-          <h3 class="offer-title">محتوى يتصدر نتائج البحث</h3>
-          <p class="offer-desc">مقالات SEO متخصصة تجلب زيارات عضوية مجانية وتجعلك مرجعاً في مجالك على جوجل.</p>
-          <ul class="offer-includes">
-            <li><i class="fa-solid fa-check"></i> بحث متعمق في الكلمات المفتاحية</li>
-            <li><i class="fa-solid fa-check"></i> محتوى طويل يتصدر المنافسة</li>
-            <li><i class="fa-solid fa-check"></i> تحسين SEO داخل الصفحة بالكامل</li>
-            <li><i class="fa-solid fa-check"></i> تقرير أداء مفصّل</li>
-          </ul>
-          <div class="offer-meta">
-            <div class="offer-meta-item">
-              <i class="fa-solid fa-clock"></i>
-              <span>2–3 أيام تسليم</span>
-            </div>
-            <div class="offer-price-badge">
-              <span>يبدأ من</span>
-              <strong>250 د.م</strong>
-            </div>
-          </div>
-          <a href="#contact" class="btn btn-service">ابدأ مدونتك <i class="fa-solid fa-arrow-left"></i></a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT ME ===== -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-wrap">
-
-        <!-- ── Photo Column ── -->
-        <div class="about-photo-col">
-          <div class="about-img-wrapper">
-
-            <!-- Spinning gradient ring -->
-            <div class="about-ring-spin"></div>
-
-            <!-- Floating badge: experience -->
-            <div class="about-badge about-badge--exp">
-              <i class="fa-solid fa-star"></i>
-              <span>+3 سنوات خبرة</span>
-            </div>
-
-            <!-- Floating badge: projects -->
-            <div class="about-badge about-badge--proj">
-              <i class="fa-solid fa-bolt"></i>
-              <span>+50 مشروع</span>
-            </div>
-
-            <!-- Photo with gradient ring -->
-            <div class="about-img-ring">
-              <img src="https://i.ibb.co/yFNB0b7x/redwan.jpg" alt="Nagriva" />
-            </div>
-
-            <!-- Available badge -->
-            <div class="about-available">
-              <span class="about-dot"></span>
-              متاح للعمل
-            </div>
-
-          </div>
-
-          <!-- Name & title -->
-          <div class="about-photo-info">
-            <p class="about-name-under">رضوان أيت لحادج</p>
-            <p class="about-title-under">مطور مواقع · منتج فيديو · مستشار رقمي</p>
-          </div>
-
-          <!-- Social links -->
-          <div class="about-social-row">
-            <a href="https://wa.me/212728427278" class="about-social-link about-social-link--wa" target="_blank" rel="noopener" aria-label="واتساب">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-            <a href="https://www.instagram.com/nagri_va/" class="about-social-link" target="_blank" rel="noopener" aria-label="إنستغرام">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61575750526639" class="about-social-link" target="_blank" rel="noopener" aria-label="فيسبوك">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.youtube.com/@nagriva" class="about-social-link" target="_blank" rel="noopener" aria-label="يوتيوب">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://x.com/nagri_va" class="about-social-link" target="_blank" rel="noopener" aria-label="تويتر X">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- ── Content ── -->
-        <div class="about-body">
-          <span class="section-label">من أنا</span>
-          <h2 class="section-title">أساعدك على تحويل فكرتك إلى مشروع <span class="gradient-text">يحقق نتائج</span></h2>
-
-          <p class="about-story">
-            أنا متخصص في بناء الحلول الرقمية التي لا تركز فقط على المظهر، بل على تحقيق نتائج حقيقية. أعمل مع رواد
-            الأعمال وأصحاب المشاريع لمساعدتهم على جذب العملاء عبر الإنترنت، من خلال مواقع احترافية ومحتوى استراتيجي مصمم
-            للنمو.
-          </p>
-          <p class="about-story">
-            هدفي ليس فقط تسليم مشروع، بل بناء نظام رقمي متكامل يساعدك على تحقيق دخل مستمر وتوسيع حضورك الرقمي بثقة.
-          </p>
-
-          <!-- Stats strip -->
-          <div class="about-stats">
-            <div class="about-stat-item">
-              <strong>+50</strong>
-              <span>مشروع منجز</span>
-            </div>
-            <div class="about-stat-divider"></div>
-            <div class="about-stat-item">
-              <strong>+3</strong>
-              <span>سنوات خبرة</span>
-            </div>
-            <div class="about-stat-divider"></div>
-            <div class="about-stat-item">
-              <strong>100%</strong>
-              <span>رضا العملاء</span>
-            </div>
-            <div class="about-stat-divider"></div>
-            <div class="about-stat-item">
-              <strong>10+</strong>
-              <span>دول حول العالم</span>
-            </div>
-          </div>
-
-          <!-- Skill chips -->
-          <div class="about-skills">
-            <span class="skill-chip"><i class="fa-solid fa-code"></i> تطوير مواقع</span>
-            <span class="skill-chip"><i class="fa-solid fa-video"></i> مونتاج فيديو</span>
-            <span class="skill-chip"><i class="fa-solid fa-magnifying-glass-chart"></i> SEO</span>
-            <span class="skill-chip"><i class="fa-solid fa-palette"></i> هوية بصرية</span>
-            <span class="skill-chip"><i class="fa-solid fa-pen-nib"></i> تصميم UI</span>
-          </div>
-
-          <!-- CTAs -->
-          <div class="about-cta-row">
-            <a href="#contact" class="btn btn-primary">
-              اعمل معي الآن <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <a href="https://drive.google.com/file/d/1LfSN8Dlvmejs_ZOAk7D210VeQ30zV5rj/view" target="_blank" rel="noopener" class="btn btn-cv">
-              <i class="fa-solid fa-file-arrow-down"></i> تحميل السيرة الذاتية
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SERVICES ===== -->
+  <!-- ===== 3. SERVICES ===== -->
   <section class="services" id="services">
     <div class="container">
       <div class="section-header">
@@ -554,7 +443,6 @@
       </div>
       <div class="services-grid">
 
-        <!-- خدمة 1: تطوير مواقع -->
         <div class="service-card" data-delay="0">
           <div class="sc-image-wrap">
             <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="تطوير مواقع ويب"
@@ -568,9 +456,8 @@
               </div>
               <div class="sc-badge badge-purple">+85% تحويل</div>
             </div>
-            <div class="service-tag">الأكثر طلباً</div>
             <h3 class="service-title">تطوير مواقع ويب احترافية</h3>
-            <p class="service-desc">موقع سريع وعصري يمثل علامتك التجارية ويحوّل الزوار إلى عملاء — بدون تعقيد.</p>
+            <p class="service-desc">موقع سريع وعصري يمثل علامتك التجارية ويحوّل الزوار إلى عملاء.</p>
             <ul class="service-features">
               <li><i class="fa-solid fa-check"></i> تصميم مخصص ومتجاوب</li>
               <li><i class="fa-solid fa-check"></i> بنية محسّنة لمحركات البحث</li>
@@ -593,7 +480,6 @@
           </div>
         </div>
 
-        <!-- خدمة 2: فيديو (featured) -->
         <div class="service-card service-card--featured" data-delay="100">
           <div class="sc-image-wrap">
             <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80" alt="مونتاج فيديو"
@@ -609,7 +495,7 @@
               <div class="sc-badge badge-blue">10K+ مشاهدة</div>
             </div>
             <h3 class="service-title">مونتاج فيديو عالي التأثير</h3>
-            <p class="service-desc">حوّل مقاطع الخام إلى محتوى احترافي يسحر جمهورك ويرفع نسب التفاعل بشكل ملحوظ.</p>
+            <p class="service-desc">حوّل مقاطع الخام إلى محتوى احترافي يسحر جمهورك ويرفع نسب التفاعل.</p>
             <ul class="service-features">
               <li><i class="fa-solid fa-check"></i> ريلز، يوتيوب وإعلانات</li>
               <li><i class="fa-solid fa-check"></i> موشن جرافيك وترجمات</li>
@@ -632,7 +518,6 @@
           </div>
         </div>
 
-        <!-- خدمة 3: مدونات -->
         <div class="service-card" data-delay="200">
           <div class="sc-image-wrap">
             <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80" alt="إنشاء مدونات"
@@ -674,114 +559,450 @@
     </div>
   </section>
 
-  <!-- ===== MID-CTA AFTER SERVICES ===== -->
-  <div class="mid-cta">
-    <div class="container">
-      <div class="mid-cta-inner">
-        <p class="mid-cta-text">مستعد لتحويل فكرتك إلى واقع رقمي مربح؟</p>
-        <div class="mid-cta-actions">
-          <a href="#contact" class="btn btn-primary">احجز استشارة مجانية <i class="fa-solid fa-rocket"></i></a>
-          <a href="#pricing" class="btn btn-ghost">استعرض الأسعار</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="how-it-works" id="how-it-works">
+  <!-- ===== 4. PORTFOLIO ===== -->
+  <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">كيف أعمل</span>
-        <h2 class="section-title">4 خطوات بسيطة <span class="gradient-text">لمشروع ناجح</span></h2>
-        <p class="section-desc">من الفكرة إلى التسليم — عملية واضحة وشفافة بدون تعقيد.</p>
+        <span class="section-label">أعمالي</span>
+        <h2 class="section-title">دراسات حالة <span class="gradient-text">بنتائج موثّقة</span></h2>
+        <p class="section-desc">اكتشف كيف حولنا التحديات إلى نجاحات ملموسة لعملائنا.</p>
       </div>
-      <div class="steps-row">
-        <div class="step-card" data-delay="0">
-          <div class="step-icon-wrap">
-            <i class="fa-solid fa-paper-plane"></i>
+
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="web">مواقع</button>
+        <button class="filter-btn" data-filter="video">فيديو</button>
+        <button class="filter-btn" data-filter="blog">مدونات</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- Card 1: E-commerce -->
+        <div class="portfolio-card" data-category="web" data-title="متجر أزياء إلكتروني" data-tag="موقع ويب"
+          data-url="https://example.com" data-has-ba="true"
+          data-before="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&auto=format"
+          data-after="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=400&fit=crop&auto=format"
+          data-problem="كان العميل يعتمد على البيع عبر واتساب فقط بدون موقع احترافي، مما كان يُضعف مصداقيته ويفقده عملاء."
+          data-solution="بنيت متجراً على Shopify بتصميم مخصص يعكس هوية العلامة التجارية مع صفحات منتجات محسّنة وتجربة شراء سلسة."
+          data-result="ارتفعت المبيعات 60% في الشهر الأول، وأصبح المتجر المصدر الرئيسي للطلبات.">
+          <div class="card-glow"></div>
+          <div class="card-image">
+            <img class="card-img-main" src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=360&fit=crop&auto=format"
+              alt="متجر أزياء إلكتروني" loading="lazy" />
+            <div class="card-ba-slider">
+              <div class="ba-before" style="background-image: url(https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-after" style="background-image: url(https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
+              <div class="ba-labels">
+                <span class="ba-label ba-label-before">قبل</span>
+                <span class="ba-label ba-label-after">بعد</span>
+              </div>
+            </div>
+            <div class="card-image-overlay">
+              <span class="card-category-tag"><i class="fa-solid fa-globe"></i> ويب</span>
+              <div class="card-hover-actions">
+                <a href="https://example.com" target="_blank" rel="noopener" class="card-action-btn btn-live-preview" title="معاينة حية">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>معاينة حية</span>
+                </a>
+                <button class="card-action-btn btn-ba-toggle" data-ba-toggle title="مقارنة قبل وبعد">
+                  <i class="fa-solid fa-not-equal"></i>
+                  <span>قارن</span>
+                </button>
+                <button class="card-action-btn portfolio-modal-trigger" title="عرض دراسة الحالة">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>دراسة حالة</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="step-num">01</div>
-          <h3 class="step-title">أرسل فكرتك</h3>
-          <p class="step-desc">أخبرني بفكرتك وأهدافك عبر نموذج التواصل أو واتساب مباشرة.</p>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-tag"><i class="fa-solid fa-globe"></i> موقع ويب</span>
+              <span class="card-result-badge"><i class="fa-solid fa-arrow-trend-up"></i> +60% مبيعات</span>
+            </div>
+            <h3 class="card-title">متجر أزياء إلكتروني</h3>
+            <p class="card-desc">متجر مبني على Shopify بتجربة شراء سلسة وحلول دفع متكاملة حولت المتجر إلى مصدر رئيسي للطلبات.</p>
+          </div>
         </div>
-        <div class="step-connector"><i class="fa-solid fa-chevron-left"></i></div>
-        <div class="step-card" data-delay="100">
-          <div class="step-icon-wrap">
-            <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+        <!-- Card 2: Video Ad -->
+        <div class="portfolio-card" data-category="video" data-title="إعلان ترويجي للعلامة التجارية"
+          data-tag="مونتاج فيديو"
+          data-url="https://example.com"
+          data-problem="كانت العلامة التجارية تفتقر لمحتوى مرئي احترافي يعكس قيمتها، مما أثّر على معدلات التفاعل على السوشيال ميديا."
+          data-solution="أنتجت فيديو ترويجياً مدته 30 ثانية مع موشن جرافيك مخصص، تصحيح ألوان سينمائي، وتصميم صوتي احترافي."
+          data-result="حقق الفيديو 150,000 مشاهدة خلال أسبوعين، ورفع نسبة التفاعل 3 أضعاف.">
+          <div class="card-glow"></div>
+          <div class="card-image">
+            <img class="card-img-main" src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=360&fit=crop&auto=format"
+              alt="إعلان ترويجي للعلامة التجارية" loading="lazy" />
+            <button class="card-video-btn portfolio-video-trigger" data-video="RYEZJDqXKu8" aria-label="مشاهدة الفيديو">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <div class="card-image-overlay">
+              <span class="card-category-tag"><i class="fa-solid fa-film"></i> فيديو</span>
+              <div class="card-hover-actions">
+                <a href="https://example.com" target="_blank" rel="noopener" class="card-action-btn btn-live-preview" title="معاينة حية">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>معاينة حية</span>
+                </a>
+                <button class="card-action-btn portfolio-modal-trigger" title="عرض دراسة الحالة">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>دراسة حالة</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="step-num">02</div>
-          <h3 class="step-title">أحلل وأقترح</h3>
-          <p class="step-desc">أدرس احتياجاتك وأقدم لك خطة واضحة مع جدول زمني وسعر شفاف.</p>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-tag"><i class="fa-solid fa-film"></i> مونتاج فيديو</span>
+              <span class="card-result-badge"><i class="fa-solid fa-eye"></i> +150K مشاهدة</span>
+            </div>
+            <h3 class="card-title">إعلان ترويجي للعلامة التجارية</h3>
+            <p class="card-desc">فيديو ترويجي بموشن جرافيك وتصحيح ألوان سينمائي حصد 150 ألف مشاهدة ورفع التفاعل 3 أضعاف.</p>
+          </div>
         </div>
-        <div class="step-connector"><i class="fa-solid fa-chevron-left"></i></div>
-        <div class="step-card" data-delay="200">
-          <div class="step-icon-wrap">
-            <i class="fa-solid fa-code"></i>
+
+        <!-- Card 3: SaaS Blog -->
+        <div class="portfolio-card" data-category="blog" data-title="مدونة نمو SaaS" data-tag="مدونة SEO"
+          data-url="https://example.com" data-has-ba="true"
+          data-before="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&auto=format"
+          data-after="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format"
+          data-problem="كان الموقع يحصل على أقل من 500 زيارة شهرياً بدون استراتيجية محتوى واضحة، في سوق تنافسي جداً."
+          data-solution="وضعت استراتيجية محتوى شاملة من 12 مقالاً تستهدف كلمات مفتاحية عالية النية مع SEO متقدم داخل الصفحة."
+          data-result="8,000 زيارة عضوية شهرياً خلال 4 أشهر، وتصدّر 15 كلمة مفتاحية تنافسية في جوجل.">
+          <div class="card-glow"></div>
+          <div class="card-image">
+            <img class="card-img-main" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=360&fit=crop&auto=format"
+              alt="مدونة نمو SaaS" loading="lazy" />
+            <div class="card-ba-slider">
+              <div class="ba-before" style="background-image: url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-after" style="background-image: url(https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
+              <div class="ba-labels">
+                <span class="ba-label ba-label-before">قبل</span>
+                <span class="ba-label ba-label-after">بعد</span>
+              </div>
+            </div>
+            <div class="card-image-overlay">
+              <span class="card-category-tag"><i class="fa-solid fa-pen-nib"></i> مدونة</span>
+              <div class="card-hover-actions">
+                <a href="https://example.com" target="_blank" rel="noopener" class="card-action-btn btn-live-preview" title="معاينة حية">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>معاينة حية</span>
+                </a>
+                <button class="card-action-btn btn-ba-toggle" data-ba-toggle title="مقارنة قبل وبعد">
+                  <i class="fa-solid fa-not-equal"></i>
+                  <span>قارن</span>
+                </button>
+                <button class="card-action-btn portfolio-modal-trigger" title="عرض دراسة الحالة">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>دراسة حالة</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="step-num">03</div>
-          <h3 class="step-title">أبدأ البناء</h3>
-          <p class="step-desc">أعمل على مشروعك بكامل التركيز مع تحديثات دورية للاطمئنان.</p>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-tag"><i class="fa-solid fa-pen-nib"></i> مدونة SEO</span>
+              <span class="card-result-badge"><i class="fa-solid fa-chart-line"></i> +8K زيارة/شهر</span>
+            </div>
+            <h3 class="card-title">مدونة نمو SaaS</h3>
+            <p class="card-desc">استراتيجية محتوى من 12 مقالاً حققت 8 آلاف زيارة عضوية شهرياً وتصدّرت 15 كلمة مفتاحية في جوجل.</p>
+          </div>
         </div>
-        <div class="step-connector"><i class="fa-solid fa-chevron-left"></i></div>
-        <div class="step-card" data-delay="300">
-          <div class="step-icon-wrap">
-            <i class="fa-solid fa-box-open"></i>
+
+        <!-- Card 4: Landing Page -->
+        <div class="portfolio-card" data-category="web" data-title="صفحة هبوط للتدريب الرياضي" data-tag="موقع ويب"
+          data-url="https://example.com" data-has-ba="true"
+          data-before="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop&auto=format"
+          data-after="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&auto=format"
+          data-problem="كان المدرب الرياضي يفقد عملاء محتملين بسبب غياب صفحة هبوط قوية تشرح خدماته وتقنعهم بالاشتراك."
+          data-solution="صممت صفحة هبوط عالية التحويل بتسلسل إقناعي منطقي: عرض القيمة، الدليل الاجتماعي، الأسعار، ثم نموذج الاشتراك."
+          data-result="ضاعفت الاشتراكات الشهرية 3 مرات خلال أول 30 يوماً من الإطلاق.">
+          <div class="card-glow"></div>
+          <div class="card-image">
+            <img class="card-img-main" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=360&fit=crop&auto=format"
+              alt="صفحة هبوط للتدريب الرياضي" loading="lazy" />
+            <div class="card-ba-slider">
+              <div class="ba-before" style="background-image: url(https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-after" style="background-image: url(https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
+              <div class="ba-labels">
+                <span class="ba-label ba-label-before">قبل</span>
+                <span class="ba-label ba-label-after">بعد</span>
+              </div>
+            </div>
+            <div class="card-image-overlay">
+              <span class="card-category-tag"><i class="fa-solid fa-globe"></i> ويب</span>
+              <div class="card-hover-actions">
+                <a href="https://example.com" target="_blank" rel="noopener" class="card-action-btn btn-live-preview" title="معاينة حية">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>معاينة حية</span>
+                </a>
+                <button class="card-action-btn btn-ba-toggle" data-ba-toggle title="مقارنة قبل وبعد">
+                  <i class="fa-solid fa-not-equal"></i>
+                  <span>قارن</span>
+                </button>
+                <button class="card-action-btn portfolio-modal-trigger" title="عرض دراسة الحالة">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>دراسة حالة</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="step-num">04</div>
-          <h3 class="step-title">تستلم مشروعك</h3>
-          <p class="step-desc">تستلم مشروعاً مكتملاً وجاهزاً للانطلاق مع دعم ما بعد التسليم.</p>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-tag"><i class="fa-solid fa-globe"></i> موقع ويب</span>
+              <span class="card-result-badge"><i class="fa-solid fa-bolt"></i> 3× اشتراكات</span>
+            </div>
+            <h3 class="card-title">صفحة هبوط للتدريب الرياضي</h3>
+            <p class="card-desc">صفحة هبوط عالية التحويل ضاعفت اشتراكات المدرب الرياضي 3 أضعاف خلال أول 30 يوماً.</p>
+          </div>
+        </div>
+
+        <!-- Card 5: YouTube Intros -->
+        <div class="portfolio-card" data-category="video" data-title="سلسلة مقدمات قناة يوتيوب" data-tag="مونتاج فيديو"
+          data-url="https://example.com"
+          data-problem="كانت القناة تفتقر لهوية بصرية متسقة، مما أدى إلى تجربة مشاهدة غير احترافية وضعف في الاحتفاظ بالمشتركين."
+          data-solution="صممت وأنتجت سلسلة من 5 مقدمات ببراندينج متحرك مخصص وهوية بصرية متسقة تعكس شخصية القناة."
+          data-result="ارتفعت نسبة الاحتفاظ بالمشاهدين 40%، وزادت قيمة العلامة التجارية للقناة بشكل ملحوظ.">
+          <div class="card-glow"></div>
+          <div class="card-image">
+            <img class="card-img-main"
+              src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=600&h=360&fit=crop&auto=format"
+              alt="سلسلة مقدمات قناة يوتيوب" loading="lazy" />
+            <button class="card-video-btn portfolio-video-trigger" data-video="pQpFebyALV0" aria-label="مشاهدة الفيديو">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <div class="card-image-overlay">
+              <span class="card-category-tag"><i class="fa-solid fa-film"></i> فيديو</span>
+              <div class="card-hover-actions">
+                <a href="https://example.com" target="_blank" rel="noopener" class="card-action-btn btn-live-preview" title="معاينة حية">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>معاينة حية</span>
+                </a>
+                <button class="card-action-btn portfolio-modal-trigger" title="عرض دراسة الحالة">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>دراسة حالة</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-tag"><i class="fa-solid fa-film"></i> مونتاج فيديو</span>
+              <span class="card-result-badge"><i class="fa-solid fa-users"></i> +40% احتفاظ</span>
+            </div>
+            <h3 class="card-title">سلسلة مقدمات قناة يوتيوب</h3>
+            <p class="card-desc">هوية بصرية متحركة ومتسقة لقناة يوتيوب رفعت الاحتفاظ بالمشاهدين بنسبة 40%.</p>
+          </div>
+        </div>
+
+        <!-- Card 6: Real Estate Blog -->
+        <div class="portfolio-card" data-category="blog" data-title="مدونة الاستثمار العقاري" data-tag="مدونة SEO"
+          data-url="https://example.com" data-has-ba="true"
+          data-before="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&auto=format"
+          data-after="https://images.unsplash.com/photo-1460317442991-0ec2093a7d26?w=600&h=400&fit=crop&auto=format"
+          data-problem="كان الموقع العقاري غير مرئي في جوجل رغم محتواه الجيد، بسبب غياب بنية SEO صحيحة واستهداف الكلمات المفتاحية الخاطئة."
+          data-solution="أعدت هيكلة المحتوى بالكامل مع استراتيجية شاملة تستهدف أكثر من 40 كلمة مفتاحية تنافسية في مجال العقارات."
+          data-result="تصدّر الموقع 40+ كلمة مفتاحية خلال 6 أشهر، مع نمو الزيارات العضوية من 200 إلى 12,000 شهرياً.">
+          <div class="card-glow"></div>
+          <div class="card-image">
+            <img class="card-img-main" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=360&fit=crop&auto=format"
+              alt="مدونة الاستثمار العقاري" loading="lazy" />
+            <div class="card-ba-slider">
+              <div class="ba-before" style="background-image: url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-after" style="background-image: url(https://images.unsplash.com/photo-1460317442991-0ec2093a7d26?w=600&h=400&fit=crop&auto=format)"></div>
+              <div class="ba-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
+              <div class="ba-labels">
+                <span class="ba-label ba-label-before">قبل</span>
+                <span class="ba-label ba-label-after">بعد</span>
+              </div>
+            </div>
+            <div class="card-image-overlay">
+              <span class="card-category-tag"><i class="fa-solid fa-pen-nib"></i> مدونة</span>
+              <div class="card-hover-actions">
+                <a href="https://example.com" target="_blank" rel="noopener" class="card-action-btn btn-live-preview" title="معاينة حية">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>معاينة حية</span>
+                </a>
+                <button class="card-action-btn btn-ba-toggle" data-ba-toggle title="مقارنة قبل وبعد">
+                  <i class="fa-solid fa-not-equal"></i>
+                  <span>قارن</span>
+                </button>
+                <button class="card-action-btn portfolio-modal-trigger" title="عرض دراسة الحالة">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>دراسة حالة</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-tag"><i class="fa-solid fa-pen-nib"></i> مدونة SEO</span>
+              <span class="card-result-badge"><i class="fa-solid fa-magnifying-glass-chart"></i> +40 كلمة</span>
+            </div>
+            <h3 class="card-title">مدونة الاستثمار العقاري</h3>
+            <p class="card-desc">تصدّر 40+ كلمة مفتاحية ونمو الزيارات العضوية من 200 إلى 12,000 شهرياً خلال 6 أشهر.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. TESTIMONIALS ===== -->
+  <section class="testimonials" id="testimonials">
+    <div class="testimonials-atmosphere" aria-hidden="true">
+      <span class="testi-particle particle-1"></span>
+      <span class="testi-particle particle-2"></span>
+      <span class="testi-particle particle-3"></span>
+      <span class="testi-particle particle-4"></span>
+    </div>
+
+    <div class="container testimonials-container">
+      <div class="testimonials-header section-header">
+        <span class="section-label label-white">آراء العملاء</span>
+        <h2 class="section-title testi-title">ماذا يقول <span class="gradient-text">عملائي</span></h2>
+        <p class="section-desc testi-desc">
+          تجارب حقيقية من أصحاب مشاريع اختاروا Nagriva لبناء حضور رقمي راق، سريع، ومصمم ليحوّل الثقة إلى نمو.
+        </p>
+      </div>
+
+      <div class="testimonials-stage" data-testimonials-carousel>
+        <button class="testi-nav testi-nav-prev" type="button" aria-label="الشهادة السابقة" data-testi-prev>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="testimonials-orbit" aria-live="polite">
+          <article class="testi-card active" data-testi-card>
+            <div class="testi-card-shine"></div>
+            <div class="testi-card-top">
+              <span class="testi-quote"><i class="fa-solid fa-quote-right"></i></span>
+              <span class="testi-badge"><i class="fa-solid fa-gem"></i> عميل موثّق</span>
+            </div>
+            <div class="testi-stars" aria-label="تقييم 5 من 5">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text">
+              "Nagriva لم يبن لنا موقعاً فقط، بل صمّم تجربة تشعر وكأنها امتداد لعلامتنا. خلال شهر واحد زادت الطلبات المؤهلة بشكل واضح."
+            </p>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://i.pravatar.cc/128?img=47" alt="سارة المنصوري" />
+              <div>
+                <strong>سارة المنصوري</strong>
+                <span>مؤسسة متجر Luxe Atelier</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testi-card" data-testi-card>
+            <div class="testi-card-shine"></div>
+            <div class="testi-card-top">
+              <span class="testi-quote"><i class="fa-solid fa-quote-right"></i></span>
+              <span class="testi-badge"><i class="fa-solid fa-bolt"></i> نمو سريع</span>
+            </div>
+            <div class="testi-stars" aria-label="تقييم 5 من 5">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text">
+              "المونتاج أصبح أكثر فخامة وإقناعاً. المحتوى صار يبدو كأنه حملة عالمية، ومعدل الاحتفاظ بالمشاهدين ارتفع من أول أسبوع."
+            </p>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://i.pravatar.cc/128?img=12" alt="كريم الدالي" />
+              <div>
+                <strong>كريم الدالي</strong>
+                <span>صانع محتوى تقني</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testi-card" data-testi-card>
+            <div class="testi-card-shine"></div>
+            <div class="testi-card-top">
+              <span class="testi-quote"><i class="fa-solid fa-quote-right"></i></span>
+              <span class="testi-badge"><i class="fa-solid fa-chart-line"></i> نتائج SEO</span>
+            </div>
+            <div class="testi-stars" aria-label="تقييم 5 من 5">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text">
+              "المدونة تحولت إلى قناة جذب مستمرة. المقالات عميقة، منظمة، وتخاطب العميل الحقيقي لا الخوارزمية فقط."
+            </p>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://i.pravatar.cc/128?img=32" alt="ليلى التميمي" />
+              <div>
+                <strong>ليلى التميمي</strong>
+                <span>مديرة نمو في CloudNest</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testi-card" data-testi-card>
+            <div class="testi-card-shine"></div>
+            <div class="testi-card-top">
+              <span class="testi-quote"><i class="fa-solid fa-quote-right"></i></span>
+              <span class="testi-badge"><i class="fa-solid fa-shield-halved"></i> تسليم مضمون</span>
+            </div>
+            <div class="testi-stars" aria-label="تقييم 5 من 5">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-text">
+              "أكثر ما أعجبني هو الهدوء في التنفيذ. كل تفصيل كان محسوباً، من سرعة الصفحة إلى لغة العرض وطريقة تحويل الزائر."
+            </p>
+            <div class="testi-author">
+              <img class="testi-avatar" src="https://i.pravatar.cc/128?img=68" alt="يوسف الرشيد" />
+              <div>
+                <strong>يوسف الرشيد</strong>
+                <span>شريك في شركة استشارات</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <button class="testi-nav testi-nav-next" type="button" aria-label="الشهادة التالية" data-testi-next>
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </div>
+
+      <div class="testi-dots" aria-label="التنقل بين الشهادات" data-testi-dots></div>
+
+      <div class="testi-stats-bar">
+        <div class="testi-stat-item">
+          <span class="testi-stat-icon"><i class="fa-solid fa-layer-group"></i></span>
+          <strong>+50</strong>
+          <span>مشروع مُنجز</span>
+        </div>
+        <div class="testi-stat-item">
+          <span class="testi-stat-icon"><i class="fa-solid fa-heart"></i></span>
+          <strong>100%</strong>
+          <span>رضا العملاء</span>
+        </div>
+        <div class="testi-stat-item">
+          <span class="testi-stat-icon"><i class="fa-solid fa-gauge-high"></i></span>
+          <strong>3 أيام</strong>
+          <span>متوسط التسليم</span>
+        </div>
+        <div class="testi-stat-item">
+          <span class="testi-stat-icon"><i class="fa-solid fa-rotate-left"></i></span>
+          <strong>ضمان</strong>
+          <span>استعادة الأموال</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== MANIFESTO ===== -->
-  <section class="manifesto" id="manifesto">
-    <div class="container">
-      <div class="manifesto-inner">
-
-        <div class="manifesto-left">
-          <span class="manifesto-eyebrow">خلف الكواليس</span>
-          <h2 class="manifesto-title">
-            معظم المستقلين<br />
-            ينفّذون ما تطلبه.<br />
-            <span class="gradient-text">أنا أبني ما تحتاجه.</span>
-          </h2>
-          <p class="manifesto-body">
-            الفرق؟ أنا لا أبدأ بـ "كيف تريد الموقع؟"<br />
-            أبدأ بـ "ماذا يجب أن يحقق هذا الموقع لعملك؟"
-          </p>
-          <p class="manifesto-body">
-            كل قرار تصميمي، كل كلمة، كل زر — مبني على هدف واحد: نتيجة قابلة للقياس. لا جماليات فارغة.
-          </p>
-          <a href="#contact" class="btn btn-primary">
-            دعني أثبت لك ذلك <i class="fa-solid fa-arrow-left"></i>
-          </a>
-        </div>
-
-        <div class="manifesto-right">
-          <div class="manifesto-card" data-delay="0">
-            <span class="mc-tag">مبدأ #1</span>
-            <p class="mc-quote">"الجمال بدون هدف هو فن معلّق على الجدار — لا يبيع."</p>
-            <p class="mc-explain">كل تصميم أبنيه يبدأ بسؤال: لماذا؟</p>
-          </div>
-          <div class="manifesto-card manifesto-card--offset" data-delay="100">
-            <span class="mc-tag mc-tag--blue">مبدأ #2</span>
-            <p class="mc-quote">"أنت لا تدفع مقابل ساعات عملي — تدفع مقابل نتيجة عملك."</p>
-            <p class="mc-explain">أسعاري مبنية على القيمة، لا على الوقت.</p>
-          </div>
-          <div class="manifesto-card" data-delay="200">
-            <span class="mc-tag mc-tag--teal">مبدأ #3</span>
-            <p class="mc-quote">"قليلون يقرؤون أرقام عملائهم. أنا أبدأ دائماً من البيانات."</p>
-            <p class="mc-explain">تقرير أداء مفصّل مع كل مشروع.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRICING ===== -->
+  <!-- ===== 6. PRICING ===== -->
   <section class="pricing" id="pricing">
     <div class="container">
       <div class="section-header">
@@ -802,7 +1023,6 @@
         </button>
       </div>
 
-      <!-- Website Pricing -->
       <div class="pricing-cards-wrap active" id="pricing-website">
         <div class="pricing-grid">
           <div class="pricing-card" data-delay="0">
@@ -866,7 +1086,6 @@
         </div>
       </div>
 
-      <!-- Video Pricing -->
       <div class="pricing-cards-wrap" id="pricing-video">
         <div class="pricing-grid">
           <div class="pricing-card" data-delay="0">
@@ -928,7 +1147,6 @@
         </div>
       </div>
 
-      <!-- Blog Pricing -->
       <div class="pricing-cards-wrap" id="pricing-blog">
         <div class="pricing-grid">
           <div class="pricing-card" data-delay="0">
@@ -998,470 +1216,70 @@
     </div>
   </section>
 
-  <!-- ===== TRUST BADGES ===== -->
-  <section class="trust-section">
-    <div class="container">
-      <div class="trust-badges">
-        <div class="trust-badge">
-          <i class="fa-solid fa-bolt"></i>
-          <span>تسليم سريع</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-badge">
-          <i class="fa-solid fa-shield-halved"></i>
-          <span>100% رضا العملاء</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-badge">
-          <i class="fa-solid fa-gem"></i>
-          <span>جودة احترافية</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-badge">
-          <i class="fa-solid fa-headset"></i>
-          <span>دعم مستمر</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-badge">
-          <i class="fa-solid fa-rotate-left"></i>
-          <span>مراجعات مجانية</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== WHY CHOOSE ME ===== -->
-  <section class="why-me" id="why-me">
-    <div class="container">
-      <div class="why-inner">
-        <div class="why-left">
-          <span class="section-label">لماذا تختارني</span>
-          <h2 class="section-title">لا أبيع خدمات —<br /><span class="gradient-text">أبني نتائج حقيقية</span></h2>
-          <p class="why-desc">
-            المئات من المستقلين يبيعون نفس الخدمات. الفرق؟ أنا أفكر كصاحب عمل، لا كمنفذ طلب. كل قرار أتخذه مبني على ما
-            يحقق لك النمو الفعلي.
-          </p>
-          <a href="#contact" class="btn btn-primary">
-            احصل على عرض سعر مجاني <i class="fa-solid fa-arrow-left"></i>
-          </a>
-        </div>
-        <div class="why-right">
-          <div class="why-grid">
-            <div class="why-card">
-              <div class="why-icon">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
-              <h4>نهج قائم على النتائج</h4>
-              <p>لا تصاميم جميلة بدون هدف. كل قرار مبني لزيادة التحويلات والمبيعات وتنمية أعمالك فعلياً.</p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">
-                <i class="fa-solid fa-bolt"></i>
-              </div>
-              <h4>تسليم خاطف — بدون تأخير</h4>
-              <p>المواقع خلال 7 أيام، الفيديوهات خلال 48 ساعة. أحترم وقتك لأنك مشغول ببناء مشروعك.</p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">
-                <i class="fa-solid fa-building"></i>
-              </div>
-              <h4>فهم حقيقي للأعمال</h4>
-              <p>أفهم كيف تعمل الأسواق الرقمية. لا أنفذ فقط — أقترح، أحسّن، وأبني بعقلية صاحب العمل.</p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">
-                <i class="fa-solid fa-comments"></i>
-              </div>
-              <h4>تواصل مباشر وشفاف</h4>
-              <p>لا وسطاء، لا إخفاء للمعلومات. أنت تتحدث معي مباشرة — تحديثات دورية طوال المشروع.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PORTFOLIO ===== -->
-  <section class="portfolio" id="portfolio">
+  <!-- ===== 7. FAQ ===== -->
+  <section class="faq" id="faq">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">أعمالي</span>
-        <h2 class="section-title">دراسات حالة <span class="gradient-text">بنتائج موثّقة</span></h2>
-        <p class="section-desc">لا صور فحسب — مشكلة حقيقية، حل حقيقي، نتيجة قابلة للقياس. انقر على أي مشروع لتقرأ القصة
-          كاملة.</p>
+        <span class="section-label">الأسئلة الشائعة</span>
+        <h2 class="section-title">إجابات <span class="gradient-text">سريعة وواضحة</span></h2>
       </div>
+      <div class="faq-grid">
 
-      <div class="portfolio-filters">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        <button class="filter-btn" data-filter="web">مواقع</button>
-        <button class="filter-btn" data-filter="video">فيديو</button>
-        <button class="filter-btn" data-filter="blog">مدونات</button>
-      </div>
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span>كم يستغرق تسليم المشروع؟</span>
+            <i class="fa-solid fa-plus"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>المواقع تستغرق 5–7 أيام، الفيديو 24–48 ساعة، والمقالات 2–3 أيام. المشاريع الأكبر قد تحتاج وقتاً إضافياً حسب التعقيد.</p>
+          </div>
+        </details>
 
-      <div class="portfolio-grid" id="portfolioGrid">
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>هل تقدم ضماناً على عملك؟</span>
+            <i class="fa-solid fa-plus"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>نعم. إذا لم تكن راضياً عن النتيجة، أقدّم مراجعات مجانية حتى رضاك التام. التزامي ليس بتسليم عمل — بل بنتيجة ترضيك.</p>
+          </div>
+        </details>
 
-        <div class="portfolio-card" data-category="web" data-title="متجر أزياء إلكتروني" data-tag="موقع ويب"
-          data-problem="كان العميل يعتمد على البيع عبر واتساب فقط بدون موقع احترافي، مما كان يُضعف مصداقيته ويفقده عملاء."
-          data-solution="بنيت متجراً على Shopify بتصميم مخصص يعكس هوية العلامة التجارية مع صفحات منتجات محسّنة وتجربة شراء سلسة."
-          data-result="ارتفعت المبيعات 60% في الشهر الأول، وأصبح المتجر المصدر الرئيسي للطلبات.">
-          <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=360&fit=crop&auto=format"
-              alt="متجر أزياء إلكتروني" loading="lazy" />
-            <div class="portfolio-overlay">
-              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </button>
-            </div>
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>ما هي طرق الدفع المتاحة؟</span>
+            <i class="fa-solid fa-plus"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>أقبل الدفع عبر Visa، Mastercard، PayPal، Apple Pay، Google Pay، وتحويل بنكي. جميع المعاملات مشفرة وآمنة.</p>
           </div>
-          <div class="portfolio-info">
-            <span class="portfolio-tag"><i class="fa-solid fa-globe"></i> موقع ويب</span>
-            <h4>متجر أزياء إلكتروني</h4>
-            <p>متجر مبني على Shopify بتصميم مخصص وصفحات منتجات وتحسين تجربة الشراء.</p>
-            <span class="portfolio-metric"><i class="fa-solid fa-arrow-trend-up"></i> +60% مبيعات خلال شهر</span>
-            <button class="btn-case-study portfolio-modal-trigger">
-              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
-            </button>
-          </div>
-        </div>
+        </details>
 
-        <div class="portfolio-card" data-category="video" data-title="إعلان ترويجي للعلامة التجارية"
-          data-tag="مونتاج فيديو"
-          data-problem="كانت العلامة التجارية تفتقر لمحتوى مرئي احترافي يعكس قيمتها، مما أثّر على معدلات التفاعل على السوشيال ميديا."
-          data-solution="أنتجت فيديو ترويجياً مدته 30 ثانية مع موشن جرافيك مخصص، تصحيح ألوان سينمائي، وتصميم صوتي احترافي."
-          data-result="حقق الفيديو 150,000 مشاهدة خلال أسبوعين، ورفع نسبة التفاعل 3 أضعاف.">
-          <div class="portfolio-img portfolio-img--video">
-            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=360&fit=crop&auto=format"
-              alt="إعلان ترويجي للعلامة التجارية" loading="lazy" />
-            <span class="video-badge"><i class="fa-solid fa-circle-play"></i> فيديو</span>
-            <div class="portfolio-overlay">
-              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="RYEZJDqXKu8"
-                aria-label="مشاهدة الفيديو">
-                <i class="fa-solid fa-play"></i>
-              </button>
-              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </button>
-            </div>
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>هل تقدم دعماً بعد التسليم؟</span>
+            <i class="fa-solid fa-plus"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>بالطبع. أقدّم دعماً مجانياً لمدة شهر بعد التسليم لضمان تشغيل سلس. للمشاريع الكبيرة، أقدّم حزم دعم ممتدة حسب احتياجك.</p>
           </div>
-          <div class="portfolio-info">
-            <span class="portfolio-tag"><i class="fa-solid fa-film"></i> فيديو</span>
-            <h4>إعلان ترويجي للعلامة التجارية</h4>
-            <p>فيديو ترويجي مدته 30 ثانية مع موشن جرافيك وتصحيح ألوان وصوت سينمائي.</p>
-            <span class="portfolio-metric"><i class="fa-solid fa-eye"></i> +150K مشاهدة في أسبوعين</span>
-            <button class="btn-case-study portfolio-modal-trigger">
-              استكشف المشروع <i class="fa-solid fa-arrow-left"></i>
-            </button>
-          </div>
-        </div>
+        </details>
 
-        <div class="portfolio-card" data-category="blog" data-title="مدونة نمو SaaS" data-tag="مدونة SEO"
-          data-problem="كان الموقع يحصل على أقل من 500 زيارة شهرياً بدون استراتيجية محتوى واضحة، في سوق تنافسي جداً."
-          data-solution="وضعت استراتيجية محتوى شاملة من 12 مقالاً تستهدف كلمات مفتاحية عالية النية مع SEO متقدم داخل الصفحة."
-          data-result="8,000 زيارة عضوية شهرياً خلال 4 أشهر، وتصدّر 15 كلمة مفتاحية تنافسية في جوجل.">
-          <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=360&fit=crop&auto=format"
-              alt="مدونة نمو SaaS" loading="lazy" />
-            <div class="portfolio-overlay">
-              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </button>
-            </div>
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>كيف نبدأ العمل معاً؟</span>
+            <i class="fa-solid fa-plus"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>بسيط جداً. تواصل معي عبر النموذج أدناه أو واتساب، أخبرني بفكرتك، وسأرد عليك خلال 24 ساعة بخطة واضحة وسعر شفاف.</p>
           </div>
-          <div class="portfolio-info">
-            <span class="portfolio-tag"><i class="fa-solid fa-pen-nib"></i> مدونة</span>
-            <h4>مدونة نمو SaaS</h4>
-            <p>استراتيجية محتوى من 12 مقالاً تستهدف كلمات مفتاحية عالية النية، حققت 8 آلاف زيارة شهرياً.</p>
-            <span class="portfolio-metric"><i class="fa-solid fa-chart-line"></i> +8K زيارة عضوية / شهر</span>
-            <button class="btn-case-study portfolio-modal-trigger">
-              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="web" data-title="صفحة هبوط للتدريب الرياضي" data-tag="موقع ويب"
-          data-problem="كان المدرب الرياضي يفقد عملاء محتملين بسبب غياب صفحة هبوط قوية تشرح خدماته وتقنعهم بالاشتراك."
-          data-solution="صممت صفحة هبوط عالية التحويل بتسلسل إقناعي منطقي: عرض القيمة، الدليل الاجتماعي، الأسعار، ثم نموذج الاشتراك."
-          data-result="ضاعفت الاشتراكات الشهرية 3 مرات خلال أول 30 يوماً من الإطلاق.">
-          <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=360&fit=crop&auto=format"
-              alt="صفحة هبوط للتدريب الرياضي" loading="lazy" />
-            <div class="portfolio-overlay">
-              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="portfolio-info">
-            <span class="portfolio-tag"><i class="fa-solid fa-globe"></i> موقع ويب</span>
-            <h4>صفحة هبوط للتدريب الرياضي</h4>
-            <p>صفحة هبوط عالية التحويل لمدرب رياضي عبر الإنترنت، ضاعفت الاشتراكات 3 مرات.</p>
-            <span class="portfolio-metric"><i class="fa-solid fa-bolt"></i> 3× اشتراكات في 30 يوم</span>
-            <button class="btn-case-study portfolio-modal-trigger">
-              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="video" data-title="سلسلة مقدمات قناة يوتيوب" data-tag="مونتاج فيديو"
-          data-problem="كانت القناة تفتقر لهوية بصرية متسقة، مما أدى إلى تجربة مشاهدة غير احترافية وضعف في الاحتفاظ بالمشتركين."
-          data-solution="صممت وأنتجت سلسلة من 5 مقدمات ببراندينج متحرك مخصص وهوية بصرية متسقة تعكس شخصية القناة."
-          data-result="ارتفعت نسبة الاحتفاظ بالمشاهدين 40%، وزادت قيمة العلامة التجارية للقناة بشكل ملحوظ.">
-          <div class="portfolio-img portfolio-img--video">
-            <img
-              src="https://blog.khamsat.com/wp-content/uploads/2022/04/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D9%81%D9%8A%D8%AF%D9%8A%D9%88%D9%87%D8%A7%D8%AA-%D9%8A%D9%88%D8%AA%D9%8A%D9%88%D8%A8-%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A9-%D9%84%D8%B4%D9%87%D8%B1-%D8%B1%D9%85%D8%B6%D8%A7%D9%86.png"
-              alt="سلسلة مقدمات قناة يوتيوب" loading="lazy" />
-            <span class="video-badge"><i class="fa-solid fa-circle-play"></i> فيديو</span>
-            <div class="portfolio-overlay">
-              <button class="overlay-btn overlay-btn--play portfolio-video-trigger" data-video="pQpFebyALV0"
-                aria-label="مشاهدة الفيديو">
-                <i class="fa-solid fa-play"></i>
-              </button>
-              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="portfolio-info">
-            <span class="portfolio-tag"><i class="fa-solid fa-film"></i> فيديو</span>
-            <h4>سلسلة مقدمات قناة يوتيوب</h4>
-            <p>سلسلة من 5 مقدمات ببراندينج متحرك وهوية بصرية متسقة.</p>
-            <span class="portfolio-metric"><i class="fa-solid fa-users"></i> +40% احتفاظ بالمشاهدين</span>
-            <button class="btn-case-study portfolio-modal-trigger">
-              استكشف المشروع <i class="fa-solid fa-arrow-left"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="blog" data-title="مدونة الاستثمار العقاري" data-tag="مدونة SEO"
-          data-problem="كان الموقع العقاري غير مرئي في جوجل رغم محتواه الجيد، بسبب غياب بنية SEO صحيحة واستهداف الكلمات المفتاحية الخاطئة."
-          data-solution="أعدت هيكلة المحتوى بالكامل مع استراتيجية شاملة تستهدف أكثر من 40 كلمة مفتاحية تنافسية في مجال العقارات."
-          data-result="تصدّر الموقع 40+ كلمة مفتاحية خلال 6 أشهر، مع نمو الزيارات العضوية من 200 إلى 12,000 شهرياً.">
-          <div class="portfolio-img">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=360&fit=crop&auto=format"
-              alt="مدونة الاستثمار العقاري" loading="lazy" />
-            <div class="portfolio-overlay">
-              <button class="overlay-btn portfolio-modal-trigger" aria-label="عرض تفاصيل المشروع">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="portfolio-info">
-            <span class="portfolio-tag"><i class="fa-solid fa-pen-nib"></i> مدونة</span>
-            <h4>مدونة الاستثمار العقاري</h4>
-            <p>مركز محتوى متخصص يتصدر أكثر من 40 كلمة مفتاحية تنافسية خلال 6 أشهر.</p>
-            <span class="portfolio-metric"><i class="fa-solid fa-magnifying-glass-chart"></i> +40 كلمة مفتاحية متصدرة</span>
-            <button class="btn-case-study portfolio-modal-trigger">
-              شاهد النتائج <i class="fa-solid fa-arrow-left"></i>
-            </button>
-          </div>
-        </div>
+        </details>
 
       </div>
     </div>
   </section>
 
-  <!-- ===== MID-CTA AFTER PORTFOLIO ===== -->
-  <div class="mid-cta mid-cta--accent">
-    <div class="container">
-      <div class="mid-cta-inner">
-        <p class="mid-cta-text">هل أعجبك ما رأيت؟ مشروعك القادم يمكن أن يكون هنا</p>
-        <div class="mid-cta-actions">
-          <a href="#contact" class="btn btn-primary">احصل على عرض خلال 24 ساعة <i
-              class="fa-solid fa-chart-line"></i></a>
-          <a href="#contact" class="btn btn-ghost">دعني أقيّم مشروعك مجاناً</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== TESTIMONIALS ===== -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">آراء العملاء</span>
-        <h2 class="section-title">ماذا يقول <span class="gradient-text">عملائي</span></h2>
-      </div>
-      <div class="testimonials-grid">
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <p class="testi-text">
-            "Nagriva بنى موقعنا في أقل من أسبوع والنتيجة مذهلة. مبيعاتنا ارتفعت 60% في الشهر الأول. من أفضل الاستثمارات
-            التي قمنا بها."
-          </p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">س</div>
-            <div>
-              <strong>سارة م.</strong>
-              <span>صاحبة متجر إلكتروني</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card testi-card--featured">
-          <div class="testi-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <p class="testi-text">
-            "المونتاج في مستوى آخر تماماً. قناتي على يوتيوب انتقلت من 500 إلى 15 ألف مشترك في 3 أشهر بعد التعامل مع
-            Nagriva. نظيف، سريع، ودقيق."
-          </p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">ك</div>
-            <div>
-              <strong>كريم د.</strong>
-              <span>صانع محتوى يوتيوب</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <p class="testi-text">
-            "مدونتنا أصبحت في المرتبة الأولى لـ 12 كلمة مفتاحية خلال شهرين فقط. مقالات Nagriva متعمقة ومكتوبة باحترافية
-            وتجلب زيارات حقيقية. أنصح به بشدة!"
-          </p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">ل</div>
-            <div>
-              <strong>ليلى ت.</strong>
-              <span>مؤسسة شركة SaaS</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SPECIAL OFFER ===== -->
-  <section class="special-offer" id="special-offer">
-    <div class="container">
-      <div class="special-offer-inner">
-        <div class="offer-fire-badge">
-          <i class="fa-solid fa-fire"></i>
-          عرض خاص لفترة محدودة
-        </div>
-        <h2 class="special-offer-title">
-          موقع ويب يجلب عملاء حقيقيين<br />
-          <span class="gradient-text">في 7 أيام أو استرداد كامل للمبلغ</span>
-        </h2>
-        <p class="special-offer-desc">
-          ضمان لا تجده في أي مكان آخر — إذا لم تكن راضياً بالكامل، أسترد لك المبلغ 100% بدون أسئلة.
-        </p>
-
-        <div class="special-offer-points">
-          <div class="special-point"><i class="fa-solid fa-circle-check"></i> تسليم خلال 7 أيام مضمون</div>
-          <div class="special-point"><i class="fa-solid fa-circle-check"></i> ضمان استرداد 100%</div>
-          <div class="special-point"><i class="fa-solid fa-circle-check"></i> مراجعات غير محدودة</div>
-          <div class="special-point"><i class="fa-solid fa-circle-check"></i> دعم لمدة شهر كامل</div>
-        </div>
-
-        <div class="urgency-spots">
-          <i class="fa-solid fa-hourglass-half"></i>
-          متبقي فقط <strong>3 أماكن</strong> هذا الشهر
-        </div>
-
-        <div class="countdown-block">
-          <div class="countdown-label-text">ينتهي العرض خلال:</div>
-          <div class="countdown-timer">
-            <div class="cd-unit">
-              <span class="cd-num" id="cdDays">00</span>
-              <span class="cd-lbl">يوم</span>
-            </div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit">
-              <span class="cd-num" id="cdHours">00</span>
-              <span class="cd-lbl">ساعة</span>
-            </div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit">
-              <span class="cd-num" id="cdMins">00</span>
-              <span class="cd-lbl">دقيقة</span>
-            </div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit">
-              <span class="cd-num" id="cdSecs">00</span>
-              <span class="cd-lbl">ثانية</span>
-            </div>
-          </div>
-        </div>
-
-        <a href="#contact" class="btn btn-primary btn-offer-main">
-          احجز مكانك الآن <i class="fa-solid fa-rocket"></i>
-        </a>
-        <p class="offer-guarantee-note">
-          <i class="fa-solid fa-lock"></i> آمن 100% — لا رسوم خفية — ضمان استرداد كامل
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LEAD CAPTURE ===== -->
-  <section class="lead-capture" id="lead-capture">
-    <div class="container">
-      <div class="lead-capture-inner">
-        <div class="lead-icon-wrap">
-          <i class="fa-solid fa-file-lines"></i>
-        </div>
-        <h2 class="lead-title">احصل على خطة مجانية لمشروعك</h2>
-        <p class="lead-desc">
-          أرسل بريدك الإلكتروني وسأرسل لك خطة مخصصة لتطوير مشروعك الرقمي — مجاناً وخلال 24 ساعة.
-        </p>
-        <form class="lead-form" id="leadForm" novalidate>
-          <div class="lead-row">
-            <input type="email" class="lead-input" id="leadEmail" placeholder="أدخل بريدك الإلكتروني..." required />
-            <button type="submit" class="btn btn-primary">
-              أرسل لي الخطة <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </div>
-        </form>
-        <div class="lead-success hidden" id="leadSuccess">
-          <i class="fa-solid fa-circle-check"></i>
-          <span>تم الإرسال! سأتواصل معك خلال 24 ساعة بخطتك المجانية.</span>
-        </div>
-        <p class="lead-note">
-          <i class="fa-solid fa-shield-halved"></i> خصوصيتك مضمونة — لن نشارك بريدك مع أي طرف
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRE-CONTACT CTA ===== -->
-  <section class="pre-contact-cta">
-    <div class="container">
-      <div class="pre-cta-inner">
-        <div class="pre-cta-icon"><i class="fa-solid fa-handshake"></i></div>
-        <h2 class="pre-cta-title">جاهز للحصول على نتائج حقيقية؟</h2>
-        <p class="pre-cta-desc">انضم إلى أكثر من 50 عميلاً حققوا نتائج موثّقة. أرسل فكرتك الآن وسأرد عليك خلال 24 ساعة
-          بخطة وسعر.</p>
-        <div class="pre-cta-actions">
-          <a href="#contact" class="btn btn-primary btn-lg">احجز استشارتك المجانية الآن <i
-              class="fa-solid fa-rocket"></i></a>
-          <a href="https://wa.me/212728427278" class="btn btn-whatsapp" target="_blank" rel="noopener">
-            <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
-          </a>
-        </div>
-        <div class="pre-cta-reassure">
-          <span><i class="fa-solid fa-clock"></i> رد خلال 24 ساعة</span>
-          <span><i class="fa-solid fa-lock"></i> استشارة مجانية</span>
-          <span><i class="fa-solid fa-shield-halved"></i> بدون التزام</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA / CONTACT ===== -->
+  <!-- ===== 8. FINAL CTA ===== -->
   <section class="cta-section" id="contact">
     <div class="cta-bg">
       <div class="blob blob-3"></div>
@@ -1470,17 +1288,14 @@
     <div class="contact-grid-bg"></div>
     <div class="container">
 
-      <!-- Section Header -->
       <div class="contact-header">
         <span class="section-label">ابدأ مشروعك</span>
         <h2 class="cta-title">حوّل فكرتك إلى <span class="cta-highlight">مشروع رابح</span></h2>
         <p class="cta-desc">أخبرني عن فكرتك — وسأرد عليك خلال 24 ساعة بخطة واضحة وسعر شفاف.</p>
       </div>
 
-      <!-- Wizard Container -->
       <div class="wizard-container">
 
-        <!-- Step Progress -->
         <div class="wizard-steps">
           <div class="wizard-step active" data-step="1">
             <div class="step-circle"><span>1</span></div>
@@ -1498,15 +1313,12 @@
           </div>
         </div>
 
-        <!-- Animated Progress Bar -->
         <div class="wizard-progress-track">
           <div class="wizard-progress-fill" id="wizardProgress"></div>
         </div>
 
-        <!-- Form -->
         <form class="contact-form wizard-form" id="contactForm" novalidate>
 
-          <!-- Hidden select kept for JS submission logic -->
           <select id="service" name="service" required class="hidden-select" aria-hidden="true" tabindex="-1">
             <option value="" disabled selected>اختر الخدمة…</option>
             <option value="website">🌐 تطوير موقع ويب</option>
@@ -1515,7 +1327,6 @@
             <option value="other">⚡ أخرى / خدمات متعددة</option>
           </select>
 
-          <!-- Panel 1: Choose Service -->
           <div class="wizard-panel" id="panel-1" data-panel="1">
             <div class="panel-header">
               <h3 class="panel-title">ماذا تحتاج؟</h3>
@@ -1554,7 +1365,6 @@
             </div>
           </div>
 
-          <!-- Panel 2: Contact Info + Project Details -->
           <div class="wizard-panel hidden" id="panel-2" data-panel="2">
             <div class="panel-header">
               <h3 class="panel-title">من أنت؟</h3>
@@ -1585,14 +1395,12 @@
             </div>
           </div>
 
-          <!-- Panel 3: Review & Submit -->
           <div class="wizard-panel hidden" id="panel-3" data-panel="3">
             <div class="panel-header">
               <h3 class="panel-title">راجع طلبك <i class="fa-solid fa-eye"></i></h3>
               <p class="panel-sub">تحقق من التفاصيل قبل الإرسال — يمكنك التعديل في أي وقت</p>
             </div>
             <div class="review-summary" id="reviewSummary">
-              <!-- Populated by JS -->
             </div>
             <div class="wizard-nav">
               <button type="button" class="btn btn-ghost wizard-back">
@@ -1613,7 +1421,6 @@
 
         </form>
 
-        <!-- Success State -->
         <div class="form-success hidden" id="formSuccess">
           <div class="success-anim"><i class="fa-solid fa-check"></i></div>
           <h3>تم استلام رسالتك!</h3>
@@ -1626,7 +1433,6 @@
 
       </div>
 
-      <!-- Bottom Contact Strip -->
       <div class="contact-strip">
         <a href="mailto:Redwanaitlhadj16@gmail.com" class="contact-pill pill-email">
           <i class="fa-solid fa-envelope"></i>
@@ -1644,7 +1450,6 @@
         </div>
       </div>
 
-      <!-- Trust Row -->
       <div class="contact-trust-bottom">
         <span><i class="fa-solid fa-circle-check"></i> استشارة مجانية</span>
         <span><i class="fa-solid fa-shield-halved"></i> بدون التزام</span>
@@ -1654,12 +1459,12 @@
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== 9. FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <H1>Nagriva</H1>
+          <span class="footer-logo-text">Nagriva</span>
           <p>نبني التميز الرقمي — مشروع واحد في كل مرة.</p>
           <div class="footer-social">
             <a href="https://wa.me/212728427278" aria-label="واتساب" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
@@ -1683,10 +1488,9 @@
             <h5>التنقل</h5>
             <ul>
               <li><a href="#home">الرئيسية</a></li>
-              <li><a href="#about">من أنا</a></li>
-              <li><a href="#how-it-works">كيف أعمل</a></li>
               <li><a href="#portfolio">أعمالي</a></li>
               <li><a href="#testimonials">آراء العملاء</a></li>
+              <li><a href="#faq">الأسئلة الشائعة</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -1699,7 +1503,7 @@
           </div>
         </div>
       </div>
-      <!-- ===== PAYMENT METHODS ===== -->
+
       <div class="payment-section">
         <div class="payment-header">
           <svg class="payment-lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1709,16 +1513,12 @@
           <span class="payment-title">طرق دفع آمنة</span>
         </div>
         <div class="payment-logos">
-
-          <!-- Visa -->
           <div class="payment-logo" aria-label="Visa" title="Visa">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 500" aria-hidden="true">
               <path d="M293.2 348.7l33.4-195.7h53.4l-33.4 195.7h-53.4zm246.7-191c-10.6-3.9-27.1-8.1-47.7-8.1-52.6 0-89.7 26.4-90 64.3-.3 28 26.6 43.6 46.9 52.9 20.8 9.5 27.8 15.6 27.7 24.1-.1 13-16.6 18.9-32 18.9-21.4 0-32.7-2.9-50.2-10.1l-6.9-3.1-7.5 43.5c12.5 5.4 35.5 10.1 59.4 10.3 56 0 92.4-26.1 92.8-66.5.2-22.2-14.1-39.1-44.9-53-18.7-9-30.2-15-30.1-24.2 0-8.1 9.7-16.7 30.7-16.7 17.5-.3 30.2 3.5 40.1 7.4l4.8 2.2 7.2-41.9zm136.9-4.7h-41.1c-12.7 0-22.2 3.4-27.8 16l-78.9 177.8h55.8s9.1-23.8 11.2-29h68.2c1.6 6.8 6.5 29 6.5 29h49.3l-43.2-193.8zm-65.9 126.5c4.4-11.2 21.2-54.3 21.2-54.3-.3.5 4.4-11.3 7.1-18.6l3.6 16.8s10.2 46.5 12.3 56.1h-44.2zm-406-126.5l-52.1 133.5-5.6-27c-9.7-31-40.1-64.6-74.1-81.4l47.7 170.5 56.4-.1 83.9-195.5h-56.2z" fill="currentColor"/>
               <path d="M146.9 153h-85.7l-.7 3.9c66.7 16 110.8 54.6 129.1 101l-18.6-88.8c-3.2-12.2-12.5-15.7-24.1-16.1z" fill="currentColor" opacity=".6"/>
             </svg>
           </div>
-
-          <!-- Mastercard -->
           <div class="payment-logo" aria-label="Mastercard" title="Mastercard">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.4 108" aria-hidden="true">
               <circle cx="52.8" cy="54" r="36.8" fill="currentColor" opacity=".9"/>
@@ -1726,31 +1526,23 @@
               <path d="M76.2 26.3a36.8 36.8 0 0 1 0 55.4 36.8 36.8 0 0 1 0-55.4z" fill="currentColor" opacity=".7"/>
             </svg>
           </div>
-
-          <!-- PayPal -->
           <div class="payment-logo" aria-label="PayPal" title="PayPal">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 33" aria-hidden="true">
               <path d="M46.2 6.7H36.9c-.7 0-1.3.5-1.4 1.1l-3.8 24.1c-.1.5.3.9.8.9h4.4c.7 0 1.3-.5 1.4-1.1l1-6.5c.1-.7.7-1.1 1.4-1.1h2.9c5.9 0 9.3-2.9 10.2-8.5.4-2.5 0-4.4-1.1-5.7-1.3-1.5-3.5-2.2-6.5-2.2zm1 8.4c-.5 3.1-2.9 3.1-5.2 3.1h-1.3l.9-5.9c.1-.4.4-.7.8-.7h.6c1.6 0 3.1 0 3.9.9.5.5.6 1.4.3 2.6zM72.9 14.9h-4.4c-.4 0-.8.3-.8.7l-.2 1.3-.3-.5c-1-1.4-3.1-1.9-5.2-1.9-4.9 0-9.1 3.7-9.9 8.9-.4 2.6.2 5.1 1.7 6.8 1.3 1.6 3.3 2.3 5.6 2.3 3.9 0 6.1-2.5 6.1-2.5l-.2 1.3c-.1.5.3.9.8.9h4c.7 0 1.3-.5 1.4-1.1l2.3-14.8c.1-.6-.3-1.4-.9-1.4zm-6.2 8.6c-.4 2.5-2.4 4.2-4.9 4.2-1.3 0-2.3-.4-2.9-1.2-.6-.8-.9-1.9-.7-3.1.4-2.5 2.4-4.2 4.9-4.2 1.2 0 2.2.4 2.9 1.2.6.9.8 2 .7 3.1zM96.4 14.9h-4.5c-.5 0-.9.2-1.2.6l-6.8 10-2.9-9.6c-.2-.6-.7-1-1.4-1h-4.4c-.5 0-.9.5-.8 1l5.4 15.9-5.1 7.2c-.3.5 0 1.1.6 1.1h4.5c.5 0 .9-.2 1.2-.6L97 16c.3-.5 0-1.1-.6-1.1z" fill="currentColor"/>
               <path d="M108.4 6.7H99c-.7 0-1.3.5-1.4 1.1l-3.8 24.1c-.1.5.3.9.8.9h4.7c.5 0 .9-.4 1-.8l1.1-6.8c.1-.7.7-1.1 1.4-1.1h2.9c5.9 0 9.3-2.9 10.2-8.5.4-2.5 0-4.4-1.1-5.7-1.4-1.5-3.6-2.2-6.4-2.2zm1 8.4c-.5 3.1-2.9 3.1-5.2 3.1h-1.3l.9-5.9c.1-.4.4-.7.8-.7h.6c1.6 0 3.1 0 3.9.9.5.5.6 1.4.3 2.6zM134.9 14.9h-4.4c-.4 0-.8.3-.8.7l-.2 1.3-.3-.5c-1-1.4-3.1-1.9-5.2-1.9-4.9 0-9.1 3.7-9.9 8.9-.4 2.6.2 5.1 1.7 6.8 1.3 1.6 3.3 2.3 5.6 2.3 3.9 0 6.1-2.5 6.1-2.5l-.2 1.3c-.1.5.3.9.8.9h4c.7 0 1.3-.5 1.4-1.1l2.3-14.8c.1-.6-.3-1.4-.9-1.4zm-6.1 8.6c-.4 2.5-2.4 4.2-4.9 4.2-1.3 0-2.3-.4-2.9-1.2-.6-.8-.9-1.9-.7-3.1.4-2.5 2.4-4.2 4.9-4.2 1.2 0 2.2.4 2.9 1.2.6.9.8 2 .7 3.1z" fill="currentColor" opacity=".7"/>
             </svg>
           </div>
-
-          <!-- Stripe -->
           <div class="payment-logo" aria-label="Stripe" title="Stripe">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 25" aria-hidden="true">
               <path d="M5.5 9.9c0-.9.7-1.2 1.9-1.2 1.7 0 3.8.5 5.5 1.4V5.4C11.1 4.6 9.3 4.3 7.4 4.3 3 4.3.3 6.6.3 10c0 5.3 7.3 4.4 7.3 6.7 0 1-.9 1.4-2.1 1.4-1.9 0-4.2-.8-6-1.8v4.8c2 .9 4.1 1.3 6 1.3 4.5 0 7.5-2.2 7.5-5.7C13 11.3 5.5 12.4 5.5 9.9zm14.3-8.6L15 2.2l-.1 15.5 5.1-1.1.1-15.3zm6.7 4.1l-.3 1.3-.2-.4c-.8-1.2-2-1.7-3.6-1.7-3.4 0-6.5 2.6-6.5 7 0 4.1 2.8 6.9 6.5 6.9 1.7 0 2.9-.6 3.7-1.7l.2 1.4h4.6V5.4h-4.4zm-.3 8.3c-.5 1.2-1.5 1.9-2.7 1.9-2.2 0-3.4-1.6-3.4-3.9 0-2.3 1.2-3.9 3.4-3.9 1.2 0 2.2.7 2.7 1.9v4zm11.3-8.6c-1.4 0-2.7.5-3.5 1.7V5.4h-5v16.8h5.1v-9c.6-1 1.5-1.6 2.6-1.6 1 0 1.6.4 2.1.9l1.9-4.2c-.7-.8-1.8-1.3-3.2-1.3zm10.2.5h-5.2l-.1 15.4 5.1-1.1.1-4.9 1.8 5.1 4.8-1 .1-.1-2.7-6.5 2.5-7.4-4.6.1-1.8 5.4V5.6z" fill="currentColor"/>
             </svg>
           </div>
-
-          <!-- Apple Pay -->
           <div class="payment-logo" aria-label="Apple Pay" title="Apple Pay">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165.52 105.965" aria-hidden="true">
               <path d="M40.295 16.558c-2.798 3.24-7.246 5.793-11.694 5.428-.555-4.448 1.625-9.173 4.197-12.08 2.798-3.353 7.687-5.793 11.66-5.974.445 4.621-1.361 9.173-4.163 12.626zm4.117 6.523c-6.456-.373-11.967 3.666-15.04 3.666-3.116 0-7.838-3.474-12.974-3.382-6.68.104-12.877 3.873-16.29 9.844-6.995 12.029-1.84 29.865 4.957 39.673 3.319 4.866 7.289 10.237 12.515 10.051 4.951-.195 6.866-3.195 12.863-3.195 5.971 0 7.694 3.195 12.938 3.1 5.431-.097 8.853-4.866 12.172-9.737 3.787-5.524 5.366-10.905 5.462-11.189-.123-.054-10.472-4.037-10.583-15.993-.104-9.973 8.134-14.745 8.505-14.977-4.638-6.862-11.896-7.62-14.525-7.861z" fill="currentColor"/>
               <path d="M80.232 8.86v52.582h8.158V44.64h11.289c10.304 0 17.538-7.065 17.538-17.917 0-10.852-7.086-17.863-17.25-17.863H80.232zm8.158 6.883h9.408c7.073 0 11.121 3.768 11.121 10.37 0 6.6-4.048 10.405-11.154 10.405H88.39V15.743zm44.265 46.197c5.116 0 9.854-2.59 12.006-6.707h.168v6.3h7.549V35.6c0-7.574-6.051-12.454-15.359-12.454-8.636 0-15.022 4.948-15.254 11.74h7.353c.612-3.226 3.574-5.344 7.617-5.344 4.925 0 7.683 2.295 7.683 6.524v2.862l-10.053.611c-9.343.57-14.393 4.384-14.393 11.023 0 6.706 5.222 11.379 12.683 11.379zm2.151-6.266c-4.291 0-7.021-2.059-7.021-5.209 0-3.258 2.63-5.15 7.651-5.454l8.938-.577v2.929c0 4.854-4.127 8.311-9.568 8.311zm34.077 20.003c7.96 0 11.708-3.038 14.975-12.216l14.344-40.29h-8.329l-9.615 31.112h-.168L171.46 23.572h-8.533l13.8 38.232-.744 2.329c-1.241 3.935-3.262 5.453-6.87 5.453-.637 0-1.875-.07-2.379-.137v6.393c.491.136 2.585.204 3.207.204z" fill="currentColor"/>
             </svg>
           </div>
-
-          <!-- Google Pay -->
           <div class="payment-logo" aria-label="Google Pay" title="Google Pay">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" aria-hidden="true">
               <path d="M55.7 23.6v7.2H53V11.9h7c1.7 0 3.1.6 4.3 1.7 1.2 1.1 1.8 2.5 1.8 4.1 0 1.6-.6 3-1.8 4.1-1.2 1.1-2.6 1.7-4.3 1.7h-4.3zm0-9.1v6.5h4.4c1 0 1.8-.4 2.5-1.1.6-.7 1-1.4 1-2.2 0-.8-.3-1.5-1-2.2-.7-.7-1.5-1-2.5-1h-4.4zM70.6 18.3c1.8 0 3.3.5 4.3 1.5 1.1 1 1.6 2.4 1.6 4.1v8.9h-2.5v-2h-.1c-1 1.7-2.4 2.5-4.1 2.5-1.5 0-2.7-.4-3.7-1.3-1-.9-1.5-2-1.5-3.3 0-1.4.5-2.5 1.6-3.3 1-.8 2.4-1.2 4.2-1.2 1.5 0 2.7.3 3.7.8v-.6c0-1-.4-1.8-1.1-2.5-.7-.7-1.6-1-2.6-1-1.5 0-2.7.6-3.6 1.9l-2.3-1.5c1.3-1.9 3.1-2 5.1-2zm-3 9.4c0 .7.3 1.2.8 1.7.6.4 1.2.7 1.9.7 1 0 2-.4 2.8-1.2.8-.8 1.2-1.7 1.2-2.7-.7-.6-1.8-.9-3.2-.9-1 0-1.8.2-2.5.7-.6.4-1 1-.9 1.7zm18.5-9l-8.3 19.4H75l3.1-6.7-5.5-12.7h2.9L79.4 27h.1l3.7-8.3h2.9z" fill="currentColor"/>
@@ -1760,7 +1552,6 @@
               <path d="M25 13c2.2 0 4.2.8 5.8 2.3l4.4-4.4C32.4 8.3 29 7 25 7c-5.8 0-10.9 2.7-13.4 7.1l4.9 3.9C17.7 15.7 21 13 25 13z" fill="currentColor" opacity=".7"/>
             </svg>
           </div>
-
         </div>
         <p class="payment-trust-msg">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="payment-shield-icon">
@@ -1771,7 +1562,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; <span id="year"></span> Nagriva. جميع الحقوق محفوظة. </p>
+        <p>&copy; <span id="year"></span> Nagriva. جميع الحقوق محفوظة.</p>
         <p class="footer-tagline">بواسطة Redouane Ait El-Hadj</p>
       </div>
     </div>
@@ -1813,8 +1604,7 @@
   </a>
 
   <script src="script.js"></script>
-  <!-- Vercel Web Analytics -->
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
 
 </html>
