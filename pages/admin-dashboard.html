@@ -119,6 +119,45 @@
       pointer-events: none;
       z-index: 0;
     }
+    /* ─── Dashboard skeleton shimmer ─── */
+    .dash-skeleton-row td {
+      padding: 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .dash-skeleton-line {
+      height: 12px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+    }
+    .dash-skeleton-line.w70 { width: 70%; }
+    .dash-skeleton-line.w65 { width: 65%; }
+    .dash-skeleton-line.w50 { width: 50%; }
+    .dash-skeleton-line.w45 { width: 45%; }
+    .dash-skeleton-line.w40 { width: 40%; }
+    .dash-skeleton-line.w35 { width: 35%; }
+    .dash-skeleton-line.w30 { width: 30%; }
+    @keyframes dash-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .dash-error-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-family: inherit;
+      transition: all var(--transition);
+    }
+    .dash-error-btn:hover {
+      border-color: var(--accent-dim);
+      color: var(--accent);
+    }
+
     .glow-bottom-left {
       position: fixed;
       bottom: -300px;
@@ -1837,9 +1876,8 @@
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
                 <option value="in_progress">In Progress</option>
-                <option value="review">Review</option>
-                <option value="delivered">Delivered</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="revision">Revision</option>
+                <option value="completed">Completed</option>
               </select>
               <select class="orders-filter-select" id="ordersSort">
                 <option value="newest">Newest First</option>
@@ -2085,6 +2123,14 @@
         }
       });
 
+      // ─── Populate charts with real data ───
+      if (typeof NAGRIVA_Dashboard !== 'undefined') {
+        var _allOrders = NAGRIVA_AdminOrders.getAllOrders();
+        if (_allOrders.length > 0) {
+          NAGRIVA_Dashboard.updateCharts(_allOrders);
+        }
+      }
+
       // ─── File Upload ───
       const uploadArea = document.getElementById('uploadArea');
       const uploadFiles = document.getElementById('uploadFiles');
@@ -2178,7 +2224,15 @@
         NAGRIVA_AdminOrders.renderOrders(ordersContainer, currentView);
       }
 
+      if (typeof NAGRIVA_Dashboard !== 'undefined') {
+        NAGRIVA_Dashboard.init();
+      }
+
       await NAGRIVA_AdminOrders.init(ordersContainer);
+
+      if (NAGRIVA_AdminOrders.error && typeof NAGRIVA_Dashboard !== 'undefined') {
+        NAGRIVA_Dashboard.showErrorState(NAGRIVA_AdminOrders.error);
+      }
 
       function openNewOrderModal() {
         NAGRIVA_Modal.open({
@@ -2265,7 +2319,7 @@
           if (!order) return;
           const confirmed = await NAGRIVA_Modal.showConfirm(
             'Delete Order',
-            `Are you sure you want to delete ${order.projectTitle}'s order? This action cannot be undone.`
+            `Are you sure you want to delete ${order.clientName || order.projectTitle}'s order? This action cannot be undone.`
           );
           if (!confirmed) return;
           try {
@@ -2278,38 +2332,12 @@
         }
       });
 
-      // ─── Subscribe to order changes ───
-      NAGRIVA_AdminOrders.onChange(function(updatedOrders, updatedStats) {
-        if (NAGRIVA_Dashboard) {
-          NAGRIVA_Dashboard.updateStats(updatedStats);
-        }
-        if (document.getElementById('page-dashboard').classList.contains('active')) {
-            const recent = updatedOrders.slice(0, 6);
-          if (NAGRIVA_Dashboard) {
-            const container = document.getElementById('dashRecentOrders');
-            if (container) {
-              container.innerHTML = recent.map(o => {
-                const initials = NAGRIVA_AdminOrders.getInitials(o.projectTitle);
-                const cls = NAGRIVA_AdminOrders.getAvatarClass(o.projectTitle, 'table');
-                const statusLabel = NAGRIVA_AdminOrders.STATUS[o.status]?.label || o.status;
-                const badgeCls = {
-                  pending: 'badge-warning', in_progress: 'badge-info',
-                  review: 'badge-neutral', delivered: 'badge-success', cancelled: 'badge-danger',
-                }[o.status] || 'badge-neutral';
-                return '<tr><td><div class="td-user"><div class="td-avatar ' + cls + '">' + initials + '</div><div><div class="td-name">' + o.projectTitle + '</div><div class="td-email">' + o.orderNumber + '</div></div></div></td><td>' + o.serviceType + '</td><td style="color:var(--white);font-weight:500;">' + NAGRIVA_AdminOrders.formatCurrency(o.budget) + '</td><td><span class="badge ' + badgeCls + '">' + statusLabel + '</span></td><td style="color:var(--gray2);font-size:0.78rem;">' + NAGRIVA_AdminOrders.formatDate(o.createdAt) + '</td></tr>';
-              }).join('');
-            }
-          }
-        }
+      // ─── Subscribe to order changes (orders page refresh only) ───
+      NAGRIVA_AdminOrders.onChange(function() {
         if (document.getElementById('page-orders').classList.contains('active')) {
           renderOrdersView();
         }
       });
-
-      // ─── Init Dashboard ───
-      if (typeof NAGRIVA_Dashboard !== 'undefined') {
-        NAGRIVA_Dashboard.init();
-      }
 
       // ─── Keyboard shortcut ───
       document.addEventListener('keydown', function(e) {

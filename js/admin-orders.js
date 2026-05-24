@@ -2,9 +2,8 @@ const NAGRIVA_AdminOrders = (() => {
   const STATUS = {
     pending:     { label: 'Pending',     color: '#f59e0b', cls: 'pending',   progress: 10  },
     in_progress: { label: 'In Progress', color: '#3b82f6', cls: 'active',    progress: 60  },
-    review:      { label: 'Review',      color: '#a855f7', cls: 'revision',  progress: 85  },
-    delivered:   { label: 'Delivered',   color: '#10b981', cls: 'completed', progress: 100 },
-    cancelled:   { label: 'Cancelled',   color: '#ef4444', cls: 'pending',   progress: 0   },
+    revision:    { label: 'Revision',    color: '#a855f7', cls: 'revision',  progress: 85  },
+    completed:   { label: 'Completed',   color: '#10b981', cls: 'completed', progress: 100 },
   };
 
   const STATUS_KEYS = Object.keys(STATUS);
@@ -19,40 +18,28 @@ const NAGRIVA_AdminOrders = (() => {
   function mapFromDB(row) {
     return {
       id: row.id,
-      orderNumber: row.order_number || '',
-      projectTitle: row.project_title || '',
-      serviceType: row.service_type || '',
+      clientName: row.client_name || '',
+      service: row.service || '',
       budget: Number(row.budget) || 0,
-      projectDescription: row.project_description || '',
-      additionalNotes: row.additional_notes || '',
       status: row.status || 'pending',
+      projectTitle: row.project_title || '',
       deadline: row.deadline || '',
+      additionalNotes: row.additional_notes || '',
       createdAt: row.created_at || new Date().toISOString(),
       progress: (STATUS[row.status] && STATUS[row.status].progress) || STATUS.pending.progress,
     };
   }
 
   function mapToDB(data) {
-    const mapped = {
-      project_title: data.projectTitle,
-      service_type: data.serviceType,
+    return {
+      client_name: data.clientName || '',
+      service: data.service || '',
       budget: Number(data.budget) || 0,
-      project_description: data.projectDescription || '',
-      additional_notes: data.additionalNotes || '',
       status: data.status || 'pending',
+      project_title: data.projectTitle || '',
       deadline: data.deadline || '',
-      order_number: generateAdminOrderNumber()
+      additional_notes: data.additionalNotes || '',
     };
-    if (data.userId) mapped.user_id = data.userId;
-    if (data.userEmail) mapped.user_email = data.userEmail;
-    return mapped;
-  }
-
-  function generateAdminOrderNumber() {
-    var year = new Date().getFullYear();
-    var seq = Date.now().toString().slice(-4);
-    var rand = Math.floor(10 + Math.random() * 90);
-    return 'NRV-' + year + '-' + seq + rand;
   }
 
   function formatDate(dateStr) {
@@ -117,32 +104,56 @@ const NAGRIVA_AdminOrders = (() => {
   async function fetchAllOrders() {
     const { data, error } = await window.supabaseClient
       .from('orders')
-      .select('*, profiles(full_name)')
+      .select('*')
       .order('created_at', { ascending: false });
-    if (error) throw error;
+    if (error) {
+      console.error('[AdminOrders] fetchAllOrders failed:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        status: error.status,
+        statusText: error.statusText
+      });
+      throw error;
+    }
     return (data || []).map(mapFromDB);
   }
 
+  let _fetchInProgress = false;
+
   async function init(containerEl) {
+    if (_fetchInProgress) return;
     _loading = true;
     _error = null;
+    _fetchInProgress = true;
     if (containerEl) containerEl.innerHTML = renderSkeleton();
     try {
       orders = await fetchAllOrders();
       _loading = false;
+      _fetchInProgress = false;
       if (containerEl) renderOrders(containerEl, 'table');
       notifyChange();
       setupRealtime();
     } catch (err) {
       _loading = false;
+      _fetchInProgress = false;
       _error = err;
-      console.error('Failed to load orders:', err);
+      console.error('[AdminOrders] init failed:', {
+        message: err.message,
+        code: err.code,
+        details: err.details,
+        hint: err.hint,
+        status: err.status
+      });
       if (containerEl) {
+        const detailMsg = err.hint || err.details || '';
         containerEl.innerHTML = `
           <div class="orders-empty">
             <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
             <h3>Failed to Load Orders</h3>
             <p>${err.message || 'Could not connect to database. Please check your connection and try again.'}</p>
+            ${detailMsg ? `<p style="font-size:0.75rem;color:var(--gray3);margin-top:4px;">${detailMsg}</p>` : ''}
             <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_AdminOrders.init(document.getElementById('ordersContainer'))">
               <i class="fas fa-sync"></i> Retry
             </button>
@@ -155,56 +166,71 @@ const NAGRIVA_AdminOrders = (() => {
   function setupRealtime() {
     if (realtimeChannel) {
       window.supabaseClient.removeChannel(realtimeChannel);
+      realtimeChannel = null;
     }
     realtimeChannel = window.supabaseClient
       .channel('admin-orders-changes')
       .on('postgres_changes',
         { event: '*', schema: 'public', table: 'orders' },
-        async () => {
+        async (payload) => {
           try {
-            orders = await fetchAllOrders();
+            const fresh = await fetchAllOrders();
+            orders = fresh;
             notifyChange();
             const container = document.getElementById('ordersContainer');
             if (container) renderOrders(container, currentViewMode || 'table');
           } catch (e) {
-            console.warn('Realtime sync error:', e);
+            console.warn('[AdminOrders] Realtime sync error:', e.message || e);
           }
         }
       )
-      .subscribe();
+      .subscribe(function(status) {
+        if (status === 'SUBSCRIBED') {
+          console.log('[AdminOrders] Realtime channel subscribed');
+        } else if (status === 'CHANNEL_ERROR') {
+          console.warn('[AdminOrders] Realtime channel error');
+        } else if (status === 'TIMED_OUT') {
+          console.warn('[AdminOrders] Realtime channel timed out');
+        }
+      });
   }
 
   let currentViewMode = 'table';
 
-  async function createOrder(data, _attempt) {
-    _attempt = _attempt || 0;
-    if (_attempt > 5) throw new Error('Failed to generate unique order number');
+  let _createInProgress = false;
+
+  async function createOrder(data) {
+    if (_createInProgress) throw new Error('A create operation is already in progress');
+    _createInProgress = true;
     const payload = mapToDB(data);
     const { data: inserted, error } = await window.supabaseClient
       .from('orders')
       .insert(payload)
-      .select('*, profiles(full_name)')
+      .select()
       .single();
+    _createInProgress = false;
     if (error) {
-      if (error.code === '23505') {
-        return createOrder(data, _attempt + 1);
-      }
       throw error;
     }
     const order = mapFromDB(inserted);
     orders.unshift(order);
     notifyChange();
-    showToast('success', 'Order Created', `${order.projectTitle} \u2014 ${order.serviceType} (${formatCurrency(order.budget)})`);
+    showToast('success', 'Order Created', `${order.clientName || order.projectTitle} \u2014 ${order.service} (${formatCurrency(order.budget)})`);
     return order;
   }
 
+  let _updateInProgress = false;
+
   async function updateOrder(id, updates) {
+    if (_updateInProgress) throw new Error('An update operation is already in progress');
+    _updateInProgress = true;
     const payload = {};
-    if (updates.projectTitle !== undefined) payload.project_title = updates.projectTitle;
-    if (updates.serviceType !== undefined) payload.service_type = updates.serviceType;
+    if (updates.clientName !== undefined) payload.client_name = updates.clientName;
+    if (updates.service !== undefined) payload.service = updates.service;
     if (updates.budget !== undefined) payload.budget = Number(updates.budget);
     if (updates.deadline !== undefined) payload.deadline = updates.deadline;
     if (updates.status !== undefined) payload.status = updates.status;
+    if (updates.projectTitle !== undefined) payload.project_title = updates.projectTitle;
     if (updates.additionalNotes !== undefined) payload.additional_notes = updates.additionalNotes;
 
     const { data: updated, error } = await window.supabaseClient
@@ -213,13 +239,14 @@ const NAGRIVA_AdminOrders = (() => {
       .eq('id', id)
       .select()
       .single();
+    _updateInProgress = false;
     if (error) throw error;
 
     const order = mapFromDB(updated);
     const idx = orders.findIndex(o => o.id === id);
     if (idx !== -1) orders[idx] = order;
     notifyChange();
-    showToast('success', 'Order Updated', `${order.projectTitle} \u2014 ${order.serviceType} updated successfully`);
+    showToast('success', 'Order Updated', `${order.clientName || order.projectTitle} \u2014 ${order.service} updated successfully`);
     return order;
   }
 
@@ -235,7 +262,7 @@ const NAGRIVA_AdminOrders = (() => {
     if (idx !== -1) removed = orders.splice(idx, 1)[0];
     notifyChange();
     if (removed) {
-      showToast('info', 'Order Deleted', `${removed.projectTitle} \u2014 ${removed.serviceType}`);
+      showToast('info', 'Order Deleted', `${removed.clientName || removed.projectTitle} \u2014 ${removed.service}`);
     }
     return true;
   }
@@ -269,8 +296,8 @@ const NAGRIVA_AdminOrders = (() => {
       const q = filters.search;
       result = result.filter(o =>
         (o.projectTitle || '').toLowerCase().includes(q) ||
-        (o.serviceType || '').toLowerCase().includes(q) ||
-        (o.orderNumber || '').toLowerCase().includes(q)
+        (o.clientName || '').toLowerCase().includes(q) ||
+        (o.service || '').toLowerCase().includes(q)
       );
     }
     if (filters.status && STATUS[filters.status]) {
@@ -287,14 +314,14 @@ const NAGRIVA_AdminOrders = (() => {
   function getStats() {
     const total = orders.length;
     const active = orders.filter(o => o.status === 'in_progress').length;
-    const revision = orders.filter(o => o.status === 'review').length;
-    const delivered = orders.filter(o => o.status === 'delivered').length;
+    const revision = orders.filter(o => o.status === 'revision').length;
+    const completed = orders.filter(o => o.status === 'completed').length;
     const pending = orders.filter(o => o.status === 'pending').length;
     const revenue = orders
-      .filter(o => o.status === 'delivered')
+      .filter(o => o.status === 'completed')
       .reduce((sum, o) => sum + Number(o.budget || 0), 0);
     const totalRevenue = orders.reduce((sum, o) => sum + Number(o.budget || 0), 0);
-    return { total, active, revision, completed: delivered, pending, revenue, totalRevenue };
+    return { total, active, revision, completed, pending, revenue, totalRevenue };
   }
 
   function onChange(cb) {
@@ -316,18 +343,19 @@ const NAGRIVA_AdminOrders = (() => {
   }
 
   function renderTableRow(order) {
+    const displayName = order.clientName || order.projectTitle;
     return `
       <tr data-id="${order.id}">
         <td>
           <div class="td-client">
-            <div class="td-avatar ${getAvatarClass(order.projectTitle, 'table')}">${getInitials(order.projectTitle)}</div>
+            <div class="td-avatar ${getAvatarClass(displayName, 'table')}">${getInitials(displayName)}</div>
             <div class="td-client-info">
-              <div class="td-name">${order.projectTitle}</div>
-              <div class="td-email">${order.orderNumber}</div>
+              <div class="td-name">${displayName}</div>
+              <div class="td-email">${order.projectTitle}</div>
             </div>
           </div>
         </td>
-        <td><span class="td-service">${order.serviceType}</span></td>
+        <td><span class="td-service">${order.service}</span></td>
         <td>${renderStatusBadge(order.status)}</td>
         <td><span class="td-amount">${formatCurrency(order.budget)}</span></td>
         <td><span class="td-date">${formatDate(order.deadline)}</span></td>
@@ -346,26 +374,27 @@ const NAGRIVA_AdminOrders = (() => {
 
   function renderCard(order) {
     const cfg = STATUS[order.status] || STATUS.pending;
+    const displayName = order.clientName || order.projectTitle;
     return `
       <div class="card order-card" data-id="${order.id}">
         <div class="order-top">
           <div class="order-client">
-            <div class="order-cavatar ${getAvatarClass(order.projectTitle, 'card')}">${getInitials(order.projectTitle)}</div>
+            <div class="order-cavatar ${getAvatarClass(displayName, 'card')}">${getInitials(displayName)}</div>
             <div class="order-cinfo">
-              <h4>${order.projectTitle}</h4>
-              <span>${order.orderNumber}</span>
+              <h4>${displayName}</h4>
+              <span>${order.projectTitle}</span>
             </div>
           </div>
           ${renderStatusBadge(order.status)}
         </div>
-        <div class="order-service">${order.serviceType}</div>
+        <div class="order-service">${order.service}</div>
         <div class="order-meta">
           <span class="order-deadline"><i class="far fa-calendar-alt"></i>Due ${formatDate(order.deadline)}</span>
           <span class="order-amount">${formatCurrency(order.budget)}</span>
         </div>
         <div class="order-progress">
           <div class="progress-track">
-            <div class="progress-bar" style="width:${cfg.progress}%;${order.status === 'in_progress' ? 'background:linear-gradient(90deg,#3b82f6,#6366f1)' : ''}${order.status === 'review' ? 'background:linear-gradient(90deg,#a855f7,#d946ef)' : ''}${order.status === 'pending' ? 'background:linear-gradient(90deg,#f59e0b,#f97316)' : ''}"></div>
+            <div class="progress-bar" style="width:${cfg.progress}%;${order.status === 'in_progress' ? 'background:linear-gradient(90deg,#3b82f6,#6366f1)' : ''}${order.status === 'revision' ? 'background:linear-gradient(90deg,#a855f7,#d946ef)' : ''}${order.status === 'pending' ? 'background:linear-gradient(90deg,#f59e0b,#f97316)' : ''}"></div>
           </div>
           <div style="display:flex;justify-content:space-between;">
             <span class="progress-name">Progress</span>

@@ -28,7 +28,7 @@ const NAGRIVA_Modal = (() => {
 
     const serviceOptions = SERVICES
       .map(s =>
-        `<option value="${s}"${prefill && prefill.serviceType === s ? ' selected' : ''}>${s}</option>`
+        `<option value="${s}"${prefill && prefill.service === s ? ' selected' : ''}>${s}</option>`
       ).join('');
 
     const div = document.createElement('div');
@@ -49,18 +49,23 @@ const NAGRIVA_Modal = (() => {
         <div class="order-modal-body">
           <form id="orderForm" autocomplete="off">
             <div class="order-form-grid">
-              <div class="order-form-field full-width">
+              <div class="order-form-field">
+                <label>Client Name <span class="required">*</span></label>
+                <input type="text" id="of_clientName" placeholder="e.g. Sarah Kim" value="${(prefill && prefill.clientName) || ''}" required />
+                <span class="field-error">Client name is required</span>
+              </div>
+              <div class="order-form-field">
                 <label>Project Title <span class="required">*</span></label>
                 <input type="text" id="of_projectTitle" placeholder="e.g. Lumos Web Design" value="${(prefill && prefill.projectTitle) || ''}" required />
                 <span class="field-error">Project title is required</span>
               </div>
               <div class="order-form-field">
-                <label>Service Type <span class="required">*</span></label>
-                <select id="of_serviceType" required>
+                <label>Service <span class="required">*</span></label>
+                <select id="of_service" required>
                   <option value="">Select service...</option>
                   ${serviceOptions}
                 </select>
-                <span class="field-error">Please select a service type</span>
+                <span class="field-error">Please select a service</span>
               </div>
               <div class="order-form-field">
                 <label>Budget ($) <span class="required">*</span></label>
@@ -166,8 +171,9 @@ const NAGRIVA_Modal = (() => {
 
   async function handleSubmit(form, closeModal, submitBtn) {
     const fields = {
+      clientName: form.querySelector('#of_clientName'),
       projectTitle: form.querySelector('#of_projectTitle'),
-      serviceType: form.querySelector('#of_serviceType'),
+      service: form.querySelector('#of_service'),
       budget: form.querySelector('#of_budget'),
       deadline: form.querySelector('#of_deadline'),
       status: form.querySelector('#of_status'),
@@ -177,12 +183,16 @@ const NAGRIVA_Modal = (() => {
     form.querySelectorAll('.order-form-field').forEach(el => el.classList.remove('has-error'));
     let isValid = true;
 
+    if (!fields.clientName.value.trim()) {
+      fields.clientName.closest('.order-form-field').classList.add('has-error'); isValid = false;
+    }
+
     if (!fields.projectTitle.value.trim()) {
       fields.projectTitle.closest('.order-form-field').classList.add('has-error'); isValid = false;
     }
 
-    if (!fields.serviceType.value) {
-      fields.serviceType.closest('.order-form-field').classList.add('has-error'); isValid = false;
+    if (!fields.service.value) {
+      fields.service.closest('.order-form-field').classList.add('has-error'); isValid = false;
     }
 
     const budget = parseFloat(fields.budget.value);
@@ -193,8 +203,9 @@ const NAGRIVA_Modal = (() => {
     if (!isValid) return;
 
     const orderData = {
+      clientName: fields.clientName.value.trim(),
       projectTitle: fields.projectTitle.value.trim(),
-      serviceType: fields.serviceType.value,
+      service: fields.service.value,
       budget: budget,
       deadline: fields.deadline.value || '',
       status: fields.status.value || 'pending',
@@ -209,12 +220,12 @@ const NAGRIVA_Modal = (() => {
       if (isEditMode && editOrderId) {
         await NAGRIVA_AdminOrders.updateOrder(editOrderId, orderData);
         closeModal();
-        showToast('success', 'Order Updated', `${orderData.projectTitle} \u2014 ${orderData.serviceType} updated successfully`);
+        showToast('success', 'Order Updated', `${orderData.clientName} \u2014 ${orderData.service} updated successfully`);
         if (onSubmitCallback) onSubmitCallback(orderData);
       } else {
         const order = await NAGRIVA_AdminOrders.createOrder(orderData);
         closeModal();
-        showToast('success', 'Order Created', `${order.projectTitle} \u2014 ${order.serviceType} (${NAGRIVA_AdminOrders.formatCurrency(order.budget)})`);
+        showToast('success', 'Order Created', `${order.clientName} \u2014 ${order.service} (${NAGRIVA_AdminOrders.formatCurrency(order.budget)})`);
         if (onSubmitCallback) onSubmitCallback(order);
       }
     } catch (err) {

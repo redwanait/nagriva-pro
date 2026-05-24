@@ -1,6 +1,12 @@
 const NAGRIVA_Dashboard = (() => {
-  function animateCounter(el, target, duration = 1000) {
+  let _loading = false;
+  let _error = null;
+  let _loaded = false;
+  let _unsubscribe = null;
+
+  function animateCounter(el, target, duration) {
     if (!el) return;
+    duration = duration || 1000;
     const start = performance.now();
     function tick(now) {
       const elapsed = now - start;
@@ -14,8 +20,9 @@ const NAGRIVA_Dashboard = (() => {
     requestAnimationFrame(tick);
   }
 
-  function animateCurrency(el, target, duration = 1000) {
+  function animateCurrency(el, target, duration) {
     if (!el) return;
+    duration = duration || 1000;
     const start = performance.now();
     function tick(now) {
       const elapsed = now - start;
@@ -30,6 +37,13 @@ const NAGRIVA_Dashboard = (() => {
   }
 
   function updateStats(stats) {
+    if (!stats) stats = { active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 };
+    const active = Math.max(0, stats.active || 0);
+    const revision = Math.max(0, stats.revision || 0);
+    const completed = Math.max(0, stats.completed || 0);
+    const revenue = Math.max(0, stats.revenue || 0);
+    const pending = Math.max(0, stats.pending || 0);
+
     const activeEl = document.getElementById('dashActiveOrders');
     const revisionEl = document.getElementById('dashPendingRevisions');
     const completedEl = document.getElementById('dashCompletedOrders');
@@ -37,31 +51,31 @@ const NAGRIVA_Dashboard = (() => {
 
     if (activeEl) {
       const current = parseInt(activeEl.textContent.replace(/[^0-9]/g, '')) || 0;
-      if (current !== stats.active) animateCounter(activeEl, stats.active);
-      else activeEl.textContent = stats.active;
+      if (current !== active) animateCounter(activeEl, active);
+      else activeEl.textContent = active;
     }
     if (revisionEl) {
       const current = parseInt(revisionEl.textContent.replace(/[^0-9]/g, '')) || 0;
-      if (current !== stats.revision) animateCounter(revisionEl, stats.revision);
-      else revisionEl.textContent = stats.revision;
+      if (current !== revision) animateCounter(revisionEl, revision);
+      else revisionEl.textContent = revision;
     }
     if (completedEl) {
       const current = parseInt(completedEl.textContent.replace(/[^0-9]/g, '')) || 0;
-      if (current !== stats.completed) animateCounter(completedEl, stats.completed);
-      else completedEl.textContent = stats.completed;
+      if (current !== completed) animateCounter(completedEl, completed);
+      else completedEl.textContent = completed;
     }
     if (revenueEl) {
       const curStr = revenueEl.textContent.replace(/[^0-9]/g, '');
       const current = parseInt(curStr) || 0;
-      if (current !== stats.revenue) animateCurrency(revenueEl, stats.revenue);
-      else revenueEl.textContent = '$' + stats.revenue.toLocaleString('en-US');
+      if (current !== revenue) animateCurrency(revenueEl, revenue);
+      else revenueEl.textContent = '$' + revenue.toLocaleString('en-US');
     }
 
     const badge = document.querySelector('.sidebar-item[data-page="orders"] .badge-count');
     if (badge) {
-      const pending = stats.pending + stats.revision;
-      badge.textContent = pending;
-      badge.style.display = pending > 0 ? '' : 'none';
+      const badgeVal = pending + revision;
+      badge.textContent = badgeVal;
+      badge.style.display = badgeVal > 0 ? '' : 'none';
     }
   }
 
@@ -76,24 +90,24 @@ const NAGRIVA_Dashboard = (() => {
     }
 
     container.innerHTML = recent.map(o => {
-      const initials = NAGRIVA_AdminOrders.getInitials(o.projectTitle);
-      const cls = NAGRIVA_AdminOrders.getAvatarClass(o.projectTitle, 'table');
+      const displayName = o.clientName || o.projectTitle;
+      const initials = NAGRIVA_AdminOrders.getInitials(displayName);
+      const cls = NAGRIVA_AdminOrders.getAvatarClass(displayName, 'table');
       const statusLabel = NAGRIVA_AdminOrders.STATUS[o.status]?.label || o.status;
       const badgeCls = {
         pending: 'badge-warning',
         in_progress: 'badge-info',
-        review: 'badge-neutral',
-        delivered: 'badge-success',
-        cancelled: 'badge-danger',
+        revision: 'badge-neutral',
+        completed: 'badge-success',
       }[o.status] || 'badge-neutral';
 
-      return `<tr>
-        <td><div class="td-user"><div class="td-avatar ${cls}">${initials}</div><div><div class="td-name">${o.projectTitle}</div><div class="td-email">${o.orderNumber}</div></div></div></td>
-        <td>${o.serviceType}</td>
-        <td style="color:var(--white);font-weight:500;">${NAGRIVA_AdminOrders.formatCurrency(o.budget)}</td>
-        <td><span class="badge ${badgeCls}">${statusLabel}</span></td>
-        <td style="color:var(--gray2);font-size:0.78rem;">${NAGRIVA_AdminOrders.formatDate(o.createdAt)}</td>
-      </tr>`;
+      return '<tr>' +
+        '<td><div class="td-user"><div class="td-avatar ' + cls + '">' + initials + '</div><div><div class="td-name">' + escapeHtml(displayName) + '</div><div class="td-email">' + escapeHtml(o.projectTitle) + '</div></div></div></td>' +
+        '<td>' + escapeHtml(o.service) + '</td>' +
+        '<td style="color:var(--white);font-weight:500;">' + NAGRIVA_AdminOrders.formatCurrency(o.budget) + '</td>' +
+        '<td><span class="badge ' + badgeCls + '">' + statusLabel + '</span></td>' +
+        '<td style="color:var(--gray2);font-size:0.78rem;">' + NAGRIVA_AdminOrders.formatDate(o.createdAt) + '</td>' +
+        '</tr>';
     }).join('');
   }
 
@@ -103,20 +117,21 @@ const NAGRIVA_Dashboard = (() => {
 
     const activities = [];
     orders.slice(0, 8).forEach(o => {
+      const displayName = o.clientName || o.projectTitle;
       activities.push({
-        text: `<strong>${o.projectTitle}</strong> — ${o.serviceType}`,
+        text: '<strong>' + escapeHtml(displayName) + '</strong> — ' + escapeHtml(o.service),
         time: NAGRIVA_AdminOrders.timeAgo(o.createdAt),
         dot: 'teal',
       });
-      if (o.status === 'delivered') {
+      if (o.status === 'completed') {
         activities.push({
-          text: `<strong>${o.projectTitle}</strong> was delivered`,
+          text: '<strong>' + escapeHtml(displayName) + '</strong> completed',
           time: NAGRIVA_AdminOrders.timeAgo(o.createdAt),
           dot: 'teal',
         });
-      } else if (o.status === 'review') {
+      } else if (o.status === 'revision') {
         activities.push({
-          text: `<strong>${o.projectTitle}</strong> is in review`,
+          text: '<strong>' + escapeHtml(displayName) + '</strong> is in revision',
           time: NAGRIVA_AdminOrders.timeAgo(o.createdAt),
           dot: 'orange',
         });
@@ -128,43 +143,308 @@ const NAGRIVA_Dashboard = (() => {
       return;
     }
 
-    container.innerHTML = activities.slice(0, 6).map((a, i) => {
-      const isLast = i === Math.min(activities.length, 6) - 1;
-      return `<div class="activity-item">
-        <div class="activity-dot-wrap">
-          <div class="activity-dot ${a.dot}"></div>
-          ${isLast ? '' : '<div class="activity-line"></div>'}
-        </div>
-        <div class="activity-content">
-          <div class="activity-text">${a.text}</div>
-          <div class="activity-time">${a.time}</div>
-        </div>
-      </div>`;
+    container.innerHTML = activities.slice(0, 6).map(function(a, i) {
+      var isLast = i === Math.min(activities.length, 6) - 1;
+      return '<div class="activity-item">' +
+        '<div class="activity-dot-wrap">' +
+          '<div class="activity-dot ' + a.dot + '"></div>' +
+          (isLast ? '' : '<div class="activity-line"></div>') +
+        '</div>' +
+        '<div class="activity-content">' +
+          '<div class="activity-text">' + a.text + '</div>' +
+          '<div class="activity-time">' + a.time + '</div>' +
+        '</div>' +
+      '</div>';
     }).join('');
   }
 
-  async function init() {
-    try {
-      const stats = NAGRIVA_AdminOrders.getStats();
-      updateStats(stats);
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
 
-      const orders = NAGRIVA_AdminOrders.getAllOrders();
-      renderRecentOrders(orders);
-      if (document.getElementById('dashActivityFeed')) {
-        renderActivity(orders);
-      }
-    } catch (err) {
-      console.error('Dashboard init error:', err);
+  function getMonthRevenue(orders, monthsAgo) {
+    var d = new Date();
+    d.setMonth(d.getMonth() - monthsAgo);
+    var targetMonth = d.getMonth();
+    var targetYear = d.getFullYear();
+    return orders
+      .filter(function(o) {
+        if (o.status !== 'completed') return false;
+        var created = new Date(o.createdAt);
+        return created.getMonth() === targetMonth && created.getFullYear() === targetYear;
+      })
+      .reduce(function(sum, o) { return sum + Number(o.budget || 0); }, 0);
+  }
+
+  function getServiceDistribution(orders) {
+    var counts = {};
+    var total = 0;
+    orders.forEach(function(o) {
+      var svc = o.service || 'Other';
+      counts[svc] = (counts[svc] || 0) + 1;
+      total++;
+    });
+    var labels = Object.keys(counts);
+    var data = labels.map(function(l) {
+      return total > 0 ? Math.round((counts[l] / total) * 100) : 0;
+    });
+    return { labels: labels, data: data };
+  }
+
+  function updateCharts(orders) {
+    if (!window.Chart || !orders || orders.length === 0) return;
+
+    var revChart = Chart.getChart('revenueChart');
+    var donutChart = Chart.getChart('donutChart');
+    if (!revChart && !donutChart) return;
+
+    var monthLabels = [];
+    var revData = [];
+    for (var i = 5; i >= 0; i--) {
+      var d = new Date();
+      d.setMonth(d.getMonth() - i);
+      monthLabels.push(d.toLocaleString('en-US', { month: 'short' }));
+      revData.push(getMonthRevenue(orders, i));
     }
 
-    NAGRIVA_AdminOrders.onChange((updatedOrders, updatedStats) => {
+    var serviceDist = getServiceDistribution(orders);
+
+    if (revChart) {
+      revChart.data.labels = monthLabels;
+      revChart.data.datasets[0].data = revData;
+      revChart.update('none');
+    }
+
+    if (donutChart) {
+      var COLORS = ['#00f5c4', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444', '#ec4899', '#14b8a6', '#8b5cf6'];
+      donutChart.data.labels = serviceDist.labels;
+      donutChart.data.datasets[0].data = serviceDist.data;
+      donutChart.data.datasets[0].backgroundColor = serviceDist.labels.map(function(_, i) {
+        return COLORS[i % COLORS.length];
+      });
+      donutChart.update('none');
+    }
+  }
+
+  function renderTableSkeleton(count) {
+    count = count || 5;
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      html += '<tr class="dash-skeleton-row">' +
+        '<td><div class="dash-skeleton-line w70"></div><div class="dash-skeleton-line w40" style="margin-top:6px"></div></td>' +
+        '<td><div class="dash-skeleton-line w50"></div></td>' +
+        '<td><div class="dash-skeleton-line w40"></div></td>' +
+        '<td><div class="dash-skeleton-line w45"></div></td>' +
+        '<td><div class="dash-skeleton-line w35"></div></td>' +
+      '</tr>';
+    }
+    return html;
+  }
+
+  function renderActivitySkeleton(count) {
+    count = count || 4;
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      html += '<div class="activity-item">' +
+        '<div class="activity-dot-wrap">' +
+          '<div class="activity-dot" style="background:rgba(255,255,255,0.06)"></div>' +
+          (i < count - 1 ? '<div class="activity-line"></div>' : '') +
+        '</div>' +
+        '<div class="activity-content">' +
+          '<div class="dash-skeleton-line w65" style="margin-bottom:6px"></div>' +
+          '<div class="dash-skeleton-line w30"></div>' +
+        '</div>' +
+      '</div>';
+    }
+    return html;
+  }
+
+  function showSkeletons() {
+    var revenueEl = document.getElementById('dashRevenue');
+    if (revenueEl) {
+      var revText = revenueEl.textContent.trim();
+      if (revText === '$0' || revText === '$—' || revText === '' || revText === '$') {
+        revenueEl.textContent = '$—';
+      }
+    }
+    ['dashActiveOrders', 'dashPendingRevisions', 'dashCompletedOrders'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        var txt = el.textContent.trim();
+        if (txt === '0' || txt === '—' || txt === '') {
+          el.textContent = '—';
+        }
+      }
+    });
+
+    var ordersTbody = document.getElementById('dashRecentOrders');
+    if (ordersTbody) {
+      var firstCell = ordersTbody.querySelector('td');
+      if (!firstCell || firstCell.textContent.includes('Loading') || firstCell.textContent.includes('orders')) {
+        ordersTbody.innerHTML = renderTableSkeleton();
+      } else if (firstCell.textContent.trim() === '—' || firstCell.textContent.trim() === '') {
+        ordersTbody.innerHTML = renderTableSkeleton();
+      }
+    }
+
+    var activityFeed = document.getElementById('dashActivityFeed');
+    if (activityFeed) {
+      var firstActivity = activityFeed.querySelector('.activity-text');
+      if (!firstActivity || firstActivity.textContent.includes('Loading') || firstActivity.textContent.includes('activity')) {
+        activityFeed.innerHTML = renderActivitySkeleton();
+      }
+    }
+  }
+
+  function showError(err) {
+    var message = (err && err.message) || 'Failed to load dashboard data. Please check your connection.';
+    var escapedMsg = escapeHtml(message);
+
+    if (err) {
+      console.error('[Dashboard] Error:', {
+        message: err.message,
+        code: err.code,
+        details: err.details,
+        hint: err.hint
+      });
+    }
+
+    var ordersTbody = document.getElementById('dashRecentOrders');
+    if (ordersTbody) {
+      ordersTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:28px 24px;">' +
+        '<div style="color:var(--danger);margin-bottom:6px;font-size:1rem;"><i class="fas fa-exclamation-triangle"></i></div>' +
+        '<div style="color:var(--gray);font-size:0.8rem;margin-bottom:12px;">' + escapedMsg + '</div>' +
+        '<button class="btn btn-secondary btn-sm" onclick="NAGRIVA_Dashboard.retry()"><i class="fas fa-sync"></i> Retry</button>' +
+      '</td></tr>';
+    }
+
+    var activityFeed = document.getElementById('dashActivityFeed');
+    if (activityFeed) {
+      activityFeed.innerHTML = '<div class="activity-item">' +
+        '<div class="activity-dot-wrap"><div class="activity-dot" style="background:rgba(239,68,68,0.2)"></div></div>' +
+        '<div class="activity-content">' +
+          '<div style="color:var(--gray);font-size:0.8rem;margin-bottom:8px;">' + escapedMsg + '</div>' +
+          '<button class="btn btn-secondary btn-sm" onclick="NAGRIVA_Dashboard.retry()"><i class="fas fa-sync"></i> Retry</button>' +
+        '</div>' +
+      '</div>';
+    }
+  }
+
+  async function retry() {
+    showSkeletons();
+    _error = null;
+    _loaded = false;
+    try {
+      await NAGRIVA_AdminOrders.init(document.getElementById('ordersContainer'));
+      if (!_loaded) {
+        var orders = NAGRIVA_AdminOrders.getAllOrders();
+        if (orders.length > 0) {
+          updateStats(NAGRIVA_AdminOrders.getStats());
+          renderRecentOrders(orders);
+          if (document.getElementById('dashActivityFeed')) {
+            renderActivity(orders);
+          }
+          updateCharts(orders);
+          _loaded = true;
+        } else if (NAGRIVA_AdminOrders.error) {
+          showError(NAGRIVA_AdminOrders.error);
+        }
+      }
+    } catch (err) {
+      showError(err);
+    }
+  }
+
+  async function init() {
+    _loading = true;
+    _error = NAGRIVA_AdminOrders.error || null;
+
+    showSkeletons();
+
+    if (_unsubscribe) _unsubscribe();
+    _unsubscribe = NAGRIVA_AdminOrders.onChange(function(updatedOrders, updatedStats) {
+      _loading = false;
+      _error = null;
+      _loaded = true;
       updateStats(updatedStats);
       renderRecentOrders(updatedOrders);
       if (document.getElementById('dashActivityFeed')) {
         renderActivity(updatedOrders);
       }
+      updateCharts(updatedOrders);
     });
+
+    var orders = NAGRIVA_AdminOrders.getAllOrders();
+    if (orders.length > 0) {
+      var stats = NAGRIVA_AdminOrders.getStats();
+      updateStats(stats);
+      renderRecentOrders(orders);
+      if (document.getElementById('dashActivityFeed')) {
+        renderActivity(orders);
+      }
+      updateCharts(orders);
+      _loading = false;
+      _loaded = true;
+    } else if (_error) {
+      showError(_error);
+      _loading = false;
+    } else if (!NAGRIVA_AdminOrders.loading) {
+      try {
+        await NAGRIVA_AdminOrders.init();
+      } catch (e) {
+        console.warn('[Dashboard] AdminOrders init error:', e);
+      }
+      if (!_loaded) {
+        var refreshed = NAGRIVA_AdminOrders.getAllOrders();
+        if (refreshed.length > 0) {
+          var s = NAGRIVA_AdminOrders.getStats();
+          updateStats(s);
+          renderRecentOrders(refreshed);
+          if (document.getElementById('dashActivityFeed')) {
+            renderActivity(refreshed);
+          }
+          updateCharts(refreshed);
+          _loaded = true;
+        }
+        if (NAGRIVA_AdminOrders.error) {
+          _error = NAGRIVA_AdminOrders.error;
+          showError(_error);
+        }
+      }
+      _loading = false;
+    }
   }
 
-  return { init, updateStats, animateCounter, animateCurrency };
+  function destroy() {
+    if (_unsubscribe) {
+      _unsubscribe();
+      _unsubscribe = null;
+    }
+  }
+
+  function showErrorState(err) {
+    _loading = false;
+    _error = err || new Error('Failed to load dashboard data');
+    console.error('[Dashboard] showErrorState:', {
+      message: _error.message,
+      code: _error.code,
+      details: _error.details,
+      hint: _error.hint
+    });
+    showError(_error);
+  }
+
+  return {
+    init: init,
+    retry: retry,
+    updateStats: updateStats,
+    updateCharts: updateCharts,
+    animateCounter: animateCounter,
+    animateCurrency: animateCurrency,
+    destroy: destroy,
+    showErrorState: showErrorState,
+    get loading() { return _loading; },
+    get error() { return _error; },
+  };
 })();
