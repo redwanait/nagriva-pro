@@ -323,7 +323,27 @@ const NagrivaAuth = (() => {
       if (data.session) {
         closeModal();
         refs.signInForm.reset();
-        window.location.href = getRedirectUrl();
+        /* ── Role-based redirect: admin users go to admin dashboard ── */
+        try {
+          const { data: profile } = await window.supabaseClient
+            .from('profiles')
+            .select('role')
+            .eq('id', data.session.user.id)
+            .single();
+          if (profile?.role === 'admin') {
+            const params = new URLSearchParams(window.location.search);
+            const redirect = params.get('redirect');
+            if (redirect && !redirect.includes('admin')) {
+              window.location.href = redirect;
+            } else {
+              window.location.href = '/pages/admin-dashboard.html';
+            }
+          } else {
+            window.location.href = getRedirectUrl();
+          }
+        } catch {
+          window.location.href = getRedirectUrl();
+        }
         return;
       } else {
         showError(refs.signinMsg, 'Unable to sign in. Please try again.');
@@ -636,7 +656,12 @@ const NagrivaAuth = (() => {
   function getRedirectUrl() {
     const params = new URLSearchParams(window.location.search);
     const redirect = params.get('redirect');
-    return redirect ? decodeURIComponent(redirect) : '/pages/dashboard.html';
+    if (redirect) {
+      return decodeURIComponent(redirect);
+    }
+    /* Default: regular users go to dashboard, admin detection
+       is handled in the sign-in handler above. */
+    return '/pages/dashboard.html';
   }
 
   function handleRedirect() {

@@ -213,7 +213,24 @@
           } else {
             msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Signed in successfully! Redirecting...';
             msg.className = 'auth-page-message success show';
-            setTimeout(function() { window.location.href = redirectAfterLogin; }, 800);
+            /* Role-based redirect: admin users go to admin dashboard */
+            (async function() {
+              try {
+                var { data: { session } } = await window.supabaseClient.auth.getSession();
+                if (session) {
+                  var { data: profile } = await window.supabaseClient
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', session.user.id)
+                    .single();
+                  if (profile?.role === 'admin' && !redirectAfterLogin.includes('admin')) {
+                    window.location.href = 'admin-dashboard.html';
+                    return;
+                  }
+                }
+              } catch (e) {}
+              window.location.href = redirectAfterLogin;
+            })();
           }
         })
         .catch(function(err) {

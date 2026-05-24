@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/admin-auth.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
   <link rel="stylesheet" href="../css/floating-elements.css" />
   <style>
@@ -587,6 +588,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/supabase-config.js"></script>
   <script src="../js/auth-guard.js"></script>
+  <script src="../js/admin-auth.js"></script>
   <script src="../js/script.js"></script>
   <script src="../js/i18n.js"></script>
   <script src="../js/profile-avatar.js"></script>
@@ -732,9 +734,9 @@
         }
       }
 
-      /* Admin link visibility */
+      /* Admin link visibility — use NagrivaAdminAuth for caching */
       try {
-        var admin = await NagrivaOrders.isAdmin();
+        var admin = await NagrivaAdminAuth.isAdmin();
         if (admin) {
           var link = document.getElementById('adminLink');
           if (link) link.style.display = '';
