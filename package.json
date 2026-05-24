@@ -1,0 +1,9 @@
+{
+  "name": "nagriva",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nagriva — AI-powered brand growth platform",
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}

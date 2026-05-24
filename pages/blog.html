@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation</title>
+  <meta name="description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing. NAGRIVA's tech blog delivers cutting-edge strategies for modern brands." />
+  <meta name="keywords" content="AI blog, tech blog, SaaS insights, digital marketing, automation, startups, SEO strategies, web design, NAGRIVA" />
+  <meta property="og:title" content="Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation" />
+  <meta property="og:description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" />
+  <link rel="stylesheet" href="/css/floating-elements.css" />
+  <link rel="stylesheet" href="/css/auth.css" />
+  <link rel="icon" type="image/png" href="/assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+
+  <!-- ══════════════════════════ NAVBAR ══════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" />
+        </span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link nav-dropdown-toggle">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="/pages/web-design.html" class="nav-dropdown-item">Web Design</a>
+            <a href="/pages/seo.html" class="nav-dropdown-item">SEO</a>
+            <a href="/pages/branding.html" class="nav-dropdown-item">Branding</a>
+            <a href="/pages/ai-automation.html" class="nav-dropdown-item">AI Automation</a>
+            <a href="/pages/social-media.html" class="nav-dropdown-item">Social Media</a>
+          </div>
+        </li>
+        <li><a href="/index.html#results" class="nav-link">Results</a></li>
+        <li><a href="/index.html#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="/index.html#about" class="nav-link">About</a></li>
+        <li><a href="/index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="/pages/blog.html" class="nav-link active">Blog</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <a href="/pages/login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="/index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════ MOBILE MENU OVERLAY ════════════════════ -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <div class="mobile-menu-header">
+        <a href="/index.html" class="mobile-menu-logo-wrap">
+          <img src="/assets/images/branding/nagriva-logo.png" alt="" class="mobile-menu-logo-img" />
+          <span class="mobile-menu-logo-text">NAGRIVA</span>
+        </a>
+        <button class="mobile-menu-close-btn" id="mobileMenuClose" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="/index.html" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="/pages/web-design.html" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Services</span>
+        </a>
+        <a href="/index.html#results" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Results</span>
+        </a>
+        <a href="/index.html#pricing" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <span>Pricing</span>
+        </a>
+        <a href="/index.html#about" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>About</span>
+        </a>
+        <a href="/index.html#contact" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Contact</span>
+        </a>
+        <a href="/pages/blog.html" class="mobile-menu-link active">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          <span>Blog</span>
+        </a>
+      </nav>
+      <a href="/pages/login.html" class="mobile-auth-link" id="mobileAuthBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        <span id="mobileAuthText">Sign In</span>
+      </a>
+      <div class="mobile-menu-footer">
+        <a href="/index.html#contact" class="mobile-menu-cta">
+          <span>Book a Free Call</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <p class="mobile-menu-trust">We reply within 24 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ HERO ══════════════════════════ -->
+  <section class="blog-hero" id="hero">
+    <div class="blog-hero-bg">
+      <div class="blog-hero-glow"></div>
+      <div class="blog-hero-glow-2"></div>
+      <div class="blog-hero-grid"></div>
+      <div class="blog-hero-noise"></div>
+    </div>
+    <div class="container">
+      <div class="blog-hero-content fade-up">
+        <div class="blog-hero-badge">
+          <span class="blog-hero-badge-dot"></span>
+          <span>Insights & Innovation</span>
+        </div>
+
+        <h1 class="blog-hero-title">
+          Insights, AI & <span>Digital Innovation</span>
+        </h1>
+
+        <p class="blog-hero-desc">
+          Explore cutting-edge strategies in artificial intelligence, SaaS growth, automation, and digital marketing. Stay ahead of the curve with expert analysis and actionable insights.
+        </p>
+
+        <div class="blog-search-wrap">
+          <svg class="blog-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="blog-search" placeholder="Search articles..." id="blogSearch" aria-label="Search articles" />
+        </div>
+
+        <div class="blog-categories" id="blogCategories">
+          <button class="blog-cat-btn active" data-cat="all">All</button>
+          <button class="blog-cat-btn" data-cat="AI">AI</button>
+          <button class="blog-cat-btn" data-cat="Technology">Technology</button>
+          <button class="blog-cat-btn" data-cat="SEO">SEO</button>
+          <button class="blog-cat-btn" data-cat="Automation">Automation</button>
+          <button class="blog-cat-btn" data-cat="Startups">Startups</button>
+          <button class="blog-cat-btn" data-cat="Web Design">Web Design</button>
+          <button class="blog-cat-btn" data-cat="Productivity">Productivity</button>
+          <button class="blog-cat-btn" data-cat="Future Tech">Future Tech</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ BLOG MAIN ══════════════════════════ -->
+  <section class="blog-main" id="blogMain">
+    <div class="blog-main-bg">
+      <div class="blog-main-glow"></div>
+    </div>
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- ─── LEFT: Content ─── -->
+        <div class="blog-content">
+
+          <!-- Featured Article -->
+          <div class="featured-article fade-up">
+            <article class="featured-card" data-category="AI">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop" alt="The Rise of Autonomous AI Agents" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+                <div class="art-thumb-glow"></div>
+              </div>
+              <div class="art-body">
+                <div class="art-meta-top">
+                  <span class="art-cat">AI</span>
+                  <span class="art-time">8 min read</span>
+                </div>
+                <h2 class="art-title">The Rise of Autonomous AI Agents: Transforming Business Operations</h2>
+                <p class="art-excerpt">How autonomous AI agents are reshaping industries — from customer service automation to complex decision-making systems that operate without human intervention.</p>
+                <div class="art-footer">
+                  <div class="art-author">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">AK</div>
+                    <div>
+                      <div class="art-author-name">Alex Kross</div>
+                      <div class="art-date">May 18, 2026</div>
+                    </div>
+                  </div>
+                  <div class="art-read-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Blog Grid -->
+          <div class="blog-grid" id="blogGrid">
+
+            <article class="art-card fade-up" data-category="Startups">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop" alt="SaaS Growth Strategies" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">Startups</span>
+                <h3 class="art-title">SaaS Growth Playbook: Scaling from Zero to $1M ARR</h3>
+                <p class="art-excerpt">Proven strategies for early-stage SaaS founders looking to build sustainable revenue momentum in competitive markets.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">SM</div>
+                    <span class="art-author-name">Sofia M.</span>
+                  </div>
+                  <span class="art-date">May 16, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="Automation">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop" alt="Workflow Automation" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">Automation</span>
+                <h3 class="art-title">Intelligent Workflow Automation: Cutting Operational Costs by 60%</h3>
+                <p class="art-excerpt">Discover how AI-powered workflow automation is helping businesses eliminate repetitive tasks and drastically reduce overhead.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">MR</div>
+                    <span class="art-author-name">Marcus R.</span>
+                  </div>
+                  <span class="art-date">May 14, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="SEO">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1432889821006-3149403d8b0a?w=600&h=400&fit=crop" alt="SEO Strategy" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">SEO</span>
+                <h3 class="art-title">The Future of SEO: AI-Powered Search & Zero-Click Results</h3>
+                <p class="art-excerpt">How generative AI and evolving search algorithms are reshaping SEO strategies and what brands need to do to stay visible.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#007aff,#00f5c4)">EL</div>
+                    <span class="art-author-name">Emily L.</span>
+                  </div>
+                  <span class="art-date">May 12, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="Technology">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Edge Computing" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">Technology</span>
+                <h3 class="art-title">Edge Computing & AI: The Next Frontier in Real-Time Processing</h3>
+                <p class="art-excerpt">Why edge computing combined with AI inference is becoming critical for applications requiring sub-millisecond latency.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#00c2a8,#8b5cf6)">JC</div>
+                    <span class="art-author-name">James C.</span>
+                  </div>
+                  <span class="art-date">May 10, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="Web Design">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&h=400&fit=crop" alt="Web Design Trends" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">Web Design</span>
+                <h3 class="art-title">2026 Web Design Trends: Immersive Experiences & AI-Driven Interfaces</h3>
+                <p class="art-excerpt">From generative UI to hyper-personalized experiences, explore the web design trends defining the digital landscape this year.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#00f5c4,#f59e0b)">AP</div>
+                    <span class="art-author-name">Aisha P.</span>
+                  </div>
+                  <span class="art-date">May 8, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="AI">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop" alt="Generative AI" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">AI</span>
+                <h3 class="art-title">Generative AI in Marketing: Creating Content at Scale Without Losing Quality</h3>
+                <p class="art-excerpt">How leading brands are leveraging generative AI to produce high-quality content while maintaining brand voice and authenticity.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#8b5cf6,#007aff)">AK</div>
+                    <span class="art-author-name">Alex K.</span>
+                  </div>
+                  <span class="art-date">May 6, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="Productivity">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop" alt="Productivity" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">Productivity</span>
+                <h3 class="art-title">Beyond ChatGPT: The AI Tools Stack Every Knowledge Worker Needs</h3>
+                <p class="art-excerpt">A curated guide to the most effective AI productivity tools — from research assistants to automated project management.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#f59e0b,#00c2a8)">SM</div>
+                    <span class="art-author-name">Sofia M.</span>
+                  </div>
+                  <span class="art-date">May 4, 2026</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="art-card fade-up" data-category="Future Tech">
+              <div class="art-thumb">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop" alt="Quantum Computing" loading="lazy" />
+                <div class="art-thumb-overlay"></div>
+              </div>
+              <div class="art-body">
+                <span class="art-cat">Future Tech</span>
+                <h3 class="art-title">Quantum Computing Explained: Why It Matters for Business Leaders</h3>
+                <p class="art-excerpt">A non-technical overview of quantum computing and its potential to revolutionize optimization, cryptography, and drug discovery.</p>
+                <div class="art-meta">
+                  <div class="art-meta-left">
+                    <div class="art-avatar" style="background:linear-gradient(135deg,#007aff,#8b5cf6)">MR</div>
+                    <span class="art-author-name">Marcus R.</span>
+                  </div>
+                  <span class="art-date">May 2, 2026</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Load More -->
+          <div class="blog-load-more fade-up">
+            <button class="btn-load-more" id="loadMoreBtn">
+              <span>Load More Articles</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"/><polyline points="7 7 12 12 17 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ─── RIGHT: Sidebar ─── -->
+        <aside class="blog-sidebar">
+
+          <!-- Trending Articles -->
+          <div class="sidebar-widget fade-up">
+            <div class="sidebar-widget-title">Trending Now</div>
+            <div class="trending-list">
+              <div class="trending-item">
+                <span class="trending-num">01</span>
+                <div class="trending-info">
+                  <div class="trending-title">The Complete Guide to AI-Powered SEO in 2026</div>
+                  <span class="trending-meta">12.4K reads</span>
+                </div>
+              </div>
+              <div class="trending-item">
+                <span class="trending-num">02</span>
+                <div class="trending-info">
+                  <div class="trending-title">How Top SaaS Companies Are Using Automation to Scale</div>
+                  <span class="trending-meta">9.8K reads</span>
+                </div>
+              </div>
+              <div class="trending-item">
+                <span class="trending-num">03</span>
+                <div class="trending-info">
+                  <div class="trending-title">The Zero-Click Search Revolution: SEO's New Reality</div>
+                  <span class="trending-meta">7.3K reads</span>
+                </div>
+              </div>
+              <div class="trending-item">
+                <span class="trending-num">04</span>
+                <div class="trending-info">
+                  <div class="trending-title">Building a $10M SaaS: Lessons from Failed Founders</div>
+                  <span class="trending-meta">6.1K reads</span>
+                </div>
+              </div>
+              <div class="trending-item">
+                <span class="trending-num">05</span>
+                <div class="trending-info">
+                  <div class="trending-title">Why Your Business Needs an AI Automation Strategy</div>
+                  <span class="trending-meta">5.4K reads</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget fade-up" style="--delay:0.05s">
+            <div class="sidebar-widget-title">Categories</div>
+            <div class="cat-list">
+              <div class="cat-item"><span class="cat-name">AI</span><span class="cat-count">24</span></div>
+              <div class="cat-item"><span class="cat-name">Technology</span><span class="cat-count">18</span></div>
+              <div class="cat-item"><span class="cat-name">SEO</span><span class="cat-count">15</span></div>
+              <div class="cat-item"><span class="cat-name">Automation</span><span class="cat-count">12</span></div>
+              <div class="cat-item"><span class="cat-name">Startups</span><span class="cat-count">11</span></div>
+              <div class="cat-item"><span class="cat-name">Web Design</span><span class="cat-count">9</span></div>
+              <div class="cat-item"><span class="cat-name">Productivity</span><span class="cat-count">8</span></div>
+              <div class="cat-item"><span class="cat-name">Future Tech</span><span class="cat-count">7</span></div>
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="sidebar-widget sidebar-newsletter fade-up" style="--delay:0.1s">
+            <div class="sidebar-widget-title">Newsletter</div>
+            <p class="newsletter-desc">Get weekly insights on AI, growth strategies, and digital innovation delivered to your inbox.</p>
+            <div class="newsletter-input-wrap">
+              <input type="email" class="sidebar-newsletter-input" placeholder="your@email.com" aria-label="Email for newsletter" />
+              <button class="sidebar-newsletter-btn" aria-label="Subscribe">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget fade-up" style="--delay:0.15s">
+            <div class="sidebar-widget-title">Recent Posts</div>
+            <div class="recent-list">
+              <div class="recent-item">
+                <div class="recent-thumb">
+                  <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=120&h=120&fit=crop" alt="" loading="lazy" />
+                </div>
+                <div class="recent-info">
+                  <div class="recent-title">The Rise of Autonomous AI Agents</div>
+                  <span class="recent-meta">May 18, 2026</span>
+                </div>
+              </div>
+              <div class="recent-item">
+                <div class="recent-thumb">
+                  <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=120&h=120&fit=crop" alt="" loading="lazy" />
+                </div>
+                <div class="recent-info">
+                  <div class="recent-title">SaaS Growth Playbook: Zero to $1M ARR</div>
+                  <span class="recent-meta">May 16, 2026</span>
+                </div>
+              </div>
+              <div class="recent-item">
+                <div class="recent-thumb">
+                  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=120&h=120&fit=crop" alt="" loading="lazy" />
+                </div>
+                <div class="recent-info">
+                  <div class="recent-title">Intelligent Workflow Automation</div>
+                  <span class="recent-meta">May 14, 2026</span>
+                </div>
+              </div>
+              <div class="recent-item">
+                <div class="recent-thumb">
+                  <img src="https://images.unsplash.com/photo-1432889821006-3149403d8b0a?w=120&h=120&fit=crop" alt="" loading="lazy" />
+                </div>
+                <div class="recent-info">
+                  <div class="recent-title">The Future of SEO: AI-Powered Search</div>
+                  <span class="recent-meta">May 12, 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CTA ══════════════════════════ -->
+  <section class="blog-cta" id="cta">
+    <div class="blog-cta-bg">
+      <div class="blog-cta-glow"></div>
+    </div>
+    <div class="container">
+      <div class="blog-cta-content fade-up">
+        <div class="section-tag">Stay Ahead</div>
+        <h2 class="blog-cta-title">Join 5,000+ Leaders Reading the NAGRIVA Journal</h2>
+        <p class="blog-cta-desc">Get exclusive insights on AI, automation, and digital growth delivered to your inbox every week. No spam, just actionable strategies.</p>
+        <a href="/index.html#contact" class="btn-primary">
+          <span>Subscribe Now</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+  <div id="footer-container"></div>
+
+  <!-- ══════════════════════════ SCRIPTS ══════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/profile-avatar.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/floating-elements.js"></script>
+  <script src="/js/chatbot.js"></script>
+  <script src="/js/footer.js"></script>
+
+  <!-- ══════════════════════════ BLOG SCRIPT ══════════════════════════ -->
+  <script>
+  (function() {
+    'use strict';
+
+    // ─── Category Filter ───
+    const catBtns = document.querySelectorAll('.blog-cat-btn');
+    const cards = document.querySelectorAll('.art-card');
+    const featured = document.querySelector('.featured-card');
+
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+
+        cards.forEach(card => {
+          if (cat === 'all' || card.dataset.category === cat) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (featured) {
+          if (cat === 'all' || featured.dataset.category === cat) {
+            featured.style.display = '';
+          } else {
+            featured.style.display = 'none';
+          }
+        }
+      });
+    });
+
+    // ─── Search ───
+    const searchInput = document.getElementById('blogSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const q = this.value.toLowerCase().trim();
+        const allArticles = document.querySelectorAll('.art-card, .featured-card');
+
+        allArticles.forEach(article => {
+          const title = article.querySelector('.art-title')?.textContent?.toLowerCase() || '';
+          const excerpt = article.querySelector('.art-excerpt')?.textContent?.toLowerCase() || '';
+          const cat = article.querySelector('.art-cat')?.textContent?.toLowerCase() || '';
+
+          if (title.includes(q) || excerpt.includes(q) || cat.includes(q)) {
+            article.style.display = '';
+          } else {
+            article.style.display = 'none';
+          }
+        });
+      });
+    }
+
+    // ─── Load More ───
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const grid = document.getElementById('blogGrid');
+    if (loadMoreBtn && grid) {
+      let page = 1;
+      const demoArticles = [
+        {
+          cat: 'AI',
+          img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop',
+          title: 'Deep Learning at the Edge: Running LLMs on Consumer Hardware',
+          excerpt: 'New optimization techniques make it possible to run large language models locally on smartphones and laptops.',
+          author: 'Alex K.',
+          color: 'linear-gradient(135deg,#00f5c4,#007aff)',
+          initials: 'AK',
+          date: 'Apr 30, 2026'
+        },
+        {
+          cat: 'Technology',
+          img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop',
+          title: 'The Rise of WebAssembly: Running Native Code in the Browser',
+          excerpt: 'WebAssembly is unlocking new possibilities for high-performance applications directly in the browser.',
+          author: 'Emily L.',
+          color: 'linear-gradient(135deg,#007aff,#00f5c4)',
+          initials: 'EL',
+          date: 'Apr 28, 2026'
+        },
+        {
+          cat: 'Startups',
+          img: 'https://images.unsplash.com/photo-1553729459-afe8f2e2b8b0?w=600&h=400&fit=crop',
+          title: 'Bootstrapping a SaaS in 2026: The Playbook That Still Works',
+          excerpt: 'Why bootstrapped SaaS founders are outperforming VC-backed startups in the current economic climate.',
+          author: 'Marcus R.',
+          color: 'linear-gradient(135deg,#f59e0b,#00f5c4)',
+          initials: 'MR',
+          date: 'Apr 26, 2026'
+        },
+        {
+          cat: 'Automation',
+          img: 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=600&h=400&fit=crop',
+          title: 'RPA vs. AI Agents: Choosing the Right Automation Approach',
+          excerpt: 'Understanding when to use traditional RPA versus modern AI agents for business process automation.',
+          author: 'Aisha P.',
+          color: 'linear-gradient(135deg,#00f5c4,#f59e0b)',
+          initials: 'AP',
+          date: 'Apr 24, 2026'
+        }
+      ];
+
+      loadMoreBtn.addEventListener('click', function() {
+        const start = (page - 1) * 4;
+        const end = start + 4;
+        const batch = demoArticles.slice(start, end);
+
+        batch.forEach(article => {
+          const div = document.createElement('article');
+          div.className = 'art-card fade-up';
+          div.dataset.category = article.cat;
+          div.innerHTML = `
+            <div class="art-thumb">
+              <img src="${article.img}" alt="${article.title}" loading="lazy" />
+              <div class="art-thumb-overlay"></div>
+            </div>
+            <div class="art-body">
+              <span class="art-cat">${article.cat}</span>
+              <h3 class="art-title">${article.title}</h3>
+              <p class="art-excerpt">${article.excerpt}</p>
+              <div class="art-meta">
+                <div class="art-meta-left">
+                  <div class="art-avatar" style="background:${article.color}">${article.initials}</div>
+                  <span class="art-author-name">${article.author}</span>
+                </div>
+                <span class="art-date">${article.date}</span>
+              </div>
+            </div>
+          `;
+          grid.appendChild(div);
+
+          // Trigger animation
+          requestAnimationFrame(() => {
+            div.classList.add('visible');
+          });
+        });
+
+        page++;
+        if (page > 1) {
+          loadMoreBtn.querySelector('span').textContent = 'Show All Articles';
+        }
+      });
+    }
+
+    // ─── Sidebar Newsletter ───
+    const nlBtn = document.querySelector('.sidebar-newsletter-btn');
+    const nlInput = document.querySelector('.sidebar-newsletter-input');
+    if (nlBtn && nlInput) {
+      nlBtn.addEventListener('click', () => {
+        const email = nlInput.value.trim();
+        if (!email || !email.includes('@')) {
+          nlInput.style.borderColor = 'rgba(255,80,80,0.4)';
+          setTimeout(() => { nlInput.style.borderColor = ''; }, 1500);
+          return;
+        }
+        nlInput.value = '';
+        nlInput.placeholder = "✓ You're subscribed!";
+        setTimeout(() => { nlInput.placeholder = 'your@email.com'; }, 3000);
+      });
+    }
+
+    // ─── Trending / Recent click simulation ───
+    document.querySelectorAll('.trending-item, .recent-item').forEach(item => {
+      item.addEventListener('click', () => {
+        window.scrollTo({
+          top: document.querySelector('.blog-hero').offsetHeight * 0.6,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // ─── Featured article click ───
+    if (featured) {
+      featured.addEventListener('click', () => {
+        window.scrollTo({
+          top: document.getElementById('blogMain').offsetTop - 80,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Automation — NAGRIVA</title>
+  <meta name="description" content="AI-powered automation that streamlines your business. Save time, reduce costs, and scale faster with intelligent workflows." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-icon"><img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" /></span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link nav-dropdown-toggle">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="web-design.html" class="nav-dropdown-item">Web Design</a>
+            <a href="seo.html" class="nav-dropdown-item">SEO</a>
+            <a href="branding.html" class="nav-dropdown-item">Branding</a>
+            <a href="ai-automation.html" class="nav-dropdown-item">AI Automation</a>
+            <a href="social-media.html" class="nav-dropdown-item">Social Media</a>
+          </div>
+        </li>
+        <li><a href="../index.html#results" class="nav-link">Results</a></li>
+        <li><a href="../index.html#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="../index.html#about" class="nav-link">About</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════ MOBILE MENU ════════════════ -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <div class="mobile-menu-header">
+        <a href="../index.html" class="mobile-menu-logo-wrap">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="" class="mobile-menu-logo-img" />
+          <span class="mobile-menu-logo-text">NAGRIVA</span>
+        </a>
+        <button class="mobile-menu-close-btn" id="mobileMenuClose" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="../index.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a>
+        <a href="web-design.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Web Design</span></a>
+        <a href="seo.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>SEO</span></a>
+        <a href="branding.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span>Branding</span></a>
+        <a href="ai-automation.html" class="mobile-menu-link active"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-4 4s-4-2-4-4a4 4 0 0 1 4-4z"/><path d="M2 22v-2a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v2"/></svg><span>AI Automation</span></a>
+        <a href="social-media.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg><span>Social Media</span></a>
+        <a href="../index.html#results" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Results</span></a>
+        <a href="../index.html#pricing" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span>Pricing</span></a>
+        <a href="../index.html#about" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>About</span></a>
+        <a href="../index.html#contact" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Contact</span></a>
+      </nav>
+        <a href="login.html" class="mobile-auth-link" id="mobileAuthBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span id="mobileAuthText">Sign In</span>
+        </a>
+      <div class="mobile-menu-footer">
+        <a href="../index.html#contact" class="mobile-menu-cta">Book a Free Call <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <p class="mobile-menu-trust">We reply within 24 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ 1. HERO ════════════════ -->
+  <section class="sp-hero" id="hero">
+    <div class="sp-hero-bg">
+      <div class="sp-hero-orb sp-hero-orb--1"></div>
+      <div class="sp-hero-orb sp-hero-orb--2"></div>
+      <div class="sp-hero-orb sp-hero-orb--3"></div>
+      <div class="sp-hero-grid"></div>
+    </div>
+    <div class="sp-hero-inner">
+      <div class="sp-hero-left">
+        <div class="sp-hero-badge">✦ AI Automation</div>
+        <h1 class="sp-hero-title">Work Smarter.<br/><span class="sp-text-glow">Automate.</span></h1>
+        <p class="sp-hero-desc">AI-powered automation that streamlines workflows, reduces costs, and helps your business scale effortlessly.</p>
+        <div class="sp-hero-actions">
+          <a href="../index.html#contact" class="sp-btn sp-btn--primary">Automate Your Business <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <a href="#solutions" class="sp-btn sp-btn--ghost">See Solutions</a>
+        </div>
+        <div class="sp-hero-trust">
+          <div class="sp-hero-avatars">
+            <div class="sp-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SK</div>
+            <div class="sp-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4);margin-left:-8px">MR</div>
+            <div class="sp-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4);margin-left:-8px">EL</div>
+          </div>
+          <span class="sp-hero-trust-text">Trusted by <strong>50+</strong> brands worldwide</span>
+        </div>
+      </div>
+      <div class="sp-hero-right">
+        <div class="sp-hero-mockup">
+          <div class="sp-mockup-top"><div class="sp-mockup-dots"><span></span><span></span><span></span></div><span class="sp-mockup-url">nagriva.com/ai-automation</span></div>
+          <div class="sp-mockup-body">
+            <svg viewBox="0 0 400 300" fill="none">
+              <rect width="400" height="300" fill="rgba(255,255,255,0.02)"/>
+              <rect x="24" y="24" width="180" height="16" rx="4" fill="rgba(0,245,196,0.15)"/>
+              <rect x="24" y="52" width="352" height="120" rx="8" fill="rgba(0,245,196,0.03)" stroke="rgba(0,245,196,0.06)" stroke-width="1"/>
+              <rect x="40" y="68" width="100" height="50" rx="8" fill="rgba(0,245,196,0.08)"/>
+              <circle cx="90" cy="93" r="14" fill="rgba(0,245,196,0.15)"/>
+              <path d="M85 93 L90 98 L97 88" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="152" y="68" width="100" height="50" rx="8" fill="rgba(255,255,255,0.02)"/>
+              <rect x="264" y="68" width="100" height="50" rx="8" fill="rgba(255,255,255,0.02)"/>
+              <rect x="40" y="132" width="320" height="28" rx="6" fill="rgba(255,255,255,0.015)"/>
+              <rect x="40" y="144" width="120" height="6" rx="3" fill="rgba(0,245,196,0.08)"/>
+              <rect x="24" y="188" width="170" height="44" rx="8" fill="rgba(255,255,255,0.015)"/>
+              <text x="36" y="206" fill="rgba(255,255,255,0.4)" font-size="7" font-family="DM Sans">Hours Saved/Month</text>
+              <text x="36" y="220" fill="#00f5c4" font-size="14" font-weight="700" font-family="Syne">120h</text>
+              <rect x="204" y="188" width="170" height="44" rx="8" fill="rgba(255,255,255,0.015)"/>
+              <text x="216" y="206" fill="rgba(255,255,255,0.4)" font-size="7" font-family="DM Sans">Cost Reduction</text>
+              <text x="216" y="220" fill="#00f5c4" font-size="14" font-weight="700" font-family="Syne">-62%</text>
+              <rect x="24" y="250" width="352" height="1" fill="rgba(255,255,255,0.04)"/>
+              <rect x="24" y="264" width="80" height="8" rx="4" fill="rgba(0,245,196,0.08)"/>
+              <rect x="116" y="264" width="80" height="8" rx="4" fill="rgba(0,245,196,0.08)"/>
+              <rect x="208" y="264" width="60" height="8" rx="4" fill="rgba(0,245,196,0.08)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 2. SHOWCASE ════════════════ -->
+  <section class="sp-showcase" id="solutions">
+    <div class="container">
+      <div class="sp-section-head">
+        <span class="sp-section-tag">Platform</span>
+        <h2 class="sp-section-title">AI <span class="sp-text-glow">Dashboard</span></h2>
+        <p class="sp-section-desc">Enterprise-grade automation platform built for modern businesses.</p>
+      </div>
+      <div class="sp-showcase-grid">
+        <div class="sp-showcase-card">
+          <div class="sp-showcase-image">
+            <img src="../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png" alt="Helios AI project preview" loading="lazy">
+            <div class="sp-showcase-overlay"><span class="sp-showcase-result">+340% Efficiency</span></div>
+          </div>
+          <div class="sp-showcase-body">
+            <div class="sp-showcase-category">AI Automation</div>
+            <h3 class="sp-showcase-title">Helios — Workflow AI</h3>
+            <div class="sp-showcase-meta">
+              <span class="sp-showcase-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>12x Output</span>
+              <span class="sp-showcase-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>90% Faster</span>
+            </div>
+            <a href="#" class="sp-showcase-btn">View Project <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          </div>
+        </div>
+        <div class="sp-showcase-card">
+          <div class="sp-showcase-image">
+            <img src="../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png" alt="Aether AI project preview" loading="lazy">
+            <div class="sp-showcase-overlay"><span class="sp-showcase-result">$50K Saved</span></div>
+          </div>
+          <div class="sp-showcase-body">
+            <div class="sp-showcase-category">Process Automation</div>
+            <h3 class="sp-showcase-title">Aether — Pipeline AI</h3>
+            <div class="sp-showcase-meta">
+              <span class="sp-showcase-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>4.2x ROI</span>
+              <span class="sp-showcase-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>1,200 Hours</span>
+            </div>
+            <a href="#" class="sp-showcase-btn">View Project <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          </div>
+        </div>
+        <div class="sp-showcase-card">
+          <div class="sp-showcase-image">
+            <img src="../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_45%20PM.png" alt="Flux AI project preview" loading="lazy">
+            <div class="sp-showcase-overlay"><span class="sp-showcase-result">-62% Costs</span></div>
+          </div>
+          <div class="sp-showcase-body">
+            <div class="sp-showcase-category">Intelligent Chatbot</div>
+            <h3 class="sp-showcase-title">Flux — AI Assistant</h3>
+            <div class="sp-showcase-meta">
+              <span class="sp-showcase-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>3.6x ROAS</span>
+              <span class="sp-showcase-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>24/7 Support</span>
+            </div>
+            <a href="#" class="sp-showcase-btn">View Project <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 3. BENEFITS ════════════════ -->
+  <section class="sp-benefits">
+    <div class="container">
+      <div class="sp-section-head">
+        <span class="sp-section-tag">Why Us</span>
+        <h2 class="sp-section-title">Automation That <span class="sp-text-glow">Works</span></h2>
+        <p class="sp-section-desc">Intelligent systems designed to save time and increase output.</p>
+      </div>
+      <div class="sp-benefits-grid">
+        <div class="sp-benefit-card">
+          <div class="sp-benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="sp-benefit-title">Save 120+ Hours/Month</div>
+          <div class="sp-benefit-desc">Automate repetitive tasks and free your team to focus on high-impact work that drives growth.</div>
+        </div>
+        <div class="sp-benefit-card">
+          <div class="sp-benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="sp-benefit-title">Reduce Costs by 62%</div>
+          <div class="sp-benefit-desc">Lower operational expenses with AI-powered workflows that replace manual processes.</div>
+        </div>
+        <div class="sp-benefit-card">
+          <div class="sp-benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <div class="sp-benefit-title">Smart Analytics</div>
+          <div class="sp-benefit-desc">Real-time insights and reporting that help you make data-driven decisions instantly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 4. PRICING ════════════════ -->
+  <section class="sp-pricing" id="pricing">
+    <div class="container">
+      <div class="sp-section-head">
+        <span class="sp-section-tag">Investment</span>
+        <h2 class="sp-section-title">Automation <span class="sp-text-glow">Plans</span></h2>
+        <p class="sp-section-desc">Scalable automation solutions for every business size.</p>
+      </div>
+      <div class="sp-pricing-grid">
+        <div class="sp-pricing-card">
+          <div class="sp-pricing-plan">Starter</div>
+          <div class="sp-pricing-price"><span class="sp-pricing-currency">$</span><span class="sp-pricing-amount">1,999</span><span style="font-size:0.8rem;color:var(--gray2);margin-top:8px">/mo</span></div>
+          <p class="sp-pricing-desc">Perfect for small teams starting with automation.</p>
+          <ul class="sp-pricing-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2 Automated Workflows</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Basic AI Chatbot</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Email Automation</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Monthly Reports</li>
+          </ul>
+          <a href="../index.html#contact" class="sp-pricing-btn">Get Started</a>
+        </div>
+        <div class="sp-pricing-card sp-pricing-card--featured">
+          <div class="sp-pricing-badge">Most Popular</div>
+          <div class="sp-pricing-plan">Growth</div>
+          <div class="sp-pricing-price"><span class="sp-pricing-currency">$</span><span class="sp-pricing-amount">3,999</span><span style="font-size:0.8rem;color:var(--gray2);margin-top:8px">/mo</span></div>
+          <p class="sp-pricing-desc">Ideal for growing businesses scaling operations.</p>
+          <ul class="sp-pricing-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>10 Automated Workflows</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Advanced AI Chatbot</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>CRM Integration</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Analytics Dashboard</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority Support</li>
+          </ul>
+          <a href="../index.html#contact" class="sp-pricing-btn sp-pricing-btn--primary">Get Started</a>
+        </div>
+        <div class="sp-pricing-card">
+          <div class="sp-pricing-plan">Premium</div>
+          <div class="sp-pricing-price"><span class="sp-pricing-currency">$</span><span class="sp-pricing-amount">6,999</span><span style="font-size:0.8rem;color:var(--gray2);margin-top:8px">/mo</span></div>
+          <p class="sp-pricing-desc">For enterprises needing full-scale automation.</p>
+          <ul class="sp-pricing-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Unlimited Workflows</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom AI Solutions</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>API Access</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Dedicated Engineer</li>
+          </ul>
+          <a href="../index.html#contact" class="sp-pricing-btn">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 5. STATS ════════════════ -->
+  <section class="sp-stats" id="results">
+    <div class="container">
+      <div class="sp-stats-grid">
+        <div class="sp-stat-card"><div class="sp-stat-num"><span>120</span><span>h</span></div><div class="sp-stat-label">Saved Per Month</div></div>
+        <div class="sp-stat-card"><div class="sp-stat-num"><span>62</span><span>%</span></div><div class="sp-stat-label">Cost Reduction</div></div>
+        <div class="sp-stat-card"><div class="sp-stat-num"><span>3.4</span><span>x</span></div><div class="sp-stat-label">Productivity Boost</div></div>
+        <div class="sp-stat-card"><div class="sp-stat-num"><span>99</span><span>%</span></div><div class="sp-stat-label">Uptime Guarantee</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 6. TESTIMONIALS ════════════════ -->
+  <section class="sp-testimonials">
+    <div class="container">
+      <div class="sp-section-head">
+        <span class="sp-section-tag">Testimonials</span>
+        <h2 class="sp-section-title">Client <span class="sp-text-glow">Success</span></h2>
+        <p class="sp-section-desc">Real results from our AI automation solutions.</p>
+      </div>
+      <div class="sp-testimonials-grid">
+        <div class="sp-testimonial-card">
+          <div class="sp-testimonial-quote"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="sp-testimonial-stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="sp-testimonial-text">"The AI automation system NAGRIVA built saved us 120 hours a month. Our team is now 3x more productive."</p>
+          <div class="sp-testimonial-author"><div class="sp-testimonial-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SK</div><div><div class="sp-testimonial-name">Sarah Kim</div><div class="sp-testimonial-role">CEO, Luma Cosmetics</div></div></div>
+        </div>
+        <div class="sp-testimonial-card">
+          <div class="sp-testimonial-quote"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="sp-testimonial-stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="sp-testimonial-text">"We reduced operational costs by 62% while improving response times. The chatbot alone transformed our customer service."</p>
+          <div class="sp-testimonial-author"><div class="sp-testimonial-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">MR</div><div><div class="sp-testimonial-name">Marcus Reed</div><div class="sp-testimonial-role">Founder, Prisma Tech</div></div></div>
+        </div>
+        <div class="sp-testimonial-card">
+          <div class="sp-testimonial-quote"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="sp-testimonial-stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#00f5c4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="sp-testimonial-text">"The custom AI solution they built for us transformed our workflow. It's like having an extra team member."</p>
+          <div class="sp-testimonial-author"><div class="sp-testimonial-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">EL</div><div><div class="sp-testimonial-name">Emily Liu</div><div class="sp-testimonial-role">Marketing Director, Novu Inc.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 7. CTA ════════════════ -->
+  <section class="sp-cta">
+    <div class="sp-cta-bg"><div class="sp-cta-orb sp-cta-orb--1"></div><div class="sp-cta-orb sp-cta-orb--2"></div><div class="sp-cta-grid"></div></div>
+    <div class="container">
+      <div class="sp-cta-content">
+        <h2 class="sp-cta-title">Ready to Automate<br/>Your <span class="sp-text-glow">Business?</span></h2>
+        <p class="sp-cta-desc">Let's build intelligent automation that saves you time and money.</p>
+        <a href="../index.html#contact" class="sp-cta-btn">Start Automating <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="sp-cta-trust">No commitment required &middot; Free 30-min strategy call</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/profile-avatar.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategy & Performance Marketing — NAGRIVA</title>
+  <meta name="description" content="Data-driven growth strategies and performance marketing campaigns across Google, Meta, and LinkedIn that deliver measurable ROI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-icon"><img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" /></span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link nav-dropdown-toggle active">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="web-design.html" class="nav-dropdown-item">Web Design</a>
+            <a href="seo.html" class="nav-dropdown-item">SEO</a>
+            <a href="branding.html" class="nav-dropdown-item">Branding</a>
+            <a href="ai-automation.html" class="nav-dropdown-item">AI Automation</a>
+            <a href="social-media.html" class="nav-dropdown-item">Social Media</a>
+          </div>
+        </li>
+        <li><a href="../index.html#results" class="nav-link">Results</a></li>
+        <li><a href="../index.html#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="../index.html#about" class="nav-link">About</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <div class="mobile-menu-header">
+        <a href="../index.html" class="mobile-menu-logo-wrap">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="" class="mobile-menu-logo-img" />
+          <span class="mobile-menu-logo-text">NAGRIVA</span>
+        </a>
+        <button class="mobile-menu-close-btn" id="mobileMenuClose" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="../index.html" class="mobile-menu-link active"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a>
+        <a href="web-design.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Services</span></a>
+        <a href="../index.html#results" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Results</span></a>
+        <a href="../index.html#pricing" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span>Pricing</span></a>
+        <a href="../index.html#about" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>About</span></a>
+        <a href="../index.html#contact" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Contact</span></a>
+      </nav>
+        <a href="login.html" class="mobile-auth-link" id="mobileAuthBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span id="mobileAuthText">Sign In</span>
+        </a>
+      <div class="mobile-menu-footer">
+        <a href="../index.html#contact" class="mobile-menu-cta">Book a Free Call <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <p class="mobile-menu-trust">We reply within 24 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="svc-hero">
+    <div class="svc-hero-bg">
+      <div class="svc-hero-glow"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="svc-hero-content fade-up">
+        <div class="svc-hero-badge">✦ Service</div>
+        <h1 class="svc-hero-title">Strategy & Performance Marketing</h1>
+        <p class="svc-hero-sub">Data-driven performance marketing and strategic consulting that scales your revenue, optimizes ad spend, and maximizes ROI.</p>
+        <div class="svc-hero-actions">
+          <a href="../index.html#contact" class="btn-primary"><span>Book a Free Call</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#reviews" class="btn-secondary"><span>See Reviews</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section pricing">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Pricing</div>
+        <h2 class="section-title">Simple <span class="text-gradient">Pricing</span></h2>
+        <p class="section-desc">Transparent subscription packages for data-driven growth.</p>
+      </div>
+      <div class="pricing-grid fade-up">
+        <div class="pricing-card">
+          <div class="pricing-plan">Starter</div>
+          <div class="pricing-price"><span class="price-currency">$</span><span class="price-amount">3,999</span></div>
+          <p class="pricing-desc">Ideal for startups that need a go-to-market strategy and a clear channel roadmap.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Market Research & Analysis</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Channel Strategy</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 3-Month Roadmap</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Executive Presentation</li>
+          </ul>
+          <a href="../index.html#contact" class="btn-pricing">Start Now</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-plan">Growth</div>
+          <div class="pricing-price"><span class="price-currency">$</span><span class="price-amount">7,499</span></div>
+          <p class="pricing-desc">For growing companies that need full strategic execution and performance marketing.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Full Strategy + Execution</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Performance Marketing</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Weekly Optimization</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Custom Dashboard</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bi-Weekly Reports</li>
+          </ul>
+          <a href="../index.html#contact" class="btn-pricing featured-btn">Start Now</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-plan">Enterprise</div>
+          <div class="pricing-price"><span class="price-currency">$</span><span class="price-amount">15K</span></div>
+          <p class="pricing-desc">For organizations that need a full growth infrastructure and a dedicated team.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Comprehensive GTM Strategy</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Dedicated Growth Team</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Board-Ready Reports</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority Support</li>
+          </ul>
+          <a href="../index.html#contact" class="btn-pricing">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-alt">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Our Work</div>
+        <h2 class="section-title">Recent <span class="text-gradient">Work</span></h2>
+        <p class="section-desc">Strategic partnerships that delivered measurable business impact.</p>
+      </div>
+      <div class="svc-results-grid fade-up">
+        <div class="svc-result-card">
+          <div class="svc-result-tag">Fintech</div>
+          <div class="svc-result-name">NovaPay</div>
+          <p class="svc-result-desc">A comprehensive go-to-market strategy enabled a successful launch that exceeded first-year targets.</p>
+          <div class="svc-result-metrics">
+            <div class="svc-result-metric"><div class="svc-result-metric-val">+35%</div><div class="svc-result-metric-label">Revenue Target</div></div>
+            <div class="svc-result-metric"><div class="svc-result-metric-val">On Time</div><div class="svc-result-metric-label">Launch Schedule</div></div>
+            <div class="svc-result-metric"><div class="svc-result-metric-val">4.8/5</div><div class="svc-result-metric-label">Board Approval</div></div>
+          </div>
+        </div>
+        <div class="svc-result-card">
+          <div class="svc-result-tag">SaaS</div>
+          <div class="svc-result-name">SignalStream</div>
+          <p class="svc-result-desc">Market research and competitive analysis uncovered an untapped market opportunity that defined the core product.</p>
+          <div class="svc-result-metrics">
+            <div class="svc-result-metric"><div class="svc-result-metric-val">Discovered</div><div class="svc-result-metric-label">Market Opportunity</div></div>
+            <div class="svc-result-metric"><div class="svc-result-metric-val">2x</div><div class="svc-result-metric-label">Pipeline Growth</div></div>
+            <div class="svc-result-metric"><div class="svc-result-metric-val">6.3x</div><div class="svc-result-metric-label">ROAS</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-alt" id="reviews">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Reviews</div>
+        <h2 class="section-title">Client <span class="text-gradient">Testimonials</span></h2>
+        <p class="section-desc">Real feedback from brands we've built strategies for.</p>
+      </div>
+      <div class="svc-reviews-grid fade-up">
+        <div class="svc-review-card">
+          <div class="sp-testimonial-quote" style="position:absolute;top:16px;right:20px;width:32px;height:32px;opacity:0.12;pointer-events:none"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="svc-review-stars">★★★★★</div>
+          <p class="svc-review-text">"NAGRIVA developed the entire go-to-market strategy. We launched on time and exceeded our first-year revenue target by 35%."</p>
+          <div class="svc-review-author"><div class="svc-review-avatar" style="background:linear-gradient(135deg,#00f5c4,#f59e0b)">VC</div><div><div class="svc-review-name">Vanessa Cruz</div><div class="svc-review-role">CEO, NovaPay</div></div></div>
+        </div>
+        <div class="svc-review-card">
+          <div class="sp-testimonial-quote" style="position:absolute;top:16px;right:20px;width:32px;height:32px;opacity:0.12;pointer-events:none"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="svc-review-stars">★★★★★</div>
+          <p class="svc-review-text">"The market research and competitive analysis were incredibly valuable. We discovered an untapped opportunity that became our flagship service."</p>
+          <div class="svc-review-author"><div class="svc-review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00c2a8)">PO</div><div><div class="svc-review-name">Patrick O'Sullivan</div><div class="svc-review-role">Founder, SignalStream</div></div></div>
+        </div>
+        <div class="svc-review-card">
+          <div class="sp-testimonial-quote" style="position:absolute;top:16px;right:20px;width:32px;height:32px;opacity:0.12;pointer-events:none"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="svc-review-stars">★★★★★</div>
+          <p class="svc-review-text">"The strategic roadmap gave us clarity and direction. We secured our Series A funding with confidence thanks to the meticulous plan they helped us build."</p>
+          <div class="svc-review-author"><div class="svc-review-avatar" style="background:linear-gradient(135deg,#007aff,#00f5c4)">AS</div><div><div class="svc-review-name">Dr. Amara Singh</div><div class="svc-review-role">Co-Founder, WellBridge Health</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-cta-section">
+    <div class="svc-cta-bg"><div class="svc-cta-glow"></div></div>
+    <div class="container">
+      <div class="svc-cta-content fade-up">
+        <h2 class="svc-cta-title">Ready to Build Your <span class="text-gradient">Growth Strategy</span>?</h2>
+        <p class="svc-cta-sub">Book a free strategy call and let's discuss how we can deliver measurable results for your business.</p>
+        <div class="svc-cta-actions">
+          <a href="../index.html#contact" class="btn-primary"><span>Book a Free Call</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="submit-order.html?service=strategy" class="btn-order-now" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:99px;font-size:0.85rem;font-weight:600;font-family:inherit;color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;text-decoration:none;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);">Order Now <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="../index.html#contact" class="btn-secondary"><span>Start Your Strategy</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/profile-avatar.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+</html>

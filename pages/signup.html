@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — NAGRIVA</title>
+  <meta name="description" content="Create your NAGRIVA account and start growing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+
+  <!-- ══════════════════════════ NAVBAR ══════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" />
+        </span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="web-design.html" class="nav-link">Services</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <a href="../index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════ MOBILE MENU ══════════════════════════ -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <div class="mobile-menu-header">
+        <a href="../index.html" class="mobile-menu-logo-wrap">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="" class="mobile-menu-logo-img" />
+          <span class="mobile-menu-logo-text">NAGRIVA</span>
+        </a>
+        <button class="mobile-menu-close-btn" id="mobileMenuClose" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="../index.html" class="mobile-menu-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="web-design.html" class="mobile-menu-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Services</span>
+        </a>
+        <a href="../index.html#contact" class="mobile-menu-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Contact</span>
+        </a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <a href="../index.html#contact" class="mobile-menu-cta">
+          Book a Free Call
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ AUTH PAGE ══════════════════════════ -->
+  <div class="auth-page">
+    <div class="auth-bg-orb auth-bg-orb-1"></div>
+    <div class="auth-bg-orb auth-bg-orb-2"></div>
+
+    <div class="auth-card">
+      <div class="auth-card-glow"></div>
+
+      <div class="auth-card-header">
+        <div class="auth-card-logo">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA" />
+          <span>NAGRIVA</span>
+        </div>
+        <h1 class="auth-card-title">Create your account</h1>
+        <p class="auth-card-subtitle">Start your growth journey with NAGRIVA.</p>
+      </div>
+
+      <form class="auth-card-form" id="signUpForm" autocomplete="off" novalidate>
+        <div class="auth-page-message" id="signupMessage"></div>
+
+        <div class="ap-form-group">
+          <label class="ap-form-label">Full Name</label>
+          <div class="ap-input-wrap">
+            <svg class="ap-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" class="ap-input" name="name" placeholder="John Doe" autocomplete="name" />
+          </div>
+        </div>
+
+        <div class="ap-form-group">
+          <label class="ap-form-label">Email Address</label>
+          <div class="ap-input-wrap">
+            <svg class="ap-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" class="ap-input" placeholder="you@company.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="ap-form-group">
+          <label class="ap-form-label">Password</label>
+          <div class="ap-input-wrap">
+            <svg class="ap-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" class="ap-input" name="password" placeholder="Create a strong password" autocomplete="new-password" />
+            <button type="button" class="ap-pw-toggle" aria-label="Toggle password">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="ap-pw-strength" id="pwStrength">
+            <div class="ap-pw-bar"><div class="ap-pw-fill" id="pwStrengthFill"></div></div>
+            <span class="ap-pw-label" id="pwStrengthLabel">Strength</span>
+          </div>
+        </div>
+
+        <div class="ap-form-group">
+          <label class="ap-form-label">Confirm Password</label>
+          <div class="ap-input-wrap">
+            <svg class="ap-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            <input type="password" class="ap-input" name="confirmPassword" placeholder="Confirm your password" autocomplete="new-password" />
+            <button type="button" class="ap-pw-toggle" aria-label="Toggle password">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <label class="ap-terms">
+          <input type="checkbox" id="termsCheckbox" />
+          <span class="ap-terms-label">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span>
+        </label>
+
+        <button type="submit" class="ap-submit" id="signupSubmit">
+          <span class="ap-submit-text">Create Account</span>
+          <span class="ap-submit-spinner"></span>
+        </button>
+
+        <div class="ap-divider">
+          <span class="ap-divider-line"></span>
+          <span class="ap-divider-text">or continue with</span>
+          <span class="ap-divider-line"></span>
+        </div>
+
+        <div class="ap-social">
+          <button type="button" class="ap-social-btn">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+            <span>Continue with Google</span>
+          </button>
+          <button type="button" class="ap-social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            <span>Continue with GitHub</span>
+          </button>
+        </div>
+
+        <div class="ap-footer">
+          <span>Already have an account? </span>
+          <a href="login.html">Sign in</a>
+        </div>
+      </form>
+    </div>
+
+    <p class="auth-page-legal">&copy; 2026 NAGRIVA. All rights reserved.</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script>
+    // Password toggle
+    document.querySelectorAll('.ap-pw-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var input = this.parentElement.querySelector('.ap-input');
+        if (!input) return;
+        var isPw = input.type === 'password';
+        input.type = isPw ? 'text' : 'password';
+        this.innerHTML = isPw
+          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+      });
+    });
+
+    // Password strength
+    var pwInput = document.querySelector('.ap-input[name="password"]');
+    if (pwInput) {
+      pwInput.addEventListener('input', function() {
+        var val = this.value;
+        var fill = document.getElementById('pwStrengthFill');
+        var label = document.getElementById('pwStrengthLabel');
+        var container = document.getElementById('pwStrength');
+        if (!fill || !label || !container) return;
+
+        if (!val) { container.classList.remove('visible'); return; }
+        container.classList.add('visible');
+
+        var score = 0;
+        if (val.length >= 8) score++;
+        if (val.length >= 12) score++;
+        if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+        if (/\d/.test(val)) score++;
+        if (/[^a-zA-Z0-9]/.test(val)) score++;
+
+        var levels = ['weak', 'fair', 'good', 'strong'];
+        var labels = ['Weak — add more characters', 'Fair — add symbols & numbers', 'Good — almost there', 'Strong — great password!'];
+        var msgs = ['Too short', 'Weak — add more characters', 'Fair — add symbols & numbers', 'Good — almost there', 'Strong — great password!'];
+
+        if (score === 0 && val.length < 6) {
+          fill.className = 'ap-pw-fill weak';
+          label.textContent = 'Too short — min 6 characters';
+          label.className = 'ap-pw-label weak';
+        } else {
+          var idx = Math.min(Math.max(score - 1, 0), 3);
+          fill.className = 'ap-pw-fill ' + levels[idx];
+          label.textContent = score === 0 ? 'Too short' : labels[idx];
+          label.className = 'ap-pw-label ' + levels[idx];
+        }
+      });
+    }
+
+    // Sign up form handling
+    document.getElementById('signUpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('signupSubmit');
+      btn.classList.add('loading');
+      var msg = document.getElementById('signupMessage');
+
+      var name = this.querySelector('.ap-input[name="name"]').value.trim();
+      var email = this.querySelector('.ap-input[type="email"]').value.trim();
+      var password = this.querySelector('.ap-input[name="password"]').value.trim();
+      var confirmPw = this.querySelector('.ap-input[name="confirmPassword"]').value.trim();
+      var terms = document.getElementById('termsCheckbox').checked;
+
+      if (!name) { showApError(msg, 'Please enter your full name', btn); return; }
+      if (!email) { showApError(msg, 'Please enter your email address', btn); return; }
+      if (!/\S+@\S+\.\S+/.test(email)) { showApError(msg, 'Please enter a valid email address', btn); return; }
+      if (!password) { showApError(msg, 'Please create a password', btn); return; }
+      if (password.length < 6) { showApError(msg, 'Password must be at least 6 characters', btn); return; }
+      if (password !== confirmPw) { showApError(msg, 'Passwords do not match', btn); return; }
+      if (!terms) { showApError(msg, 'Please agree to the Terms of Service', btn); return; }
+
+      window.supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: { data: { full_name: name } }
+      }).then(function(resp) {
+        btn.classList.remove('loading');
+        if (resp.error) {
+          var errMsg = resp.error.message || 'Sign up failed.';
+          if (errMsg.toLowerCase().includes('already registered') || errMsg.toLowerCase().includes('already exists')) errMsg = 'An account with this email already exists. Try signing in instead.';
+          msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> ' + errMsg;
+          msg.className = 'auth-page-message error show';
+        } else if (resp.data && !resp.data.session) {
+          msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Account created! Check your email for a confirmation link.';
+          msg.className = 'auth-page-message success show';
+        } else {
+          msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Account created! Redirecting...';
+          msg.className = 'auth-page-message success show';
+          setTimeout(function() { window.location.href = 'dashboard.html'; }, 800);
+        }
+      }).catch(function(err) {
+        btn.classList.remove('loading');
+        showApError(msg, 'Network error. Please try again.', null);
+      });
+    });
+
+    function showApError(msg, text, btn) {
+      if (btn) btn.classList.remove('loading');
+      msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> ' + text;
+      msg.className = 'auth-page-message error show';
+    }
+  </script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <div id="footer-container"></div>
+
+  <script src="../js/footer.js"></script>
+</body>
+</html>

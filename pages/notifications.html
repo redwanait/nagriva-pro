@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications — NAGRIVA</title>
+  <meta name="description" content="Your NAGRIVA notifications." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <style>
+    .notif-page { padding-top: 100px; min-height: 100vh; }
+    .notif-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+    .notif-header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
+    .notif-header-right { display: flex; align-items: center; gap: 12px; }
+    .notif-mark-read {
+      padding: 8px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 500;
+      color: var(--gray); border: 1px solid var(--border2); background: none;
+      cursor: pointer; font-family: inherit; transition: all 0.2s ease;
+    }
+    .notif-mark-read:hover { color: var(--white); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+    .notif-filters { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .notif-filter {
+      padding: 6px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 500;
+      color: var(--gray2); border: 1px solid transparent; background: none;
+      cursor: pointer; font-family: inherit; transition: all 0.2s ease;
+    }
+    .notif-filter:hover { color: var(--gray); }
+    .notif-filter.active { color: var(--accent); border-color: rgba(0,245,196,0.2); background: rgba(0,245,196,0.06); }
+    .notif-count { font-size: 0.7rem; color: var(--gray2); margin-left: 4px; }
+    .notif-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 40px; }
+    .notif-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 18px; background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border); border-radius: 14px;
+      transition: border-color 0.2s ease; cursor: pointer;
+    }
+    .notif-item:hover { border-color: rgba(255,255,255,0.1); }
+    .notif-item.unread { background: rgba(0,245,196,0.02); border-color: rgba(0,245,196,0.08); }
+    .notif-item.unread .notif-dot { display: block; }
+    .notif-dot {
+      display: none; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 6px;
+      box-shadow: 0 0 8px rgba(0,245,196,0.3);
+    }
+    .notif-content { flex: 1; min-width: 0; }
+    .notif-title { font-size: 0.88rem; font-weight: 500; color: var(--white); margin-bottom: 2px; }
+    .notif-item.unread .notif-title { font-weight: 600; }
+    .notif-text { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+    .notif-time { font-size: 0.72rem; color: var(--gray2); margin-top: 6px; }
+    .notif-empty {
+      text-align: center; padding: 60px 20px;
+      background: rgba(255,255,255,0.015); border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+    .notif-empty-icon { width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 50%; background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); }
+    .notif-empty h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .notif-empty p { font-size: 0.85rem; color: var(--gray2); }
+    @media (max-width: 768px) {
+      .notif-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-icon"><img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" /></span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="web-design.html" class="nav-link">Services</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="notif-page">
+    <div class="container">
+      <div class="notif-header">
+        <h1>Notifications</h1>
+        <div class="notif-header-right">
+          <button class="notif-mark-read" id="markAllRead">Mark all as read</button>
+        </div>
+      </div>
+
+      <div class="notif-filters">
+        <button class="notif-filter active" data-filter="all">All</button>
+        <button class="notif-filter" data-filter="unread">Unread</button>
+        <button class="notif-filter" data-filter="projects">Projects</button>
+        <button class="notif-filter" data-filter="billing">Billing</button>
+      </div>
+
+      <div class="notif-list" id="notifList"></div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/auth-guard.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/profile-avatar.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      var currentFilter = 'all';
+      var notifications = [];
+      var currentUserId = null;
+      var isLoading = true;
+      var loadError = null;
+
+      var TYPE_CATEGORY = {
+        project_update: 'projects',
+        message: 'projects',
+        payment: 'billing',
+        report: 'projects',
+        milestone: 'projects'
+      };
+
+      function timeAgo(dateStr) {
+        var now = new Date();
+        var date = new Date(dateStr);
+        var seconds = Math.floor((now - date) / 1000);
+        if (seconds < 60) return 'just now';
+        var minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return minutes + (minutes === 1 ? ' minute ago' : ' minutes ago');
+        var hours = Math.floor(minutes / 60);
+        if (hours < 24) return hours + (hours === 1 ? ' hour ago' : ' hours ago');
+        var days = Math.floor(hours / 24);
+        if (days < 30) return days + (days === 1 ? ' day ago' : ' days ago');
+        var months = Math.floor(days / 30);
+        return months + (months === 1 ? ' month ago' : ' months ago');
+      }
+
+      function getCategory(type) {
+        return TYPE_CATEGORY[type] || 'projects';
+      }
+
+      function getFiltered() {
+        if (currentFilter === 'all') return notifications;
+        if (currentFilter === 'unread') return notifications.filter(function(n) { return !n.is_read; });
+        return notifications.filter(function(n) { return getCategory(n.type) === currentFilter; });
+      }
+
+      function getUnreadCount() {
+        return notifications.filter(function(n) { return !n.is_read; }).length;
+      }
+
+      function renderLoading() {
+        var list = document.getElementById('notifList');
+        list.innerHTML = '';
+        for (var i = 0; i < 4; i++) {
+          var item = document.createElement('div');
+          item.className = 'notif-item';
+          item.style.pointerEvents = 'none';
+          var content = document.createElement('div');
+          content.className = 'notif-content';
+          var bars = [
+            { w: '40%', h: '14px', o: 0.06 },
+            { w: '70%', h: '12px', o: 0.04 },
+            { w: '20%', h: '10px', o: 0.03 }
+          ];
+          bars.forEach(function(b) {
+            var bar = document.createElement('div');
+            bar.style.cssText = 'height:' + b.h + ';width:' + b.w + ';background:rgba(255,255,255,' + b.o + ');border-radius:6px;margin-bottom:6px';
+            content.appendChild(bar);
+          });
+          item.appendChild(content);
+          list.appendChild(item);
+        }
+      }
+
+      function renderError(msg) {
+        var list = document.getElementById('notifList');
+        list.innerHTML =
+          '<div class="notif-empty">' +
+            '<div class="notif-empty-icon">' +
+              '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+            '</div>' +
+            '<h3>Something went wrong</h3>' +
+            '<p>' + msg + '</p>' +
+          '</div>';
+      }
+
+      function renderEmpty() {
+        var list = document.getElementById('notifList');
+        var msg = currentFilter === 'unread' ? 'No unread notifications.' : 'No notifications in this category.';
+        list.innerHTML =
+          '<div class="notif-empty">' +
+            '<div class="notif-empty-icon">' +
+              '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' +
+            '</div>' +
+            '<h3>All caught up!</h3>' +
+            '<p>' + msg + '</p>' +
+          '</div>';
+      }
+
+      function renderNotifications() {
+        var list = document.getElementById('notifList');
+        var filtered = getFiltered();
+
+        if (filtered.length === 0) {
+          renderEmpty();
+          return;
+        }
+
+        list.innerHTML = '';
+        filtered.forEach(function(n) {
+          var item = document.createElement('div');
+          item.className = 'notif-item' + (!n.is_read ? ' unread' : '');
+          item.dataset.id = n.id;
+
+          var dot = document.createElement('span');
+          dot.className = 'notif-dot';
+          item.appendChild(dot);
+
+          var content = document.createElement('div');
+          content.className = 'notif-content';
+
+          var title = document.createElement('div');
+          title.className = 'notif-title';
+          title.textContent = n.title;
+          content.appendChild(title);
+
+          var text = document.createElement('div');
+          text.className = 'notif-text';
+          text.textContent = n.message;
+          content.appendChild(text);
+
+          var time = document.createElement('div');
+          time.className = 'notif-time';
+          time.textContent = timeAgo(n.created_at);
+          content.appendChild(time);
+
+          item.appendChild(content);
+          list.appendChild(item);
+
+          item.addEventListener('click', function() {
+            if (!n.is_read) {
+              markRead(n.id);
+              n.is_read = true;
+              this.classList.remove('unread');
+              updateCounts();
+            }
+            if (n.link) {
+              window.location.href = n.link;
+            }
+          });
+        });
+      }
+
+      function updateCounts() {
+        var total = getUnreadCount();
+        document.querySelectorAll('.notif-filter').forEach(function(btn) {
+          var filter = btn.dataset.filter;
+          var el = btn.querySelector('.notif-count');
+          var count;
+          if (filter === 'all' || filter === 'unread') count = total;
+          else count = notifications.filter(function(n) { return getCategory(n.type) === filter && !n.is_read; }).length;
+
+          if (count > 0) {
+            if (!el) {
+              el = document.createElement('span');
+              el.className = 'notif-count';
+              btn.appendChild(el);
+            }
+            el.textContent = '(' + count + ')';
+          } else {
+            if (el) el.remove();
+          }
+        });
+      }
+
+      async function fetchNotifications() {
+        isLoading = true;
+        loadError = null;
+        renderLoading();
+
+        try {
+          var { data, error } = await window.supabaseClient
+            .from('notifications')
+            .select('*')
+            .eq('user_id', currentUserId)
+            .order('created_at', { ascending: false })
+            .limit(50);
+
+          if (error) throw error;
+
+          notifications = data || [];
+          renderNotifications();
+          updateCounts();
+        } catch (err) {
+          loadError = err.message || 'Could not load notifications.';
+          renderError(loadError);
+        } finally {
+          isLoading = false;
+        }
+      }
+
+      async function markRead(id) {
+        try {
+          await window.supabaseClient
+            .from('notifications')
+            .update({ is_read: true })
+            .eq('id', id)
+            .eq('user_id', currentUserId);
+        } catch (err) {
+          console.error('Failed to mark notification as read:', err);
+        }
+      }
+
+      async function markAllRead() {
+        try {
+          await window.supabaseClient
+            .from('notifications')
+            .update({ is_read: true })
+            .eq('user_id', currentUserId)
+            .eq('is_read', false);
+
+          notifications.forEach(function(n) { n.is_read = true; });
+          renderNotifications();
+          updateCounts();
+        } catch (err) {
+          console.error('Failed to mark all as read:', err);
+        }
+      }
+
+      function subscribeRealtime() {
+        var channel = window.supabaseClient
+          .channel('notifications-realtime')
+          .on('postgres_changes',
+            {
+              event: 'INSERT',
+              schema: 'public',
+              table: 'notifications',
+              filter: 'user_id=eq.' + currentUserId
+            },
+            function(payload) {
+              var n = payload.new;
+              notifications.unshift(n);
+              if (currentFilter === 'all' || currentFilter === 'unread' || getCategory(n.type) === currentFilter) {
+                renderNotifications();
+              }
+              updateCounts();
+            }
+          )
+          .subscribe();
+      }
+
+      /* ── Init ── */
+      var { data: { session } } = await window.supabaseClient.auth.getSession();
+      if (!session) return;
+      currentUserId = session.user.id;
+
+      await fetchNotifications();
+      subscribeRealtime();
+
+      document.querySelectorAll('.notif-filter').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.notif-filter').forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          renderNotifications();
+        });
+      });
+
+      document.getElementById('markAllRead').addEventListener('click', markAllRead);
+    });
+  </script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+</html>

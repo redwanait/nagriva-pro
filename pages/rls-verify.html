@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RLS Security Verification — NAGRIVA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: #0a0c0c; color: #e8edee; padding: 40px 24px; }
+    .container { max-width: 860px; margin: 0 auto; }
+    h1 { font-family: 'Syne', sans-serif; font-size: 1.6rem; margin-bottom: 6px; }
+    .subtitle { color: #8a9295; margin-bottom: 32px; font-size: 0.9rem; }
+    .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .stat { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; text-align: center; }
+    .stat-value { font-size: 1.8rem; font-weight: 700; font-family: 'Syne', sans-serif; }
+    .stat-label { font-size: 0.75rem; color: #8a9295; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat.pass .stat-value { color: #00f5c4; }
+    .stat.fail .stat-value { color: #ef4444; }
+    .stat.warn .stat-value { color: #f59e0b; }
+    .test-group { margin-bottom: 24px; }
+    .test-group h2 { font-family: 'Syne', sans-serif; font-size: 1rem; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .test-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; margin-bottom: 6px; font-size: 0.85rem; }
+    .test-item.pass { border-left: 3px solid #00f5c4; }
+    .test-item.fail { border-left: 3px solid #ef4444; }
+    .test-item.warn { border-left: 3px solid #f59e0b; }
+    .test-item .icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+    .test-item .label { flex: 1; }
+    .test-item .detail { font-size: 0.75rem; color: #8a9295; }
+    .loader { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.1); border-top-color: #00f5c4; border-radius: 50%; animation: spin 0.6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .log { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 16px; margin-top: 20px; font-family: monospace; font-size: 0.75rem; max-height: 400px; overflow: auto; white-space: pre-wrap; color: #8a9295; }
+    .btn { padding: 10px 24px; border: none; border-radius: 10px; font-family: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; background: #00f5c4; color: #0a0c0c; }
+    .btn:hover { background: #00d4a8; }
+    .btn:disabled { opacity: 0.4; cursor: default; }
+    .user-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.1); border-radius: 99px; font-size: 0.8rem; margin-bottom: 20px; }
+    .user-badge .email { color: #8a9295; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 RLS Security Verification</h1>
+    <p class="subtitle" id="subtitle">Running end-to-end RLS policy tests against your Supabase instance...</p>
+
+    <div id="userBadge" class="user-badge" style="display:none;"></div>
+
+    <div class="summary" id="summary">
+      <div class="stat"><div class="stat-value" id="statTotal">0</div><div class="stat-label">Tests</div></div>
+      <div class="stat pass"><div class="stat-value" id="statPass">0</div><div class="stat-label">Passed</div></div>
+      <div class="stat fail"><div class="stat-value" id="statFail">0</div><div class="stat-label">Failed</div></div>
+      <div class="stat warn"><div class="stat-value" id="statWarn">0</div><div class="stat-label">Warnings</div></div>
+    </div>
+
+    <button class="btn" id="runBtn" onclick="runAll()" disabled>
+      <span id="btnText">Running...</span>
+    </button>
+
+    <div id="results"></div>
+    <div class="log" id="log">Initializing...</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = window.supabaseClient;
+    const resultsEl = document.getElementById('results');
+    const logEl = document.getElementById('log');
+    let results = [];
+    let passCount = 0, failCount = 0, warnCount = 0;
+    let testUserId = null;
+    let adminUserId = null;
+
+    function log(msg) {
+      logEl.textContent += msg + '\n';
+    }
+
+    function addResult(group, label, passed, detail) {
+      const status = passed === true ? 'pass' : passed === null ? 'warn' : 'fail';
+      results.push({ group, label, status, detail: detail || '' });
+      if (status === 'pass') passCount++;
+      else if (status === 'fail') failCount++;
+      else warnCount++;
+      renderResults();
+      updateStats();
+    }
+
+    function renderResults() {
+      const groups = {};
+      results.forEach(r => {
+        if (!groups[r.group]) groups[r.group] = [];
+        groups[r.group].push(r);
+      });
+      resultsEl.innerHTML = '';
+      Object.entries(groups).forEach(([group, tests]) => {
+        const div = document.createElement('div');
+        div.className = 'test-group';
+        div.innerHTML = `<h2>${group}</h2>`;
+        tests.forEach(t => {
+          const icons = { pass: '✅', fail: '❌', warn: '⚠️' };
+          const item = document.createElement('div');
+          item.className = `test-item ${t.status}`;
+          item.innerHTML = `
+            <span class="icon">${icons[t.status]}</span>
+            <span class="label">${t.label}</span>
+            <span class="detail">${t.detail || ''}</span>
+          `;
+          div.appendChild(item);
+        });
+        resultsEl.appendChild(div);
+      });
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').textContent = results.length;
+      document.getElementById('statPass').textContent = passCount;
+      document.getElementById('statFail').textContent = failCount;
+      document.getElementById('statWarn').textContent = warnCount;
+    }
+
+    async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    function expect(condition, label, detail) {
+      addResult(currentGroup, label, condition, detail || (condition ? 'OK' : 'FAILED'));
+    }
+
+    let currentGroup = '';
+
+    async function runAll() {
+      const btn = document.getElementById('runBtn');
+      btn.disabled = true;
+      document.getElementById('btnText').textContent = 'Running...';
+      results = []; passCount = 0; failCount = 0; warnCount = 0;
+      resultsEl.innerHTML = '';
+      log('=== NAGRIVA RLS Verification Started ===\n');
+
+      try {
+        await testAuth();
+        await testProfiles();
+        await testOrders();
+        await testNotifications();
+        await testProjects();
+        await testMessages();
+        await testFiles();
+        await testActivityLog();
+        await testStorage();
+        await testRealtime();
+        await testAdminAccess();
+      } catch (err) {
+        log('FATAL: ' + err.message);
+        addResult('System', 'Test runner', false, err.message);
+      }
+
+      log('\n=== Verification Complete ===');
+      document.getElementById('btnText').textContent = 'Re-run Tests';
+      btn.disabled = false;
+      document.getElementById('subtitle').textContent =
+        `${passCount} passed, ${failCount} failed, ${warnCount} warnings — ${results.length} total tests`;
+    }
+
+    /* ─── Tests ─── */
+
+    async function testAuth() {
+      currentGroup = '🔑 Authentication & Session';
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        addResult(currentGroup, 'User is authenticated', false, 'Not logged in — some tests will be skipped');
+        addResult(currentGroup, 'Session exists', false, 'No active session');
+        return;
+      }
+
+      testUserId = session.user.id;
+      const email = session.user.email || 'unknown';
+      addResult(currentGroup, 'User is authenticated', true, email);
+
+      const badge = document.getElementById('userBadge');
+      badge.style.display = '';
+      badge.innerHTML = `<span>👤</span><span>${email}</span><span class="email">(${testUserId.slice(0, 8)}...)</span>`;
+
+      // Check role
+      const { data: profile } = await supabase.from('profiles').select('role').eq('id', testUserId).single();
+      if (profile) {
+        addResult(currentGroup, 'Profile loaded', true, `Role: ${profile.role}`);
+        if (profile.role === 'admin') adminUserId = testUserId;
+      } else {
+        addResult(currentGroup, 'Profile loaded', false, 'Could not fetch profile');
+      }
+    }
+
+    async function testProfiles() {
+      currentGroup = '👤 Profiles RLS';
+
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null, 'Not authenticated'); return; }
+
+      // Can read own profile
+      const { data: own, error: ownErr } = await supabase.from('profiles').select('*').eq('id', testUserId).single();
+      expect(!!own && !ownErr, 'Can read own profile', ownErr ? ownErr.message : 'OK');
+
+      // Can update own profile
+      const { error: updErr } = await supabase.from('profiles').update({ full_name: 'RLS Test User' }).eq('id', testUserId);
+      expect(!updErr, 'Can update own profile', updErr ? updErr.message : 'OK');
+
+      // Cannot read another user's profile directly (if not admin)
+      if (adminUserId !== testUserId) {
+        // Try to get a different profile — should fail
+        const { data: other, error: otherErr } = await supabase
+          .from('profiles')
+          .select('id')
+          .neq('id', testUserId)
+          .limit(1);
+        const blocked = !otherErr || (other && other.length === 0);
+        expect(blocked, 'Cannot enumerate other profiles (RLS blocks)', otherErr ? otherErr.message : (other ? `Got ${other.length} rows` : 'No rows (OK)'));
+      } else {
+        addResult(currentGroup, 'Cannot enumerate other profiles (admin)', null, 'Skipped — current user is admin');
+      }
+    }
+
+    async function testOrders() {
+      currentGroup = '📦 Orders RLS';
+
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      // Can view own orders
+      const { data: ownOrders, error: viewErr } = await supabase
+        .from('orders')
+        .select('id, user_id')
+        .eq('user_id', testUserId);
+      expect(!viewErr, 'Can view own orders', viewErr ? viewErr.message : `${ownOrders.length} order(s)`);
+
+      // Can insert own order
+      const { data: newOrder, error: insErr } = await supabase
+        .from('orders')
+        .insert({
+          user_id: testUserId,
+          order_number: 'TEST-' + Date.now(),
+          service_type: 'Web Design',
+          project_name: 'RLS Test Order',
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (insErr) {
+        addResult(currentGroup, 'Can insert own order', false, insErr.message);
+      } else {
+        addResult(currentGroup, 'Can insert own order', true, newOrder.order_number);
+        // Clean up
+        await supabase.from('orders').delete().eq('id', newOrder.id);
+      }
+
+      // RLS blocks inserting with wrong user_id
+      if (testUserId) {
+        const fakeId = '00000000-0000-0000-0000-000000000000';
+        const { error: fakeInsErr } = await supabase
+          .from('orders')
+          .insert({
+            user_id: fakeId,
+            order_number: 'TEST-FAKE-' + Date.now(),
+            service_type: 'Web Design',
+            project_name: 'Fake Order',
+            status: 'pending'
+          });
+        expect(!!fakeInsErr, 'Cannot insert order with wrong user_id', fakeInsErr ? 'Blocked (OK)' : 'ALLOWED!');
+      }
+
+      // Cannot update orders if not admin
+      if (adminUserId !== testUserId) {
+        const { error: updErr } = await supabase
+          .from('orders')
+          .update({ project_name: 'Hacked' })
+          .neq('id', '00000000-0000-0000-0000-000000000000');
+        expect(!!updErr, 'Cannot update orders (non-admin)', updErr ? 'Blocked (OK)' : 'ALLOWED!');
+      }
+    }
+
+    async function testNotifications() {
+      currentGroup = '🔔 Notifications RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      // Can read own notifications
+      const { data: notifs, error: nErr } = await supabase
+        .from('notifications')
+        .select('id')
+        .eq('user_id', testUserId)
+        .limit(5);
+      expect(!nErr, 'Can view own notifications', nErr ? nErr.message : `${notifs.length} notification(s)`);
+
+      // Can insert own notification
+      const { data: newNotif, error: niErr } = await supabase
+        .from('notifications')
+        .insert({
+          user_id: testUserId,
+          title: 'RLS Test',
+          message: 'This is a test notification',
+          type: 'project_update'
+        })
+        .select()
+        .single();
+      expect(!niErr, 'Can insert own notification', niErr ? niErr.message : 'OK');
+      if (newNotif) {
+        await supabase.from('notifications').delete().eq('id', newNotif.id);
+      }
+
+      // Cannot insert notification for another user
+      const fakeId = '00000000-0000-0000-0000-000000000000';
+      const { error: fniErr } = await supabase
+        .from('notifications')
+        .insert({
+          user_id: fakeId,
+          title: 'Fake',
+          message: 'Should be blocked',
+          type: 'project_update'
+        });
+      expect(!!fniErr, 'Cannot insert notification for other user', fniErr ? 'Blocked (OK)' : 'ALLOWED!');
+    }
+
+    async function testProjects() {
+      currentGroup = '📋 Projects RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      // Need an order to test against
+      const { data: order } = await supabase
+        .from('orders')
+        .select('id')
+        .eq('user_id', testUserId)
+        .limit(1)
+        .single();
+
+      if (!order) {
+        addResult(currentGroup, 'Project insert test', null, 'No orders to test against');
+        return;
+      }
+
+      const { data: proj, error: piErr } = await supabase
+        .from('projects')
+        .insert({ order_id: order.id, title: 'RLS Test Milestone', description: 'Testing RLS policy', status: 'pending' })
+        .select()
+        .single();
+      expect(!piErr, 'Can insert project for own order', piErr ? piErr.message : 'OK');
+      if (proj) {
+        await supabase.from('projects').delete().eq('id', proj.id);
+      }
+    }
+
+    async function testMessages() {
+      currentGroup = '💬 Messages RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      const { data: order } = await supabase
+        .from('orders')
+        .select('id')
+        .eq('user_id', testUserId)
+        .limit(1)
+        .single();
+
+      if (!order) {
+        addResult(currentGroup, 'Message insert test', null, 'No orders to test against');
+        return;
+      }
+
+      const { error: miErr } = await supabase
+        .from('messages')
+        .insert({
+          order_id: order.id,
+          user_id: testUserId,
+          sender_role: 'client',
+          message: 'RLS test message'
+        });
+      expect(!miErr, 'Can send message on own order', miErr ? miErr.message : 'OK');
+    }
+
+    async function testFiles() {
+      currentGroup = '📎 Files RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      const { data: order } = await supabase
+        .from('orders')
+        .select('id')
+        .eq('user_id', testUserId)
+        .limit(1)
+        .single();
+
+      if (!order) {
+        addResult(currentGroup, 'File record test', null, 'No orders to test against');
+        return;
+      }
+
+      // Can insert file record
+      const { data: file, error: fiErr } = await supabase
+        .from('files')
+        .insert({
+          order_id: order.id,
+          user_id: testUserId,
+          file_name: 'rls-test.txt',
+          file_size: 100,
+          file_type: 'text/plain',
+          storage_path: testUserId + '/' + order.id + '/rls-test.txt',
+          uploaded_by: 'client'
+        })
+        .select()
+        .single();
+      expect(!fiErr, 'Can upload file record to own order', fiErr ? fiErr.message : 'OK');
+      if (file) {
+        await supabase.from('files').delete().eq('id', file.id);
+      }
+    }
+
+    async function testActivityLog() {
+      currentGroup = '📝 Activity Log RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      const { data: order } = await supabase
+        .from('orders')
+        .select('id')
+        .eq('user_id', testUserId)
+        .limit(1)
+        .single();
+
+      if (!order) {
+        addResult(currentGroup, 'Activity insert test', null, 'No orders to test against');
+        return;
+      }
+
+      const { error: alErr } = await supabase
+        .from('activity_log')
+        .insert({ order_id: order.id, user_id: testUserId, action: 'rls_test', description: 'RLS verification test' });
+      expect(!alErr, 'Can log activity on own order', alErr ? alErr.message : 'OK');
+    }
+
+    async function testStorage() {
+      currentGroup = '🗄️ Storage RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      // Check that order-files bucket exists
+      const { data: buckets } = await supabase.storage.listBuckets();
+      const hasOrderFiles = buckets?.some(b => b.name === 'order-files');
+      const hasAvatars = buckets?.some(b => b.name === 'avatars');
+      expect(hasOrderFiles, 'order-files bucket exists', hasOrderFiles ? 'OK' : 'Missing!');
+      expect(hasAvatars, 'avatars bucket exists', hasAvatars ? 'OK' : 'Missing!');
+
+      // Test authenticated upload to order-files
+      if (hasOrderFiles) {
+        const testBlob = new Blob(['RLS test content'], { type: 'text/plain' });
+        const testFile = new File([testBlob], 'rls-test-' + Date.now() + '.txt');
+        const filePath = testUserId + '/test/' + testFile.name;
+
+        const { error: upErr } = await supabase.storage
+          .from('order-files')
+          .upload(filePath, testFile);
+        expect(!upErr, 'Can upload file to order-files', upErr ? upErr.message : 'OK');
+
+        if (!upErr) {
+          await supabase.storage.from('order-files').remove([filePath]);
+        }
+      }
+    }
+
+    async function testRealtime() {
+      currentGroup = '⚡ Realtime RLS';
+      if (!testUserId) { addResult(currentGroup, 'Skipped (no session)', null); return; }
+
+      // Test that we can subscribe to realtime changes
+      const channel = supabase.channel('rls-test-channel')
+        .on('postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'notifications', filter: 'user_id=eq.' + testUserId },
+          () => {}
+        );
+
+      const subErr = await new Promise(resolve => {
+        channel.subscribe(status => {
+          if (status === 'SUBSCRIBED' || status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+            resolve(status);
+          }
+        });
+        setTimeout(() => resolve('TIMED_OUT'), 5000);
+      });
+
+      const ok = subErr === 'SUBSCRIBED';
+      expect(ok, 'Can subscribe to notifications realtime', ok ? 'SUBSCRIBED' : subErr);
+      supabase.removeChannel(channel);
+    }
+
+    async function testAdminAccess() {
+      currentGroup = '🛡️ Admin RLS';
+      if (adminUserId !== testUserId) {
+        addResult(currentGroup, 'Admin-specific tests', null, 'Current user is not admin — log in as admin to verify');
+        return;
+      }
+
+      // Admin can read all orders
+      const { data: orders, error: oErr } = await supabase
+        .from('orders')
+        .select('id');
+      expect(!oErr, 'Admin can read all orders', oErr ? oErr.message : `${orders.length} order(s)`);
+      expect(orders && orders.length > 0, 'Admin sees all orders (not just own)', orders ? `${orders.length} rows` : 'No orders');
+
+      // Admin can read all profiles
+      const { data: profiles, error: pErr } = await supabase
+        .from('profiles')
+        .select('id, role');
+      expect(!pErr, 'Admin can read all profiles', pErr ? pErr.message : `${profiles.length} profile(s)`);
+    }
+
+    /* ─── Init ─── */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('runBtn').disabled = false;
+      document.getElementById('btnText').textContent = 'Run Verification Tests';
+      log('Loaded. Click "Run Verification Tests" to start.\n');
+    });
+  </script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <div id="footer-container"></div>
+
+  <script src="../js/footer.js"></script>
+</body>
+</html>

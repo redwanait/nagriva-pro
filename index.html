@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAGRIVA — Digital Growth Agency</title>
+  <meta name="description" content="We turn your website into a client-generating machine. Design, SEO, and growth for modern brands." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" />
+  <link rel="stylesheet" href="/css/floating-elements.css" />
+  <link rel="stylesheet" href="/css/auth.css" />
+  <link rel="icon" type="image/png" href="/assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+
+  <!-- ══════════════════════════ NAVBAR ══════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">
+          <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" />
+        </span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active" data-i18n="nav.home">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link nav-dropdown-toggle" data-i18n="nav.services">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="/pages/web-design.html" class="nav-dropdown-item" data-i18n="nav.web-design">Web Design</a>
+            <a href="/pages/seo.html" class="nav-dropdown-item" data-i18n="nav.seo">SEO</a>
+            <a href="/pages/branding.html" class="nav-dropdown-item" data-i18n="nav.branding">Branding</a>
+            <a href="/pages/ai-automation.html" class="nav-dropdown-item" data-i18n="nav.ai-automation">AI Automation</a>
+            <a href="/pages/social-media.html" class="nav-dropdown-item" data-i18n="nav.social-media">Social Media</a>
+          </div>
+        </li>
+        <li><a href="#results" class="nav-link" data-i18n="nav.results">Results</a></li>
+        <li><a href="#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
+        <li><a href="#about" class="nav-link" data-i18n="nav.about">About</a></li>
+        <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="/pages/blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <a href="/pages/login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="#contact" class="btn-book" data-i18n="nav.book-call">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════ MOBILE MENU OVERLAY ════════════════════ -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <div class="mobile-menu-header">
+        <a href="#" class="mobile-menu-logo-wrap">
+          <img src="/assets/images/branding/nagriva-logo.png" alt="" class="mobile-menu-logo-img" />
+          <span class="mobile-menu-logo-text">NAGRIVA</span>
+        </a>
+        <button class="mobile-menu-close-btn" id="mobileMenuClose" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="#hero" class="mobile-menu-link active">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span data-i18n="nav.home">Home</span>
+        </a>
+        <a href="/pages/web-design.html" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          <span data-i18n="nav.services">Services</span>
+        </a>
+        <a href="#results" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          <span data-i18n="nav.results">Results</span>
+        </a>
+        <a href="#pricing" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+          <span data-i18n="nav.pricing">Pricing</span>
+        </a>
+        <a href="#about" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span data-i18n="nav.about">About</span>
+        </a>
+        <a href="#contact" class="mobile-menu-link">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span data-i18n="nav.contact">Contact</span>
+        </a>
+      </nav>
+      <a href="/pages/login.html" class="mobile-auth-link" id="mobileAuthBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        <span id="mobileAuthText" data-i18n="nav.signin">Sign In</span>
+      </a>
+      <div class="mobile-menu-footer">
+        <a href="#contact" class="mobile-menu-cta">
+          <span data-i18n="nav.book-call">Book a Free Call</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <p class="mobile-menu-trust">We reply within 24 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ AUTH MODAL ══════════════════════════ -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-backdrop" id="authBackdrop"></div>
+    <div class="auth-ambient auth-ambient-1"></div>
+    <div class="auth-ambient auth-ambient-2"></div>
+    <div class="auth-modal" id="authModal">
+      <div class="auth-modal-glow"></div>
+      <button class="auth-close-btn" id="authCloseBtn" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="auth-inner" id="authInner">
+
+        <!-- Header -->
+        <div class="auth-header">
+          <div class="auth-logo">
+            <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA" />
+            <span class="auth-logo-text">NAGRIVA</span>
+          </div>
+          <h3 class="auth-title" id="authTitle">Welcome Back</h3>
+          <p class="auth-subtitle" id="authSubtitle">Sign in to access your dashboard and manage your projects.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="signin">Sign In</button>
+          <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+
+        <!-- ═══ SIGN IN FORM ═══ -->
+        <form class="auth-form active" id="signInForm" autocomplete="off">
+          <div class="auth-message" id="signinMessage"></div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <span>Password</span>
+              <button type="button" class="auth-forgot-link">Forgot password?</button>
+            </label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" class="auth-input" placeholder="Enter your password" autocomplete="current-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-form-options">
+            <label class="auth-remember">
+              <input type="checkbox" checked />
+              <span class="auth-remember-label">Remember me</span>
+            </label>
+          </div>
+
+          <button type="submit" class="auth-submit" id="signinSubmit">
+            <span class="auth-btn-text">Sign In</span>
+            <span class="auth-btn-spinner"></span>
+            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="auth-divider">
+            <span class="auth-divider-line"></span>
+            <span class="auth-divider-text">or continue with</span>
+            <span class="auth-divider-line"></span>
+          </div>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="auth-social-btn github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-form-footer">
+            <span>Don't have an account? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signup">Create one</button>
+          </div>
+        </form>
+
+        <!-- ═══ SIGN UP FORM ═══ -->
+        <form class="auth-form" id="signUpForm" autocomplete="off">
+          <div class="auth-message" id="signupMessage"></div>
+
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" class="auth-input" name="name" placeholder="John Doe" autocomplete="name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" class="auth-input" name="password" placeholder="Create a password" autocomplete="new-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              <input type="password" class="auth-input" name="confirmPassword" placeholder="Confirm your password" autocomplete="new-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-pw-strength" id="passwordStrength">
+            <div class="auth-pw-strength-bar">
+              <div class="auth-pw-strength-fill" id="passwordStrengthFill"></div>
+            </div>
+            <span class="auth-pw-strength-label" id="passwordStrengthLabel">Strength</span>
+          </div>
+
+          <label class="auth-terms">
+            <input type="checkbox" id="termsCheckbox" />
+            <span class="auth-terms-label">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span>
+          </label>
+
+          <button type="submit" class="auth-submit" id="signupSubmit">
+            <span class="auth-btn-text">Create Account</span>
+            <span class="auth-btn-spinner"></span>
+            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="auth-divider">
+            <span class="auth-divider-line"></span>
+            <span class="auth-divider-text">or continue with</span>
+            <span class="auth-divider-line"></span>
+          </div>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="auth-social-btn github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-form-footer">
+            <span>Already have an account? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signin">Sign in</button>
+          </div>
+        </form>
+
+        <!-- ═══ FORGOT PASSWORD FORM ═══ -->
+        <form class="auth-form" id="forgotForm" autocomplete="off">
+          <div class="auth-message" id="forgotMessage"></div>
+
+          <div id="forgotFormWrap">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <div class="auth-input-wrap">
+                <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <button type="submit" class="auth-submit" id="forgotSubmit">
+              <span class="auth-btn-text">Send Reset Link</span>
+              <span class="auth-btn-spinner"></span>
+              <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="auth-forgot-success" id="forgotSuccess">
+            <div class="auth-forgot-success-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <p class="auth-forgot-success-text">Check your email for a password reset link. If it doesn't appear within a few minutes, check your spam folder.</p>
+          </div>
+
+          <div class="auth-form-footer">
+            <span>Remember your password? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signin">Back to sign in</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ HERO ══════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-glow"></div>
+      <div class="hero-glow-2"></div>
+      <div class="hero-grid"></div>
+      <div class="hero-noise"></div>
+    </div>
+    <div class="hero-container">
+      <div class="hero-left fade-up">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span data-i18n="hero.badge">Digital Growth Agency</span>
+        </div>
+
+        <h1 class="hero-title" data-i18n="hero.title">
+          Grow Your Brand.<br/>
+          <span class="hero-highlight">Scale Your Revenue.</span>
+        </h1>
+
+        <p class="hero-desc" data-i18n="hero.subtitle2">
+          We design, optimize and grow websites that attract more traffic,
+          convert more leads and scale your business — with precision and strategy.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">
+            <span data-i18n="hero.cta2">Book a Free Call</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#projects" class="btn-secondary">
+            <span data-i18n="hero.view-results">View Results</span>
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 12L3.5 15L5 9.5L1 6H6L8 1Z" fill="#00f5c4"/></svg>
+            </div>
+            <span data-i18n="hero.trust-fast">Fast Results</span>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00f5c4" stroke-width="1.5"/><path d="M5 8L7 10L11 6" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <span data-i18n="hero.trust-seo">SEO Optimized</span>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 7L10 9L14 3" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span data-i18n="hero.trust-conversion">Conversion Focused</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right fade-up" style="--delay:0.15s">
+        <div class="hero-visual-wrapper">
+          <!-- Ambient glow blobs -->
+          <div class="hero-ambient ambient-1"></div>
+          <div class="hero-ambient ambient-2"></div>
+
+          <!-- Main Glass Card -->
+          <div class="glass-card">
+            <div class="glass-inner">
+              <div class="glass-header">
+                <div class="glass-header-left">
+                  <span class="glass-dot"></span>
+                  <span class="glass-label">Growth Analytics</span>
+                </div>
+                <span class="glass-badge">+156.4%</span>
+              </div>
+
+              <div class="glass-chart-wrap">
+                <svg class="glass-chart-svg" viewBox="0 0 340 100" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="gcGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#00f5c4" stop-opacity="0.35"/>
+                      <stop offset="100%" stop-color="#00f5c4" stop-opacity="0"/>
+                    </linearGradient>
+                    <filter id="gcGlow">
+                      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                  </defs>
+                  <path class="gc-area" d="M0 85 Q30 78 60 72 Q90 66 120 55 Q150 44 180 40 Q210 36 240 22 Q270 8 300 12 Q330 16 340 10 L340 100 L0 100 Z" fill="url(#gcGrad)"/>
+                  <path class="gc-line" d="M0 85 Q30 78 60 72 Q90 66 120 55 Q150 44 180 40 Q210 36 240 22 Q270 8 300 12 Q330 16 340 10" stroke="#00f5c4" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#gcGlow)"/>
+                </svg>
+              </div>
+
+              <div class="glass-metrics-row">
+                <div class="gm-item">
+                  <span class="gm-value">126.8K</span>
+                  <span class="gm-label">Monthly Traffic</span>
+                </div>
+                <div class="gm-divider"></div>
+                <div class="gm-item">
+                  <span class="gm-value">4.68%</span>
+                  <span class="gm-label">Conversion Rate</span>
+                </div>
+                <div class="gm-divider"></div>
+                <div class="gm-item">
+                  <span class="gm-value">$94.2K</span>
+                  <span class="gm-label">Revenue</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Float Card -->
+          <div class="float-card">
+            <div class="float-card-glow"></div>
+            <div class="float-card-body">
+              <div class="float-card-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <div>
+                <div class="float-card-num">250+</div>
+                <div class="float-card-txt">Projects Delivered</div>
+              </div>
+              <span class="float-card-arrow">↑ 23.8%</span>
+            </div>
+          </div>
+
+          <!-- Floating Pill -->
+          <div class="float-pill">
+            <span class="float-pill-dot"></span>
+            <span class="float-pill-text">AI-Powered Insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ══════════════════════════ BRANDS ══════════════════════════ -->
+  <section class="brands">
+    <div class="container">
+      <div class="brands-label">Trusted by forward-thinking brands</div>
+      <div class="marquee-track">
+        <div class="marquee-inner">
+          <span class="brand-item">Luma Cosmetics</span>
+          <span class="brand-item">Prisma Tech</span>
+          <span class="brand-item">Novu Inc.</span>
+          <span class="brand-item">Retool Systems</span>
+          <span class="brand-item">Stytch Labs</span>
+          <span class="brand-item">Venture Lab</span>
+          <span class="brand-item">Orbit Finance</span>
+          <span class="brand-item">Pulse Health</span>
+          <span class="brand-item">Luma Cosmetics</span>
+          <span class="brand-item">Prisma Tech</span>
+          <span class="brand-item">Novu Inc.</span>
+          <span class="brand-item">Retool Systems</span>
+          <span class="brand-item">Stytch Labs</span>
+          <span class="brand-item">Venture Lab</span>
+          <span class="brand-item">Orbit Finance</span>
+          <span class="brand-item">Pulse Health</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ SERVICES ══════════════════════════ -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag" data-i18n="services.tag">✦ What we do</div>
+        <h2 class="section-title" data-i18n="services.title">Everything You Need to <span class="text-gradient">Grow</span></h2>
+        <p class="section-desc" data-i18n="services.subtitle">End-to-end digital solutions crafted to position your brand ahead of the competition.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Web Design -->
+        <a href="/pages/web-design.html" class="service-card fade-up" style="--delay:0s">
+          <div class="service-img">
+            <img class="service-visual" src="/assets/images/projects/Web Design.png" alt="Web Design" loading="lazy">
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <div class="service-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="3"/><path d="M9 22h6"/><path d="M12 19v3"/></svg>
+            </div>
+            <div class="service-name">Web Design</div>
+            <div class="service-desc">Conversion-driven interfaces that position your brand as an industry leader and drive results.</div>
+          </div>
+          <div class="service-footer">
+            <div class="service-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- SEO Optimization -->
+        <a href="/pages/seo.html" class="service-card fade-up" style="--delay:0.06s">
+          <div class="service-img">
+            <img class="service-visual" src="/assets/images/projects/SEO Optimization.png" alt="SEO Optimization" loading="lazy">
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <div class="service-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="service-name">SEO Optimization</div>
+            <div class="service-desc">Technical and on-page SEO strategies that drive organic traffic and build search authority.</div>
+          </div>
+          <div class="service-footer">
+            <div class="service-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Branding -->
+        <a href="/pages/branding.html" class="service-card fade-up" style="--delay:0.12s">
+          <div class="service-img">
+            <img class="service-visual" src="/assets/images/projects/Brand Identity.png" alt="Brand Identity" loading="lazy">
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <div class="service-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
+            </div>
+            <div class="service-name">Brand Identity</div>
+            <div class="service-desc">Strategic identity systems — visual language, positioning, and brand architecture that resonate.</div>
+          </div>
+          <div class="service-footer">
+            <div class="service-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+        <!-- AI Automation -->
+        <a href="/pages/ai-automation.html" class="service-card fade-up" style="--delay:0.18s">
+          <div class="service-img">
+            <img class="service-visual" src="/assets/images/projects/AI Automation.png" alt="AI Automation" loading="lazy">
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <div class="service-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="service-name">AI Automation</div>
+            <div class="service-desc">Intelligent automation solutions that streamline operations and eliminate repetitive tasks.</div>
+          </div>
+          <div class="service-footer">
+            <div class="service-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Social Media Growth -->
+        <a href="/pages/social-media.html" class="service-card fade-up" style="--delay:0.24s">
+          <div class="service-img">
+            <img class="service-visual" src="/assets/images/projects/Social Media Growth.png" alt="Social Media Growth" loading="lazy">
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <div class="service-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="service-name">Social Media Growth</div>
+            <div class="service-desc">Strategic social campaigns that build communities, drive engagement, and amplify brand presence.</div>
+          </div>
+          <div class="service-footer">
+            <div class="service-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Performance Marketing -->
+        <a href="/pages/strategy.html" class="service-card fade-up" style="--delay:0.3s">
+          <div class="service-img">
+            <img class="service-visual" src="/assets/images/projects/Performance Marketing.png" alt="Performance Marketing" loading="lazy">
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <div class="service-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="service-name">Performance Marketing</div>
+            <div class="service-desc">Data-driven paid campaigns across Google, Meta, and LinkedIn that deliver measurable ROI.</div>
+          </div>
+          <div class="service-footer">
+            <div class="service-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ RESULTS ══════════════════════════ -->
+  <section class="results section" id="results">
+    <div class="results-bg"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag" data-i18n="results.tag">By the numbers</div>
+        <h2 class="section-title" data-i18n="results.title">Our <span class="text-gradient">Impact</span></h2>
+        <p class="section-desc" data-i18n="results.subtitle">Measurable outcomes that compound over time for our clients.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card fade-up" style="--delay:0s">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 18 8 12 12 15 17 8 21 11"/></svg>
+          </div>
+          <div class="stat-num" data-count="250">0</div>
+          <div class="stat-unit">%</div>
+          <div class="stat-label">Avg. Traffic Increase</div>
+        </div>
+        <div class="stat-card fade-up" style="--delay:0.07s">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-num" data-count="180">0</div>
+          <div class="stat-unit">+</div>
+          <div class="stat-label">Leads Generated</div>
+        </div>
+        <div class="stat-card fade-up" style="--delay:0.14s">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <div class="stat-num" data-count="95">0</div>
+          <div class="stat-unit">%</div>
+          <div class="stat-label">Conversion Boost</div>
+        </div>
+        <div class="stat-card fade-up" style="--delay:0.21s">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="stat-num" data-count="40">0</div>
+          <div class="stat-unit">+</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PROJECTS ══════════════════════════ -->
+  <section class="projects section" id="projects">
+    <div class="projects-bg-glow"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Our work</div>
+        <h2 class="section-title">Recent <span class="text-gradient">Projects</span></h2>
+        <p class="section-desc">Real results for real brands. Explore our latest work across industries.</p>
+      </div>
+
+      <div class="pj-grid fade-up">
+        <!-- VELOUR -->
+        <div class="pj-card pj-card-large pj-velour" data-project="velour">
+          <div class="pj-visual">
+            <img class="pj-svg" src="/assets/images/projects/VELOUR — E-Commerce Experience.png" alt="VELOUR" loading="lazy">
+            <div class="pj-visual-glow"></div>
+            <div class="pj-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <div class="pj-body">
+            <div class="pj-tag">✦ Fashion</div>
+            <h3 class="pj-title">VELOUR — E-Commerce Experience</h3>
+            <div class="pj-services">Web Design · Brand Identity · Performance Marketing</div>
+          </div>
+        </div>
+
+        <!-- NOMAD -->
+        <div class="pj-card pj-card-large pj-nomad" data-project="nomad">
+          <div class="pj-visual">
+            <img class="pj-svg" src="/assets/images/projects/NOMAD — Travel Booking Platform.png" alt="NOMAD" loading="lazy">
+            <div class="pj-visual-glow"></div>
+            <div class="pj-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <div class="pj-body">
+            <div class="pj-tag">✦ Travel</div>
+            <h3 class="pj-title">NOMAD — Travel Booking Platform</h3>
+            <div class="pj-services">Web Design · SEO · AI Automation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-grid-bottom fade-up">
+        <!-- Pulse -->
+        <div class="pj-card pj-pulse" data-project="pulse">
+          <div class="pj-visual">
+            <img class="pj-svg" src="/assets/images/projects/Pulse — Analytics Dashboard.png" alt="Pulse" loading="lazy">
+            <div class="pj-visual-glow"></div>
+            <div class="pj-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <div class="pj-body">
+            <div class="pj-tag">✦ Analytics</div>
+            <h3 class="pj-title">Pulse — Analytics Dashboard</h3>
+            <div class="pj-services">Web Design · AI Automation</div>
+          </div>
+        </div>
+
+        <!-- Bite -->
+        <div class="pj-card pj-bite" data-project="bite">
+          <div class="pj-visual">
+            <img class="pj-svg" src="/assets/images/projects/Bite — Food Delivery App.png" alt="Bite" loading="lazy">
+            <div class="pj-visual-glow"></div>
+            <div class="pj-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <div class="pj-body">
+            <div class="pj-tag">✦ Food Delivery</div>
+            <h3 class="pj-title">Bite — Food Delivery App</h3>
+            <div class="pj-services">Web Design · Performance Marketing</div>
+          </div>
+        </div>
+
+        <!-- Vault -->
+        <div class="pj-card pj-vault" data-project="vault">
+          <div class="pj-visual">
+            <img class="pj-svg" src="/assets/images/projects/Vault — Fintech Dashboard.png" alt="Vault" loading="lazy">
+            <div class="pj-visual-glow"></div>
+            <div class="pj-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <div class="pj-body">
+            <div class="pj-tag">✦ Fintech</div>
+            <h3 class="pj-title">Vault — Fintech Dashboard</h3>
+            <div class="pj-services">Web Design · Brand Identity · SEO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-cta-wrap fade-up">
+        <a href="#contact" class="pj-cta-btn">
+          <span>Start Your Project</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Project Modal ─── -->
+  <div class="pj-modal-overlay" id="pjModal">
+    <div class="pj-modal">
+      <button class="pj-modal-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="pj-modal-visual">
+        <!-- PUT YOUR MODAL PROJECT IMAGE PATH IN script.js -> projectData[].image -->
+        <img src="" alt="">
+      </div>
+      <div class="pj-modal-info">
+        <span class="pj-modal-category"></span>
+        <h3 class="pj-modal-title"></h3>
+        <p class="pj-modal-desc"></p>
+        <div class="pj-modal-services">
+          <h4>Services</h4>
+          <ul></ul>
+        </div>
+        <div class="pj-modal-results">
+          <h4>Key Results</h4>
+          <div class="pj-modal-stats"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ SOCIAL PROOF ══════════════════════════ -->
+  <section class="sp-section section" id="social">
+    <div class="sp-bg"></div>
+    <div class="container">
+      <div class="sp-top fade-up">
+        <div class="section-tag">✦ Social Proof</div>
+        <h2 class="section-title">Trusted by <span class="text-gradient">Innovators</span></h2>
+        <p class="section-desc">Real results and feedback from brands we've helped scale.</p>
+      </div>
+
+      <div class="sp-logos-wrap fade-up">
+        <div class="sp-logos-label">Powering growth for</div>
+        <div class="sp-logos">
+          <span class="sp-logo">Helios</span>
+          <span class="sp-logo">Aether</span>
+          <span class="sp-logo">Flux</span>
+          <span class="sp-logo">Zenith</span>
+          <span class="sp-logo">Atlas</span>
+          <span class="sp-logo">Pulse</span>
+        </div>
+      </div>
+
+      <div class="sp-testi-grid fade-up">
+        <div class="sp-testi-card">
+          <div class="sp-testi-stars">★★★★★</div>
+          <p class="sp-testi-text">"NAGRIVA redesigned our entire platform. The new interface boosted user engagement by 40% and our NPS score jumped 25 points."</p>
+          <div class="sp-testi-author">
+            <div class="sp-testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">AK</div>
+            <div>
+              <div class="sp-testi-name">Alex Kim</div>
+              <div class="sp-testi-role">CTO, Crest Analytics</div>
+            </div>
+          </div>
+        </div>
+        <div class="sp-testi-card sp-testi-featured">
+          <div class="sp-testi-stars">★★★★★</div>
+          <p class="sp-testi-text">"We interviewed five agencies before choosing NAGRIVA. Best decision we made. Organic traffic increased 340% in 6 months."</p>
+          <div class="sp-testi-author">
+            <div class="sp-testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">SM</div>
+            <div>
+              <div class="sp-testi-name">Sofia Martinez</div>
+              <div class="sp-testi-role">CMO, Relay Financial</div>
+            </div>
+          </div>
+        </div>
+        <div class="sp-testi-card">
+          <div class="sp-testi-stars">★★★★★</div>
+          <p class="sp-testi-text">"The level of craftsmanship and attention to detail is outstanding. They didn't just build a website — they built a complete growth system."</p>
+          <div class="sp-testi-author">
+            <div class="sp-testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">JD</div>
+            <div>
+              <div class="sp-testi-name">James Dubois</div>
+              <div class="sp-testi-role">Founder, Tidal Studio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sp-stats-grid fade-up">
+        <div class="sp-stat-card">
+          <div class="sp-stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 18 8 12 12 15 17 8 21 11"/></svg>
+          </div>
+          <div><span class="sp-stat-num" data-count="500">0</span><span class="sp-stat-unit">+</span></div>
+          <div class="sp-stat-label">Projects Completed</div>
+        </div>
+        <div class="sp-stat-card">
+          <div class="sp-stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div><span class="sp-stat-num" data-count="98">0</span><span class="sp-stat-unit">%</span></div>
+          <div class="sp-stat-label">Client Satisfaction</div>
+        </div>
+        <div class="sp-stat-card">
+          <div class="sp-stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div><span class="sp-stat-num" data-count="200">0</span><span class="sp-stat-unit">+</span></div>
+          <div class="sp-stat-label">Active Clients</div>
+        </div>
+        <div class="sp-stat-card">
+          <div class="sp-stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div><span class="sp-stat-num" data-count="340">0</span><span class="sp-stat-unit">%</span></div>
+          <div class="sp-stat-label">Revenue Growth</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PROCESS ══════════════════════════ -->
+  <section class="process section" id="about">
+    <div class="process-bg-glow"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ How we work</div>
+        <h2 class="section-title">Our <span class="process-gradient-text">Process</span></h2>
+        <p class="section-desc">A proven methodology that delivers consistent results, from discovery to launch and beyond.</p>
+      </div>
+
+      <div class="process-timeline fade-up">
+        <div class="timeline-line"></div>
+        <div class="timeline-nodes">
+          <div class="timeline-node">
+            <div class="node-num">01</div>
+            <div class="node-dot"></div>
+          </div>
+          <div class="timeline-node">
+            <div class="node-num">02</div>
+            <div class="node-dot"></div>
+          </div>
+          <div class="timeline-node">
+            <div class="node-num">03</div>
+            <div class="node-dot"></div>
+          </div>
+          <div class="timeline-node">
+            <div class="node-num">04</div>
+            <div class="node-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-cards fade-up">
+        <!-- Discovery -->
+        <div class="process-card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <div class="card-title">Discovery</div>
+          <div class="card-divider"></div>
+          <div class="card-desc">Deep-dive research into your brand, audience, competitors, and growth opportunities.</div>
+          <button class="card-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+
+        <!-- Strategy -->
+        <div class="process-card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="card-title">Strategy</div>
+          <div class="card-divider"></div>
+          <div class="card-desc">Data-informed roadmap with clear milestones, KPIs, and a custom growth plan.</div>
+          <button class="card-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+
+        <!-- Execute -->
+        <div class="process-card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="card-title">Execute</div>
+          <div class="card-divider"></div>
+          <div class="card-desc">Agile design and development with weekly check-ins and transparent progress.</div>
+          <button class="card-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+
+        <!-- Optimize -->
+        <div class="process-card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="card-title">Optimize</div>
+          <div class="card-divider"></div>
+          <div class="card-desc">Post-launch monitoring, A/B testing, and continuous optimization for peak performance.</div>
+          <button class="card-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="process-features fade-up">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="feature-text">
+            <div class="feature-title">Fast Turnaround</div>
+            <div class="feature-sub">4-8 week delivery</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="feature-text">
+            <div class="feature-title">Dedicated Support</div>
+            <div class="feature-sub">Direct project manager</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+          </div>
+          <div class="feature-text">
+            <div class="feature-title">Milestone Tracking</div>
+            <div class="feature-sub">Weekly progress updates</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="feature-text">
+            <div class="feature-title">Data-Driven</div>
+            <div class="feature-sub">Real-time analytics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ TESTIMONIALS ══════════════════════════ -->
+  <section class="testimonials section" id="testimonials">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">What Our <span class="text-gradient">Clients Say</span></h2>
+        <p class="section-desc">Trusted by modern brands worldwide.</p>
+      </div>
+    </div>
+
+    <div class="testimonials-track-wrap fade-up">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"NAGRIVA completely transformed our online presence. Traffic doubled within 3 months and our conversion rate has never been higher."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SK</div>
+            <div>
+              <div class="testi-name">Sarah Kim</div>
+              <div class="testi-role">CEO, Luma Cosmetics</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The team's strategic approach to SEO and design is unmatched. We've seen a 180% increase in organic leads since launching our new site."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">MR</div>
+            <div>
+              <div class="testi-name">Marcus Reed</div>
+              <div class="testi-role">Founder, Prisma Tech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Working with NAGRIVA was a game-changer. Our revenue grew by 94% in the first quarter after the redesign. Highly recommend."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">EL</div>
+            <div>
+              <div class="testi-name">Emily Liu</div>
+              <div class="testi-role">CMO, Novu Inc.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Their performance marketing campaigns delivered a 4.5x ROAS in the first month alone. The data-driven approach really sets them apart."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#007aff,#00f5c4)">JC</div>
+            <div>
+              <div class="testi-name">James Chen</div>
+              <div class="testi-role">Director, Retool Systems</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"NAGRIVA didn't just build us a website — they built a growth engine. Our team is finally spending less time on fixes and more on scaling."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#00c2a8,#8b5cf6)">AP</div>
+            <div>
+              <div class="testi-name">Aisha Patel</div>
+              <div class="testi-role">CEO, Stytch Labs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duplicates for seamless scroll -->
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"NAGRIVA completely transformed our online presence. Traffic doubled within 3 months and our conversion rate has never been higher."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SK</div>
+            <div>
+              <div class="testi-name">Sarah Kim</div>
+              <div class="testi-role">CEO, Luma Cosmetics</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The team's strategic approach to SEO and design is unmatched. We've seen a 180% increase in organic leads since launching our new site."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">MR</div>
+            <div>
+              <div class="testi-name">Marcus Reed</div>
+              <div class="testi-role">Founder, Prisma Tech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Working with NAGRIVA was a game-changer. Our revenue grew by 94% in the first quarter after the redesign. Highly recommend."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">EL</div>
+            <div>
+              <div class="testi-name">Emily Liu</div>
+              <div class="testi-role">CMO, Novu Inc.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ══════════════════════════ FAQ — Premium Redesign ══════════════════════════ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="faq-split">
+        <!-- ─── LEFT SIDE ─── -->
+        <div class="faq-left fade-up">
+          <div class="faq-badge" data-i18n="faq.tag">✦ FAQ</div>
+
+          <h2 class="faq-title" data-i18n="faq.title">
+            Frequently Asked
+            <span class="faq-title-gradient">Questions</span>
+          </h2>
+
+          <p class="faq-sub" data-i18n="faq.subtitle">
+            Everything you need to know about working with us. Can't find what you're looking for? Our team is here to help.
+          </p>
+
+          <!-- Premium Support Card -->
+          <div class="faq-support-card">
+            <div class="faq-support-glow"></div>
+            <div class="faq-support-inner">
+              <div class="faq-support-icon-row">
+                <div class="faq-support-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="faq-support-info">
+                  <div class="faq-support-name">Need Quick Help?</div>
+                  <div class="faq-support-desc">Our team typically replies within 2 hours</div>
+                </div>
+              </div>
+              <button class="faq-chat-btn" onclick="this.classList.add('pulse-glow');setTimeout(function(){this.classList.remove('pulse-glow')}.bind(this),600);openNagrivaChat()">
+                <span>Live Chat</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H10M10 7L7 4M10 7L7 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Trust Strip -->
+          <div class="faq-trust-strip">
+            <div class="faq-trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>24/7 Support</span>
+            </div>
+            <div class="faq-trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>2h Response Time</span>
+            </div>
+            <div class="faq-trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              <span>98% Satisfaction</span>
+            </div>
+          </div>
+
+          <!-- Company Logos -->
+          <div class="faq-brands">
+            <span class="faq-brands-label">Trusted by industry leaders</span>
+            <div class="faq-brands-row">
+              <span class="faq-brand-logo">Google</span>
+              <span class="faq-brand-logo">Meta</span>
+              <span class="faq-brand-logo">TikTok</span>
+              <span class="faq-brand-logo">Shopify</span>
+              <span class="faq-brand-logo">Stripe</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── RIGHT SIDE ─── -->
+        <div class="faq-right fade-up" style="--delay:0.15s">
+          <div class="faq-accordion">
+            <!-- Item 01 -->
+            <div class="faq-p-item open">
+              <button class="faq-p-q">
+                <span class="faq-p-num">01</span>
+                <span class="faq-p-text">What services does NAGRIVA offer?</span>
+                <span class="faq-p-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-p-answer">
+                <div class="faq-p-answer-inner">
+                  <p>We provide a full spectrum of digital growth services including web design, SEO optimization, branding, AI automation, social media growth, and performance marketing — all tailored to your business goals.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 02 -->
+            <div class="faq-p-item">
+              <button class="faq-p-q">
+                <span class="faq-p-num">02</span>
+                <span class="faq-p-text">How long does a typical project take?</span>
+                <span class="faq-p-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-p-answer">
+                <div class="faq-p-answer-inner">
+                  <p>Timelines vary by scope, but most projects are delivered within 4-8 weeks. We'll provide a detailed timeline during our initial consultation and keep you updated throughout the process.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 03 -->
+            <div class="faq-p-item">
+              <button class="faq-p-q">
+                <span class="faq-p-num">03</span>
+                <span class="faq-p-text">Do you work with startups and small businesses?</span>
+                <span class="faq-p-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-p-answer">
+                <div class="faq-p-answer-inner">
+                  <p>Absolutely. We work with businesses of all sizes — from early-stage startups to established enterprises. Every engagement is customized to fit your budget and growth stage.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 04 -->
+            <div class="faq-p-item">
+              <button class="faq-p-q">
+                <span class="faq-p-num">04</span>
+                <span class="faq-p-text">What results can I expect from SEO?</span>
+                <span class="faq-p-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-p-answer">
+                <div class="faq-p-answer-inner">
+                  <p>While results vary, our clients typically see significant improvements in organic traffic within 3-6 months. We focus on sustainable, long-term growth strategies that compound over time.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 05 -->
+            <div class="faq-p-item">
+              <button class="faq-p-q">
+                <span class="faq-p-num">05</span>
+                <span class="faq-p-text">Do you offer ongoing support after launch?</span>
+                <span class="faq-p-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-p-answer">
+                <div class="faq-p-answer-inner">
+                  <p>Yes. We offer ongoing maintenance, monitoring, and optimization packages to ensure your digital presence continues to perform at its best long after launch.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 06 -->
+            <div class="faq-p-item">
+              <button class="faq-p-q">
+                <span class="faq-p-num">06</span>
+                <span class="faq-p-text">How do I get started with NAGRIVA?</span>
+                <span class="faq-p-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-p-answer">
+                <div class="faq-p-answer-inner">
+                  <p>Book a free call with us. We'll discuss your goals, analyze your current setup, and put together a tailored growth strategy. No commitment required — just a friendly conversation about your business.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── BOTTOM CTA ─── -->
+      <div class="faq-bottom-cta fade-up">
+        <div class="faq-cta-glow"></div>
+        <div class="faq-cta-body">
+          <div class="faq-cta-left">
+            <h3 class="faq-cta-title">Still have questions?</h3>
+            <p class="faq-cta-desc">We're here to help you. Get in touch with our team and we'll get back to you within 2 hours.</p>
+          </div>
+          <a href="#contact" class="faq-cta-btn">
+            <span>Contact Us</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PRICING / SERVICES ══════════════════════════ -->
+  <section class="pricing section" id="pricing">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Solutions</div>
+        <h2 class="section-title">Plans & <span class="text-gradient">Packages</span></h2>
+        <p class="section-desc">Scalable solutions crafted for your business goals. From brand launches to custom builds — we tailor every project to your needs.</p>
+      </div>
+
+      <div class="pricing-grid fade-up">
+        <!-- Brand & Launch -->
+        <div class="pricing-card">
+          <div class="pricing-service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="pricing-service-title" data-i18n="pricing.brand-launch">Brand & Launch</div>
+          <div class="pricing-price"><span class="price-amount" data-i18n-currency="50">500</span> <span class="price-currency" data-i18n-currency-symbol>DH</span></div>
+          <div class="price-label" data-i18n="pricing.starting-price">Starting Price</div>
+          <p class="pricing-desc" data-i18n="pricing.brand-launch-desc">Kickstart your online presence with a custom website, blog, or brand identity — designed to make a lasting impression.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Website & Blog Design</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SEO Optimization</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Responsive Layout</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Performance Optimized</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Content Strategy</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Brand Identity Setup</li>
+          </ul>
+          <a href="https://buy.stripe.com/test_00wfZg8d141n6tw2IsfIs02"  target="_blank" class="btn-pricing" data-i18n="pricing.view-packages">View Packages</a>
+        </div>
+
+        <!-- Scale & Convert (Featured) -->
+        <div class="pricing-card featured">
+          <div class="pricing-badge" data-i18n="pricing.most-popular">Most Popular</div>
+          <div class="pricing-service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              <polyline points="17 6 23 6 23 12"/>
+            </svg>
+          </div>
+          <div class="pricing-service-title" data-i18n="pricing.scale-convert">Scale & Convert</div>
+          <div class="pricing-price"><span class="price-amount" data-i18n-currency="120">1200</span> <span class="price-currency" data-i18n-currency-symbol>DH</span></div>
+          <div class="price-label" data-i18n="pricing.starting-price">Starting Price</div>
+          <p class="pricing-desc" data-i18n="pricing.scale-convert-desc">Growth-focused websites and digital tools engineered to turn visitors into loyal customers.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Premium Web Development</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Modern UI/UX</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Conversion Optimization</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SEO & Analytics</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Performance Tuning</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Growth Strategy</li>
+          </ul>
+          <a href="https://buy.stripe.com/test_6oU8wO1OD2Xj19c1EofIs01" target="_blank" class="btn-pricing featured-btn" data-i18n="pricing.get-started">Get Started</a>
+        </div>
+
+        <!-- Custom Solutions -->
+        <div class="pricing-card">
+          <div class="pricing-service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l1.5 5.5L19 9l-5.5 2.5L12 17l-1.5-5.5L5 9l5.5-2.5L12 2z"/>
+            </svg>
+          </div>
+          <div class="pricing-service-title" data-i18n="pricing.custom">Custom Solutions</div>
+          <div class="pricing-price"><span class="price-amount" data-i18n-currency="75">750</span> <span class="price-currency" data-i18n-currency-symbol>DH</span></div>
+          <div class="price-label" data-i18n="pricing.starting-from">Starting From</div>
+          <p class="pricing-desc" data-i18n="pricing.custom-desc">Bespoke digital solutions tailored to your unique needs — from video and automation to branding and beyond.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tailored Development</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI & Automation</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Video & Motion Content</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Brand & Identity</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Strategy Consulting</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>And More</li>
+          </ul>
+          <a href="#contact" class="btn-pricing" data-i18n="pricing.contact-us">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CONTACT / CTA ══════════════════════════ -->
+  <section class="cta-section section" id="contact">
+
+    <div class="container">
+      <div class="contact-grid">
+        <!-- ═══ LEFT SIDE ═══ -->
+        <div class="contact-left fade-up">
+          <div class="contact-visual-area">
+            <!-- Text -->
+            <div class="contact-text-block">
+              <div class="contact-badge" data-i18n="contact.badge">Let's talk</div>
+              <h2 class="contact-title" data-i18n="contact.title">
+                Ready to <span class="contact-highlight">Grow</span> Your Business?
+              </h2>
+              <p class="contact-desc" data-i18n="contact.desc">
+                Book a free strategy call and let's map out a growth plan tailored to your brand. No commitment, just results.
+              </p>
+            </div>
+
+            <!-- Floating Stats Cards -->
+            <div class="contact-stats-grid">
+              <div class="c-stat-card c-stat-1" style="--float-d:0s">
+                <div class="c-stat-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="c-stat-body">
+                  <span class="c-stat-val">284.6K</span>
+                  <span class="c-stat-lbl">Traffic Generated</span>
+                </div>
+                <span class="c-stat-chg positive">+18.2%</span>
+              </div>
+              <div class="c-stat-card c-stat-2" style="--float-d:0.3s">
+                <div class="c-stat-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div class="c-stat-body">
+                  <span class="c-stat-val">4.86%</span>
+                  <span class="c-stat-lbl">Conversion Rate</span>
+                </div>
+                <span class="c-stat-chg positive">+2.1%</span>
+              </div>
+              <div class="c-stat-card c-stat-3" style="--float-d:0.6s">
+                <div class="c-stat-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="c-stat-body">
+                  <span class="c-stat-val">$186K</span>
+                  <span class="c-stat-lbl">Revenue Growth</span>
+                </div>
+                <span class="c-stat-chg positive">+34.7%</span>
+              </div>
+              <div class="c-stat-card c-stat-4" style="--float-d:0.9s">
+                <div class="c-stat-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="c-stat-body">
+                  <span class="c-stat-val">48</span>
+                  <span class="c-stat-lbl">Active Campaigns</span>
+                </div>
+                <span class="c-stat-chg positive">+12</span>
+              </div>
+            </div>
+
+            <!-- Testimonial Card -->
+            <div class="c-testimonial" style="--float-d:0.4s">
+              <div class="c-testi-glow"></div>
+              <div class="c-testi-body">
+                <div class="c-testi-stars">★★★★★</div>
+                <p class="c-testi-text">"NAGRIVA transformed our digital presence. Traffic grew 340% in just 6 months. The best investment we've made."</p>
+                <div class="c-testi-author">
+                  <div class="c-testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SM</div>
+                  <div>
+                    <div class="c-testi-name">Sofia Martinez</div>
+                    <div class="c-testi-role">CMO, Relay Financial</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trusted Brands -->
+            <div class="c-trusted">
+              <span class="c-trusted-label">Trusted by leading brands</span>
+              <div class="c-trusted-logos">
+                <span class="c-t-logo">Google</span>
+                <span class="c-t-logo">Meta</span>
+                <span class="c-t-logo">TikTok</span>
+                <span class="c-t-logo">YouTube</span>
+                <span class="c-t-logo">Shopify</span>
+              </div>
+            </div>
+
+            <!-- Ambients -->
+            <div class="c-ambient c-ambient-1"></div>
+            <div class="c-ambient c-ambient-2"></div>
+            <div class="c-ambient c-ambient-3"></div>
+          </div>
+        </div>
+
+        <!-- ═══ RIGHT SIDE ═══ -->
+        <div class="contact-right fade-up" style="--delay:0.15s">
+          <div class="contact-card">
+            <form class="contact-form" id="contactForm">
+              <div class="contact-form-header">
+                <span class="contact-form-badge">Get in Touch</span>
+                <h3 class="contact-form-title">Let's Work Together</h3>
+              </div>
+              <div class="form-group">
+                <div class="form-input-wrap">
+                  <svg class="form-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <input type="text" name="name" class="form-input" placeholder="Full Name" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-input-wrap">
+                  <svg class="form-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <input type="email" name="email" class="form-input" placeholder="Email Address" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-input-wrap">
+                  <svg class="form-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <select name="service" class="form-select">
+                    <option value="" disabled selected>Service Needed</option>
+                    <option value="Web Design">Web Design</option>
+                    <option value="SEO Optimization">SEO Optimization</option>
+                    <option value="Branding">Branding</option>
+                    <option value="Performance Marketing">Performance Marketing</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-input-wrap textarea-wrap">
+                  <svg class="form-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  <textarea name="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                </div>
+              </div>
+              <button type="submit" class="form-btn" id="formBtn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-spinner"></span>
+                <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="form-error" id="formError">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <span>Something went wrong. Please try again or email us directly.</span>
+              </div>
+              <div class="contact-trust-badges">
+                <div class="c-trust-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span>256-bit Secure</span>
+                </div>
+                <div class="c-trust-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>Reply in 24h</span>
+                </div>
+                <div class="c-trust-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>No Spam</span>
+                </div>
+              </div>
+            </form>
+            <div class="form-success" id="formSuccess">
+              <div class="success-glow"></div>
+              <div class="success-icon-wrap">
+                <svg class="success-checkmark" viewBox="0 0 52 52" width="52" height="52">
+                  <circle class="checkmark-circle" cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <path class="checkmark-check" d="M14 27l7 7 16-16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="success-headline">Message Sent Successfully</h3>
+              <p class="success-sub">We received your request and will contact you within 24 hours.</p>
+              <div class="success-summary" id="successSummary">
+                <div class="summary-row">
+                  <span class="summary-label">Name</span>
+                  <span class="summary-value" id="summaryName"></span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Email</span>
+                  <span class="summary-value" id="summaryEmail"></span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Service</span>
+                  <span class="summary-value" id="summaryService"></span>
+                </div>
+                <div class="summary-row summary-row-message">
+                  <span class="summary-label">Message</span>
+                  <span class="summary-value" id="summaryMessage"></span>
+                </div>
+              </div>
+              <button class="success-resend-btn" id="resetFormBtn" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                <span>Send Another Message</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/profile-avatar.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/floating-elements.js"></script>
+  <script src="/js/chatbot.js"></script>
+  <script src="/js/footer.js"></script>
+</body>
+</html>

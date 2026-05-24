@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — NAGRIVA</title>
+  <meta name="description" content="Your NAGRIVA client dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <style>
+    .dash-page {
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .dash-greeting h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .dash-greeting p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .dash-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.15);
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .dash-badge-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .dash-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 24px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .dash-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      transform: translateY(-3px);
+    }
+    .dash-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .dash-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+      letter-spacing: -0.02em;
+    }
+    .dash-card .dash-label {
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+    .dash-card .dash-change {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.12);
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-top: 10px;
+    }
+    .dash-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .dash-activity {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .dash-activity-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color var(--transition);
+    }
+    .dash-activity-item:hover {
+      border-color: rgba(255,255,255,0.1);
+    }
+    .dash-activity-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dash-activity-dot.active { background: var(--accent); box-shadow: 0 0 8px rgba(0,245,196,0.4); }
+    .dash-activity-dot.pending { background: #f59e0b; }
+    .dash-activity-text {
+      flex: 1;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    .dash-activity-text strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+    .dash-activity-time {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      white-space: nowrap;
+    }
+    .dash-quick-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .dash-quick-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      border: 1px solid var(--border2);
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .dash-quick-link:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+    }
+    .dash-quick-link.primary {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .dash-quick-link.primary:hover {
+      box-shadow: 0 0 30px rgba(0,245,196,0.3);
+    }
+
+    .dash-orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .dash-order-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .dash-order-item:hover {
+      border-color: rgba(0,245,196,0.2);
+      background: rgba(0,245,196,0.02);
+    }
+    .dash-order-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .dash-order-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .dash-order-meta {
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .dash-order-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .dash-order-badge.pending { color:#f59e0b; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.2); }
+    .dash-order-badge.in_progress { color:#4facfe; background:rgba(79,172,254,0.1); border:1px solid rgba(79,172,254,0.2); }
+    .dash-order-badge.review { color:#a855f7; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); }
+    .dash-order-badge.delivered { color:var(--accent); background:rgba(0,245,196,0.1); border:1px solid rgba(0,245,196,0.2); }
+    .dash-order-badge.cancelled { color:#ff5050; background:rgba(255,80,80,0.1); border:1px solid rgba(255,80,80,0.2); }
+    .dash-order-arrow {
+      color: var(--gray2);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .dash-order-item:hover .dash-order-arrow {
+      transform: translateX(3px);
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .dash-grid { grid-template-columns: 1fr; }
+      .dash-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+
+  <!-- ══════════════════════════ NAVBAR ══════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" />
+        </span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="web-design.html" class="nav-link">Services</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <a href="login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════ DASHBOARD ══════════════════════════ -->
+  <section class="dash-page">
+    <div class="container">
+      <div class="dash-header">
+        <div class="dash-greeting">
+          <h1>Welcome back<span id="dashUserName"></span></h1>
+          <p>Here's what's happening with your projects.</p>
+        </div>
+        <div class="dash-badge">
+          <span class="dash-badge-dot"></span>
+          All systems operational
+        </div>
+      </div>
+
+      <div class="dash-grid" id="dashStats">
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3 id="activeCount">-</h3>
+          <div class="dash-label">Active Projects</div>
+          <span class="dash-change">Currently in progress</span>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <h3 id="completedCount">-</h3>
+          <div class="dash-label">Completed Projects</div>
+          <span class="dash-change">Delivered orders</span>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 id="pendingCount">-</h3>
+          <div class="dash-label">Pending Orders</div>
+          <span class="dash-change">Awaiting processing</span>
+        </div>
+      </div>
+
+      <h2 class="dash-section-title">Recent Orders</h2>
+      <div class="dash-orders-list" id="dashOrdersList">
+        <div class="dash-activity-item">
+          <span class="dash-activity-dot"></span>
+          <span class="dash-activity-text">Loading orders...</span>
+          <span class="dash-activity-time"></span>
+        </div>
+      </div>
+
+      <h2 class="dash-section-title">Recent Activity</h2>
+      <div class="dash-activity" id="dashActivity">
+        <div class="dash-activity-item">
+          <span class="dash-activity-dot active"></span>
+          <span class="dash-activity-text">Loading activity...</span>
+          <span class="dash-activity-time"></span>
+        </div>
+      </div>
+
+      <h2 class="dash-section-title">Quick Links</h2>
+      <div class="dash-quick-links">
+        <a href="submit-order.html" class="dash-quick-link primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Order
+        </a>
+        <a href="client-portal.html" class="dash-quick-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+          Client Portal
+        </a>
+        <a href="order-tracking.html" class="dash-quick-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Track Order
+        </a>
+        <a href="../index.html#contact" class="dash-quick-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Support
+        </a>
+        <a href="admin-dashboard.html" class="dash-quick-link" id="adminLink" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Admin Panel
+        </a>
+        <a href="../index.html" class="dash-quick-link">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ AUTH MODAL ══════════════════════════ -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-backdrop" id="authBackdrop"></div>
+    <div class="auth-ambient auth-ambient-1"></div>
+    <div class="auth-ambient auth-ambient-2"></div>
+    <div class="auth-modal" id="authModal">
+      <div class="auth-modal-glow"></div>
+      <button class="auth-close-btn" id="authCloseBtn" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="auth-inner">
+        <div class="auth-header">
+          <div class="auth-logo">
+            <img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA" />
+            <span class="auth-logo-text">NAGRIVA</span>
+          </div>
+          <h3 class="auth-title" id="authTitle">Welcome Back</h3>
+          <p class="auth-subtitle" id="authSubtitle">Sign in to access your dashboard and manage your projects.</p>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="signin">Sign In</button>
+          <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+        <form class="auth-form active" id="signInForm" autocomplete="off">
+          <div class="auth-message" id="signinMessage"></div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">
+              <span>Password</span>
+              <button type="button" class="auth-forgot-link">Forgot password?</button>
+            </label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" class="auth-input" placeholder="Enter your password" autocomplete="current-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="auth-form-options">
+            <label class="auth-remember">
+              <input type="checkbox" checked />
+              <span class="auth-remember-label">Remember me</span>
+            </label>
+          </div>
+          <button type="submit" class="auth-submit" id="signinSubmit">
+            <span class="auth-btn-text">Sign In</span>
+            <span class="auth-btn-spinner"></span>
+            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="auth-divider"><span class="auth-divider-line"></span><span class="auth-divider-text">or continue with</span><span class="auth-divider-line"></span></div>
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="auth-social-btn github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+          <div class="auth-form-footer">
+            <span>Don't have an account? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signup">Create one</button>
+          </div>
+        </form>
+        <form class="auth-form" id="signUpForm" autocomplete="off">
+          <div class="auth-message" id="signupMessage"></div>
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" class="auth-input" name="name" placeholder="John Doe" autocomplete="name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" class="auth-input" name="password" placeholder="Create a password" autocomplete="new-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              <input type="password" class="auth-input" name="confirmPassword" placeholder="Confirm your password" autocomplete="new-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-pw-strength" id="passwordStrength">
+            <div class="auth-pw-strength-bar">
+              <div class="auth-pw-strength-fill" id="passwordStrengthFill"></div>
+            </div>
+            <span class="auth-pw-strength-label" id="passwordStrengthLabel">Strength</span>
+          </div>
+
+          <label class="auth-terms">
+            <input type="checkbox" id="termsCheckbox" />
+            <span class="auth-terms-label">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span>
+          </label>
+
+          <button type="submit" class="auth-submit" id="signupSubmit">
+            <span class="auth-btn-text">Create Account</span>
+            <span class="auth-btn-spinner"></span>
+            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="auth-divider"><span class="auth-divider-line"></span><span class="auth-divider-text">or continue with</span><span class="auth-divider-line"></span></div>
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="auth-social-btn github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+          <div class="auth-form-footer">
+            <span>Already have an account? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signin">Sign in</button>
+          </div>
+        </form>
+        <form class="auth-form" id="forgotForm" autocomplete="off">
+          <div class="auth-message" id="forgotMessage"></div>
+          <div id="forgotFormWrap">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <div class="auth-input-wrap">
+                <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+            <button type="submit" class="auth-submit" id="forgotSubmit">
+              <span class="auth-btn-text">Send Reset Link</span>
+              <span class="auth-btn-spinner"></span>
+              <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="auth-forgot-success" id="forgotSuccess">
+            <div class="auth-forgot-success-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <p class="auth-forgot-success-text">Check your email for a password reset link. If it doesn't appear within a few minutes, check your spam folder.</p>
+          </div>
+          <div class="auth-form-footer">
+            <span>Remember your password? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signin">Back to sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/auth-guard.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/profile-avatar.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/orders.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      /* Greeting */
+      var nameEl = document.getElementById('dashUserName');
+      if (nameEl) {
+        var user = await NagrivaOrders.getCurrentUser();
+        if (user) {
+          var displayName = user.user_metadata?.full_name || user.email?.split('@')[0] || '';
+          if (displayName) nameEl.textContent = ', ' + displayName.split(' ')[0];
+        }
+      }
+
+      /* Dashboard Stats */
+      async function loadStats() {
+        try {
+          var stats = await NagrivaOrders.getUserDashboardStats();
+          document.getElementById('activeCount').textContent = stats.active;
+          document.getElementById('completedCount').textContent = stats.completed;
+          document.getElementById('pendingCount').textContent = stats.pending;
+        } catch (err) {
+          console.error('[Dashboard] loadStats failed:', err.message || err);
+        }
+      }
+
+      /* Activity */
+      async function loadActivity() {
+        var container = document.getElementById('dashActivity');
+        try {
+          var activities = await NagrivaOrders.getRecentActivity(5);
+          if (activities.length === 0) {
+            container.innerHTML = '<div class="dash-activity-item"><span class="dash-activity-dot"></span><span class="dash-activity-text">No recent activity</span><span class="dash-activity-time"></span></div>';
+            return;
+          }
+          container.innerHTML = '';
+          activities.forEach(function(a) {
+            var item = document.createElement('div');
+            item.className = 'dash-activity-item';
+            var dot = document.createElement('span');
+            dot.className = 'dash-activity-dot active';
+            var text = document.createElement('span');
+            text.className = 'dash-activity-text';
+            text.innerHTML = '<strong>' + (a.action || 'Update') + '</strong> — ' + (a.description || '');
+            var time = document.createElement('span');
+            time.className = 'dash-activity-time';
+            time.textContent = NagrivaOrders.formatTimeAgo(a.created_at);
+            item.appendChild(dot);
+            item.appendChild(text);
+            item.appendChild(time);
+            container.appendChild(item);
+          });
+        } catch (err) {
+          console.error('[Dashboard] loadActivity failed:', err.message || err);
+          container.innerHTML = '<div class="dash-activity-item"><span class="dash-activity-dot"></span><span class="dash-activity-text">Could not load activity</span></div>';
+        }
+      }
+
+      /* Recent Orders */
+      function formatBudget(val) {
+        if (val == null || isNaN(val)) return '';
+        return ' $' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      }
+      function formatDateShort(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+      function safeServiceType(s) {
+        if (!s) return 'Service';
+        return String(s).replace(/_/g, ' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+      }
+      async function loadOrders() {
+        var container = document.getElementById('dashOrdersList');
+        var orders;
+        try {
+          orders = await NagrivaOrders.getUserOrders();
+          console.log('[Dashboard] Orders fetched:', orders);
+        } catch (err) {
+          console.error('[Dashboard] NagrivaOrders.getUserOrders failed:', err);
+          try {
+            console.log('[Dashboard] Trying direct Supabase query...');
+            var fbUser = await NagrivaOrders.getCurrentUser();
+            var fbQuery = window.supabaseClient.from('orders').select('*');
+            if (fbUser) fbQuery = fbQuery.eq('user_id', fbUser.id);
+            var result = await fbQuery.order('created_at', { ascending: false });
+            if (result.error) throw result.error;
+            orders = result.data || [];
+            console.log('[Dashboard] Direct fetch succeeded:', orders);
+          } catch (fallbackErr) {
+            console.error('[Dashboard] Direct query also failed:', fallbackErr);
+            container.innerHTML = '<div class="dash-activity-item"><span class="dash-activity-dot"></span><span class="dash-activity-text">Could not load orders</span></div>';
+            return;
+          }
+        }
+        if (!orders || orders.length === 0) {
+          container.innerHTML = '<div class="dash-activity-item"><span class="dash-activity-dot"></span><span class="dash-activity-text">No orders yet. <a href="submit-order.html" style="color:var(--accent);text-decoration:underline;">Submit your first order</a></span><span class="dash-activity-time"></span></div>';
+          return;
+        }
+        container.innerHTML = '';
+        var displayOrders = orders.slice(0, 5);
+        displayOrders.forEach(function(o) {
+          try {
+            var item = document.createElement('a');
+            item.className = 'dash-order-item';
+            item.href = 'order-tracking.html?id=' + (o.id || '');
+
+            var info = document.createElement('div');
+            info.className = 'dash-order-info';
+
+            var name = document.createElement('div');
+            name.className = 'dash-order-name';
+            name.textContent = o.project_title || o.project_name || 'Untitled Project';
+
+            var meta = document.createElement('div');
+            meta.className = 'dash-order-meta';
+            meta.textContent = safeServiceType(o.service_type) + ' · ' + formatDateShort(o.created_at) + formatBudget(o.budget);
+
+            info.appendChild(name);
+            info.appendChild(meta);
+
+            var badge = document.createElement('span');
+            badge.className = 'dash-order-badge ' + NagrivaOrders.getStatusBadgeClass(o.status);
+            badge.textContent = NagrivaOrders.getStatusLabel(o.status);
+
+            var arrow = document.createElement('span');
+            arrow.className = 'dash-order-arrow';
+            arrow.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+            item.appendChild(info);
+            item.appendChild(badge);
+            item.appendChild(arrow);
+            container.appendChild(item);
+          } catch (renderErr) {
+            console.error('[Dashboard] Failed to render order item:', renderErr, o);
+          }
+        });
+        if (container.children.length === 0) {
+          container.innerHTML = '<div class="dash-activity-item"><span class="dash-activity-dot"></span><span class="dash-activity-text">Could not load orders</span></div>';
+        }
+      }
+
+      /* Admin link visibility */
+      try {
+        var admin = await NagrivaOrders.isAdmin();
+        if (admin) {
+          var link = document.getElementById('adminLink');
+          if (link) link.style.display = '';
+        }
+      } catch (e) {}
+
+      loadStats();
+      loadOrders();
+      loadActivity();
+    });
+  </script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+</html>

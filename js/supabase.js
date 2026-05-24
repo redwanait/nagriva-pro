@@ -1,0 +1,1 @@
+const supabase = window.supabaseClient;

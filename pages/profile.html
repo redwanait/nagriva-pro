@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — NAGRIVA</title>
+  <meta name="description" content="Your NAGRIVA profile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <style>
+    .profile-page { padding-top: 100px; min-height: 100vh; }
+    .profile-header { display: flex; align-items: center; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+    .profile-avatar-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .profile-avatar-wrapper { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+    .profile-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700;
+      color: var(--bg);
+    }
+    .profile-avatar-badge {
+      position: absolute; bottom: 0; right: 0;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .profile-avatar-badge svg { width: 11px; height: 11px; color: var(--bg); display: block; }
+    .profile-info { flex: 1; min-width: 0; }
+    .profile-info h1 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+    .profile-info .profile-email { font-size: 0.85rem; color: var(--gray); }
+    .profile-info .profile-joined { font-size: 0.78rem; color: var(--gray2); margin-top: 4px; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+    .profile-card {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 24px;
+    }
+    .profile-card h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: -0.01em; }
+    .profile-form { display: flex; flex-direction: column; gap: 16px; }
+    .pf-group { display: flex; flex-direction: column; gap: 6px; }
+    .pf-label { font-size: 0.78rem; font-weight: 500; color: var(--gray); letter-spacing: 0.01em; }
+    .pf-input {
+      width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--white); outline: none;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .pf-input:focus { border-color: rgba(0,245,196,0.3); background: rgba(0,245,196,0.02); }
+    .pf-input:disabled { opacity: 0.5; cursor: not-allowed; }
+    .pf-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      border: none; align-self: flex-start;
+      color: var(--bg); background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .pf-btn:hover { box-shadow: 0 0 30px rgba(0,245,196,0.25); transform: translateY(-1px); }
+    .pf-btn:active { transform: translateY(0) scale(0.98); }
+    .pf-btn.loading { pointer-events: none; opacity: 0.9; }
+    .pf-btn.loading .pf-btn-text { display: none; }
+    .pf-btn.loading .pf-btn-spinner { display: inline-block; }
+    .pf-btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(4,4,4,0.15); border-top-color: #040404; border-radius: 50%; animation: auth-spin 0.6s linear infinite; }
+    .pf-success { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(0,245,196,0.05); border: 1px solid rgba(0,245,196,0.12); color: rgba(255,255,255,0.7); display: none; }
+    .pf-success.show { display: block; animation: auth-msg-in 0.35s ease; }
+    .pf-error { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(255,80,80,0.05); border: 1px solid rgba(255,80,80,0.12); color: rgba(255,255,255,0.7); display: none; }
+    .pf-error.show { display: block; animation: auth-msg-in 0.35s ease; }
+    .connected-provider { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.015); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; }
+    .connected-provider:last-child { margin-bottom: 0; }
+    .connected-provider-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); }
+    .connected-provider-info { flex: 1; min-width: 0; }
+    .connected-provider-name { font-size: 0.85rem; font-weight: 500; color: var(--white); }
+    .connected-provider-email { font-size: 0.75rem; color: var(--gray2); }
+    .connected-provider-badge { font-size: 0.65rem; font-weight: 600; color: var(--accent); background: rgba(0,245,196,0.08); padding: 2px 8px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .no-providers { font-size: 0.85rem; color: var(--gray2); text-align: center; padding: 24px 0; }
+    .profile-avatar.has-image { background: none; border: 2px solid var(--accent); }
+    .profile-avatar img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .profile-avatar img.loaded { opacity: 1; }
+    .change-photo-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; margin-top: 12px; padding: 7px 16px; min-height: 32px;
+      border-radius: 8px; font-size: 0.75rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; border: none; outline: none;
+      color: var(--accent); background: rgba(0,245,196,0.08);
+      transition: all var(--transition); line-height: 1;
+    }
+    .change-photo-btn:hover { background: rgba(0,245,196,0.15); }
+    .change-photo-btn.loading { pointer-events: none; opacity: 0.6; }
+    .change-photo-btn svg { flex-shrink: 0; display: block; }
+    .toast-container {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+    }
+    .toast {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 18px; border-radius: 12px; font-size: 0.82rem;
+      font-family: 'DM Sans', sans-serif; color: rgba(255,255,255,0.85);
+      background: rgba(11,15,15,0.96); border: 1px solid var(--border);
+      backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      pointer-events: auto; opacity: 0; transform: translateY(12px) scale(0.96);
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1); max-width: 360px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0) scale(1); }
+    .toast-success .toast-icon { color: var(--accent); }
+    .toast-error .toast-icon { color: #ff5050; }
+    .toast-info .toast-icon { color: #60a5fa; }
+    .toast-icon { display: flex; flex-shrink: 0; }
+    .toast-msg { flex: 1; min-width: 0; }
+    @media (max-width: 768px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-header { flex-direction: column; text-align: center; }
+      .profile-info { text-align: center; }
+      .pf-btn { align-self: stretch; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-icon"><img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" /></span>
+        <span class="logo-text">NAGRIVA</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="web-design.html" class="nav-link">Services</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="login.html" class="btn-auth" id="authBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <div class="nav-user-avatar" id="userAvatar">
+          <span class="nav-user-name" id="userName">User</span>
+          <span class="nav-user-img" id="userImg">U</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-avatar" id="dropdownAvatar">U</span>
+              <div class="user-dropdown-info">
+                <div class="user-dropdown-name" id="dropdownName">User</div>
+                <div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>
+              </div>
+            </div>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Dashboard
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              Notifications
+            </button>
+            <button class="user-dropdown-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Settings
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item signout" id="signoutBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-book">Book a Free Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="profile-page">
+    <div class="container">
+      <div class="profile-header">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar" id="profileAvatar">U</div>
+            <div class="profile-avatar-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <button class="change-photo-btn" id="changePhotoBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Change Photo
+          </button>
+          <input type="file" accept="image/jpeg,image/png,image/webp" id="avatarInput" style="display:none" />
+        </div>
+        <div class="profile-info">
+          <h1 id="profileName">User</h1>
+          <div class="profile-email" id="profileEmail">user@email.com</div>
+          <div class="profile-joined" id="profileJoined">Member since ...</div>
+        </div>
+      </div>
+
+      <div class="profile-grid">
+        <div class="profile-card">
+          <h2>Edit Profile</h2>
+          <form class="profile-form" id="profileForm">
+            <div class="pf-success" id="profileSuccess">Profile updated successfully.</div>
+            <div class="pf-error" id="profileError"></div>
+            <div class="pf-group">
+              <label class="pf-label">Full Name</label>
+              <input type="text" class="pf-input" id="profileNameInput" placeholder="Your full name" />
+            </div>
+            <div class="pf-group">
+              <label class="pf-label">Email</label>
+              <input type="email" class="pf-input" id="profileEmailInput" disabled />
+            </div>
+            <button type="submit" class="pf-btn" id="profileSaveBtn">
+              <span class="pf-btn-text">Save Changes</span>
+              <span class="pf-btn-spinner"></span>
+            </button>
+          </form>
+        </div>
+
+        <div class="profile-card">
+          <h2>Connected Providers</h2>
+          <div id="connectedProviders">
+            <div class="no-providers">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div id="footer-container"></div>
+        <div class="footer-bottom-logos">
+          <img src="https://i.ibb.co/GfQ5pZXy/visa.png" alt="Visa" loading="lazy" />
+          <img src="https://i.ibb.co/hR7WDPDQ/card.png" alt="Mastercard" loading="lazy" />
+          <img src="https://i.ibb.co/Z6HcFfY9/apple-pay.png" alt="Apple Pay" loading="lazy" />
+          <img src="https://i.ibb.co/gbBV4fBg/google-pay.png" alt="Google Pay" loading="lazy" />
+          <img src="https://i.ibb.co/qFMfm6g9/stripe.png" alt="Stripe" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/auth-guard.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/profile-avatar.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var user, nameEl, emailEl, nameInput, emailInput, joinedEl;
+
+      function initProfile() {
+        user = NagrivaAuth.getUser();
+        nameEl = document.getElementById('profileName');
+        emailEl = document.getElementById('profileEmail');
+        nameInput = document.getElementById('profileNameInput');
+        emailInput = document.getElementById('profileEmailInput');
+        joinedEl = document.getElementById('profileJoined');
+
+        if (!user) {
+          var check = setInterval(function() {
+            user = NagrivaAuth.getUser();
+            if (user) { clearInterval(check); populateProfile(); }
+          }, 100);
+          setTimeout(function() { clearInterval(check); }, 5000);
+          return;
+        }
+        populateProfile();
+      }
+
+      function getDisplayName(u) {
+        if (!u) return 'User';
+        return u.user_metadata?.full_name || u.email?.split('@')[0] || 'User';
+      }
+
+      function formatDate(iso) {
+        if (!iso) return 'N/A';
+        var d = new Date(iso);
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function populateProfile() {
+        var displayName = getDisplayName(user);
+        if (nameEl) nameEl.textContent = displayName;
+        if (emailEl) emailEl.textContent = user.email || '';
+        if (nameInput) nameInput.value = displayName;
+        if (emailInput) emailInput.value = user.email || '';
+        if (joinedEl) joinedEl.textContent = 'Member since ' + formatDate(user.created_at);
+
+        loadProviders();
+      }
+
+      async function loadProviders() {
+        var container = document.getElementById('connectedProviders');
+        try {
+          var { data: { identities }, error } = await window.supabaseClient.auth.getUser();
+          if (error) throw error;
+          var idents = identities?.identities || [];
+          if (idents.length === 0) {
+            container.innerHTML = '<div class="no-providers">No connected providers.</div>';
+            return;
+          }
+          container.innerHTML = '';
+          idents.forEach(function(ident) {
+            var isEmail = ident.provider === 'email';
+            var div = document.createElement('div');
+            div.className = 'connected-provider';
+
+            var icon = document.createElement('div');
+            icon.className = 'connected-provider-icon';
+            if (ident.provider === 'google') {
+              icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>';
+            } else if (ident.provider === 'github') {
+              icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>';
+            } else {
+              icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
+            }
+            div.appendChild(icon);
+
+            var info = document.createElement('div');
+            info.className = 'connected-provider-info';
+            var pName = document.createElement('div');
+            pName.className = 'connected-provider-name';
+            pName.textContent = ident.provider ? ident.provider.charAt(0).toUpperCase() + ident.provider.slice(1) : 'Email';
+            info.appendChild(pName);
+
+            if (ident.email) {
+              var pEmail = document.createElement('div');
+              pEmail.className = 'connected-provider-email';
+              pEmail.textContent = ident.email;
+              info.appendChild(pEmail);
+            }
+            div.appendChild(info);
+
+            var badge = document.createElement('span');
+            badge.className = 'connected-provider-badge';
+            badge.textContent = isEmail ? 'Primary' : 'Connected';
+            div.appendChild(badge);
+
+            container.appendChild(div);
+          });
+        } catch (_) {
+          container.innerHTML = '<div class="no-providers">Could not load providers.</div>';
+        }
+      }
+
+      document.getElementById('profileForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var successEl = document.getElementById('profileSuccess');
+        var errorEl = document.getElementById('profileError');
+        var saveBtn = document.getElementById('profileSaveBtn');
+        successEl.classList.remove('show');
+        errorEl.classList.remove('show');
+
+        var newName = document.getElementById('profileNameInput').value.trim();
+        if (!newName) {
+          errorEl.textContent = 'Please enter your name.';
+          errorEl.classList.add('show');
+          return;
+        }
+
+        saveBtn.classList.add('loading');
+        try {
+          var { error } = await window.supabaseClient.auth.updateUser({
+            data: { full_name: newName }
+          });
+          if (error) throw error;
+
+          successEl.classList.add('show');
+          var displayName = getDisplayName({ user_metadata: { full_name: newName }, email: user.email });
+          if (nameEl) nameEl.textContent = displayName;
+          ProfileAvatar.refreshAll();
+        } catch (err) {
+          errorEl.textContent = err.message || 'Failed to update profile.';
+          errorEl.classList.add('show');
+        }
+        saveBtn.classList.remove('loading');
+      });
+
+      initProfile();
+
+      NagrivaAuth.onAuthStateChange = NagrivaAuth.onAuthStateChange || function() {};
+      var origHandler = window.supabaseClient.auth.onAuthStateChange;
+      if (origHandler) {
+        window.supabaseClient.auth.onAuthStateChange(function(event, session) {
+          if (event === 'USER_UPDATED') {
+            user = session?.user || null;
+            if (user) populateProfile();
+          }
+        });
+      }
+    });
+  </script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+</html>

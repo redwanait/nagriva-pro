@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAGRIVA — Admin Dashboard</title>
+  <meta name="description" content="NAGRIVA premium admin dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/admin-orders.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" />
+  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    :root {
+      --bg: #040404;
+      --bg2: #090c0c;
+      --surface: rgba(255, 255, 255, 0.025);
+      --surface-hover: rgba(255, 255, 255, 0.04);
+      --accent: #00f5c4;
+      --accent2: #00c2a8;
+      --accent-glow: rgba(0, 245, 196, 0.08);
+      --accent-dim: rgba(0, 245, 196, 0.15);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --white: #ffffff;
+      --gray: #a1a1aa;
+      --gray2: #71717a;
+      --gray3: #52525b;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --info: #3b82f6;
+      --r: 22px;
+      --r-sm: 14px;
+      --r-xs: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --sidebar-w: 264px;
+    }
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 245, 196, 0.2);
+      border-radius: 99px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 245, 196, 0.35);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    ul {
+      list-style: none;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+    }
+    input,
+    textarea {
+      font-family: inherit;
+      outline: none;
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .glow-top-right {
+      position: fixed;
+      top: -300px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 245, 196, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-bottom-left {
+      position: fixed;
+      bottom: -300px;
+      left: -200px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 194, 168, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT ─── */
+    .app {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar-w);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      background: rgba(4, 4, 4, 0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-right: 1px solid var(--border);
+      padding: 0;
+      transition: transform var(--transition);
+    }
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 24px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+    .sidebar-brand-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+    }
+    .sidebar-brand-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      margin-left: 2px;
+      animation: pulse 2s ease infinite;
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--gray3);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 16px 14px 8px;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--r-xs);
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--gray);
+      transition: all var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    .sidebar-item i {
+      width: 18px;
+      text-align: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .sidebar-item:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+    }
+    .sidebar-item.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+    .sidebar-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 20px;
+      border-radius: 0 3px 3px 0;
+      background: var(--accent);
+    }
+    .sidebar-item .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-left: auto;
+      animation: pulse 2s ease infinite;
+    }
+    .sidebar-item .badge-count {
+      margin-left: auto;
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 99px;
+      line-height: 1.3;
+    }
+    .sidebar-footer {
+      padding: 16px 12px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: var(--r-xs);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .sidebar-user:hover {
+      background: var(--surface-hover);
+    }
+    .sidebar-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+    .sidebar-user-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .sidebar-user-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+    }
+    .sidebar-user-role {
+      font-size: 0.68rem;
+      color: var(--gray2);
+    }
+
+    /* ─── MAIN ─── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── TOPBAR ─── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 32px;
+      background: rgba(4, 4, 4, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .topbar-hamburger {
+      display: none;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-xs);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .topbar-hamburger:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+    }
+    .topbar-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+    .topbar-title span {
+      color: var(--gray2);
+      font-weight: 400;
+    }
+    .topbar-center {
+      flex: 1;
+    }
+    .topbar-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 320px;
+      width: 100%;
+      padding: 8px 14px;
+      border-radius: var(--r-xs);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .topbar-search:focus-within {
+      border-color: var(--accent-dim);
+      background: var(--surface-hover);
+    }
+    .topbar-search i {
+      color: var(--gray2);
+      font-size: 0.8rem;
+    }
+    .topbar-search input {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 400;
+    }
+    .topbar-search input::placeholder {
+      color: var(--gray2);
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+    .topbar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-xs);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .topbar-btn:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+      border-color: var(--border-light);
+    }
+    .topbar-btn .notif-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--danger);
+      border: 1.5px solid var(--bg);
+    }
+    .topbar-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--bg);
+      cursor: pointer;
+      transition: opacity var(--transition);
+      flex-shrink: 0;
+    }
+    .topbar-avatar:hover {
+      opacity: 0.85;
+    }
+
+    /* ─── CONTENT ─── */
+    .content {
+      flex: 1;
+      padding: 32px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .page {
+      display: none;
+      animation: pageIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+    }
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+    .page-header p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+    .page-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: var(--r-xs);
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      line-height: 1.3;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(0, 245, 196, 0.15);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--gray);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+      border-color: var(--border-light);
+    }
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 0.75rem;
+    }
+    .btn-icon {
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+    .card-subtitle {
+      font-size: 0.75rem;
+      color: var(--gray2);
+    }
+    .card-link {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity var(--transition);
+    }
+    .card-link:hover {
+      opacity: 0.8;
+    }
+
+    /* ─── STATS CARDS ─── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 245, 196, 0.04), transparent 70%);
+      pointer-events: none;
+    }
+    .stat-card .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .stat-card .stat-icon.teal {
+      background: rgba(0, 245, 196, 0.08);
+      color: var(--accent);
+      border-color: rgba(0, 245, 196, 0.15);
+    }
+    .stat-card .stat-icon.orange {
+      background: rgba(245, 158, 11, 0.08);
+      color: var(--warning);
+      border-color: rgba(245, 158, 11, 0.15);
+    }
+    .stat-card .stat-icon.blue {
+      background: rgba(59, 130, 246, 0.08);
+      color: var(--info);
+      border-color: rgba(59, 130, 246, 0.15);
+    }
+    .stat-card .stat-icon.red {
+      background: rgba(239, 68, 68, 0.08);
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.15);
+    }
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--gray2);
+      font-weight: 500;
+    }
+    .stat-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-top: 10px;
+      padding: 3px 8px;
+      border-radius: 99px;
+    }
+    .stat-change.up {
+      color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+    .stat-change.down {
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* ─── CHARTS ROW ─── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .chart-wrap {
+      position: relative;
+      height: 260px;
+    }
+    .chart-wrap canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ─── CONTENT GRID ─── */
+    .content-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .content-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ─── TABLE ─── */
+    .table-wrap {
+      overflow-x: auto;
+    }
+    .table-wrap table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .table-wrap th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 500;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray3);
+      border-bottom: 1px solid var(--border);
+    }
+    .table-wrap td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--gray);
+      white-space: nowrap;
+    }
+    .table-wrap tr:last-child td {
+      border-bottom: none;
+    }
+    .table-wrap tr {
+      transition: background var(--transition);
+    }
+    .table-wrap tbody tr:hover {
+      background: var(--surface-hover);
+    }
+    .td-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .td-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.6rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+    .td-avatar.a1 {
+      background: #00f5c4;
+    }
+    .td-avatar.a2 {
+      background: #f59e0b;
+    }
+    .td-avatar.a3 {
+      background: #3b82f6;
+    }
+    .td-avatar.a4 {
+      background: #ef4444;
+    }
+    .td-avatar.a5 {
+      background: #a855f7;
+    }
+    .td-avatar.a6 {
+      background: #ec4899;
+    }
+    .td-name {
+      color: var(--white);
+      font-weight: 500;
+    }
+    .td-email {
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+
+    /* ─── BADGES ─── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.68rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+    .badge-success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+    .badge-success::before {
+      background: var(--success);
+    }
+    .badge-warning {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+    .badge-warning::before {
+      background: var(--warning);
+    }
+    .badge-danger {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
+    }
+    .badge-danger::before {
+      background: var(--danger);
+    }
+    .badge-info {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--info);
+    }
+    .badge-info::before {
+      background: var(--info);
+    }
+    .badge-neutral {
+      background: var(--surface-hover);
+      color: var(--gray);
+    }
+    .badge-neutral::before {
+      background: var(--gray3);
+    }
+
+    /* ─── ACTIVITY FEED ─── */
+    .activity-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    .activity-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding-top: 4px;
+    }
+    .activity-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .activity-dot.teal {
+      background: var(--accent);
+    }
+    .activity-dot.orange {
+      background: var(--warning);
+    }
+    .activity-dot.blue {
+      background: var(--info);
+    }
+    .activity-dot.red {
+      background: var(--danger);
+    }
+    .activity-dot.purple {
+      background: #a855f7;
+    }
+    .activity-line {
+      width: 1px;
+      flex: 1;
+      background: var(--border);
+    }
+    .activity-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .activity-text {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+    .activity-text strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+    .activity-time {
+      font-size: 0.7rem;
+      color: var(--gray3);
+      margin-top: 3px;
+    }
+
+    /* ─── NOTIFICATIONS ─── */
+    .notif-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .notif-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .notif-item:last-child {
+      border-bottom: none;
+    }
+    .notif-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .notif-icon-wrap.teal {
+      background: rgba(0, 245, 196, 0.08);
+      color: var(--accent);
+      border-color: rgba(0, 245, 196, 0.15);
+    }
+    .notif-icon-wrap.orange {
+      background: rgba(245, 158, 11, 0.08);
+      color: var(--warning);
+      border-color: rgba(245, 158, 11, 0.15);
+    }
+    .notif-icon-wrap.blue {
+      background: rgba(59, 130, 246, 0.08);
+      color: var(--info);
+      border-color: rgba(59, 130, 246, 0.15);
+    }
+    .notif-icon-wrap.red {
+      background: rgba(239, 68, 68, 0.08);
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.15);
+    }
+    .notif-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .notif-text {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+    .notif-text strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+    .notif-time {
+      font-size: 0.68rem;
+      color: var(--gray3);
+      margin-top: 2px;
+    }
+
+    /* ─── PROGRESS BARS ─── */
+    .progress-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .progress-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .progress-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .progress-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .progress-pct {
+      font-size: 0.75rem;
+      color: var(--gray2);
+      font-weight: 500;
+    }
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .progress-bar.orange {
+      background: linear-gradient(90deg, var(--warning), #f97316);
+    }
+    .progress-bar.blue {
+      background: linear-gradient(90deg, var(--info), #6366f1);
+    }
+    .progress-bar.purple {
+      background: linear-gradient(90deg, #a855f7, #d946ef);
+    }
+
+    /* ─── UPLOAD AREA ─── */
+    .upload-area {
+      border: 1.5px dashed rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-sm);
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .upload-area:hover,
+    .upload-area.dragover {
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+    }
+    .upload-area i {
+      font-size: 1.5rem;
+      color: var(--gray2);
+      margin-bottom: 10px;
+    }
+    .upload-area p {
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+    .upload-area span {
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .upload-files {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .upload-file {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--r-xs);
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+    }
+    .upload-file i {
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+    .upload-file .file-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .upload-file .file-name {
+      font-size: 0.78rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+    .upload-file .file-size {
+      font-size: 0.68rem;
+      color: var(--gray2);
+    }
+    .upload-file .file-remove {
+      color: var(--gray3);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: color var(--transition);
+    }
+    .upload-file .file-remove:hover {
+      color: var(--danger);
+    }
+
+    /* ─── MESSAGES ─── */
+    .message-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .message-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .message-item:last-child {
+      border-bottom: none;
+    }
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.65rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+    .message-avatar.ma1 {
+      background: linear-gradient(135deg, #00f5c4, #00c2a8);
+    }
+    .message-avatar.ma2 {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+    }
+    .message-avatar.ma3 {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+    }
+    .message-avatar.ma4 {
+      background: linear-gradient(135deg, #a855f7, #d946ef);
+    }
+    .message-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .message-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    .message-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .message-time {
+      font-size: 0.68rem;
+      color: var(--gray3);
+      margin-left: auto;
+    }
+    .message-text {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .message-input {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .message-input input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: var(--r-xs);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-size: 0.82rem;
+      transition: all var(--transition);
+    }
+    .message-input input:focus {
+      border-color: var(--accent-dim);
+    }
+    .message-input input::placeholder {
+      color: var(--gray2);
+    }
+    .message-input .btn {
+      flex-shrink: 0;
+    }
+
+    /* ─── ORDERS PAGE ─── */
+    .orders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .order-card {
+      padding: 20px;
+    }
+    .order-card .order-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .order-card .order-client {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .order-card .order-cavatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+    .order-card .order-cavatar.oca1 {
+      background: linear-gradient(135deg, #00f5c4, #00c2a8);
+    }
+    .order-card .order-cavatar.oca2 {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+    }
+    .order-card .order-cavatar.oca3 {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+    }
+    .order-card .order-cavatar.oca4 {
+      background: linear-gradient(135deg, #a855f7, #d946ef);
+    }
+    .order-card .order-cavatar.oca5 {
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+    }
+    .order-card .order-cavatar.oca6 {
+      background: linear-gradient(135deg, #14b8a6, #0d9488);
+    }
+    .order-card .order-cinfo h4 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .order-card .order-cinfo span {
+      font-size: 0.7rem;
+      color: var(--gray2);
+    }
+    .order-card .order-service {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 500;
+      background: var(--surface-hover);
+      color: var(--gray);
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .order-card .order-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .order-card .order-date {
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .order-card .order-amount {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+    .order-card .order-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+    .order-card .order-progress .progress-name {
+      font-size: 0.7rem;
+      color: var(--gray2);
+    }
+    .order-card .order-progress .progress-pct {
+      font-size: 0.7rem;
+      color: var(--gray);
+    }
+    .order-card .order-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .order-card .order-actions .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 0.72rem;
+    }
+    .order-card .order-actions .danger-action {
+      color: var(--gray3);
+    }
+    .order-card .order-actions .danger-action:hover {
+      border-color: rgba(239,68,68,0.2);
+      color: var(--danger);
+      background: rgba(239,68,68,0.08);
+    }
+    .order-card .order-deadline {
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .order-card .order-deadline i {
+      margin-right: 4px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1200px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .charts-row {
+        grid-template-columns: 1fr;
+      }
+      .content-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .content-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 1024px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main {
+        margin-left: 0;
+      }
+      .topbar-hamburger {
+        display: flex;
+      }
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 99;
+      }
+      .sidebar-overlay.open {
+        display: block;
+      }
+    }
+    @media (max-width: 768px) {
+      .topbar {
+        padding: 12px 16px;
+      }
+      .content {
+        padding: 16px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .topbar-search {
+        max-width: 100%;
+      }
+      .topbar-center {
+        display: none;
+      }
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .orders-grid {
+        grid-template-columns: 1fr;
+      }
+      .stat-card {
+        padding: 18px;
+      }
+      .card {
+        padding: 18px;
+      }
+    }
+    @media (max-width: 480px) {
+      .topbar-right .topbar-btn {
+        display: none;
+      }
+    }
+
+    /* ─── STATUS PAGE PLACEHOLDER ─── */
+    .status-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .status-placeholder i {
+      font-size: 2.5rem;
+      color: var(--gray3);
+      margin-bottom: 16px;
+    }
+    .status-placeholder h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .status-placeholder p {
+      font-size: 0.85rem;
+      color: var(--gray2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">N</div>
+        <div class="sidebar-brand-text">NAGRIVA<span class="sidebar-brand-dot"></span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-label">Main Menu</div>
+        <div class="sidebar-item active" data-page="dashboard">
+          <i class="fas fa-th-large"></i> Dashboard
+        </div>
+        <div class="sidebar-item" data-page="orders">
+          <i class="fas fa-shopping-bag"></i> Orders
+          <span class="badge-count">12</span>
+        </div>
+        <div class="sidebar-item" data-page="clients">
+          <i class="fas fa-users"></i> Clients
+        </div>
+        <div class="sidebar-item" data-page="messages">
+          <i class="fas fa-comment-dots"></i> Messages
+          <span class="badge-dot"></span>
+        </div>
+        <div class="sidebar-item" data-page="files">
+          <i class="fas fa-folder"></i> Files
+        </div>
+        <div class="sidebar-label">Workspace</div>
+        <div class="sidebar-item" data-page="revisions">
+          <i class="fas fa-undo-alt"></i> Revisions
+          <span class="badge-count">4</span>
+        </div>
+        <div class="sidebar-item" data-page="payments">
+          <i class="fas fa-credit-card"></i> Payments
+        </div>
+        <div class="sidebar-item" data-page="analytics">
+          <i class="fas fa-chart-line"></i> Analytics
+        </div>
+        <div class="sidebar-item" data-page="settings">
+          <i class="fas fa-cog"></i> Settings
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar">AK</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Alex Kim</div>
+            <div class="sidebar-user-role">Creative Director</div>
+          </div>
+          <i class="fas fa-ellipsis-v" style="color:var(--gray3);font-size:0.75rem;"></i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="topbar-title">Dashboard <span>/ overview</span></div>
+        </div>
+        <div class="topbar-center">
+          <div class="topbar-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search orders, clients..." />
+            <span style="font-size:0.65rem;color:var(--gray3);padding:2px 6px;border:1px solid var(--border);border-radius:4px;">⌘K</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="topbar-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notif-dot"></span>
+          </button>
+          <button class="topbar-btn">
+            <i class="fas fa-cog"></i>
+          </button>
+          <div class="topbar-avatar">AK</div>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- ═══ PAGE: DASHBOARD ═══ -->
+        <div class="page active" id="page-dashboard">
+
+          <div class="page-header">
+            <div>
+              <h1>Dashboard</h1>
+              <p>Your agency at a glance — everything you need to manage operations.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-secondary btn-sm"><i class="fas fa-download"></i> Export</button>
+              <button class="btn btn-primary btn-sm" id="dashNewOrderBtn"><i class="fas fa-plus"></i> New Order</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="card stat-card">
+              <div class="stat-icon teal"><i class="fas fa-dollar-sign"></i></div>
+              <div class="stat-value" id="dashRevenue">$0</div>
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-change up"><i class="fas fa-arrow-up"></i> From completed orders</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon blue"><i class="fas fa-clipboard-list"></i></div>
+              <div class="stat-value" id="dashActiveOrders">0</div>
+              <div class="stat-label">Active Orders</div>
+              <div class="stat-change up"><i class="fas fa-arrow-up"></i> Currently in progress</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon orange"><i class="fas fa-sync-alt"></i></div>
+              <div class="stat-value" id="dashPendingRevisions">0</div>
+              <div class="stat-label">Pending Revisions</div>
+              <div class="stat-change down"><i class="fas fa-arrow-down"></i> Awaiting review</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon red"><i class="fas fa-check-circle"></i></div>
+              <div class="stat-value" id="dashCompletedOrders">0</div>
+              <div class="stat-label">Completed Orders</div>
+              <div class="stat-change up"><i class="fas fa-arrow-up"></i> Delivered & closed</div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="charts-row">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Revenue Overview</div>
+                  <div class="card-subtitle">Monthly revenue for the past 6 months</div>
+                </div>
+                <div class="card-link">View Full Report <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.6rem;"></i></div>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="revenueChart"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Orders by Service</div>
+                  <div class="card-subtitle">Distribution across services</div>
+                </div>
+              </div>
+              <div class="chart-wrap" style="height:220px;">
+                <canvas id="donutChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders + Activity -->
+          <div class="content-grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Recent Orders</div>
+                  <div class="card-subtitle">Latest 6 client orders</div>
+                </div>
+                <div class="card-link">View All</div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Project</th><th>Service</th><th>Budget</th><th>Status</th><th>Date</th></tr>
+                  </thead>
+                  <tbody id="dashRecentOrders">
+                    <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--gray3);">Loading orders...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Client Activity</div>
+                  <div class="card-subtitle">Latest updates from your clients</div>
+                </div>
+                <div class="card-link">View All</div>
+              </div>
+              <div class="activity-feed" id="dashActivityFeed">
+                <div class="activity-item">
+                  <div class="activity-content">
+                    <div class="activity-text" style="color:var(--gray3);">Loading activity...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress + Notifications + Upload -->
+          <div class="content-grid-3">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Active Projects</div>
+                  <div class="card-subtitle">Progress across current work</div>
+                </div>
+              </div>
+              <div class="progress-list">
+                <div class="progress-item">
+                  <div class="progress-head">
+                    <span class="progress-name">Lumos — Web Design</span>
+                    <span class="progress-pct">78%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-bar" style="width:78%;"></div>
+                  </div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-head">
+                    <span class="progress-name">Vivid — SEO Strategy</span>
+                    <span class="progress-pct">45%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-bar orange" style="width:45%;"></div>
+                  </div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-head">
+                    <span class="progress-name">Axiom — Brand Identity</span>
+                    <span class="progress-pct">92%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-bar blue" style="width:92%;"></div>
+                  </div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-head">
+                    <span class="progress-name">Northstar — AI Automation</span>
+                    <span class="progress-pct">34%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-bar purple" style="width:34%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Notifications</div>
+                  <div class="card-subtitle">Recent alerts and updates</div>
+                </div>
+                <div class="card-link">Mark All Read</div>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-icon-wrap teal"><i class="fas fa-check"></i></div>
+                  <div class="notif-content">
+                    <div class="notif-text"><strong>Payment received</strong> — $4,200 from Sarah Kim</div>
+                    <div class="notif-time">5 min ago</div>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-icon-wrap orange"><i class="fas fa-exclamation"></i></div>
+                  <div class="notif-content">
+                    <div class="notif-text"><strong>Revision requested</strong> on Brand Identity project</div>
+                    <div class="notif-time">1 hour ago</div>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-icon-wrap blue"><i class="fas fa-file"></i></div>
+                  <div class="notif-content">
+                    <div class="notif-text"><strong>New files uploaded</strong> by Marcus Chen (3 files)</div>
+                    <div class="notif-time">2 hours ago</div>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-icon-wrap red"><i class="fas fa-calendar"></i></div>
+                  <div class="notif-content">
+                    <div class="notif-text"><strong>Deadline approaching</strong> — Axiom project due in 2 days</div>
+                    <div class="notif-time">3 hours ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Quick Upload</div>
+                  <div class="card-subtitle">Drag & drop or click to upload</div>
+                </div>
+              </div>
+              <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drop files here or click to browse</p>
+                <span>Max 50MB per file</span>
+              </div>
+              <div class="upload-files" id="uploadFiles"></div>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div class="card" style="margin-top:24px;">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Live Messages</div>
+                <div class="card-subtitle">Recent conversations with clients</div>
+              </div>
+              <div class="card-link">Open Inbox <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.6rem;"></i></div>
+            </div>
+            <div class="message-list" id="messageList">
+              <div class="message-item">
+                <div class="message-avatar ma1">SK</div>
+                <div class="message-body">
+                  <div class="message-head">
+                    <span class="message-name">Sarah Kim</span>
+                    <span class="message-time">2m ago</span>
+                  </div>
+                  <div class="message-text">The new homepage looks incredible! Can we schedule a call to discuss the animations?</div>
+                </div>
+              </div>
+              <div class="message-item">
+                <div class="message-avatar ma2">MC</div>
+                <div class="message-body">
+                  <div class="message-head">
+                    <span class="message-name">Marcus Chen</span>
+                    <span class="message-time">15m ago</span>
+                  </div>
+                  <div class="message-text">Just uploaded the brand guidelines PDF. Let me know if you need any other formats.</div>
+                </div>
+              </div>
+              <div class="message-item">
+                <div class="message-avatar ma3">EP</div>
+                <div class="message-body">
+                  <div class="message-head">
+                    <span class="message-name">Elena Petrova</span>
+                    <span class="message-time">1h ago</span>
+                  </div>
+                  <div class="message-text">I think the logo needs to be bolder. Can we try a few more iterations?</div>
+                </div>
+              </div>
+              <div class="message-item">
+                <div class="message-avatar ma4">JR</div>
+                <div class="message-body">
+                  <div class="message-head">
+                    <span class="message-name">James Rodriguez</span>
+                    <span class="message-time">2h ago</span>
+                  </div>
+                  <div class="message-text">The automation workflow is running smoothly. Great work on the integration!</div>
+                </div>
+              </div>
+            </div>
+            <div class="message-input">
+              <input type="text" placeholder="Type your message..." id="messageInput" />
+              <button class="btn btn-primary btn-sm" id="sendMessage"><i class="fas fa-paper-plane"></i> Send</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═══ PAGE: ORDERS ═══ -->
+        <div class="page" id="page-orders">
+
+          <div class="page-header">
+            <div>
+              <h1>Orders</h1>
+              <p>Manage all client orders, track progress, and update statuses in real time.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary btn-sm" id="ordersNewBtn">
+                <i class="fas fa-plus"></i> New Order
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="orders-toolbar">
+            <div class="orders-search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="ordersSearch" placeholder="Search project, service, order..." />
+              <button class="orders-search-clear" id="ordersSearchClear"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="orders-filter-group">
+              <select class="orders-filter-select" id="ordersStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="review">Review</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <select class="orders-filter-select" id="ordersSort">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+            </div>
+            <div class="orders-view-toggle">
+              <button class="orders-view-btn active" data-view="table" title="Table view">
+                <i class="fas fa-list"></i>
+              </button>
+              <button class="orders-view-btn" data-view="card" title="Card view">
+                <i class="fas fa-th-large"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Count -->
+          <div class="orders-count" id="ordersCount" style="margin-bottom:16px;"></div>
+
+          <!-- Orders Container -->
+          <div id="ordersContainer"></div>
+        </div>
+
+        <!-- ═══ PAGE: Coming Soon (Clients, Messages, Files, etc.) ═══ -->
+        <div class="page" id="page-clients">
+          <div class="page-header"><div><h1>Clients</h1><p>Manage your client relationships.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-users"></i><h3>Clients Module</h3><p>Client management interface coming soon.</p></div>
+        </div>
+        <div class="page" id="page-messages">
+          <div class="page-header"><div><h1>Messages</h1><p>Client communication center.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-comment-dots"></i><h3>Messages Inbox</h3><p>Full messaging interface coming soon.</p></div>
+        </div>
+        <div class="page" id="page-files">
+          <div class="page-header"><div><h1>Files</h1><p>Asset and deliverable management.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-folder"></i><h3>File Manager</h3><p>File management system coming soon.</p></div>
+        </div>
+        <div class="page" id="page-revisions">
+          <div class="page-header"><div><h1>Revisions</h1><p>Track revision requests across projects.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-undo-alt"></i><h3>Revisions Tracker</h3><p>Revision management coming soon.</p></div>
+        </div>
+        <div class="page" id="page-payments">
+          <div class="page-header"><div><h1>Payments</h1><p>Invoicing and payment tracking.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-credit-card"></i><h3>Payments</h3><p>Full payment dashboard coming soon.</p></div>
+        </div>
+        <div class="page" id="page-analytics">
+          <div class="page-header"><div><h1>Analytics</h1><p>Deep insights into your business.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-chart-line"></i><h3>Analytics</h3><p>Advanced analytics coming soon.</p></div>
+        </div>
+        <div class="page" id="page-settings">
+          <div class="page-header"><div><h1>Settings</h1><p>Configure your workspace.</p></div></div>
+          <div class="card status-placeholder"><i class="fas fa-cog"></i><h3>Settings</h3><p>Workspace settings coming soon.</p></div>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /main -->
+  </div><!-- /app -->
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/admin-orders.js"></script>
+  <script src="../js/admin-modal.js"></script>
+  <script src="../js/admin-dashboard.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+
+      // ─── Sidebar Navigation ───
+      const sidebarItems = document.querySelectorAll('.sidebar-item[data-page]');
+      const pages = document.querySelectorAll('.page');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const hamburger = document.getElementById('hamburger');
+      const topbarTitle = document.querySelector('.topbar-title');
+
+      function switchPage(pageId) {
+        pages.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('page-' + pageId);
+        if (target) target.classList.add('active');
+
+        sidebarItems.forEach(item => item.classList.remove('active'));
+        const activeItem = document.querySelector('.sidebar-item[data-page="' + pageId + '"]');
+        if (activeItem) activeItem.classList.add('active');
+
+        const names = {
+          dashboard: 'Dashboard',
+          orders: 'Orders',
+          clients: 'Clients',
+          messages: 'Messages',
+          files: 'Files',
+          revisions: 'Revisions',
+          payments: 'Payments',
+          analytics: 'Analytics',
+          settings: 'Settings'
+        };
+        topbarTitle.innerHTML = (names[pageId] || 'Dashboard') + ' <span>/ overview</span>';
+
+        if (pageId === 'orders') {
+          renderOrdersView();
+        }
+
+        if (window.innerWidth <= 1024) {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('open');
+        }
+      }
+
+      sidebarItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const page = this.dataset.page;
+          switchPage(page);
+        });
+      });
+
+      // ─── Mobile sidebar ───
+      hamburger.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', function() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+
+      // ─── Charts ───
+      Chart.defaults.color = '#71717a';
+      Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+      Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+      const revCtx = document.getElementById('revenueChart').getContext('2d');
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+      const gradient = revCtx.createLinearGradient(0, 0, 0, 260);
+      gradient.addColorStop(0, 'rgba(0,245,196,0.25)');
+      gradient.addColorStop(0.5, 'rgba(0,245,196,0.08)');
+      gradient.addColorStop(1, 'rgba(0,245,196,0)');
+
+      new Chart(revCtx, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Revenue',
+            data: [28500, 32000, 29800, 35600, 41200, 45300],
+            borderColor: '#00f5c4',
+            backgroundColor: gradient,
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#040404',
+            pointBorderColor: '#00f5c4',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(4,4,4,0.9)',
+              titleColor: '#fff',
+              bodyColor: '#a1a1aa',
+              borderColor: 'rgba(255,255,255,0.06)',
+              borderWidth: 1,
+              padding: 12,
+              cornerRadius: 10
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#52525b', font: { size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.03)' },
+              ticks: {
+                color: '#52525b',
+                font: { size: 11 },
+                callback: function(v) { return '$' + (v / 1000).toFixed(0) + 'k'; }
+              }
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          }
+        }
+      });
+
+      const donutCtx = document.getElementById('donutChart').getContext('2d');
+      new Chart(donutCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Web Design', 'SEO', 'Branding', 'AI Automation', 'Social Media'],
+          datasets: [{
+            data: [35, 22, 18, 15, 10],
+            backgroundColor: ['#00f5c4', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444'],
+            borderColor: '#040404',
+            borderWidth: 3,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#a1a1aa',
+                font: { size: 11, family: "'DM Sans', sans-serif" },
+                padding: 12,
+                usePointStyle: true,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(4,4,4,0.9)',
+              titleColor: '#fff',
+              bodyColor: '#a1a1aa',
+              borderColor: 'rgba(255,255,255,0.06)',
+              borderWidth: 1,
+              padding: 12,
+              cornerRadius: 10,
+              callbacks: {
+                label: function(ctx) {
+                  return ctx.label + ': ' + ctx.parsed + '%';
+                }
+              }
+            }
+          },
+          cutout: '65%'
+        }
+      });
+
+      // ─── File Upload ───
+      const uploadArea = document.getElementById('uploadArea');
+      const uploadFiles = document.getElementById('uploadFiles');
+      let files = [];
+
+      uploadArea.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = '*/*';
+        input.onchange = function(e) {
+          handleFiles(e.target.files);
+        };
+        input.click();
+      });
+
+      uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.classList.add('dragover');
+      });
+      uploadArea.addEventListener('dragleave', function() {
+        this.classList.remove('dragover');
+      });
+      uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('dragover');
+        handleFiles(e.dataTransfer.files);
+      });
+
+      function handleFiles(fileList) {
+        for (let f of fileList) {
+          files.push(f);
+          const size = f.size > 1024 * 1024 ?
+            (f.size / (1024 * 1024)).toFixed(1) + ' MB' :
+            (f.size / 1024).toFixed(1) + ' KB';
+          const div = document.createElement('div');
+          div.className = 'upload-file';
+          div.innerHTML =
+            '<i class="fas fa-file"></i><div class="file-info"><div class="file-name">' +
+            f.name + '</div><div class="file-size">' + size + '</div></div>' +
+            '<span class="file-remove"><i class="fas fa-times"></i></span>';
+          div.querySelector('.file-remove').addEventListener('click', function() {
+            div.remove();
+            files = files.filter(fi => fi !== f);
+          });
+          uploadFiles.appendChild(div);
+        }
+      }
+
+      // ─── Live Messages ───
+      const messageInput = document.getElementById('messageInput');
+      const sendBtn = document.getElementById('sendMessage');
+      const messageList = document.getElementById('messageList');
+      const avatars = ['SK', 'MC', 'EP', 'JR'];
+      const classes = ['ma1', 'ma2', 'ma3', 'ma4'];
+      let msgIdx = 0;
+
+      function sendMessage() {
+        const text = messageInput.value.trim();
+        if (!text) return;
+        const av = avatars[msgIdx % avatars.length];
+        const cl = classes[msgIdx % classes.length];
+        const div = document.createElement('div');
+        div.className = 'message-item';
+        div.style.animation = 'fadeUp 0.3s ease';
+        div.innerHTML =
+          '<div class="message-avatar ' + cl + '">' + av + '</div>' +
+          '<div class="message-body"><div class="message-head"><span class="message-name">You</span>' +
+          '<span class="message-time">Just now</span></div><div class="message-text">' +
+          text.replace(/</g, '&lt;') + '</div></div>';
+        messageList.appendChild(div);
+        messageList.scrollTop = messageList.scrollHeight;
+        messageInput.value = '';
+        msgIdx++;
+      }
+
+      sendBtn.addEventListener('click', sendMessage);
+      messageInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') sendMessage();
+      });
+
+      /* ════════════════════════════════════════
+         ORDERS SYSTEM INITIALIZATION
+         ════════════════════════════════════════ */
+
+      let currentView = 'table';
+      const ordersContainer = document.getElementById('ordersContainer');
+
+      function renderOrdersView() {
+        if (!ordersContainer) return;
+        NAGRIVA_AdminOrders.renderOrders(ordersContainer, currentView);
+      }
+
+      await NAGRIVA_AdminOrders.init(ordersContainer);
+
+      function openNewOrderModal() {
+        NAGRIVA_Modal.open({
+          onSubmit: function() {
+            renderOrdersView();
+            if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
+          }
+        });
+      }
+      document.getElementById('ordersNewBtn').addEventListener('click', openNewOrderModal);
+      document.getElementById('dashNewOrderBtn').addEventListener('click', openNewOrderModal);
+
+      // ─── Search ───
+      const searchInput = document.getElementById('ordersSearch');
+      const searchClear = document.getElementById('ordersSearchClear');
+
+      searchInput.addEventListener('input', function() {
+        NAGRIVA_AdminOrders.setSearch(this.value);
+        searchClear.classList.toggle('visible', this.value.length > 0);
+        renderOrdersView();
+      });
+
+      searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.focus();
+        this.classList.remove('visible');
+        NAGRIVA_AdminOrders.setSearch('');
+        renderOrdersView();
+      });
+
+      // ─── Status Filter ───
+      document.getElementById('ordersStatusFilter').addEventListener('change', function() {
+        NAGRIVA_AdminOrders.setStatusFilter(this.value);
+        renderOrdersView();
+      });
+
+      // ─── Sort ───
+      document.getElementById('ordersSort').addEventListener('change', function() {
+        NAGRIVA_AdminOrders.setSort(this.value);
+        renderOrdersView();
+      });
+
+      // ─── View Toggle ───
+      document.querySelectorAll('.orders-view-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.orders-view-btn').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          this.classList.add('active');
+          currentView = this.dataset.view;
+          renderOrdersView();
+        });
+      });
+
+      // ─── Empty state new order button ───
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.empty-new-order-btn')) {
+          openNewOrderModal();
+        }
+      });
+
+      // ─── Delegated events for table/card actions ───
+      document.addEventListener('click', async function(e) {
+        const actionBtn = e.target.closest('[data-action]');
+        if (!actionBtn) return;
+
+        const action = actionBtn.dataset.action;
+        const row = actionBtn.closest('tr[data-id]') || actionBtn.closest('.order-card[data-id]');
+        if (!row) return;
+        const orderId = row.dataset.id;
+
+        if (action === 'edit') {
+          const order = NAGRIVA_AdminOrders.getOrder(orderId);
+          if (!order) return;
+          NAGRIVA_Modal.open({
+            prefill: order,
+            onSubmit: function() {
+              renderOrdersView();
+              if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
+            }
+          });
+        } else if (action === 'delete') {
+          const order = NAGRIVA_AdminOrders.getOrder(orderId);
+          if (!order) return;
+          const confirmed = await NAGRIVA_Modal.showConfirm(
+            'Delete Order',
+            `Are you sure you want to delete ${order.projectTitle}'s order? This action cannot be undone.`
+          );
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_AdminOrders.deleteOrder(orderId);
+            renderOrdersView();
+            if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
+          } catch (err) {
+            console.error('Delete failed:', err);
+          }
+        }
+      });
+
+      // ─── Subscribe to order changes ───
+      NAGRIVA_AdminOrders.onChange(function(updatedOrders, updatedStats) {
+        if (NAGRIVA_Dashboard) {
+          NAGRIVA_Dashboard.updateStats(updatedStats);
+        }
+        if (document.getElementById('page-dashboard').classList.contains('active')) {
+            const recent = updatedOrders.slice(0, 6);
+          if (NAGRIVA_Dashboard) {
+            const container = document.getElementById('dashRecentOrders');
+            if (container) {
+              container.innerHTML = recent.map(o => {
+                const initials = NAGRIVA_AdminOrders.getInitials(o.projectTitle);
+                const cls = NAGRIVA_AdminOrders.getAvatarClass(o.projectTitle, 'table');
+                const statusLabel = NAGRIVA_AdminOrders.STATUS[o.status]?.label || o.status;
+                const badgeCls = {
+                  pending: 'badge-warning', in_progress: 'badge-info',
+                  review: 'badge-neutral', delivered: 'badge-success', cancelled: 'badge-danger',
+                }[o.status] || 'badge-neutral';
+                return '<tr><td><div class="td-user"><div class="td-avatar ' + cls + '">' + initials + '</div><div><div class="td-name">' + o.projectTitle + '</div><div class="td-email">' + o.orderNumber + '</div></div></div></td><td>' + o.serviceType + '</td><td style="color:var(--white);font-weight:500;">' + NAGRIVA_AdminOrders.formatCurrency(o.budget) + '</td><td><span class="badge ' + badgeCls + '">' + statusLabel + '</span></td><td style="color:var(--gray2);font-size:0.78rem;">' + NAGRIVA_AdminOrders.formatDate(o.createdAt) + '</td></tr>';
+              }).join('');
+            }
+          }
+        }
+        if (document.getElementById('page-orders').classList.contains('active')) {
+          renderOrdersView();
+        }
+      });
+
+      // ─── Init Dashboard ───
+      if (typeof NAGRIVA_Dashboard !== 'undefined') {
+        NAGRIVA_Dashboard.init();
+      }
+
+      // ─── Keyboard shortcut ───
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          document.getElementById('ordersSearch')?.focus();
+        }
+      });
+
+    });
+  </script>
+  <script src="../js/floating-elements.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <div id="footer-container"></div>
+
+  <script src="../js/footer.js"></script>
+</body>
+</html>
