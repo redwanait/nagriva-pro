@@ -19,6 +19,8 @@ const NAGRIVA_Modal = (() => {
     'Video Production'
   ];
 
+  let _clientOptions = [];
+
   function buildModal(prefill) {
     const isEditing = !!prefill;
     const statusOptions = Object.entries(NAGRIVA_AdminOrders.STATUS)
@@ -30,6 +32,10 @@ const NAGRIVA_Modal = (() => {
       .map(s =>
         `<option value="${s}"${prefill && prefill.service === s ? ' selected' : ''}>${s}</option>`
       ).join('');
+
+    const prefillName = (prefill && prefill.clientName) || '';
+    const prefillEmail = (prefill && prefill.clientEmail) || '';
+    const prefillClientId = (prefill && prefill.clientId) || '';
 
     const div = document.createElement('div');
     div.className = 'order-modal-overlay';
@@ -49,10 +55,24 @@ const NAGRIVA_Modal = (() => {
         <div class="order-modal-body">
           <form id="orderForm" autocomplete="off">
             <div class="order-form-grid">
+              <div class="order-form-field full-width">
+                <label>Client</label>
+                <div class="client-search-wrap${prefillClientId ? ' has-selected' : ''}" id="of_clientSearchWrap">
+                  <input type="text" id="of_clientSearch" placeholder="Search existing clients..." autocomplete="off" value="${prefillName}" />
+                  <input type="hidden" id="of_clientId" value="${prefillClientId}" />
+                  <i class="fas fa-chevron-down client-search-icon" id="of_clientSearchIcon"></i>
+                  <button class="client-search-clear${prefillClientId ? ' visible' : ''}" id="of_clientSearchClear" type="button"><i class="fas fa-times"></i></button>
+                  <div class="client-search-dropdown" id="of_clientDropdown"></div>
+                </div>
+              </div>
               <div class="order-form-field">
                 <label>Client Name <span class="required">*</span></label>
-                <input type="text" id="of_clientName" placeholder="e.g. Sarah Kim" value="${(prefill && prefill.clientName) || ''}" required />
+                <input type="text" id="of_clientName" placeholder="e.g. Sarah Kim" value="${prefillName}" required />
                 <span class="field-error">Client name is required</span>
+              </div>
+              <div class="order-form-field">
+                <label>Client Email</label>
+                <input type="email" id="of_clientEmail" placeholder="client@example.com" value="${prefillEmail}" />
               </div>
               <div class="order-form-field">
                 <label>Project Title <span class="required">*</span></label>
@@ -124,6 +144,210 @@ const NAGRIVA_Modal = (() => {
     }, 4000);
   }
 
+  async function loadClientOptions() {
+    try {
+      const { data } = await window.supabaseClient
+        .from('profiles')
+        .select('id, full_name, email')
+        .eq('role', 'client')
+        .order('full_name');
+      _clientOptions = (data || []).map(p => ({
+        id: p.id,
+        name: p.full_name || 'Unknown',
+        email: p.email || ''
+      }));
+    } catch (_) {
+      _clientOptions = [];
+    }
+  }
+
+  function getAvatarClass(name) {
+    const classes = ['a1','a2','a3','a4','a5','a6'];
+    let hash = 0;
+    for (let i = 0; i < (name || '').length; i++) hash = ((hash << 5) - hash) + name.charCodeAt(i);
+    return classes[Math.abs(hash) % classes.length];
+  }
+
+  function getInitials(name) {
+    if (!name) return 'U';
+    return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || 'U';
+  }
+
+  function renderDropdown(filterText) {
+    const dropdown = document.getElementById('of_clientDropdown');
+    const wrap = document.getElementById('of_clientSearchWrap');
+    if (!dropdown || !wrap) return;
+    const q = (filterText || '').toLowerCase().trim();
+    const filtered = q
+      ? _clientOptions.filter(c =>
+          c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q)
+        )
+      : _clientOptions;
+    const selectedId = document.getElementById('of_clientId')?.value || '';
+    if (filtered.length === 0) {
+      dropdown.innerHTML = '<div class="client-search-no-results">No clients found</div>';
+    } else {
+      dropdown.innerHTML = filtered.map(c => {
+        const isSelected = c.id === selectedId;
+        return `<div class="client-search-option${isSelected ? ' selected' : ''}" data-id="${c.id}" data-name="${c.name.replace(/"/g, '&quot;')}" data-email="${c.email}">
+          <div class="cso-avatar ${getAvatarClass(c.name)}">${getInitials(c.name)}</div>
+          <div class="cso-info">
+            <div class="cso-name">${c.name}</div>
+            <div class="cso-email">${c.email || 'No email'}</div>
+          </div>
+          <div class="cso-check"><i class="fas fa-check"></i></div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  function selectClient(id, name, email) {
+    const searchInput = document.getElementById('of_clientSearch');
+    const clientIdField = document.getElementById('of_clientId');
+    const clientNameField = document.getElementById('of_clientName');
+    const emailField = document.getElementById('of_clientEmail');
+    const wrap = document.getElementById('of_clientSearchWrap');
+    const clearBtn = document.getElementById('of_clientSearchClear');
+    if (!searchInput || !clientIdField) return;
+    clientIdField.value = id || '';
+    if (name && searchInput) searchInput.value = name;
+    if (name && clientNameField) clientNameField.value = name;
+    if (emailField) emailField.value = email || '';
+    if (wrap) wrap.classList.toggle('has-selected', !!id);
+    if (clearBtn) clearBtn.classList.toggle('visible', !!id);
+    closeDropdown();
+  }
+
+  function closeDropdown() {
+    const dropdown = document.getElementById('of_clientDropdown');
+    if (dropdown) dropdown.classList.remove('open');
+  }
+
+  function openDropdown() {
+    const dropdown = document.getElementById('of_clientDropdown');
+    if (dropdown) {
+      renderDropdown(document.getElementById('of_clientSearch')?.value || '');
+      dropdown.classList.add('open');
+    }
+  }
+
+  function setupClientSearch(form) {
+    const searchInput = form.querySelector('#of_clientSearch');
+    const clientIdField = form.querySelector('#of_clientId');
+    const clientNameField = form.querySelector('#of_clientName');
+    const emailField = form.querySelector('#of_clientEmail');
+    const clearBtn = form.querySelector('#of_clientSearchClear');
+    const dropdown = form.querySelector('#of_clientDropdown');
+    const wrap = form.querySelector('#of_clientSearchWrap');
+    if (!searchInput) return;
+
+    // Show all on focus
+    searchInput.addEventListener('focus', () => {
+      openDropdown();
+    });
+
+    // Filter on input
+    searchInput.addEventListener('input', function() {
+      const val = this.value;
+      // If user types, clear the clientId selection
+      const currentId = clientIdField?.value;
+      if (currentId) {
+        const matched = _clientOptions.find(c => c.id === currentId && c.name === val);
+        if (!matched) {
+          clientIdField.value = '';
+          if (wrap) wrap.classList.remove('has-selected');
+          if (clearBtn) clearBtn.classList.remove('visible');
+        }
+      }
+      renderDropdown(val);
+      const dd = document.getElementById('of_clientDropdown');
+      if (dd) dd.classList.add('open');
+    });
+
+    // Select on click via delegation
+    if (dropdown) {
+      dropdown.addEventListener('click', function(e) {
+        const opt = e.target.closest('.client-search-option');
+        if (!opt) return;
+        selectClient(
+          opt.dataset.id,
+          opt.dataset.name,
+          opt.dataset.email
+        );
+      });
+    }
+
+    // Clear button
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        selectClient('', '', '');
+        if (searchInput) searchInput.value = '';
+        if (clientNameField) clientNameField.value = '';
+        if (emailField) emailField.value = '';
+        searchInput?.focus();
+      });
+    }
+
+    // Close on outside click
+    document.addEventListener('mousedown', function outsideHandler(e) {
+      if (wrap && !wrap.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
+    // Keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+      const items = dropdown ? dropdown.querySelectorAll('.client-search-option') : [];
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const highlighted = dropdown?.querySelector('.highlighted');
+        if (!highlighted && items.length > 0) {
+          items[0].classList.add('highlighted');
+        } else if (highlighted) {
+          highlighted.classList.remove('highlighted');
+          const next = highlighted.nextElementSibling;
+          if (next && next.classList.contains('client-search-option')) {
+            next.classList.add('highlighted');
+          } else if (items.length > 0) {
+            items[0].classList.add('highlighted');
+          }
+        }
+        // Scroll into view
+        const hl = dropdown?.querySelector('.highlighted');
+        if (hl) hl.scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const highlighted = dropdown?.querySelector('.highlighted');
+        if (!highlighted && items.length > 0) {
+          items[items.length - 1].classList.add('highlighted');
+        } else if (highlighted) {
+          highlighted.classList.remove('highlighted');
+          const prev = highlighted.previousElementSibling;
+          if (prev && prev.classList.contains('client-search-option')) {
+            prev.classList.add('highlighted');
+          } else if (items.length > 0) {
+            items[items.length - 1].classList.add('highlighted');
+          }
+        }
+        const hl = dropdown?.querySelector('.highlighted');
+        if (hl) hl.scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter' || e.key === 'Tab') {
+        const highlighted = dropdown?.querySelector('.highlighted');
+        if (highlighted) {
+          e.preventDefault();
+          selectClient(
+            highlighted.dataset.id,
+            highlighted.dataset.name,
+            highlighted.dataset.email
+          );
+        }
+      } else if (e.key === 'Escape') {
+        closeDropdown();
+      }
+    });
+  }
+
   function open(options) {
     const { onSubmit, onClose, prefill } = options || {};
     onSubmitCallback = onSubmit || null;
@@ -133,45 +357,53 @@ const NAGRIVA_Modal = (() => {
 
     if (overlay) { overlay.remove(); overlay = null; }
 
-    overlay = buildModal(prefill);
-    modal = overlay.querySelector('.order-modal');
-    document.body.appendChild(overlay);
+    loadClientOptions().then(() => {
+      overlay = buildModal(prefill);
+      modal = overlay.querySelector('.order-modal');
+      document.body.appendChild(overlay);
 
-    const closeBtn = overlay.querySelector('#orderModalClose');
-    const cancelBtn = overlay.querySelector('#orderModalCancel');
-    const submitBtn = overlay.querySelector('#orderModalSubmit');
-    const form = overlay.querySelector('#orderForm');
+      const closeBtn = overlay.querySelector('#orderModalClose');
+      const cancelBtn = overlay.querySelector('#orderModalCancel');
+      const submitBtn = overlay.querySelector('#orderModalSubmit');
+      const form = overlay.querySelector('#orderForm');
 
-    function closeModal() {
-      overlay.classList.remove('active');
-      setTimeout(() => {
-        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-        overlay = null; modal = null;
-        if (onCloseCallback) onCloseCallback();
-      }, 400);
-      document.body.style.overflow = '';
-    }
+      function closeModal() {
+        overlay.classList.remove('active');
+        setTimeout(() => {
+          if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+          overlay = null; modal = null;
+          if (onCloseCallback) onCloseCallback();
+        }, 400);
+        document.body.style.overflow = '';
+      }
 
-    closeBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+      closeBtn.addEventListener('click', closeModal);
+      cancelBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 
-    document.addEventListener('keydown', function escHandler(e) {
-      if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); }
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); }
+      });
+
+      submitBtn.addEventListener('click', () => handleSubmit(form, closeModal, submitBtn));
+      form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target.id !== 'of_clientSearch') {
+          e.preventDefault(); handleSubmit(form, closeModal, submitBtn);
+        }
+      });
+
+      setupClientSearch(form);
+
+      requestAnimationFrame(() => overlay.classList.add('active'));
+      document.body.style.overflow = 'hidden';
     });
-
-    submitBtn.addEventListener('click', () => handleSubmit(form, closeModal, submitBtn));
-    form.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); handleSubmit(form, closeModal, submitBtn); }
-    });
-
-    requestAnimationFrame(() => overlay.classList.add('active'));
-    document.body.style.overflow = 'hidden';
   }
 
   async function handleSubmit(form, closeModal, submitBtn) {
     const fields = {
       clientName: form.querySelector('#of_clientName'),
+      clientEmail: form.querySelector('#of_clientEmail'),
+      clientIdField: form.querySelector('#of_clientId'),
       projectTitle: form.querySelector('#of_projectTitle'),
       service: form.querySelector('#of_service'),
       budget: form.querySelector('#of_budget'),
@@ -202,8 +434,12 @@ const NAGRIVA_Modal = (() => {
 
     if (!isValid) return;
 
+    const clientId = fields.clientIdField ? fields.clientIdField.value : null;
+
     const orderData = {
       clientName: fields.clientName.value.trim(),
+      clientEmail: fields.clientEmail ? fields.clientEmail.value.trim() : '',
+      clientId: clientId || null,
       projectTitle: fields.projectTitle.value.trim(),
       service: fields.service.value,
       budget: budget,

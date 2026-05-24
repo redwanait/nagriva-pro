@@ -19,6 +19,8 @@ const NAGRIVA_AdminOrders = (() => {
     return {
       id: row.id,
       clientName: row.client_name || '',
+      clientEmail: row.client_email || '',
+      clientId: row.client_id || null,
       service: row.service || '',
       budget: Number(row.budget) || 0,
       status: row.status || 'pending',
@@ -33,6 +35,8 @@ const NAGRIVA_AdminOrders = (() => {
   function mapToDB(data) {
     return {
       client_name: data.clientName || '',
+      client_email: data.clientEmail || '',
+      client_id: data.clientId || null,
       service: data.service || '',
       budget: Number(data.budget) || 0,
       status: data.status || 'pending',
@@ -135,6 +139,7 @@ const NAGRIVA_AdminOrders = (() => {
       if (containerEl) renderOrders(containerEl, 'table');
       notifyChange();
       setupRealtime();
+      setupProfilesRealtime();
     } catch (err) {
       _loading = false;
       _fetchInProgress = false;
@@ -195,6 +200,33 @@ const NAGRIVA_AdminOrders = (() => {
       });
   }
 
+  let profilesChannel = null;
+
+  function setupProfilesRealtime() {
+    if (profilesChannel) {
+      window.supabaseClient.removeChannel(profilesChannel);
+      profilesChannel = null;
+    }
+    profilesChannel = window.supabaseClient
+      .channel('admin-orders-profiles')
+      .on('postgres_changes',
+        { event: '*', schema: 'public', table: 'profiles' },
+        async () => {
+          try {
+            // Re-fetch orders so client names/emails stay synced
+            const fresh = await fetchAllOrders();
+            orders = fresh;
+            notifyChange();
+            const container = document.getElementById('ordersContainer');
+            if (container) renderOrders(container, currentViewMode || 'table');
+          } catch (e) {
+            console.warn('[AdminOrders] Profiles realtime sync error:', e.message || e);
+          }
+        }
+      )
+      .subscribe();
+  }
+
   let currentViewMode = 'table';
 
   let _createInProgress = false;
@@ -226,6 +258,8 @@ const NAGRIVA_AdminOrders = (() => {
     _updateInProgress = true;
     const payload = {};
     if (updates.clientName !== undefined) payload.client_name = updates.clientName;
+    if (updates.clientEmail !== undefined) payload.client_email = updates.clientEmail;
+    if (updates.clientId !== undefined) payload.client_id = updates.clientId || null;
     if (updates.service !== undefined) payload.service = updates.service;
     if (updates.budget !== undefined) payload.budget = Number(updates.budget);
     if (updates.deadline !== undefined) payload.deadline = updates.deadline;
@@ -343,7 +377,8 @@ const NAGRIVA_AdminOrders = (() => {
   }
 
   function renderTableRow(order) {
-    const displayName = order.clientName || order.projectTitle;
+    const displayName = order.clientName || order.projectTitle || 'Unknown Client';
+    const subtitle = order.clientEmail || order.projectTitle;
     return `
       <tr data-id="${order.id}">
         <td>
@@ -351,7 +386,7 @@ const NAGRIVA_AdminOrders = (() => {
             <div class="td-avatar ${getAvatarClass(displayName, 'table')}">${getInitials(displayName)}</div>
             <div class="td-client-info">
               <div class="td-name">${displayName}</div>
-              <div class="td-email">${order.projectTitle}</div>
+              <div class="td-email">${subtitle}</div>
             </div>
           </div>
         </td>
@@ -374,7 +409,8 @@ const NAGRIVA_AdminOrders = (() => {
 
   function renderCard(order) {
     const cfg = STATUS[order.status] || STATUS.pending;
-    const displayName = order.clientName || order.projectTitle;
+    const displayName = order.clientName || order.projectTitle || 'Unknown Client';
+    const subtitle = order.clientEmail || order.projectTitle;
     return `
       <div class="card order-card" data-id="${order.id}">
         <div class="order-top">
@@ -382,7 +418,7 @@ const NAGRIVA_AdminOrders = (() => {
             <div class="order-cavatar ${getAvatarClass(displayName, 'card')}">${getInitials(displayName)}</div>
             <div class="order-cinfo">
               <h4>${displayName}</h4>
-              <span>${order.projectTitle}</span>
+              <span>${subtitle}</span>
             </div>
           </div>
           ${renderStatusBadge(order.status)}
@@ -492,6 +528,10 @@ const NAGRIVA_AdminOrders = (() => {
     if (realtimeChannel) {
       window.supabaseClient.removeChannel(realtimeChannel);
       realtimeChannel = null;
+    }
+    if (profilesChannel) {
+      window.supabaseClient.removeChannel(profilesChannel);
+      profilesChannel = null;
     }
     onChangeCallbacks = [];
     orders = [];

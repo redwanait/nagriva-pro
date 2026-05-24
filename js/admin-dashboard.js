@@ -115,6 +115,33 @@ const NAGRIVA_Dashboard = (() => {
     const container = document.getElementById('dashActivityFeed');
     if (!container) return;
 
+    // Try to use real activity data first
+    if (typeof NAGRIVA_Activity !== 'undefined' && NAGRIVA_Activity.getActivities().length > 0) {
+      const activities = NAGRIVA_Activity.getActivities().slice(0, 6);
+      container.innerHTML = activities.map(function(a, i) {
+        const dotMap = {
+          order_created: 'teal', status_changed: 'blue', message_sent: 'purple',
+          file_uploaded: 'orange', project_completed: 'teal', project_added: 'blue',
+          manager_assigned: 'orange', profile_updated: 'gray'
+        };
+        const dot = dotMap[a.action] || 'teal';
+        var isLast = i === activities.length - 1;
+        var actorName = a.profiles && a.profiles.full_name ? a.profiles.full_name : 'System';
+        return '<div class="activity-item">' +
+          '<div class="activity-dot-wrap">' +
+            '<div class="activity-dot ' + dot + '"></div>' +
+            (isLast ? '' : '<div class="activity-line"></div>') +
+          '</div>' +
+          '<div class="activity-content">' +
+            '<div class="activity-text"><strong>' + escapeHtml(actorName) + '</strong> ' + escapeHtml(a.description || a.action) + '</div>' +
+            '<div class="activity-time">' + NAGRIVA_AdminOrders.timeAgo(a.created_at) + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      return;
+    }
+
+    // Fallback: derive from orders
     const activities = [];
     orders.slice(0, 8).forEach(o => {
       const displayName = o.clientName || o.projectTitle;
@@ -356,11 +383,43 @@ const NAGRIVA_Dashboard = (() => {
     }
   }
 
+  function renderDashboardNotifications() {
+    const container = document.querySelector('.notif-list');
+    if (!container) return;
+    if (typeof NAGRIVA_Notifications !== 'undefined' && NAGRIVA_Notifications.getNotifications().length > 0) {
+      NAGRIVA_Notifications.renderNotifications(container, 4);
+      container.querySelectorAll('[data-action="mark-read"]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = this.dataset.id;
+          if (id) NAGRIVA_Notifications.markAsRead(id);
+        });
+      });
+      return;
+    }
+    if (NAGRIVA_Notifications && NAGRIVA_Notifications.getNotifications().length === 0) {
+      container.innerHTML = '<div style="padding:12px;text-align:center;color:var(--gray3);font-size:0.78rem;">No notifications yet</div>';
+    }
+  }
+
   async function init() {
     _loading = true;
     _error = NAGRIVA_AdminOrders.error || null;
 
     showSkeletons();
+
+    // Load real activity and notifications
+    if (typeof NAGRIVA_Activity !== 'undefined') {
+      NAGRIVA_Activity.init(null, 10).then(function() {
+        var container = document.getElementById('dashActivityFeed');
+        if (container) renderActivity(NAGRIVA_AdminOrders.getAllOrders());
+      });
+    }
+    if (typeof NAGRIVA_Notifications !== 'undefined') {
+      NAGRIVA_Notifications.init().then(function() {
+        renderDashboardNotifications();
+      });
+    }
 
     if (_unsubscribe) _unsubscribe();
     _unsubscribe = NAGRIVA_AdminOrders.onChange(function(updatedOrders, updatedStats) {
@@ -374,6 +433,23 @@ const NAGRIVA_Dashboard = (() => {
       }
       updateCharts(updatedOrders);
     });
+
+    // Subscribe to activity changes
+    if (typeof NAGRIVA_Activity !== 'undefined') {
+      NAGRIVA_Activity.onChange(function() {
+        var container = document.getElementById('dashActivityFeed');
+        if (container && document.getElementById('page-dashboard').classList.contains('active')) {
+          renderActivity(NAGRIVA_AdminOrders.getAllOrders());
+        }
+      });
+    }
+
+    // Subscribe to notification changes
+    if (typeof NAGRIVA_Notifications !== 'undefined') {
+      NAGRIVA_Notifications.onChange(function() {
+        renderDashboardNotifications();
+      });
+    }
 
     var orders = NAGRIVA_AdminOrders.getAllOrders();
     if (orders.length > 0) {

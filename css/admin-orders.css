@@ -392,6 +392,144 @@
   100% { background-position: 200% 0; }
 }
 
+/* ─── Searchable Client Dropdown ─── */
+.client-search-wrap {
+  position: relative;
+  width: 100%;
+}
+.client-search-wrap input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--r-xs);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition);
+}
+.client-search-wrap input::placeholder { color: var(--gray3); }
+.client-search-wrap input:hover { border-color: var(--border-light); }
+.client-search-wrap input:focus {
+  border-color: rgba(0,245,196,0.25);
+  background: rgba(0,245,196,0.015);
+  box-shadow: 0 0 0 1px rgba(0,245,196,0.05);
+}
+.client-search-wrap .client-search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray3);
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+.client-search-wrap .client-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gray3);
+  cursor: pointer;
+  font-size: 0.65rem;
+  padding: 4px;
+  display: none;
+  transition: color var(--transition);
+  z-index: 2;
+}
+.client-search-wrap .client-search-clear:hover { color: var(--white); }
+.client-search-wrap .client-search-clear.visible { display: block; }
+.client-search-wrap.has-selected input {
+  border-color: rgba(0,245,196,0.15);
+  background: rgba(0,245,196,0.03);
+}
+.client-search-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: var(--r-xs);
+  background: rgba(12,16,16,0.97);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,245,196,0.03);
+  z-index: 100;
+  display: none;
+}
+.client-search-dropdown.open { display: block; }
+.client-search-dropdown::-webkit-scrollbar { width: 3px; }
+.client-search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+.client-search-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background var(--transition);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.client-search-option:last-child { border-bottom: none; }
+.client-search-option:hover,
+.client-search-option.highlighted {
+  background: rgba(0,245,196,0.05);
+}
+.client-search-option .cso-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.55rem;
+  color: var(--bg);
+  flex-shrink: 0;
+}
+.client-search-option .cso-info {
+  flex: 1;
+  min-width: 0;
+}
+.client-search-option .cso-name {
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.client-search-option .cso-email {
+  color: var(--gray3);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.client-search-option .cso-check {
+  color: var(--accent);
+  font-size: 0.7rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.client-search-option.selected .cso-check { opacity: 1; }
+.client-search-no-results {
+  padding: 20px 14px;
+  text-align: center;
+  color: var(--gray3);
+  font-size: 0.75rem;
+}
+
+.client-search-option .cso-avatar.a1 { background: #00f5c4; }
+.client-search-option .cso-avatar.a2 { background: #f59e0b; }
+.client-search-option .cso-avatar.a3 { background: #3b82f6; }
+.client-search-option .cso-avatar.a4 { background: #ef4444; }
+.client-search-option .cso-avatar.a5 { background: #a855f7; }
+.client-search-option .cso-avatar.a6 { background: #ec4899; }
+
 /* ─── New Order Modal ─── */
 .order-modal-overlay {
   position: fixed;
@@ -744,6 +882,37 @@
 @media (max-width: 480px) {
   .order-modal-header h2 { font-size: 1.05rem; }
   .confirm-modal { padding: 24px; }
+}
+
+/* ─── Messages: Active conversation highlight ─── */
+.active-conversation {
+  background: var(--accent-glow) !important;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-xs);
+}
+
+/* ─── Notifications: mark-all-read button ─── */
+.notif-mark-all {
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 500;
+  transition: opacity var(--transition);
+}
+.notif-mark-all:hover {
+  opacity: 0.8;
+}
+
+/* ─── Orders: additional helpers ─── */
+.orders-filter-select optgroup {
+  background: var(--bg);
+  color: var(--white);
+}
+
+/* ─── Activity container scrolling ─── */
+#activityContainer {
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 /* ════════════════════════════════════════════════════════

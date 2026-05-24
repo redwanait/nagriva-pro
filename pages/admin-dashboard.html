@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/admin-orders.css" />
+  <link rel="stylesheet" href="../css/admin-payments.css" />
   <link rel="stylesheet" href="../css/admin-auth.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
@@ -1901,34 +1902,262 @@
           <div id="ordersContainer"></div>
         </div>
 
-        <!-- ═══ PAGE: Coming Soon (Clients, Messages, Files, etc.) ═══ -->
+        <!-- ═══ PAGE: CLIENTS ═══ -->
         <div class="page" id="page-clients">
-          <div class="page-header"><div><h1>Clients</h1><p>Manage your client relationships.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-users"></i><h3>Clients Module</h3><p>Client management interface coming soon.</p></div>
+          <div class="page-header">
+            <div>
+              <h1>Clients</h1>
+              <p>Manage your client relationships, view order history, and track spending.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary btn-sm" id="clientsNewBtn"><i class="fas fa-plus"></i> Add Client</button>
+            </div>
+          </div>
+          <div class="stats-grid" style="margin-bottom:20px;">
+            <div class="card stat-card">
+              <div class="stat-icon teal"><i class="fas fa-users"></i></div>
+              <div class="stat-value" id="clientsTotal">0</div>
+              <div class="stat-label">Total Clients</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon blue"><i class="fas fa-user-check"></i></div>
+              <div class="stat-value" id="clientsActive">0</div>
+              <div class="stat-label">Active (90 days)</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon orange"><i class="fas fa-dollar-sign"></i></div>
+              <div class="stat-value" id="clientsRevenue">$0</div>
+              <div class="stat-label">Total Revenue</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon red"><i class="fas fa-chart-line"></i></div>
+              <div class="stat-value" id="clientsAvgOrder">$0</div>
+              <div class="stat-label">Avg Order Value</div>
+            </div>
+          </div>
+          <div class="orders-toolbar">
+            <div class="orders-search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="clientsSearch" placeholder="Search by name, company..." />
+              <button class="orders-search-clear" id="clientsSearchClear"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="orders-filter-group">
+              <select class="orders-filter-select" id="clientsSort">
+                <option value="name">Name A-Z</option>
+                <option value="recent">Most Recent</option>
+                <option value="orders">Most Orders</option>
+                <option value="spent">Most Spent</option>
+              </select>
+            </div>
+          </div>
+          <div class="orders-count" id="clientsCount" style="margin-bottom:16px;"></div>
+          <div id="clientsContainer"></div>
         </div>
+
+        <!-- ═══ PAGE: MESSAGES ═══ -->
         <div class="page" id="page-messages">
-          <div class="page-header"><div><h1>Messages</h1><p>Client communication center.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-comment-dots"></i><h3>Messages Inbox</h3><p>Full messaging interface coming soon.</p></div>
+          <div class="page-header">
+            <div>
+              <h1>Messages</h1>
+              <p>Client communication center — real-time conversations.</p>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:380px 1fr;gap:16px;min-height:500px;">
+            <div class="card" style="padding:0;overflow:hidden;">
+              <div style="padding:16px;border-bottom:1px solid var(--border);">
+                <div class="orders-search-wrap" style="max-width:100%;">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="messagesSearch" placeholder="Search conversations..." />
+                </div>
+              </div>
+              <div id="messagesContainer" style="overflow-y:auto;max-height:500px;"></div>
+            </div>
+            <div class="card" id="activeConversation" style="display:flex;flex-direction:column;">
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--gray3);text-align:center;padding:40px;">
+                <i class="fas fa-comment-dots" style="font-size:2rem;margin-bottom:12px;opacity:0.5;"></i>
+                <p>Select a conversation to view messages</p>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- ═══ PAGE: FILES ═══ -->
         <div class="page" id="page-files">
-          <div class="page-header"><div><h1>Files</h1><p>Asset and deliverable management.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-folder"></i><h3>File Manager</h3><p>File management system coming soon.</p></div>
+          <div class="page-header">
+            <div>
+              <h1>Files</h1>
+              <p>Asset and deliverable management across all orders.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary btn-sm" id="filesUploadBtn"><i class="fas fa-upload"></i> Upload File</button>
+            </div>
+          </div>
+          <div class="orders-toolbar">
+            <div class="orders-search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="filesSearch" placeholder="Search files by name..." />
+              <button class="orders-search-clear" id="filesSearchClear"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="orders-filter-group">
+              <select class="orders-filter-select" id="filesTypeFilter">
+                <option value="">All Types</option>
+                <option value="image">Images</option>
+                <option value="document">Documents</option>
+                <option value="archive">Archives</option>
+              </select>
+            </div>
+          </div>
+          <div class="orders-count" id="filesCount" style="margin-bottom:16px;"></div>
+          <div id="filesContainer"></div>
         </div>
+
+        <!-- ═══ PAGE: REVISIONS (Activity Timeline) ═══ -->
         <div class="page" id="page-revisions">
-          <div class="page-header"><div><h1>Revisions</h1><p>Track revision requests across projects.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-undo-alt"></i><h3>Revisions Tracker</h3><p>Revision management coming soon.</p></div>
+          <div class="page-header">
+            <div>
+              <h1>Activity Timeline</h1>
+              <p>Complete audit trail of all actions across your agency.</p>
+            </div>
+            <div class="page-actions">
+              <select class="orders-filter-select" id="activityActionFilter">
+                <option value="">All Actions</option>
+                <option value="order_created">Orders Created</option>
+                <option value="status_changed">Status Changes</option>
+                <option value="message_sent">Messages</option>
+                <option value="file_uploaded">File Uploads</option>
+                <option value="project_completed">Milestones</option>
+              </select>
+            </div>
+          </div>
+          <div class="card">
+            <div class="activity-feed" id="activityContainer"></div>
+          </div>
         </div>
+
+        <!-- ════════════════════════════════════════════
+             PAGE: PAYMENTS
+             Complete payment tracking, revenue & history
+             ════════════════════════════════════════════ -->
         <div class="page" id="page-payments">
-          <div class="page-header"><div><h1>Payments</h1><p>Invoicing and payment tracking.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-credit-card"></i><h3>Payments</h3><p>Full payment dashboard coming soon.</p></div>
+
+          <div class="page-header">
+            <div>
+              <h1>Payments</h1>
+              <p>Track revenue, manage payments, and view transaction history in real time.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary btn-sm" id="paymentsNewBtn"><i class="fas fa-plus"></i> New Payment</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="pay-stats-grid">
+            <div class="pay-stat-card">
+              <div class="pay-stat-icon teal"><i class="fas fa-dollar-sign"></i></div>
+              <div class="pay-stat-value" id="payTotalRevenue">$0</div>
+              <div class="pay-stat-label">Total Revenue</div>
+              <div class="pay-stat-change up"><i class="fas fa-arrow-up"></i> From paid payments</div>
+            </div>
+            <div class="pay-stat-card">
+              <div class="pay-stat-icon orange"><i class="fas fa-clock"></i></div>
+              <div class="pay-stat-value" id="payPendingAmount">$0</div>
+              <div class="pay-stat-label">Pending Amount</div>
+              <div class="pay-stat-change neutral"><i class="fas fa-hourglass-half"></i> Awaiting payment</div>
+            </div>
+            <div class="pay-stat-card">
+              <div class="pay-stat-icon blue"><i class="fas fa-check-circle"></i></div>
+              <div class="pay-stat-value" id="payPaidCount">0</div>
+              <div class="pay-stat-label">Paid Transactions</div>
+              <div class="pay-stat-change up"><i class="fas fa-arrow-up"></i> Completed payments</div>
+            </div>
+            <div class="pay-stat-card">
+              <div class="pay-stat-icon red"><i class="fas fa-exclamation-circle"></i></div>
+              <div class="pay-stat-value" id="payFailedCount">0</div>
+              <div class="pay-stat-label">Failed / Refunded</div>
+              <div class="pay-stat-change down"><i class="fas fa-arrow-down"></i> Requires attention</div>
+            </div>
+          </div>
+
+          <!-- Revenue Chart -->
+          <div class="pay-charts-row">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Revenue Trend</div>
+                  <div class="card-subtitle">Monthly paid revenue for the past 6 months</div>
+                </div>
+                <div class="card-link pay-history-link" style="cursor:pointer;">View History <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.6rem;"></i></div>
+              </div>
+              <div class="pay-chart-wrap">
+                <canvas id="payRevenueChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary: Payments Table + Recent History -->
+          <div class="pay-summary-grid">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">All Payments</div>
+                  <div class="card-subtitle">Complete payment records</div>
+                </div>
+              </div>
+
+              <!-- Toolbar -->
+              <div class="payments-toolbar" style="padding:0 0 12px 0;margin-bottom:0;">
+                <div class="payments-search-wrap">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="paymentsSearch" placeholder="Search by client, order..." />
+                  <button class="payments-search-clear" id="paymentsSearchClear"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="payments-filter-group">
+                  <select class="payments-filter-select" id="paymentsStatusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                    <option value="refunded">Refunded</option>
+                    <option value="failed">Failed</option>
+                  </select>
+                  <select class="payments-filter-select" id="paymentsSort">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="amount">Highest Amount</option>
+                    <option value="amount-asc">Lowest Amount</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="payments-count" id="paymentsCount" style="padding:0 0 8px 0;"></div>
+              <div id="paymentsContainer"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Recent History</div>
+                  <div class="card-subtitle">Latest payment status changes</div>
+                </div>
+                <div class="card-link pay-history-link" style="cursor:pointer;">View All</div>
+              </div>
+              <div class="pay-history-list-compact" id="payRecentHistory">
+                <div style="text-align:center;padding:20px;color:var(--gray3);font-size:0.78rem;">Loading history...</div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <!-- ═══ PAGE: ANALYTICS ═══ -->
         <div class="page" id="page-analytics">
           <div class="page-header"><div><h1>Analytics</h1><p>Deep insights into your business.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-chart-line"></i><h3>Analytics</h3><p>Advanced analytics coming soon.</p></div>
+          <div class="card status-placeholder"><i class="fas fa-chart-line"></i><h3>Analytics</h3><p>Advanced analytics coming in the next update.</p></div>
         </div>
+
+        <!-- ═══ PAGE: SETTINGS ═══ -->
         <div class="page" id="page-settings">
           <div class="page-header"><div><h1>Settings</h1><p>Configure your workspace.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-cog"></i><h3>Settings</h3><p>Workspace settings coming soon.</p></div>
+          <div class="card status-placeholder"><i class="fas fa-cog"></i><h3>Settings</h3><p>Workspace settings coming in the next update.</p></div>
         </div>
 
       </div><!-- /content -->
@@ -1949,6 +2178,12 @@
   <script src="../js/admin-orders.js"></script>
   <script src="../js/admin-modal.js"></script>
   <script src="../js/admin-dashboard.js"></script>
+  <script src="../js/admin-clients.js"></script>
+  <script src="../js/admin-messages.js"></script>
+  <script src="../js/admin-files.js"></script>
+  <script src="../js/admin-activity.js"></script>
+  <script src="../js/admin-notifications.js"></script>
+  <script src="../js/admin-payments.js"></script>
   <script src="../js/i18n.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
@@ -1976,7 +2211,7 @@
           clients: 'Clients',
           messages: 'Messages',
           files: 'Files',
-          revisions: 'Revisions',
+          revisions: 'Activity',
           payments: 'Payments',
           analytics: 'Analytics',
           settings: 'Settings'
@@ -1985,6 +2220,16 @@
 
         if (pageId === 'orders') {
           renderOrdersView();
+        } else if (pageId === 'clients') {
+          renderClientsView();
+        } else if (pageId === 'messages') {
+          renderMessagesView();
+        } else if (pageId === 'files') {
+          renderFilesView();
+        } else if (pageId === 'revisions') {
+          renderActivityView();
+        } else if (pageId === 'payments') {
+          renderPaymentsView();
         }
 
         if (window.innerWidth <= 1024) {
@@ -2180,37 +2425,58 @@
         }
       }
 
-      // ─── Live Messages ───
-      const messageInput = document.getElementById('messageInput');
-      const sendBtn = document.getElementById('sendMessage');
-      const messageList = document.getElementById('messageList');
-      const avatars = ['SK', 'MC', 'EP', 'JR'];
-      const classes = ['ma1', 'ma2', 'ma3', 'ma4'];
-      let msgIdx = 0;
-
-      function sendMessage() {
-        const text = messageInput.value.trim();
-        if (!text) return;
-        const av = avatars[msgIdx % avatars.length];
-        const cl = classes[msgIdx % classes.length];
-        const div = document.createElement('div');
-        div.className = 'message-item';
-        div.style.animation = 'fadeUp 0.3s ease';
-        div.innerHTML =
-          '<div class="message-avatar ' + cl + '">' + av + '</div>' +
-          '<div class="message-body"><div class="message-head"><span class="message-name">You</span>' +
-          '<span class="message-time">Just now</span></div><div class="message-text">' +
-          text.replace(/</g, '&lt;') + '</div></div>';
-        messageList.appendChild(div);
-        messageList.scrollTop = messageList.scrollHeight;
-        messageInput.value = '';
-        msgIdx++;
+      // ─── Dashboard Live Messages ───
+      function refreshDashboardMessages() {
+        const messageList = document.getElementById('messageList');
+        if (!messageList) return;
+        if (typeof NAGRIVA_Messages !== 'undefined' && NAGRIVA_Messages.getConversations().length > 0) {
+          const convos = NAGRIVA_Messages.getConversations().slice(0, 4);
+          messageList.innerHTML = convos.map(function(c) {
+            const initials = NAGRIVA_Messages.getInitials(c.clientName);
+            const preview = c.lastMessage ? c.lastMessage.substring(0, 80) + (c.lastMessage.length > 80 ? '...' : '') : 'No messages yet';
+            const time = NAGRIVA_Messages.formatDate(c.lastMessageTime);
+            return '<div class="message-item open-page" data-page="messages" style="cursor:pointer;">' +
+              '<div class="message-avatar ma1">' + initials + '</div>' +
+              '<div class="message-body">' +
+              '<div class="message-head"><span class="message-name">' + c.clientName.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</span>' +
+              '<span class="message-time">' + time + '</span></div>' +
+              '<div class="message-text">' + preview.replace(/</g,'&lt;') + '</div>' +
+              '</div></div>';
+          }).join('');
+        }
       }
 
-      sendBtn.addEventListener('click', sendMessage);
-      messageInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') sendMessage();
-      });
+      if (typeof NAGRIVA_Messages !== 'undefined') {
+        NAGRIVA_Messages.onChange(function() {
+          refreshDashboardMessages();
+        });
+      }
+
+      const messageInput = document.getElementById('messageInput');
+      const sendBtn = document.getElementById('sendMessage');
+      if (messageInput && sendBtn) {
+        sendBtn.addEventListener('click', function() {
+          const conversationId = NAGRIVA_Messages.getConversations();
+          if (conversationId.length > 0) {
+            const text = messageInput.value.trim();
+            if (!text) return;
+            NAGRIVA_Messages.sendMessage(conversationId[0].id, text).then(function() {
+              messageInput.value = '';
+              refreshDashboardMessages();
+            }).catch(function(err) {
+              console.warn('[Dashboard] Send failed:', err);
+            });
+          } else {
+            switchPage('messages');
+          }
+        });
+        messageInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendBtn.click();
+          }
+        });
+      }
 
       /* ════════════════════════════════════════
          ORDERS SYSTEM INITIALIZATION
@@ -2233,6 +2499,201 @@
       if (NAGRIVA_AdminOrders.error && typeof NAGRIVA_Dashboard !== 'undefined') {
         NAGRIVA_Dashboard.showErrorState(NAGRIVA_AdminOrders.error);
       }
+
+      // ─── Clients ───
+      const clientsContainer = document.getElementById('clientsContainer');
+      let clientsInitialized = false;
+
+      async function renderClientsView() {
+        if (!clientsInitialized) {
+          await NAGRIVA_Clients.init(clientsContainer);
+          clientsInitialized = true;
+        }
+        updateClientsStats();
+      }
+
+      function updateClientsStats() {
+        const stats = NAGRIVA_Clients.getStats();
+        document.getElementById('clientsTotal').textContent = stats.total;
+        document.getElementById('clientsActive').textContent = stats.activeClients;
+        document.getElementById('clientsRevenue').textContent = '$' + stats.totalRevenue.toLocaleString('en-US');
+        document.getElementById('clientsAvgOrder').textContent = '$' + stats.avgOrderValue.toLocaleString('en-US');
+      }
+
+      NAGRIVA_Clients.onChange(function(clientsList) {
+        updateClientsStats();
+      });
+
+      document.getElementById('clientsSearch')?.addEventListener('input', function() {
+        NAGRIVA_Clients.setSearch(this.value);
+        const clear = document.getElementById('clientsSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Clients.renderClients(clientsContainer);
+      });
+
+      document.getElementById('clientsSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('clientsSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Clients.setSearch('');
+        NAGRIVA_Clients.renderClients(clientsContainer);
+      });
+
+      document.getElementById('clientsSort')?.addEventListener('change', function() {
+        NAGRIVA_Clients.setSort(this.value);
+        NAGRIVA_Clients.renderClients(clientsContainer);
+      });
+
+      document.getElementById('clientsNewBtn')?.addEventListener('click', function() {
+        showNewClientModal();
+      });
+
+      // ─── Messages ───
+      const messagesContainer = document.getElementById('messagesContainer');
+      let messagesInitialized = false;
+
+      async function renderMessagesView() {
+        if (!messagesInitialized) {
+          await NAGRIVA_Messages.init(messagesContainer);
+          messagesInitialized = true;
+        }
+      }
+
+      document.getElementById('messagesSearch')?.addEventListener('input', function() {
+        NAGRIVA_Messages.setSearch(this.value);
+        NAGRIVA_Messages.renderConversations(messagesContainer);
+      });
+
+      // ─── Files ───
+      const filesContainer = document.getElementById('filesContainer');
+      let filesInitialized = false;
+
+      async function renderFilesView() {
+        if (!filesInitialized) {
+          await NAGRIVA_Files.init(filesContainer);
+          filesInitialized = true;
+        }
+      }
+
+      document.getElementById('filesSearch')?.addEventListener('input', function() {
+        NAGRIVA_Files.setSearch(this.value);
+        const clear = document.getElementById('filesSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Files.renderFiles(filesContainer);
+      });
+
+      document.getElementById('filesSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('filesSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Files.setSearch('');
+        NAGRIVA_Files.renderFiles(filesContainer);
+      });
+
+      document.getElementById('filesTypeFilter')?.addEventListener('change', function() {
+        NAGRIVA_Files.setTypeFilter(this.value);
+        NAGRIVA_Files.renderFiles(filesContainer);
+      });
+
+      document.getElementById('filesUploadBtn')?.addEventListener('click', function() {
+        showFileUploadModal();
+      });
+
+      // ─── Activity / Revisions ───
+      const activityContainer = document.getElementById('activityContainer');
+      let activityInitialized = false;
+
+      async function renderActivityView() {
+        if (!activityInitialized) {
+          await NAGRIVA_Activity.init(activityContainer);
+          activityInitialized = true;
+        }
+      }
+
+      document.getElementById('activityActionFilter')?.addEventListener('change', function() {
+        NAGRIVA_Activity.setActionFilter(this.value);
+        NAGRIVA_Activity.renderActivities(activityContainer);
+      });
+
+      // ─── Payments ───
+      const paymentsContainer = document.getElementById('paymentsContainer');
+      let paymentsInitialized = false;
+
+      async function renderPaymentsView() {
+        if (!paymentsInitialized) {
+          await NAGRIVA_Payments.init(paymentsContainer);
+          paymentsInitialized = true;
+        }
+      }
+
+      NAGRIVA_Payments.onChange(function() {
+        if (document.getElementById('page-payments').classList.contains('active')) {
+          NAGRIVA_Payments.renderPayments(paymentsContainer);
+          NAGRIVA_Payments.renderStats();
+          NAGRIVA_Payments.renderRevenueChart();
+          NAGRIVA_Payments.renderHistoryCompact();
+        }
+      });
+
+      document.getElementById('paymentsSearch')?.addEventListener('input', function() {
+        NAGRIVA_Payments.setSearch(this.value);
+        const clear = document.getElementById('paymentsSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('paymentsSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Payments.setSearch('');
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsStatusFilter')?.addEventListener('change', function() {
+        NAGRIVA_Payments.setStatusFilter(this.value);
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsSort')?.addEventListener('change', function() {
+        NAGRIVA_Payments.setSort(this.value);
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsNewBtn')?.addEventListener('click', function() {
+        NAGRIVA_Payments.openPaymentModal();
+      });
+
+      // Open history links (delegated)
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.pay-history-link')) {
+          const page = document.getElementById('page-payments');
+          if (page && page.classList.contains('active')) {
+            e.preventDefault();
+            NAGRIVA_Payments.openHistoryModal(null);
+          }
+        }
+      });
+
+      // View payment history on row click (delegated)
+      document.addEventListener('click', function(e) {
+        const row = e.target.closest('#paymentsContainer tr[data-id]');
+        if (row) {
+          const paymentId = row.dataset.id;
+          NAGRIVA_Payments.openHistoryModal(paymentId);
+        }
+      });
+
+      // ─── Notifications ───
+      NAGRIVA_Notifications.init();
+      document.querySelector('.notif-list')?.parentElement?.querySelector('.card-link')?.addEventListener('click', function() {
+        NAGRIVA_Notifications.markAllAsRead();
+      });
+
+      // ─── Refresh dashboard widgets after modules load ───
+      setTimeout(function() {
+        refreshDashboardMessages();
+      }, 1000);
 
       function openNewOrderModal() {
         NAGRIVA_Modal.open({
@@ -2294,6 +2755,178 @@
         }
       });
 
+      // ─── New Client Modal ───
+      function showNewClientModal(clientData) {
+        const isEditing = !!clientData;
+        const overlay = document.createElement('div');
+        overlay.className = 'order-modal-overlay';
+        overlay.id = 'newClientModal';
+        overlay.innerHTML = `
+          <div class="order-modal">
+            <div class="order-modal-glow"></div>
+            <div class="order-modal-header">
+              <div>
+                <h2>${isEditing ? 'Edit Client' : 'New Client'}</h2>
+                <p>${isEditing ? 'Update client details.' : 'Create a new client account.'}</p>
+              </div>
+              <button class="order-modal-close" id="clientModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="order-modal-body">
+              <form id="clientForm" autocomplete="off">
+                <div class="order-form-grid">
+                  <div class="order-form-field">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="cf_name" placeholder="e.g. Sarah Kim" value="${clientData ? clientData.name : ''}" required />
+                  </div>
+                  <div class="order-form-field">
+                    <label>Email${isEditing ? '' : ' <span class="required">*</span>'}</label>
+                    <input type="email" id="cf_email" placeholder="client@example.com" value="${clientData ? clientData.email : ''}" ${isEditing ? '' : 'required'} />
+                  </div>
+                  <div class="order-form-field">
+                    <label>Company</label>
+                    <input type="text" id="cf_company" placeholder="e.g. Acme Inc." value="${clientData ? clientData.company : ''}" />
+                  </div>
+                  <div class="order-form-field">
+                    <label>Phone</label>
+                    <input type="text" id="cf_phone" placeholder="+1 (555) 000-0000" value="${clientData ? clientData.phone : ''}" />
+                  </div>
+                  ${isEditing ? '' : '<div class="order-form-field"><label>Temporary Password</label><input type="text" id="cf_password" value="TempPass123!" /><span style="font-size:0.7rem;color:var(--gray3);">Change after first login</span></div>'}
+                </div>
+              </form>
+            </div>
+            <div class="order-modal-footer">
+              <button class="btn btn-secondary" id="clientModalCancel">Cancel</button>
+              <button class="btn btn-primary" id="clientModalSubmit"><i class="fas ${isEditing ? 'fa-save' : 'fa-plus'}"></i> ${isEditing ? 'Save Changes' : 'Create Client'}</button>
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add('active'));
+
+        function closeModal() {
+          overlay.classList.remove('active');
+          setTimeout(() => overlay.remove(), 400);
+        }
+        overlay.querySelector('#clientModalClose').addEventListener('click', closeModal);
+        overlay.querySelector('#clientModalCancel').addEventListener('click', closeModal);
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+
+        overlay.querySelector('#clientModalSubmit').addEventListener('click', async function() {
+          const name = overlay.querySelector('#cf_name').value.trim();
+          const email = overlay.querySelector('#cf_email').value.trim();
+          const company = overlay.querySelector('#cf_company').value.trim();
+          const phone = overlay.querySelector('#cf_phone').value.trim();
+          const password = overlay.querySelector('#cf_password') ? overlay.querySelector('#cf_password').value : 'TempPass123!';
+          if (!name) { showToast('error', 'Validation Error', 'Name is required'); return; }
+          if (!isEditing && !email) { showToast('error', 'Validation Error', 'Email is required'); return; }
+          this.disabled = true;
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+          try {
+            if (isEditing) {
+              await NAGRIVA_Clients.updateClient(clientData.id, { full_name: name, phone, company });
+            } else {
+              await NAGRIVA_Clients.createClient({ full_name: name, email, phone, company, password });
+            }
+            closeModal();
+            NAGRIVA_Clients.renderClients(clientsContainer);
+          } catch (err) {
+            this.disabled = false;
+            this.innerHTML = '<i class="fas ' + (isEditing ? 'fa-save' : 'fa-plus') + '"></i> ' + (isEditing ? 'Save Changes' : 'Create Client');
+            showToast('error', 'Operation Failed', err.message || 'Something went wrong');
+          }
+        });
+      }
+
+      // ─── File Upload Modal ───
+      function showFileUploadModal() {
+        const orders = NAGRIVA_Files.getOrders();
+        const orderOptions = orders.map(o =>
+          `<option value="${o.id}">${o.client_name || o.project_title || o.order_number || 'Untitled'}</option>`
+        ).join('');
+
+        const overlay = document.createElement('div');
+        overlay.className = 'order-modal-overlay';
+        overlay.innerHTML = `
+          <div class="order-modal" style="max-width:480px;">
+            <div class="order-modal-glow"></div>
+            <div class="order-modal-header">
+              <div>
+                <h2>Upload File</h2>
+                <p>Attach a file to an order.</p>
+              </div>
+              <button class="order-modal-close" id="fileModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="order-modal-body">
+              <form id="fileUploadForm">
+                <div class="order-form-grid">
+                  <div class="order-form-field full-width">
+                    <label>Select Order <span class="required">*</span></label>
+                    <select id="uf_order" required>
+                      <option value="">Choose an order...</option>
+                      ${orderOptions}
+                    </select>
+                  </div>
+                  <div class="order-form-field full-width">
+                    <label>Choose File <span class="required">*</span></label>
+                    <input type="file" id="uf_file" required />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="order-modal-footer">
+              <button class="btn btn-secondary" id="fileModalCancel">Cancel</button>
+              <button class="btn btn-primary" id="fileModalSubmit"><i class="fas fa-upload"></i> Upload</button>
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add('active'));
+
+        function closeModal() {
+          overlay.classList.remove('active');
+          setTimeout(() => overlay.remove(), 400);
+        }
+        overlay.querySelector('#fileModalClose').addEventListener('click', closeModal);
+        overlay.querySelector('#fileModalCancel').addEventListener('click', closeModal);
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+
+        overlay.querySelector('#fileModalSubmit').addEventListener('click', async function() {
+          const orderId = overlay.querySelector('#uf_order').value;
+          const fileInput = overlay.querySelector('#uf_file');
+          if (!orderId) { showToast('error', 'Validation Error', 'Please select an order'); return; }
+          if (!fileInput.files || !fileInput.files[0]) { showToast('error', 'Validation Error', 'Please select a file'); return; }
+          this.disabled = true;
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+          try {
+            await NAGRIVA_Files.uploadFile(fileInput.files[0], orderId);
+            closeModal();
+            NAGRIVA_Files.renderFiles(filesContainer);
+          } catch (err) {
+            this.disabled = false;
+            this.innerHTML = '<i class="fas fa-upload"></i> Upload';
+            showToast('error', 'Upload Failed', err.message || 'Something went wrong');
+          }
+        });
+      }
+
+      // ─── Toast helper for page scripts ───
+      function showToast(type, title, message) {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
+        toast.innerHTML = '<div class="toast-icon ' + type + '"><i class="fas ' + (icons[type] || icons.info) + '"></i></div><div class="toast-content"><div class="toast-title">' + title + '</div><div class="toast-message">' + message + '</div></div><button class="toast-close"><i class="fas fa-times"></i></button>';
+        container.appendChild(toast);
+        requestAnimationFrame(function() { toast.classList.add('visible'); });
+        toast.querySelector('.toast-close').addEventListener('click', function() {
+          toast.classList.remove('visible');
+          setTimeout(function() { toast.remove(); }, 400);
+        });
+        setTimeout(function() {
+          toast.classList.remove('visible');
+          setTimeout(function() { toast.remove(); }, 400);
+        }, 4000);
+      }
+
       // ─── Delegated events for table/card actions ───
       document.addEventListener('click', async function(e) {
         const actionBtn = e.target.closest('[data-action]');
@@ -2329,6 +2962,48 @@
           } catch (err) {
             console.error('Delete failed:', err);
           }
+        } else if (action === 'view-client') {
+          const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
+          if (client) {
+            const modal = document.createElement('div');
+            modal.innerHTML = NAGRIVA_Clients.renderClientProfile(client);
+            document.body.appendChild(modal.firstElementChild);
+            const closeBtn = document.getElementById('profileModalClose');
+            const closeBtn2 = document.getElementById('profileModalCloseBtn');
+            const closeModal = function() {
+              const el = document.getElementById('clientProfileModal');
+              if (el) { el.classList.remove('active'); setTimeout(function() { el.remove(); }, 300); }
+            };
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (closeBtn2) closeBtn2.addEventListener('click', closeModal);
+            const profileModal = document.getElementById('clientProfileModal');
+            if (profileModal) {
+              profileModal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+            }
+          }
+        } else if (action === 'edit-client') {
+          const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
+          if (client) showNewClientModal(client);
+        } else if (action === 'delete-client') {
+          const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
+          if (!client) return;
+          const confirmed = await NAGRIVA_Modal.showConfirm('Delete Client', 'Are you sure you want to remove ' + client.name + '? This will not delete their orders.');
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_Clients.deleteClient(orderId);
+            NAGRIVA_Clients.renderClients(clientsContainer);
+          } catch (err) {
+            showToast('error', 'Delete Failed', err.message);
+          }
+        } else if (action === 'delete-file') {
+          const confirmed = await NAGRIVA_Modal.showConfirm('Delete File', 'Are you sure you want to delete this file?');
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_Files.deleteFile(orderId);
+            NAGRIVA_Files.renderFiles(filesContainer);
+          } catch (err) {
+            showToast('error', 'Delete Failed', err.message);
+          }
         }
       });
 
@@ -2336,6 +3011,14 @@
       NAGRIVA_AdminOrders.onChange(function() {
         if (document.getElementById('page-orders').classList.contains('active')) {
           renderOrdersView();
+        }
+      });
+
+      // ─── Open page from dashboard widgets ───
+      document.addEventListener('click', function(e) {
+        const openPage = e.target.closest('.open-page');
+        if (openPage && openPage.dataset.page) {
+          switchPage(openPage.dataset.page);
         }
       });
 
