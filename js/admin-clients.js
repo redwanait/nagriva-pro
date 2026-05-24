@@ -67,11 +67,7 @@ const NAGRIVA_Clients = (() => {
       .order('created_at', { ascending: false });
     if (profilesError) throw profilesError;
 
-    const { data: allOrders, error: ordersError } = await window.supabaseClient
-      .from('orders')
-      .select('id, user_id, client_id, budget, status, created_at')
-      .order('created_at', { ascending: false });
-    if (ordersError) throw ordersError;
+    const allOrders = await NAGRIVA_OrdersAPI.fetchOrdersForClientStats();
 
     orders = allOrders || [];
 

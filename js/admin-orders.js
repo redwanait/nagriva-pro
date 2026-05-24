@@ -16,10 +16,11 @@ const NAGRIVA_AdminOrders = (() => {
   let _error = null;
 
   function mapFromDB(row) {
+    const clientFromJoin = row.client;
     return {
       id: row.id,
-      clientName: row.client_name || '',
-      clientEmail: row.client_email || '',
+      clientName: (clientFromJoin && clientFromJoin.full_name) || row.client_name || '',
+      clientEmail: (clientFromJoin && clientFromJoin.email) || row.client_email || '',
       clientId: row.client_id || null,
       service: row.service || '',
       budget: Number(row.budget) || 0,
@@ -106,11 +107,10 @@ const NAGRIVA_AdminOrders = (() => {
   }
 
   async function fetchAllOrders() {
-    const { data, error } = await window.supabaseClient
-      .from('orders')
-      .select('*')
-      .order('created_at', { ascending: false });
-    if (error) {
+    try {
+      const data = await NAGRIVA_OrdersAPI.fetchAllOrders();
+      return (data || []).map(mapFromDB);
+    } catch (error) {
       console.error('[AdminOrders] fetchAllOrders failed:', {
         message: error.message,
         code: error.code,
@@ -121,7 +121,6 @@ const NAGRIVA_AdminOrders = (() => {
       });
       throw error;
     }
-    return (data || []).map(mapFromDB);
   }
 
   let _fetchInProgress = false;
@@ -235,19 +234,30 @@ const NAGRIVA_AdminOrders = (() => {
     if (_createInProgress) throw new Error('A create operation is already in progress');
     _createInProgress = true;
     const payload = mapToDB(data);
-    const { data: inserted, error } = await window.supabaseClient
-      .from('orders')
-      .insert(payload)
-      .select()
-      .single();
+    const inserted = await NAGRIVA_OrdersAPI.createOrder(payload);
     _createInProgress = false;
-    if (error) {
-      throw error;
-    }
     const order = mapFromDB(inserted);
     orders.unshift(order);
     notifyChange();
     showToast('success', 'Order Created', `${order.clientName || order.projectTitle} \u2014 ${order.service} (${formatCurrency(order.budget)})`);
+
+    if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+      const targetUserId = order.clientId || inserted.client_id;
+      if (targetUserId) {
+        NAGRIVA_NotificationTriggers.newOrder(inserted, targetUserId).catch(function(e) {
+          console.warn('[AdminOrders] Failed to trigger new-order notification:', e.message);
+        });
+      }
+      NAGRIVA_NotificationTriggers.notifyAdmins(
+        'Order Created by Admin',
+        (order.clientName || 'A client') + ' order for ' + order.service + ' was created.',
+        '/pages/order-tracking.html?id=' + order.id,
+        { order_id: order.id, trigger: 'new_order', source: 'admin_panel' }
+      ).catch(function(e) {
+        console.warn('[AdminOrders] Failed to notify admins:', e.message);
+      });
+    }
+
     return order;
   }
 
@@ -267,29 +277,33 @@ const NAGRIVA_AdminOrders = (() => {
     if (updates.projectTitle !== undefined) payload.project_title = updates.projectTitle;
     if (updates.additionalNotes !== undefined) payload.additional_notes = updates.additionalNotes;
 
-    const { data: updated, error } = await window.supabaseClient
-      .from('orders')
-      .update(payload)
-      .eq('id', id)
-      .select()
-      .single();
+    const updated = await NAGRIVA_OrdersAPI.updateOrder(id, payload);
     _updateInProgress = false;
-    if (error) throw error;
 
     const order = mapFromDB(updated);
     const idx = orders.findIndex(o => o.id === id);
     if (idx !== -1) orders[idx] = order;
     notifyChange();
     showToast('success', 'Order Updated', `${order.clientName || order.projectTitle} \u2014 ${order.service} updated successfully`);
+
+    if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+      var targetUserId = order.clientId || updated.client_id;
+      if (targetUserId && updates.status) {
+        NAGRIVA_NotificationTriggers.statusChanged(updated, targetUserId, updates.status).catch(function(e) {
+          console.warn('[AdminOrders] Failed to trigger status-change notification:', e.message);
+        });
+      } else if (targetUserId && (updates.projectTitle || updates.budget || updates.deadline)) {
+        NAGRIVA_NotificationTriggers.orderUpdated(updated, targetUserId, 'Your order details have been updated.').catch(function(e) {
+          console.warn('[AdminOrders] Failed to trigger order-update notification:', e.message);
+        });
+      }
+    }
+
     return order;
   }
 
   async function deleteOrder(id) {
-    const { error } = await window.supabaseClient
-      .from('orders')
-      .delete()
-      .eq('id', id);
-    if (error) throw error;
+    await NAGRIVA_OrdersAPI.deleteOrder(id);
 
     const idx = orders.findIndex(o => o.id === id);
     let removed = null;

@@ -57,11 +57,7 @@ const NAGRIVA_Messages = (() => {
   }
 
   async function fetchConversations() {
-    const { data: allOrders, error: ordersError } = await window.supabaseClient
-      .from('orders')
-      .select('id, client_name, project_title, service, created_at')
-      .order('created_at', { ascending: false });
-    if (ordersError) throw ordersError;
+    const allOrders = await NAGRIVA_OrdersAPI.fetchOrdersList('id, client_name, project_title, service, created_at');
 
     const { data: allMessages, error: messagesError } = await window.supabaseClient
       .from('messages')

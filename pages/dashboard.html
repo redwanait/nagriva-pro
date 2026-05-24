@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../css/admin-auth.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
   <link rel="stylesheet" href="../css/floating-elements.css" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
   <style>
     .dash-page {
       padding-top: 100px;
@@ -593,6 +594,11 @@
   <script src="../js/i18n.js"></script>
   <script src="../js/profile-avatar.js"></script>
   <script src="../js/auth.js"></script>
+  <script src="../modules/notifications/notifications-api.js"></script>
+  <script src="../modules/notifications/notifications-realtime.js"></script>
+  <script src="../modules/notifications/notifications-triggers.js"></script>
+  <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
+  <script src="../modules/orders/orders-api.js"></script>
   <script src="../js/orders.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
@@ -673,14 +679,10 @@
         } catch (err) {
           console.error('[Dashboard] NagrivaOrders.getUserOrders failed:', err);
           try {
-            console.log('[Dashboard] Trying direct Supabase query...');
+            console.log('[Dashboard] Trying fallback via OrdersAPI...');
             var fbUser = await NagrivaOrders.getCurrentUser();
-            var fbQuery = window.supabaseClient.from('orders').select('*');
-            if (fbUser) fbQuery = fbQuery.eq('user_id', fbUser.id);
-            var result = await fbQuery.order('created_at', { ascending: false });
-            if (result.error) throw result.error;
-            orders = result.data || [];
-            console.log('[Dashboard] Direct fetch succeeded:', orders);
+            orders = fbUser ? await NAGRIVA_OrdersAPI.getUserOrders(fbUser.id) : [];
+            console.log('[Dashboard] Fallback fetch succeeded:', orders);
           } catch (fallbackErr) {
             console.error('[Dashboard] Direct query also failed:', fallbackErr);
             container.innerHTML = '<div class="dash-activity-item"><span class="dash-activity-dot"></span><span class="dash-activity-text">Could not load orders</span></div>';

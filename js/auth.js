@@ -397,6 +397,13 @@ const NagrivaAuth = (() => {
         return;
       }
 
+      /* Trigger new-client notification for admins */
+      if (data.user && typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+        NAGRIVA_NotificationTriggers.newClient(data.user).catch(function(e) {
+          console.warn('[Auth] Failed to trigger new-client notification:', e.message);
+        });
+      }
+
       /* If session is null, email confirmation is enabled */
       if (!data.session) {
         showSuccess(refs.signupMsg,

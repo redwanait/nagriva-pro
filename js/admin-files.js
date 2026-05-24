@@ -63,11 +63,7 @@ const NAGRIVA_Files = (() => {
   }
 
   async function fetchFiles() {
-    const { data: allOrders, error: ordersError } = await window.supabaseClient
-      .from('orders')
-      .select('id, client_name, project_title, order_number')
-      .order('created_at', { ascending: false });
-    if (ordersError) throw ordersError;
+    const allOrders = await NAGRIVA_OrdersAPI.fetchOrdersList('id, client_name, project_title, order_number');
     orders = allOrders || [];
 
     const { data: allFiles, error: filesError } = await window.supabaseClient

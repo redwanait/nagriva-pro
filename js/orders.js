@@ -80,24 +80,7 @@ const NagrivaOrders = (() => {
   async function ensureUserIdLinked(user) {
     if (!user || !user.email) return;
     try {
-      const { data: orphanOrders, error } = await window.supabaseClient
-        .from('orders')
-        .select('id')
-        .is('user_id', null)
-        .eq('user_email', user.email);
-
-      if (error) {
-        console.warn('[NagrivaOrders] ensureUserIdLinked query error:', error);
-        return;
-      }
-
-      if (orphanOrders && orphanOrders.length > 0) {
-        const ids = orphanOrders.map(o => o.id);
-        await window.supabaseClient
-          .from('orders')
-          .update({ user_id: user.id })
-          .in('id', ids);
-      }
+      await NAGRIVA_OrdersAPI.linkOrphanOrders(user);
     } catch (err) {
       console.warn('[NagrivaOrders] ensureUserIdLinked failed:', err.message || err);
     }
@@ -117,9 +100,9 @@ const NagrivaOrders = (() => {
 
     const orderNumber = generateOrderNumber();
 
-    const { data, error: insertError } = await window.supabaseClient
-      .from('orders')
-      .insert({
+    let data;
+    try {
+      data = await NAGRIVA_OrdersAPI.createOrder({
         user_id: user.id,
         user_email: user.email || '',
         service_type: orderData.service_type,
@@ -130,12 +113,9 @@ const NagrivaOrders = (() => {
         deadline: orderData.deadline || null,
         status: 'pending',
         order_number: orderNumber
-      })
-      .select()
-      .single();
-
-    if (insertError) {
-      if (insertError.code === '23505') {
+      });
+    } catch (insertError) {
+      if (insertError && insertError.code === '23505') {
         return createOrder(orderData, _attempt + 1);
       }
       console.error('[NagrivaOrders] createOrder insert error:', insertError);
@@ -167,17 +147,7 @@ const NagrivaOrders = (() => {
 
       await ensureUserIdLinked(user);
 
-      const { data, error } = await window.supabaseClient
-        .from('orders')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('[NagrivaOrders] getUserOrders query error:', error);
-        throw error;
-      }
-      return data || [];
+      return await NAGRIVA_OrdersAPI.getUserOrders(user.id);
     } catch (err) {
       console.error('[NagrivaOrders] getUserOrders failed:', err.message || err);
       throw err;
@@ -192,19 +162,7 @@ const NagrivaOrders = (() => {
     const profile = await getProfile(user.id);
     const isAdmin = profile?.role === 'admin';
 
-    let query = window.supabaseClient
-      .from('orders')
-      .select('*')
-      .eq('id', orderId);
-
-    if (!isAdmin) {
-      query = query.eq('user_id', user.id);
-    }
-
-    const { data, error } = await query.single();
-
-    if (error) throw error;
-    return data;
+    return await NAGRIVA_OrdersAPI.getOrderById(orderId, isAdmin ? null : user.id);
   }
 
   /* ─── Get Own Order (scoped to current user, non-admin) ─── */
@@ -212,18 +170,10 @@ const NagrivaOrders = (() => {
     const user = await getCurrentUser();
     if (!user) throw new Error('Not authenticated');
 
-    const { data, error } = await window.supabaseClient
-      .from('orders')
-      .select('*')
-      .eq('id', orderId)
-      .eq('user_id', user.id)
-      .single();
-
-    if (error) throw error;
-    return data;
+    return await NAGRIVA_OrdersAPI.getOrderById(orderId, user.id);
   }
 
-  /* ─── Get All Orders (Admin only) ─── */
+  /* ─── Get All Orders (Admin only) with client join ─── */
   async function getAllOrders() {
     const user = await getCurrentUser();
     if (!user) throw new Error('Not authenticated');
@@ -231,15 +181,7 @@ const NagrivaOrders = (() => {
     const profile = await getProfile(user.id);
     if (profile?.role !== 'admin') throw new Error('Admin access required');
 
-    const { data, error } = await window.supabaseClient
-      .from('orders')
-      .select('*, profiles(full_name)')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('[NagrivaOrders] getAllOrders error:', error);
-      throw error;
-    }
+    const data = await NAGRIVA_OrdersAPI.fetchAllOrders();
     return data || [];
   }
 
@@ -251,14 +193,7 @@ const NagrivaOrders = (() => {
     const profile = await getProfile(user.id);
     if (profile?.role !== 'admin') throw new Error('Admin access required');
 
-    const { data, error } = await window.supabaseClient
-      .from('orders')
-      .update({ status })
-      .eq('id', orderId)
-      .select()
-      .single();
-
-    if (error) throw error;
+    const data = await NAGRIVA_OrdersAPI.updateOrder(orderId, { status });
 
     await logActivity(orderId, user.id, 'status_changed',
       'Status changed to ' + getStatusLabel(status));
@@ -274,14 +209,7 @@ const NagrivaOrders = (() => {
     const profile = await getProfile(user.id);
     if (profile?.role !== 'admin') throw new Error('Admin access required');
 
-    const { data, error } = await window.supabaseClient
-      .from('orders')
-      .update(updates)
-      .eq('id', orderId)
-      .select()
-      .single();
-
-    if (error) throw error;
+    const data = await NAGRIVA_OrdersAPI.updateOrder(orderId, updates);
 
     if (updates.project_manager) {
       await logActivity(orderId, user.id, 'manager_assigned',
@@ -556,22 +484,7 @@ const NagrivaOrders = (() => {
 
       await ensureUserIdLinked(user);
 
-      const { data: orders, error } = await window.supabaseClient
-        .from('orders')
-        .select('status')
-        .eq('user_id', user.id);
-
-      if (error) {
-        console.error('[NagrivaOrders] getUserDashboardStats error:', error);
-        return { active: 0, completed: 0, pending: 0, total: 0 };
-      }
-
-      return {
-        total: orders.length,
-        active: orders.filter(o => o.status === 'in_progress' || o.status === 'review').length,
-        completed: orders.filter(o => o.status === 'delivered').length,
-        pending: orders.filter(o => o.status === 'pending').length
-      };
+      return await NAGRIVA_OrdersAPI.getUserDashboardStats(user.id);
     } catch (err) {
       console.error('[NagrivaOrders] getUserDashboardStats failed:', err.message || err);
       return { active: 0, completed: 0, pending: 0, total: 0 };
@@ -579,20 +492,12 @@ const NagrivaOrders = (() => {
   }
 
   async function getAdminDashboardStats() {
-    const { data: orders, error } = await window.supabaseClient
-      .from('orders')
-      .select('status');
-
-    if (error) return { total: 0, pending: 0, in_progress: 0, review: 0, delivered: 0, cancelled: 0 };
-
-    return {
-      total: orders.length,
-      pending: orders.filter(o => o.status === 'pending').length,
-      in_progress: orders.filter(o => o.status === 'in_progress').length,
-      review: orders.filter(o => o.status === 'review').length,
-      delivered: orders.filter(o => o.status === 'delivered').length,
-      cancelled: orders.filter(o => o.status === 'cancelled').length
-    };
+    try {
+      return await NAGRIVA_OrdersAPI.getAdminDashboardStats();
+    } catch (err) {
+      console.error('[NagrivaOrders] getAdminDashboardStats failed:', err.message || err);
+      return { total: 0, pending: 0, in_progress: 0, review: 0, delivered: 0, cancelled: 0 };
+    }
   }
 
   async function getRecentActivity(limit = 10) {
@@ -602,12 +507,7 @@ const NagrivaOrders = (() => {
 
       await ensureUserIdLinked(user);
 
-      const { data: userOrders } = await window.supabaseClient
-        .from('orders')
-        .select('id')
-        .eq('user_id', user.id);
-
-      const orderIds = (userOrders || []).map(o => o.id);
+      const orderIds = await NAGRIVA_OrdersAPI.getUserOrderIds(user.id);
       if (orderIds.length === 0) return [];
 
       const { data, error } = await window.supabaseClient

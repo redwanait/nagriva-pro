@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
   <link rel="stylesheet" href="../css/floating-elements.css" />
+  <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
   <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
   <style>
     *,
@@ -2175,6 +2177,7 @@
   <script src="../js/supabase.js"></script>
   <script src="../js/auth-guard.js"></script>
   <script src="../js/admin-auth.js"></script>
+  <script src="../modules/orders/orders-api.js"></script>
   <script src="../js/admin-orders.js"></script>
   <script src="../js/admin-modal.js"></script>
   <script src="../js/admin-dashboard.js"></script>
@@ -2184,6 +2187,7 @@
   <script src="../js/admin-activity.js"></script>
   <script src="../js/admin-notifications.js"></script>
   <script src="../js/admin-payments.js"></script>
+  <script src="../components/client-drawer/client-drawer.js"></script>
   <script src="../js/i18n.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
@@ -2963,24 +2967,7 @@
             console.error('Delete failed:', err);
           }
         } else if (action === 'view-client') {
-          const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
-          if (client) {
-            const modal = document.createElement('div');
-            modal.innerHTML = NAGRIVA_Clients.renderClientProfile(client);
-            document.body.appendChild(modal.firstElementChild);
-            const closeBtn = document.getElementById('profileModalClose');
-            const closeBtn2 = document.getElementById('profileModalCloseBtn');
-            const closeModal = function() {
-              const el = document.getElementById('clientProfileModal');
-              if (el) { el.classList.remove('active'); setTimeout(function() { el.remove(); }, 300); }
-            };
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
-            if (closeBtn2) closeBtn2.addEventListener('click', closeModal);
-            const profileModal = document.getElementById('clientProfileModal');
-            if (profileModal) {
-              profileModal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-            }
-          }
+          NAGRIVA_ClientDrawer.open(orderId);
         } else if (action === 'edit-client') {
           const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
           if (client) showNewClientModal(client);
@@ -3004,6 +2991,26 @@
           } catch (err) {
             showToast('error', 'Delete Failed', err.message);
           }
+        }
+      });
+
+      // ─── Open client drawer from order/client table rows ───
+      document.addEventListener('click', function(e) {
+        const clientEl = e.target.closest('.td-client, .td-user');
+        if (!clientEl) return;
+        const row = clientEl.closest('tr[data-id]');
+        if (!row) return;
+        const actionBtn = e.target.closest('[data-action]');
+        if (actionBtn) return;
+        const id = row.dataset.id;
+        const orderRow = clientEl.closest('#page-orders tr[data-id]');
+        if (orderRow) {
+          const order = NAGRIVA_AdminOrders.getOrder(id);
+          if (order && order.clientId) {
+            NAGRIVA_ClientDrawer.open(order.clientId);
+          }
+        } else {
+          NAGRIVA_ClientDrawer.open(id);
         }
       });
 
@@ -3036,6 +3043,10 @@
   <script src="../js/chatbot.js"></script>
   <div id="footer-container"></div>
 
+  <script src="../modules/notifications/notifications-api.js"></script>
+  <script src="../modules/notifications/notifications-realtime.js"></script>
+  <script src="../modules/notifications/notifications-triggers.js"></script>
+  <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
   <script src="../js/footer.js"></script>
 </body>
 </html>
