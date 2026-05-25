@@ -397,6 +397,13 @@ const NagrivaAuth = (() => {
         return;
       }
 
+      /* Trigger activity log for new client registration */
+      if (data.user && typeof NAGRIVA_ActivityLogsTrigger !== 'undefined') {
+        NAGRIVA_ActivityLogsTrigger.clientRegistered(data.user).catch(function(e) {
+          console.warn('[Auth] Failed to trigger client-registered activity log:', e.message);
+        });
+      }
+
       /* Trigger new-client notification for admins */
       if (data.user && typeof NAGRIVA_NotificationTriggers !== 'undefined') {
         NAGRIVA_NotificationTriggers.newClient(data.user).catch(function(e) {

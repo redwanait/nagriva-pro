@@ -241,6 +241,12 @@ const NAGRIVA_AdminOrders = (() => {
     notifyChange();
     showToast('success', 'Order Created', `${order.clientName || order.projectTitle} \u2014 ${order.service} (${formatCurrency(order.budget)})`);
 
+    if (typeof NAGRIVA_ActivityLogsTrigger !== 'undefined') {
+      NAGRIVA_ActivityLogsTrigger.orderCreated(inserted, inserted.user_id || null).catch(function(e) {
+        console.warn('[AdminOrders] Failed to trigger activity log:', e.message);
+      });
+    }
+
     if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
       const targetUserId = order.clientId || inserted.client_id;
       if (targetUserId) {
@@ -285,6 +291,19 @@ const NAGRIVA_AdminOrders = (() => {
     if (idx !== -1) orders[idx] = order;
     notifyChange();
     showToast('success', 'Order Updated', `${order.clientName || order.projectTitle} \u2014 ${order.service} updated successfully`);
+
+    if (typeof NAGRIVA_ActivityLogsTrigger !== 'undefined') {
+      var targetUserId = order.clientId || updated.client_id;
+      if (updates.status) {
+        NAGRIVA_ActivityLogsTrigger.statusChanged(updated, targetUserId || null, updates.status).catch(function(e) {
+          console.warn('[AdminOrders] Failed to trigger status-change activity log:', e.message);
+        });
+      } else {
+        NAGRIVA_ActivityLogsTrigger.orderUpdated(updated, targetUserId || null, 'Order details updated for ' + order.service).catch(function(e) {
+          console.warn('[AdminOrders] Failed to trigger order-update activity log:', e.message);
+        });
+      }
+    }
 
     if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
       var targetUserId = order.clientId || updated.client_id;

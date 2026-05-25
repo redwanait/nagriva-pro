@@ -111,80 +111,6 @@ const NAGRIVA_Dashboard = (() => {
     }).join('');
   }
 
-  function renderActivity(orders) {
-    const container = document.getElementById('dashActivityFeed');
-    if (!container) return;
-
-    // Try to use real activity data first
-    if (typeof NAGRIVA_Activity !== 'undefined' && NAGRIVA_Activity.getActivities().length > 0) {
-      const activities = NAGRIVA_Activity.getActivities().slice(0, 6);
-      container.innerHTML = activities.map(function(a, i) {
-        const dotMap = {
-          order_created: 'teal', status_changed: 'blue', message_sent: 'purple',
-          file_uploaded: 'orange', project_completed: 'teal', project_added: 'blue',
-          manager_assigned: 'orange', profile_updated: 'gray'
-        };
-        const dot = dotMap[a.action] || 'teal';
-        var isLast = i === activities.length - 1;
-        var actorName = a.profiles && a.profiles.full_name ? a.profiles.full_name : 'System';
-        return '<div class="activity-item">' +
-          '<div class="activity-dot-wrap">' +
-            '<div class="activity-dot ' + dot + '"></div>' +
-            (isLast ? '' : '<div class="activity-line"></div>') +
-          '</div>' +
-          '<div class="activity-content">' +
-            '<div class="activity-text"><strong>' + escapeHtml(actorName) + '</strong> ' + escapeHtml(a.description || a.action) + '</div>' +
-            '<div class="activity-time">' + NAGRIVA_AdminOrders.timeAgo(a.created_at) + '</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-      return;
-    }
-
-    // Fallback: derive from orders
-    const activities = [];
-    orders.slice(0, 8).forEach(o => {
-      const displayName = o.clientName || o.projectTitle;
-      activities.push({
-        text: '<strong>' + escapeHtml(displayName) + '</strong> — ' + escapeHtml(o.service),
-        time: NAGRIVA_AdminOrders.timeAgo(o.createdAt),
-        dot: 'teal',
-      });
-      if (o.status === 'completed') {
-        activities.push({
-          text: '<strong>' + escapeHtml(displayName) + '</strong> completed',
-          time: NAGRIVA_AdminOrders.timeAgo(o.createdAt),
-          dot: 'teal',
-        });
-      } else if (o.status === 'revision') {
-        activities.push({
-          text: '<strong>' + escapeHtml(displayName) + '</strong> is in revision',
-          time: NAGRIVA_AdminOrders.timeAgo(o.createdAt),
-          dot: 'orange',
-        });
-      }
-    });
-
-    if (activities.length === 0) {
-      container.innerHTML = '<div class="activity-item"><div class="activity-content"><div class="activity-text" style="color:var(--gray3);">No activity yet</div></div></div>';
-      return;
-    }
-
-    container.innerHTML = activities.slice(0, 6).map(function(a, i) {
-      var isLast = i === Math.min(activities.length, 6) - 1;
-      return '<div class="activity-item">' +
-        '<div class="activity-dot-wrap">' +
-          '<div class="activity-dot ' + a.dot + '"></div>' +
-          (isLast ? '' : '<div class="activity-line"></div>') +
-        '</div>' +
-        '<div class="activity-content">' +
-          '<div class="activity-text">' + a.text + '</div>' +
-          '<div class="activity-time">' + a.time + '</div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-  }
-
   function escapeHtml(str) {
     if (!str) return '';
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -269,24 +195,6 @@ const NAGRIVA_Dashboard = (() => {
     return html;
   }
 
-  function renderActivitySkeleton(count) {
-    count = count || 4;
-    var html = '';
-    for (var i = 0; i < count; i++) {
-      html += '<div class="activity-item">' +
-        '<div class="activity-dot-wrap">' +
-          '<div class="activity-dot" style="background:rgba(255,255,255,0.06)"></div>' +
-          (i < count - 1 ? '<div class="activity-line"></div>' : '') +
-        '</div>' +
-        '<div class="activity-content">' +
-          '<div class="dash-skeleton-line w65" style="margin-bottom:6px"></div>' +
-          '<div class="dash-skeleton-line w30"></div>' +
-        '</div>' +
-      '</div>';
-    }
-    return html;
-  }
-
   function showSkeletons() {
     var revenueEl = document.getElementById('dashRevenue');
     if (revenueEl) {
@@ -315,13 +223,6 @@ const NAGRIVA_Dashboard = (() => {
       }
     }
 
-    var activityFeed = document.getElementById('dashActivityFeed');
-    if (activityFeed) {
-      var firstActivity = activityFeed.querySelector('.activity-text');
-      if (!firstActivity || firstActivity.textContent.includes('Loading') || firstActivity.textContent.includes('activity')) {
-        activityFeed.innerHTML = renderActivitySkeleton();
-      }
-    }
   }
 
   function showError(err) {
@@ -346,16 +247,6 @@ const NAGRIVA_Dashboard = (() => {
       '</td></tr>';
     }
 
-    var activityFeed = document.getElementById('dashActivityFeed');
-    if (activityFeed) {
-      activityFeed.innerHTML = '<div class="activity-item">' +
-        '<div class="activity-dot-wrap"><div class="activity-dot" style="background:rgba(239,68,68,0.2)"></div></div>' +
-        '<div class="activity-content">' +
-          '<div style="color:var(--gray);font-size:0.8rem;margin-bottom:8px;">' + escapedMsg + '</div>' +
-          '<button class="btn btn-secondary btn-sm" onclick="NAGRIVA_Dashboard.retry()"><i class="fas fa-sync"></i> Retry</button>' +
-        '</div>' +
-      '</div>';
-    }
   }
 
   async function retry() {
@@ -369,9 +260,6 @@ const NAGRIVA_Dashboard = (() => {
         if (orders.length > 0) {
           updateStats(NAGRIVA_AdminOrders.getStats());
           renderRecentOrders(orders);
-          if (document.getElementById('dashActivityFeed')) {
-            renderActivity(orders);
-          }
           updateCharts(orders);
           _loaded = true;
         } else if (NAGRIVA_AdminOrders.error) {
@@ -408,13 +296,15 @@ const NAGRIVA_Dashboard = (() => {
 
     showSkeletons();
 
-    // Load real activity and notifications
-    if (typeof NAGRIVA_Activity !== 'undefined') {
-      NAGRIVA_Activity.init(null, 10).then(function() {
-        var container = document.getElementById('dashActivityFeed');
-        if (container) renderActivity(NAGRIVA_AdminOrders.getAllOrders());
+    // Load realtime activity feed
+    if (typeof NAGRIVA_ActivityFeed !== 'undefined') {
+      NAGRIVA_ActivityFeed.init({
+        containerId: 'dashActivityFeed',
+        limit: 10,
+        realtime: true
       });
     }
+
     if (typeof NAGRIVA_Notifications !== 'undefined') {
       NAGRIVA_Notifications.init().then(function() {
         renderDashboardNotifications();
@@ -428,21 +318,8 @@ const NAGRIVA_Dashboard = (() => {
       _loaded = true;
       updateStats(updatedStats);
       renderRecentOrders(updatedOrders);
-      if (document.getElementById('dashActivityFeed')) {
-        renderActivity(updatedOrders);
-      }
       updateCharts(updatedOrders);
     });
-
-    // Subscribe to activity changes
-    if (typeof NAGRIVA_Activity !== 'undefined') {
-      NAGRIVA_Activity.onChange(function() {
-        var container = document.getElementById('dashActivityFeed');
-        if (container && document.getElementById('page-dashboard').classList.contains('active')) {
-          renderActivity(NAGRIVA_AdminOrders.getAllOrders());
-        }
-      });
-    }
 
     // Subscribe to notification changes
     if (typeof NAGRIVA_Notifications !== 'undefined') {
@@ -456,9 +333,6 @@ const NAGRIVA_Dashboard = (() => {
       var stats = NAGRIVA_AdminOrders.getStats();
       updateStats(stats);
       renderRecentOrders(orders);
-      if (document.getElementById('dashActivityFeed')) {
-        renderActivity(orders);
-      }
       updateCharts(orders);
       _loading = false;
       _loaded = true;
@@ -477,9 +351,6 @@ const NAGRIVA_Dashboard = (() => {
           var s = NAGRIVA_AdminOrders.getStats();
           updateStats(s);
           renderRecentOrders(refreshed);
-          if (document.getElementById('dashActivityFeed')) {
-            renderActivity(refreshed);
-          }
           updateCharts(refreshed);
           _loaded = true;
         }

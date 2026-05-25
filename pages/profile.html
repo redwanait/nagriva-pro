@@ -387,6 +387,12 @@
           var displayName = getDisplayName({ user_metadata: { full_name: newName }, email: user.email });
           if (nameEl) nameEl.textContent = displayName;
           ProfileAvatar.refreshAll();
+
+          if (typeof NAGRIVA_ActivityLogsTrigger !== 'undefined') {
+            NAGRIVA_ActivityLogsTrigger.profileUpdated(user.id, 'Profile name updated to ' + newName).catch(function(e) {
+              console.warn('[Profile] Failed to trigger activity log:', e.message);
+            });
+          }
         } catch (err) {
           errorEl.textContent = err.message || 'Failed to update profile.';
           errorEl.classList.add('show');
