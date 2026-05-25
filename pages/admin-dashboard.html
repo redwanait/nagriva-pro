@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../css/admin-payments.css" />
   <link rel="stylesheet" href="../css/admin-invoices.css" />
   <link rel="stylesheet" href="../css/admin-auth.css" />
+  <link rel="stylesheet" href="../css/admin-services.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
   <link rel="stylesheet" href="../css/floating-elements.css" />
@@ -1744,6 +1745,9 @@
           <i class="fas fa-undo-alt"></i> Revisions
           <span class="badge-count">4</span>
         </div>
+        <div class="sidebar-item" data-page="services">
+          <i class="fas fa-cube"></i> Services
+        </div>
         <div class="sidebar-item" data-page="payments">
           <i class="fas fa-credit-card"></i> Payments
         </div>
@@ -2236,6 +2240,72 @@
           <div id="filesContainer"></div>
         </div>
 
+        <!-- ═══ PAGE: SERVICES ═══ -->
+        <div class="page" id="page-services">
+
+          <div class="page-header">
+            <div>
+              <h1>Services</h1>
+              <p>Manage your service offerings, update descriptions, and control visibility.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary btn-sm" id="servicesNewBtn"><i class="fas fa-plus"></i> Create Service</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-grid services-stats">
+            <div class="card stat-card">
+              <div class="stat-icon teal"><i class="fas fa-cube"></i></div>
+              <div class="stat-value" id="svcTotal">0</div>
+              <div class="stat-label">Total Services</div>
+              <div class="stat-change up"><i class="fas fa-arrow-up"></i> All offerings</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon blue"><i class="fas fa-globe"></i></div>
+              <div class="stat-value" id="svcPublished">0</div>
+              <div class="stat-label">Published</div>
+              <div class="stat-change up"><i class="fas fa-arrow-up"></i> Live on site</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon orange"><i class="fas fa-pen-fancy"></i></div>
+              <div class="stat-value" id="svcDraft">0</div>
+              <div class="stat-label">Drafts</div>
+              <div class="stat-change neutral"><i class="fas fa-clock"></i> In progress</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon red"><i class="fas fa-archive"></i></div>
+              <div class="stat-value" id="svcArchived">0</div>
+              <div class="stat-label">Archived</div>
+              <div class="stat-change down"><i class="fas fa-arrow-down"></i> Inactive</div>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="orders-toolbar">
+            <div class="orders-search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="servicesSearch" placeholder="Search by title, slug, category..." />
+              <button class="orders-search-clear" id="servicesSearchClear"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="orders-filter-group">
+              <select class="orders-filter-select" id="servicesStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Count -->
+          <div class="orders-count" id="servicesCount" style="margin-bottom:16px;"></div>
+
+          <!-- Services Container -->
+          <div id="servicesContainer"></div>
+
+        </div>
+
         <!-- ═══ PAGE: REVISIONS (Activity Timeline) ═══ -->
         <div class="page" id="page-revisions">
           <div class="page-header">
@@ -2481,6 +2551,8 @@
   <script src="../js/admin-modal.js"></script>
   <script src="../js/admin-dashboard.js"></script>
   <script src="../js/admin-clients.js"></script>
+  <script src="../modules/services/services-api.js"></script>
+  <script src="../js/admin-services.js"></script>
   <script src="../js/admin-messages.js"></script>
   <script src="../js/admin-files.js"></script>
   <script src="../js/admin-activity.js"></script>
@@ -2520,6 +2592,7 @@
           messages: 'Messages',
           files: 'Files',
           revisions: 'Activity',
+          services: 'Services',
           payments: 'Payments',
           invoices: 'Invoices',
           analytics: 'Analytics',
@@ -2535,6 +2608,8 @@
           renderMessagesView();
         } else if (pageId === 'files') {
           renderFilesView();
+        } else if (pageId === 'services') {
+          renderServicesView();
         } else if (pageId === 'revisions') {
           renderActivityView();
         } else if (pageId === 'payments') {
@@ -2910,6 +2985,54 @@
         showFileUploadModal();
       });
 
+      // ─── Services ───
+      const servicesContainer = document.getElementById('servicesContainer');
+      let servicesInitialized = false;
+
+      async function renderServicesView() {
+        if (!servicesInitialized) {
+          await NAGRIVA_AdminServices.init(servicesContainer);
+          servicesInitialized = true;
+        }
+        NAGRIVA_AdminServices.renderStats();
+      }
+
+      function updateServicesStats() {
+        const stats = NAGRIVA_AdminServices.getStats();
+        document.getElementById('svcTotal').textContent = stats.total;
+        document.getElementById('svcPublished').textContent = stats.published;
+        document.getElementById('svcDraft').textContent = stats.draft;
+        document.getElementById('svcArchived').textContent = stats.archived;
+      }
+
+      NAGRIVA_AdminServices.onChange(function() {
+        updateServicesStats();
+      });
+
+      document.getElementById('servicesSearch')?.addEventListener('input', function() {
+        NAGRIVA_AdminServices.setSearch(this.value);
+        const clear = document.getElementById('servicesSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_AdminServices.renderServices(servicesContainer);
+      });
+
+      document.getElementById('servicesSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('servicesSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_AdminServices.setSearch('');
+        NAGRIVA_AdminServices.renderServices(servicesContainer);
+      });
+
+      document.getElementById('servicesStatusFilter')?.addEventListener('change', function() {
+        NAGRIVA_AdminServices.setStatusFilter(this.value);
+        NAGRIVA_AdminServices.renderServices(servicesContainer);
+      });
+
+      document.getElementById('servicesNewBtn')?.addEventListener('click', function() {
+        NAGRIVA_AdminServices.openServiceModal(null);
+      });
+
       // ─── Activity / Revisions ───
       const activityContainer = document.getElementById('activityContainer');
       let activityInitialized = false;
@@ -3101,13 +3224,16 @@
         });
       });
 
-      // ─── Empty state new order / invoice buttons ───
+      // ─── Empty state new order / invoice / service buttons ───
       document.addEventListener('click', function(e) {
         if (e.target.closest('.empty-new-order-btn')) {
           openNewOrderModal();
         }
         if (e.target.closest('.inv-empty-new-btn')) {
           NAGRIVA_AdminInvoices.openInvoiceModal();
+        }
+        if (e.target.closest('.empty-new-service-btn')) {
+          NAGRIVA_AdminServices.openServiceModal(null);
         }
       });
 
@@ -3396,6 +3522,21 @@
           } catch (err) {
             showToast('error', 'Delete Failed', err.message);
           }
+        } else if (action === 'edit-service') {
+          const service = NAGRIVA_AdminServices.getService(orderId);
+          if (service) NAGRIVA_AdminServices.openServiceModal(service);
+        } else if (action === 'delete-service') {
+          const service = NAGRIVA_AdminServices.getService(orderId);
+          if (!service) return;
+          const confirmed = await NAGRIVA_AdminServices.showConfirm('Delete Service', 'Are you sure you want to delete "' + service.title + '"? This action cannot be undone.');
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_AdminServices.deleteService(orderId);
+            NAGRIVA_AdminServices.renderServices(servicesContainer);
+            NAGRIVA_AdminServices.renderStats();
+          } catch (err) {
+            showToast('error', 'Delete Failed', err.message);
+          }
         }
       });
 
@@ -3446,7 +3587,7 @@
   </script>
   <script src="../js/floating-elements.js"></script>
   <script src="../js/chatbot.js"></script>
-  <div id="footer-container"></div>
+
 
   <script src="../modules/notifications/notifications-api.js"></script>
   <script src="../modules/notifications/notifications-realtime.js"></script>

@@ -1,0 +1,182 @@
+/* ════════════════════════════════════════════════════════
+   NAGRIVA — Admin Services Page Styles
+   Service-specific table and UI overrides
+   ════════════════════════════════════════════════════════ */
+
+/* ─── Service table: compact spacing & refined typography ─── */
+.services-table {
+  font-size: 0.78rem;
+}
+.services-table thead th {
+  padding: 10px 16px;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.services-table tbody td {
+  padding: 10px 16px;
+}
+.services-table tbody tr {
+  transition: background var(--transition);
+}
+.services-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+/* ─── Service table specific column widths ─── */
+.services-table th:nth-child(1),
+.services-table td:nth-child(1) {
+  min-width: 140px;
+}
+.services-table th:nth-child(2),
+.services-table td:nth-child(2) {
+  min-width: 130px;
+}
+.services-table th:nth-child(3),
+.services-table td:nth-child(3) {
+  min-width: 100px;
+}
+.services-table th:nth-child(4),
+.services-table td:nth-child(4) {
+  min-width: 180px;
+  max-width: 220px;
+}
+.services-table th:nth-child(5),
+.services-table td:nth-child(5) {
+  min-width: 90px;
+}
+.services-table th:nth-child(6),
+.services-table td:nth-child(6) {
+  min-width: 100px;
+}
+
+/* ─── Service title ─── */
+.services-table .svc-title {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.3;
+  transition: color var(--transition);
+}
+.services-table tbody tr:hover .svc-title {
+  color: var(--accent);
+}
+
+/* ─── Service slug ─── */
+.td-slug {
+  color: var(--gray2);
+  font-size: 0.68rem;
+  font-family: 'SF Mono', 'Fira Code', 'DM Sans', monospace;
+  background: rgba(255,255,255,0.03);
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* ─── Service category ─── */
+.td-category {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--info);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  white-space: nowrap;
+}
+
+/* ─── Short description ─── */
+.td-desc {
+  font-size: 0.72rem;
+  color: var(--gray2);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+/* ─── Actions column ─── */
+.services-table .td-actions {
+  gap: 2px;
+}
+.services-table .td-action-btn {
+  width: 28px;
+  height: 28px;
+  font-size: 0.68rem;
+}
+
+/* ─── Status badge refinement ─── */
+.services-table .order-status-badge {
+  padding: 3px 10px;
+  font-size: 0.65rem;
+}
+
+/* ─── Date text refinement ─── */
+.services-table .td-date {
+  font-size: 0.72rem;
+  color: var(--gray2);
+}
+
+/* ─── Service skeleton row ─── */
+.services-skeleton-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 2fr 1fr 80px;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: var(--r-xs);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+/* ─── Stats card override for services ─── */
+.services-stats .stat-value {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1200px) {
+  .services-skeleton-row {
+    grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  }
+  .services-skeleton-row > *:nth-child(6) {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .services-skeleton-row {
+    grid-template-columns: 2fr 1.5fr 1fr 2fr;
+  }
+  .services-skeleton-row > *:nth-child(5),
+  .services-skeleton-row > *:nth-child(6) {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .services-skeleton-row {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 8px;
+  }
+  .services-skeleton-row > *:nth-child(n+3) {
+    display: none;
+  }
+}
+
+/* ─── Animations ─── */
+@keyframes svcFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#page-services .stat-card {
+  animation: svcFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+#page-services .stat-card:nth-child(1) { animation-delay: 0.05s; }
+#page-services .stat-card:nth-child(2) { animation-delay: 0.1s; }
+#page-services .stat-card:nth-child(3) { animation-delay: 0.15s; }
+#page-services .stat-card:nth-child(4) { animation-delay: 0.2s; }

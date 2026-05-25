@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-service="page-title">Web Design — NAGRIVA</title>
+   <title data-service="page-title">Web Design — NAGRIVA</title>
   <meta data-service="meta-description" name="description" content="Premium web design that converts visitors into customers. Modern, fast, and conversion-optimized websites." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -123,8 +123,13 @@
     </div>
   </div>
 
+  <!-- ════════════════ LOADING OVERLAY ════════════════ -->
+  <div class="fv-loading" id="fvLoading">
+    <div class="fv-loading-spinner"></div>
+  </div>
+
   <!-- ════════════════ SERVICE DETAIL PAGE ════════════════ -->
-  <main class="fv-page">
+  <main class="fv-page" id="fvPage">
     <div class="fv-container">
 
       <!-- ===== LEFT COLUMN ===== -->
@@ -244,10 +249,234 @@
               <div class="fv-benefit-text">
                 <h4>SEO Optimized</h4>
                 <p>Built with search engines in mind from day one.</p>
+              </div>
             </div>
+          </div>
+        </div>
 
+        <!-- Process -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">Our Process</h3>
+          <div class="fv-process" data-service="process">
+            <div class="fv-process-step">
+              <div class="fv-process-num">01</div>
+              <div class="fv-process-content">
+                <h4>Discovery & Strategy</h4>
+                <p>We dive deep into your brand, audience, and goals to craft a strategy that drives results.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">02</div>
+              <div class="fv-process-content">
+                <h4>Design & Prototype</h4>
+                <p>High-fidelity designs with interactive prototypes that bring your vision to life.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">03</div>
+              <div class="fv-process-content">
+                <h4>Development & Testing</h4>
+                <p>Clean, performant code with rigorous testing across devices and browsers.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">04</div>
+              <div class="fv-process-content">
+                <h4>Launch & Optimize</h4>
+                <p>Seamless deployment with ongoing optimization and performance monitoring.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">Frequently Asked Questions</h3>
+          <div class="fv-faq" data-service="faq">
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                How long does a typical web design project take?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>Timelines vary based on scope. A standard 5-page website takes 3-4 weeks, while more complex projects can take 6-8 weeks. We'll provide a clear timeline during our discovery call.</p>
+              </div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                What is included in the price?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>Each package includes custom design, development, content population, basic SEO setup, and 2 rounds of revisions. Higher-tier packages include additional pages, CMS integration, and dedicated support.</p>
+              </div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                Do you offer ongoing maintenance?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>Yes, we offer monthly maintenance packages to keep your website secure, updated, and performing at its best. Contact us for custom maintenance plans.</p>
+              </div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                Will my website be mobile-friendly?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>Absolutely. Every website we build is fully responsive and optimized for all devices — from mobile phones to large desktop screens. We test thoroughly across 20+ device configurations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results / Highlights -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">Results That Speak</h3>
+          <div class="fv-results-grid" data-service="results">
+            <div class="fv-result-item">
+              <div class="fv-result-num">50+</div>
+              <div class="fv-result-label">Webships Delivered</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">4.2x</div>
+              <div class="fv-result-label">Avg. Conversion Lift</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">98%</div>
+              <div class="fv-result-label">Client Satisfaction</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">2.8x</div>
+              <div class="fv-result-label">Faster Load Times</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== RIGHT SIDEBAR (STICKY) ===== -->
+      <aside class="fv-sidebar">
+        <div class="fv-sidebar-inner">
+
+          <!-- Package Tabs -->
+          <div class="fv-pkg-tabs" data-service="packages-tabs">
+            <button class="fv-pkg-tab" data-pkg="0">Starter</button>
+            <button class="fv-pkg-tab active" data-pkg="1">Growth</button>
+            <button class="fv-pkg-tab" data-pkg="2">Scale</button>
+          </div>
+
+          <div data-service="packages-data">
+          <!-- Package: Starter -->
+          <div class="fv-pkg-data" data-pkg="0" style="display:none">
+            <div class="fv-pkg-name">Starter Package</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">3,499</span>
+            </div>
+            <div class="fv-meta">
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                4-Week Delivery
+              </div>
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                2 Revisions
+              </div>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <ul class="fv-features">
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>5-Page Custom Website</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>2 Rounds of Revisions</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Basic SEO Setup</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Mobile Responsive</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Contact Form Integration</li>
+            </ul>
+            <a href="submit-order.html?service=web_design" class="fv-cta fv-cta--primary" data-service="cta-primary">
+              Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
+            <div class="fv-sidebar-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure checkout &bull; Money-back guarantee
+            </div>
+          </div>
+
+          <!-- Package: Growth (Most Popular) -->
+          <div class="fv-pkg-data" data-pkg="1">
+            <div class="fv-pkg-name">Growth Package &bull; Most Popular</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">6,499</span>
+            </div>
+            <div class="fv-meta">
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                6-Week Delivery
+              </div>
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Unlimited Revisions
+              </div>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <ul class="fv-features">
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>10-Page Custom Website</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited Revisions</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>CMS Integration</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Full SEO Optimization</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Analytics Dashboard</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>30-Day Support</li>
+            </ul>
+            <a href="submit-order.html?service=web_design" class="fv-cta fv-cta--primary" data-service="cta-primary">
+              Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
+            <div class="fv-sidebar-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure checkout &bull; Money-back guarantee
+            </div>
+          </div>
+
+          <!-- Package: Scale -->
+          <div class="fv-pkg-data" data-pkg="2" style="display:none">
+            <div class="fv-pkg-name">Scale Package</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">12K</span>
+            </div>
+            <div class="fv-meta">
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                8-Week Delivery
+              </div>
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Unlimited Revisions
+              </div>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <ul class="fv-features">
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Custom Pages & Features</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Complete Design System</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced Animations</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated Project Manager</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Priority Support</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>90-Day Maintenance</li>
+            </ul>
+            <a href="submit-order.html?service=web_design" class="fv-cta fv-cta--primary" data-service="cta-primary">
+              Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
+            <div class="fv-sidebar-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure checkout &bull; Money-back guarantee
+            </div>
           </div>
           </div>
+
         </div>
       </aside>
 
@@ -276,6 +505,7 @@
   <script src="../js/i18n.js"></script>
   <script src="../js/chatbot.js"></script>
   <script src="../js/footer.js"></script>
+  <script src="../js/services-api.js"></script>
   <script src="../js/services-renderer.js"></script>
   <script src="../js/services-detail.js"></script>
 </body>
