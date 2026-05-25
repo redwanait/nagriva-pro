@@ -5,7 +5,7 @@
 
 const NAGRIVA_ServicesAPI = (() => {
   const TABLE = 'services';
-  const SELECT_FIELDS = 'id, title, slug, category, short_description, description, meta_title, meta_description, featured, status, created_at, updated_at';
+  const SELECT_FIELDS = 'id, title, slug, category, short_description, description, meta_title, meta_description, image, featured, status, created_at, updated_at';
 
   function handleError(error) {
     console.error('[ServicesAPI] Error:', {

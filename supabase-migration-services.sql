@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS services (
   category TEXT NOT NULL DEFAULT '',
   short_description TEXT DEFAULT '',
   full_description TEXT DEFAULT '',
+  image TEXT DEFAULT '',
   meta_title TEXT DEFAULT '',
   meta_description TEXT DEFAULT '',
   seller_name TEXT DEFAULT 'NAGRIVA Agency',
@@ -89,7 +90,7 @@ CREATE TRIGGER trigger_services_updated_at
 --  5. SEED DATA
 -- ════════════════════════════════════════════════════════
 
-INSERT INTO services (title, slug, category, short_description, full_description, meta_title, meta_description, seller_name, seller_label, rating, review_count, satisfaction, highlights, gallery, description, benefits, process, faq, results, packages, trust_items, featured, status) VALUES
+INSERT INTO services (title, slug, category, short_description, full_description, meta_title, meta_description, seller_name, seller_label, rating, review_count, satisfaction, highlights, gallery, description, benefits, process, faq, results, packages, trust_items, image, featured, status) VALUES
 
 (
   'Web Design',
@@ -111,6 +112,7 @@ INSERT INTO services (title, slug, category, short_description, full_description
   '[{"num": "50+", "label": "Webships Delivered"}, {"num": "4.2x", "label": "Avg. Conversion Lift"}, {"num": "98%", "label": "Client Satisfaction"}, {"num": "2.8x", "label": "Faster Load Times"}]',
   '[{"name": "Starter Package", "shortName": "Starter", "price": "3,499", "delivery": "4-Week Delivery", "revisions": "2 Revisions", "features": ["5-Page Custom Website", "2 Rounds of Revisions", "Basic SEO Setup", "Mobile Responsive", "Contact Form Integration"], "popular": false}, {"name": "Growth Package", "shortName": "Growth", "price": "6,499", "delivery": "6-Week Delivery", "revisions": "Unlimited Revisions", "features": ["10-Page Custom Website", "Unlimited Revisions", "CMS Integration", "Full SEO Optimization", "Analytics Dashboard", "30-Day Support"], "popular": true, "featured": true}, {"name": "Scale Package", "shortName": "Scale", "price": "12K", "delivery": "8-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Custom Pages & Features", "Complete Design System", "Advanced Animations", "Dedicated Project Manager", "Priority Support", "90-Day Maintenance"], "popular": false}]',
   '[{"icon": "lock", "text": "Secure Payment"}, {"icon": "star", "text": "98% Satisfaction"}, {"icon": "clockMeta", "text": "On-Time Delivery"}, {"icon": "users", "text": "Dedicated Support"}, {"icon": "shield", "text": "Money-Back Guarantee"}]',
+  '/assets/images/projects/Web Design.png',
   true, 'published'
 ),
 
@@ -134,6 +136,7 @@ INSERT INTO services (title, slug, category, short_description, full_description
   '[{"num": "150+", "label": "Clients Served"}, {"num": "4.8x", "label": "Avg. Traffic Growth"}, {"num": "96%", "label": "Client Retention"}, {"num": "3.2x", "label": "Avg. ROI"}]',
   '[{"name": "Starter Package", "shortName": "Starter", "price": "1,999", "delivery": "2-Week Delivery", "revisions": "2 Revisions", "features": ["Keyword Research", "On-Page SEO", "10 Keywords", "Monthly Report", "2 Revisions"], "popular": false}, {"name": "Growth Package", "shortName": "Growth", "price": "3,999", "delivery": "4-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Full SEO Audit", "On-Page + Off-Page SEO", "25 Keywords", "Content Strategy", "4 Reports", "Unlimited Revisions"], "popular": true, "featured": true}, {"name": "Scale Package", "shortName": "Scale", "price": "7,999", "delivery": "8-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Enterprise SEO Strategy", "Technical + Local SEO", "50+ Keywords", "Content Production", "Dedicated Manager", "Priority Support"], "popular": false}]',
   '[{"icon": "lock", "text": "Secure Payment"}, {"icon": "star", "text": "96% Retention"}, {"icon": "clockMeta", "text": "On-Time Delivery"}, {"icon": "users", "text": "Dedicated Support"}, {"icon": "shield", "text": "Money-Back Guarantee"}]',
+  '/assets/images/projects/SEO Optimization.png',
   false, 'published'
 ),
 
@@ -157,6 +160,7 @@ INSERT INTO services (title, slug, category, short_description, full_description
   '[{"num": "80+", "label": "Brands Built"}, {"num": "3.5x", "label": "Brand Recognition"}, {"num": "94%", "label": "Client Retention"}, {"num": "4.9", "label": "Star Avg. Rating"}]',
   '[{"name": "Starter Package", "shortName": "Starter", "price": "2,499", "delivery": "2-Week Delivery", "revisions": "2 Revisions", "features": ["Logo Design", "Color Palette", "Typography", "Brand Board", "2 Concepts"], "popular": false}, {"name": "Growth Package", "shortName": "Growth", "price": "4,999", "delivery": "4-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Full Identity Package", "Logo + Variations", "Brand Guidelines", "Stationery", "4 Concepts", "Unlimited Revisions"], "popular": true, "featured": true}, {"name": "Scale Package", "shortName": "Scale", "price": "8,999", "delivery": "6-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Complete Brand System", "Guidelines Book", "Brand Strategy", "Iconography", "Web Assets", "Dedicated Manager + Priority Support"], "popular": false}]',
   '[{"icon": "lock", "text": "Secure Payment"}, {"icon": "star", "text": "94% Retention"}, {"icon": "clockMeta", "text": "On-Time Delivery"}, {"icon": "users", "text": "Dedicated Support"}, {"icon": "shield", "text": "Money-Back Guarantee"}]',
+  '/assets/images/projects/Brand Identity.png',
   false, 'published'
 ),
 
@@ -180,6 +184,7 @@ INSERT INTO services (title, slug, category, short_description, full_description
   '[{"num": "60+", "label": "Automations Delivered"}, {"num": "12x", "label": "Efficiency Boost"}, {"num": "99.9%", "label": "Uptime Guarantee"}, {"num": "$2M+", "label": "Client Savings"}]',
   '[{"name": "Starter Package", "shortName": "Starter", "price": "3,999", "delivery": "3-Week Delivery", "revisions": "2 Revisions", "features": ["Process Analysis", "Basic Automation", "1 Integration", "Workflow Design", "2 Revisions"], "popular": false}, {"name": "Growth Package", "shortName": "Growth", "price": "7,999", "delivery": "6-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Multi-Process Automation", "3 Integrations", "Custom AI Agent", "Dashboard", "Training", "Unlimited Revisions"], "popular": true, "featured": true}, {"name": "Scale Package", "shortName": "Scale", "price": "15K", "delivery": "10-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Enterprise Automation", "Unlimited Integrations", "Full AI System", "Dedicated Infrastructure", "24/7 Support", "Priority Delivery"], "popular": false}]',
   '[{"icon": "lock", "text": "Secure Payment"}, {"icon": "star", "text": "99.9% Uptime"}, {"icon": "clockMeta", "text": "On-Time Delivery"}, {"icon": "users", "text": "Dedicated Support"}, {"icon": "shield", "text": "Money-Back Guarantee"}]',
+  '/assets/images/projects/AI Automation.png',
   false, 'published'
 ),
 
@@ -203,6 +208,7 @@ INSERT INTO services (title, slug, category, short_description, full_description
   '[{"num": "200+", "label": "Campaigns Run"}, {"num": "5.6x", "label": "Engagement Rate"}, {"num": "150K+", "label": "Followers Grown"}, {"num": "4.2x", "label": "Avg. ROAS"}]',
   '[{"name": "Starter Package", "shortName": "Starter", "price": "1,499", "delivery": "2-Week Delivery", "revisions": "2 Revisions", "features": ["Content Calendar", "8 Posts/Month", "Hashtag Strategy", "Monthly Report", "2 Revisions"], "popular": false}, {"name": "Growth Package", "shortName": "Growth", "price": "3,499", "delivery": "4-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Full Management", "16 Posts/Month", "Stories + Reels", "Community Engagement", "Paid Ads Setup", "Unlimited Revisions"], "popular": true, "featured": true}, {"name": "Scale Package", "shortName": "Scale", "price": "6,999", "delivery": "6-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Complete Growth System", "30+ Posts/Month", "Full Ad Management", "Influencer Strategy", "Dedicated Manager", "Priority Support"], "popular": false}]',
   '[{"icon": "lock", "text": "Secure Payment"}, {"icon": "star", "text": "5.6x Engagement"}, {"icon": "clockMeta", "text": "On-Time Delivery"}, {"icon": "users", "text": "Dedicated Support"}, {"icon": "shield", "text": "Money-Back Guarantee"}]',
+  '/assets/images/projects/Social Media Growth.png',
   false, 'published'
 ),
 
@@ -226,5 +232,18 @@ INSERT INTO services (title, slug, category, short_description, full_description
   '[{"num": "300+", "label": "Campaigns Managed"}, {"num": "6.2x", "label": "Avg. ROAS"}, {"num": "95%", "label": "Client Retention"}, {"num": "$10M+", "label": "Ad Spend Managed"}]',
   '[{"name": "Starter Package", "shortName": "Starter", "price": "2,499", "delivery": "2-Week Delivery", "revisions": "2 Revisions", "features": ["Channel Strategy", "Ad Creative", "1 Platform", "Basic Tracking", "Monthly Report", "2 Revisions"], "popular": false}, {"name": "Growth Package", "shortName": "Growth", "price": "4,999", "delivery": "4-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Full Funnel Strategy", "3 Platforms", "Audience Research", "A/B Testing", "Analytics Dashboard", "Unlimited Revisions"], "popular": true, "featured": true}, {"name": "Scale Package", "shortName": "Scale", "price": "9,999", "delivery": "6-Week Delivery", "revisions": "Unlimited Revisions", "features": ["Enterprise Growth", "All Platforms", "Custom Attribution", "Dedicated Team", "24/7 Optimization", "Priority Support"], "popular": false}]',
   '[{"icon": "lock", "text": "Secure Payment"}, {"icon": "star", "text": "6.2x Avg. ROAS"}, {"icon": "clockMeta", "text": "On-Time Delivery"}, {"icon": "users", "text": "Dedicated Support"}, {"icon": "shield", "text": "Money-Back Guarantee"}]',
+  '/assets/images/projects/Performance Marketing.png',
   false, 'published'
 );
+
+-- ── 6. ADD IMAGE COLUMN (for existing tables) ──
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'services' AND column_name = 'image'
+  ) THEN
+    ALTER TABLE services ADD COLUMN image TEXT DEFAULT '';
+  END IF;
+END $$;

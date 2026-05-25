@@ -27,6 +27,7 @@ const NAGRIVA_AdminServices = (() => {
       description: row.description || '',
       metaTitle: row.meta_title || '',
       metaDescription: row.meta_description || '',
+      image: row.image || '',
       featured: !!row.featured,
       status: row.status || 'draft',
       createdAt: row.created_at || new Date().toISOString(),
@@ -43,6 +44,7 @@ const NAGRIVA_AdminServices = (() => {
       description: data.description || '',
       meta_title: data.metaTitle || '',
       meta_description: data.metaDescription || '',
+      image: data.image || '',
       featured: !!data.featured,
       status: data.status || 'draft'
     };
@@ -194,6 +196,7 @@ const NAGRIVA_AdminServices = (() => {
     if (updates.description !== undefined) payload.description = updates.description;
     if (updates.metaTitle !== undefined) payload.meta_title = updates.metaTitle;
     if (updates.metaDescription !== undefined) payload.meta_description = updates.metaDescription;
+    if (updates.image !== undefined) payload.image = updates.image;
     if (updates.featured !== undefined) payload.featured = !!updates.featured;
     if (updates.status !== undefined) payload.status = updates.status;
 
@@ -427,6 +430,10 @@ const NAGRIVA_AdminServices = (() => {
                   '<option value="archived"' + (isEditing && serviceData.status === 'archived' ? ' selected' : '') + '>Archived</option>' +
                 '</select>' +
               '</div>' +
+              '<div class="order-form-field full-width">' +
+                '<label>Card Image URL</label>' +
+                '<input type="url" id="sf_image" placeholder="https://example.com/image.jpg" value="' + escapeHtml(serviceData ? serviceData.image : '') + '" />' +
+              '</div>' +
               '<div class="order-form-field" style="justify-content:flex-end;">' +
                 '<label style="margin-bottom:0;">&nbsp;</label>' +
                 '<div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-radius:var(--r-xs);background:rgba(255,255,255,0.025);border:1px solid var(--border);cursor:pointer;" onclick="this.querySelector(\'input\').click()">' +
@@ -472,6 +479,7 @@ const NAGRIVA_AdminServices = (() => {
       const category = overlay.querySelector('#sf_category').value.trim();
       const shortDescription = overlay.querySelector('#sf_shortDescription').value.trim();
       const description = overlay.querySelector('#sf_description').value.trim();
+      const image = overlay.querySelector('#sf_image').value.trim();
       const status = overlay.querySelector('#sf_status').value;
       const featured = overlay.querySelector('#sf_featured').checked;
 
@@ -491,6 +499,7 @@ const NAGRIVA_AdminServices = (() => {
             category: category,
             shortDescription: shortDescription,
             description: description,
+            image: image,
             status: status,
             featured: featured
           });
@@ -502,6 +511,7 @@ const NAGRIVA_AdminServices = (() => {
             category: category,
             shortDescription: shortDescription,
             description: description,
+            image: image,
             status: status,
             featured: featured
           });

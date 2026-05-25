@@ -380,6 +380,9 @@ window.ServicesAPI = (function () {
       metaDescription: row.meta_description || row.short_description || '',
       breadcrumbCurrent: row.title || '',
       title: row.hero_title || row.title || '',
+      short_description: row.short_description || '',
+      category: row.category || '',
+      image: row.image || (Array.isArray(_parseJSON(row.gallery)) && _parseJSON(row.gallery)[0]) || '',
       highlights: _parseJSON(row.highlights),
       sellerName: row.seller_name || 'NAGRIVA Agency',
       sellerLabel: _fixUnicode(row.seller_label) || 'Premium Digital Agency \u2022 Top 1% of Designers',
@@ -438,10 +441,11 @@ window.ServicesAPI = (function () {
       });
   }
 
-  function getAllServices() {
+  function getAllServices(options) {
+    options = options || {};
     var now = Date.now();
 
-    if (_allCache && now - _allCache.ts < CACHE_TTL) {
+    if (!options.featured && _allCache && now - _allCache.ts < CACHE_TTL) {
       return Promise.resolve(_allCache.data);
     }
 
@@ -450,10 +454,16 @@ window.ServicesAPI = (function () {
       return Promise.resolve(all);
     }
 
-    return window.supabaseClient
+    var query = window.supabaseClient
       .from('services')
       .select('*')
-      .eq('status', 'published')
+      .eq('status', 'published');
+
+    if (options.featured) {
+      query = query.eq('featured', true);
+    }
+
+    return query
       .order('created_at', { ascending: true })
       .then(function (res) {
         if (res.error || !res.data || !res.data.length) {
@@ -461,7 +471,9 @@ window.ServicesAPI = (function () {
           return all;
         }
         var transformed = res.data.map(_transformRow);
-        _allCache = { data: transformed, ts: now };
+        if (!options.featured) {
+          _allCache = { data: transformed, ts: now };
+        }
         return transformed;
       })
       .catch(function () {
