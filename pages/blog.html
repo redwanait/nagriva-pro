@@ -183,21 +183,17 @@
           Explore cutting-edge strategies in artificial intelligence, SaaS growth, automation, and digital marketing. Stay ahead of the curve with expert analysis and actionable insights.
         </p>
 
-        <div class="blog-search-wrap">
+         <div class="blog-search-wrap">
           <svg class="blog-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" class="blog-search" placeholder="Search articles..." id="blogSearch" aria-label="Search articles" />
+          <button class="blog-search-clear" id="searchClear" aria-label="Clear search">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
         </div>
+        <div class="blog-search-results" id="searchResults"></div>
 
         <div class="blog-categories" id="blogCategories">
           <button class="blog-cat-btn active" data-cat="all">All</button>
-          <button class="blog-cat-btn" data-cat="AI">AI</button>
-          <button class="blog-cat-btn" data-cat="Technology">Technology</button>
-          <button class="blog-cat-btn" data-cat="SEO">SEO</button>
-          <button class="blog-cat-btn" data-cat="Automation">Automation</button>
-          <button class="blog-cat-btn" data-cat="Startups">Startups</button>
-          <button class="blog-cat-btn" data-cat="Web Design">Web Design</button>
-          <button class="blog-cat-btn" data-cat="Productivity">Productivity</button>
-          <button class="blog-cat-btn" data-cat="Future Tech">Future Tech</button>
         </div>
       </div>
     </div>
@@ -215,197 +211,58 @@
         <div class="blog-content">
 
           <!-- Featured Article -->
-          <div class="featured-article fade-up">
-            <article class="featured-card" data-category="AI">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop" alt="The Rise of Autonomous AI Agents" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-                <div class="art-thumb-glow"></div>
-              </div>
-              <div class="art-body">
-                <div class="art-meta-top">
-                  <span class="art-cat">AI</span>
-                  <span class="art-time">8 min read</span>
-                </div>
-                <h2 class="art-title">The Rise of Autonomous AI Agents: Transforming Business Operations</h2>
-                <p class="art-excerpt">How autonomous AI agents are reshaping industries — from customer service automation to complex decision-making systems that operate without human intervention.</p>
-                <div class="art-footer">
-                  <div class="art-author">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">AK</div>
-                    <div>
-                      <div class="art-author-name">Alex Kross</div>
-                      <div class="art-date">May 18, 2026</div>
-                    </div>
-                  </div>
-                  <div class="art-read-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                  </div>
-                </div>
-              </div>
-            </article>
+          <div class="featured-article fade-up" id="featuredContainer">
+            <!-- Rendered by blog-api.js -->
           </div>
 
           <!-- Blog Grid -->
           <div class="blog-grid" id="blogGrid">
+            <!-- Rendered by blog-api.js -->
+          </div>
 
-            <article class="art-card fade-up" data-category="Startups">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop" alt="SaaS Growth Strategies" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">Startups</span>
-                <h3 class="art-title">SaaS Growth Playbook: Scaling from Zero to $1M ARR</h3>
-                <p class="art-excerpt">Proven strategies for early-stage SaaS founders looking to build sustainable revenue momentum in competitive markets.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">SM</div>
-                    <span class="art-author-name">Sofia M.</span>
-                  </div>
-                  <span class="art-date">May 16, 2026</span>
+          <!-- Skeleton Loading -->
+          <div class="skeleton-grid" id="skeletonGrid">
+            <div class="skeleton-card">
+              <div class="skeleton-thumb"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line w20 h8"></div>
+                <div class="skeleton-line w80 h14"></div>
+                <div class="skeleton-line w60 h8"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-avatar"></div>
+                  <div class="skeleton-line w20 h8"></div>
                 </div>
               </div>
-            </article>
-
-            <article class="art-card fade-up" data-category="Automation">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop" alt="Workflow Automation" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">Automation</span>
-                <h3 class="art-title">Intelligent Workflow Automation: Cutting Operational Costs by 60%</h3>
-                <p class="art-excerpt">Discover how AI-powered workflow automation is helping businesses eliminate repetitive tasks and drastically reduce overhead.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">MR</div>
-                    <span class="art-author-name">Marcus R.</span>
-                  </div>
-                  <span class="art-date">May 14, 2026</span>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton-thumb"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line w20 h8"></div>
+                <div class="skeleton-line w80 h14"></div>
+                <div class="skeleton-line w60 h8"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-avatar"></div>
+                  <div class="skeleton-line w20 h8"></div>
                 </div>
               </div>
-            </article>
+            </div>
+          </div>
 
-            <article class="art-card fade-up" data-category="SEO">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1432889821006-3149403d8b0a?w=600&h=400&fit=crop" alt="SEO Strategy" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">SEO</span>
-                <h3 class="art-title">The Future of SEO: AI-Powered Search & Zero-Click Results</h3>
-                <p class="art-excerpt">How generative AI and evolving search algorithms are reshaping SEO strategies and what brands need to do to stay visible.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#007aff,#00f5c4)">EL</div>
-                    <span class="art-author-name">Emily L.</span>
-                  </div>
-                  <span class="art-date">May 12, 2026</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="art-card fade-up" data-category="Technology">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Edge Computing" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">Technology</span>
-                <h3 class="art-title">Edge Computing & AI: The Next Frontier in Real-Time Processing</h3>
-                <p class="art-excerpt">Why edge computing combined with AI inference is becoming critical for applications requiring sub-millisecond latency.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#00c2a8,#8b5cf6)">JC</div>
-                    <span class="art-author-name">James C.</span>
-                  </div>
-                  <span class="art-date">May 10, 2026</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="art-card fade-up" data-category="Web Design">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&h=400&fit=crop" alt="Web Design Trends" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">Web Design</span>
-                <h3 class="art-title">2026 Web Design Trends: Immersive Experiences & AI-Driven Interfaces</h3>
-                <p class="art-excerpt">From generative UI to hyper-personalized experiences, explore the web design trends defining the digital landscape this year.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#00f5c4,#f59e0b)">AP</div>
-                    <span class="art-author-name">Aisha P.</span>
-                  </div>
-                  <span class="art-date">May 8, 2026</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="art-card fade-up" data-category="AI">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop" alt="Generative AI" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">AI</span>
-                <h3 class="art-title">Generative AI in Marketing: Creating Content at Scale Without Losing Quality</h3>
-                <p class="art-excerpt">How leading brands are leveraging generative AI to produce high-quality content while maintaining brand voice and authenticity.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#8b5cf6,#007aff)">AK</div>
-                    <span class="art-author-name">Alex K.</span>
-                  </div>
-                  <span class="art-date">May 6, 2026</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="art-card fade-up" data-category="Productivity">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop" alt="Productivity" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">Productivity</span>
-                <h3 class="art-title">Beyond ChatGPT: The AI Tools Stack Every Knowledge Worker Needs</h3>
-                <p class="art-excerpt">A curated guide to the most effective AI productivity tools — from research assistants to automated project management.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#f59e0b,#00c2a8)">SM</div>
-                    <span class="art-author-name">Sofia M.</span>
-                  </div>
-                  <span class="art-date">May 4, 2026</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="art-card fade-up" data-category="Future Tech">
-              <div class="art-thumb">
-                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop" alt="Quantum Computing" loading="lazy" />
-                <div class="art-thumb-overlay"></div>
-              </div>
-              <div class="art-body">
-                <span class="art-cat">Future Tech</span>
-                <h3 class="art-title">Quantum Computing Explained: Why It Matters for Business Leaders</h3>
-                <p class="art-excerpt">A non-technical overview of quantum computing and its potential to revolutionize optimization, cryptography, and drug discovery.</p>
-                <div class="art-meta">
-                  <div class="art-meta-left">
-                    <div class="art-avatar" style="background:linear-gradient(135deg,#007aff,#8b5cf6)">MR</div>
-                    <span class="art-author-name">Marcus R.</span>
-                  </div>
-                  <span class="art-date">May 2, 2026</span>
-                </div>
-              </div>
-            </article>
-
+          <!-- Empty State -->
+          <div class="blog-empty" id="blogEmpty">
+            <div class="blog-empty-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="blog-empty-title">No articles found</div>
+            <div class="blog-empty-desc">Try adjusting your search or filter to discover more content.</div>
+            <button class="blog-empty-reset" id="emptyResetBtn">Reset Filters</button>
           </div>
 
           <!-- Load More -->
           <div class="blog-load-more fade-up">
             <button class="btn-load-more" id="loadMoreBtn">
-              <span>Load More Articles</span>
+              <span class="btn-label">Load More Articles</span>
+              <span class="spinner"></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"/><polyline points="7 7 12 12 17 7"/></svg>
             </button>
           </div>
@@ -418,57 +275,16 @@
           <!-- Trending Articles -->
           <div class="sidebar-widget fade-up">
             <div class="sidebar-widget-title">Trending Now</div>
-            <div class="trending-list">
-              <div class="trending-item">
-                <span class="trending-num">01</span>
-                <div class="trending-info">
-                  <div class="trending-title">The Complete Guide to AI-Powered SEO in 2026</div>
-                  <span class="trending-meta">12.4K reads</span>
-                </div>
-              </div>
-              <div class="trending-item">
-                <span class="trending-num">02</span>
-                <div class="trending-info">
-                  <div class="trending-title">How Top SaaS Companies Are Using Automation to Scale</div>
-                  <span class="trending-meta">9.8K reads</span>
-                </div>
-              </div>
-              <div class="trending-item">
-                <span class="trending-num">03</span>
-                <div class="trending-info">
-                  <div class="trending-title">The Zero-Click Search Revolution: SEO's New Reality</div>
-                  <span class="trending-meta">7.3K reads</span>
-                </div>
-              </div>
-              <div class="trending-item">
-                <span class="trending-num">04</span>
-                <div class="trending-info">
-                  <div class="trending-title">Building a $10M SaaS: Lessons from Failed Founders</div>
-                  <span class="trending-meta">6.1K reads</span>
-                </div>
-              </div>
-              <div class="trending-item">
-                <span class="trending-num">05</span>
-                <div class="trending-info">
-                  <div class="trending-title">Why Your Business Needs an AI Automation Strategy</div>
-                  <span class="trending-meta">5.4K reads</span>
-                </div>
-              </div>
+            <div class="trending-list" id="trendingList">
+              <!-- Rendered by blog-api.js -->
             </div>
           </div>
 
           <!-- Categories -->
           <div class="sidebar-widget fade-up" style="--delay:0.05s">
             <div class="sidebar-widget-title">Categories</div>
-            <div class="cat-list">
-              <div class="cat-item"><span class="cat-name">AI</span><span class="cat-count">24</span></div>
-              <div class="cat-item"><span class="cat-name">Technology</span><span class="cat-count">18</span></div>
-              <div class="cat-item"><span class="cat-name">SEO</span><span class="cat-count">15</span></div>
-              <div class="cat-item"><span class="cat-name">Automation</span><span class="cat-count">12</span></div>
-              <div class="cat-item"><span class="cat-name">Startups</span><span class="cat-count">11</span></div>
-              <div class="cat-item"><span class="cat-name">Web Design</span><span class="cat-count">9</span></div>
-              <div class="cat-item"><span class="cat-name">Productivity</span><span class="cat-count">8</span></div>
-              <div class="cat-item"><span class="cat-name">Future Tech</span><span class="cat-count">7</span></div>
+            <div class="cat-list" id="catList">
+              <!-- Rendered by blog-api.js -->
             </div>
           </div>
 
@@ -487,43 +303,8 @@
           <!-- Recent Posts -->
           <div class="sidebar-widget fade-up" style="--delay:0.15s">
             <div class="sidebar-widget-title">Recent Posts</div>
-            <div class="recent-list">
-              <div class="recent-item">
-                <div class="recent-thumb">
-                  <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=120&h=120&fit=crop" alt="" loading="lazy" />
-                </div>
-                <div class="recent-info">
-                  <div class="recent-title">The Rise of Autonomous AI Agents</div>
-                  <span class="recent-meta">May 18, 2026</span>
-                </div>
-              </div>
-              <div class="recent-item">
-                <div class="recent-thumb">
-                  <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=120&h=120&fit=crop" alt="" loading="lazy" />
-                </div>
-                <div class="recent-info">
-                  <div class="recent-title">SaaS Growth Playbook: Zero to $1M ARR</div>
-                  <span class="recent-meta">May 16, 2026</span>
-                </div>
-              </div>
-              <div class="recent-item">
-                <div class="recent-thumb">
-                  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=120&h=120&fit=crop" alt="" loading="lazy" />
-                </div>
-                <div class="recent-info">
-                  <div class="recent-title">Intelligent Workflow Automation</div>
-                  <span class="recent-meta">May 14, 2026</span>
-                </div>
-              </div>
-              <div class="recent-item">
-                <div class="recent-thumb">
-                  <img src="https://images.unsplash.com/photo-1432889821006-3149403d8b0a?w=120&h=120&fit=crop" alt="" loading="lazy" />
-                </div>
-                <div class="recent-info">
-                  <div class="recent-title">The Future of SEO: AI-Powered Search</div>
-                  <span class="recent-meta">May 12, 2026</span>
-                </div>
-              </div>
+            <div class="recent-list" id="recentList">
+              <!-- Rendered by blog-api.js -->
             </div>
           </div>
 
@@ -533,7 +314,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════ CTA ══════════════════════════ -->
+  <!-- ══════════════════════════ NEWSLETTER CTA ══════════════════════════ -->
   <section class="blog-cta" id="cta">
     <div class="blog-cta-bg">
       <div class="blog-cta-glow"></div>
@@ -543,10 +324,17 @@
         <div class="section-tag">Stay Ahead</div>
         <h2 class="blog-cta-title">Join 5,000+ Leaders Reading the NAGRIVA Journal</h2>
         <p class="blog-cta-desc">Get exclusive insights on AI, automation, and digital growth delivered to your inbox every week. No spam, just actionable strategies.</p>
-        <a href="/index.html#contact" class="btn-primary">
-          <span>Subscribe Now</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="blog-cta-form">
+          <input type="email" class="blog-cta-input" placeholder="your@email.com" id="ctaEmail" aria-label="Email for newsletter" />
+          <button class="blog-cta-submit" id="ctaSubscribe">
+            <span>Subscribe</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+        <span class="blog-cta-trust">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No spam. Unsubscribe anytime.
+        </span>
       </div>
     </div>
   </section>
@@ -557,6 +345,7 @@
   <!-- ══════════════════════════ SCRIPTS ══════════════════════════ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
+  <script src="/modules/blog/blog-api.js"></script>
   <script src="/js/script.js"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/profile-avatar.js"></script>
@@ -570,147 +359,469 @@
   (function() {
     'use strict';
 
-    // ─── Category Filter ───
-    const catBtns = document.querySelectorAll('.blog-cat-btn');
-    const cards = document.querySelectorAll('.art-card');
-    const featured = document.querySelector('.featured-card');
+    // ─── State ───
+    let allArticles = [];
+    let currentPage = 1;
+    let hasMore = true;
+    let isLoading = false;
+    let currentCategory = 'all';
+    let currentSearch = '';
 
-    catBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        catBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.dataset.cat;
+    // ─── DOM refs ───
+    const featuredContainer = document.getElementById('featuredContainer');
+    const grid = document.getElementById('blogGrid');
+    const skeletonGrid = document.getElementById('skeletonGrid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const catContainer = document.getElementById('blogCategories');
+    const catList = document.getElementById('catList');
+    const trendingList = document.getElementById('trendingList');
+    const recentList = document.getElementById('recentList');
+    const searchInput = document.getElementById('blogSearch');
+    const searchClear = document.getElementById('searchClear');
+    const searchResults = document.getElementById('searchResults');
+    const emptyState = document.getElementById('blogEmpty');
+    const emptyReset = document.getElementById('emptyResetBtn');
 
-        cards.forEach(card => {
-          if (cat === 'all' || card.dataset.category === cat) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
+    // ─── Helpers ───
+
+    function formatReadCount(count) {
+      if (!count) return '0 reads';
+      if (count >= 1000) return (count / 1000).toFixed(1).replace('.0', '') + 'K reads';
+      return count + ' reads';
+    }
+
+    function renderFeatured(article) {
+      if (!featuredContainer || !article) return;
+      const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      featuredContainer.innerHTML = `
+        <article class="featured-card" data-category="${article.category}" data-id="${article.id}" data-slug="${article.slug}">
+          <div class="art-thumb">
+            <img src="${article.imageUrl}" alt="${article.title}" loading="lazy" />
+            <div class="art-thumb-overlay"></div>
+            <div class="art-thumb-glow"></div>
+            <div class="featured-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Featured
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-meta-top">
+              <span class="art-cat">${article.category}</span>
+              <span class="art-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                ${article.readingTime} min read
+              </span>
+            </div>
+            <h2 class="art-title">${article.title}</h2>
+            <p class="art-excerpt">${article.excerpt}</p>
+            <div class="art-footer">
+              <div class="art-author">
+                <div class="art-avatar" style="background:${article.authorAvatarColor}">${article.authorInitials}</div>
+                <div>
+                  <div class="art-author-name">${article.authorName}</div>
+                  <div class="art-date">${date}</div>
+                </div>
+              </div>
+              <div class="art-read-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCard(article, index) {
+      const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      const div = document.createElement('article');
+      div.className = 'art-card fade-up' + (index < 8 ? '' : '');
+      div.dataset.category = article.category;
+      div.dataset.id = article.id;
+      div.dataset.slug = article.slug;
+      div.innerHTML = `
+        <div class="art-thumb">
+          <img src="${article.imageUrl}" alt="${article.title}" loading="lazy" />
+          <div class="art-thumb-overlay"></div>
+        </div>
+        <div class="art-body">
+          <span class="art-cat">${article.category}</span>
+          <h3 class="art-title">${article.title}</h3>
+          <p class="art-excerpt">${article.excerpt}</p>
+          <div class="art-meta">
+            <div class="art-meta-left">
+              <div class="art-avatar" style="background:${article.authorAvatarColor}">${article.authorInitials}</div>
+              <span class="art-author-name">${article.authorName}</span>
+            </div>
+            <div class="art-meta-right">
+              <span class="art-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                ${article.readingTime} min
+              </span>
+              <span class="arrow-link">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    function renderTrending(articles) {
+      if (!trendingList) return;
+      trendingList.innerHTML = articles.map((a, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        return `
+          <div class="trending-item" data-id="${a.id}" data-slug="${a.slug}">
+            <span class="trending-num">${num}</span>
+            <div class="trending-info">
+              <div class="trending-title">${a.title}</div>
+              <span class="trending-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                ${formatReadCount(a.readCount)}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCategories(categories) {
+      if (!catList || !catContainer) return;
+
+      // Build sidebar category list
+      catList.innerHTML = categories.map(c => `
+        <div class="cat-item" data-cat="${c.name}">
+          <span class="cat-name">${c.name}</span>
+          <span class="cat-count">${c.count}</span>
+        </div>
+      `).join('');
+
+      // Build filter buttons (keep All at front, then add dynamic)
+      const allBtn = catContainer.querySelector('.blog-cat-btn');
+      if (allBtn) {
+        allBtn.remove();
+      } else {
+        catContainer.innerHTML = '';
+      }
+
+      let html = '<button class="blog-cat-btn active" data-cat="all">All</button>';
+      categories.forEach(c => {
+        html += `<button class="blog-cat-btn" data-cat="${c.name}">${c.name}</button>`;
+      });
+      catContainer.innerHTML = html;
+
+      // Re-bind click events for category buttons
+      document.querySelectorAll('.blog-cat-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentCategory = this.dataset.cat;
+          currentPage = 1;
+          loadArticles(true);
+        });
+      });
+
+      // Bind sidebar category clicks
+      document.querySelectorAll('.cat-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const cat = this.dataset.cat;
+          const targetBtn = document.querySelector(`.blog-cat-btn[data-cat="${cat}"]`);
+          if (targetBtn) {
+            targetBtn.click();
+            targetBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
           }
         });
-
-        if (featured) {
-          if (cat === 'all' || featured.dataset.category === cat) {
-            featured.style.display = '';
-          } else {
-            featured.style.display = 'none';
-          }
-        }
       });
-    });
+    }
+
+    function renderRecent(articles) {
+      if (!recentList) return;
+      recentList.innerHTML = articles.map(a => {
+        const date = new Date(a.publishedAt).toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', year: 'numeric'
+        });
+        return `
+          <div class="recent-item" data-id="${a.id}" data-slug="${a.slug}">
+            <div class="recent-thumb">
+              <img src="${a.imageUrl}" alt="" loading="lazy" />
+            </div>
+            <div class="recent-info">
+              <div class="recent-title">${a.title}</div>
+              <span class="recent-meta">${date}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showSkeletons(show) {
+      if (!skeletonGrid) return;
+      skeletonGrid.classList.toggle('loading', show);
+    }
+
+    function updateLoadMoreBtn(result) {
+      if (!loadMoreBtn) return;
+      hasMore = result.page < result.totalPages;
+      loadMoreBtn.disabled = !hasMore;
+      loadMoreBtn.querySelector('.btn-label').textContent = hasMore ? 'Load More Articles' : 'All articles loaded';
+    }
+
+    function updateSearchResults() {
+      if (!searchResults) return;
+      const q = currentSearch;
+      if (!q) {
+        searchResults.textContent = '';
+        return;
+      }
+      const visible = getAllCurrentArticles().length;
+      if (visible === 0) {
+        searchResults.textContent = 'No results found';
+      } else {
+        searchResults.textContent = visible + ' article' + (visible > 1 ? 's' : '') + ' found';
+      }
+    }
+
+    function toggleEmptyState() {
+      if (!emptyState) return;
+      const visible = getAllCurrentArticles().length;
+      const isFiltering = currentCategory !== 'all' || currentSearch.length > 0;
+      if (visible === 0 && isFiltering && !isLoading) {
+        emptyState.classList.add('show');
+      } else {
+        emptyState.classList.remove('show');
+      }
+    }
+
+    function getAllCurrentArticles() {
+      return document.querySelectorAll('.art-card:not([style*="display: none"])');
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function applyFilters() {
+      if (!grid) return;
+      const q = currentSearch.toLowerCase().trim();
+      grid.classList.add('filtering');
+
+      document.querySelectorAll('.art-card').forEach(card => {
+        const cat = card.dataset.category || '';
+        const title = card.querySelector('.art-title')?.textContent?.toLowerCase() || '';
+        const excerpt = card.querySelector('.art-excerpt')?.textContent?.toLowerCase() || '';
+        const catText = (card.querySelector('.art-cat')?.textContent || '').toLowerCase();
+
+        const matchesCat = currentCategory === 'all' || cat === currentCategory;
+        const matchesSearch = !q || title.includes(q) || excerpt.includes(q) || catText.includes(q);
+
+        card.style.display = (matchesCat && matchesSearch) ? '' : 'none';
+      });
+
+      if (featuredContainer) {
+        const fc = featuredContainer.querySelector('.featured-card');
+        if (fc) {
+          const fCat = fc.dataset.category || '';
+          const fTitle = fc.querySelector('.art-title')?.textContent?.toLowerCase() || '';
+          const fExcerpt = fc.querySelector('.art-excerpt')?.textContent?.toLowerCase() || '';
+          const fCatText = (fc.querySelector('.art-cat')?.textContent || '').toLowerCase();
+
+          const matchesCat = currentCategory === 'all' || fCat === currentCategory;
+          const matchesSearch = !q || fTitle.includes(q) || fExcerpt.includes(q) || fCatText.includes(q);
+
+          fc.style.display = (matchesCat && matchesSearch) ? '' : 'none';
+        }
+      }
+
+      updateSearchResults();
+      toggleEmptyState();
+
+      requestAnimationFrame(() => {
+        grid.classList.remove('filtering');
+      });
+    }
+
+    // ─── Load articles from API ───
+
+    async function loadArticles(reset) {
+      if (isLoading) return;
+      isLoading = true;
+
+      if (reset) {
+        currentPage = 1;
+        if (grid) grid.innerHTML = '';
+        showSkeletons(true);
+        if (loadMoreBtn) loadMoreBtn.classList.add('loading');
+      }
+
+      try {
+        const result = await NAGRIVA_BlogAPI.fetchLatest({
+          page: currentPage,
+          per_page: 8,
+          category: currentCategory === 'all' ? null : currentCategory,
+          search: currentSearch || null
+        });
+
+        if (reset) {
+          showSkeletons(false);
+          if (grid) grid.innerHTML = '';
+        }
+
+        result.data.forEach((article, i) => {
+          const card = renderCard(article, i);
+          if (grid) grid.appendChild(card);
+          requestAnimationFrame(() => {
+            card.classList.add('visible');
+          });
+        });
+
+        allArticles = reset ? result.data : allArticles.concat(result.data);
+        updateLoadMoreBtn(result);
+        applyFilters();
+
+      } catch (err) {
+        console.error('[NAGRIVA Blog] Failed to load articles:', err);
+        if (reset) {
+          showSkeletons(false);
+        }
+      } finally {
+        isLoading = false;
+        if (loadMoreBtn) loadMoreBtn.classList.remove('loading');
+      }
+    }
+
+    // ─── Load sidebar data ───
+
+    async function loadSidebar() {
+      try {
+        const [categories, trending, recent] = await Promise.all([
+          NAGRIVA_BlogAPI.fetchCategories(),
+          NAGRIVA_BlogAPI.fetchTrending({ limit: 5 }),
+          NAGRIVA_BlogAPI.fetchRecent({ limit: 4 })
+        ]);
+
+        renderCategories(categories);
+        renderTrending(trending);
+        renderRecent(recent);
+
+      } catch (err) {
+        console.error('[NAGRIVA Blog] Failed to load sidebar:', err);
+      }
+    }
+
+    // ─── Load featured article ───
+
+    async function loadFeatured() {
+      try {
+        const featured = await NAGRIVA_BlogAPI.fetchFeatured({ limit: 1 });
+        if (featured.length > 0) {
+          renderFeatured(featured[0]);
+        }
+      } catch (err) {
+        console.error('[NAGRIVA Blog] Failed to load featured:', err);
+      }
+    }
+
+    // ─── Init ───
+
+    async function init() {
+      try {
+        const connection = await NAGRIVA_BlogAPI.checkConnection();
+        if (!connection.ok) {
+          console.info('[NAGRIVA Blog] Supabase unavailable: ' + (connection.message || 'fallback active'));
+        } else {
+          console.info('[NAGRIVA Blog] Connected to Supabase');
+        }
+      } catch (e) {
+        console.info('[NAGRIVA Blog] Starting with built-in fallback data');
+      }
+
+      await loadFeatured();
+      await loadSidebar();
+      await loadArticles(true);
+    }
 
     // ─── Search ───
-    const searchInput = document.getElementById('blogSearch');
+
     if (searchInput) {
       searchInput.addEventListener('input', function() {
-        const q = this.value.toLowerCase().trim();
-        const allArticles = document.querySelectorAll('.art-card, .featured-card');
+        const q = this.value.trim();
+        currentSearch = q;
+        if (searchClear) {
+          searchClear.classList.toggle('show', q.length > 0);
+        }
+        currentPage = 1;
+        loadArticles(true);
+      });
+    }
 
-        allArticles.forEach(article => {
-          const title = article.querySelector('.art-title')?.textContent?.toLowerCase() || '';
-          const excerpt = article.querySelector('.art-excerpt')?.textContent?.toLowerCase() || '';
-          const cat = article.querySelector('.art-cat')?.textContent?.toLowerCase() || '';
+    if (searchClear) {
+      searchClear.addEventListener('click', function() {
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+          currentSearch = '';
+          this.classList.remove('show');
+          currentPage = 1;
+          loadArticles(true);
+        }
+      });
+    }
 
-          if (title.includes(q) || excerpt.includes(q) || cat.includes(q)) {
-            article.style.display = '';
-          } else {
-            article.style.display = 'none';
-          }
-        });
+    // ─── Empty state reset ───
+
+    if (emptyReset) {
+      emptyReset.addEventListener('click', function() {
+        if (searchInput) {
+          searchInput.value = '';
+          currentSearch = '';
+          if (searchClear) searchClear.classList.remove('show');
+        }
+        currentCategory = 'all';
+        currentPage = 1;
+        document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+        const allBtn = document.querySelector('.blog-cat-btn[data-cat="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        loadArticles(true);
       });
     }
 
     // ─── Load More ───
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const grid = document.getElementById('blogGrid');
-    if (loadMoreBtn && grid) {
-      let page = 1;
-      const demoArticles = [
-        {
-          cat: 'AI',
-          img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop',
-          title: 'Deep Learning at the Edge: Running LLMs on Consumer Hardware',
-          excerpt: 'New optimization techniques make it possible to run large language models locally on smartphones and laptops.',
-          author: 'Alex K.',
-          color: 'linear-gradient(135deg,#00f5c4,#007aff)',
-          initials: 'AK',
-          date: 'Apr 30, 2026'
-        },
-        {
-          cat: 'Technology',
-          img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop',
-          title: 'The Rise of WebAssembly: Running Native Code in the Browser',
-          excerpt: 'WebAssembly is unlocking new possibilities for high-performance applications directly in the browser.',
-          author: 'Emily L.',
-          color: 'linear-gradient(135deg,#007aff,#00f5c4)',
-          initials: 'EL',
-          date: 'Apr 28, 2026'
-        },
-        {
-          cat: 'Startups',
-          img: 'https://images.unsplash.com/photo-1553729459-afe8f2e2b8b0?w=600&h=400&fit=crop',
-          title: 'Bootstrapping a SaaS in 2026: The Playbook That Still Works',
-          excerpt: 'Why bootstrapped SaaS founders are outperforming VC-backed startups in the current economic climate.',
-          author: 'Marcus R.',
-          color: 'linear-gradient(135deg,#f59e0b,#00f5c4)',
-          initials: 'MR',
-          date: 'Apr 26, 2026'
-        },
-        {
-          cat: 'Automation',
-          img: 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=600&h=400&fit=crop',
-          title: 'RPA vs. AI Agents: Choosing the Right Automation Approach',
-          excerpt: 'Understanding when to use traditional RPA versus modern AI agents for business process automation.',
-          author: 'Aisha P.',
-          color: 'linear-gradient(135deg,#00f5c4,#f59e0b)',
-          initials: 'AP',
-          date: 'Apr 24, 2026'
-        }
-      ];
 
+    if (loadMoreBtn) {
       loadMoreBtn.addEventListener('click', function() {
-        const start = (page - 1) * 4;
-        const end = start + 4;
-        const batch = demoArticles.slice(start, end);
-
-        batch.forEach(article => {
-          const div = document.createElement('article');
-          div.className = 'art-card fade-up';
-          div.dataset.category = article.cat;
-          div.innerHTML = `
-            <div class="art-thumb">
-              <img src="${article.img}" alt="${article.title}" loading="lazy" />
-              <div class="art-thumb-overlay"></div>
-            </div>
-            <div class="art-body">
-              <span class="art-cat">${article.cat}</span>
-              <h3 class="art-title">${article.title}</h3>
-              <p class="art-excerpt">${article.excerpt}</p>
-              <div class="art-meta">
-                <div class="art-meta-left">
-                  <div class="art-avatar" style="background:${article.color}">${article.initials}</div>
-                  <span class="art-author-name">${article.author}</span>
-                </div>
-                <span class="art-date">${article.date}</span>
-              </div>
-            </div>
-          `;
-          grid.appendChild(div);
-
-          // Trigger animation
-          requestAnimationFrame(() => {
-            div.classList.add('visible');
-          });
-        });
-
-        page++;
-        if (page > 1) {
-          loadMoreBtn.querySelector('span').textContent = 'Show All Articles';
-        }
+        if (isLoading || !hasMore) return;
+        currentPage++;
+        loadArticles(false);
       });
     }
 
+    // ─── Article card click → article page ───
+
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest(
+        '.featured-card, .art-card, .trending-item, .recent-item'
+      );
+      if (!target) return;
+
+      const slug = target.dataset.slug;
+      const id = target.dataset.id;
+
+      if (slug) {
+        if (id) {
+          NAGRIVA_BlogAPI.incrementReadCount(id).catch(() => {});
+        }
+        window.location.href = '/pages/article.html?slug=' + encodeURIComponent(slug);
+      }
+    });
+
     // ─── Sidebar Newsletter ───
+
     const nlBtn = document.querySelector('.sidebar-newsletter-btn');
     const nlInput = document.querySelector('.sidebar-newsletter-input');
     if (nlBtn && nlInput) {
@@ -725,27 +836,36 @@
         nlInput.placeholder = "✓ You're subscribed!";
         setTimeout(() => { nlInput.placeholder = 'your@email.com'; }, 3000);
       });
-    }
-
-    // ─── Trending / Recent click simulation ───
-    document.querySelectorAll('.trending-item, .recent-item').forEach(item => {
-      item.addEventListener('click', () => {
-        window.scrollTo({
-          top: document.querySelector('.blog-hero').offsetHeight * 0.6,
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // ─── Featured article click ───
-    if (featured) {
-      featured.addEventListener('click', () => {
-        window.scrollTo({
-          top: document.getElementById('blogMain').offsetTop - 80,
-          behavior: 'smooth'
-        });
+      nlInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') nlBtn.click();
       });
     }
+
+    // ─── CTA Newsletter ───
+
+    const ctaBtn = document.getElementById('ctaSubscribe');
+    const ctaInput = document.getElementById('ctaEmail');
+    if (ctaBtn && ctaInput) {
+      ctaBtn.addEventListener('click', () => {
+        const email = ctaInput.value.trim();
+        if (!email || !email.includes('@')) {
+          ctaInput.style.borderColor = 'rgba(255,80,80,0.4)';
+          setTimeout(() => { ctaInput.style.borderColor = ''; }, 1500);
+          return;
+        }
+        ctaInput.value = '';
+        ctaBtn.innerHTML = '<span>Subscribed ✓</span>';
+        setTimeout(() => {
+          ctaBtn.innerHTML = '<span>Subscribe</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+        }, 2500);
+      });
+      ctaInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') ctaBtn.click();
+      });
+    }
+
+    // ─── Start ───
+    init();
 
   })();
   </script>
