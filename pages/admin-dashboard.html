@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/admin-orders.css" />
   <link rel="stylesheet" href="../css/admin-payments.css" />
+  <link rel="stylesheet" href="../css/admin-invoices.css" />
   <link rel="stylesheet" href="../css/admin-auth.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
@@ -1528,6 +1529,9 @@
         <div class="sidebar-item" data-page="payments">
           <i class="fas fa-credit-card"></i> Payments
         </div>
+        <div class="sidebar-item" data-page="invoices">
+          <i class="fas fa-file-invoice-dollar"></i> Invoices
+        </div>
         <div class="sidebar-item" data-page="analytics">
           <i class="fas fa-chart-line"></i> Analytics
         </div>
@@ -2151,6 +2155,76 @@
 
         </div>
 
+        <!-- ════════════════════════════════════════════
+             PAGE: INVOICES
+             Complete invoice management
+             ════════════════════════════════════════════ -->
+        <div class="page" id="page-invoices">
+
+          <div class="inv-page-header">
+            <div>
+              <h1>Invoices</h1>
+              <p>Manage invoices, track payments, and monitor due dates across all orders.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary btn-sm" id="invoicesNewBtn"><i class="fas fa-plus"></i> New Invoice</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="inv-stats-grid">
+            <div class="inv-stat-card">
+              <div class="inv-stat-icon teal"><i class="fas fa-dollar-sign"></i></div>
+              <div class="inv-stat-value" id="invTotalAmount">$0</div>
+              <div class="inv-stat-label">Total Invoiced</div>
+              <div class="inv-stat-change up"><i class="fas fa-arrow-up"></i> All invoices combined</div>
+            </div>
+            <div class="inv-stat-card">
+              <div class="inv-stat-icon orange"><i class="fas fa-clock"></i></div>
+              <div class="inv-stat-value" id="invPendingAmount">$0</div>
+              <div class="inv-stat-label">Pending</div>
+              <div class="inv-stat-change neutral"><i class="fas fa-hourglass-half"></i> Awaiting payment</div>
+            </div>
+            <div class="inv-stat-card">
+              <div class="inv-stat-icon green"><i class="fas fa-check-circle"></i></div>
+              <div class="inv-stat-value" id="invPaidAmount">$0</div>
+              <div class="inv-stat-label">Paid</div>
+              <div class="inv-stat-change up"><i class="fas fa-arrow-up"></i> Completed payments</div>
+            </div>
+            <div class="inv-stat-card">
+              <div class="inv-stat-icon red"><i class="fas fa-exclamation-circle"></i></div>
+              <div class="inv-stat-value" id="invOverdueAmount">$0</div>
+              <div class="inv-stat-label">Overdue</div>
+              <div class="inv-stat-change down"><i class="fas fa-arrow-down"></i> Requires attention</div>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="inv-toolbar">
+            <div class="inv-search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="invoicesSearch" placeholder="Search invoice #, client, order..." />
+              <button class="inv-search-clear" id="invoicesSearchClear"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="inv-filter-group">
+              <select class="inv-filter-select" id="invoicesStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="overdue">Overdue</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Count -->
+          <div class="inv-count" id="invoicesCount" style="margin-bottom:16px;"></div>
+
+          <!-- Invoices Container -->
+          <div id="invoicesContainer"></div>
+
+        </div>
+
         <!-- ═══ PAGE: ANALYTICS ═══ -->
         <div class="page" id="page-analytics">
           <div class="page-header"><div><h1>Analytics</h1><p>Deep insights into your business.</p></div></div>
@@ -2193,6 +2267,8 @@
   <script src="../js/admin-activity.js"></script>
   <script src="../js/admin-notifications.js"></script>
   <script src="../js/admin-payments.js"></script>
+  <script src="../modules/invoices/invoices-realtime.js"></script>
+  <script src="../js/admin-invoices.js"></script>
   <script src="../components/client-drawer/client-drawer.js"></script>
   <script src="../js/i18n.js"></script>
   <script>
@@ -2223,6 +2299,7 @@
           files: 'Files',
           revisions: 'Activity',
           payments: 'Payments',
+          invoices: 'Invoices',
           analytics: 'Analytics',
           settings: 'Settings'
         };
@@ -2240,6 +2317,8 @@
           renderActivityView();
         } else if (pageId === 'payments') {
           renderPaymentsView();
+        } else if (pageId === 'invoices') {
+          renderInvoicesView();
         }
 
         if (window.innerWidth <= 1024) {
@@ -2694,6 +2773,48 @@
         }
       });
 
+      // ─── Invoices ───
+      const invoicesContainer = document.getElementById('invoicesContainer');
+      let invoicesInitialized = false;
+
+      async function renderInvoicesView() {
+        if (!invoicesInitialized) {
+          await NAGRIVA_AdminInvoices.init(invoicesContainer);
+          invoicesInitialized = true;
+        }
+      }
+
+      NAGRIVA_AdminInvoices.onChange(function() {
+        if (document.getElementById('page-invoices').classList.contains('active')) {
+          NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+          NAGRIVA_AdminInvoices.renderStats();
+        }
+      });
+
+      document.getElementById('invoicesSearch')?.addEventListener('input', function() {
+        NAGRIVA_AdminInvoices.setSearch(this.value);
+        const clear = document.getElementById('invoicesSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+      });
+
+      document.getElementById('invoicesSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('invoicesSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_AdminInvoices.setSearch('');
+        NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+      });
+
+      document.getElementById('invoicesStatusFilter')?.addEventListener('change', function() {
+        NAGRIVA_AdminInvoices.setStatusFilter(this.value);
+        NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+      });
+
+      document.getElementById('invoicesNewBtn')?.addEventListener('click', function() {
+        NAGRIVA_AdminInvoices.openInvoiceModal();
+      });
+
       // ─── Notifications ───
       NAGRIVA_Notifications.init();
       document.querySelector('.notif-list')?.parentElement?.querySelector('.card-link')?.addEventListener('click', function() {
@@ -2758,10 +2879,13 @@
         });
       });
 
-      // ─── Empty state new order button ───
+      // ─── Empty state new order / invoice buttons ───
       document.addEventListener('click', function(e) {
         if (e.target.closest('.empty-new-order-btn')) {
           openNewOrderModal();
+        }
+        if (e.target.closest('.inv-empty-new-btn')) {
+          NAGRIVA_AdminInvoices.openInvoiceModal();
         }
       });
 
@@ -2974,6 +3098,30 @@
           }
         } else if (action === 'view-client') {
           NAGRIVA_ClientDrawer.open(orderId);
+        } else if (action === 'edit-invoice') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow) {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (invoice) NAGRIVA_AdminInvoices.openInvoiceModal(invoice);
+          }
+        } else if (action === 'delete-invoice') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow) {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (!invoice) return;
+            const confirmed = await NAGRIVA_AdminInvoices.showConfirm(
+              'Delete Invoice',
+              `Are you sure you want to delete Invoice ${invoice.invoiceNumber}? This action cannot be undone.`
+            );
+            if (!confirmed) return;
+            try {
+              await NAGRIVA_AdminInvoices.deleteInvoice(invoice.id);
+              NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+              NAGRIVA_AdminInvoices.renderStats();
+            } catch (err) {
+              console.error('Delete invoice failed:', err);
+            }
+          }
         } else if (action === 'edit-client') {
           const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
           if (client) showNewClientModal(client);
