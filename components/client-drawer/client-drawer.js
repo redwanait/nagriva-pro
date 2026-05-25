@@ -206,7 +206,7 @@ const NAGRIVA_ClientDrawer = (() => {
               </div>
             </div>`;
         }).join('')
-      : '<div class="cd-empty"><i class="fas fa-shopping-bag"></i><br />No orders yet</div>';
+      : '<div class="cd-empty"><div class="cd-empty-icon"><i class="fas fa-shopping-bag"></i></div><span class="cd-empty-label">No orders yet</span>This client hasn\'t placed any orders yet.</div>';
 
     const activityHtml = _activities.length > 0
       ? _activities.map(a => {
@@ -226,7 +226,7 @@ const NAGRIVA_ClientDrawer = (() => {
               </div>
             </div>`;
         }).join('')
-      : '<div class="cd-empty"><i class="fas fa-history"></i><br />No recent activity</div>';
+      : '<div class="cd-empty"><div class="cd-empty-icon"><i class="fas fa-history"></i></div><span class="cd-empty-label">No recent activity</span>No recent activity recorded for this client.</div>';
 
     const statusBadge = latestOrder
       ? getStatusBadge(latestOrder.status)

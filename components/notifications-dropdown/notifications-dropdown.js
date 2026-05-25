@@ -51,7 +51,12 @@ const NAGRIVA_NotificationsDropdown = (() => {
       report: 'M18 20V10M12 20V4M6 20v-6',
       milestone: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
       file: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6',
-      status: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+      status: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+      invoice_created: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+      invoice_updated: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+      invoice_paid: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 9a3 3 0 100 6 3 3 0 000-6z',
+      invoice_overdue: 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+      invoice_deleted: 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
     };
     return map[type] || 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0';
   }
@@ -64,7 +69,12 @@ const NAGRIVA_NotificationsDropdown = (() => {
       report: 'orange',
       milestone: 'purple',
       file: 'orange',
-      status: 'blue'
+      status: 'blue',
+      invoice_created: 'teal',
+      invoice_updated: 'blue',
+      invoice_paid: 'green',
+      invoice_overdue: 'orange',
+      invoice_deleted: 'gray'
     };
     return map[type] || 'teal';
   }
@@ -395,7 +405,7 @@ const NAGRIVA_NotificationsDropdown = (() => {
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>' +
         '</div>' +
         '<div class="notif-dd-empty-title">All caught up!</div>' +
-        '<div class="notif-dd-empty-text">No new notifications. We\'ll let you know when something arrives.</div>' +
+        '<div class="notif-dd-empty-text">You\'re up to date. New notifications will appear here as they arrive.</div>' +
       '</div>';
     const countLabel = document.getElementById('notifDDCount');
     if (countLabel) countLabel.textContent = '';

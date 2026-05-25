@@ -27,7 +27,11 @@ const NAGRIVA_Activity = (() => {
       project_completed: 'teal',
       project_added: 'blue',
       manager_assigned: 'orange',
-      profile_updated: 'gray'
+      profile_updated: 'gray',
+      invoice_created: 'teal',
+      invoice_updated: 'blue',
+      invoice_paid: 'green',
+      invoice_deleted: 'gray'
     };
     return map[action] || 'gray';
   }
@@ -41,7 +45,11 @@ const NAGRIVA_Activity = (() => {
       project_completed: 'fa-check-circle',
       project_added: 'fa-tasks',
       manager_assigned: 'fa-user-tie',
-      profile_updated: 'fa-user-edit'
+      profile_updated: 'fa-user-edit',
+      invoice_created: 'fa-file-invoice-dollar',
+      invoice_updated: 'fa-pen',
+      invoice_paid: 'fa-check-circle',
+      invoice_deleted: 'fa-trash'
     };
     return map[action] || 'fa-circle';
   }
@@ -197,10 +205,12 @@ const NAGRIVA_Activity = (() => {
 
     if (items.length === 0) {
       container.innerHTML = `
-        <div class="activity-item">
-          <div class="activity-content">
-            <div class="activity-text" style="color:var(--gray3);">${filters.search || filters.action ? 'No matching activity found.' : 'No activity yet.'}</div>
+        <div style="text-align:center;padding:48px 20px;animation:fadeInUp 0.5s ease-out;">
+          <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--accent);font-size:1.1rem;">
+            <i class="fas fa-stream"></i>
           </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:4px;">${filters.search || filters.action ? 'No matching activity' : 'No activity yet'}</div>
+          <div style="font-size:0.78rem;color:var(--gray2);line-height:1.5;max-width:280px;margin:0 auto;">${filters.search || filters.action ? 'No activity matches your current filters. Try adjusting your search criteria.' : 'System events, status changes, and user actions will be recorded here in real time.'}</div>
         </div>`;
       return;
     }

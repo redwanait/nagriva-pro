@@ -34,13 +34,22 @@
 .af-item {
   display: flex;
   gap: 12px;
-  padding: 12px 0;
+  padding: 12px 10px;
+  margin: 0 -10px;
   border-bottom: 1px solid var(--border);
+  border-radius: 8px;
   opacity: 0;
   animation: afFadeIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transition: background 0.2s ease;
 }
 .af-item:last-child {
   border-bottom: none;
+}
+.af-item:hover {
+  background: rgba(255,255,255,0.02);
+}
+.af-item:hover .af-text strong {
+  color: var(--accent);
 }
 
 @keyframes afFadeIn {
@@ -201,6 +210,7 @@
 .af-text strong {
   color: var(--white);
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 .af-time {
   font-size: 0.7rem;
@@ -249,39 +259,55 @@
   background: rgba(239, 68, 68, 0.08);
 }
 
+@keyframes af-fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes af-float-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
 .af-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 48px 20px;
   text-align: center;
+  animation: af-fadeInUp 0.5s ease-out;
 }
 .af-empty-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  margin-bottom: 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--gray2);
+  margin-bottom: 16px;
+  background: rgba(0,245,196,0.05);
+  border: 1px solid rgba(0,245,196,0.1);
+  color: var(--accent);
+  animation: af-float-icon 3s ease-in-out infinite;
+  transition: all var(--transition);
+}
+.af-empty:hover .af-empty-icon {
+  background: rgba(0,245,196,0.08);
+  border-color: rgba(0,245,196,0.2);
+  transform: scale(1.05);
 }
 .af-empty-title {
   font-family: 'Syne', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--white);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .af-empty-text {
   font-size: 0.78rem;
   color: var(--gray2);
-  line-height: 1.5;
-  max-width: 240px;
+  line-height: 1.6;
+  max-width: 260px;
 }
 
 .af-error {

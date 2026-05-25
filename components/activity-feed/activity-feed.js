@@ -30,7 +30,11 @@ const NAGRIVA_ActivityFeed = (() => {
     project_completed: { icon: 'fa-check-circle', color: 'teal',   label: 'Completed' },
     project_added:     { icon: 'fa-tasks',        color: 'blue',   label: 'Project Added' },
     manager_assigned:  { icon: 'fa-user-tie',     color: 'orange', label: 'Manager Assigned' },
-    profile_updated:   { icon: 'fa-user-edit',    color: 'gray',   label: 'Profile Updated' }
+    profile_updated:   { icon: 'fa-user-edit',    color: 'gray',   label: 'Profile Updated' },
+    invoice_created:   { icon: 'fa-file-invoice-dollar', color: 'teal',   label: 'Invoice Created' },
+    invoice_updated:   { icon: 'fa-pen',                color: 'blue',   label: 'Invoice Updated' },
+    invoice_paid:      { icon: 'fa-check-circle',        color: 'green',  label: 'Invoice Paid' },
+    invoice_deleted:   { icon: 'fa-trash',               color: 'gray',   label: 'Invoice Deleted' }
   };
 
   function getActionMeta(action) {
@@ -76,9 +80,9 @@ const NAGRIVA_ActivityFeed = (() => {
     if (!_feedEl) return;
     _feedEl.innerHTML =
       '<div class="af-empty">' +
-        '<div class="af-empty-icon"><i class="fas fa-stream"></i></div>' +
-        '<div class="af-empty-title">No Activity Yet</div>' +
-        '<div class="af-empty-text">Client actions, updates, and system events will appear here in real time.</div>' +
+        '<div class="af-empty-icon"><i class="fas fa-clock"></i></div>' +
+        '<div class="af-empty-title">No activity yet</div>' +
+        '<div class="af-empty-text">Client actions, status updates, and system events will appear here in real time as they happen.</div>' +
       '</div>';
   }
 

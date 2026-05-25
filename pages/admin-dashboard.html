@@ -147,6 +147,75 @@
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
     }
+
+    /* ─── Dashboard stat card skeleton ─── */
+    .dash-stat-skel {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .dash-stat-skel-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+      margin-bottom: 16px;
+    }
+    .dash-stat-skel-value {
+      height: 28px; width: 55%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+      margin-bottom: 8px;
+    }
+    .dash-stat-skel-label {
+      height: 10px; width: 40%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+      margin-bottom: 12px;
+    }
+    .dash-stat-skel-change {
+      height: 8px; width: 55%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.015) 25%, rgba(255,255,255,0.035) 50%, rgba(255,255,255,0.015) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+    }
+
+    /* ─── Dashboard notification skeleton ─── */
+    .dash-notif-skel {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .dash-notif-skel:last-child { border-bottom: none; }
+    .dash-notif-skel-icon {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+    }
+    .dash-notif-skel-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .dash-notif-skel-line {
+      height: 10px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%;
+      animation: dash-shimmer 1.5s ease-in-out infinite;
+      margin-bottom: 6px;
+    }
+    .dash-notif-skel-line:last-child { margin-bottom: 0; }
     .dash-error-btn {
       background: none;
       border: 1px solid var(--border);
@@ -593,6 +662,15 @@
       border: none;
       font-family: inherit;
       line-height: 1.3;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .btn:active {
+      transform: scale(0.97);
     }
     .btn-primary {
       background: var(--accent);
@@ -637,6 +715,7 @@
     }
     .card:hover {
       border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     }
     .card-header {
       display: flex;
@@ -676,6 +755,20 @@
       padding: 24px;
       position: relative;
       overflow: hidden;
+      transition: all var(--transition), transform 0.25s cubic-bezier(0.4,0,0.2,1);
+      animation: statFadeIn 0.5s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.05s; }
+    .stat-card:nth-child(2) { animation-delay: 0.1s; }
+    .stat-card:nth-child(3) { animation-delay: 0.15s; }
+    .stat-card:nth-child(4) { animation-delay: 0.2s; }
+    @keyframes statFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,245,196,0.15);
     }
     .stat-card::after {
       content: '';
@@ -698,6 +791,10 @@
       font-size: 1rem;
       margin-bottom: 16px;
       border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .stat-card:hover .stat-icon {
+      transform: scale(1.06);
     }
     .stat-card .stat-icon.teal {
       background: rgba(0, 245, 196, 0.08);
@@ -726,6 +823,7 @@
       letter-spacing: -0.02em;
       color: var(--white);
       margin-bottom: 4px;
+      transition: color var(--transition);
     }
     .stat-label {
       font-size: 0.78rem;
@@ -741,6 +839,7 @@
       margin-top: 10px;
       padding: 3px 8px;
       border-radius: 99px;
+      transition: all var(--transition);
     }
     .stat-change.up {
       color: var(--success);
@@ -810,10 +909,20 @@
       border-bottom: none;
     }
     .table-wrap tr {
-      transition: background var(--transition);
+      transition: background var(--transition), color var(--transition);
+      cursor: pointer;
     }
     .table-wrap tbody tr:hover {
       background: var(--surface-hover);
+    }
+    .table-wrap tbody tr:active {
+      background: rgba(255,255,255,0.015);
+    }
+    .table-wrap td {
+      transition: color var(--transition);
+    }
+    .table-wrap tbody tr:hover .td-name {
+      color: var(--accent);
     }
     .td-user {
       display: flex;
@@ -921,11 +1030,17 @@
     .activity-item {
       display: flex;
       gap: 12px;
-      padding: 12px 0;
+      padding: 12px 12px;
+      margin: 0 -12px;
       border-bottom: 1px solid var(--border);
+      border-radius: 8px;
+      transition: background var(--transition);
     }
     .activity-item:last-child {
       border-bottom: none;
+    }
+    .activity-item:hover {
+      background: var(--surface-hover);
     }
     .activity-dot-wrap {
       display: flex;
@@ -939,6 +1054,10 @@
       height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .activity-item:hover .activity-dot {
+      transform: scale(1.25);
     }
     .activity-dot.teal {
       background: var(--accent);
@@ -968,10 +1087,18 @@
       font-size: 0.82rem;
       color: var(--gray);
       line-height: 1.4;
+      transition: color var(--transition);
+    }
+    .activity-item:hover .activity-text {
+      color: rgba(161, 161, 170, 0.85);
     }
     .activity-text strong {
       color: var(--white);
       font-weight: 600;
+      transition: color var(--transition);
+    }
+    .activity-item:hover .activity-text strong {
+      color: var(--accent);
     }
     .activity-time {
       font-size: 0.7rem;
@@ -988,12 +1115,18 @@
     .notif-item {
       display: flex;
       gap: 12px;
-      padding: 12px 0;
+      padding: 12px 12px;
+      margin: 0 -12px;
       border-bottom: 1px solid var(--border);
       align-items: flex-start;
+      border-radius: 8px;
+      transition: background var(--transition);
     }
     .notif-item:last-child {
       border-bottom: none;
+    }
+    .notif-item:hover {
+      background: var(--surface-hover);
     }
     .notif-icon-wrap {
       width: 32px;
@@ -1005,6 +1138,10 @@
       font-size: 0.75rem;
       flex-shrink: 0;
       border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .notif-item:hover .notif-icon-wrap {
+      transform: scale(1.08);
     }
     .notif-icon-wrap.teal {
       background: rgba(0, 245, 196, 0.08);
@@ -1034,10 +1171,15 @@
       font-size: 0.82rem;
       color: var(--gray);
       line-height: 1.4;
+      transition: color var(--transition);
+    }
+    .notif-item:hover .notif-text strong {
+      color: var(--accent);
     }
     .notif-text strong {
       color: var(--white);
       font-weight: 600;
+      transition: color var(--transition);
     }
     .notif-time {
       font-size: 0.68rem;
@@ -1084,6 +1226,31 @@
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      overflow: hidden;
+    }
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: progressShimmer 2.5s ease-in-out infinite;
+    }
+    @keyframes progressShimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .progress-item:hover .progress-bar {
+      box-shadow: 0 0 12px rgba(0,245,196,0.3);
+    }
+    .progress-item:hover .progress-bar.orange {
+      box-shadow: 0 0 12px rgba(245,158,11,0.3);
+    }
+    .progress-item:hover .progress-bar.blue {
+      box-shadow: 0 0 12px rgba(59,130,246,0.3);
+    }
+    .progress-item:hover .progress-bar.purple {
+      box-shadow: 0 0 12px rgba(168,85,247,0.3);
+    }
     }
     .progress-bar.orange {
       background: linear-gradient(90deg, var(--warning), #f97316);
@@ -1427,12 +1594,14 @@
     @media (max-width: 768px) {
       .topbar {
         padding: 12px 16px;
+        gap: 10px;
       }
       .content {
         padding: 16px;
       }
       .stats-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
       .topbar-search {
         max-width: 100%;
@@ -1443,6 +1612,17 @@
       .page-header {
         flex-direction: column;
         align-items: flex-start;
+        margin-bottom: 20px;
+      }
+      .page-header h1 {
+        font-size: 1.3rem;
+      }
+      .page-actions {
+        width: 100%;
+      }
+      .page-actions .btn {
+        flex: 1;
+        justify-content: center;
       }
       .orders-grid {
         grid-template-columns: 1fr;
@@ -1452,6 +1632,44 @@
       }
       .card {
         padding: 18px;
+      }
+      .content-grid-2,
+      .content-grid-3 {
+        gap: 12px;
+      }
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .topbar-title {
+        font-size: 0.95rem;
+      }
+      .topbar-btn .notif-dot {
+        top: 4px;
+        right: 4px;
+      }
+      .stat-value {
+        font-size: 1.4rem;
+      }
+      .table-wrap {
+        margin: 0 -12px;
+        padding: 0 12px;
+      }
+      .table-wrap th,
+      .table-wrap td {
+        padding: 8px 10px;
+      }
+      .order-card .order-cavatar {
+        width: 32px;
+        height: 32px;
+      }
+      .order-card .order-cinfo h4 {
+        font-size: 0.82rem;
+      }
+      .dash-notif-skel-icon {
+        width: 28px;
+        height: 28px;
       }
     }
     @media (max-width: 480px) {
@@ -2258,6 +2476,7 @@
   <script src="../modules/activity-logs/activity-logs-realtime.js"></script>
   <script src="../modules/activity-logs/activity-logs-triggers.js"></script>
   <script src="../components/activity-feed/activity-feed.js"></script>
+  <script src="../js/toast.js"></script>
   <script src="../js/admin-orders.js"></script>
   <script src="../js/admin-modal.js"></script>
   <script src="../js/admin-dashboard.js"></script>
@@ -2268,6 +2487,9 @@
   <script src="../js/admin-notifications.js"></script>
   <script src="../js/admin-payments.js"></script>
   <script src="../modules/invoices/invoices-realtime.js"></script>
+  <script src="../modules/invoices/invoices-notifications.js"></script>
+  <script src="../modules/invoices/invoices-activity.js"></script>
+  <script src="../modules/invoices/invoice-pdf.js"></script>
   <script src="../js/admin-invoices.js"></script>
   <script src="../components/client-drawer/client-drawer.js"></script>
   <script src="../js/i18n.js"></script>
@@ -3120,6 +3342,35 @@
               NAGRIVA_AdminInvoices.renderStats();
             } catch (err) {
               console.error('Delete invoice failed:', err);
+            }
+          }
+        } else if (action === 'download-invoice-pdf') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow && typeof NAGRIVA_InvoicePDF !== 'undefined') {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (invoice) {
+              try {
+                actionBtn.disabled = true;
+                actionBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                await NAGRIVA_InvoicePDF.downloadInvoice(invoice);
+              } catch (err) {
+                showToast('error', 'Download Failed', err.message || 'Could not generate PDF');
+              } finally {
+                actionBtn.disabled = false;
+                actionBtn.innerHTML = '<i class="fas fa-file-pdf"></i>';
+              }
+            }
+          }
+        } else if (action === 'print-invoice') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow && typeof NAGRIVA_InvoicePDF !== 'undefined') {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (invoice) {
+              try {
+                await NAGRIVA_InvoicePDF.printInvoice(invoice);
+              } catch (err) {
+                showToast('error', 'Print Failed', err.message || 'Could not print invoice');
+              }
             }
           }
         } else if (action === 'edit-client') {

@@ -544,6 +544,14 @@
   align-items: flex-start;
   gap: 12px;
   position: relative;
+  transition: opacity 0.3s ease;
+}
+.track-stage:hover .track-stage-label {
+  color: var(--accent);
+}
+.track-stage.pending:hover .track-stage-icon {
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.35);
 }
 .track-stage:not(:last-child) .track-stage-line {
   position: absolute;
@@ -706,11 +714,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 0;
+  padding: 11px 8px;
+  margin: 0 -8px;
   border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  transition: background 0.2s ease;
 }
 .track-detail-row:last-child {
   border-bottom: none;
+}
+.track-detail-row:hover {
+  background: rgba(255,255,255,0.02);
 }
 .track-detail-label {
   font-size: 0.78rem;
@@ -879,7 +893,10 @@
   transition: transform 0.25s ease;
 }
 .track-tl-item:hover .track-tl-content {
-  transform: translateX(3px);
+  transform: translateX(4px);
+}
+.track-tl-item:hover .track-tl-title {
+  color: var(--accent);
 }
 .track-tl-head {
   display: flex;
@@ -1084,18 +1101,39 @@
   color: var(--accent);
   background: rgba(0,245,196,0.08);
 }
+@keyframes tfe-fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes of-fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .track-file-empty {
   text-align: center;
-  padding: 20px;
+  padding: 32px 20px;
   color: var(--gray2);
   font-size: 0.82rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  animation: tfe-fadeInUp 0.4s ease-out;
 }
 .track-file-empty svg {
-  opacity: 0.3;
+  opacity: 0.25;
+}
+.track-file-empty .tfe-label {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--white);
+}
+.track-file-empty .tfe-text {
+  font-size: 0.78rem;
+  color: var(--gray2);
+  max-width: 240px;
+  line-height: 1.5;
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1176,6 +1214,10 @@
 /* ════════════════════════════════════════════════════════
    NO ORDER PLACEHOLDER
    ════════════════════════════════════════════════════════ */
+@keyframes pno-fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .portal-no-orders {
   text-align: center;
   padding: 64px 24px;
@@ -1187,11 +1229,30 @@
   align-items: center;
   gap: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  animation: pno-fadeInUp 0.5s ease-out;
 }
-.portal-no-orders svg {
-  color: var(--gray2);
-  opacity: 0.3;
+.portal-no-orders .pno-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0,245,196,0.04);
+  border: 1px solid rgba(0,245,196,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 4px;
+  transition: all var(--transition);
+}
+.portal-no-orders:hover .pno-icon-wrap {
+  background: rgba(0,245,196,0.07);
+  border-color: rgba(0,245,196,0.15);
+  transform: scale(1.05);
+}
+.portal-no-orders .pno-icon-wrap svg {
+  color: var(--accent);
+  opacity: 0.7;
+  width: 28px;
+  height: 28px;
 }
 .portal-no-orders h3 {
   font-family: 'Syne', sans-serif;
@@ -1269,12 +1330,18 @@
   .track-select-wrap {
     max-width: 100%;
   }
+  .track-hero-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  }
 }
 
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .track-hero {
     padding: 100px 0 32px;
+  }
+  .track-hero-inner {
+    text-align: left;
   }
   .track-hero-glow {
     width: 400px;
@@ -1290,11 +1357,16 @@
   .track-hero-glow-2 {
     display: none;
   }
+  .track-hero-desc {
+    text-align: left;
+    margin: 0;
+  }
   .track-grid-bg {
     mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.2) 0%, transparent 70%);
   }
   .track-progress-wrap {
     padding: 20px 18px;
+    margin-bottom: 16px;
   }
   .track-progress-header {
     flex-direction: column;
@@ -1305,14 +1377,14 @@
     justify-content: space-between;
   }
   .track-progress-stages {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 8px;
   }
   .track-stage {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 8px;
   }
   .track-stage:not(:last-child) .track-stage-line {
     display: none;
@@ -1331,6 +1403,9 @@
   .track-stage-date {
     font-size: 0.55rem;
   }
+  .track-stage-info {
+    padding-top: 2px;
+  }
   .track-card {
     padding: 18px 18px;
   }
@@ -1345,7 +1420,8 @@
     border-color: rgba(255,255,255,0.07);
   }
   .track-detail-row {
-    padding: 10px 0;
+    padding: 10px 4px;
+    margin: 0 -4px;
     flex-direction: column;
     align-items: flex-start;
     gap: 3px;
@@ -1360,6 +1436,9 @@
   }
   .track-delivery-info {
     align-items: center;
+  }
+  .track-delivery-day {
+    font-size: 1.8rem;
   }
   .track-tl-head {
     flex-direction: column;
@@ -1379,9 +1458,7 @@
     transform: none;
   }
   .track-dash-bg-glow {
-    filter: blur(30px);
-    width: 500px;
-    height: 300px;
+    display: none;
   }
   .track-timeline::before {
     left: 6px;
@@ -1413,6 +1490,13 @@
   }
   .progress-ring-text {
     font-size: 0.58rem;
+  }
+  .track-grid {
+    gap: 16px;
+  }
+  .track-left,
+  .track-right {
+    gap: 16px;
   }
 }
 

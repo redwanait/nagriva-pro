@@ -85,7 +85,7 @@ const NAGRIVA_Dashboard = (() => {
 
     const recent = orders.slice(0, 6);
     if (recent.length === 0) {
-      container.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--gray3);">No orders yet</td></tr>';
+      container.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px 24px;"><div style="width:48px;height:48px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--accent);font-size:1.1rem;"><i class="fas fa-shopping-bag"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:4px;">No recent orders</div><div style="font-size:0.78rem;color:var(--gray2);line-height:1.5;max-width:280px;margin:0 auto;">Your recent orders and projects will appear here once you create them.</div></td></tr>';
       return;
     }
 
@@ -195,23 +195,76 @@ const NAGRIVA_Dashboard = (() => {
     return html;
   }
 
+  function renderStatsSkeleton() {
+    var icons = ['', '', '', ''];
+    return icons.map(function() {
+      return '<div class="card dash-stat-skel">' +
+        '<div class="dash-stat-skel-icon"></div>' +
+        '<div class="dash-stat-skel-value"></div>' +
+        '<div class="dash-stat-skel-label"></div>' +
+        '<div class="dash-stat-skel-change"></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function renderStatCards() {
+    return '' +
+      '<div class="card stat-card">' +
+        '<div class="stat-icon teal"><i class="fas fa-dollar-sign"></i></div>' +
+        '<div class="stat-value" id="dashRevenue">$0</div>' +
+        '<div class="stat-label">Total Revenue</div>' +
+        '<div class="stat-change up"><i class="fas fa-arrow-up"></i> From completed orders</div>' +
+      '</div>' +
+      '<div class="card stat-card">' +
+        '<div class="stat-icon blue"><i class="fas fa-clipboard-list"></i></div>' +
+        '<div class="stat-value" id="dashActiveOrders">0</div>' +
+        '<div class="stat-label">Active Orders</div>' +
+        '<div class="stat-change up"><i class="fas fa-arrow-up"></i> Currently in progress</div>' +
+      '</div>' +
+      '<div class="card stat-card">' +
+        '<div class="stat-icon orange"><i class="fas fa-sync-alt"></i></div>' +
+        '<div class="stat-value" id="dashPendingRevisions">0</div>' +
+        '<div class="stat-label">Pending Revisions</div>' +
+        '<div class="stat-change down"><i class="fas fa-arrow-down"></i> Awaiting review</div>' +
+      '</div>' +
+      '<div class="card stat-card">' +
+        '<div class="stat-icon red"><i class="fas fa-check-circle"></i></div>' +
+        '<div class="stat-value" id="dashCompletedOrders">0</div>' +
+        '<div class="stat-label">Completed Orders</div>' +
+        '<div class="stat-change up"><i class="fas fa-arrow-up"></i> Delivered & closed</div>' +
+      '</div>';
+  }
+
+  function restoreStatsCards() {
+    var grid = document.querySelector('.stats-grid');
+    if (!grid) return;
+    if (grid.querySelector('.dash-stat-skel')) {
+      grid.innerHTML = renderStatCards();
+    }
+  }
+
+  function renderNotifSkeleton() {
+    var html = '';
+    for (var i = 0; i < 3; i++) {
+      html += '<div class="dash-notif-skel">' +
+        '<div class="dash-notif-skel-icon"></div>' +
+        '<div class="dash-notif-skel-content">' +
+          '<div class="dash-notif-skel-line" style="width:65%;"></div>' +
+          '<div class="dash-notif-skel-line" style="width:40%;"></div>' +
+        '</div>' +
+      '</div>';
+    }
+    return html;
+  }
+
   function showSkeletons() {
-    var revenueEl = document.getElementById('dashRevenue');
-    if (revenueEl) {
-      var revText = revenueEl.textContent.trim();
-      if (revText === '$0' || revText === '$—' || revText === '' || revText === '$') {
-        revenueEl.textContent = '$—';
+    var statsGrid = document.querySelector('.stats-grid');
+    if (statsGrid) {
+      var firstStat = statsGrid.querySelector('.dash-stat-skel');
+      if (!firstStat) {
+        statsGrid.innerHTML = renderStatsSkeleton();
       }
     }
-    ['dashActiveOrders', 'dashPendingRevisions', 'dashCompletedOrders'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) {
-        var txt = el.textContent.trim();
-        if (txt === '0' || txt === '—' || txt === '') {
-          el.textContent = '—';
-        }
-      }
-    });
 
     var ordersTbody = document.getElementById('dashRecentOrders');
     if (ordersTbody) {
@@ -223,6 +276,14 @@ const NAGRIVA_Dashboard = (() => {
       }
     }
 
+    var notifList = document.querySelector('.notif-list');
+    if (notifList) {
+      var hasRealNotif = notifList.querySelector('.notif-item');
+      var hasSkel = notifList.querySelector('.dash-notif-skel');
+      if (!hasRealNotif && !hasSkel) {
+        notifList.innerHTML = renderNotifSkeleton();
+      }
+    }
   }
 
   function showError(err) {
@@ -286,7 +347,7 @@ const NAGRIVA_Dashboard = (() => {
       return;
     }
     if (NAGRIVA_Notifications && NAGRIVA_Notifications.getNotifications().length === 0) {
-      container.innerHTML = '<div style="padding:12px;text-align:center;color:var(--gray3);font-size:0.78rem;">No notifications yet</div>';
+      container.innerHTML = '<div style="padding:24px 16px;text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--accent);font-size:0.9rem;"><i class="fas fa-bell"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.82rem;color:var(--white);margin-bottom:3px;">All caught up</div><div style="font-size:0.72rem;color:var(--gray2);line-height:1.5;">No new notifications to show.</div></div>';
     }
   }
 
@@ -316,6 +377,7 @@ const NAGRIVA_Dashboard = (() => {
       _loading = false;
       _error = null;
       _loaded = true;
+      restoreStatsCards();
       updateStats(updatedStats);
       renderRecentOrders(updatedOrders);
       updateCharts(updatedOrders);
@@ -330,6 +392,7 @@ const NAGRIVA_Dashboard = (() => {
 
     var orders = NAGRIVA_AdminOrders.getAllOrders();
     if (orders.length > 0) {
+      restoreStatsCards();
       var stats = NAGRIVA_AdminOrders.getStats();
       updateStats(stats);
       renderRecentOrders(orders);
@@ -348,6 +411,7 @@ const NAGRIVA_Dashboard = (() => {
       if (!_loaded) {
         var refreshed = NAGRIVA_AdminOrders.getAllOrders();
         if (refreshed.length > 0) {
+          restoreStatsCards();
           var s = NAGRIVA_AdminOrders.getStats();
           updateStats(s);
           renderRecentOrders(refreshed);

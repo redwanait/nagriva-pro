@@ -27,7 +27,12 @@ const NAGRIVA_Notifications = (() => {
       report: 'fa-chart-bar',
       milestone: 'fa-trophy',
       file: 'fa-file',
-      status: 'fa-tag'
+      status: 'fa-tag',
+      invoice_created: 'fa-file-invoice-dollar',
+      invoice_updated: 'fa-pen',
+      invoice_paid: 'fa-check-circle',
+      invoice_overdue: 'fa-exclamation-triangle',
+      invoice_deleted: 'fa-trash'
     };
     return map[type] || 'fa-bell';
   }
@@ -40,7 +45,12 @@ const NAGRIVA_Notifications = (() => {
       report: 'orange',
       milestone: 'purple',
       file: 'orange',
-      status: 'blue'
+      status: 'blue',
+      invoice_created: 'teal',
+      invoice_updated: 'blue',
+      invoice_paid: 'green',
+      invoice_overdue: 'orange',
+      invoice_deleted: 'gray'
     };
     return map[type] || 'teal';
   }

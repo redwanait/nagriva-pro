@@ -31,31 +31,6 @@ const NAGRIVA_Messages = (() => {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function showToast(type, title, message) {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-    toast.innerHTML = `
-      <div class="toast-icon ${type}"><i class="fas ${icons[type] || icons.info}"></i></div>
-      <div class="toast-content">
-        <div class="toast-title">${title}</div>
-        <div class="toast-message">${message}</div>
-      </div>
-      <button class="toast-close"><i class="fas fa-times"></i></button>`;
-    container.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('visible'));
-    toast.querySelector('.toast-close').addEventListener('click', () => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    });
-    setTimeout(() => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 4000);
-  }
-
   async function fetchConversations() {
     const allOrders = await NAGRIVA_OrdersAPI.fetchOrdersList('id, client_name, project_title, service, created_at');
 
@@ -314,8 +289,8 @@ const NAGRIVA_Messages = (() => {
       container.innerHTML = `
         <div class="orders-empty" style="padding:20px;">
           <div class="orders-empty-icon"><i class="fas fa-comment-dots"></i></div>
-          <h3>${filters.search ? 'No conversations match your search' : 'No conversations yet'}</h3>
-          <p>${filters.search ? 'Try different keywords.' : 'Messages from clients will appear here.'}</p>
+          <h3>${filters.search ? 'No matching conversations' : 'No conversations yet'}</h3>
+          <p>${filters.search ? 'No conversations match your search. Try different keywords.' : 'Client conversations and messages will appear here. Start by creating an order and communicating with your clients.'}</p>
         </div>`;
       return;
     }
@@ -403,7 +378,7 @@ const NAGRIVA_Messages = (() => {
         input.focus();
         await renderActiveConversation(orderId);
       } catch (err) {
-        showToast('error', 'Send Failed', err.message || 'Could not send message');
+        NAGRIVA_Toast.error('Send Failed', err.message || 'Could not send message');
       }
       input.disabled = false;
       sendBtn.disabled = false;

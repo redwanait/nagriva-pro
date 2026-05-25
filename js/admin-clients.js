@@ -34,31 +34,6 @@ const NAGRIVA_Clients = (() => {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function showToast(type, title, message) {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-    toast.innerHTML = `
-      <div class="toast-icon ${type}"><i class="fas ${icons[type] || icons.info}"></i></div>
-      <div class="toast-content">
-        <div class="toast-title">${title}</div>
-        <div class="toast-message">${message}</div>
-      </div>
-      <button class="toast-close"><i class="fas fa-times"></i></button>`;
-    container.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('visible'));
-    toast.querySelector('.toast-close').addEventListener('click', () => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    });
-    setTimeout(() => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 4000);
-  }
-
   async function fetchClients() {
     const { data: profiles, error: profilesError } = await window.supabaseClient
       .from('profiles')
@@ -124,7 +99,7 @@ const NAGRIVA_Clients = (() => {
             </button>
           </div>`;
       }
-      showToast('error', 'Connection Error', 'Could not load clients from database.');
+      NAGRIVA_Toast.error('Connection Error', 'Could not load clients from database.');
     }
   }
 
@@ -184,7 +159,7 @@ const NAGRIVA_Clients = (() => {
 
     clients = await fetchClients();
     notifyChange();
-    showToast('success', 'Client Created', `${data.full_name} added successfully`);
+    NAGRIVA_Toast.success('Client Created', `${data.full_name} added successfully`);
     return { id };
   }
 
@@ -203,7 +178,7 @@ const NAGRIVA_Clients = (() => {
 
     clients = await fetchClients();
     notifyChange();
-    showToast('success', 'Client Updated', `${data.full_name || 'Client'} updated successfully`);
+    NAGRIVA_Toast.success('Client Updated', `${data.full_name || 'Client'} updated successfully`);
     return true;
   }
 
@@ -216,7 +191,7 @@ const NAGRIVA_Clients = (() => {
 
     clients = clients.filter(c => c.id !== id);
     notifyChange();
-    showToast('info', 'Client Removed', 'Client has been removed.');
+    NAGRIVA_Toast.info('Client Removed', 'Client has been removed.');
     return true;
   }
 
@@ -301,15 +276,15 @@ const NAGRIVA_Clients = (() => {
       return `
         <div class="orders-empty">
           <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No clients match your search</h3>
-          <p>Try different keywords or clear your filters to see all clients.</p>
+          <h3>No matching clients</h3>
+          <p>No clients match your current search. Try different keywords or clear your filters to see all clients.</p>
         </div>`;
     }
     return `
       <div class="orders-empty">
         <div class="orders-empty-icon"><i class="fas fa-users"></i></div>
         <h3>No clients yet</h3>
-        <p>Clients will appear here once they sign up or you create them.</p>
+        <p>Clients will appear here once they sign up or you create their accounts. Manage all client relationships and projects from this view.</p>
       </div>`;
   }
 

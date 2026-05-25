@@ -352,6 +352,18 @@
 .inv-td-avatar.a6 { background: #ec4899; }
 
 /* ─── Empty State ─── */
+@keyframes inv-fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes inv-float-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes inv-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,245,196,0); }
+  50% { box-shadow: 0 0 30px rgba(0,245,196,0.08); }
+}
 .inv-empty {
   display: flex;
   flex-direction: column;
@@ -362,6 +374,7 @@
   border-radius: var(--r);
   border: 1px dashed var(--border);
   background: var(--surface);
+  animation: inv-fadeInUp 0.5s ease-out;
 }
 .inv-empty-icon {
   width: 72px;
@@ -375,6 +388,13 @@
   color: var(--accent);
   font-size: 1.5rem;
   margin-bottom: 20px;
+  animation: inv-float-icon 3s ease-in-out infinite, inv-glow-pulse 3s ease-in-out infinite;
+  transition: all var(--transition);
+}
+.inv-empty:hover .inv-empty-icon {
+  background: rgba(0,245,196,0.08);
+  border-color: rgba(0,245,196,0.2);
+  transform: scale(1.05);
 }
 .inv-empty h3 {
   font-family: 'Syne', sans-serif;

@@ -498,15 +498,15 @@ const NAGRIVA_AdminOrders = (() => {
       return `
         <div class="orders-empty">
           <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No orders match your search</h3>
-          <p>Try different keywords or clear your filters to see all orders.</p>
+          <h3>No matching orders</h3>
+          <p>No orders match your current search. Try adjusting your keywords or clearing your filters to see all orders.</p>
         </div>`;
     }
     return `
       <div class="orders-empty">
         <div class="orders-empty-icon"><i class="fas fa-shopping-bag"></i></div>
         <h3>No orders yet</h3>
-        <p>Create your first order to start managing client projects from one place.</p>
+        <p>Create your first order to start managing client projects from one place. All order activity and updates will appear here in real time.</p>
         <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;">
           <i class="fas fa-plus"></i> Create Order
         </button>

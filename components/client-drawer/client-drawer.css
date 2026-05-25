@@ -181,10 +181,12 @@
   border-radius: var(--r-sm);
   padding: 16px;
   text-align: center;
-  transition: border-color var(--transition);
+  transition: all var(--transition);
 }
 .cd-stat-card:hover {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 245, 196, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 .cd-stat-value {
   font-family: 'Syne', sans-serif;
@@ -235,16 +237,24 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 10px 0;
+  padding: 10px 8px;
+  margin: 0 -8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
   transition: background var(--transition);
 }
 .cd-order-item:first-child {
-  padding-top: 0;
+  padding-top: 10px;
 }
 .cd-order-item:last-child {
   border-bottom: none;
-  padding-bottom: 0;
+  padding-bottom: 10px;
+}
+.cd-order-item:hover {
+  background: var(--surface-hover);
+}
+.cd-order-item:hover .cd-order-service {
+  color: var(--accent);
 }
 .cd-order-dot {
   width: 8px;
@@ -299,15 +309,21 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 8px 0;
+  padding: 8px 6px;
+  margin: 0 -6px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  transition: background 0.2s ease;
 }
 .cd-activity-item:first-child {
-  padding-top: 0;
+  padding-top: 8px;
 }
 .cd-activity-item:last-child {
   border-bottom: none;
-  padding-bottom: 0;
+  padding-bottom: 8px;
+}
+.cd-activity-item:hover {
+  background: var(--surface-hover);
 }
 .cd-activity-icon {
   width: 28px;
@@ -391,16 +407,45 @@
 }
 
 /* ─── Empty State ─── */
+@keyframes cd-fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .cd-empty {
   text-align: center;
-  padding: 32px 16px;
-  color: var(--gray3);
-  font-size: 0.82rem;
+  padding: 36px 16px;
+  color: var(--gray2);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  animation: cd-fadeInUp 0.4s ease-out;
 }
-.cd-empty i {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  opacity: 0.5;
+.cd-empty .cd-empty-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,245,196,0.04);
+  border: 1px solid rgba(0,245,196,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin: 0 auto 14px;
+  opacity: 0.7;
+  transition: all var(--transition);
+}
+.cd-empty:hover .cd-empty-icon {
+  background: rgba(0,245,196,0.07);
+  border-color: rgba(0,245,196,0.15);
+  transform: scale(1.05);
+}
+.cd-empty .cd-empty-label {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--white);
+  margin-bottom: 4px;
+  display: block;
 }
 
 /* ─── Skeleton ─── */

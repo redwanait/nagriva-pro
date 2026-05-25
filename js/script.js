@@ -755,7 +755,7 @@ function initServiceCTA() {
 
   var orderUrl = 'submit-order.html?service=' + service;
 
-  document.querySelectorAll('.sp-btn--primary, .sp-cta-btn').forEach(function (btn) {
+  document.querySelectorAll('.sp-btn--primary, .sp-cta-btn, .fv-cta--primary').forEach(function (btn) {
     var svg = btn.querySelector('svg');
     btn.innerHTML = 'Order Now ';
     if (svg) btn.appendChild(svg);

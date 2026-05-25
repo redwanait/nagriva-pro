@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       /* Files */
       let filesHtml = '';
       if (files.length === 0) {
-        filesHtml = '<div class="track-file-empty"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>No files yet</span></div>';
+        filesHtml = '<div class="track-file-empty"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="tfe-label">No files yet</span><span class="tfe-text">Delivered files and project assets will appear here once they\'re ready.</span></div>';
       } else {
         files.forEach(f => {
           const isDeliverable = f.uploaded_by === 'admin';
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       /* Timeline */
       let timelineHtml = '';
       if (activity.length === 0) {
-        timelineHtml = '<div style="text-align:center;padding:20px;color:var(--gray2);font-size:0.82rem;">No activity yet</div>';
+        timelineHtml = '<div style="text-align:center;padding:32px 20px;color:var(--gray2);font-size:0.82rem;animation:of-fadeInUp 0.4s ease-out;"><div style="width:40px;height:40px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--accent);font-size:0.9rem;"><i class="fas fa-clock"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.85rem;color:var(--white);margin-bottom:3px;">No activity yet</div><div style="font-size:0.75rem;color:var(--gray2);max-width:220px;margin:0 auto;line-height:1.5;">Project updates and status changes will appear here.</div></div>';
       } else {
         activity.forEach(a => {
           timelineHtml += '<div class="track-tl-item"><div class="track-tl-dot"></div><div class="track-tl-content">' +

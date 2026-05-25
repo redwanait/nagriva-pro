@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Strategy & Performance Marketing — NAGRIVA</title>
-  <meta name="description" content="Data-driven growth strategies and performance marketing campaigns across Google, Meta, and LinkedIn that deliver measurable ROI." />
+  <title>Performance Marketing — NAGRIVA</title>
+  <meta name="description" content="Data-driven performance marketing that delivers measurable ROI. Full-funnel campaigns across all channels, optimized for conversions." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/service-detail.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
   <link rel="stylesheet" href="../css/floating-elements.css" />
   <link rel="stylesheet" href="../css/auth.css" />
@@ -16,6 +17,7 @@
 </head>
 <body>
 
+  <!-- ════════════════ NAVBAR ════════════════ -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
@@ -25,13 +27,14 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="../index.html" class="nav-link">Home</a></li>
         <li class="nav-dropdown">
-          <a href="#" class="nav-link nav-dropdown-toggle active">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <a href="#" class="nav-link nav-dropdown-toggle">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
           <div class="nav-dropdown-menu">
             <a href="web-design.html" class="nav-dropdown-item">Web Design</a>
             <a href="seo.html" class="nav-dropdown-item">SEO</a>
             <a href="branding.html" class="nav-dropdown-item">Branding</a>
             <a href="ai-automation.html" class="nav-dropdown-item">AI Automation</a>
             <a href="social-media.html" class="nav-dropdown-item">Social Media</a>
+            <a href="strategy.html" class="nav-dropdown-item">Performance Marketing</a>
           </div>
         </li>
         <li><a href="../index.html#results" class="nav-link">Results</a></li>
@@ -84,7 +87,7 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- ════════════════ MOBILE MENU ════════════════ -->
   <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
     <div class="mobile-menu-panel" id="mobileMenuPanel">
@@ -98,17 +101,21 @@
         </button>
       </div>
       <nav class="mobile-menu-nav">
-        <a href="../index.html" class="mobile-menu-link active"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a>
-        <a href="web-design.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Services</span></a>
-        <a href="../index.html#results" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Results</span></a>
-        <a href="../index.html#pricing" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span>Pricing</span></a>
-        <a href="../index.html#about" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>About</span></a>
-        <a href="../index.html#contact" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Contact</span></a>
+        <a href="../index.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a>
+        <a href="web-design.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Web Design</span></a>
+        <a href="seo.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>SEO</span></a>
+        <a href="branding.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span>Branding</span></a>
+        <a href="ai-automation.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-4 4s-4-2-4-4a4 4 0 0 1 4-4z"/><path d="M2 22v-2a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v2"/></svg><span>AI Automation</span></a>
+        <a href="social-media.html" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg><span>Social Media</span></a>
+        <a href="strategy.html" class="mobile-menu-link active"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Marketing</span></a>
+        <a href="../index.html#results" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Results</span></a>
+        <a href="../index.html#about" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>About</span></a>
+        <a href="../index.html#contact" class="mobile-menu-link"><svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Contact</span></a>
       </nav>
-        <a href="login.html" class="mobile-auth-link" id="mobileAuthBtn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          <span id="mobileAuthText">Sign In</span>
-        </a>
+      <a href="login.html" class="mobile-auth-link" id="mobileAuthBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        <span id="mobileAuthText">Sign In</span>
+      </a>
       <div class="mobile-menu-footer">
         <a href="../index.html#contact" class="mobile-menu-cta">Book a Free Call <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <p class="mobile-menu-trust">We reply within 24 hours</p>
@@ -116,150 +123,370 @@
     </div>
   </div>
 
-  <section class="svc-hero">
-    <div class="svc-hero-bg">
-      <div class="svc-hero-glow"></div>
-      <div class="hero-grid"></div>
-    </div>
-    <div class="container">
-      <div class="svc-hero-content fade-up">
-        <div class="svc-hero-badge">✦ Service</div>
-        <h1 class="svc-hero-title">Strategy & Performance Marketing</h1>
-        <p class="svc-hero-sub">Data-driven performance marketing and strategic consulting that scales your revenue, optimizes ad spend, and maximizes ROI.</p>
-        <div class="svc-hero-actions">
-          <a href="../index.html#contact" class="btn-primary"><span>Book a Free Call</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="#reviews" class="btn-secondary"><span>See Reviews</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ════════════════ SERVICE DETAIL PAGE ════════════════ -->
+  <main class="fv-page">
+    <div class="fv-container">
 
-  <section class="svc-section pricing">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">Pricing</div>
-        <h2 class="section-title">Simple <span class="text-gradient">Pricing</span></h2>
-        <p class="section-desc">Transparent subscription packages for data-driven growth.</p>
-      </div>
-      <div class="pricing-grid fade-up">
-        <div class="pricing-card">
-          <div class="pricing-plan">Starter</div>
-          <div class="pricing-price"><span class="price-currency">$</span><span class="price-amount">3,999</span></div>
-          <p class="pricing-desc">Ideal for startups that need a go-to-market strategy and a clear channel roadmap.</p>
-          <ul class="pricing-features">
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Market Research & Analysis</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Channel Strategy</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 3-Month Roadmap</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Executive Presentation</li>
-          </ul>
-          <a href="../index.html#contact" class="btn-pricing">Start Now</a>
-        </div>
-        <div class="pricing-card featured">
-          <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-plan">Growth</div>
-          <div class="pricing-price"><span class="price-currency">$</span><span class="price-amount">7,499</span></div>
-          <p class="pricing-desc">For growing companies that need full strategic execution and performance marketing.</p>
-          <ul class="pricing-features">
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Full Strategy + Execution</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Performance Marketing</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Weekly Optimization</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Custom Dashboard</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bi-Weekly Reports</li>
-          </ul>
-          <a href="../index.html#contact" class="btn-pricing featured-btn">Start Now</a>
-        </div>
-        <div class="pricing-card">
-          <div class="pricing-plan">Enterprise</div>
-          <div class="pricing-price"><span class="price-currency">$</span><span class="price-amount">15K</span></div>
-          <p class="pricing-desc">For organizations that need a full growth infrastructure and a dedicated team.</p>
-          <ul class="pricing-features">
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Comprehensive GTM Strategy</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Dedicated Growth Team</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Board-Ready Reports</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority Support</li>
-          </ul>
-          <a href="../index.html#contact" class="btn-pricing">Contact Us</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      <!-- ===== LEFT COLUMN ===== -->
+      <div class="fv-main">
 
-  <section class="svc-section svc-alt">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">Our Work</div>
-        <h2 class="section-title">Recent <span class="text-gradient">Work</span></h2>
-        <p class="section-desc">Strategic partnerships that delivered measurable business impact.</p>
-      </div>
-      <div class="svc-results-grid fade-up">
-        <div class="svc-result-card">
-          <div class="svc-result-tag">Fintech</div>
-          <div class="svc-result-name">NovaPay</div>
-          <p class="svc-result-desc">A comprehensive go-to-market strategy enabled a successful launch that exceeded first-year targets.</p>
-          <div class="svc-result-metrics">
-            <div class="svc-result-metric"><div class="svc-result-metric-val">+35%</div><div class="svc-result-metric-label">Revenue Target</div></div>
-            <div class="svc-result-metric"><div class="svc-result-metric-val">On Time</div><div class="svc-result-metric-label">Launch Schedule</div></div>
-            <div class="svc-result-metric"><div class="svc-result-metric-val">4.8/5</div><div class="svc-result-metric-label">Board Approval</div></div>
+        <!-- Breadcrumb -->
+        <nav class="fv-breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="fv-bc-sep">/</span>
+          <a href="../index.html#services">Services</a>
+          <span class="fv-bc-sep">/</span>
+          <span class="fv-bc-current">Performance Marketing</span>
+        </nav>
+
+        <!-- Title -->
+        <div class="fv-header">
+          <h1 class="fv-title">Performance Marketing That <span class="sp-text-glow">Delivers</span> ROI</h1>
+          <div class="fv-highlights">
+            <span class="fv-highlight-tag">Data-Driven</span>
+            <span class="fv-highlight-tag">Full Funnel</span>
+            <span class="fv-highlight-tag">Multi-Channel</span>
+            <span class="fv-highlight-tag">ROI Guaranteed</span>
           </div>
         </div>
-        <div class="svc-result-card">
-          <div class="svc-result-tag">SaaS</div>
-          <div class="svc-result-name">SignalStream</div>
-          <p class="svc-result-desc">Market research and competitive analysis uncovered an untapped market opportunity that defined the core product.</p>
-          <div class="svc-result-metrics">
-            <div class="svc-result-metric"><div class="svc-result-metric-val">Discovered</div><div class="svc-result-metric-label">Market Opportunity</div></div>
-            <div class="svc-result-metric"><div class="svc-result-metric-val">2x</div><div class="svc-result-metric-label">Pipeline Growth</div></div>
-            <div class="svc-result-metric"><div class="svc-result-metric-val">6.3x</div><div class="svc-result-metric-label">ROAS</div></div>
+
+        <!-- Seller / Agency Trust -->
+        <div class="fv-seller">
+          <div class="fv-seller-avatar">NA</div>
+          <div class="fv-seller-info">
+            <span class="fv-seller-name">NAGRIVA Agency</span>
+            <span class="fv-seller-label">Premium Digital Agency &bull; Top 1% of Strategists</span>
+          </div>
+          <span class="fv-seller-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Trusted Partner
+          </span>
+        </div>
+
+        <!-- Reviews / Rating -->
+        <div class="fv-reviews">
+          <div class="fv-reviews-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="fv-reviews-rating">4.9</span>
+          <span class="fv-reviews-count">(128 reviews)</span>
+          <div class="fv-reviews-bar">
+            <div class="fv-reviews-bar-fill" style="width: 98%"></div>
+          </div>
+          <span class="fv-reviews-score">98% Satisfaction</span>
+        </div>
+
+        <!-- Gallery -->
+        <div class="fv-gallery">
+          <div class="fv-gallery-main">
+            <img src="../assets/images/projects/Performance%20Marketing.png" alt="Performance Marketing Showcase" />
+            <button class="fv-gallery-nav fv-gallery-prev" aria-label="Previous">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="fv-gallery-nav fv-gallery-next" aria-label="Next">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <div class="fv-gallery-dots"></div>
+          </div>
+          <div class="fv-gallery-thumbs">
+            <div class="fv-gallery-thumb active">
+              <img src="../assets/images/projects/Performance%20Marketing.png" alt="Thumb 1" data-src="../assets/images/projects/Performance%20Marketing.png" />
+            </div>
+            <div class="fv-gallery-thumb">
+              <img src="../assets/images/projects/Pulse%20%E2%80%94%20Analytics%20Dashboard.png" alt="Thumb 2" data-src="../assets/images/projects/Pulse%20%E2%80%94%20Analytics%20Dashboard.png" />
+            </div>
+            <div class="fv-gallery-thumb">
+              <img src="../assets/images/projects/VELOUR%20%E2%80%94%20E-Commerce%20Experience.png" alt="Thumb 3" data-src="../assets/images/projects/VELOUR%20%E2%80%94%20E-Commerce%20Experience.png" />
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="svc-section svc-alt" id="reviews">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">Reviews</div>
-        <h2 class="section-title">Client <span class="text-gradient">Testimonials</span></h2>
-        <p class="section-desc">Real feedback from brands we've built strategies for.</p>
-      </div>
-      <div class="svc-reviews-grid fade-up">
-        <div class="svc-review-card">
-          <div class="sp-testimonial-quote" style="position:absolute;top:16px;right:20px;width:32px;height:32px;opacity:0.12;pointer-events:none"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="svc-review-stars">★★★★★</div>
-          <p class="svc-review-text">"NAGRIVA developed the entire go-to-market strategy. We launched on time and exceeded our first-year revenue target by 35%."</p>
-          <div class="svc-review-author"><div class="svc-review-avatar" style="background:linear-gradient(135deg,#00f5c4,#f59e0b)">VC</div><div><div class="svc-review-name">Vanessa Cruz</div><div class="svc-review-role">CEO, NovaPay</div></div></div>
+        <!-- Description -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">About This Service</h3>
+          <div class="fv-description">
+            <p>We build data-driven performance marketing campaigns that deliver measurable ROI across every channel. From paid media strategy to conversion optimization, every dollar is tracked, optimized, and scaled for maximum impact.</p>
+            <p>Our full-funnel approach ensures your brand reaches the right audience at every stage — from awareness to conversion — with real-time analytics driving every decision.</p>
+          </div>
         </div>
-        <div class="svc-review-card">
-          <div class="sp-testimonial-quote" style="position:absolute;top:16px;right:20px;width:32px;height:32px;opacity:0.12;pointer-events:none"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="svc-review-stars">★★★★★</div>
-          <p class="svc-review-text">"The market research and competitive analysis were incredibly valuable. We discovered an untapped opportunity that became our flagship service."</p>
-          <div class="svc-review-author"><div class="svc-review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00c2a8)">PO</div><div><div class="svc-review-name">Patrick O'Sullivan</div><div class="svc-review-role">Founder, SignalStream</div></div></div>
-        </div>
-        <div class="svc-review-card">
-          <div class="sp-testimonial-quote" style="position:absolute;top:16px;right:20px;width:32px;height:32px;opacity:0.12;pointer-events:none"><svg viewBox="0 0 24 24" fill="none"><path d="M10 11H6c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5m12-5h-4c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v4zm0 0c0 2.5-2 4-4 5" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="svc-review-stars">★★★★★</div>
-          <p class="svc-review-text">"The strategic roadmap gave us clarity and direction. We secured our Series A funding with confidence thanks to the meticulous plan they helped us build."</p>
-          <div class="svc-review-author"><div class="svc-review-avatar" style="background:linear-gradient(135deg,#007aff,#00f5c4)">AS</div><div><div class="svc-review-name">Dr. Amara Singh</div><div class="svc-review-role">Co-Founder, WellBridge Health</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="svc-section svc-cta-section">
-    <div class="svc-cta-bg"><div class="svc-cta-glow"></div></div>
-    <div class="container">
-      <div class="svc-cta-content fade-up">
-        <h2 class="svc-cta-title">Ready to Build Your <span class="text-gradient">Growth Strategy</span>?</h2>
-        <p class="svc-cta-sub">Book a free strategy call and let's discuss how we can deliver measurable results for your business.</p>
-        <div class="svc-cta-actions">
-          <a href="../index.html#contact" class="btn-primary"><span>Book a Free Call</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="submit-order.html?service=strategy" class="btn-order-now" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:99px;font-size:0.85rem;font-weight:600;font-family:inherit;color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;text-decoration:none;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);">Order Now <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="../index.html#contact" class="btn-secondary"><span>Start Your Strategy</span></a>
+        <!-- Benefits -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">What You Get</h3>
+          <div class="fv-benefits-grid">
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+              <div class="fv-benefit-text">
+                <h4>Paid Media Strategy</h4>
+                <p>Strategic ad placements across Google, Meta, LinkedIn, and more for maximum ROI.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+              <div class="fv-benefit-text">
+                <h4>Conversion Optimization</h4>
+                <p>Landing pages, funnels, and creative refined through continuous A/B testing.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="fv-benefit-text">
+                <h4>Multi-Channel Campaigns</h4>
+                <p>Integrated campaigns across search, social, display, and programmatic channels.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+              <div class="fv-benefit-text">
+                <h4>Real-Time Analytics</h4>
+                <p>Live dashboards with actionable insights and transparent performance reporting.</p>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Process -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">Our Process</h3>
+          <div class="fv-process">
+            <div class="fv-process-step">
+              <div class="fv-process-num">01</div>
+              <div class="fv-process-content">
+                <h4>Market Research</h4>
+                <p>In-depth audience analysis, competitor benchmarking, and channel selection to identify high-impact opportunities.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">02</div>
+              <div class="fv-process-content">
+                <h4>Campaign Strategy</h4>
+                <p>Data-backed campaign architecture with tailored messaging, budget allocation, and creative direction.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">03</div>
+              <div class="fv-process-content">
+                <h4>Execution & Testing</h4>
+                <p>Rigorous A/B testing across audiences, creatives, and placements to find the winning formula.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">04</div>
+              <div class="fv-process-content">
+                <h4>Scale & Optimize</h4>
+                <p>Continuous optimization and budget scaling based on real-time performance data and ROAS targets.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">Frequently Asked Questions</h3>
+          <div class="fv-faq">
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                Which advertising channels do you work with?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>We manage campaigns across Google Ads, Meta (Facebook/Instagram), LinkedIn, TikTok, Pinterest, and programmatic networks. Our team selects the right mix based on your audience and goals.</p>
+              </div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                What is the minimum ad budget required?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>We recommend a minimum monthly ad spend of $2,000 to generate statistically significant data. Our packages start at $2,499 for management fees, with ad spend billed separately.</p>
+              </div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                How do you track and attribute conversions?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>We set up multi-touch attribution models with advanced tracking via Google Tag Manager, server-side tracking, and CRM integration. Every conversion is accurately attributed to its source.</p>
+              </div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                What does your reporting cadence look like?
+                <svg class="fv-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer">
+                <p>You'll receive weekly performance snapshots and a comprehensive monthly report with actionable insights. Enterprise clients get real-time dashboard access and weekly strategy calls.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results / Highlights -->
+        <div class="fv-section">
+          <h3 class="fv-section-title">Results That Speak</h3>
+          <div class="fv-results-grid">
+            <div class="fv-result-item">
+              <div class="fv-result-num">300+</div>
+              <div class="fv-result-label">Campaigns Managed</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">6.2x</div>
+              <div class="fv-result-label">Avg. ROAS</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">95%</div>
+              <div class="fv-result-label">Client Retention</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">$10M+</div>
+              <div class="fv-result-label">Ad Spend Managed</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== RIGHT SIDEBAR (STICKY) ===== -->
+      <aside class="fv-sidebar">
+        <div class="fv-sidebar-inner">
+
+          <!-- Package Tabs -->
+          <div class="fv-pkg-tabs">
+            <button class="fv-pkg-tab" data-pkg="0">Starter</button>
+            <button class="fv-pkg-tab active" data-pkg="1">Growth</button>
+            <button class="fv-pkg-tab" data-pkg="2">Scale</button>
+          </div>
+
+          <!-- Package: Starter -->
+          <div class="fv-pkg-data" data-pkg="0" style="display:none">
+            <div class="fv-pkg-name">Starter Package</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">2,499</span>
+            </div>
+            <div class="fv-meta">
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                2-Week Delivery
+              </div>
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                2 Revisions
+              </div>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <ul class="fv-features">
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Channel Strategy</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Ad Creative</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>1 Platform</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Basic Tracking</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly Report</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>2 Revisions</li>
+            </ul>
+            <a href="submit-order.html?service=strategy" class="fv-cta fv-cta--primary">
+              Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
+            <div class="fv-sidebar-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure checkout &bull; Money-back guarantee
+            </div>
+          </div>
+
+          <!-- Package: Growth (Most Popular) -->
+          <div class="fv-pkg-data" data-pkg="1">
+            <div class="fv-pkg-name">Growth Package &bull; Most Popular</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">4,999</span>
+            </div>
+            <div class="fv-meta">
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                4-Week Delivery
+              </div>
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Unlimited Revisions
+              </div>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <ul class="fv-features">
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Full Funnel Strategy</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>3 Platforms</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Audience Research</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>A/B Testing</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Analytics Dashboard</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited Revisions</li>
+            </ul>
+            <a href="submit-order.html?service=strategy" class="fv-cta fv-cta--primary">
+              Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
+            <div class="fv-sidebar-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure checkout &bull; Money-back guarantee
+            </div>
+          </div>
+
+          <!-- Package: Scale -->
+          <div class="fv-pkg-data" data-pkg="2" style="display:none">
+            <div class="fv-pkg-name">Scale Package</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">9,999</span>
+            </div>
+            <div class="fv-meta">
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                6-Week Delivery
+              </div>
+              <div class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Unlimited Revisions
+              </div>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <ul class="fv-features">
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Enterprise Growth</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>All Platforms</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Custom Attribution</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated Team</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>24/7 Optimization</li>
+              <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Priority Support</li>
+            </ul>
+            <a href="submit-order.html?service=strategy" class="fv-cta fv-cta--primary">
+              Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
+            <div class="fv-sidebar-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure checkout &bull; Money-back guarantee
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Bottom Trust Bar -->
+    <div class="fv-container" style="grid-template-columns:1fr; padding-top:0">
+      <div class="fv-trust-bar">
+        <span class="fv-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure Payment</span>
+        <span class="fv-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>98% Satisfaction</span>
+        <span class="fv-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>On-Time Delivery</span>
+        <span class="fv-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Dedicated Support</span>
+        <span class="fv-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Money-Back Guarantee</span>
       </div>
     </div>
-  </section>
+  </main>
 
   <div id="footer-container"></div>
 
@@ -272,5 +499,6 @@
   <script src="../js/i18n.js"></script>
   <script src="../js/chatbot.js"></script>
   <script src="../js/footer.js"></script>
+  <script src="../js/service-detail.js"></script>
 </body>
 </html>

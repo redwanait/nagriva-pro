@@ -89,31 +89,6 @@ const NAGRIVA_Payments = (() => {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function showToast(type, title, message) {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-    toast.innerHTML = `
-      <div class="toast-icon ${type}"><i class="fas ${icons[type] || icons.info}"></i></div>
-      <div class="toast-content">
-        <div class="toast-title">${title}</div>
-        <div class="toast-message">${message}</div>
-      </div>
-      <button class="toast-close"><i class="fas fa-times"></i></button>`;
-    container.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('visible'));
-    toast.querySelector('.toast-close').addEventListener('click', () => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    });
-    setTimeout(() => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 4000);
-  }
-
   function applyFilters() {
     filterPayments = payments.filter(p => {
       if (filters.status && p.status !== filters.status) return false;
@@ -206,15 +181,15 @@ const NAGRIVA_Payments = (() => {
     if (!container) return;
     if (filtered) {
       container.innerHTML = '<div class="pay-empty-state" style="padding:40px 20px;">' +
-        '<i class="fas fa-search" style="font-size:1.8rem;"></i>' +
+        '<div class="pay-empty-icon"><i class="fas fa-search"></i></div>' +
         '<h3>No matching payments</h3>' +
-        '<p>Try adjusting your search or filter criteria.</p>' +
+        '<p>No payments match your current search. Try adjusting your filters to see all records.</p>' +
       '</div>';
     } else {
       container.innerHTML = '<div class="pay-empty-state">' +
-        '<i class="fas fa-credit-card"></i>' +
+        '<div class="pay-empty-icon"><i class="fas fa-credit-card"></i></div>' +
         '<h3>No payments yet</h3>' +
-        '<p>Create your first payment record to start tracking revenue.</p>' +
+        '<p>Start tracking revenue by recording your first payment. All payment activity will appear here in real time.</p>' +
       '</div>';
     }
   }
@@ -542,8 +517,8 @@ const NAGRIVA_Payments = (() => {
       const paidAt = overlay.querySelector('#pf_paid_at').value;
       const notes = overlay.querySelector('#pf_notes').value.trim();
 
-      if (!orderId) { showToast('error', 'Validation Error', 'Please select an order'); return; }
-      if (!amount || amount <= 0) { showToast('error', 'Validation Error', 'Please enter a valid amount'); return; }
+      if (!orderId) { NAGRIVA_Toast.error('Validation Error', 'Please select an order'); return; }
+      if (!amount || amount <= 0) { NAGRIVA_Toast.error('Validation Error', 'Please enter a valid amount'); return; }
 
       this.disabled = true;
       this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
@@ -562,10 +537,10 @@ const NAGRIVA_Payments = (() => {
 
         if (isEditing) {
           await updatePayment(paymentData.id, data);
-          showToast('success', 'Payment Updated', 'Payment record has been updated successfully.');
+          NAGRIVA_Toast.success('Payment Updated', 'Payment record has been updated successfully.');
         } else {
           await createPayment(data);
-          showToast('success', 'Payment Created', 'Payment record has been created successfully.');
+          NAGRIVA_Toast.success('Payment Created', 'Payment record has been created successfully.');
         }
 
         closeModal();
@@ -579,7 +554,7 @@ const NAGRIVA_Payments = (() => {
       } catch (err) {
         this.disabled = false;
         this.innerHTML = '<i class="fas ' + (isEditing ? 'fa-save' : 'fa-plus') + '"></i> ' + (isEditing ? 'Save Changes' : 'Create Payment');
-        showToast('error', 'Operation Failed', err.message || 'Something went wrong');
+        NAGRIVA_Toast.error('Operation Failed', err.message || 'Something went wrong');
       }
     });
   }

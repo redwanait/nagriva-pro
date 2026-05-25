@@ -37,31 +37,6 @@ const NAGRIVA_Files = (() => {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function showToast(type, title, message) {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-    toast.innerHTML = `
-      <div class="toast-icon ${type}"><i class="fas ${icons[type] || icons.info}"></i></div>
-      <div class="toast-content">
-        <div class="toast-title">${title}</div>
-        <div class="toast-message">${message}</div>
-      </div>
-      <button class="toast-close"><i class="fas fa-times"></i></button>`;
-    container.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('visible'));
-    toast.querySelector('.toast-close').addEventListener('click', () => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    });
-    setTimeout(() => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 4000);
-  }
-
   async function fetchFiles() {
     const allOrders = await NAGRIVA_OrdersAPI.fetchOrdersList('id, client_name, project_title, order_number');
     orders = allOrders || [];
@@ -111,7 +86,7 @@ const NAGRIVA_Files = (() => {
             </button>
           </div>`;
       }
-      showToast('error', 'Connection Error', 'Could not load files from database.');
+      NAGRIVA_Toast.error('Connection Error', 'Could not load files from database.');
     }
   }
 
@@ -169,7 +144,7 @@ const NAGRIVA_Files = (() => {
 
     files = await fetchFiles();
     notifyChange();
-    showToast('success', 'File Uploaded', file.name + ' uploaded successfully');
+    NAGRIVA_Toast.success('File Uploaded', file.name + ' uploaded successfully');
     return { ...data, public_url: urlData.publicUrl };
   }
 
@@ -190,7 +165,7 @@ const NAGRIVA_Files = (() => {
 
     files = files.filter(f => f.id !== fileId);
     notifyChange();
-    showToast('info', 'File Deleted', file.file_name + ' has been removed.');
+    NAGRIVA_Toast.info('File Deleted', file.file_name + ' has been removed.');
     return true;
   }
 
@@ -250,11 +225,13 @@ const NAGRIVA_Files = (() => {
     let html = '<div class="orders-skeleton">';
     for (let i = 0; i < 5; i++) {
       html += `
-        <div class="orders-skeleton-row">
-          <div class="orders-skeleton-bar row"><div class="orders-skeleton-bar" style="width:32px;height:32px;border-radius:8px;"></div><div><div class="orders-skeleton-bar w60"></div></div></div>
+        <div class="orders-skeleton-row" style="grid-template-columns:2fr 1.2fr 1fr 0.8fr 1fr 80px;">
+          <div class="orders-skeleton-bar row"><div class="orders-skeleton-bar" style="width:32px;height:32px;border-radius:8px;"></div><div><div class="orders-skeleton-bar w60"></div><div class="orders-skeleton-bar w40" style="margin-top:6px;"></div></div></div>
           <div class="orders-skeleton-bar w50"></div>
+          <div class="orders-skeleton-bar w40"></div>
           <div class="orders-skeleton-bar w30"></div>
           <div class="orders-skeleton-bar w40"></div>
+          <div class="orders-skeleton-bar w40" style="width:32px;height:32px;border-radius:6px;margin:0 auto;"></div>
         </div>`;
     }
     html += '</div>';
@@ -276,8 +253,8 @@ const NAGRIVA_Files = (() => {
       container.innerHTML = `
         <div class="orders-empty">
           <div class="orders-empty-icon"><i class="fas fa-folder-open"></i></div>
-          <h3>No files yet</h3>
-          <p>Files uploaded to orders will appear here.</p>
+          <h3>No files uploaded</h3>
+          <p>Upload files to any order to collaborate with your team. All project files, assets, and deliverables will be stored here.</p>
         </div>`;
       return;
     }
@@ -285,8 +262,8 @@ const NAGRIVA_Files = (() => {
       container.innerHTML = `
         <div class="orders-empty">
           <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No files match your search</h3>
-          <p>Try different keywords or filters.</p>
+          <h3>No matching files</h3>
+          <p>No files match your current search. Try different keywords or clear your filters.</p>
         </div>`;
       return;
     }

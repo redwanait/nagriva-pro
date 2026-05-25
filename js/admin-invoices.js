@@ -92,31 +92,6 @@ const NAGRIVA_AdminInvoices = (() => {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function showToast(type, title, message) {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-    toast.innerHTML = `
-      <div class="toast-icon ${type}"><i class="fas ${icons[type] || icons.info}"></i></div>
-      <div class="toast-content">
-        <div class="toast-title">${title}</div>
-        <div class="toast-message">${message}</div>
-      </div>
-      <button class="toast-close"><i class="fas fa-times"></i></button>`;
-    container.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('visible'));
-    toast.querySelector('.toast-close').addEventListener('click', () => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    });
-    setTimeout(() => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 4000);
-  }
-
   async function fetchAllInvoices() {
     try {
       const result = await NAGRIVA_InvoicesAPI.fetchInvoices({ per_page: 200 });
@@ -170,7 +145,7 @@ const NAGRIVA_AdminInvoices = (() => {
             </button>
           </div>`;
       }
-      showToast('error', 'Connection Error', 'Could not load invoices from database.');
+      NAGRIVA_Toast.error('Connection Error', 'Could not load invoices from database.');
     }
   }
 
@@ -227,7 +202,18 @@ const NAGRIVA_AdminInvoices = (() => {
       const invoice = mapFromDB(inserted);
       invoices.unshift(invoice);
       notifyChange();
-      showToast('success', 'Invoice Created', `Invoice ${invoice.invoiceNumber} — ${formatCurrency(invoice.total)}`);
+
+      const { data: { user } } = await window.supabaseClient.auth.getUser();
+      if (user) {
+        if (typeof NAGRIVA_InvoiceNotifications !== 'undefined') {
+          NAGRIVA_InvoiceNotifications.invoiceCreated(invoice, user.id);
+        }
+        if (typeof NAGRIVA_InvoiceActivity !== 'undefined') {
+          NAGRIVA_InvoiceActivity.invoiceCreated(invoice, user.id);
+        }
+      }
+
+      NAGRIVA_Toast.success('Invoice Created', `Invoice ${invoice.invoiceNumber} — ${formatCurrency(invoice.total)}`);
       return invoice;
     } finally {
       _createInProgress = false;
@@ -257,12 +243,43 @@ const NAGRIVA_AdminInvoices = (() => {
         payload.total = amt + tx;
       }
 
+      const prev = invoices.find(i => i.id === id);
+      const oldStatus = prev ? prev.status : null;
+
       const updated = await NAGRIVA_InvoicesAPI.updateInvoice(id, payload);
       const invoice = mapFromDB(updated);
       const idx = invoices.findIndex(i => i.id === id);
       if (idx !== -1) invoices[idx] = invoice;
       notifyChange();
-      showToast('success', 'Invoice Updated', `Invoice ${invoice.invoiceNumber} updated successfully`);
+
+      const { data: { user } } = await window.supabaseClient.auth.getUser();
+      if (user) {
+        const newStatus = invoice.status;
+        if (oldStatus && oldStatus !== newStatus) {
+          if (typeof NAGRIVA_InvoiceNotifications !== 'undefined') {
+            if (newStatus === 'paid') {
+              NAGRIVA_InvoiceNotifications.invoicePaid(invoice, user.id);
+            } else if (newStatus === 'overdue') {
+              NAGRIVA_InvoiceNotifications.invoiceOverdue(invoice, user.id);
+            } else {
+              NAGRIVA_InvoiceNotifications.invoiceStatusChanged(invoice, user.id, oldStatus, newStatus);
+            }
+          }
+          if (typeof NAGRIVA_InvoiceActivity !== 'undefined') {
+            if (newStatus === 'paid') {
+              NAGRIVA_InvoiceActivity.invoicePaid(invoice, user.id);
+            } else {
+              NAGRIVA_InvoiceActivity.invoiceUpdated(invoice, user.id, 'Invoice ' + invoice.invoiceNumber + ' status changed to ' + newStatus);
+            }
+          }
+        } else {
+          if (typeof NAGRIVA_InvoiceActivity !== 'undefined') {
+            NAGRIVA_InvoiceActivity.invoiceUpdated(invoice, user.id);
+          }
+        }
+      }
+
+      NAGRIVA_Toast.success('Invoice Updated', `Invoice ${invoice.invoiceNumber} updated successfully`);
       return invoice;
     } finally {
       _updateInProgress = false;
@@ -270,13 +287,21 @@ const NAGRIVA_AdminInvoices = (() => {
   }
 
   async function deleteInvoice(id) {
-    await NAGRIVA_InvoicesAPI.deleteInvoice(id);
     const idx = invoices.findIndex(i => i.id === id);
-    let removed = null;
-    if (idx !== -1) removed = invoices.splice(idx, 1)[0];
+    const removed = idx !== -1 ? invoices[idx] : null;
+
+    if (removed) {
+      const { data: { user } } = await window.supabaseClient.auth.getUser();
+      if (user && typeof NAGRIVA_InvoiceActivity !== 'undefined') {
+        await NAGRIVA_InvoiceActivity.invoiceDeleted(removed, user.id);
+      }
+    }
+
+    await NAGRIVA_InvoicesAPI.deleteInvoice(id);
+    if (idx !== -1) invoices.splice(idx, 1);
     notifyChange();
     if (removed) {
-      showToast('info', 'Invoice Deleted', `Invoice ${removed.invoiceNumber} deleted`);
+      NAGRIVA_Toast.info('Invoice Deleted', `Invoice ${removed.invoiceNumber} deleted`);
     }
     return true;
   }
@@ -398,6 +423,12 @@ const NAGRIVA_AdminInvoices = (() => {
             <button class="inv-td-action-btn danger" data-action="delete-invoice" title="Delete">
               <i class="fas fa-trash"></i>
             </button>
+            <button class="inv-td-action-btn" data-action="download-invoice-pdf" title="Download PDF">
+              <i class="fas fa-file-pdf"></i>
+            </button>
+            <button class="inv-td-action-btn" data-action="print-invoice" title="Print">
+              <i class="fas fa-print"></i>
+            </button>
           </div>
         </td>
       </tr>`;
@@ -426,15 +457,15 @@ const NAGRIVA_AdminInvoices = (() => {
       return `
         <div class="inv-empty">
           <div class="inv-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No invoices match your search</h3>
-          <p>Try different keywords or clear your filters to see all invoices.</p>
+          <h3>No matching invoices</h3>
+          <p>No invoices match your current search. Try adjusting your keywords or clearing your filters to see all invoices.</p>
         </div>`;
     }
     return `
       <div class="inv-empty">
         <div class="inv-empty-icon"><i class="fas fa-file-invoice-dollar"></i></div>
         <h3>No invoices yet</h3>
-        <p>Create your first invoice to start tracking payments and due dates.</p>
+        <p>Generate your first invoice to start tracking payments, due dates, and revenue. Every invoice you create will appear here.</p>
         <button class="btn btn-primary inv-empty-new-btn" style="margin-top:20px;">
           <i class="fas fa-plus"></i> Create Invoice
         </button>
@@ -869,7 +900,7 @@ const NAGRIVA_AdminInvoices = (() => {
         if (isEditing && prefill) {
           await updateInvoice(prefill.id, data);
           closeModal();
-          showToast('success', 'Invoice Updated', `Invoice updated successfully`);
+          NAGRIVA_Toast.success('Invoice Updated', `Invoice updated successfully`);
         } else {
           await createInvoice(data);
           closeModal();
