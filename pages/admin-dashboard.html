@@ -16,8 +16,7 @@
   <link rel="stylesheet" href="../css/admin-services.css" />
   <link rel="stylesheet" href="../css/admin-settings.css" />
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/chatbot.css" />
-  <link rel="stylesheet" href="../css/floating-elements.css" />
+  <!-- chatbot.css and floating-elements.css intentionally excluded from admin -->
   <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" />
   <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
   <link rel="stylesheet" href="../components/activity-feed/activity-feed.css" />
@@ -274,39 +273,40 @@
     .sidebar-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 24px 24px 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    .sidebar-brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--accent);
-      display: flex;
-      align-items: center;
       justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--bg);
-      flex-shrink: 0;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: all var(--transition);
+      position: relative;
     }
-    .sidebar-brand-text {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.05rem;
-      letter-spacing: 0.06em;
-      color: var(--white);
+    .sidebar-brand::after {
+      content: '';
+      position: absolute;
+      inset: 12px 20px;
+      border-radius: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+      background: radial-gradient(ellipse at center, rgba(0, 245, 196, 0.08) 0%, transparent 70%);
     }
-    .sidebar-brand-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: inline-block;
-      margin-left: 2px;
-      animation: pulse 2s ease infinite;
+    .sidebar-brand:hover::after {
+      opacity: 1;
+    }
+    .sidebar-logo {
+      width: 130px;
+      height: auto;
+      max-height: 42px;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+      image-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      transition: filter var(--transition), opacity var(--transition);
+    }
+    .sidebar-logo:hover {
+      filter: drop-shadow(0 0 12px rgba(0, 245, 196, 0.25));
     }
     .sidebar-nav {
       flex: 1;
@@ -380,48 +380,187 @@
       border-radius: 99px;
       line-height: 1.3;
     }
+    /* ─── Sidebar Profile ─── */
     .sidebar-footer {
-      padding: 16px 12px 20px;
+      position: relative;
+      padding: 12px 10px 14px;
       border-top: 1px solid var(--border);
     }
-    .sidebar-user {
+    .sidebar-profile {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 14px;
+      padding: 10px 10px;
       border-radius: var(--r-xs);
       cursor: pointer;
-      transition: background var(--transition);
+      transition: all var(--transition);
+      position: relative;
+      user-select: none;
     }
-    .sidebar-user:hover {
+    .sidebar-profile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--r-xs);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+      background: radial-gradient(ellipse at 0% 50%, rgba(0, 245, 196, 0.06) 0%, transparent 70%);
+    }
+    .sidebar-profile:hover {
       background: var(--surface-hover);
     }
-    .sidebar-user-avatar {
-      width: 32px;
-      height: 32px;
+    .sidebar-profile:hover::after {
+      opacity: 1;
+    }
+    .sidebar-profile:active {
+      transform: scale(0.98);
+    }
+    .sidebar-profile-avatar {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--bg);
       flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
     }
-    .sidebar-user-info {
+    .sidebar-profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+    .sidebar-profile-avatar img.loaded {
+      display: block;
+    }
+    .sidebar-profile-avatar img.loaded ~ #sidebarProfileInitials {
+      display: none;
+    }
+    .sidebar-profile-status {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 2px solid var(--bg);
+      z-index: 2;
+      box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+    }
+    .sidebar-profile-info {
       flex: 1;
       min-width: 0;
     }
-    .sidebar-user-name {
-      font-size: 0.8rem;
+    .sidebar-profile-name {
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--white);
       line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .sidebar-user-role {
+    .sidebar-profile-role {
       font-size: 0.68rem;
       color: var(--gray2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-profile-chevron {
+      font-size: 0.55rem;
+      color: var(--gray3);
+      transition: transform var(--transition), color var(--transition);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .sidebar-profile:hover .sidebar-profile-chevron {
+      color: var(--accent);
+      opacity: 1;
+    }
+    .sidebar-profile.active .sidebar-profile-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    /* ─── Sidebar Profile Dropdown ─── */
+    .sidebar-profile-dropdown {
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 10px;
+      right: 10px;
+      background: rgba(8, 12, 12, 0.97);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--r-sm);
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 245, 196, 0.03);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px) scale(0.96);
+      transform-origin: bottom center;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 300;
+      padding: 6px;
+    }
+    .sidebar-profile-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .sidebar-profile-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .sidebar-profile-item i {
+      width: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray2);
+      transition: color var(--transition);
+      flex-shrink: 0;
+    }
+    .sidebar-profile-item span {
+      flex: 1;
+    }
+    .sidebar-profile-item:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+    }
+    .sidebar-profile-item:hover i {
+      color: var(--accent);
+    }
+    .sidebar-profile-item[data-action="logout"]:hover {
+      color: var(--danger);
+    }
+    .sidebar-profile-item[data-action="logout"]:hover i {
+      color: var(--danger);
+    }
+    .sidebar-profile-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 8px;
     }
 
     /* ─── MAIN ─── */
@@ -522,6 +661,7 @@
       align-items: center;
       gap: 8px;
       margin-left: auto;
+      position: relative;
     }
     .topbar-btn {
       width: 36px;
@@ -564,12 +704,176 @@
       font-size: 0.7rem;
       color: var(--bg);
       cursor: pointer;
-      transition: opacity var(--transition);
+      transition: all var(--transition);
       flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
     }
     .topbar-avatar:hover {
-      opacity: 0.85;
+      transform: scale(1.08);
     }
+    .topbar-avatar:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .topbar-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: none;
+      position: relative;
+      z-index: 1;
+    }
+    .topbar-avatar img.loaded {
+      display: block;
+    }
+    .topbar-avatar img.loaded ~ #adminAvatarInitials {
+      display: none;
+    }
+    .avatar-glow {
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+      background: radial-gradient(circle at center, rgba(0, 245, 196, 0.35) 0%, transparent 70%);
+    }
+    .topbar-avatar:hover .avatar-glow {
+      opacity: 1;
+    }
+    .topbar-avatar:active {
+      transform: scale(0.95);
+    }
+    .topbar-avatar.has-image {
+      background: var(--surface);
+    }
+    #adminAvatarInitials {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── Avatar Dropdown ─── */
+    .avatar-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 240px;
+      background: rgba(8, 12, 12, 0.96);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 245, 196, 0.04);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.96);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 200;
+      transform-origin: top right;
+    }
+    .avatar-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .dropdown-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 16px 12px;
+    }
+    .dropdown-avatar-mini {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--bg);
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .dropdown-avatar-mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+    .dropdown-avatar-mini img.loaded {
+      display: block;
+    }
+    .dropdown-avatar-mini img.loaded ~ span {
+      display: none;
+    }
+    .dropdown-user-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .dropdown-user-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dropdown-user-role {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+    .dropdown-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .dropdown-item i {
+      width: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray2);
+      transition: color var(--transition);
+    }
+    .dropdown-item:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+    }
+    .dropdown-item:hover i {
+      color: var(--accent);
+    }
+    .dropdown-item[data-action="logout"]:hover {
+      color: var(--danger);
+    }
+    .dropdown-item[data-action="logout"]:hover i {
+      color: var(--danger);
+    }
+
+
 
     /* ─── CONTENT ─── */
     .content {
@@ -1900,10 +2204,9 @@
 
     <!-- ═══ SIDEBAR ═══ -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-brand">
-        <div class="sidebar-brand-icon">N</div>
-        <div class="sidebar-brand-text">NAGRIVA<span class="sidebar-brand-dot"></span></div>
-      </div>
+      <a class="sidebar-brand" href="../index.html" aria-label="NAGRIVA Home">
+        <img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA" class="sidebar-logo" width="500" height="500" loading="lazy" decoding="async" />
+      </a>
       <nav class="sidebar-nav">
         <div class="sidebar-label">Main Menu</div>
         <div class="sidebar-item active" data-page="dashboard">
@@ -1946,13 +2249,36 @@
         </div>
       </nav>
       <div class="sidebar-footer">
-        <div class="sidebar-user">
-          <div class="sidebar-user-avatar">AK</div>
-          <div class="sidebar-user-info">
-            <div class="sidebar-user-name">Alex Kim</div>
-            <div class="sidebar-user-role">Creative Director</div>
+        <div class="sidebar-profile" id="sidebarProfile" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          <div class="sidebar-profile-avatar" id="sidebarProfileAvatar">
+            <img src="" alt="" id="sidebarProfileImg" />
+            <span id="sidebarProfileInitials">AK</span>
+            <span class="sidebar-profile-status"></span>
           </div>
-          <i class="fas fa-ellipsis-v" style="color:var(--gray3);font-size:0.75rem;"></i>
+          <div class="sidebar-profile-info">
+            <div class="sidebar-profile-name" id="sidebarProfileName">Alex Kim</div>
+            <div class="sidebar-profile-role" id="sidebarProfileRole">Creative Director</div>
+          </div>
+          <i class="fas fa-chevron-up sidebar-profile-chevron" id="sidebarProfileChevron"></i>
+        </div>
+        <div class="sidebar-profile-dropdown" id="sidebarProfileDropdown">
+          <a class="sidebar-profile-item" href="profile.html" data-action="profile">
+            <i class="fas fa-user"></i>
+            <span>My Profile</span>
+          </a>
+          <a class="sidebar-profile-item" href="#" data-action="settings">
+            <i class="fas fa-sliders-h"></i>
+            <span>Account Settings</span>
+          </a>
+          <a class="sidebar-profile-item" href="#" data-action="notifications">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+          </a>
+          <div class="sidebar-profile-divider"></div>
+          <a class="sidebar-profile-item" href="#" data-action="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
         </div>
       </div>
     </aside>
@@ -1980,14 +2306,35 @@
             <i class="fas fa-comment-dots"></i>
             <span class="topbar-msg-badge" id="topbarMsgBadge" style="display:none;">0</span>
           </button>
-          <button class="topbar-btn">
+          <button class="topbar-btn" id="topbarNotifBtn" title="Notifications">
             <i class="fas fa-bell"></i>
-            <span class="notif-dot"></span>
+            <span class="notif-dot" id="topbarNotifDot"></span>
           </button>
-          <button class="topbar-btn">
+          <button class="topbar-btn open-page" data-page="settings" title="Settings">
             <i class="fas fa-cog"></i>
           </button>
-          <div class="topbar-avatar">AK</div>
+          <div class="topbar-avatar" id="adminAvatar" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="avatar-glow"></div>
+            <img src="" alt="Profile" id="adminAvatarImg" />
+            <span id="adminAvatarInitials">AK</span>
+          </div>
+          <div class="avatar-dropdown" id="avatarDropdown">
+            <div class="dropdown-header">
+              <div class="dropdown-avatar-mini" id="dropdownAvatarMini">
+                <img src="" alt="" id="dropdownMiniImg" />
+                <span id="dropdownMiniInitials">AK</span>
+              </div>
+              <div class="dropdown-user-info">
+                <div class="dropdown-user-name" id="dropdownUserName">Alex Kim</div>
+                <div class="dropdown-user-role" id="dropdownUserRole">Admin</div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="profile.html" data-action="profile"><i class="fas fa-user"></i> My Profile</a>
+            <a class="dropdown-item" href="#" data-action="settings"><i class="fas fa-sliders-h"></i> Dashboard Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
         </div>
       </header>
 
@@ -2716,445 +3063,626 @@
         </div>
 
         <!-- ═══ PAGE: SETTINGS ═══ -->
-        <!-- ═══ PAGE: SETTINGS ═══ -->
         <div class="page" id="page-settings">
-          <div class="page-header">
-            <div>
-              <h1>Settings</h1>
-              <p>Manage your entire platform configuration — branding, payments, notifications &amp; more.</p>
+          <div class="page-header settings-header">
+            <div class="page-header-left">
+              <div class="page-header-icon"><i class="fas fa-sliders-h"></i></div>
+              <div>
+                <h1>Settings</h1>
+                <p>Manage your entire platform configuration</p>
+                <span class="page-header-badge">CMS Configuration Panel</span>
+              </div>
             </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div class="settings-header-actions">
+              <div class="cms-search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" class="cms-search-input" id="cmsSearchInput" placeholder="Search settings..." autocomplete="off" />
+                <span class="cms-search-count" id="cmsSearchCount"></span>
+                <button class="cms-search-clear" id="cmsSearchClear"><i class="fas fa-times"></i></button>
+              </div>
               <div class="autosave-indicator" id="autosaveIndicator"><i class="fas fa-circle" style="font-size:6px;opacity:0.4;"></i> Autosave</div>
             </div>
           </div>
 
           <div class="settings-layout" id="settingsContent">
-            <!-- Sidebar Tabs -->
-            <div class="settings-sidebar" id="settingsTabs" style="display:none;">
-              <button class="settings-tab active" data-section="general"><i class="fas fa-sliders-h"></i> <span>General</span></button>
-              <button class="settings-tab" data-section="branding"><i class="fas fa-palette"></i> <span>Branding</span></button>
-              <button class="settings-tab" data-section="support-chat"><i class="fas fa-comments"></i> <span>Support Chat</span></button>
-              <button class="settings-tab" data-section="orders"><i class="fas fa-shopping-bag"></i> <span>Orders</span></button>
-              <button class="settings-tab" data-section="payments"><i class="fas fa-credit-card"></i> <span>Payments</span></button>
-              <button class="settings-tab" data-section="notifications"><i class="fas fa-bell"></i> <span>Notifications</span></button>
-              <button class="settings-tab" data-section="seo"><i class="fas fa-search"></i> <span>SEO</span></button>
-              <button class="settings-tab" data-section="ai-assistant"><i class="fas fa-robot"></i> <span>AI Assistant</span></button>
-              <button class="settings-tab" data-section="content"><i class="fas fa-file-alt"></i> <span>Content</span></button>
+            <div style="flex:1;min-width:0;">
+
+              <!-- Sticky Section Tabs -->
+              <div class="sticky-tabs-wrap">
+                <div class="cms-tabs">
+                  <button class="cms-tab" data-section="section-nav"><i class="fas fa-bars"></i> Nav <span class="tab-count">8</span></button>
+                  <button class="cms-tab" data-section="section-hero"><i class="fas fa-home"></i> Hero <span class="tab-count">8</span></button>
+                  <button class="cms-tab" data-section="section-cta"><i class="fas fa-bullhorn"></i> CTA <span class="tab-count">3</span></button>
+                  <button class="cms-tab" data-section="section-footer"><i class="fas fa-shoe-prints"></i> Footer <span class="tab-count">10</span></button>
+                  <button class="cms-tab" data-section="section-branding"><i class="fas fa-palette"></i> Brand <span class="tab-count">6</span></button>
+                  <button class="cms-tab" data-section="section-seo"><i class="fas fa-search"></i> SEO <span class="tab-count">5</span></button>
+                  <button class="cms-tab" data-section="section-ai-assistant"><i class="fas fa-robot"></i> AI <span class="tab-count">8</span></button>
+                  <button class="cms-tab" data-section="section-support-chat"><i class="fas fa-comments"></i> Chat <span class="tab-count">6</span></button>
+                  <button class="cms-tab" data-section="section-payments"><i class="fas fa-credit-card"></i> Pay <span class="tab-count">7</span></button>
+                  <button class="cms-tab" data-section="section-notifications"><i class="fas fa-bell"></i> Notif <span class="tab-count">4</span></button>
+                  <button class="cms-tab" data-section="section-orders"><i class="fas fa-shopping-bag"></i> Orders <span class="tab-count">4</span></button>
+                </div>
+              </div>
+
+              <!-- Accordion Sections -->
+              <div class="cms-accordion" id="settingsSections" style="display:none;">
+
+                <!-- ═══ NAVIGATION ═══ -->
+                <div class="cms-section" id="section-nav">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-bars"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Navigation</h3>
+                      <p>Company brand, logo, and nav links</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">8 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Company Name</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_company_name" placeholder="NAGRIVA" />
+                        </div>
+                        <div class="cms-field-upload full-span">
+                          <div class="cms-upload-preview large" id="set_logo_preview"><i class="fas fa-image placeholder-icon"></i></div>
+                          <div class="cms-upload-info">
+                            <div class="cms-upload-name" id="set_logo_name">No file selected</div>
+                            <div class="cms-upload-size">200x50px PNG or SVG</div>
+                            <button class="cms-upload-btn"><i class="fas fa-upload"></i> Upload Logo</button>
+                            <input type="file" id="set_logo_input" accept="image/png,image/jpeg,image/svg+xml,image/webp" style="display:none;" />
+                          </div>
+                        </div>
+                        <div class="full-span">
+                          <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 0 4px;">
+                            <span style="font-size:0.68rem;font-weight:600;color:var(--gray);">Navigation Links</span>
+                            <span style="font-size:0.55rem;color:var(--gray3);"><i class="fas fa-grip-vertical"></i> Drag to reorder</span>
+                          </div>
+                          <div id="cms-content-nav"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ HERO ═══ -->
+                <div class="cms-section" id="section-hero">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-home"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Hero Section</h3>
+                      <p>Headline, subtitle, and call-to-action</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">8 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div id="cms-content-hero" class="full-span"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ CTA ═══ -->
+                <div class="cms-section" id="section-cta">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-bullhorn"></i></div>
+                    <div class="cms-section-info">
+                      <h3>CTA Buttons</h3>
+                      <p>Call-to-action text and button labels</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">3 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div id="cms-content-cta" class="full-span"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ FOOTER ═══ -->
+                <div class="cms-section" id="section-footer">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-shoe-prints"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Footer</h3>
+                      <p>Description, copyright, and link headings</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">10 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div id="cms-content-footer" class="full-span"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ BRANDING ═══ -->
+                <div class="cms-section" id="section-branding">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-palette"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Branding</h3>
+                      <p>Colors, glow, rounding, and theme presets</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">Live</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field-color">
+                          <span class="cms-field-label">Primary Color</span>
+                          <div style="display:flex;align-items:center;gap:8px;">
+                            <input type="color" class="cms-color-picker" id="set_primary_color" value="#00f5c4" />
+                            <span class="cms-color-value" id="set_primary_display">#00f5c4</span>
+                          </div>
+                        </div>
+                        <div class="cms-field-color">
+                          <span class="cms-field-label">Secondary Color</span>
+                          <div style="display:flex;align-items:center;gap:8px;">
+                            <input type="color" class="cms-color-picker" id="set_secondary_color" value="#00c2a8" />
+                            <span class="cms-color-value" id="set_secondary_display">#00c2a8</span>
+                          </div>
+                        </div>
+                        <div class="cms-field-range">
+                          <span class="cms-field-label">Glow Intensity</span>
+                          <input type="range" class="cms-range-input" id="set_glow_intensity" min="0" max="200" value="100" />
+                          <span class="cms-range-value" id="set_glow_value">100</span>
+                        </div>
+                        <div class="cms-field-range">
+                          <span class="cms-field-label">Border Radius</span>
+                          <input type="range" class="cms-range-input" id="set_border_radius" min="0" max="40" value="22" />
+                          <span class="cms-range-value" id="set_radius_value">22</span>
+                          <span style="font-size:0.6rem;color:var(--gray3);margin-left:2px;">px</span>
+                        </div>
+                        <div class="full-span" style="margin-top:4px;">
+                          <span class="cms-field-label" style="display:block;margin-bottom:6px;">Theme Presets</span>
+                          <div class="cms-theme-grid"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ SEO ═══ -->
+                <div class="cms-section" id="section-seo">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-search"></i></div>
+                    <div class="cms-section-info">
+                      <h3>SEO</h3>
+                      <p>Meta, analytics, and search appearance</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">5 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Meta Title</span><span class="cms-field-key">50-60 chars</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_meta_title" placeholder="NAGRIVA — Premium Digital Agency" maxlength="70" />
+                          <div class="cms-char-count"><span id="meta_title_count">0</span>/70</div>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Meta Description</span><span class="cms-field-key">150-160 chars</span></div></div>
+                          <textarea class="cms-field-input" id="set_meta_desc" placeholder="Premium digital agency..." rows="2" maxlength="160"></textarea>
+                          <div class="cms-char-count"><span id="meta_desc_count">0</span>/160</div>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Google Analytics ID</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_ga_id" placeholder="G-XXXXXXXXXX" />
+                        </div>
+                        <div class="cms-field-upload full-span">
+                          <div class="cms-upload-preview large" id="set_og_preview"><i class="fas fa-image placeholder-icon"></i></div>
+                          <div class="cms-upload-info">
+                            <div class="cms-upload-name" id="set_og_name">No file selected</div>
+                            <div class="cms-upload-size">1200x630px PNG or JPEG</div>
+                            <button class="cms-upload-btn"><i class="fas fa-upload"></i> Upload OG Image</button>
+                            <input type="file" id="set_og_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                          </div>
+                        </div>
+                        <div class="cms-field-upload full-span">
+                          <div class="cms-upload-preview" id="set_favicon_preview"><i class="fas fa-image placeholder-icon"></i></div>
+                          <div class="cms-upload-info">
+                            <div class="cms-upload-name" id="set_favicon_name">No file selected</div>
+                            <div class="cms-upload-size">32x32px ICO or PNG</div>
+                            <button class="cms-upload-btn"><i class="fas fa-upload"></i> Upload Favicon</button>
+                            <input type="file" id="set_favicon_input" accept="image/png,image/jpeg,image/x-icon" style="display:none;" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ AI ASSISTANT ═══ -->
+                <div class="cms-section" id="section-ai-assistant">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-robot"></i></div>
+                    <div class="cms-section-info">
+                      <h3>AI Assistant</h3>
+                      <p>Personality, tone, prompts, and features</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">8 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Assistant Name</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_ai_name" placeholder="Nova" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Tone</span></div></div>
+                          <select class="cms-field-input" id="set_ai_tone">
+                            <option value="professional">Professional</option>
+                            <option value="friendly">Friendly</option>
+                            <option value="casual">Casual</option>
+                            <option value="formal">Formal</option>
+                          </select>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Welcome Message</span></div></div>
+                          <textarea class="cms-field-input" id="set_ai_welcome" placeholder="Hello! I am Nova, your NAGRIVA assistant." rows="2"></textarea>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">System Prompt</span><span class="cms-field-key">Core instructions</span></div></div>
+                          <textarea class="cms-field-input" id="set_ai_system_prompt" placeholder="You are Nova, an AI assistant for NAGRIVA..." rows="3"></textarea>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Personality Prompt</span><span class="cms-field-key">Additional layer</span></div></div>
+                          <textarea class="cms-field-input" id="set_ai_prompt" placeholder="You are a helpful, professional digital agency assistant..." rows="2"></textarea>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Response Style</span></div></div>
+                          <select class="cms-field-input" id="set_ai_response_style">
+                            <option value="concise">Concise</option>
+                            <option value="balanced">Balanced</option>
+                            <option value="detailed">Detailed</option>
+                          </select>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Enable AI Suggestions</div>
+                            <div class="cms-toggle-desc">Show AI-powered suggestions in the dashboard</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_ai_suggestions" aria-label="Toggle AI suggestions"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Smart Reply</div>
+                            <div class="cms-toggle-desc">Enable AI-generated smart replies in messaging</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_smart_reply" aria-label="Toggle smart reply"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ SUPPORT CHAT ═══ -->
+                <div class="cms-section" id="section-support-chat">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-comments"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Support Chat</h3>
+                      <p>Widget behavior, messages, and avatar</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">6 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Enable Support Widget</div>
+                            <div class="cms-toggle-desc">Show the chat widget across the platform</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_chat_enabled" aria-label="Toggle support widget"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Online Status</div>
+                            <div class="cms-toggle-desc">Show support agents as online</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_chat_online" aria-label="Toggle online status"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Typing Indicator</div>
+                            <div class="cms-toggle-desc">Show typing indicator for chat responses</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_chat_typing" aria-label="Toggle typing indicator"></button>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Welcome Message</span></div></div>
+                          <textarea class="cms-field-input" id="set_chat_welcome" placeholder="Hello! How can we help you today?" rows="2"></textarea>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Auto Reply</span></div></div>
+                          <textarea class="cms-field-input" id="set_chat_auto_reply" placeholder="Thank you for your message. Our team will get back to you shortly." rows="2"></textarea>
+                        </div>
+                        <div class="cms-field-upload full-span">
+                          <div class="cms-upload-preview round" id="set_chat_avatar_preview"><i class="fas fa-user-circle placeholder-icon"></i></div>
+                          <div class="cms-upload-info">
+                            <div class="cms-upload-name" id="set_chat_avatar_name">No file selected</div>
+                            <button class="cms-upload-btn"><i class="fas fa-upload"></i> Upload Avatar</button>
+                            <input type="file" id="set_chat_avatar_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ PAYMENTS ═══ -->
+                <div class="cms-section" id="section-payments">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-credit-card"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Payments</h3>
+                      <p>Gateways, keys, invoice, and tax</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">Sensitive</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Currency</span></div></div>
+                          <select class="cms-field-input" id="set_currency"></select>
+                        </div>
+                        <div class="cms-field"></div>
+                        <div class="full-span"><span style="font-size:0.68rem;font-weight:600;color:var(--gray);display:block;padding:2px 0;">Stripe Keys</span></div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Public Key</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_stripe_public" placeholder="pk_live_..." />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Secret Key</span></div></div>
+                          <input type="password" class="cms-field-input" id="set_stripe_secret" placeholder="sk_live_..." />
+                        </div>
+                        <div class="full-span"><span style="font-size:0.68rem;font-weight:600;color:var(--gray);display:block;padding:2px 0;">PayPal Keys</span></div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Client ID</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_paypal_client" placeholder="PayPal Client ID" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Secret</span></div></div>
+                          <input type="password" class="cms-field-input" id="set_paypal_secret" placeholder="PayPal Secret" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Invoice Prefix</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_invoice_prefix" placeholder="INV-" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Tax Percentage</span></div></div>
+                          <input type="number" class="cms-field-input" id="set_tax_percentage" min="0" max="100" step="0.1" placeholder="0" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ NOTIFICATIONS ═══ -->
+                <div class="cms-section" id="section-notifications">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-bell"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Notifications</h3>
+                      <p>Email, push, alerts, and sounds</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">4 channels</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Email Notifications</div>
+                            <div class="cms-toggle-desc">Send email for important updates</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_email_notifs" aria-label="Toggle email notifications"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Push Notifications</div>
+                            <div class="cms-toggle-desc">Send push notifications to browsers</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_push_notifs" aria-label="Toggle push notifications"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Admin Alerts</div>
+                            <div class="cms-toggle-desc">Alerts for new orders, signups, payments</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_admin_alerts" aria-label="Toggle admin alerts"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Sound Notifications</div>
+                            <div class="cms-toggle-desc">Play sounds for real-time events</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_sound_notifs" aria-label="Toggle sound notifications"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ ORDERS ═══ -->
+                <div class="cms-section" id="section-orders">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Orders</h3>
+                      <p>Defaults, limits, and ID generation</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">4 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Default Status</span></div></div>
+                          <select class="cms-field-input" id="set_default_status">
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="revision">Revision</option>
+                            <option value="completed">Completed</option>
+                          </select>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Revisions Limit</span></div></div>
+                          <input type="number" class="cms-field-input" id="set_revisions_limit" min="0" max="20" placeholder="3" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Deadline (days)</span></div></div>
+                          <input type="number" class="cms-field-input" id="set_deadline_days" min="1" max="90" placeholder="14" />
+                        </div>
+                        <div class="cms-field-toggle">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Auto-generate IDs</div>
+                            <div class="cms-toggle-desc">Generate unique order IDs</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_auto_order_ids" aria-label="Toggle auto-generate order IDs"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ OTHER CONTENT ═══ -->
+                <div class="cms-section" id="section-other-content">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Other Content</h3>
+                      <p>Dashboard, Contact, Services, FAQ, Auth</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge" id="contentSaveBadge" style="cursor:pointer;">Save Changes</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div id="contentEditor"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ GENERAL ═══ -->
+                <div class="cms-section" id="section-general">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-sliders-h"></i></div>
+                    <div class="cms-section-info">
+                      <h3>General</h3>
+                      <p>Timezone, language, and contact details</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">4 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Support Email</span></div></div>
+                          <input type="email" class="cms-field-input" id="set_support_email" placeholder="hello@nagriva.com" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">WhatsApp Number</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_whatsapp" placeholder="+1234567890" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Timezone</span></div></div>
+                          <select class="cms-field-input" id="set_timezone"></select>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Language</span></div></div>
+                          <select class="cms-field-input" id="set_language"></select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
-            <!-- Sections -->
-            <div class="settings-content" id="settingsSections" style="display:none;">
-
-              <!-- ═══ GENERAL ═══ -->
-              <div class="settings-section active" id="section-general">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>General Information</h2>
-                      <p>Basic platform details and contact information.</p>
-                    </div>
-                  </div>
-                  <div class="settings-form">
-                    <div class="sfg">
-                      <label class="sfg-label">Company Name</label>
-                      <input type="text" class="sfg-input" id="set_company_name" placeholder="NAGRIVA" />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Support Email</label>
-                      <input type="email" class="sfg-input" id="set_support_email" placeholder="hello@nagriva.com" />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">WhatsApp Number</label>
-                      <input type="text" class="sfg-input" id="set_whatsapp" placeholder="+1234567890" />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Timezone</label>
-                      <select class="sfg-input" id="set_timezone"></select>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Language</label>
-                      <select class="sfg-input" id="set_language"></select>
-                    </div>
-                  </div>
+            <!-- Preview Panel -->
+            <div class="settings-preview">
+              <div class="preview-header">
+                <div class="preview-header-left">
+                  <i class="fas fa-eye" style="color:var(--accent);font-size:0.75rem;"></i>
+                  <h4>Preview</h4>
                 </div>
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Brand Assets</h2>
-                      <p>Upload your company logo and favicon.</p>
-                    </div>
+                <div style="display:flex;align-items:center;gap:4px;">
+                  <div class="preview-device-toggle">
+                    <button class="preview-device-btn active" data-device="desktop" title="Desktop"><i class="fas fa-desktop"></i></button>
+                    <button class="preview-device-btn" data-device="mobile" title="Mobile"><i class="fas fa-mobile-alt"></i></button>
                   </div>
-                  <div class="settings-form">
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Company Logo</label>
-                      <div class="sfg-upload">
-                        <div class="sfg-upload-preview large" id="set_logo_preview"><i class="fas fa-image placeholder-icon"></i></div>
-                        <div class="sfg-upload-info">
-                          <div class="sfg-upload-name" id="set_logo_name">No file selected</div>
-                          <div class="sfg-upload-size">Recommended: 200x50px PNG or SVG</div>
-                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload Logo</button>
-                          <input type="file" id="set_logo_input" accept="image/png,image/jpeg,image/svg+xml,image/webp" style="display:none;" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Favicon</label>
-                      <div class="sfg-upload">
-                        <div class="sfg-upload-preview" id="set_favicon_preview"><i class="fas fa-image placeholder-icon"></i></div>
-                        <div class="sfg-upload-info">
-                          <div class="sfg-upload-name" id="set_favicon_name">No file selected</div>
-                          <div class="sfg-upload-size">Recommended: 32x32px ICO or PNG</div>
-                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload Favicon</button>
-                          <input type="file" id="set_favicon_input" accept="image/png,image/jpeg,image/x-icon" style="display:none;" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <button class="preview-toggle-btn" title="Toggle"><i class="fas fa-chevron-right"></i></button>
                 </div>
               </div>
-
-              <!-- ═══ BRANDING ═══ -->
-              <div class="settings-section" id="section-branding">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Colors & Appearance</h2>
-                      <p>Customize the platform look and feel.</p>
-                    </div>
-                    <div class="badge">Live preview</div>
-                  </div>
-                  <div class="settings-form">
-                    <div class="sfg">
-                      <label class="sfg-label">Primary Color</label>
-                      <div class="sfg-color-wrap">
-                        <input type="color" class="sfg-color" id="set_primary_color" value="#00f5c4" />
-                        <span class="sfg-color-value" id="set_primary_display">#00f5c4</span>
-                      </div>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Secondary Color</label>
-                      <div class="sfg-color-wrap">
-                        <input type="color" class="sfg-color" id="set_secondary_color" value="#00c2a8" />
-                        <span class="sfg-color-value" id="set_secondary_display">#00c2a8</span>
-                      </div>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Glow Intensity</label>
-                      <div class="sfg-range-wrap">
-                        <input type="range" class="sfg-range" id="set_glow_intensity" min="0" max="200" value="100" />
-                        <span class="sfg-range-value" id="set_glow_value">100</span>
-                      </div>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Border Radius</label>
-                      <div class="sfg-range-wrap">
-                        <input type="range" class="sfg-range" id="set_border_radius" min="0" max="40" value="22" />
-                        <span class="sfg-range-value" id="set_radius_value">22</span>
-                      </div>
-                      <div class="sfg-hint">Controls card and button roundness (px)</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Theme Presets</h2>
-                      <p>Quick-switch between curated color schemes.</p>
-                    </div>
-                  </div>
-                  <div class="theme-presets"></div>
+              <div class="preview-body">
+                <div class="preview-frame" id="previewFrame">
+                  <div id="previewContent"></div>
                 </div>
               </div>
-
-              <!-- ═══ SUPPORT CHAT ═══ -->
-              <div class="settings-section" id="section-support-chat">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Chat Widget</h2>
-                      <p>Configure the support chat widget behavior.</p>
-                    </div>
-                  </div>
-                  <div class="settings-form full">
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Enable Support Widget</div>
-                        <div class="sfg-toggle-desc">Show the chat widget across the platform.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_chat_enabled" aria-label="Toggle support widget"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Online Status</div>
-                        <div class="sfg-toggle-desc">Show support agents as online.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_chat_online" aria-label="Toggle online status"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Typing Indicator</div>
-                        <div class="sfg-toggle-desc">Show typing indicator for chat responses.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_chat_typing" aria-label="Toggle typing indicator"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Welcome Message</label>
-                      <textarea class="sfg-input" id="set_chat_welcome" placeholder="Hello! How can we help you today?" rows="2"></textarea>
-                    </div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Auto Reply</label>
-                      <textarea class="sfg-input" id="set_chat_auto_reply" placeholder="Thank you for your message. Our team will get back to you shortly." rows="2"></textarea>
-                    </div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Support Avatar</label>
-                      <div class="sfg-upload">
-                        <div class="sfg-upload-preview round" id="set_chat_avatar_preview"><i class="fas fa-user-circle placeholder-icon"></i></div>
-                        <div class="sfg-upload-info">
-                          <div class="sfg-upload-name" id="set_chat_avatar_name">No file selected</div>
-                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload Avatar</button>
-                          <input type="file" id="set_chat_avatar_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ═══ ORDERS ═══ -->
-              <div class="settings-section" id="section-orders">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Order Defaults</h2>
-                      <p>Configure default order behavior and limits.</p>
-                    </div>
-                  </div>
-                  <div class="settings-form">
-                    <div class="sfg">
-                      <label class="sfg-label">Default Order Status</label>
-                      <select class="sfg-input" id="set_default_status">
-                        <option value="pending">Pending</option>
-                        <option value="in_progress">In Progress</option>
-                        <option value="revision">Revision</option>
-                        <option value="completed">Completed</option>
-                      </select>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Revisions Limit</label>
-                      <input type="number" class="sfg-input" id="set_revisions_limit" min="0" max="20" placeholder="3" />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Default Deadline (days)</label>
-                      <input type="number" class="sfg-input" id="set_deadline_days" min="1" max="90" placeholder="14" />
-                    </div>
-                    <div class="sfg" style="justify-content:flex-end;">
-                      <div class="sfg-toggle" style="padding:0;">
-                        <div class="sfg-toggle-info">
-                          <div class="sfg-toggle-title">Auto-generate Order IDs</div>
-                          <div class="sfg-toggle-desc">Generate unique order IDs automatically.</div>
-                        </div>
-                        <button class="sfg-toggle-switch active" id="set_auto_order_ids" aria-label="Toggle auto-generate order IDs"></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ═══ PAYMENTS ═══ -->
-              <div class="settings-section" id="section-payments">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Payment Gateways</h2>
-                      <p>Configure payment providers and billing settings.</p>
-                    </div>
-                    <div class="badge">Sensitive</div>
-                  </div>
-                  <div class="settings-form">
-                    <div class="sfg">
-                      <label class="sfg-label">Currency</label>
-                      <select class="sfg-input" id="set_currency"></select>
-                    </div>
-                    <div class="sfg"></div>
-                    <div class="sfg full-width" style="margin-top:4px;">
-                      <label class="sfg-label" style="font-size:0.82rem;color:var(--gray2);">Stripe Keys</label>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Public Key</label>
-                      <input type="text" class="sfg-input" id="set_stripe_public" placeholder="pk_live_..." />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Secret Key</label>
-                      <input type="password" class="sfg-input" id="set_stripe_secret" placeholder="sk_live_..." />
-                    </div>
-                    <div class="sfg full-width" style="margin-top:4px;">
-                      <label class="sfg-label" style="font-size:0.82rem;color:var(--gray2);">PayPal Keys</label>
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Client ID</label>
-                      <input type="text" class="sfg-input" id="set_paypal_client" placeholder="PayPal Client ID" />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Secret</label>
-                      <input type="password" class="sfg-input" id="set_paypal_secret" placeholder="PayPal Secret" />
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg">
-                      <label class="sfg-label">Invoice Prefix</label>
-                      <input type="text" class="sfg-input" id="set_invoice_prefix" placeholder="INV-" />
-                    </div>
-                    <div class="sfg">
-                      <label class="sfg-label">Tax Percentage</label>
-                      <input type="number" class="sfg-input" id="set_tax_percentage" min="0" max="100" step="0.1" placeholder="0" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ═══ NOTIFICATIONS ═══ -->
-              <div class="settings-section" id="section-notifications">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Notification Channels</h2>
-                      <p>Control how and when notifications are sent.</p>
-                    </div>
-                  </div>
-                  <div class="settings-form full">
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Email Notifications</div>
-                        <div class="sfg-toggle-desc">Send email notifications for important updates.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_email_notifs" aria-label="Toggle email notifications"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Push Notifications</div>
-                        <div class="sfg-toggle-desc">Send push notifications to browsers.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_push_notifs" aria-label="Toggle push notifications"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Admin Alerts</div>
-                        <div class="sfg-toggle-desc">Send alerts for new orders, signups, and payments.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_admin_alerts" aria-label="Toggle admin alerts"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Sound Notifications</div>
-                        <div class="sfg-toggle-desc">Play notification sounds for real-time events.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_sound_notifs" aria-label="Toggle sound notifications"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ═══ SEO ═══ -->
-              <div class="settings-section" id="section-seo">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>SEO & Meta</h2>
-                      <p>Control how your platform appears in search results.</p>
-                    </div>
-                  </div>
-                  <div class="settings-form">
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Meta Title</label>
-                      <input type="text" class="sfg-input" id="set_meta_title" placeholder="NAGRIVA — Premium Digital Agency" maxlength="70" />
-                      <div class="sfg-hint">Recommended: 50-60 characters. <span id="meta_title_count">0</span>/70</div>
-                    </div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Meta Description</label>
-                      <textarea class="sfg-input" id="set_meta_desc" placeholder="Premium digital agency offering web design, SEO, branding..." rows="2" maxlength="160"></textarea>
-                      <div class="sfg-hint">Recommended: 150-160 characters. <span id="meta_desc_count">0</span>/160</div>
-                    </div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Google Analytics ID</label>
-                      <input type="text" class="sfg-input" id="set_ga_id" placeholder="G-XXXXXXXXXX" />
-                    </div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">OG Image</label>
-                      <div class="sfg-upload">
-                        <div class="sfg-upload-preview large" id="set_og_preview"><i class="fas fa-image placeholder-icon"></i></div>
-                        <div class="sfg-upload-info">
-                          <div class="sfg-upload-name" id="set_og_name">No file selected</div>
-                          <div class="sfg-upload-size">Recommended: 1200x630px PNG or JPEG</div>
-                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload OG Image</button>
-                          <input type="file" id="set_og_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ═══ AI ASSISTANT ═══ -->
-              <div class="settings-section" id="section-ai-assistant">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>AI Assistant</h2>
-                      <p>Configure the AI chatbot personality and features.</p>
-                    </div>
-                  </div>
-                  <div class="settings-form">
-                    <div class="sfg">
-                      <label class="sfg-label">Assistant Name</label>
-                      <input type="text" class="sfg-input" id="set_ai_name" placeholder="Nova" />
-                    </div>
-                    <div class="sfg"></div>
-                    <div class="sfg full-width">
-                      <label class="sfg-label">Personality Prompt</label>
-                      <textarea class="sfg-input" id="set_ai_prompt" placeholder="You are a helpful, professional digital agency assistant..." rows="4"></textarea>
-                      <div class="sfg-hint">This prompt defines how the AI behaves when talking to clients.</div>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle full-width">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Enable AI Suggestions</div>
-                        <div class="sfg-toggle-desc">Show AI-powered suggestions in the dashboard.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_ai_suggestions" aria-label="Toggle AI suggestions"></button>
-                    </div>
-                    <div class="sfg-divider"></div>
-                    <div class="sfg-toggle full-width">
-                      <div class="sfg-toggle-info">
-                        <div class="sfg-toggle-title">Smart Reply</div>
-                        <div class="sfg-toggle-desc">Enable AI-generated smart replies in messaging.</div>
-                      </div>
-                      <button class="sfg-toggle-switch active" id="set_smart_reply" aria-label="Toggle smart reply"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ═══ CONTENT ═══ -->
-              <div class="settings-section" id="section-content">
-                <div class="settings-card">
-                  <div class="settings-card-header">
-                    <div>
-                      <h2>Website Content</h2>
-                      <p>Edit all visible text across your website. Changes update instantly.</p>
-                    </div>
-                    <div class="badge" id="contentSaveBadge" style="cursor:pointer;">Save All Changes</div>
-                  </div>
-                  <div id="contentEditor"></div>
-                </div>
-              </div>
-
             </div>
+
           </div>
+
+          <!-- Floating Quick Action Bar -->
+          <div class="cms-float-bar">
+            <button class="cms-float-btn primary" data-action="save-all"><i class="fas fa-cloud-upload-alt"></i> Save All</button>
+            <div class="cms-float-divider"></div>
+            <button class="cms-float-btn" data-action="reset"><i class="fas fa-undo"></i> Reset</button>
+            <div class="cms-float-divider"></div>
+            <button class="cms-float-btn" data-action="collapse-all"><i class="fas fa-compress-alt"></i> Collapse</button>
+            <button class="cms-float-btn" data-action="expand-all"><i class="fas fa-expand-alt"></i> Expand</button>
+          </div>
+
         </div>
 
       </div><!-- /content -->
@@ -3195,6 +3723,8 @@
   <script src="../modules/invoices/invoices-activity.js"></script>
   <script src="../modules/invoices/invoice-pdf.js"></script>
   <script src="../js/admin-invoices.js"></script>
+  <script src="../modules/navbar/navbar-api.js"></script>
+  <script src="../js/admin-navbar.js"></script>
   <script src="../components/client-drawer/client-drawer.js"></script>
   <script src="../js/i18n.js"></script>
   <script>
@@ -4235,10 +4765,6 @@
 
     });
   </script>
-  <script src="../js/floating-elements.js"></script>
-  <script src="../js/chatbot.js"></script>
-
-
   <script src="../modules/notifications/notifications-api.js"></script>
   <script src="../modules/notifications/notifications-realtime.js"></script>
   <script src="../modules/notifications/notifications-triggers.js"></script>

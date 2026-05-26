@@ -3,12 +3,16 @@ const NAGRIVA_SettingsAPI = (() => {
 
   const TABLE = 'settings';
   const STORAGE_BUCKET = 'settings';
+  const CACHE_KEY = 'nagriva_settings_cache';
+  const CACHE_TTL = 5 * 60 * 1000;
+
+  let realtimeSub = null;
+  let onChangeCallbacks = [];
 
   const DEFAULT_VALUES = {
     general: {
       company_name: 'NAGRIVA',
       logo_url: '',
-      favicon_url: '',
       support_email: 'hello@nagriva.com',
       whatsapp_number: '',
       timezone: 'UTC',
@@ -54,15 +58,72 @@ const NAGRIVA_SettingsAPI = (() => {
       meta_title: 'NAGRIVA — Premium Digital Agency',
       meta_description: 'Premium digital agency offering web design, SEO, branding, AI automation, and social media management services.',
       og_image_url: '',
+      favicon_url: '',
       google_analytics_id: ''
     },
     ai_assistant: {
       ai_assistant_name: 'Nova',
+      ai_welcome_message: 'Hello! I am Nova, your NAGRIVA assistant. How can I help you today?',
       ai_personality_prompt: 'You are a helpful, professional digital agency assistant. Be concise, friendly, and knowledgeable about NAGRIVA services.',
+      ai_system_prompt: 'You are Nova, an AI assistant for NAGRIVA — a premium digital agency. You help clients with inquiries about web design, SEO, branding, AI automation, and social media management. Be professional, concise, and helpful. Always represent NAGRIVA in a positive light.',
+      ai_tone: 'professional',
+      ai_response_style: 'concise',
       ai_suggestions_enabled: true,
       smart_reply_enabled: true
     }
   };
+
+  /* ─── Local Cache ─── */
+  function getCached() {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (Date.now() - data.ts > CACHE_TTL) {
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+      }
+      return data.settings;
+    } catch { return null; }
+  }
+
+  function setCached(settings) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ settings, ts: Date.now() }));
+    } catch {}
+  }
+
+  function clearCache() {
+    try { localStorage.removeItem(CACHE_KEY); } catch {}
+  }
+
+  /* ─── Realtime Subscriptions ─── */
+  function subscribeToRealtime(callback) {
+    if (callback) onChangeCallbacks.push(callback);
+    if (realtimeSub) return;
+    try {
+      realtimeSub = window.supabaseClient
+        .channel('settings-realtime')
+        .on('postgres_changes',
+          { event: '*', schema: 'public', table: TABLE },
+          (payload) => {
+            clearCache();
+            onChangeCallbacks.forEach(cb => cb(payload));
+          }
+        )
+        .subscribe();
+    } catch (err) {
+      console.warn('[SettingsAPI] Realtime subscription failed:', err.message);
+    }
+  }
+
+  function unsubscribe() {
+    if (realtimeSub) {
+      window.supabaseClient.removeChannel(realtimeSub);
+      realtimeSub = null;
+    }
+    onChangeCallbacks = [];
+  }
 
   async function getAllSettings() {
     const { data, error } = await window.supabaseClient
@@ -76,12 +137,17 @@ const NAGRIVA_SettingsAPI = (() => {
     return settings;
   }
 
-  async function getAllSettingsWithDefaults() {
+  async function getAllSettingsWithDefaults(useCache) {
+    if (useCache !== false) {
+      const cached = getCached();
+      if (cached) return cached;
+    }
     const raw = await getAllSettings();
     const merged = {};
     Object.keys(DEFAULT_VALUES).forEach(key => {
       merged[key] = { ...DEFAULT_VALUES[key], ...(raw[key] || {}) };
     });
+    setCached(merged);
     return merged;
   }
 
@@ -98,19 +164,33 @@ const NAGRIVA_SettingsAPI = (() => {
     return data?.setting_value || DEFAULT_VALUES[key] || null;
   }
 
-  async function saveSetting(key, value) {
-    const { data, error } = await window.supabaseClient
-      .rpc('upsert_setting', { p_key: key, p_value: value });
-    if (error) {
-      const { data: upsertData, error: upsertError } = await window.supabaseClient
-        .from(TABLE)
-        .upsert({ setting_key: key, setting_value: value }, { onConflict: 'setting_key' })
-        .select()
-        .single();
-      if (upsertError) throw upsertError;
-      return upsertData;
+  async function saveSetting(key, value, optimisticData) {
+    if (optimisticData) {
+      const cached = getCached();
+      if (cached) {
+        cached[key] = { ...cached[key], ...value };
+        setCached(cached);
+      }
     }
-    return data;
+    try {
+      const { data, error } = await window.supabaseClient
+        .rpc('upsert_setting', { p_key: key, p_value: value });
+      if (error) {
+        const { data: upsertData, error: upsertError } = await window.supabaseClient
+          .from(TABLE)
+          .upsert({ setting_key: key, setting_value: value }, { onConflict: 'setting_key' })
+          .select()
+          .single();
+        if (upsertError) throw upsertError;
+        clearCache();
+        return upsertData;
+      }
+      clearCache();
+      return data;
+    } catch (err) {
+      clearCache();
+      throw err;
+    }
   }
 
   async function bulkSave(settingsMap) {
@@ -172,6 +252,10 @@ const NAGRIVA_SettingsAPI = (() => {
     deleteSetting,
     uploadFile,
     ensureBucket,
+    subscribeToRealtime,
+    unsubscribe,
+    clearCache,
+    getCached,
     DEFAULT_VALUES
   };
 })();
