@@ -11,6 +11,57 @@ window.ServicesAPI = (function () {
   var _cache = {};
   var _allCache = null;
 
+  var SERVICE_PHOTOS = {
+    'web-design': {
+      image: '/assets/images/services/web-design-1.jpg',
+      gallery: [
+        '../assets/images/services/web-design-1.jpg',
+        '../assets/images/services/web-design-2.jpg',
+        '../assets/images/services/web-design-3.jpg'
+      ]
+    },
+    seo: {
+      image: '/assets/images/services/seo-1.jpg',
+      gallery: [
+        '../assets/images/services/seo-1.jpg',
+        '../assets/images/services/seo-2.jpg',
+        '../assets/images/services/seo-3.jpg'
+      ]
+    },
+    branding: {
+      image: '/assets/images/services/branding-1.jpg',
+      gallery: [
+        '../assets/images/services/branding-1.jpg',
+        '../assets/images/services/branding-2.jpg',
+        '../assets/images/services/branding-3.jpg'
+      ]
+    },
+    'ai-automation': {
+      image: '/assets/images/services/ai-automation-1.jpg',
+      gallery: [
+        '../assets/images/services/ai-automation-1.jpg',
+        '../assets/images/services/ai-automation-2.jpg',
+        '../assets/images/services/ai-automation-3.jpg'
+      ]
+    },
+    'social-media': {
+      image: '/assets/images/services/social-media-1.jpg',
+      gallery: [
+        '../assets/images/services/social-media-1.jpg',
+        '../assets/images/services/social-media-2.jpg',
+        '../assets/images/services/social-media-3.jpg'
+      ]
+    },
+    strategy: {
+      image: '/assets/images/services/performance-marketing-1.jpg',
+      gallery: [
+        '../assets/images/services/performance-marketing-1.jpg',
+        '../assets/images/services/performance-marketing-2.jpg',
+        '../assets/images/services/performance-marketing-3.jpg'
+      ]
+    }
+  };
+
   /* ════════════════════════════════════════════════════════
      FALLBACK DATA — embedded so no blocking network request
      ════════════════════════════════════════════════════════ */
@@ -29,11 +80,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      gallery: [
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_45%20PM.png'
-      ],
+      image: SERVICE_PHOTOS['web-design'].image,
+      gallery: SERVICE_PHOTOS['web-design'].gallery,
       description: '<p>We build premium, conversion-optimized websites that look stunning and drive measurable growth for your business. Every pixel serves a purpose, every interaction is intentional, and every page is built to convert.</p><p>From sleek landing pages to complex web applications, our designs are crafted to elevate your brand, engage your audience, and deliver results \u2014 fast.</p>',
       benefits: [
         { icon: 'layers', title: 'Conversion Focused', text: 'Data-backed design decisions that turn visitors into customers.' },
@@ -85,11 +133,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      gallery: [
-        '../assets/images/projects/SEO%20Optimization.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png'
-      ],
+      image: SERVICE_PHOTOS.seo.image,
+      gallery: SERVICE_PHOTOS.seo.gallery,
       description: '<p>We deliver data-driven SEO strategies that propel your website to the top of search results. Our white-hat approach combines technical expertise, content excellence, and proven link-building tactics to drive sustainable organic growth.</p><p>From comprehensive site audits to ongoing performance monitoring, every tactic is meticulously executed to maximize your ROI and establish your brand as an authority in your industry.</p>',
       benefits: [
         { icon: 'layers', title: 'Data-Driven Strategy', text: 'Comprehensive keyword research and competitive analysis backed by real search data.' },
@@ -141,11 +186,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      gallery: [
-        '../assets/images/projects/Brand%20Identity.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png'
-      ],
+      image: SERVICE_PHOTOS.branding.image,
+      gallery: SERVICE_PHOTOS.branding.gallery,
       description: '<p>We craft strategic brand identities that make you unforgettable. From logos and color palettes to complete visual systems and brand guidelines \u2014 every element is designed to communicate your unique value, connect with your audience, and set you apart from the competition.</p><p>Whether you\'re launching a new brand or evolving an existing one, our comprehensive approach ensures consistency, credibility, and impact across every touchpoint.</p>',
       benefits: [
         { icon: 'clockAlt', title: 'Strategic Positioning', text: 'We define your brand\'s unique market position to differentiate and dominate.' },
@@ -197,11 +239,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      gallery: [
-        '../assets/images/projects/AI%20Automation.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png'
-      ],
+      image: SERVICE_PHOTOS['ai-automation'].image,
+      gallery: SERVICE_PHOTOS['ai-automation'].gallery,
       description: '<p>We build intelligent AI automation systems that eliminate repetitive tasks, streamline complex workflows, and unlock new levels of efficiency for your business. From custom AI agents to enterprise-grade pipelines, every solution is designed to scale with you.</p><p>Whether you need to automate data processing, integrate smart chatbots, or build a fully autonomous operational layer \u2014 our AI engineers deliver future-ready systems that drive real results.</p>',
       benefits: [
         { icon: 'clockAlt', title: 'Workflow Automation', text: 'End-to-end automation that connects your tools and eliminates manual busywork.' },
@@ -253,11 +292,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      gallery: [
-        '../assets/images/projects/Social%20Media%20Growth.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png'
-      ],
+      image: SERVICE_PHOTOS['social-media'].image,
+      gallery: SERVICE_PHOTOS['social-media'].gallery,
       description: '<p>We build social media growth systems that amplify your brand\'s voice and drive measurable engagement. From organic content strategies to paid ad campaigns, every move is data-informed and results-driven.</p><p>Whether you\'re launching a new presence or scaling an existing community, our strategies are designed to grow your following, boost engagement, and deliver a real return on your social investment.</p>',
       benefits: [
         { icon: 'edit', title: 'Content Strategy', text: 'Data-backed content calendars and creative direction tailored to your brand voice.' },
@@ -309,11 +345,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      gallery: [
-        '../assets/images/projects/Performance%20Marketing.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_55%20PM.png',
-        '../assets/images/projects/ChatGPT%20Image%20May%2018%2C%202026%2C%2007_30_50%20PM.png'
-      ],
+      image: SERVICE_PHOTOS.strategy.image,
+      gallery: SERVICE_PHOTOS.strategy.gallery,
       description: '<p>We build data-driven performance marketing campaigns that deliver measurable ROI across every channel. From paid media strategy to conversion optimization, every dollar is tracked, optimized, and scaled for maximum impact.</p><p>Our full-funnel approach ensures your brand reaches the right audience at every stage \u2014 from awareness to conversion \u2014 with real-time analytics driving every decision.</p>',
       benefits: [
         { icon: 'layers', title: 'Paid Media Strategy', text: 'Strategic ad placements across Google, Meta, LinkedIn, and more for maximum ROI.' },
@@ -372,9 +405,21 @@ window.ServicesAPI = (function () {
     });
   }
 
+  function _applyServicePhotos(service) {
+    if (!service || !service.slug || !SERVICE_PHOTOS[service.slug]) return service;
+    var photos = SERVICE_PHOTOS[service.slug];
+    var normalized = {};
+    Object.keys(service).forEach(function (key) {
+      normalized[key] = service[key];
+    });
+    normalized.image = photos.image;
+    normalized.gallery = photos.gallery.slice();
+    return normalized;
+  }
+
   function _transformRow(row) {
     if (!row) return null;
-    return {
+    return _applyServicePhotos({
       slug: row.slug || '',
       pageTitle: row.meta_title || row.title + ' — NAGRIVA',
       metaDescription: row.meta_description || row.short_description || '',
@@ -397,7 +442,7 @@ window.ServicesAPI = (function () {
       results: _parseJSON(row.results),
       packages: _parseJSON(row.packages),
       trustItems: _parseJSON(row.trust_items)
-    };
+    });
   }
 
   /* ════════════════════════════════════════════════════════
@@ -419,7 +464,7 @@ window.ServicesAPI = (function () {
 
     // If Supabase client is not available, fall back immediately
     if (!window.supabaseClient) {
-      return Promise.resolve(FALLBACK[slug] || FALLBACK['web-design']);
+      return Promise.resolve(_applyServicePhotos(FALLBACK[slug] || FALLBACK['web-design']));
     }
 
     return window.supabaseClient
@@ -430,14 +475,14 @@ window.ServicesAPI = (function () {
       .maybeSingle()
       .then(function (res) {
         if (res.error || !res.data) {
-          return FALLBACK[slug] || FALLBACK['web-design'];
+          return _applyServicePhotos(FALLBACK[slug] || FALLBACK['web-design']);
         }
         var transformed = _transformRow(res.data);
         _cache[slug] = { data: transformed, ts: now };
         return transformed;
       })
       .catch(function () {
-        return FALLBACK[slug] || FALLBACK['web-design'];
+        return _applyServicePhotos(FALLBACK[slug] || FALLBACK['web-design']);
       });
   }
 
@@ -450,7 +495,7 @@ window.ServicesAPI = (function () {
     }
 
     if (!window.supabaseClient) {
-      var all = Object.keys(FALLBACK).map(function (k) { return FALLBACK[k]; });
+      var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
       return Promise.resolve(all);
     }
 
@@ -467,7 +512,7 @@ window.ServicesAPI = (function () {
       .order('created_at', { ascending: true })
       .then(function (res) {
         if (res.error || !res.data || !res.data.length) {
-          var all = Object.keys(FALLBACK).map(function (k) { return FALLBACK[k]; });
+          var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
           return all;
         }
         var transformed = res.data.map(_transformRow);
@@ -477,7 +522,7 @@ window.ServicesAPI = (function () {
         return transformed;
       })
       .catch(function () {
-        var all = Object.keys(FALLBACK).map(function (k) { return FALLBACK[k]; });
+        var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
         return all;
       });
   }

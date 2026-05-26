@@ -940,9 +940,10 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 /* ─── Image Area ─── */
 .service-img {
   position: relative;
-  height: 200px;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   flex-shrink: 0;
+  background: rgba(0,0,0,0.35);
 }
 
 .service-visual {
@@ -964,7 +965,9 @@ img.service-visual {
 .service-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(4,4,4,0.7) 100%);
+  background:
+    linear-gradient(180deg, rgba(4,4,4,0.08) 0%, rgba(4,4,4,0.22) 50%, rgba(4,4,4,0.82) 100%),
+    linear-gradient(90deg, rgba(0,0,0,0.22), transparent 46%, rgba(0,0,0,0.18));
   pointer-events: none;
 }
 
