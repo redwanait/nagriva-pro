@@ -15,6 +15,7 @@
   var bookCallLink = window.location.pathname === '/' || window.location.pathname === '/index.html' ? '#contact' : '../index.html#contact';
 
   /* ─── State ─── */
+  var popupOpen = false;
   var supportOpen = false;
   var supportAuthChecked = false;
   var supportAuthed = false;
@@ -69,20 +70,64 @@
     try { localStorage.setItem(SUPPORT_READ_KEY, new Date().toISOString()); } catch(e) {}
   }
 
+  /* ─── Popup ─── */
+  function togglePopup() {
+    if (popupOpen) closePopup();
+    else openPopup();
+  }
+
+  function openPopup() {
+    var popup = document.getElementById('fabPopup');
+    var fab = document.getElementById('globalChatFab');
+    if (!popup) return;
+    popupOpen = true;
+    popup.classList.add('open');
+    if (fab) fab.classList.add('open');
+  }
+
+  function closePopup() {
+    var popup = document.getElementById('fabPopup');
+    var fab = document.getElementById('globalChatFab');
+    popupOpen = false;
+    if (popup) popup.classList.remove('open');
+    if (fab) fab.classList.remove('open');
+  }
+
   /* ─── HTML ─── */
   var HTML = '\n\
 <div id="nagriva-floating-elements">\n\
-  <div class="chat-fab-wrapper">\n\
-    <button class="chat-fab" id="globalChatFab" aria-label="Toggle chat">\n\
-      <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA" />\n\
-    </button>\n\
-  </div>\n\
-\n\
-  <div class="support-fab-wrapper" id="supportFabWrapper">\n\
-    <button class="support-fab" id="supportFab" aria-label="Support chat">\n\
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>\n\
-      <span class="support-fab-badge" id="supportChatBadge">0</span>\n\
-    </button>\n\
+  <div class="fab-container">\n\
+    <div class="fab-popup" id="fabPopup">\n\
+      <div class="fab-popup-item" id="fabPopupAI">\n\
+        <div class="fab-popup-icon">\n\
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">\n\
+            <path d="M12 2l2 7 7 2-7 2-2 7-2-7-7-2 7-2z"/>\n\
+          </svg>\n\
+        </div>\n\
+        <div class="fab-popup-info">\n\
+          <span class="fab-popup-title">AI Assistant</span>\n\
+          <span class="fab-popup-desc">Instant AI-powered help</span>\n\
+        </div>\n\
+      </div>\n\
+      <div class="fab-popup-divider"></div>\n\
+      <div class="fab-popup-item" id="fabPopupSupport">\n\
+        <div class="fab-popup-icon">\n\
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">\n\
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>\n\
+          </svg>\n\
+        </div>\n\
+        <div class="fab-popup-info">\n\
+          <span class="fab-popup-title">Support Chat</span>\n\
+          <span class="fab-popup-desc">Talk with our support team</span>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="chat-fab-wrapper">\n\
+      <button class="chat-fab" id="globalChatFab" aria-label="NAGRIVA Assistant">\n\
+        <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA" />\n\
+      </button>\n\
+      <span class="chat-fab-badge" id="globalChatBadge"></span>\n\
+    </div>\n\
   </div>\n\
 \n\
   <div class="support-overlay" id="supportOverlay"></div>\n\
@@ -90,7 +135,7 @@
   <div class="support-modal" id="supportModal">\n\
     <div class="support-modal-header">\n\
       <div class="support-modal-header-left">\n\
-        <div class="support-modal-avatar">✦</div>\n\
+        <div class="support-modal-avatar">&#x2726;</div>\n\
         <div class="support-modal-header-info">\n\
           <h4>NAGRIVA Support</h4>\n\
           <span class="support-status"><span class="chat-status-dot"></span> Online</span>\n\
@@ -203,9 +248,8 @@
 
   /* ─── Update Badge ─── */
   function updateSupportBadge() {
-    var badge = document.getElementById('supportChatBadge');
+    var badge = document.getElementById('globalChatBadge');
     if (badge) {
-      badge.textContent = supportUnread;
       badge.classList.toggle('visible', supportUnread > 0);
     }
   }
@@ -314,14 +358,12 @@
   async function openSupport() {
     var modal = document.getElementById('supportModal');
     var overlay = document.getElementById('supportOverlay');
-    var fab = document.getElementById('supportFab');
     var body = document.getElementById('supportModalBody');
     if (!modal) return;
 
     supportOpen = true;
     modal.classList.add('open');
     if (overlay) overlay.classList.add('open');
-    if (fab) fab.classList.add('open');
 
     var isAuth = await checkAuth();
     if (!isAuth) {
@@ -347,11 +389,9 @@
   function closeSupport() {
     var modal = document.getElementById('supportModal');
     var overlay = document.getElementById('supportOverlay');
-    var fab = document.getElementById('supportFab');
     supportOpen = false;
     if (modal) modal.classList.remove('open');
     if (overlay) overlay.classList.remove('open');
-    if (fab) fab.classList.remove('open');
   }
 
   /* ─── Setup Realtime for Support ─── */
@@ -405,27 +445,49 @@
 
     document.body.insertAdjacentHTML('beforeend', HTML);
 
-    /* AI Chatbot FAB */
+    /* FAB - toggle popup */
     var fab = document.getElementById('globalChatFab');
     if (fab) {
-      fab.addEventListener('click', function() {
+      fab.addEventListener('click', function(e) {
+        e.stopPropagation();
+        togglePopup();
+      });
+    }
+
+    /* Popup items */
+    var popupAI = document.getElementById('fabPopupAI');
+    var popupSupport = document.getElementById('fabPopupSupport');
+
+    if (popupAI) {
+      popupAI.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closePopup();
         if (typeof window.openNagrivaChat === 'function') {
           window.openNagrivaChat();
         }
       });
     }
 
-    /* Support FAB */
-    var supportFab = document.getElementById('supportFab');
-    var supportClose = document.getElementById('supportClose');
-    var supportOverlay = document.getElementById('supportOverlay');
-
-    if (supportFab) {
-      supportFab.addEventListener('click', function() {
+    if (popupSupport) {
+      popupSupport.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closePopup();
         if (supportOpen) closeSupport();
         else openSupport();
       });
     }
+
+    /* Click outside to close popup */
+    document.addEventListener('click', function(e) {
+      if (popupOpen && !e.target.closest('.fab-container')) {
+        closePopup();
+      }
+    });
+
+    /* Support close button and overlay */
+    var supportClose = document.getElementById('supportClose');
+    var supportOverlay = document.getElementById('supportOverlay');
+
     if (supportClose) {
       supportClose.addEventListener('click', closeSupport);
     }
@@ -434,7 +496,10 @@
     }
 
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && supportOpen) closeSupport();
+      if (e.key === 'Escape') {
+        if (popupOpen) closePopup();
+        if (supportOpen) closeSupport();
+      }
     });
 
     /* Background auth check + realtime setup */

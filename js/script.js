@@ -38,7 +38,7 @@ const projectData = {
   velour: {
     title: 'VELOUR — E-Commerce Experience',
     category: '✦ Fashion & Luxury',
-    image: '/assets/images/projects/VELOUR — E-Commerce Experience.png',
+    image: '/assets/images/projects/VELOUR — E-Commerce Experience.svg',
     desc: 'A luxury e-commerce platform designed for a premium fashion brand. Every interaction, from browse to checkout, is crafted to reflect elegance and drive conversion.',
     services: ['Web Design', 'Brand Identity', 'Performance Marketing'],
     results: [
@@ -50,7 +50,7 @@ const projectData = {
   nomad: {
     title: 'NOMAD — Travel Booking Platform',
     category: '✦ Travel & Hospitality',
-    image: '/assets/images/projects/NOMAD — Travel Booking Platform.png',
+    image: '/assets/images/projects/NOMAD — Travel Booking Platform.svg',
     desc: 'A seamless travel booking platform that simplifies itinerary management and delivers personalized recommendations at every step of the journey.',
     services: ['Web Design', 'SEO', 'AI Automation'],
     results: [
@@ -62,7 +62,7 @@ const projectData = {
   pulse: {
     title: 'Pulse — Analytics Dashboard',
     category: '✦ Data & Analytics',
-    image: '/assets/images/projects/Pulse — Analytics Dashboard.png',
+    image: '/assets/images/projects/Pulse — Analytics Dashboard.svg',
     desc: 'An enterprise-grade analytics dashboard with real-time data visualization, customizable reports, and AI-powered insights for confident decision-making.',
     services: ['Web Design', 'AI Automation'],
     results: [
@@ -74,7 +74,7 @@ const projectData = {
   bite: {
     title: 'Bite — Food Delivery App',
     category: '✦ Food & Mobile',
-    image: '/assets/images/projects/Bite — Food Delivery App.png',
+    image: '/assets/images/projects/Bite — Food Delivery App.svg',
     desc: 'A modern food delivery platform with intelligent order routing, real-time tracking, and a dynamic recommendation engine that keeps users engaged.',
     services: ['Web Design', 'Performance Marketing'],
     results: [
@@ -86,7 +86,7 @@ const projectData = {
   vault: {
     title: 'Vault — Fintech Dashboard',
     category: '✦ Fintech & Security',
-    image: '/assets/images/projects/Vault — Fintech Dashboard.png',
+    image: '/assets/images/projects/Vault — Fintech Dashboard.svg',
     desc: 'A premium fintech dashboard combining advanced trading features with bank-grade security, real-time portfolio tracking, and intelligent risk management.',
     services: ['Web Design', 'Brand Identity', 'SEO'],
     results: [

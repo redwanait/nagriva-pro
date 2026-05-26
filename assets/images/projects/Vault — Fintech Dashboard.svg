@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0a0a0f"/>
+  <!-- Top Navigation -->
+  <rect x="0" y="0" width="800" height="56" fill="#0d0d14" rx="0"/>
+  <rect x="0" y="56" width="800" height="1" fill="rgba(255,255,255,0.04)"/>
+  <rect x="20" y="18" width="32" height="20" rx="6" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
+  <text x="26" y="32" font-family="system-ui" font-size="10" font-weight="700" fill="#00d4ff">V</text>
+  <text x="62" y="34" font-family="system-ui" font-size="15" font-weight="700" fill="#fff" letter-spacing="-0.3">Vault</text>
+  <text x="120" y="34" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.4)">Dashboard</text>
+  <text x="198" y="34" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.25)">Portfolio</text>
+  <text x="265" y="34" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.25)">Markets</text>
+  <text x="328" y="34" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.25)">Transactions</text>
+  <rect x="610" y="16" width="80" height="24" rx="12" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.15)" stroke-width="0.5"/>
+  <text x="623" y="32" font-family="system-ui" font-size="10" font-weight="500" fill="#00d4ff">+ Deposit</text>
+  <rect x="700" y="16" width="80" height="24" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="714" y="32" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.4)">Profile</text>
+
+  <!-- Welcome + Portfolio Value -->
+  <text x="30" y="90" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.4)">Welcome back, Alex</text>
+  <text x="30" y="118" font-family="system-ui" font-size="28" font-weight="700" fill="#fff" letter-spacing="-0.5">$247,890.42</text>
+  <text x="200" y="118" font-family="system-ui" font-size="12" fill="#22c55e">↑ $4,283.12 (1.76%)</text>
+  <text x="30" y="138" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.3)">Total Portfolio Value</text>
+
+  <!-- Quick Stats -->
+  <rect x="30" y="158" width="175" height="70" rx="10" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="44" y="180" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Today's Return</text>
+  <text x="44" y="206" font-family="system-ui" font-size="18" font-weight="700" fill="#22c55e">+$1,247.80</text>
+  <rect x="160" y="196" width="30" height="16" rx="8" fill="#22c55e" opacity="0.1"/>
+  <text x="165" y="208" font-family="system-ui" font-size="8" fill="#22c55e">+2.1%</text>
+
+  <rect x="218" y="158" width="175" height="70" rx="10" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="232" y="180" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Assets Under Mgt</text>
+  <text x="232" y="206" font-family="system-ui" font-size="18" font-weight="700" fill="#fff">$2.4M</text>
+  <rect x="330" y="196" width="48" height="16" rx="8" fill="rgba(0,212,255,0.1)"/>
+  <text x="336" y="208" font-family="system-ui" font-size="8" fill="#00d4ff">+$180k</text>
+
+  <rect x="406" y="158" width="175" height="70" rx="10" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="420" y="180" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Open Positions</text>
+  <text x="420" y="206" font-family="system-ui" font-size="18" font-weight="700" fill="#fff">12</text>
+  <rect x="500" y="196" width="40" height="16" rx="8" fill="#4facfe" opacity="0.1"/>
+  <text x="506" y="208" font-family="system-ui" font-size="8" fill="#4facfe">3 new</text>
+
+  <rect x="594" y="158" width="176" height="70" rx="10" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="608" y="180" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Risk Score</text>
+  <text x="608" y="206" font-family="system-ui" font-size="18" font-weight="700" fill="#fff">Moderate</text>
+  <rect x="700" y="196" width="55" height="16" rx="8" fill="#f97316" opacity="0.1"/>
+  <text x="706" y="208" font-family="system-ui" font-size="8" fill="#f97316">4/10 risk</text>
+
+  <!-- Main Chart -->
+  <rect x="30" y="245" width="500" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="46" y="270" font-family="system-ui" font-size="13" font-weight="600" fill="#fff">Portfolio Performance</text>
+  <rect x="170" y="258" width="20" height="14" rx="7" fill="rgba(0,212,255,0.15)"/>
+  <text x="174" y="268" font-family="system-ui" font-size="7" fill="#00d4ff">1D</text>
+  <rect x="195" y="258" width="20" height="14" rx="7" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="200" y="268" font-family="system-ui" font-size="7" fill="rgba(255,255,255,0.3)">1W</text>
+  <rect x="220" y="258" width="20" height="14" rx="7" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="225" y="268" font-family="system-ui" font-size="7" fill="rgba(255,255,255,0.3)">1M</text>
+  <rect x="245" y="258" width="20" height="14" rx="7" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="250" y="268" font-family="system-ui" font-size="7" fill="rgba(255,255,255,0.3)">1Y</text>
+  <rect x="270" y="258" width="20" height="14" rx="7" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="273" y="268" font-family="system-ui" font-size="7" fill="rgba(255,255,255,0.3)">ALL</text>
+
+  <!-- Y-axis labels -->
+  <text x="48" y="300" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">250k</text>
+  <text x="48" y="330" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">240k</text>
+  <text x="48" y="360" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">230k</text>
+  <text x="48" y="390" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">220k</text>
+  <text x="48" y="420" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">210k</text>
+
+  <!-- Grid lines -->
+  <line x1="65" y1="297" x2="505" y2="297" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <line x1="65" y1="327" x2="505" y2="327" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <line x1="65" y1="357" x2="505" y2="357" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <line x1="65" y1="387" x2="505" y2="387" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <line x1="65" y1="417" x2="505" y2="417" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+
+  <!-- Area under line -->
+  <path d="M70 420 L70 410 L95 415 L120 400 L145 405 L170 385 L195 390 L220 370 L245 375 L270 355 L295 360 L320 340 L345 345 L370 325 L395 330 L420 310 L445 315 L470 295 L495 300 L505 305 L505 420 Z" fill="url(#areaChart)"/>
+
+  <!-- Green line going up -->
+  <path d="M70 410 L95 415 L120 400 L145 405 L170 385 L195 390 L220 370 L245 375 L270 355 L295 360 L320 340 L345 345 L370 325 L395 330 L420 310 L445 315 L470 295 L495 300 L505 305" stroke="#22c55e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Second line (cyan) -->
+  <path d="M70 420 L95 418 L120 412 L145 415 L170 405 L195 408 L220 398 L245 400 L270 390 L295 392 L320 382 L345 384 L370 374 L395 376 L420 365 L445 368 L470 358 L495 360 L505 358" stroke="#00d4ff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+
+  <defs>
+    <linearGradient id="areaChart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(34,197,94,0.2)"/>
+      <stop offset="100%" stop-color="rgba(34,197,94,0)"/>
+    </linearGradient>
+    <linearGradient id="barGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(34,197,94,0.4)"/>
+      <stop offset="100%" stop-color="rgba(34,197,94,0.05)"/>
+    </linearGradient>
+    <linearGradient id="barRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(239,68,68,0.3)"/>
+      <stop offset="100%" stop-color="rgba(239,68,68,0.05)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- X-axis labels -->
+  <text x="75" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Jan</text>
+  <text x="130" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Feb</text>
+  <text x="190" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Mar</text>
+  <text x="248" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Apr</text>
+  <text x="305" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">May</text>
+  <text x="360" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Jun</text>
+  <text x="420" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Jul</text>
+  <text x="475" y="435" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.15)">Aug</text>
+
+  <!-- Legend -->
+  <circle cx="350" y="450" r="3" fill="#22c55e"/>
+  <text x="358" y="454" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.25)">Portfolio</text>
+  <circle cx="410" y="450" r="3" fill="#00d4ff"/>
+  <text x="418" y="454" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.25)">S&P 500</text>
+
+  <!-- Right Panel: Holdings -->
+  <rect x="545" y="245" width="225" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="560" y="270" font-family="system-ui" font-size="13" font-weight="600" fill="#fff">Top Holdings</text>
+  <rect x="560" y="282" width="195" height="1" fill="rgba(255,255,255,0.04)"/>
+
+  <!-- Holding 1: AAPL -->
+  <rect x="560" y="292" width="195" height="1" fill="rgba(255,255,255,0.02)"/>
+  <text x="560" y="312" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">AAPL</text>
+  <text x="560" y="326" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Apple Inc.</text>
+  <text x="690" y="312" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">$45,230</text>
+  <text x="735" y="326" font-family="system-ui" font-size="9" fill="#22c55e">+3.2%</text>
+  <rect x="560" y="335" width="70" height="2" rx="1" fill="#22c55e" opacity="0.4"/>
+
+  <!-- Holding 2: TSLA -->
+  <rect x="560" y="345" width="195" height="1" fill="rgba(255,255,255,0.02)"/>
+  <text x="560" y="365" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">TSLA</text>
+  <text x="560" y="379" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Tesla Inc.</text>
+  <text x="690" y="365" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">$38,150</text>
+  <text x="735" y="379" font-family="system-ui" font-size="9" fill="#ef4444">-1.8%</text>
+  <rect x="560" y="388" width="60" height="2" rx="1" fill="#ef4444" opacity="0.4"/>
+
+  <!-- Holding 3: MSFT -->
+  <rect x="560" y="398" width="195" height="1" fill="rgba(255,255,255,0.02)"/>
+  <text x="560" y="418" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">MSFT</text>
+  <text x="560" y="432" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Microsoft Corp.</text>
+  <text x="690" y="418" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">$32,890</text>
+  <text x="735" y="432" font-family="system-ui" font-size="9" fill="#22c55e">+1.5%</text>
+  <rect x="560" y="441" width="50" height="2" rx="1" fill="#22c55e" opacity="0.4"/>
+
+  <!-- Bottom: Allocation + Recent Transactions -->
+  <rect x="30" y="462" width="240" height="120" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="46" y="487" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">Asset Allocation</text>
+  <!-- Donut representation -->
+  <circle cx="100" cy="535" r="28" fill="none" stroke="#22c55e" stroke-width="8" stroke-dasharray="70 176"/>
+  <circle cx="100" cy="535" r="28" fill="none" stroke="#00d4ff" stroke-width="8" stroke-dasharray="50 176" stroke-dashoffset="-70"/>
+  <circle cx="100" cy="535" r="28" fill="none" stroke="#a855f7" stroke-width="8" stroke-dasharray="30 176" stroke-dashoffset="-120"/>
+  <circle cx="100" cy="535" r="28" fill="none" stroke="#f97316" stroke-width="8" stroke-dasharray="26 176" stroke-dashoffset="-150"/>
+  <circle cx="100" cy="535" r="12" fill="#12121e"/>
+  <text x="95" y="538" font-family="system-ui" font-size="7" fill="rgba(255,255,255,0.4)">100%</text>
+  <!-- Legend -->
+  <circle cx="150" cy="500" r="3" fill="#22c55e"/>
+  <text x="158" y="504" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">Stocks 40%</text>
+  <circle cx="150" cy="518" r="3" fill="#00d4ff"/>
+  <text x="158" y="522" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">Bonds 28%</text>
+  <circle cx="150" cy="536" r="3" fill="#a855f7"/>
+  <text x="158" y="540" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">Crypto 17%</text>
+  <circle cx="150" cy="554" r="3" fill="#f97316"/>
+  <text x="158" y="558" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">Cash 15%</text>
+
+  <!-- Recent Transactions -->
+  <rect x="285" y="462" width="485" height="120" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="301" y="487" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">Recent Transactions</text>
+  <rect x="301" y="498" width="453" height="1" fill="rgba(255,255,255,0.04)"/>
+
+  <!-- Transaction 1 -->
+  <circle cx="314" cy="518" r="4" fill="#22c55e"/>
+  <text x="326" y="522" font-family="system-ui" font-size="11" fill="#fff">Buy AAPL</text>
+  <text x="326" y="536" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Market buy · 50 shares</text>
+  <text x="680" y="522" font-family="system-ui" font-size="11" font-weight="500" fill="#22c55e">+$4,500</text>
+  <text x="730" y="522" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.2)">2h ago</text>
+
+  <!-- Transaction 2 -->
+  <circle cx="314" cy="548" r="4" fill="#ef4444"/>
+  <text x="326" y="552" font-family="system-ui" font-size="11" fill="#fff">Sell TSLA</text>
+  <text x="326" y="566" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Limit sell · 25 shares</text>
+  <text x="680" y="552" font-family="system-ui" font-size="11" font-weight="500" fill="#ef4444">-$2,300</text>
+  <text x="730" y="552" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.2)">5h ago</text>
+
+  <!-- Transaction 3 -->
+  <circle cx="314" cy="578" r="4" fill="#00d4ff"/>
+  <text x="326" y="582" font-family="system-ui" font-size="11" fill="#fff">USDC Deposit</text>
+  <text x="326" y="596" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Confirmed · 6 confirmations</text>
+  <text x="680" y="582" font-family="system-ui" font-size="11" font-weight="500" fill="#00d4ff">+$10,000</text>
+  <text x="730" y="582" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.2)">1d ago</text>
+</svg>

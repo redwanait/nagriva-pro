@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0a0a0f"/>
+  <!-- Top Bar -->
+  <rect x="0" y="0" width="800" height="56" fill="#0d0d14" rx="0"/>
+  <rect x="0" y="56" width="800" height="1" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="26" cy="28" r="10" fill="#4facfe" opacity="0.3"/>
+  <text x="46" y="33" font-family="system-ui" font-size="15" font-weight="700" fill="#fff" letter-spacing="0.3">NOMAD</text>
+  <text x="115" y="33" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.5)">Explore</text>
+  <text x="178" y="33" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.5)">Trips</text>
+  <text x="228" y="33" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.5)">Saved</text>
+  <text x="280" y="33" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.5)">Inbox</text>
+  <rect x="680" y="16" width="100" height="24" rx="12" fill="rgba(79,172,254,0.15)" stroke="rgba(79,172,254,0.2)" stroke-width="0.5"/>
+  <text x="694" y="32" font-family="system-ui" font-size="11" font-weight="500" fill="#4facfe">Book a Trip</text>
+
+  <!-- Search Section -->
+  <rect x="30" y="78" width="740" height="70" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <rect x="50" y="95" width="160" height="36" rx="8" fill="rgba(79,172,254,0.08)" stroke="rgba(79,172,254,0.15)" stroke-width="0.5"/>
+  <text x="62" y="117" font-family="system-ui" font-size="12" fill="#4facfe">✈ Where to?</text>
+  <rect x="225" y="95" width="130" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="237" y="117" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.4)">Check-in</text>
+  <rect x="368" y="95" width="130" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="380" y="117" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.4)">Check-out</text>
+  <rect x="512" y="95" width="100" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="524" y="117" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.4)">Guests</text>
+  <rect x="626" y="95" width="36" height="36" rx="8" fill="#4facfe" opacity="0.9"/>
+  <rect x="638" y="107" width="12" height="12" rx="6" fill="none" stroke="#0a0a0f" stroke-width="1.5" transform="rotate(45,644,113)"/>
+
+  <!-- Main Content -->
+  <text x="30" y="178" font-family="system-ui" font-size="16" font-weight="700" fill="#fff" letter-spacing="-0.3">Popular Destinations</text>
+  <text x="720" y="178" font-family="system-ui" font-size="11" fill="#4facfe">View all →</text>
+
+  <!-- Destination Cards Row -->
+  <!-- Card 1: Paris -->
+  <rect x="30" y="195" width="170" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="30" y="195" width="170" height="110" rx="12" fill="#1a1a28"/>
+  <rect x="30" y="290" width="170" height="15" fill="#1a1a28"/>
+  <path d="M30 305 L30 290 Q30 290 30 290 L200 290 Q200 290 200 290 L200 305 Z" fill="#12121e"/>
+  <text x="46" y="220" font-family="system-ui" font-size="14" font-weight="700" fill="#fff">Paris</text>
+  <text x="46" y="240" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">France</text>
+  <circle cx="170" cy="240" r="3" fill="#ef4444"/>
+  <circle cx="180" cy="240" r="3" fill="#ef4444"/>
+  <circle cx="150" cy="240" r="3" fill="#ef4444"/>
+  <!-- Eiffel Tower silhouette -->
+  <rect x="96" y="230" width="2" height="30" rx="1" fill="rgba(255,255,255,0.08)"/>
+  <rect x="92" y="248" width="10" height="12" rx="2" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="46" y="322" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Romantic Getaway</text>
+  <text x="46" y="340" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">4 nights · 5★ hotel</text>
+  <text x="125" y="340" font-family="system-ui" font-size="11" font-weight="600" fill="#4facfe">$1,290</text>
+
+  <!-- Card 2: Tokyo -->
+  <rect x="215" y="195" width="170" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="215" y="195" width="170" height="110" rx="12" fill="#1a1a28"/>
+  <rect x="215" y="290" width="170" height="15" fill="#1a1a28"/>
+  <path d="M215 305 L215 290 Q215 290 215 290 L385 290 Q385 290 385 290 L385 305 Z" fill="#12121e"/>
+  <text x="231" y="220" font-family="system-ui" font-size="14" font-weight="700" fill="#fff">Tokyo</text>
+  <text x="231" y="240" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Japan</text>
+  <circle cx="320" cy="235" r="10" fill="none" stroke="rgba(255,215,0,0.15)" stroke-width="0.8"/>
+  <circle cx="320" cy="235" r="4" fill="rgba(255,215,0,0.2)"/>
+  <!-- Temple silhouette -->
+  <rect x="285" y="230" width="14" height="30" rx="1" fill="rgba(255,255,255,0.06)"/>
+  <path d="M279 245 L292 230 L305 245" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" fill="none"/>
+  <text x="231" y="322" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Cultural Explorer</text>
+  <text x="231" y="340" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">7 nights · Cherry Blossom</text>
+  <text x="330" y="340" font-family="system-ui" font-size="11" font-weight="600" fill="#4facfe">$2,450</text>
+
+  <!-- Card 3: Santorini -->
+  <rect x="400" y="195" width="170" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="400" y="195" width="170" height="110" rx="12" fill="#1a1a28"/>
+  <rect x="400" y="290" width="170" height="15" fill="#1a1a28"/>
+  <path d="M400 305 L400 290 Q400 290 400 290 L570 290 Q570 290 570 290 L570 305 Z" fill="#12121e"/>
+  <text x="416" y="220" font-family="system-ui" font-size="14" font-weight="700" fill="#fff">Santorini</text>
+  <text x="416" y="240" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Greece</text>
+  <rect x="460" y="230" width="16" height="12" rx="6" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <rect x="480" y="230" width="16" height="12" rx="6" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <rect x="500" y="230" width="16" height="12" rx="6" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <text x="416" y="322" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Sunset Escape</text>
+  <text x="416" y="340" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">5 nights · Caldera View</text>
+  <text x="505" y="340" font-family="system-ui" font-size="11" font-weight="600" fill="#4facfe">$1,890</text>
+
+  <!-- Card 4: Bali -->
+  <rect x="585" y="195" width="185" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <rect x="585" y="195" width="185" height="110" rx="12" fill="#1a1a28"/>
+  <rect x="585" y="290" width="185" height="15" fill="#1a1a28"/>
+  <path d="M585 305 L585 290 Q585 290 585 290 L770 290 Q770 290 770 290 L770 305 Z" fill="#12121e"/>
+  <text x="601" y="220" font-family="system-ui" font-size="14" font-weight="700" fill="#fff">Bali</text>
+  <text x="601" y="240" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Indonesia</text>
+  <path d="M650 230 Q660 220 670 230 Q680 240 690 230" stroke="rgba(79,172,254,0.15)" stroke-width="1" fill="none"/>
+  <path d="M660 240 Q670 230 680 240" stroke="rgba(79,172,254,0.1)" stroke-width="0.8" fill="none"/>
+  <text x="601" y="322" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Tropical Retreat</text>
+  <text x="601" y="340" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">10 nights · Villa + Surf</text>
+  <text x="696" y="340" font-family="system-ui" font-size="11" font-weight="600" fill="#4facfe">$2,890</text>
+
+  <!-- Bottom Section: Map + Booking -->
+  <rect x="30" y="415" width="450" height="165" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <text x="46" y="440" font-family="system-ui" font-size="13" font-weight="600" fill="#fff" letter-spacing="-0.2">Trip Overview</text>
+  <!-- Mini Map -->
+  <rect x="46" y="455" width="200" height="110" rx="8" fill="#1a1a28" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="146" cy="510" r="4" fill="#4facfe" opacity="0.8"/>
+  <circle cx="146" cy="510" r="8" fill="#4facfe" opacity="0.15"/>
+  <circle cx="120" cy="495" r="3" fill="#4facfe" opacity="0.4"/>
+  <line x1="120" y1="495" x2="146" y2="510" stroke="rgba(79,172,254,0.2)" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <rect x="260" y="455" width="200" height="110" rx="8" fill="#1a1a28"/>
+  <!-- Itinerary items -->
+  <circle cx="272" cy="472" r="4" fill="#4facfe"/>
+  <text x="284" y="476" font-family="system-ui" font-size="11" fill="#fff">Flight to Paris</text>
+  <text x="410" y="476" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.3)">08:30 AM</text>
+  <line x1="272" y1="480" x2="272" y2="498" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <circle cx="272" cy="500" r="4" fill="rgba(255,255,255,0.15)"/>
+  <text x="284" y="504" font-family="system-ui" font-size="11" fill="#fff">Check-in · Le Meurice</text>
+  <text x="405" y="504" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.3)">3:00 PM</text>
+  <line x1="272" y1="508" x2="272" y2="526" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <circle cx="272" cy="528" r="4" fill="rgba(255,255,255,0.15)"/>
+  <text x="284" y="532" font-family="system-ui" font-size="11" fill="#fff">Louvre Museum</text>
+  <text x="405" y="532" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.3)">10:00 AM</text>
+  <line x1="272" y1="536" x2="272" y2="552" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <circle cx="272" cy="554" r="4" fill="rgba(255,255,255,0.15)"/>
+  <text x="284" y="558" font-family="system-ui" font-size="11" fill="#fff">Dinner · Le Cinq</text>
+  <text x="400" y="558" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.3)">8:00 PM</text>
+
+  <!-- Booking Summary -->
+  <rect x="495" y="415" width="275" height="165" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <text x="512" y="440" font-family="system-ui" font-size="13" font-weight="600" fill="#fff" letter-spacing="-0.2">Booking Summary</text>
+  <rect x="512" y="455" width="240" height="1" fill="rgba(255,255,255,0.05)"/>
+  <text x="512" y="478" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.5)">Destination</text>
+  <text x="640" y="478" font-family="system-ui" font-size="11" fill="#fff">Paris, France</text>
+  <text x="512" y="500" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.5)">Dates</text>
+  <text x="640" y="500" font-family="system-ui" font-size="11" fill="#fff">Jun 15 - Jun 19</text>
+  <text x="512" y="522" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.5)">Guests</text>
+  <text x="640" y="522" font-family="system-ui" font-size="11" fill="#fff">2 Adults</text>
+  <text x="512" y="544" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.5)">Total</text>
+  <text x="640" y="544" font-family="system-ui" font-size="13" font-weight="700" fill="#4facfe">$1,290</text>
+  <rect x="512" y="558" width="240" height="1" fill="rgba(255,255,255,0.05)"/>
+  <rect x="512" y="568" width="240" height="10" rx="5" fill="rgba(79,172,254,0.15)"/>
+  <rect x="512" y="568" width="180" height="10" rx="5" fill="#4facfe" opacity="0.7"/>
+</svg>
