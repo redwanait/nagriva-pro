@@ -30,11 +30,11 @@ const NAGRIVA_Payments = (() => {
       notes: row.notes || '',
       createdAt: row.created_at || new Date().toISOString(),
       updatedAt: row.updated_at || null,
-      clientName: row.profiles ? row.profiles.full_name || '' : (row.client_name || ''),
-      clientEmail: row.profiles ? row.profiles.email || '' : (row.client_email || ''),
-      orderNumber: row.orders ? row.orders.order_number || '' : (row.order_number || ''),
-      projectTitle: row.orders ? row.orders.project_title || '' : (row.project_title || ''),
-      service: row.orders ? row.orders.service || '' : (row.service || ''),
+      clientName: row.client_name || '',
+      clientEmail: row.client_email || '',
+      orderNumber: row.order_number || '',
+      projectTitle: row.project_title || '',
+      service: row.service || '',
     };
   }
 
@@ -641,11 +641,7 @@ const NAGRIVA_Payments = (() => {
     try {
       const { data, error } = await window.supabaseClient
         .from('payments')
-        .select(`
-          *,
-          profiles:client_id ( full_name, email ),
-          orders:order_id ( order_number, project_title, service )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -666,10 +662,7 @@ const NAGRIVA_Payments = (() => {
     try {
       const { data, error } = await window.supabaseClient
         .from('payment_history')
-        .select(`
-          *,
-          profiles:client_id ( full_name, email )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -795,8 +788,18 @@ const NAGRIVA_Payments = (() => {
     _loading = true;
     if (containerEl) renderSkeleton(containerEl);
 
+    const timeout = setTimeout(() => {
+      if (_loading) {
+        _loading = false;
+        _error = new Error('Loading timed out');
+        console.error('[Payments] Loading timed out');
+        if (containerEl) renderError(containerEl, _error);
+      }
+    }, 20000);
+
     try {
       await fetchPayments();
+      clearTimeout(timeout);
       await fetchPaymentHistory();
       if (containerEl) renderPayments(containerEl);
       renderStats();
@@ -804,6 +807,7 @@ const NAGRIVA_Payments = (() => {
       renderHistoryCompact();
       setupRealtime();
     } catch (err) {
+      clearTimeout(timeout);
       _error = err;
       if (containerEl) renderError(containerEl, err);
     }

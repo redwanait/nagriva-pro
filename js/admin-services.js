@@ -24,7 +24,7 @@ const NAGRIVA_AdminServices = (() => {
       slug: row.slug || '',
       category: row.category || '',
       shortDescription: row.short_description || '',
-      description: row.description || '',
+      description: row.full_description || '',
       metaTitle: row.meta_title || '',
       metaDescription: row.meta_description || '',
       image: row.image || '',
@@ -41,7 +41,7 @@ const NAGRIVA_AdminServices = (() => {
       slug: data.slug || '',
       category: data.category || '',
       short_description: data.shortDescription || '',
-      description: data.description || '',
+      full_description: data.description || '',
       meta_title: data.metaTitle || '',
       meta_description: data.metaDescription || '',
       image: data.image || '',
@@ -172,15 +172,23 @@ const NAGRIVA_AdminServices = (() => {
   async function createService(data) {
     if (_createInProgress) throw new Error('A create operation is already in progress');
     _createInProgress = true;
-    const payload = mapToDB(data);
-    if (!payload.slug) payload.slug = slugify(payload.title);
-    const inserted = await NAGRIVA_ServicesAPI.createService(payload);
-    _createInProgress = false;
-    const service = mapFromDB(inserted);
-    services.unshift(service);
-    notifyChange();
-    showToast('success', 'Service Created', service.title + ' created successfully');
-    return service;
+    try {
+      const payload = mapToDB(data);
+      if (!payload.slug) payload.slug = slugify(payload.title);
+      console.log('[AdminServices] createService payload:', JSON.stringify(payload, null, 2));
+      const inserted = await NAGRIVA_ServicesAPI.createService(payload);
+      const service = mapFromDB(inserted);
+      services.unshift(service);
+      notifyChange();
+      showToast('success', 'Service Created', service.title + ' created successfully');
+      return service;
+    } catch (err) {
+      console.error('[AdminServices] createService failed:', err);
+      showToast('error', 'Create Failed', err.message || 'Could not create service.');
+      throw err;
+    } finally {
+      _createInProgress = false;
+    }
   }
 
   let _updateInProgress = false;
@@ -188,27 +196,33 @@ const NAGRIVA_AdminServices = (() => {
   async function updateService(id, updates) {
     if (_updateInProgress) throw new Error('An update operation is already in progress');
     _updateInProgress = true;
-    const payload = {};
-    if (updates.title !== undefined) payload.title = updates.title;
-    if (updates.slug !== undefined) payload.slug = updates.slug;
-    if (updates.category !== undefined) payload.category = updates.category;
-    if (updates.shortDescription !== undefined) payload.short_description = updates.shortDescription;
-    if (updates.description !== undefined) payload.description = updates.description;
-    if (updates.metaTitle !== undefined) payload.meta_title = updates.metaTitle;
-    if (updates.metaDescription !== undefined) payload.meta_description = updates.metaDescription;
-    if (updates.image !== undefined) payload.image = updates.image;
-    if (updates.featured !== undefined) payload.featured = !!updates.featured;
-    if (updates.status !== undefined) payload.status = updates.status;
+    try {
+      const payload = {};
+      if (updates.title !== undefined) payload.title = updates.title;
+      if (updates.slug !== undefined) payload.slug = updates.slug;
+      if (updates.category !== undefined) payload.category = updates.category;
+      if (updates.shortDescription !== undefined) payload.short_description = updates.shortDescription;
+      if (updates.description !== undefined) payload.full_description = updates.description;
+      if (updates.metaTitle !== undefined) payload.meta_title = updates.metaTitle;
+      if (updates.metaDescription !== undefined) payload.meta_description = updates.metaDescription;
+      if (updates.image !== undefined) payload.image = updates.image;
+      if (updates.featured !== undefined) payload.featured = !!updates.featured;
+      if (updates.status !== undefined) payload.status = updates.status;
 
-    const updated = await NAGRIVA_ServicesAPI.updateService(id, payload);
-    _updateInProgress = false;
-
-    const service = mapFromDB(updated);
-    const idx = services.findIndex(s => s.id === id);
-    if (idx !== -1) services[idx] = service;
-    notifyChange();
-    showToast('success', 'Service Updated', service.title + ' updated successfully');
-    return service;
+      const updated = await NAGRIVA_ServicesAPI.updateService(id, payload);
+      const service = mapFromDB(updated);
+      const idx = services.findIndex(s => s.id === id);
+      if (idx !== -1) services[idx] = service;
+      notifyChange();
+      showToast('success', 'Service Updated', service.title + ' updated successfully');
+      return service;
+    } catch (err) {
+      console.error('[AdminServices] updateService failed:', err);
+      showToast('error', 'Update Failed', err.message || 'Could not update service.');
+      throw err;
+    } finally {
+      _updateInProgress = false;
+    }
   }
 
   async function deleteService(id) {

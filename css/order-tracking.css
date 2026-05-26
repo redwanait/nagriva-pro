@@ -1528,9 +1528,59 @@
   }
 }
 
-/* ════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════
+   TRACK TABS
+   ════════════════════════════════════════════ */
+
+.track-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 4px;
+}
+
+.track-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--gray2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+  white-space: nowrap;
+}
+
+.track-tab:hover {
+  color: var(--gray);
+  background: rgba(255,255,255,0.03);
+}
+
+.track-tab.active {
+  background: rgba(0,245,196,0.08);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(0,245,196,0.04);
+}
+
+.track-tab svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════
    ACCESSIBILITY — Reduced Motion
-   ════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

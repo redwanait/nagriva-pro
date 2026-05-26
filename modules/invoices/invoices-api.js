@@ -5,28 +5,7 @@ const NAGRIVA_InvoicesAPI = (() => {
   const DEFAULT_PER_PAGE = 20;
   const MAX_PER_PAGE = 100;
 
-  const CLIENT_SELECT = `
-    id,
-    full_name,
-    email,
-    avatar_url
-  `;
-
-  const ORDER_SELECT = `
-    id,
-    order_number,
-    service_type,
-    project_name,
-    status,
-    budget,
-    created_at
-  `;
-
-  const INVOICE_SELECT = `
-    *,
-    client:profiles(${CLIENT_SELECT}),
-    order:orders(${ORDER_SELECT})
-  `;
+  const INVOICE_SELECT = '*';
 
   function validatePage(value) {
     const n = Number(value);

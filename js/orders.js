@@ -283,7 +283,7 @@ const NagrivaOrders = (() => {
   async function getMessages(orderId) {
     const { data, error } = await window.supabaseClient
       .from('messages')
-      .select('*, profiles(full_name)')
+      .select('*')
       .eq('order_id', orderId)
       .order('created_at', { ascending: true });
 
@@ -306,7 +306,7 @@ const NagrivaOrders = (() => {
         sender_role: senderRole,
         message: text
       })
-      .select('*, profiles(full_name)')
+      .select('*')
       .single();
 
     if (error) throw error;
@@ -329,7 +329,7 @@ const NagrivaOrders = (() => {
         async (payload) => {
           const { data } = await window.supabaseClient
             .from('messages')
-            .select('*, profiles(full_name)')
+            .select('*')
             .eq('id', payload.new.id)
             .single();
           if (data) callback(data);
@@ -438,15 +438,19 @@ const NagrivaOrders = (() => {
   }
 
   async function getActivity(orderId) {
-    const { data, error } = await window.supabaseClient
-      .from('activity_log')
-      .select('*, profiles(full_name)')
-      .eq('order_id', orderId)
-      .order('created_at', { ascending: false })
-      .limit(20);
-
-    if (error) throw error;
-    return data || [];
+    try {
+      const { data, error } = await window.supabaseClient
+        .from('activity_log')
+        .select('*')
+        .eq('order_id', orderId)
+        .order('created_at', { ascending: false })
+        .limit(20);
+      if (error) throw error;
+      return data || [];
+    } catch (err) {
+      console.error('[NagrivaOrders] getActivity error:', err.message || err);
+      return [];
+    }
   }
 
   function subscribeToActivity(orderId, callback) {
@@ -462,7 +466,7 @@ const NagrivaOrders = (() => {
         async (payload) => {
           const { data } = await window.supabaseClient
             .from('activity_log')
-            .select('*, profiles(full_name)')
+            .select('*')
             .eq('id', payload.new.id)
             .single();
           if (data) callback(data);
@@ -512,7 +516,7 @@ const NagrivaOrders = (() => {
 
       const { data, error } = await window.supabaseClient
         .from('activity_log')
-        .select('*, profiles(full_name)')
+        .select('*')
         .in('order_id', orderIds)
         .order('created_at', { ascending: false })
         .limit(limit);

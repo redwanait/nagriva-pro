@@ -43,7 +43,7 @@ const NAGRIVA_Files = (() => {
 
     const { data: allFiles, error: filesError } = await window.supabaseClient
       .from('files')
-      .select('*, profiles(full_name)')
+      .select('*')
       .order('created_at', { ascending: false });
     if (filesError) throw filesError;
 
@@ -56,7 +56,7 @@ const NAGRIVA_Files = (() => {
         ...f,
         public_url: urlData.publicUrl,
         orderName: order ? (order.client_name || order.project_title || order.order_number) : 'Unknown Order',
-        uploaderName: f.profiles ? f.profiles.full_name : 'Unknown'
+        uploaderName: f.uploaded_by || 'Unknown'
       };
     });
   }
@@ -65,13 +65,36 @@ const NAGRIVA_Files = (() => {
     _loading = true;
     _error = null;
     if (containerEl) containerEl.innerHTML = renderSkeleton();
+
+    const timeout = setTimeout(() => {
+      if (_loading) {
+        _loading = false;
+        _error = new Error('Loading timed out');
+        console.error('[Files] Loading timed out');
+        if (containerEl) {
+          containerEl.innerHTML = `
+            <div class="orders-empty">
+              <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
+              <h3>Failed to Load Files</h3>
+              <p>Request timed out. Please check your connection and try again.</p>
+              <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_Files.init(document.getElementById('filesContainer'))">
+                <i class="fas fa-sync"></i> Retry
+              </button>
+            </div>`;
+        }
+        NAGRIVA_Toast.error('Connection Error', 'Files request timed out.');
+      }
+    }, 20000);
+
     try {
       files = await fetchFiles();
+      clearTimeout(timeout);
       _loading = false;
       if (containerEl) renderFiles(containerEl);
       notifyChange();
       setupRealtime();
     } catch (err) {
+      clearTimeout(timeout);
       _loading = false;
       _error = err;
       console.error('[Files] init failed:', err);

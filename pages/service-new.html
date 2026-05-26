@@ -917,13 +917,15 @@
           slug: slugInput.value.trim(),
           category: categorySelect.value,
           short_description: shortDesc.value.trim(),
-          description: fullDesc.value.trim(),
+          full_description: fullDesc.value.trim(),
           status: statusSelect.value,
           featured: featuredCheckbox.checked
         };
+        console.log('[ServiceNew] submit payload:', JSON.stringify(payload, null, 2));
 
         try {
           var result = await NAGRIVA_ServicesAPI.createService(payload);
+          console.log('[ServiceNew] create success:', JSON.stringify(result, null, 2));
           NAGRIVA_Toast.success('Service Created', result.title + ' created successfully.');
           setLoading(false);
           setTimeout(function() {
@@ -931,6 +933,7 @@
           }, 1200);
         } catch (err) {
           setLoading(false);
+          console.error('[ServiceNew] create failed:', err);
           var msg = err.message || 'Something went wrong. Please try again.';
           NAGRIVA_Toast.error('Creation Failed', msg);
         }

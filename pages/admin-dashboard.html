@@ -623,6 +623,38 @@
         background-position: 200% 0;
       }
     }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .content-loaded {
+      animation: fadeInUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    .table-wrap::-webkit-scrollbar {
+      height: 4px;
+    }
+    .table-wrap::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+    }
+    .table-wrap::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    tr {
+      transition: background 0.2s ease;
+    }
 
     /* ─── PAGE HEADER ─── */
     .page-header {
@@ -925,6 +957,19 @@
     .table-wrap tbody tr:hover .td-name {
       color: var(--accent);
     }
+    .table-wrap tbody tr {
+      animation: rowFadeIn 0.3s ease both;
+    }
+    .table-wrap tbody tr:nth-child(1) { animation-delay: 0.02s; }
+    .table-wrap tbody tr:nth-child(2) { animation-delay: 0.04s; }
+    .table-wrap tbody tr:nth-child(3) { animation-delay: 0.06s; }
+    .table-wrap tbody tr:nth-child(4) { animation-delay: 0.08s; }
+    .table-wrap tbody tr:nth-child(5) { animation-delay: 0.1s; }
+    .table-wrap tbody tr:nth-child(6) { animation-delay: 0.12s; }
+    @keyframes rowFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .td-user {
       display: flex;
       align-items: center;
@@ -967,6 +1012,85 @@
     .td-email {
       font-size: 0.72rem;
       color: var(--gray2);
+    }
+
+    /* ─── SEARCH WRAPS ─── */
+    .orders-search-wrap,
+    .payments-search-wrap,
+    .inv-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--r-xs);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      max-width: 280px;
+      width: 100%;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .orders-search-wrap:focus-within,
+    .payments-search-wrap:focus-within,
+    .inv-search-wrap:focus-within {
+      border-color: var(--accent-dim);
+      background: var(--surface-hover);
+    }
+    .orders-search-wrap i,
+    .payments-search-wrap i,
+    .inv-search-wrap i {
+      color: var(--gray2);
+      font-size: 0.8rem;
+      transition: color 0.2s ease;
+    }
+    .orders-search-wrap:focus-within i,
+    .payments-search-wrap:focus-within i,
+    .inv-search-wrap:focus-within i {
+      color: var(--accent);
+    }
+    .orders-search-wrap input,
+    .payments-search-wrap input,
+    .inv-search-wrap input {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 0.8rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+    }
+    .orders-search-wrap input::placeholder,
+    .payments-search-wrap input::placeholder,
+    .inv-search-wrap input::placeholder {
+      color: var(--gray3);
+    }
+    .orders-search-clear,
+    .payments-search-clear,
+    .inv-search-clear {
+      background: none;
+      border: none;
+      color: var(--gray3);
+      cursor: pointer;
+      padding: 2px;
+      display: none;
+      font-size: 0.75rem;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    .orders-search-clear.visible,
+    .payments-search-clear.visible,
+    .inv-search-clear.visible {
+      display: block;
+    }
+    .orders-search-clear:hover,
+    .payments-search-clear:hover,
+    .inv-search-clear:hover {
+      color: var(--white);
+    }
+    select {
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    select:focus {
+      border-color: var(--accent-dim);
+      background: var(--surface-hover);
     }
 
     /* ─── BADGES ─── */
@@ -1332,6 +1456,42 @@
       color: var(--danger);
     }
 
+    /* ─── MESSAGE TABS ─── */
+    .msg-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 12px;
+      background: rgba(255,255,255,0.01);
+      flex-shrink: 0;
+    }
+    .msg-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 11px 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray2);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition);
+      font-family: inherit;
+      position: relative;
+    }
+    .msg-tab:hover {
+      color: var(--gray);
+      background: var(--surface-hover);
+    }
+    .msg-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
     /* ─── MESSAGES ─── */
     .message-list {
       display: flex;
@@ -1646,7 +1806,29 @@
       .topbar-title {
         font-size: 0.95rem;
       }
-      .topbar-btn .notif-dot {
+      .page#page-messages > div:first-child {
+        grid-template-columns: 1fr !important;
+      }
+    .topbar-msg-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #ff5050, #ff3050);
+      color: #fff;
+      font-size: 0.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      box-shadow: 0 2px 8px rgba(255,50,50,0.3);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .topbar-btn .notif-dot {
         top: 4px;
         right: 4px;
       }
@@ -1735,6 +1917,7 @@
         </div>
         <div class="sidebar-item" data-page="messages">
           <i class="fas fa-comment-dots"></i> Messages
+          <span class="badge-count" style="display:none;">0</span>
           <span class="badge-dot"></span>
         </div>
         <div class="sidebar-item" data-page="files">
@@ -1792,6 +1975,10 @@
           </div>
         </div>
         <div class="topbar-right">
+          <button class="topbar-btn open-page" data-page="messages" title="Messages">
+            <i class="fas fa-comment-dots"></i>
+            <span class="topbar-msg-badge" id="topbarMsgBadge" style="display:none;">0</span>
+          </button>
           <button class="topbar-btn">
             <i class="fas fa-bell"></i>
             <span class="notif-dot"></span>
@@ -2027,7 +2214,7 @@
                 <div class="card-title">Live Messages</div>
                 <div class="card-subtitle">Recent conversations with clients</div>
               </div>
-              <div class="card-link">Open Inbox <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.6rem;"></i></div>
+              <div class="card-link open-page" data-page="messages" style="cursor:pointer;">Open Inbox <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.6rem;"></i></div>
             </div>
             <div class="message-list" id="messageList">
               <div class="message-item">
@@ -2192,14 +2379,22 @@
             </div>
           </div>
           <div style="display:grid;grid-template-columns:380px 1fr;gap:16px;min-height:500px;">
-            <div class="card" style="padding:0;overflow:hidden;">
-              <div style="padding:16px;border-bottom:1px solid var(--border);">
+            <div class="card" style="padding:0;overflow:hidden;display:flex;flex-direction:column;">
+              <div class="msg-tabs">
+                <button class="msg-tab active" data-tab="orders" onclick="NAGRIVA_Messages.setActiveTab('orders')">
+                  <i class="fas fa-shopping-bag" style="font-size:0.7rem;"></i> Orders
+                </button>
+                <button class="msg-tab" data-tab="support" onclick="NAGRIVA_Messages.setActiveTab('support')">
+                  <i class="fas fa-headset" style="font-size:0.7rem;"></i> Support Chat
+                </button>
+              </div>
+              <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
                 <div class="orders-search-wrap" style="max-width:100%;">
                   <i class="fas fa-search"></i>
                   <input type="text" id="messagesSearch" placeholder="Search conversations..." />
                 </div>
               </div>
-              <div id="messagesContainer" style="overflow-y:auto;max-height:500px;"></div>
+              <div id="messagesContainer" style="overflow-y:auto;flex:1;max-height:500px;"></div>
             </div>
             <div class="card" id="activeConversation" style="display:flex;flex-direction:column;">
               <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--gray3);text-align:center;padding:40px;">
@@ -2568,6 +2763,16 @@
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
 
+      // ─── Debounce utility ───
+      function debounce(fn, ms) {
+        let timer;
+        return function() {
+          const context = this, args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => fn.apply(context, args), ms || 300);
+        };
+      }
+
       // ─── Sidebar Navigation ───
       const sidebarItems = document.querySelectorAll('.sidebar-item[data-page]');
       const pages = document.querySelectorAll('.page');
@@ -2600,6 +2805,7 @@
         };
         topbarTitle.innerHTML = (names[pageId] || 'Dashboard') + ' <span>/ overview</span>';
 
+        /* Only render the page being switched to — others are lazy-init'd */
         if (pageId === 'orders') {
           renderOrdersView();
         } else if (pageId === 'clients') {
@@ -2818,13 +3024,14 @@
         if (typeof NAGRIVA_Messages !== 'undefined' && NAGRIVA_Messages.getConversations().length > 0) {
           const convos = NAGRIVA_Messages.getConversations().slice(0, 4);
           messageList.innerHTML = convos.map(function(c) {
-            const initials = NAGRIVA_Messages.getInitials(c.clientName);
+            const name = c.senderName || c.senderEmail || 'Unknown';
+            const initials = NAGRIVA_Messages.getInitials(name);
             const preview = c.lastMessage ? c.lastMessage.substring(0, 80) + (c.lastMessage.length > 80 ? '...' : '') : 'No messages yet';
             const time = NAGRIVA_Messages.formatDate(c.lastMessageTime);
             return '<div class="message-item open-page" data-page="messages" style="cursor:pointer;">' +
               '<div class="message-avatar ma1">' + initials + '</div>' +
               '<div class="message-body">' +
-              '<div class="message-head"><span class="message-name">' + c.clientName.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</span>' +
+              '<div class="message-head"><span class="message-name">' + name.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</span>' +
               '<span class="message-time">' + time + '</span></div>' +
               '<div class="message-text">' + preview.replace(/</g,'&lt;') + '</div>' +
               '</div></div>';
@@ -2910,12 +3117,12 @@
         updateClientsStats();
       });
 
-      document.getElementById('clientsSearch')?.addEventListener('input', function() {
+      document.getElementById('clientsSearch')?.addEventListener('input', debounce(function() {
         NAGRIVA_Clients.setSearch(this.value);
         const clear = document.getElementById('clientsSearchClear');
         if (clear) clear.classList.toggle('visible', this.value.length > 0);
         NAGRIVA_Clients.renderClients(clientsContainer);
-      });
+      }, 250));
 
       document.getElementById('clientsSearchClear')?.addEventListener('click', function() {
         const input = document.getElementById('clientsSearch');
@@ -2942,13 +3149,15 @@
         if (!messagesInitialized) {
           await NAGRIVA_Messages.init(messagesContainer);
           messagesInitialized = true;
+        } else {
+          if (messagesContainer) NAGRIVA_Messages.renderConversations(messagesContainer);
         }
       }
 
-      document.getElementById('messagesSearch')?.addEventListener('input', function() {
+      document.getElementById('messagesSearch')?.addEventListener('input', debounce(function() {
         NAGRIVA_Messages.setSearch(this.value);
         NAGRIVA_Messages.renderConversations(messagesContainer);
-      });
+      }, 250));
 
       // ─── Files ───
       const filesContainer = document.getElementById('filesContainer');
@@ -2961,12 +3170,12 @@
         }
       }
 
-      document.getElementById('filesSearch')?.addEventListener('input', function() {
+      document.getElementById('filesSearch')?.addEventListener('input', debounce(function() {
         NAGRIVA_Files.setSearch(this.value);
         const clear = document.getElementById('filesSearchClear');
         if (clear) clear.classList.toggle('visible', this.value.length > 0);
         NAGRIVA_Files.renderFiles(filesContainer);
-      });
+      }, 250));
 
       document.getElementById('filesSearchClear')?.addEventListener('click', function() {
         const input = document.getElementById('filesSearch');
@@ -3009,12 +3218,12 @@
         updateServicesStats();
       });
 
-      document.getElementById('servicesSearch')?.addEventListener('input', function() {
+      document.getElementById('servicesSearch')?.addEventListener('input', debounce(function() {
         NAGRIVA_AdminServices.setSearch(this.value);
         const clear = document.getElementById('servicesSearchClear');
         if (clear) clear.classList.toggle('visible', this.value.length > 0);
         NAGRIVA_AdminServices.renderServices(servicesContainer);
-      });
+      }, 250));
 
       document.getElementById('servicesSearchClear')?.addEventListener('click', function() {
         const input = document.getElementById('servicesSearch');
@@ -3069,12 +3278,12 @@
         }
       });
 
-      document.getElementById('paymentsSearch')?.addEventListener('input', function() {
+      document.getElementById('paymentsSearch')?.addEventListener('input', debounce(function() {
         NAGRIVA_Payments.setSearch(this.value);
         const clear = document.getElementById('paymentsSearchClear');
         if (clear) clear.classList.toggle('visible', this.value.length > 0);
         NAGRIVA_Payments.renderPayments(paymentsContainer);
-      });
+      }, 250));
 
       document.getElementById('paymentsSearchClear')?.addEventListener('click', function() {
         const input = document.getElementById('paymentsSearch');
@@ -3136,12 +3345,12 @@
         }
       });
 
-      document.getElementById('invoicesSearch')?.addEventListener('input', function() {
+      document.getElementById('invoicesSearch')?.addEventListener('input', debounce(function() {
         NAGRIVA_AdminInvoices.setSearch(this.value);
         const clear = document.getElementById('invoicesSearchClear');
         if (clear) clear.classList.toggle('visible', this.value.length > 0);
         NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
-      });
+      }, 250));
 
       document.getElementById('invoicesSearchClear')?.addEventListener('click', function() {
         const input = document.getElementById('invoicesSearch');
@@ -3186,11 +3395,11 @@
       const searchInput = document.getElementById('ordersSearch');
       const searchClear = document.getElementById('ordersSearchClear');
 
-      searchInput.addEventListener('input', function() {
+      searchInput.addEventListener('input', debounce(function() {
         NAGRIVA_AdminOrders.setSearch(this.value);
         searchClear.classList.toggle('visible', this.value.length > 0);
         renderOrdersView();
-      });
+      }, 250));
 
       searchClear.addEventListener('click', function() {
         searchInput.value = '';
@@ -3431,7 +3640,11 @@
           });
         } else if (action === 'delete') {
           const order = NAGRIVA_AdminOrders.getOrder(orderId);
-          if (!order) return;
+          if (!order) {
+            console.warn('[AdminDashboard] No order found for id:', orderId);
+            return;
+          }
+          console.debug('[AdminDashboard] Delete requested for order:', { id: order.id, clientName: order.clientName, projectTitle: order.projectTitle, service: order.service });
           const confirmed = await NAGRIVA_Modal.showConfirm(
             'Delete Order',
             `Are you sure you want to delete ${order.clientName || order.projectTitle}'s order? This action cannot be undone.`
@@ -3442,7 +3655,7 @@
             renderOrdersView();
             if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
           } catch (err) {
-            console.error('Delete failed:', err);
+            console.error('[AdminDashboard] Delete failed:', { id: orderId, error: err.message, code: err.code });
           }
         } else if (action === 'view-client') {
           NAGRIVA_ClientDrawer.open(orderId);

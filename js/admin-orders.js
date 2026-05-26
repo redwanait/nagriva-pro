@@ -16,11 +16,10 @@ const NAGRIVA_AdminOrders = (() => {
   let _error = null;
 
   function mapFromDB(row) {
-    const clientFromJoin = row.client;
     return {
       id: row.id,
-      clientName: (clientFromJoin && clientFromJoin.full_name) || row.client_name || '',
-      clientEmail: (clientFromJoin && clientFromJoin.email) || row.client_email || '',
+      clientName: row.client_name || '',
+      clientEmail: row.client_email || '',
       clientId: row.client_id || null,
       service: row.service || '',
       budget: Number(row.budget) || 0,
@@ -131,8 +130,31 @@ const NAGRIVA_AdminOrders = (() => {
     _error = null;
     _fetchInProgress = true;
     if (containerEl) containerEl.innerHTML = renderSkeleton();
+
+    const timeout = setTimeout(() => {
+      if (_loading) {
+        _loading = false;
+        _fetchInProgress = false;
+        _error = new Error('Loading timed out');
+        console.error('[AdminOrders] Loading timed out');
+        if (containerEl) {
+          containerEl.innerHTML = `
+            <div class="orders-empty">
+              <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
+              <h3>Failed to Load Orders</h3>
+              <p>Request timed out. Please check your connection and try again.</p>
+              <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_AdminOrders.init(document.getElementById('ordersContainer'))">
+                <i class="fas fa-sync"></i> Retry
+              </button>
+            </div>`;
+        }
+        showToast('error', 'Connection Error', 'Orders request timed out.');
+      }
+    }, 20000);
+
     try {
       orders = await fetchAllOrders();
+      clearTimeout(timeout);
       _loading = false;
       _fetchInProgress = false;
       if (containerEl) renderOrders(containerEl, 'table');
@@ -140,6 +162,7 @@ const NAGRIVA_AdminOrders = (() => {
       setupRealtime();
       setupProfilesRealtime();
     } catch (err) {
+      clearTimeout(timeout);
       _loading = false;
       _fetchInProgress = false;
       _error = err;
@@ -268,6 +291,7 @@ const NAGRIVA_AdminOrders = (() => {
   }
 
   let _updateInProgress = false;
+  let _deleteInProgress = false;
 
   async function updateOrder(id, updates) {
     if (_updateInProgress) throw new Error('An update operation is already in progress');
@@ -322,15 +346,65 @@ const NAGRIVA_AdminOrders = (() => {
   }
 
   async function deleteOrder(id) {
-    await NAGRIVA_OrdersAPI.deleteOrder(id);
+    if (!id) {
+      console.error('[AdminOrders] deleteOrder called with invalid id:', id);
+      showToast('error', 'Delete Failed', 'Invalid order ID. Cannot delete without a valid identifier.');
+      throw new Error('Invalid order ID: ' + JSON.stringify(id));
+    }
+
+    if (_deleteInProgress) {
+      console.warn('[AdminOrders] deleteOrder already in progress, skipping duplicate for id:', id);
+      throw new Error('A delete operation is already in progress');
+    }
+    _deleteInProgress = true;
+
+    console.debug('[AdminOrders] deleteOrder — starting deletion for id:', id);
+
+    let apiSuccess = false;
+    try {
+      await NAGRIVA_OrdersAPI.deleteOrder(id);
+      apiSuccess = true;
+      console.debug('[AdminOrders] deleteOrder — API delete succeeded for id:', id);
+    } catch (err) {
+      _deleteInProgress = false;
+      console.error('[AdminOrders] deleteOrder failed:', {
+        message: err.message,
+        code: err.code,
+        details: err.details,
+        hint: err.hint,
+        status: err.status,
+        id: id,
+      });
+      showToast('error', 'Delete Failed', err.message || 'Could not delete order. Please check your permissions and try again.');
+      throw err;
+    }
 
     const idx = orders.findIndex(o => o.id === id);
     let removed = null;
     if (idx !== -1) removed = orders.splice(idx, 1)[0];
     notifyChange();
+
     if (removed) {
-      showToast('info', 'Order Deleted', `${removed.clientName || removed.projectTitle} \u2014 ${removed.service}`);
+      showToast('success', 'Order Deleted', `${removed.clientName || removed.projectTitle} \u2014 ${removed.service}`);
     }
+
+    try {
+      const fresh = await fetchAllOrders();
+      orders = fresh;
+      notifyChange();
+
+      const stillExists = fresh.some(function(o) { return o.id === id; });
+      if (stillExists) {
+        console.warn('[AdminOrders] Order id', id, 'still present in DB after delete — possible RLS/permission issue');
+        showToast('warning', 'Sync Warning', 'Order was removed from the list but may still exist in the database. Refresh to confirm.');
+      } else {
+        console.debug('[AdminOrders] Verified: order id', id, 'successfully removed from database.');
+      }
+    } catch (refreshErr) {
+      console.warn('[AdminOrders] Re-fetch after delete failed:', refreshErr.message || refreshErr);
+    }
+
+    _deleteInProgress = false;
     return true;
   }
 

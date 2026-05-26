@@ -7,15 +7,7 @@ const NAGRIVA_OrdersAPI = (() => {
   async function fetchAllOrders() {
     const { data, error } = await window.supabaseClient
       .from(TABLE)
-      .select(`
-        *,
-        client:profiles(
-          id,
-          full_name,
-          email,
-          avatar_url
-        )
-      `)
+      .select('*')
       .order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
@@ -99,11 +91,32 @@ const NAGRIVA_OrdersAPI = (() => {
 
   /* ─── Delete order ─── */
   async function deleteOrder(id) {
-    const { error } = await window.supabaseClient
+    if (!id) {
+      const err = new Error('Cannot delete order: missing order ID.');
+      err.code = 'INVALID_ID';
+      console.error('[OrdersAPI] deleteOrder called without valid id:', id);
+      throw err;
+    }
+
+    console.debug('[OrdersAPI] deleteOrder — deleting order id:', id);
+    const { data, error } = await window.supabaseClient
       .from(TABLE)
       .delete()
       .eq('id', id);
-    if (error) throw error;
+
+    if (error) {
+      console.error('[OrdersAPI] deleteOrder — Supabase error:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        status: error.status,
+        statusText: error.statusText,
+      });
+      throw error;
+    }
+
+    console.debug('[OrdersAPI] deleteOrder — delete executed successfully. Response data:', data);
     return true;
   }
 

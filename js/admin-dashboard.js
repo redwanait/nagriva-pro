@@ -357,23 +357,40 @@ const NAGRIVA_Dashboard = (() => {
 
     showSkeletons();
 
+    // Loading timeout: prevent infinite skeleton loading
+    const loadingTimeout = setTimeout(() => {
+      if (_loading) {
+        _loading = false;
+        _error = new Error('Loading timed out. Please check your connection and try again.');
+        console.error('[Dashboard] Loading timed out');
+        showError(_error);
+      }
+    }, 20000);
+
     // Load realtime activity feed
     if (typeof NAGRIVA_ActivityFeed !== 'undefined') {
-      NAGRIVA_ActivityFeed.init({
-        containerId: 'dashActivityFeed',
-        limit: 10,
-        realtime: true
-      });
+      try {
+        NAGRIVA_ActivityFeed.init({
+          containerId: 'dashActivityFeed',
+          limit: 10,
+          realtime: true
+        });
+      } catch (e) {
+        console.warn('[Dashboard] ActivityFeed init error:', e);
+      }
     }
 
     if (typeof NAGRIVA_Notifications !== 'undefined') {
       NAGRIVA_Notifications.init().then(function() {
         renderDashboardNotifications();
+      }).catch(function(e) {
+        console.warn('[Dashboard] Notifications init error:', e);
       });
     }
 
     if (_unsubscribe) _unsubscribe();
     _unsubscribe = NAGRIVA_AdminOrders.onChange(function(updatedOrders, updatedStats) {
+      clearTimeout(loadingTimeout);
       _loading = false;
       _error = null;
       _loaded = true;
@@ -392,6 +409,7 @@ const NAGRIVA_Dashboard = (() => {
 
     var orders = NAGRIVA_AdminOrders.getAllOrders();
     if (orders.length > 0) {
+      clearTimeout(loadingTimeout);
       restoreStatsCards();
       var stats = NAGRIVA_AdminOrders.getStats();
       updateStats(stats);
@@ -400,12 +418,15 @@ const NAGRIVA_Dashboard = (() => {
       _loading = false;
       _loaded = true;
     } else if (_error) {
+      clearTimeout(loadingTimeout);
       showError(_error);
       _loading = false;
     } else if (!NAGRIVA_AdminOrders.loading) {
       try {
         await NAGRIVA_AdminOrders.init();
+        clearTimeout(loadingTimeout);
       } catch (e) {
+        clearTimeout(loadingTimeout);
         console.warn('[Dashboard] AdminOrders init error:', e);
       }
       if (!_loaded) {
@@ -417,6 +438,14 @@ const NAGRIVA_Dashboard = (() => {
           renderRecentOrders(refreshed);
           updateCharts(refreshed);
           _loaded = true;
+        } else {
+          // Show empty state with stats at 0
+          restoreStatsCards();
+          updateStats({ active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 });
+          var ordersTbody = document.getElementById('dashRecentOrders');
+          if (ordersTbody && !ordersTbody.querySelector('td')) {
+            ordersTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px 24px;"><div style="width:48px;height:48px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--accent);font-size:1.1rem;"><i class="fas fa-shopping-bag"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:4px;">No recent orders</div><div style="font-size:0.78rem;color:var(--gray2);line-height:1.5;max-width:280px;margin:0 auto;">Your recent orders and projects will appear here once you create them.</div></td></tr>';
+          }
         }
         if (NAGRIVA_AdminOrders.error) {
           _error = NAGRIVA_AdminOrders.error;
@@ -424,6 +453,42 @@ const NAGRIVA_Dashboard = (() => {
         }
       }
       _loading = false;
+    } else {
+      // NAGRIVA_AdminOrders.loading is true - wait for it
+      try {
+        // Wait for orders to load with a poll
+        var pollAttempts = 0;
+        var pollInterval = setInterval(function() {
+          pollAttempts++;
+          if (!NAGRIVA_AdminOrders.loading || pollAttempts > 20) {
+            clearInterval(pollInterval);
+            clearTimeout(loadingTimeout);
+            if (!_loaded) {
+              var refreshed = NAGRIVA_AdminOrders.getAllOrders();
+              if (refreshed.length > 0) {
+                restoreStatsCards();
+                var s = NAGRIVA_AdminOrders.getStats();
+                updateStats(s);
+                renderRecentOrders(refreshed);
+                updateCharts(refreshed);
+                _loaded = true;
+              } else {
+                restoreStatsCards();
+                updateStats({ active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 });
+                if (NAGRIVA_AdminOrders.error) {
+                  _error = NAGRIVA_AdminOrders.error;
+                  showError(_error);
+                }
+              }
+              _loading = false;
+            }
+          }
+        }, 1000);
+      } catch (e) {
+        clearTimeout(loadingTimeout);
+        console.warn('[Dashboard] Poll error:', e);
+        _loading = false;
+      }
     }
   }
 

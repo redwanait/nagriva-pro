@@ -26,7 +26,7 @@ const NAGRIVA_ActivityLogsAPI = (() => {
 
     let query = window.supabaseClient
       .from(TABLE)
-      .select('*, profiles(full_name)', { count: 'exact' });
+      .select('*', { count: 'exact' });
 
     if (options.action) {
       query = query.eq('action', options.action);
@@ -70,20 +70,29 @@ const NAGRIVA_ActivityLogsAPI = (() => {
 
     query = query.range(offset, offset + perPage - 1);
 
-    const { data, error, count } = await query;
-
-    if (error) throw error;
-
-    return {
-      data: (data || []).map(a => ({
-        ...a,
-        actorName: a.profiles ? a.profiles.full_name : 'System'
-      })),
-      count: count || 0,
-      page,
-      per_page: perPage,
-      total_pages: Math.ceil((count || 0) / perPage)
-    };
+    try {
+      const { data, error, count } = await query;
+      if (error) throw error;
+      return {
+        data: (data || []).map(a => ({
+          ...a,
+          actorName: 'System'
+        })),
+        count: count || 0,
+        page,
+        per_page: perPage,
+        total_pages: Math.ceil((count || 0) / perPage)
+      };
+    } catch (err) {
+      console.error('[ActivityLogsAPI] fetchLogs error:', err.message || err);
+      return {
+        data: [],
+        count: 0,
+        page,
+        per_page: perPage,
+        total_pages: 0
+      };
+    }
   }
 
   async function createLog(data) {
@@ -98,19 +107,24 @@ const NAGRIVA_ActivityLogsAPI = (() => {
       description: data.description || null
     };
 
-    const { data: result, error } = await window.supabaseClient
-      .from(TABLE)
-      .insert(payload)
-      .select('*, profiles(full_name)')
-      .single();
+    try {
+      const { data: result, error } = await window.supabaseClient
+        .from(TABLE)
+        .insert(payload)
+        .select('*')
+        .single();
 
-    if (error) throw error;
+      if (error) throw error;
 
-    if (result) {
-      result.actorName = result.profiles ? result.profiles.full_name : 'System';
+      if (result) {
+        result.actorName = 'System';
+      }
+
+      return result;
+    } catch (err) {
+      console.error('[ActivityLogsAPI] createLog error:', err.message || err);
+      return null;
     }
-
-    return result;
   }
 
   async function fetchUserLogs(userId, options) {

@@ -5,14 +5,17 @@
 
 const NAGRIVA_ServicesAPI = (() => {
   const TABLE = 'services';
-  const SELECT_FIELDS = 'id, title, slug, category, short_description, description, meta_title, meta_description, image, featured, status, created_at, updated_at';
+  const SELECT_FIELDS = 'id, title, slug, category, short_description, full_description, meta_title, meta_description, image, featured, status, created_at, updated_at';
 
-  function handleError(error) {
+  function handleError(error, context = {}) {
     console.error('[ServicesAPI] Error:', {
       message: error.message,
       code: error.code,
       details: error.details,
-      hint: error.hint
+      hint: error.hint,
+      status: error.status,
+      statusText: error.statusText,
+      ...context
     });
     throw error;
   }
@@ -23,10 +26,13 @@ const NAGRIVA_ServicesAPI = (() => {
         .from(TABLE)
         .select(SELECT_FIELDS)
         .order('created_at', { ascending: false });
-      if (error) throw error;
+      if (error) {
+        console.error('[ServicesAPI] fetchAllServices error:', JSON.stringify(error, null, 2));
+        throw error;
+      }
       return data || [];
     } catch (err) {
-      handleError(err);
+      handleError(err, { operation: 'fetchAllServices' });
     }
   }
 
@@ -37,52 +43,70 @@ const NAGRIVA_ServicesAPI = (() => {
         .select('*')
         .eq('id', id)
         .single();
-      if (error) throw error;
+      if (error) {
+        console.error('[ServicesAPI] fetchServiceById error:', JSON.stringify(error, null, 2));
+        throw error;
+      }
       return data;
     } catch (err) {
-      handleError(err);
+      handleError(err, { operation: 'fetchServiceById', id });
     }
   }
 
   async function createService(payload) {
     try {
+      console.log('[ServicesAPI] createService payload:', JSON.stringify(payload, null, 2));
       const { data, error } = await window.supabaseClient
         .from(TABLE)
         .insert(payload)
         .select(SELECT_FIELDS)
         .single();
-      if (error) throw error;
+      if (error) {
+        console.error('[ServicesAPI] Supabase insert error response:', JSON.stringify(error, null, 2));
+        throw error;
+      }
+      console.log('[ServicesAPI] createService success:', JSON.stringify(data, null, 2));
       return data;
     } catch (err) {
-      handleError(err);
+      handleError(err, { operation: 'createService', payload });
     }
   }
 
   async function updateService(id, payload) {
     try {
+      console.log('[ServicesAPI] updateService payload:', JSON.stringify(payload, null, 2));
       const { data, error } = await window.supabaseClient
         .from(TABLE)
         .update(payload)
         .eq('id', id)
         .select(SELECT_FIELDS)
         .single();
-      if (error) throw error;
+      if (error) {
+        console.error('[ServicesAPI] Supabase update error:', JSON.stringify(error, null, 2));
+        throw error;
+      }
+      console.log('[ServicesAPI] updateService success:', JSON.stringify(data, null, 2));
       return data;
     } catch (err) {
-      handleError(err);
+      handleError(err, { operation: 'updateService', id, payload });
     }
   }
 
   async function deleteService(id) {
     try {
+      console.log('[ServicesAPI] deleteService id:', id);
       const { error } = await window.supabaseClient
         .from(TABLE)
         .delete()
         .eq('id', id);
-      if (error) throw error;
+      if (error) {
+        console.error('[ServicesAPI] delete error:', JSON.stringify(error, null, 2));
+        throw error;
+      }
+      console.log('[ServicesAPI] deleteService success:', id);
       return true;
     } catch (err) {
-      handleError(err);
+      handleError(err, { operation: 'deleteService', id });
     }
   }
 

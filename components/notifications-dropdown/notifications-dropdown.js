@@ -569,12 +569,26 @@ const NAGRIVA_NotificationsDropdown = (() => {
   }
 
   /* ─── Init ─── */
+  let _initAttempts = 0;
+  const MAX_INIT_ATTEMPTS = 10;
+
   async function init() {
     if (_initialized) return;
 
+    if (_initAttempts >= MAX_INIT_ATTEMPTS) {
+      console.warn('[NotificationsDropdown] Navbar not found after ' + MAX_INIT_ATTEMPTS + ' attempts — page likely uses a different layout (e.g. admin topbar). Skipping.');
+      return;
+    }
+
+    const hasNavbar = document.getElementById('navbar');
+    if (!hasNavbar) {
+      console.warn('[NotificationsDropdown] No #navbar found — page uses different layout. Skipping initialization.');
+      return;
+    }
+
     const injected = injectBell();
     if (!injected) {
-      console.warn('[NotificationsDropdown] Navbar not ready, retrying...');
+      _initAttempts++;
       setTimeout(init, 500);
       return;
     }
@@ -667,10 +681,13 @@ const NAGRIVA_NotificationsDropdown = (() => {
 })();
 
 /* ─── Auto-init on DOM ready ─── */
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+(function autoInit() {
+  if (!document.getElementById('navbar')) return;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      NAGRIVA_NotificationsDropdown.init();
+    });
+  } else {
     NAGRIVA_NotificationsDropdown.init();
-  });
-} else {
-  NAGRIVA_NotificationsDropdown.init();
-}
+  }
+})();

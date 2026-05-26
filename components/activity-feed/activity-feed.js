@@ -125,7 +125,7 @@ const NAGRIVA_ActivityFeed = (() => {
     _feedEl.innerHTML = items.map((log, i) => {
       const meta = getActionMeta(log.action);
       const isLast = i === items.length - 1;
-      const actorName = log.actorName || (log.profiles ? log.profiles.full_name : null) || 'System';
+      const actorName = log.actorName || 'System';
       return '<div class="af-item" data-af-id="' + log.id + '">' +
         '<div class="af-icon-wrap ' + meta.color + '"><i class="fas ' + meta.icon + '"></i></div>' +
         '<div class="af-content">' +
@@ -159,7 +159,7 @@ const NAGRIVA_ActivityFeed = (() => {
     _error = null;
 
     const meta = getActionMeta(log.action);
-    const actorName = log.actorName || (log.profiles ? log.profiles.full_name : null) || 'System';
+    const actorName = log.actorName || 'System';
     const itemHtml = '<div class="af-item af-item-new" data-af-id="' + log.id + '">' +
       '<div class="af-icon-wrap ' + meta.color + '"><i class="fas ' + meta.icon + '"></i></div>' +
       '<div class="af-content">' +
@@ -196,7 +196,7 @@ const NAGRIVA_ActivityFeed = (() => {
       const existingItem = _feedEl.querySelector('[data-af-id="' + updated.id + '"]');
       if (existingItem) {
         const meta = getActionMeta(updated.action);
-        const actorName = updated.actorName || (updated.profiles ? updated.profiles.full_name : null) || 'System';
+        const actorName = updated.actorName || 'System';
         existingItem.innerHTML =
           '<div class="af-icon-wrap ' + meta.color + '"><i class="fas ' + meta.icon + '"></i></div>' +
           '<div class="af-content">' +
@@ -228,15 +228,26 @@ const NAGRIVA_ActivityFeed = (() => {
     _error = null;
     renderSkeletons();
 
+    const timeout = setTimeout(() => {
+      if (_loading) {
+        _loading = false;
+        _error = new Error('Activity feed timed out');
+        console.error('[ActivityFeed] Loading timed out');
+        renderFeed();
+      }
+    }, 15000);
+
     try {
       const result = await NAGRIVA_ActivityLogsAPI.fetchLogs({
         per_page: _options.limit,
         page: 1
       });
+      clearTimeout(timeout);
       _logs = result.data || [];
       _loading = false;
       renderFeed();
     } catch (err) {
+      clearTimeout(timeout);
       _loading = false;
       _error = err;
       console.error('[ActivityFeed] Load error:', err);

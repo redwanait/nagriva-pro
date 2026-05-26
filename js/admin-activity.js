@@ -61,29 +61,44 @@ const NAGRIVA_Activity = (() => {
 
   async function fetchActivities(limit) {
     limit = limit || 50;
-    const { data, error } = await window.supabaseClient
-      .from('activity_log')
-      .select('*, profiles(full_name)')
-      .order('created_at', { ascending: false })
-      .limit(limit);
-    if (error) throw error;
-    return (data || []).map(a => ({
-      ...a,
-      actorName: a.profiles ? a.profiles.full_name : 'System'
-    }));
+    try {
+      const { data, error } = await window.supabaseClient
+        .from('activity_log')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+      if (error) throw error;
+      return data || [];
+    } catch (err) {
+      console.error('[Activity] fetchActivities error:', err.message || err);
+      return [];
+    }
   }
 
   async function init(containerEl, limit) {
     _loading = true;
     _error = null;
     if (containerEl) containerEl.innerHTML = renderSkeleton();
+
+    const timeout = setTimeout(() => {
+      if (_loading) {
+        _loading = false;
+        _error = new Error('Request timed out');
+        console.error('[Activity] Loading timed out');
+        if (containerEl) renderActivities(containerEl);
+        notifyChange();
+      }
+    }, 15000);
+
     try {
       activities = await fetchActivities(limit);
+      clearTimeout(timeout);
       _loading = false;
       if (containerEl) renderActivities(containerEl);
       notifyChange();
       setupRealtime();
     } catch (err) {
+      clearTimeout(timeout);
       _loading = false;
       _error = err;
       console.error('[Activity] init failed:', err);
@@ -114,14 +129,11 @@ const NAGRIVA_Activity = (() => {
           try {
             const { data } = await window.supabaseClient
               .from('activity_log')
-              .select('*, profiles(full_name)')
+              .select('*')
               .eq('id', payload.new.id)
               .single();
             if (data) {
-              activities.unshift({
-                ...data,
-                actorName: data.profiles ? data.profiles.full_name : 'System'
-              });
+              activities.unshift(data);
               if (activities.length > 100) activities = activities.slice(0, 100);
               notifyChange();
               const container = document.getElementById('activityContainer');
@@ -154,7 +166,7 @@ const NAGRIVA_Activity = (() => {
       const q = filters.search;
       result = result.filter(a =>
         (a.description || '').toLowerCase().includes(q) ||
-        (a.actorName || '').toLowerCase().includes(q) ||
+        (a.user_id || '').toLowerCase().includes(q) ||
         (a.action || '').toLowerCase().includes(q)
       );
     }
@@ -225,7 +237,7 @@ const NAGRIVA_Activity = (() => {
           </div>
           <div class="activity-content">
             <div class="activity-text">
-              <strong>${escapeHtml(a.actorName)}</strong>
+              <strong>${a.user_id ? escapeHtml(a.user_id.substring(0, 8) + '...') : 'System'}</strong>
               ${escapeHtml(a.description || a.action)}
             </div>
             <div class="activity-time">${formatDate(a.created_at)}</div>

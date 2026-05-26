@@ -976,7 +976,7 @@
         featuredCheckbox.checked = !!data.featured;
         featuredTrack.classList.toggle('active', !!data.featured);
         shortDesc.value = data.short_description || '';
-        fullDesc.value = data.description || '';
+        fullDesc.value = data.full_description || '';
 
         if (!slugUserEdited) updateSlugPreview(slugInput.value);
 
@@ -1036,13 +1036,15 @@
           slug: slugInput.value.trim(),
           category: categorySelect.value,
           short_description: shortDesc.value.trim(),
-          description: fullDesc.value.trim(),
+          full_description: fullDesc.value.trim(),
           status: statusSelect.value,
           featured: featuredCheckbox.checked
         };
+        console.log('[ServiceEdit] update payload:', JSON.stringify(payload, null, 2));
 
         try {
           var result = await NAGRIVA_ServicesAPI.updateService(serviceId, payload);
+          console.log('[ServiceEdit] update success:', JSON.stringify(result, null, 2));
           NAGRIVA_Toast.success('Service Updated', result.title + ' updated successfully.');
           setLoading(false);
           showMeta(result);
@@ -1050,6 +1052,7 @@
           pageSubtitle.textContent = 'Update your "' + result.title + '" service offering.';
         } catch (err) {
           setLoading(false);
+          console.error('[ServiceEdit] update failed:', err);
           var msg = err.message || 'Something went wrong. Please try again.';
           NAGRIVA_Toast.error('Update Failed', msg);
         }
