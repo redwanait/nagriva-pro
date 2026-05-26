@@ -200,14 +200,18 @@ const NAGRIVA_Messages = (() => {
   }
 
   async function loadSupportMessages(convId) {
-    const { data, error } = await supabaseClient
+    var { data, error } = await supabaseClient
       .from('messages')
-      .select('*, profiles!inner(full_name, email)')
+      .select('*')
       .eq('conversation_id', convId)
       .order('created_at', { ascending: true });
 
     if (error) throw error;
-    supportMessages[convId] = data || [];
+    var msgs = data || [];
+    var userIds = msgs.map(function(m) { return m.user_id; });
+    await fetchProfilesForUserIds(userIds);
+    msgs.forEach(attachProfileToMsg);
+    supportMessages[convId] = msgs;
     return supportMessages[convId];
   }
 
@@ -296,12 +300,14 @@ const NAGRIVA_Messages = (() => {
         { event: 'INSERT', schema: 'public', table: 'messages' },
         async (payload) => {
           try {
-            const { data: fullMsg, error } = await supabaseClient
+            var { data: fullMsg, error } = await supabaseClient
               .from('messages')
-              .select('*, profiles!inner(full_name, email)')
+              .select('*')
               .eq('id', payload.new.id)
               .single();
             if (error || !fullMsg) return;
+            await fetchProfilesForUserIds([fullMsg.user_id]);
+            attachProfileToMsg(fullMsg);
 
             const oid = fullMsg.order_id;
 
@@ -322,8 +328,8 @@ const NAGRIVA_Messages = (() => {
               } else {
                 conversations.unshift({
                   id: oid,
-                  clientName: fullMsg.profiles?.full_name || 'Unknown',
-                  clientEmail: fullMsg.profiles?.email || '',
+                  clientName: fullMsg._profileName || 'Unknown',
+                  clientEmail: fullMsg._profileEmail || '',
                   projectTitle: '',
                   orderNumber: '#' + oid.slice(0, 8),
                   lastMessage: fullMsg.message,
@@ -349,13 +355,12 @@ const NAGRIVA_Messages = (() => {
               if (!supportMessages[cid]) supportMessages[cid] = [];
               supportMessages[cid].push(fullMsg);
 
-              const profile = fullMsg.profiles || {};
               let existingConv = supportConversations.find(c => c.id === cid);
               if (!existingConv) {
                 existingConv = {
                   id: cid,
-                  clientName: profile.full_name || profile.email || 'Unknown User',
-                  clientEmail: profile.email || '',
+                  clientName: fullMsg._profileName || fullMsg._profileEmail || 'Unknown User',
+                  clientEmail: fullMsg._profileEmail || '',
                   lastMessage: null,
                   lastMessageTime: null,
                   lastSenderRole: null,
@@ -382,7 +387,7 @@ const NAGRIVA_Messages = (() => {
               if (activeSupportConvId === cid) renderActiveSupportConversation(cid);
 
               if (document.visibilityState !== 'visible' && typeof NAGRIVA_Toast !== 'undefined') {
-                const sender = fullMsg.sender_role === 'client' ? (fullMsg.profiles?.full_name || 'Client') : 'NAGRIVA Support';
+                var sender = fullMsg.sender_role === 'client' ? (fullMsg._profileName || 'Client') : 'NAGRIVA Support';
                 NAGRIVA_Toast.info('New Message from ' + sender,
                   fullMsg.message.length > 60 ? fullMsg.message.substring(0, 60) + '...' : fullMsg.message,
                   { duration: 5000 }
@@ -476,13 +481,17 @@ const NAGRIVA_Messages = (() => {
   }
 
   async function loadMessages(orderId) {
-    const { data, error } = await supabaseClient
+    var { data, error } = await supabaseClient
       .from('messages')
-      .select('*, profiles!inner(full_name, email)')
+      .select('*')
       .eq('order_id', orderId)
       .order('created_at', { ascending: true });
     if (error) throw error;
-    messages[orderId] = data || [];
+    var msgs = data || [];
+    var userIds = msgs.map(function(m) { return m.user_id; });
+    await fetchProfilesForUserIds(userIds);
+    msgs.forEach(attachProfileToMsg);
+    messages[orderId] = msgs;
     return messages[orderId];
   }
 

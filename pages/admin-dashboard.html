@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/admin-invoices.css" />
   <link rel="stylesheet" href="../css/admin-auth.css" />
   <link rel="stylesheet" href="../css/admin-services.css" />
+  <link rel="stylesheet" href="../css/admin-settings.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/chatbot.css" />
   <link rel="stylesheet" href="../css/floating-elements.css" />
@@ -2715,9 +2716,445 @@
         </div>
 
         <!-- ═══ PAGE: SETTINGS ═══ -->
+        <!-- ═══ PAGE: SETTINGS ═══ -->
         <div class="page" id="page-settings">
-          <div class="page-header"><div><h1>Settings</h1><p>Configure your workspace.</p></div></div>
-          <div class="card status-placeholder"><i class="fas fa-cog"></i><h3>Settings</h3><p>Workspace settings coming in the next update.</p></div>
+          <div class="page-header">
+            <div>
+              <h1>Settings</h1>
+              <p>Manage your entire platform configuration — branding, payments, notifications &amp; more.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <div class="autosave-indicator" id="autosaveIndicator"><i class="fas fa-circle" style="font-size:6px;opacity:0.4;"></i> Autosave</div>
+            </div>
+          </div>
+
+          <div class="settings-layout" id="settingsContent">
+            <!-- Sidebar Tabs -->
+            <div class="settings-sidebar" id="settingsTabs" style="display:none;">
+              <button class="settings-tab active" data-section="general"><i class="fas fa-sliders-h"></i> <span>General</span></button>
+              <button class="settings-tab" data-section="branding"><i class="fas fa-palette"></i> <span>Branding</span></button>
+              <button class="settings-tab" data-section="support-chat"><i class="fas fa-comments"></i> <span>Support Chat</span></button>
+              <button class="settings-tab" data-section="orders"><i class="fas fa-shopping-bag"></i> <span>Orders</span></button>
+              <button class="settings-tab" data-section="payments"><i class="fas fa-credit-card"></i> <span>Payments</span></button>
+              <button class="settings-tab" data-section="notifications"><i class="fas fa-bell"></i> <span>Notifications</span></button>
+              <button class="settings-tab" data-section="seo"><i class="fas fa-search"></i> <span>SEO</span></button>
+              <button class="settings-tab" data-section="ai-assistant"><i class="fas fa-robot"></i> <span>AI Assistant</span></button>
+              <button class="settings-tab" data-section="content"><i class="fas fa-file-alt"></i> <span>Content</span></button>
+            </div>
+
+            <!-- Sections -->
+            <div class="settings-content" id="settingsSections" style="display:none;">
+
+              <!-- ═══ GENERAL ═══ -->
+              <div class="settings-section active" id="section-general">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>General Information</h2>
+                      <p>Basic platform details and contact information.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg">
+                      <label class="sfg-label">Company Name</label>
+                      <input type="text" class="sfg-input" id="set_company_name" placeholder="NAGRIVA" />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Support Email</label>
+                      <input type="email" class="sfg-input" id="set_support_email" placeholder="hello@nagriva.com" />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">WhatsApp Number</label>
+                      <input type="text" class="sfg-input" id="set_whatsapp" placeholder="+1234567890" />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Timezone</label>
+                      <select class="sfg-input" id="set_timezone"></select>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Language</label>
+                      <select class="sfg-input" id="set_language"></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Brand Assets</h2>
+                      <p>Upload your company logo and favicon.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Company Logo</label>
+                      <div class="sfg-upload">
+                        <div class="sfg-upload-preview large" id="set_logo_preview"><i class="fas fa-image placeholder-icon"></i></div>
+                        <div class="sfg-upload-info">
+                          <div class="sfg-upload-name" id="set_logo_name">No file selected</div>
+                          <div class="sfg-upload-size">Recommended: 200x50px PNG or SVG</div>
+                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload Logo</button>
+                          <input type="file" id="set_logo_input" accept="image/png,image/jpeg,image/svg+xml,image/webp" style="display:none;" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Favicon</label>
+                      <div class="sfg-upload">
+                        <div class="sfg-upload-preview" id="set_favicon_preview"><i class="fas fa-image placeholder-icon"></i></div>
+                        <div class="sfg-upload-info">
+                          <div class="sfg-upload-name" id="set_favicon_name">No file selected</div>
+                          <div class="sfg-upload-size">Recommended: 32x32px ICO or PNG</div>
+                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload Favicon</button>
+                          <input type="file" id="set_favicon_input" accept="image/png,image/jpeg,image/x-icon" style="display:none;" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ BRANDING ═══ -->
+              <div class="settings-section" id="section-branding">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Colors & Appearance</h2>
+                      <p>Customize the platform look and feel.</p>
+                    </div>
+                    <div class="badge">Live preview</div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg">
+                      <label class="sfg-label">Primary Color</label>
+                      <div class="sfg-color-wrap">
+                        <input type="color" class="sfg-color" id="set_primary_color" value="#00f5c4" />
+                        <span class="sfg-color-value" id="set_primary_display">#00f5c4</span>
+                      </div>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Secondary Color</label>
+                      <div class="sfg-color-wrap">
+                        <input type="color" class="sfg-color" id="set_secondary_color" value="#00c2a8" />
+                        <span class="sfg-color-value" id="set_secondary_display">#00c2a8</span>
+                      </div>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Glow Intensity</label>
+                      <div class="sfg-range-wrap">
+                        <input type="range" class="sfg-range" id="set_glow_intensity" min="0" max="200" value="100" />
+                        <span class="sfg-range-value" id="set_glow_value">100</span>
+                      </div>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Border Radius</label>
+                      <div class="sfg-range-wrap">
+                        <input type="range" class="sfg-range" id="set_border_radius" min="0" max="40" value="22" />
+                        <span class="sfg-range-value" id="set_radius_value">22</span>
+                      </div>
+                      <div class="sfg-hint">Controls card and button roundness (px)</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Theme Presets</h2>
+                      <p>Quick-switch between curated color schemes.</p>
+                    </div>
+                  </div>
+                  <div class="theme-presets"></div>
+                </div>
+              </div>
+
+              <!-- ═══ SUPPORT CHAT ═══ -->
+              <div class="settings-section" id="section-support-chat">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Chat Widget</h2>
+                      <p>Configure the support chat widget behavior.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form full">
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Enable Support Widget</div>
+                        <div class="sfg-toggle-desc">Show the chat widget across the platform.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_chat_enabled" aria-label="Toggle support widget"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Online Status</div>
+                        <div class="sfg-toggle-desc">Show support agents as online.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_chat_online" aria-label="Toggle online status"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Typing Indicator</div>
+                        <div class="sfg-toggle-desc">Show typing indicator for chat responses.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_chat_typing" aria-label="Toggle typing indicator"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Welcome Message</label>
+                      <textarea class="sfg-input" id="set_chat_welcome" placeholder="Hello! How can we help you today?" rows="2"></textarea>
+                    </div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Auto Reply</label>
+                      <textarea class="sfg-input" id="set_chat_auto_reply" placeholder="Thank you for your message. Our team will get back to you shortly." rows="2"></textarea>
+                    </div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Support Avatar</label>
+                      <div class="sfg-upload">
+                        <div class="sfg-upload-preview round" id="set_chat_avatar_preview"><i class="fas fa-user-circle placeholder-icon"></i></div>
+                        <div class="sfg-upload-info">
+                          <div class="sfg-upload-name" id="set_chat_avatar_name">No file selected</div>
+                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload Avatar</button>
+                          <input type="file" id="set_chat_avatar_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ ORDERS ═══ -->
+              <div class="settings-section" id="section-orders">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Order Defaults</h2>
+                      <p>Configure default order behavior and limits.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg">
+                      <label class="sfg-label">Default Order Status</label>
+                      <select class="sfg-input" id="set_default_status">
+                        <option value="pending">Pending</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="revision">Revision</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Revisions Limit</label>
+                      <input type="number" class="sfg-input" id="set_revisions_limit" min="0" max="20" placeholder="3" />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Default Deadline (days)</label>
+                      <input type="number" class="sfg-input" id="set_deadline_days" min="1" max="90" placeholder="14" />
+                    </div>
+                    <div class="sfg" style="justify-content:flex-end;">
+                      <div class="sfg-toggle" style="padding:0;">
+                        <div class="sfg-toggle-info">
+                          <div class="sfg-toggle-title">Auto-generate Order IDs</div>
+                          <div class="sfg-toggle-desc">Generate unique order IDs automatically.</div>
+                        </div>
+                        <button class="sfg-toggle-switch active" id="set_auto_order_ids" aria-label="Toggle auto-generate order IDs"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ PAYMENTS ═══ -->
+              <div class="settings-section" id="section-payments">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Payment Gateways</h2>
+                      <p>Configure payment providers and billing settings.</p>
+                    </div>
+                    <div class="badge">Sensitive</div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg">
+                      <label class="sfg-label">Currency</label>
+                      <select class="sfg-input" id="set_currency"></select>
+                    </div>
+                    <div class="sfg"></div>
+                    <div class="sfg full-width" style="margin-top:4px;">
+                      <label class="sfg-label" style="font-size:0.82rem;color:var(--gray2);">Stripe Keys</label>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Public Key</label>
+                      <input type="text" class="sfg-input" id="set_stripe_public" placeholder="pk_live_..." />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Secret Key</label>
+                      <input type="password" class="sfg-input" id="set_stripe_secret" placeholder="sk_live_..." />
+                    </div>
+                    <div class="sfg full-width" style="margin-top:4px;">
+                      <label class="sfg-label" style="font-size:0.82rem;color:var(--gray2);">PayPal Keys</label>
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Client ID</label>
+                      <input type="text" class="sfg-input" id="set_paypal_client" placeholder="PayPal Client ID" />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Secret</label>
+                      <input type="password" class="sfg-input" id="set_paypal_secret" placeholder="PayPal Secret" />
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg">
+                      <label class="sfg-label">Invoice Prefix</label>
+                      <input type="text" class="sfg-input" id="set_invoice_prefix" placeholder="INV-" />
+                    </div>
+                    <div class="sfg">
+                      <label class="sfg-label">Tax Percentage</label>
+                      <input type="number" class="sfg-input" id="set_tax_percentage" min="0" max="100" step="0.1" placeholder="0" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ NOTIFICATIONS ═══ -->
+              <div class="settings-section" id="section-notifications">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Notification Channels</h2>
+                      <p>Control how and when notifications are sent.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form full">
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Email Notifications</div>
+                        <div class="sfg-toggle-desc">Send email notifications for important updates.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_email_notifs" aria-label="Toggle email notifications"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Push Notifications</div>
+                        <div class="sfg-toggle-desc">Send push notifications to browsers.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_push_notifs" aria-label="Toggle push notifications"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Admin Alerts</div>
+                        <div class="sfg-toggle-desc">Send alerts for new orders, signups, and payments.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_admin_alerts" aria-label="Toggle admin alerts"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Sound Notifications</div>
+                        <div class="sfg-toggle-desc">Play notification sounds for real-time events.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_sound_notifs" aria-label="Toggle sound notifications"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ SEO ═══ -->
+              <div class="settings-section" id="section-seo">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>SEO & Meta</h2>
+                      <p>Control how your platform appears in search results.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Meta Title</label>
+                      <input type="text" class="sfg-input" id="set_meta_title" placeholder="NAGRIVA — Premium Digital Agency" maxlength="70" />
+                      <div class="sfg-hint">Recommended: 50-60 characters. <span id="meta_title_count">0</span>/70</div>
+                    </div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Meta Description</label>
+                      <textarea class="sfg-input" id="set_meta_desc" placeholder="Premium digital agency offering web design, SEO, branding..." rows="2" maxlength="160"></textarea>
+                      <div class="sfg-hint">Recommended: 150-160 characters. <span id="meta_desc_count">0</span>/160</div>
+                    </div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Google Analytics ID</label>
+                      <input type="text" class="sfg-input" id="set_ga_id" placeholder="G-XXXXXXXXXX" />
+                    </div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">OG Image</label>
+                      <div class="sfg-upload">
+                        <div class="sfg-upload-preview large" id="set_og_preview"><i class="fas fa-image placeholder-icon"></i></div>
+                        <div class="sfg-upload-info">
+                          <div class="sfg-upload-name" id="set_og_name">No file selected</div>
+                          <div class="sfg-upload-size">Recommended: 1200x630px PNG or JPEG</div>
+                          <button class="sfg-upload-btn"><i class="fas fa-upload"></i> Upload OG Image</button>
+                          <input type="file" id="set_og_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ AI ASSISTANT ═══ -->
+              <div class="settings-section" id="section-ai-assistant">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>AI Assistant</h2>
+                      <p>Configure the AI chatbot personality and features.</p>
+                    </div>
+                  </div>
+                  <div class="settings-form">
+                    <div class="sfg">
+                      <label class="sfg-label">Assistant Name</label>
+                      <input type="text" class="sfg-input" id="set_ai_name" placeholder="Nova" />
+                    </div>
+                    <div class="sfg"></div>
+                    <div class="sfg full-width">
+                      <label class="sfg-label">Personality Prompt</label>
+                      <textarea class="sfg-input" id="set_ai_prompt" placeholder="You are a helpful, professional digital agency assistant..." rows="4"></textarea>
+                      <div class="sfg-hint">This prompt defines how the AI behaves when talking to clients.</div>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle full-width">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Enable AI Suggestions</div>
+                        <div class="sfg-toggle-desc">Show AI-powered suggestions in the dashboard.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_ai_suggestions" aria-label="Toggle AI suggestions"></button>
+                    </div>
+                    <div class="sfg-divider"></div>
+                    <div class="sfg-toggle full-width">
+                      <div class="sfg-toggle-info">
+                        <div class="sfg-toggle-title">Smart Reply</div>
+                        <div class="sfg-toggle-desc">Enable AI-generated smart replies in messaging.</div>
+                      </div>
+                      <button class="sfg-toggle-switch active" id="set_smart_reply" aria-label="Toggle smart reply"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ CONTENT ═══ -->
+              <div class="settings-section" id="section-content">
+                <div class="settings-card">
+                  <div class="settings-card-header">
+                    <div>
+                      <h2>Website Content</h2>
+                      <p>Edit all visible text across your website. Changes update instantly.</p>
+                    </div>
+                    <div class="badge" id="contentSaveBadge" style="cursor:pointer;">Save All Changes</div>
+                  </div>
+                  <div id="contentEditor"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
       </div><!-- /content -->
@@ -3807,5 +4244,9 @@
   <script src="../modules/notifications/notifications-triggers.js"></script>
   <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
   <script src="../js/footer.js"></script>
+  <script src="../modules/settings/settings-api.js"></script>
+  <script src="../modules/content/content-api.js"></script>
+  <script src="../js/content-loader.js"></script>
+  <script src="../js/admin-settings.js"></script>
 </body>
 </html>
