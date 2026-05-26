@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" />
   <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
   <link rel="stylesheet" href="../components/activity-feed/activity-feed.css" />
+  <link rel="stylesheet" href="../css/global-search.css" />
   <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
   <style>
     *,
@@ -2295,10 +2296,13 @@
           <div class="topbar-title">Dashboard <span>/ overview</span></div>
         </div>
         <div class="topbar-center">
-          <div class="topbar-search">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search orders, clients..." />
-            <span style="font-size:0.65rem;color:var(--gray3);padding:2px 6px;border:1px solid var(--border);border-radius:4px;">⌘K</span>
+          <div class="global-search-wrap" id="globalSearchWrap">
+            <div class="topbar-search">
+              <i class="fas fa-search"></i>
+              <input type="text" id="globalSearchInput" placeholder="Search orders, clients..." autocomplete="off" />
+              <span class="gs-hint-badge" id="globalSearchHint">⌘K</span>
+            </div>
+            <div class="global-search-dropdown" id="globalSearchDropdown"></div>
           </div>
         </div>
         <div class="topbar-right">
@@ -3725,6 +3729,7 @@
   <script src="../js/admin-invoices.js"></script>
   <script src="../modules/navbar/navbar-api.js"></script>
   <script src="../js/admin-navbar.js"></script>
+  <script src="../modules/search/global-search.js"></script>
   <script src="../components/client-drawer/client-drawer.js"></script>
   <script src="../js/i18n.js"></script>
   <script>
@@ -3796,6 +3801,7 @@
           overlay.classList.remove('open');
         }
       }
+      window.switchPage = switchPage;
 
       sidebarItems.forEach(item => {
         item.addEventListener('click', function() {
