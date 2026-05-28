@@ -680,14 +680,14 @@ const NAGRIVA_NotificationsDropdown = (() => {
   };
 })();
 
-/* ─── Auto-init on DOM ready ─── */
+/* ─── Auto-init after dynamic navbar loads ─── */
 (function autoInit() {
-  if (!document.getElementById('navbar')) return;
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      NAGRIVA_NotificationsDropdown.init();
-    });
-  } else {
+  function start() {
     NAGRIVA_NotificationsDropdown.init();
+  }
+  if (document.getElementById('navbar')) {
+    start();
+  } else {
+    document.addEventListener('navbar:loaded', start, { once: true });
   }
 })();

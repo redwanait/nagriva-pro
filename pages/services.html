@@ -16,48 +16,9 @@
   <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" />
   <link rel="icon" type="image/png" href="/assets/images/branding/nagriva-logo.png" />
 </head>
-<body>
+<body data-page="services">
 
-  <!-- ══════════════════════════ NAVBAR ══════════════════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="/" class="nav-logo">
-        <span class="logo-icon">
-          <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA logo" />
-        </span>
-        <span class="logo-text">NAGRIVA</span>
-      </a>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link nav-dropdown-toggle">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></a>
-          <div class="nav-dropdown-menu">
-            <a href="/pages/web-design.html" class="nav-dropdown-item">Web Design</a>
-            <a href="/pages/seo.html" class="nav-dropdown-item">SEO</a>
-            <a href="/pages/branding.html" class="nav-dropdown-item">Branding</a>
-            <a href="/pages/ai-automation.html" class="nav-dropdown-item">AI Automation</a>
-            <a href="/pages/social-media.html" class="nav-dropdown-item">Social Media</a>
-          </div>
-        </li>
-        <li><a href="/#results" class="nav-link">Results</a></li>
-        <li><a href="/#pricing" class="nav-link">Pricing</a></li>
-        <li><a href="/#contact" class="nav-link">Contact</a></li>
-        <li><a href="/pages/blog.html" class="nav-link">Blog</a></li>
-      </ul>
-
-      <div class="nav-right">
-        <a href="/pages/login.html" class="btn-auth" id="authBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span>Sign In</span>
-        </a>
-      </div>
-
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <div id="navbar-container"></div>
 
   <!-- ══════════════════════════ SERVICES HERO ══════════════════════════ -->
   <section class="services-page-hero section">
@@ -113,6 +74,7 @@
   <script src="../js/content-loader.js"></script>
   <script src="/js/floating-elements.js"></script>
   <script src="/js/chatbot.js"></script>
+  <script src="/js/navbar.js"></script>
   <script src="/js/footer.js"></script>
 </body>
 </html>

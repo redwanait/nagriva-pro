@@ -50,6 +50,7 @@ const NagrivaAuth = (() => {
     refs.dropdownAvatar = document.getElementById('dropdownAvatar');
     refs.signoutBtn = document.getElementById('signoutBtn');
 
+    refs.bookBtn = document.getElementById('bookBtn');
     refs.mobileAuthBtn = document.getElementById('mobileAuthBtn');
     refs.mobileAuthText = document.getElementById('mobileAuthText');
 
@@ -215,7 +216,6 @@ const NagrivaAuth = (() => {
       if (refs.userAvatar) refs.userAvatar.classList.add('visible');
       if (refs.userName) refs.userName.textContent = displayName;
 
-      /* Use centralized avatar renderer (ProfileAvatar) if available, else fallback to initials */
       if (typeof ProfileAvatar !== 'undefined') {
         ProfileAvatar.setAvatarImage(refs.userImg, avatarUrl, displayName);
       } else if (refs.userImg) {
@@ -232,9 +232,13 @@ const NagrivaAuth = (() => {
       }
 
       if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = 'none';
+
+      /* Ensure Book a Call CTA stays visible for authenticated users */
+      if (refs.bookBtn) refs.bookBtn.style.display = '';
     } else {
       if (refs.authBtn) refs.authBtn.style.display = '';
       if (refs.userAvatar) refs.userAvatar.classList.remove('visible');
+      if (refs.bookBtn) refs.bookBtn.style.display = '';
       if (refs.mobileAuthBtn) {
         refs.mobileAuthBtn.style.display = '';
         if (refs.mobileAuthText) refs.mobileAuthText.textContent = 'Sign In';
@@ -587,13 +591,48 @@ const NagrivaAuth = (() => {
 
   function closeDropdown() {
     if (refs.dropdown) refs.dropdown.classList.remove('open');
+    if (refs.userAvatar) refs.userAvatar.setAttribute('aria-expanded', 'false');
+  }
+
+  function openDropdown() {
+    if (refs.dropdown) refs.dropdown.classList.add('open');
+    if (refs.userAvatar) refs.userAvatar.setAttribute('aria-expanded', 'true');
+    /* Close notification dropdown if open */
+    if (typeof NAGRIVA_NotificationsDropdown !== 'undefined') {
+      NAGRIVA_NotificationsDropdown.close();
+    }
+  }
+
+  function _onDropdownKeydown(e) {
+    if (e.key === 'Escape') closeDropdown();
+  }
+
+  function _onDropdownOutsideClick(e) {
+    if (refs.userAvatar && !refs.userAvatar.contains(e.target) && refs.dropdown?.classList.contains('open')) {
+      closeDropdown();
+    }
   }
 
   function initDropdown() {
     if (refs.userAvatar) {
-      refs.userAvatar.addEventListener('click', (e) => {
+      refs.userAvatar.addEventListener('click', function(e) {
         e.stopPropagation();
-        refs.dropdown?.classList.toggle('open');
+        if (refs.dropdown?.classList.contains('open')) {
+          closeDropdown();
+        } else {
+          openDropdown();
+        }
+      });
+      refs.userAvatar.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          if (refs.dropdown?.classList.contains('open')) {
+            closeDropdown();
+          } else {
+            openDropdown();
+          }
+        }
       });
     }
 
@@ -601,11 +640,8 @@ const NagrivaAuth = (() => {
       refs.signoutBtn.addEventListener('click', handleSignOut);
     }
 
-    document.addEventListener('click', (e) => {
-      if (refs.userAvatar && !refs.userAvatar.contains(e.target)) {
-        refs.dropdown?.classList.remove('open');
-      }
-    });
+    document.addEventListener('keydown', _onDropdownKeydown);
+    document.addEventListener('click', _onDropdownOutsideClick);
   }
 
   /* ════════════════════════════════════════════
@@ -691,21 +727,31 @@ const NagrivaAuth = (() => {
 
   /* ─── Dropdown Navigation Links ─── */
   function initDropdownNav() {
-    const NAV_MAP = {
-      'My Profile': '/pages/profile.html',
-      'Dashboard': '/pages/dashboard.html',
-      'Notifications': '/pages/notifications.html',
-      'Settings': '/pages/settings.html'
+    var NAV_MAP = {
+      'profile': '/pages/profile.html',
+      'dashboard': '/pages/dashboard.html',
+      'notifications': '/pages/notifications.html',
+      'settings': '/pages/settings.html'
     };
-    document.querySelectorAll('.user-dropdown-item').forEach(item => {
-      const text = item.textContent.trim();
-      const href = NAV_MAP[text];
+    document.querySelectorAll('.user-dropdown-item[data-nav]').forEach(function(item) {
+      var nav = item.getAttribute('data-nav');
+      var href = NAV_MAP[nav];
       if (href) {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          closeDropdown();
           window.location.href = href;
         });
       }
     });
+  }
+
+  /* ─── Re-bind navbar-specific events after navbar loads ─── */
+  function initNavbarUI() {
+    cacheRefs();
+    initDropdown();
+    initDropdownNav();
+    updateUI();
   }
 
   /* ─── Init ─── */
@@ -717,8 +763,6 @@ const NagrivaAuth = (() => {
     initForgotLinks();
     initFormFooterLinks();
     initModalControls();
-    initDropdown();
-    initDropdownNav();
     initGoogleOAuth();
     initGitHubOAuth();
 
@@ -735,6 +779,12 @@ const NagrivaAuth = (() => {
     /* Handle redirect after login params */
     handleRedirect();
   }
+
+  /* ─── Re-init navbar-dependent UI when the dynamic navbar loads ─── */
+  document.addEventListener('navbar:loaded', function onNavbarLoad() {
+    document.removeEventListener('navbar:loaded', onNavbarLoad);
+    initNavbarUI();
+  });
 
   /* ─── Public API ─── */
   return {

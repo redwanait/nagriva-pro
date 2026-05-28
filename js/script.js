@@ -18,8 +18,6 @@ const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').m
 
 /* ─── DOM READY ─── */
 document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initHamburger();
   initScrollAnimations();
   initCounters();
   initFAQ();
@@ -29,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectModals();
   initServiceCTA();
   initHomepageServices();
+});
+
+/* ─── Navbar-dependent inits (wait for dynamic navbar to load) ─── */
+document.addEventListener('navbar:loaded', () => {
+  initNavbar();
+  initHamburger();
 });
 
 /* ════════════════════════════════════════════

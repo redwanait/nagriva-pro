@@ -10,6 +10,11 @@
   --auth-glow: rgba(0,245,196,0.15);
 }
 
+/* ─── Book a Call CTA — always visible regardless of auth state ─── */
+.btn-book {
+  display: inline-flex;
+}
+
 /* ─── Auth Button in Navbar ─── */
 .btn-auth {
   display: inline-flex;
@@ -99,21 +104,21 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  width: 250px;
-  background: rgba(8,12,12,0.94);
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.06);
+  width: 264px;
+  background: rgba(6,10,10,0.95);
+  backdrop-filter: blur(36px) saturate(200%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 18px;
-  padding: 6px;
+  padding: 8px;
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px) scale(0.96);
   transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
   box-shadow:
-    0 24px 80px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(0,245,196,0.03),
-    0 0 40px rgba(0,245,196,0.03);
+    0 24px 80px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(0,245,196,0.04),
+    0 0 60px rgba(0,0,0,0.3);
   z-index: 1001;
 }
 .user-dropdown.open {
@@ -124,78 +129,115 @@
 .user-dropdown-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 12px;
+  padding: 12px 14px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   margin-bottom: 4px;
 }
 .user-dropdown-avatar {
-  width: 36px; height: 36px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--bg);
   flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(0,245,196,0.08);
 }
 .user-dropdown-info { flex: 1; min-width: 0; }
 .user-dropdown-name {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--white);
-  line-height: 1.2;
+  line-height: 1.3;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .user-dropdown-email {
   font-size: 0.7rem;
-  color: var(--gray2);
+  color: rgba(255,255,255,0.3);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 1px;
 }
 .user-dropdown-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 10px 14px;
   border-radius: 10px;
   font-size: 0.82rem;
   color: var(--gray);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   background: none;
   border: none;
   width: 100%;
   text-align: left;
   font-family: inherit;
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.user-dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 .user-dropdown-item:hover {
   background: rgba(255,255,255,0.04);
   color: var(--white);
 }
+.user-dropdown-item:hover::before {
+  opacity: 0.5;
+}
 .user-dropdown-item svg {
   flex-shrink: 0;
+  width: 18px;
+  height: 18px;
   color: var(--gray2);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
-.user-dropdown-item:hover svg { color: var(--accent); }
+.user-dropdown-item:hover svg {
+  color: var(--accent);
+  transform: translateX(2px);
+}
 .user-dropdown-divider {
   height: 1px;
-  background: rgba(255,255,255,0.04);
-  margin: 4px 12px;
+  background: rgba(255,255,255,0.08);
+  margin: 4px 14px 6px;
 }
-.user-dropdown-item.signout { color: rgba(255,100,100,0.7); }
+.user-dropdown-item.signout {
+  color: rgba(255,100,100,0.6);
+  margin-top: 2px;
+}
+.user-dropdown-item.signout::before {
+  display: none;
+}
 .user-dropdown-item.signout:hover {
-  background: rgba(255,80,80,0.06);
-  color: #ff6464;
+  background: rgba(255,80,80,0.07);
+  color: #ff7070;
 }
-.user-dropdown-item.signout:hover svg { color: #ff6464; }
+.user-dropdown-item.signout:hover svg {
+  color: #ff7070;
+  transform: none;
+}
+.user-dropdown-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
 
 /* ════════════════════════════════════════════
    AUTH MODAL — OVERLAY & BACKDROP

@@ -208,7 +208,10 @@ const ProfileAvatar = (() => {
    ════════════════════════════════════════════ */
   async function init() {
     currentUser = NagrivaAuth.getUser();
-    if (currentUser) {
+    if (!currentUser) return;
+
+    var container = document.getElementById('navbar-container');
+    if (container && container.children.length > 0) {
       setup();
     }
   }
@@ -216,7 +219,7 @@ const ProfileAvatar = (() => {
   function initAuthListener() {
     window.supabaseClient.auth.onAuthStateChange(function(event) {
       if (event === 'SIGNED_IN') {
-        setup();
+        onNavbarReady();
       } else if (event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
         currentUser = NagrivaAuth.getUser();
         if (currentUser) {
@@ -227,6 +230,14 @@ const ProfileAvatar = (() => {
         refreshAll();
       }
     });
+  }
+
+  /* ─── Called when navbar is guaranteed to be in the DOM ─── */
+  function onNavbarReady() {
+    currentUser = NagrivaAuth.getUser();
+    if (currentUser) {
+      setup();
+    }
   }
 
   /* ─── Auto-init ─── */
@@ -240,6 +251,10 @@ const ProfileAvatar = (() => {
       init();
       if (window.supabaseClient) initAuthListener();
     }
+
+    /* If user is already signed in but navbar loaded after profile-avatar,
+       wait for the dynamic navbar to appear before rendering avatars */
+    document.addEventListener('navbar:loaded', onNavbarReady);
   }
 
   autoInit();

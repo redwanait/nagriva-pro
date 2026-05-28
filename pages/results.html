@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results — NAGRIVA</title>
+  <meta name="description" content="Real results for modern brands. Case studies, growth metrics, and proven performance across web design, SEO, branding, and automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" />
+  <link rel="stylesheet" href="/css/floating-elements.css" />
+  <link rel="stylesheet" href="/css/admin-auth.css" />
+  <link rel="stylesheet" href="/css/auth.css" />
+  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" />
+  <link rel="icon" type="image/png" href="/assets/images/branding/nagriva-logo.png" />
+  <style>
+    /* ════════════════════════════════════════════════════════
+       RESULTS PAGE — Premium Portfolio Styles
+    ════════════════════════════════════════════════════════ */
+
+    /* ─── Hero ─── */
+    .results-hero {
+      position: relative;
+      padding: 160px 0 80px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .results-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .results-hero-glow {
+      position: absolute;
+      top: -200px;
+      right: -100px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,196,0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+    .results-hero-glow-2 {
+      position: absolute;
+      bottom: -120px;
+      left: -200px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,245,196,0.06) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: glowPulse2 12s ease-in-out infinite;
+    }
+    .results-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 60% 40%, rgba(0,0,0,0.5) 0%, transparent 70%);
+    }
+    .results-hero .container { position: relative; z-index: 1; }
+
+    .results-hero-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 56px;
+    }
+    .results-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.2);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .results-hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .results-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .results-hero-title span {
+      background: linear-gradient(135deg, #00f5c4 0%, #00c2a8 50%, #4facfe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .results-hero-sub {
+      font-size: 1.08rem;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+    .results-hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .results-hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .results-hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+    .results-hero-trust-item svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ─── Hero Metrics Bar ─── */
+    .results-hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .results-hero-metric {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .results-hero-metric:hover {
+      border-color: rgba(0,245,196,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(0,245,196,0.05);
+    }
+    .results-hero-metric-value {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .results-hero-metric-label {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* ─── Case Studies ─── */
+    .results-case-studies {
+      position: relative;
+      padding: 120px 0;
+      background: var(--bg2);
+      overflow: hidden;
+    }
+    .results-case-studies::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 900px;
+      height: 900px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,245,196,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ─── Case Study Card (Premium) ─── */
+    .cs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .cs-card {
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cs-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.04) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .cs-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.4);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 50px rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.08);
+    }
+    .cs-card:hover::before { opacity: 1; }
+    .cs-full { grid-column: 1 / -1; }
+
+    .cs-visual {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .cs-full .cs-visual { height: 280px; }
+    .cs-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cs-card:hover .cs-visual img { transform: scale(1.04); }
+    .cs-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(4,4,4,0.08) 0%, rgba(4,4,4,0.22) 50%, rgba(4,4,4,0.82) 100%);
+      pointer-events: none;
+    }
+    .cs-visual-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.1) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.4;
+      transition: opacity 0.5s ease;
+    }
+    .cs-card:hover .cs-visual-glow { opacity: 1; }
+
+    .cs-body {
+      padding: 22px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+    .cs-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cs-accent, var(--accent));
+      background: rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.08);
+      border: 1px solid rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.2);
+      padding: 4px 10px;
+      border-radius: 99px;
+      width: fit-content;
+    }
+    .cs-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+    .cs-full .cs-title { font-size: 1.3rem; }
+    .cs-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .cs-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .cs-service-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--gray2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    .cs-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .cs-metric {
+      text-align: center;
+      padding: 10px 8px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .cs-card:hover .cs-metric {
+      border-color: rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.12);
+      background: rgba(var(--cs-accent-r,0),var(--cs-accent-g,245),var(--cs-accent-b,196),0.03);
+    }
+    .cs-metric-value {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cs-accent, var(--accent));
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    .cs-metric-label {
+      display: block;
+      font-size: 0.62rem;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    /* ─── Case Study Accent Colors ─── */
+    .cs-velour { --cs-accent: #00f5c4; --cs-accent-r: 0; --cs-accent-g: 245; --cs-accent-b: 196; }
+    .cs-nomad  { --cs-accent: #4facfe; --cs-accent-r: 79; --cs-accent-g: 172; --cs-accent-b: 254; }
+    .cs-pulse  { --cs-accent: #a855f7; --cs-accent-r: 168; --cs-accent-g: 85; --cs-accent-b: 247; }
+    .cs-bite   { --cs-accent: #f97316; --cs-accent-r: 249; --cs-accent-g: 115; --cs-accent-b: 22; }
+    .cs-vault  { --cs-accent: #00d4ff; --cs-accent-r: 0; --cs-accent-g: 212; --cs-accent-b: 255; }
+
+    /* ─── Before / After Section ─── */
+    .results-ba {
+      position: relative;
+      padding: 120px 0;
+      overflow: hidden;
+    }
+    .results-ba-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(0,245,196,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+    .ba-card {
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 36px 32px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ba-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(0,245,196,0.04);
+    }
+    .ba-card-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray2);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ba-card-label svg { width: 14px; height: 14px; }
+    .ba-label-before { color: rgba(255,100,100,0.6); }
+    .ba-label-after { color: var(--accent); }
+
+    .ba-kpi {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ba-kpi-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .ba-kpi-row:last-child { border-bottom: none; }
+    .ba-kpi-name {
+      font-size: 0.85rem;
+      color: var(--gray);
+      min-width: 100px;
+    }
+    .ba-kpi-values {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .ba-kpi-val {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .ba-val-before {
+      color: rgba(255,255,255,0.3);
+    }
+    .ba-val-after {
+      color: var(--accent);
+    }
+    .ba-kpi-arrow {
+      color: var(--gray2);
+      font-size: 0.8rem;
+    }
+    .ba-kpi-change {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(0,245,196,0.1);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .ba-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .ba-chart-box {
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+    .ba-chart-box:hover {
+      border-color: rgba(0,245,196,0.15);
+    }
+    .ba-chart-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .ba-chart-value.before { color: rgba(255,255,255,0.2); }
+    .ba-chart-value.after { color: var(--accent); }
+    .ba-chart-label {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-top: 6px;
+    }
+    .ba-chart-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.15);
+      padding: 4px 10px;
+      border-radius: 99px;
+      margin-top: 10px;
+    }
+
+    .ba-kpi-card {
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 20px 20px;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+    .ba-kpi-card:hover {
+      border-color: rgba(0,245,196,0.15);
+    }
+    .ba-kpi-card-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .ba-kpi-card-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+    .ba-kpi-card-sub {
+      font-size: 0.65rem;
+      color: var(--gray2);
+      margin-top: 2px;
+    }
+
+    /* ─── Testimonials ─── */
+    .results-testimonials {
+      position: relative;
+      padding: 120px 0;
+      background: var(--bg2);
+      overflow: hidden;
+    }
+    .results-testimonials::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(0,245,196,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .rt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .rt-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+    .rt-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      box-shadow: 0 0 30px rgba(0,245,196,0.05), 0 20px 40px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+    }
+    .rt-card-glow {
+      position: absolute;
+      inset: -1px;
+      border-radius: 19px;
+      background: linear-gradient(135deg, rgba(0,245,196,0.04) 0%, transparent 40%, transparent 60%, rgba(0,245,196,0.02) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .rt-card:hover .rt-card-glow { opacity: 1; }
+    .rt-stars {
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1;
+    }
+    .rt-text {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.7;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .rt-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      z-index: 1;
+    }
+    .rt-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .rt-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .rt-role {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-top: 1px;
+    }
+
+    /* ─── Animated Metrics Section ─── */
+    .results-metrics {
+      position: relative;
+      padding: 120px 0;
+      overflow: hidden;
+    }
+    .results-metrics-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(0,245,196,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .rm-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .rm-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 32px 16px;
+      text-align: center;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .rm-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(0,245,196,0.05);
+    }
+    .rm-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,245,196,0.07);
+      border: 1px solid rgba(0,245,196,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      color: var(--accent);
+    }
+    .rm-num {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      display: inline;
+    }
+    .rm-plus {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: inline;
+      margin-left: 1px;
+    }
+    .rm-percent {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline;
+    }
+    .rm-label {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    /* ─── CTA Section ─── */
+    .results-cta {
+      position: relative;
+      padding: 140px 0;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .results-cta-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .results-cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0,245,196,0.08) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+    .results-cta-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.4) 0%, transparent 70%);
+    }
+    .results-cta .container { position: relative; z-index: 1; text-align: center; }
+    .results-cta-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .results-cta-title span {
+      background: linear-gradient(135deg, #00f5c4 0%, #00c2a8 50%, #4facfe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .results-cta-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .results-cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .results-hero-metrics { grid-template-columns: repeat(2, 1fr); }
+      .cs-grid { grid-template-columns: 1fr; }
+      .cs-full { grid-column: 1; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .rt-grid { grid-template-columns: repeat(2, 1fr); }
+      .rm-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .results-hero { padding: 120px 0 60px; }
+      .results-hero-metrics { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .results-hero-metric { padding: 20px 16px; }
+      .results-case-studies { padding: 80px 0; }
+      .results-ba { padding: 80px 0; }
+      .results-testimonials { padding: 80px 0; }
+      .results-metrics { padding: 80px 0; }
+      .results-cta { padding: 100px 0; }
+      .cs-visual { height: 180px; }
+      .cs-full .cs-visual { height: 220px; }
+      .ba-card { padding: 24px 20px; }
+      .ba-visual { grid-template-columns: 1fr; }
+      .rt-grid { grid-template-columns: 1fr; }
+      .rm-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .results-hero-trust { gap: 16px; }
+      .cs-metrics { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .cs-metric { padding: 8px 6px; }
+      .cs-metric-value { font-size: 0.95rem; }
+    }
+    @media (max-width: 480px) {
+      .results-hero-metrics { grid-template-columns: 1fr 1fr; }
+      .rm-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body data-page="results">
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 1: HERO
+  ════════════════════════════════════════════════════════════ -->
+  <section class="results-hero">
+    <div class="results-hero-bg">
+      <div class="results-hero-glow"></div>
+      <div class="results-hero-glow-2"></div>
+      <div class="results-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="results-hero-content fade-up">
+        <div class="results-hero-badge">
+          <span class="results-hero-badge-dot"></span>
+          Case Studies & Impact
+        </div>
+        <h1 class="results-hero-title">Real Results For <span>Modern Brands</span></h1>
+        <p class="results-hero-sub">Measurable growth across web design, SEO, branding, AI automation, and performance marketing — delivered for ambitious businesses.</p>
+        <div class="results-hero-actions">
+          <a href="#case-studies" class="btn-primary">
+            View Case Studies
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/#contact" class="btn-secondary">
+            Start a Project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="results-hero-trust">
+          <span class="results-hero-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            50+ Projects Delivered
+          </span>
+          <span class="results-hero-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            98% Client Satisfaction
+          </span>
+          <span class="results-hero-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            4.9★ Avg. Rating
+          </span>
+        </div>
+      </div>
+
+      <div class="results-hero-metrics fade-up">
+        <div class="results-hero-metric">
+          <div class="results-hero-metric-value">$18M+</div>
+          <div class="results-hero-metric-label">Revenue Generated</div>
+        </div>
+        <div class="results-hero-metric">
+          <div class="results-hero-metric-value">340%</div>
+          <div class="results-hero-metric-label">Avg. ROI</div>
+        </div>
+        <div class="results-hero-metric">
+          <div class="results-hero-metric-value">12K+</div>
+          <div class="results-hero-metric-label">Monthly Traffic</div>
+        </div>
+        <div class="results-hero-metric">
+          <div class="results-hero-metric-value">4.8x</div>
+          <div class="results-hero-metric-label">Avg. ROAS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 2: FEATURED CASE STUDIES
+  ════════════════════════════════════════════════════════════ -->
+  <section class="results-case-studies section" id="case-studies">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Featured Work</div>
+        <h2 class="section-title">Case <span class="text-gradient">Studies</span></h2>
+        <p class="section-desc">Real projects. Real metrics. Every engagement is designed to deliver measurable business impact.</p>
+      </div>
+
+      <div class="cs-grid">
+        <!-- VELOUR -->
+        <div class="cs-card cs-velour cs-full fade-up" style="--delay:0.07s">
+          <div class="cs-visual">
+            <img src="/assets/images/projects/VELOUR%20%E2%80%94%20E-Commerce%20Experience.svg" alt="VELOUR E-Commerce Experience" loading="lazy" />
+            <div class="cs-visual-overlay"></div>
+            <div class="cs-visual-glow"></div>
+          </div>
+          <div class="cs-body">
+            <span class="cs-category">✦ Fashion & Luxury</span>
+            <h3 class="cs-title">VELOUR — E-Commerce Experience</h3>
+            <p class="cs-desc">A luxury e-commerce platform designed for a premium fashion brand. Every interaction, from browse to checkout, is crafted to reflect elegance and drive conversion.</p>
+            <div class="cs-services">
+              <span class="cs-service-tag">Web Design</span>
+              <span class="cs-service-tag">Brand Identity</span>
+              <span class="cs-service-tag">Performance Marketing</span>
+            </div>
+            <div class="cs-metrics">
+              <div class="cs-metric">
+                <span class="cs-metric-value">3.2x</span>
+                <span class="cs-metric-label">Conversion</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">+186%</span>
+                <span class="cs-metric-label">Revenue Growth</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">+40%</span>
+                <span class="cs-metric-label">Avg. Order Value</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOMAD -->
+        <div class="cs-card cs-nomad fade-up" style="--delay:0.14s">
+          <div class="cs-visual">
+            <img src="/assets/images/projects/NOMAD%20%E2%80%94%20Travel%20Booking%20Platform.svg" alt="NOMAD Travel Booking Platform" loading="lazy" />
+            <div class="cs-visual-overlay"></div>
+            <div class="cs-visual-glow"></div>
+          </div>
+          <div class="cs-body">
+            <span class="cs-category">✦ Travel & Hospitality</span>
+            <h3 class="cs-title">NOMAD — Travel Booking Platform</h3>
+            <p class="cs-desc">A seamless booking platform that simplifies itinerary management and delivers personalized recommendations.</p>
+            <div class="cs-services">
+              <span class="cs-service-tag">Web Design</span>
+              <span class="cs-service-tag">SEO</span>
+              <span class="cs-service-tag">AI Automation</span>
+            </div>
+            <div class="cs-metrics">
+              <div class="cs-metric">
+                <span class="cs-metric-value">2.5x</span>
+                <span class="cs-metric-label">Booking Conv.</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">60%</span>
+                <span class="cs-metric-label">Faster Checkout</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">4.7★</span>
+                <span class="cs-metric-label">User Rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PULSE -->
+        <div class="cs-card cs-pulse fade-up" style="--delay:0.21s">
+          <div class="cs-visual">
+            <img src="/assets/images/projects/Pulse%20%E2%80%94%20Analytics%20Dashboard.svg" alt="Pulse Analytics Dashboard" loading="lazy" />
+            <div class="cs-visual-overlay"></div>
+            <div class="cs-visual-glow"></div>
+          </div>
+          <div class="cs-body">
+            <span class="cs-category">✦ Data & Analytics</span>
+            <h3 class="cs-title">Pulse — Analytics Dashboard</h3>
+            <p class="cs-desc">Enterprise-grade analytics with real-time data visualization, customizable reports, and AI-powered insights.</p>
+            <div class="cs-services">
+              <span class="cs-service-tag">Web Design</span>
+              <span class="cs-service-tag">AI Automation</span>
+            </div>
+            <div class="cs-metrics">
+              <div class="cs-metric">
+                <span class="cs-metric-value">45%</span>
+                <span class="cs-metric-label">Faster Reports</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">10K+</span>
+                <span class="cs-metric-label">Daily Users</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">99.9%</span>
+                <span class="cs-metric-label">Uptime SLA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BITE -->
+        <div class="cs-card cs-bite fade-up" style="--delay:0.28s">
+          <div class="cs-visual">
+            <img src="/assets/images/projects/Bite%20%E2%80%94%20Food%20Delivery%20App.svg" alt="Bite Food Delivery App" loading="lazy" />
+            <div class="cs-visual-overlay"></div>
+            <div class="cs-visual-glow"></div>
+          </div>
+          <div class="cs-body">
+            <span class="cs-category">✦ Food & Mobile</span>
+            <h3 class="cs-title">Bite — Food Delivery App</h3>
+            <p class="cs-desc">Modern food delivery platform with intelligent order routing, real-time tracking, and dynamic recommendations.</p>
+            <div class="cs-services">
+              <span class="cs-service-tag">Web Design</span>
+              <span class="cs-service-tag">Performance Marketing</span>
+            </div>
+            <div class="cs-metrics">
+              <div class="cs-metric">
+                <span class="cs-metric-value">3x</span>
+                <span class="cs-metric-label">Daily Orders</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">4.8★</span>
+                <span class="cs-metric-label">App Rating</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">35%</span>
+                <span class="cs-metric-label">Repeat Rate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VAULT -->
+        <div class="cs-card cs-vault cs-full fade-up" style="--delay:0.35s">
+          <div class="cs-visual">
+            <img src="/assets/images/projects/Vault%20%E2%80%94%20Fintech%20Dashboard.svg" alt="Vault Fintech Dashboard" loading="lazy" />
+            <div class="cs-visual-overlay"></div>
+            <div class="cs-visual-glow"></div>
+          </div>
+          <div class="cs-body">
+            <span class="cs-category">✦ Fintech & Security</span>
+            <h3 class="cs-title">Vault — Fintech Dashboard</h3>
+            <p class="cs-desc">Premium fintech dashboard combining advanced trading features with bank-grade security, real-time portfolio tracking, and intelligent risk management.</p>
+            <div class="cs-services">
+              <span class="cs-service-tag">Web Design</span>
+              <span class="cs-service-tag">Brand Identity</span>
+              <span class="cs-service-tag">SEO</span>
+            </div>
+            <div class="cs-metrics">
+              <div class="cs-metric">
+                <span class="cs-metric-value">$2M+</span>
+                <span class="cs-metric-label">Assets Managed</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">99.9%</span>
+                <span class="cs-metric-label">Platform Uptime</span>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-value">4.9★</span>
+                <span class="cs-metric-label">Security Rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 3: BEFORE / AFTER
+  ════════════════════════════════════════════════════════════ -->
+  <section class="results-ba section">
+    <div class="results-ba-bg"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Growth Metrics</div>
+        <h2 class="section-title">Before & <span class="text-gradient">After</span></h2>
+        <p class="section-desc">Real performance improvements across key KPIs — measured before and after our engagement.</p>
+      </div>
+
+      <div class="ba-grid">
+        <div class="ba-card fade-up">
+          <div class="ba-card-label ba-label-before">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Before Engagement
+          </div>
+          <div class="ba-kpi">
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Monthly Traffic</span>
+              <span class="ba-kpi-val ba-val-before">2,400</span>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Conversion Rate</span>
+              <span class="ba-kpi-val ba-val-before">1.2%</span>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Revenue / Month</span>
+              <span class="ba-kpi-val ba-val-before">$12K</span>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Lead Generation</span>
+              <span class="ba-kpi-val ba-val-before">45/mo</span>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Page Load Time</span>
+              <span class="ba-kpi-val ba-val-before">4.2s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ba-card fade-up" style="--delay:0.15s">
+          <div class="ba-card-label ba-label-after">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            After Engagement
+          </div>
+          <div class="ba-kpi">
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Monthly Traffic</span>
+              <div class="ba-kpi-values">
+                <span class="ba-kpi-val ba-val-after">12,800</span>
+                <span class="ba-kpi-arrow">→</span>
+                <span class="ba-kpi-change">+433%</span>
+              </div>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Conversion Rate</span>
+              <div class="ba-kpi-values">
+                <span class="ba-kpi-val ba-val-after">4.8%</span>
+                <span class="ba-kpi-arrow">→</span>
+                <span class="ba-kpi-change">+300%</span>
+              </div>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Revenue / Month</span>
+              <div class="ba-kpi-values">
+                <span class="ba-kpi-val ba-val-after">$68K</span>
+                <span class="ba-kpi-arrow">→</span>
+                <span class="ba-kpi-change">+467%</span>
+              </div>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Lead Generation</span>
+              <div class="ba-kpi-values">
+                <span class="ba-kpi-val ba-val-after">210/mo</span>
+                <span class="ba-kpi-arrow">→</span>
+                <span class="ba-kpi-change">+367%</span>
+              </div>
+            </div>
+            <div class="ba-kpi-row">
+              <span class="ba-kpi-name">Page Load Time</span>
+              <div class="ba-kpi-values">
+                <span class="ba-kpi-val ba-val-after">0.9s</span>
+                <span class="ba-kpi-arrow">→</span>
+                <span class="ba-kpi-change">−79%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-visual fade-up" style="margin-top:32px;">
+        <div class="ba-chart-box">
+          <div class="ba-chart-value before">2,400</div>
+          <div class="ba-chart-label">Before — Monthly Traffic</div>
+        </div>
+        <div class="ba-chart-box">
+          <div class="ba-chart-value after">12,800</div>
+          <div class="ba-chart-label">After — Monthly Traffic</div>
+          <div class="ba-chart-change">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+            +433% Growth
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 4: CLIENT TESTIMONIALS
+  ════════════════════════════════════════════════════════════ -->
+  <section class="results-testimonials section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Client Stories</div>
+        <h2 class="section-title">What Our <span class="text-gradient">Clients Say</span></h2>
+        <p class="section-desc">Trusted by founders, marketers, and business leaders across industries.</p>
+      </div>
+
+      <div class="rt-grid">
+        <div class="rt-card fade-up">
+          <div class="rt-card-glow"></div>
+          <div class="rt-stars">★★★★★</div>
+          <p class="rt-text">"NAGRIVA completely transformed our online presence. Revenue doubled within 3 months and their design team exceeded every expectation."</p>
+          <div class="rt-author">
+            <div class="rt-avatar" style="background:linear-gradient(135deg,#00f5c4,#00c2a8);">SM</div>
+            <div>
+              <div class="rt-name">Sarah Mitchell</div>
+              <div class="rt-role">CEO, VELOUR</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rt-card fade-up" style="--delay:0.1s">
+          <div class="rt-card-glow"></div>
+          <div class="rt-stars">★★★★★</div>
+          <p class="rt-text">"Working with NAGRIVA was the best investment we made. Our traffic grew 5x and the new platform generates leads on autopilot."</p>
+          <div class="rt-author">
+            <div class="rt-avatar" style="background:linear-gradient(135deg,#4facfe,#007aff);">MJ</div>
+            <div>
+              <div class="rt-name">Marcus Johnson</div>
+              <div class="rt-role">Founder, Nomad Travel</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rt-card fade-up" style="--delay:0.2s">
+          <div class="rt-card-glow"></div>
+          <div class="rt-stars">★★★★★</div>
+          <p class="rt-text">"The analytics dashboard NAGRIVA built for us is incredible. We make better decisions faster, and our clients love the transparency."</p>
+          <div class="rt-author">
+            <div class="rt-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">EK</div>
+            <div>
+              <div class="rt-name">Elena Kostova</div>
+              <div class="rt-role">CTO, Pulse Analytics</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rt-card fade-up" style="--delay:0.3s">
+          <div class="rt-card-glow"></div>
+          <div class="rt-stars">★★★★★</div>
+          <p class="rt-text">"Our app went from concept to launch in record time. The NAGRIVA team brought both strategic vision and flawless execution."</p>
+          <div class="rt-author">
+            <div class="rt-avatar" style="background:linear-gradient(135deg,#f97316,#ea580c);">DC</div>
+            <div>
+              <div class="rt-name">David Chen</div>
+              <div class="rt-role">CEO, Bite Delivery</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rt-card fade-up" style="--delay:0.4s">
+          <div class="rt-card-glow"></div>
+          <div class="rt-stars">★★★★★</div>
+          <p class="rt-text">"Bank-grade security meets beautiful design. NAGRIVA understood our fintech requirements perfectly. A truly premium partnership."</p>
+          <div class="rt-author">
+            <div class="rt-avatar" style="background:linear-gradient(135deg,#00d4ff,#0099cc);">AR</div>
+            <div>
+              <div class="rt-name">Aisha Rahman</div>
+              <div class="rt-role">COO, Vault Finance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rt-card fade-up" style="--delay:0.5s">
+          <div class="rt-card-glow"></div>
+          <div class="rt-stars">★★★★★</div>
+          <p class="rt-text">"Professional, responsive, and results-driven. They didn't just build a website — they built a growth engine for our entire business."</p>
+          <div class="rt-author">
+            <div class="rt-avatar" style="background:linear-gradient(135deg,#00f5c4,#00c2a8);">JL</div>
+            <div>
+              <div class="rt-name">James Liu</div>
+              <div class="rt-role">Marketing Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 5: RESULTS METRICS
+  ════════════════════════════════════════════════════════════ -->
+  <section class="results-metrics section">
+    <div class="results-metrics-bg"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ By The Numbers</div>
+        <h2 class="section-title">Our <span class="text-gradient">Impact</span></h2>
+        <p class="section-desc">Cumulative results across every project, campaign, and partnership.</p>
+      </div>
+
+      <div class="rm-grid" id="resultsMetricsGrid">
+        <div class="rm-card fade-up">
+          <div class="rm-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="rm-num" data-count="52">0</span><span class="rm-plus">+</span>
+          <div class="rm-label">Projects Completed</div>
+        </div>
+        <div class="rm-card fade-up" style="--delay:0.07s">
+          <div class="rm-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <span class="rm-num" data-count="18">0</span><span class="rm-plus">M+</span>
+          <div class="rm-label">Revenue Generated</div>
+        </div>
+        <div class="rm-card fade-up" style="--delay:0.14s">
+          <div class="rm-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="20 8 22 10 27 5"/></svg>
+          </div>
+          <span class="rm-num" data-count="340">0</span><span class="rm-percent">%</span>
+          <div class="rm-label">Avg. Client ROI</div>
+        </div>
+        <div class="rm-card fade-up" style="--delay:0.21s">
+          <div class="rm-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="rm-num" data-count="98">0</span><span class="rm-percent">%</span>
+          <div class="rm-label">Client Satisfaction</div>
+        </div>
+        <div class="rm-card fade-up" style="--delay:0.28s">
+          <div class="rm-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <span class="rm-num" data-count="15">0</span><span class="rm-plus">K+</span>
+          <div class="rm-label">Leads Generated</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 6: CTA
+  ════════════════════════════════════════════════════════════ -->
+  <section class="results-cta">
+    <div class="results-cta-bg">
+      <div class="results-cta-glow"></div>
+      <div class="results-cta-grid"></div>
+    </div>
+    <div class="container">
+      <div class="fade-up">
+        <div class="results-hero-badge" style="margin-bottom:20px;">
+          <span class="results-hero-badge-dot"></span>
+          Let's Work Together
+        </div>
+        <h2 class="results-cta-title">Ready To Scale <span>Your Brand?</span></h2>
+        <p class="results-cta-sub">Book a free strategy call. No commitment — just a conversation about your goals and how we can help you achieve them.</p>
+        <div class="results-cta-actions">
+          <a href="/#contact" class="btn-primary">
+            Book a Call
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/pages/services.html" class="btn-secondary">
+            Explore Services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/profile-avatar.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/admin-auth.js"></script>
+  <script src="/modules/notifications/notifications-api.js"></script>
+  <script src="/modules/notifications/notifications-realtime.js"></script>
+  <script src="/modules/notifications/notifications-triggers.js"></script>
+  <script src="/components/notifications-dropdown/notifications-dropdown.js"></script>
+  <script src="../modules/content/content-api.js"></script>
+  <script src="../js/content-loader.js"></script>
+  <script src="/js/floating-elements.js"></script>
+  <script src="/js/chatbot.js"></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/footer.js"></script>
+</body>
+</html>
