@@ -71,7 +71,7 @@
 /* ─── Avatar Skeleton ─── */
 .nav-avatar-skeleton {
   display: none;
-  width: 40px; height: 40px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   background: rgba(255,255,255,0.04);
   position: relative;
@@ -94,14 +94,14 @@
 
 /* ─── Avatar Image ─── */
 .nav-user-img {
-  width: 40px; height: 40px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--bg);
   flex-shrink: 0;
