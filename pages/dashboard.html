@@ -7,14 +7,17 @@
   <meta name="description" content="Your NAGRIVA client dashboard." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/auth.css" />
-  <link rel="stylesheet" href="../css/admin-auth.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-auth.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/client-messages.css" />
-  <link rel="stylesheet" href="../css/chatbot.css" />
-  <link rel="stylesheet" href="../css/floating-elements.css" />
-  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
+  <link rel="stylesheet" href="../css/onboarding.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <style>
     .dash-page {
       padding-top: 100px;
@@ -321,8 +324,8 @@
         </a>
       </div>
 
-      <h2 class="dash-section-title">Recent Orders</h2>
-      <div class="dash-orders-list" id="dashOrdersList">
+      <h2 class="dash-section-title lazy-section">Recent Orders</h2>
+      <div class="dash-orders-list lazy-section" id="dashOrdersList">
         <div class="dash-activity-item">
           <span class="dash-activity-dot"></span>
           <span class="dash-activity-text">Loading orders...</span>
@@ -330,8 +333,8 @@
         </div>
       </div>
 
-      <h2 class="dash-section-title">Recent Activity</h2>
-      <div class="dash-activity" id="dashActivity">
+      <h2 class="dash-section-title lazy-section">Recent Activity</h2>
+      <div class="dash-activity lazy-section" id="dashActivity">
         <div class="dash-activity-item">
           <span class="dash-activity-dot active"></span>
           <span class="dash-activity-text">Loading activity...</span>
@@ -339,8 +342,8 @@
         </div>
       </div>
 
-      <h2 class="dash-section-title">Quick Links</h2>
-      <div class="dash-quick-links">
+      <h2 class="dash-section-title lazy-section">Quick Links</h2>
+      <div class="dash-quick-links lazy-section">
         <a href="submit-order.html" class="dash-quick-link primary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           New Order
@@ -370,7 +373,7 @@
   </section>
 
   <!-- ══════════════════════════ AUTH MODAL ══════════════════════════ -->
-  <div class="auth-overlay" id="authOverlay">
+  <div class="auth-overlay" id="authOverlay" style="display:none">
     <div class="auth-backdrop" id="authBackdrop"></div>
     <div class="auth-ambient auth-ambient-1"></div>
     <div class="auth-ambient auth-ambient-2"></div>
@@ -544,23 +547,18 @@
 
   <div id="footer-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/supabase-config.js"></script>
-  <script src="../js/auth-guard.js"></script>
-  <script src="../js/admin-auth.js"></script>
-  <script src="../js/script.js"></script>
-  <script src="../js/i18n.js"></script>
-  <script src="../js/profile-avatar.js"></script>
-  <script src="../js/auth.js"></script>
-  <script src="../modules/notifications/notifications-api.js"></script>
-  <script src="../modules/notifications/notifications-realtime.js"></script>
-  <script src="../modules/notifications/notifications-triggers.js"></script>
-  <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
-  <script src="../modules/orders/orders-api.js"></script>
-  <script src="../js/orders.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/admin-auth.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script defer src="../js/onboarding.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
-      /* Greeting */
       var nameEl = document.getElementById('dashUserName');
       if (nameEl) {
         var user = await NagrivaOrders.getCurrentUser();
@@ -570,7 +568,6 @@
         }
       }
 
-      /* Dashboard Stats */
       async function loadStats() {
         try {
           var stats = await NagrivaOrders.getUserDashboardStats();
@@ -582,7 +579,6 @@
         }
       }
 
-      /* Activity */
       async function loadActivity() {
         var container = document.getElementById('dashActivity');
         try {
@@ -599,7 +595,7 @@
             dot.className = 'dash-activity-dot active';
             var text = document.createElement('span');
             text.className = 'dash-activity-text';
-            text.innerHTML = '<strong>' + (a.action || 'Update') + '</strong> — ' + (a.description || '');
+            text.innerHTML = '<strong>' + (a.action || 'Update') + '</strong> \u2014 ' + (a.description || '');
             var time = document.createElement('span');
             time.className = 'dash-activity-time';
             time.textContent = NagrivaOrders.formatTimeAgo(a.created_at);
@@ -614,7 +610,6 @@
         }
       }
 
-      /* ─── Messages Widget ─── */
       async function loadMessageCount() {
         try {
           var user = await NagrivaOrders.getCurrentUser();
@@ -669,7 +664,6 @@
         }
       }
 
-      /* Recent Orders */
       function formatBudget(val) {
         if (val == null || isNaN(val)) return '';
         return ' $' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -723,7 +717,7 @@
 
             var meta = document.createElement('div');
             meta.className = 'dash-order-meta';
-            meta.textContent = safeServiceType(o.service_type) + ' · ' + formatDateShort(o.created_at) + formatBudget(o.budget);
+            meta.textContent = safeServiceType(o.service_type) + ' \u00b7 ' + formatDateShort(o.created_at) + formatBudget(o.budget);
 
             info.appendChild(name);
             info.appendChild(meta);
@@ -749,9 +743,8 @@
         }
       }
 
-      /* Admin link visibility — use NagrivaAdminAuth for caching */
       try {
-        var admin = await NagrivaAdminAuth.isAdmin();
+        var admin = await NagrivaAdminAuth.isAdmin(true);
         if (admin) {
           var link = document.getElementById('adminLink');
           if (link) link.style.display = '';
@@ -764,11 +757,8 @@
       loadMessageCount();
     });
   </script>
-  <script src="../modules/content/content-api.js"></script>
-  <script src="../js/content-loader.js"></script>
-  <script src="../js/floating-elements.js"></script>
-  <script src="../js/chatbot.js"></script>
-  <script src="../js/navbar.js"></script>
-  <script src="../js/footer.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
 </body>
 </html>

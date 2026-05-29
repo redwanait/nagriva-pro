@@ -680,7 +680,7 @@
 }
 @keyframes pno-float-icon {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-3px); }
 }
 .portal-no-orders {
   text-align: center; padding: 80px 20px;

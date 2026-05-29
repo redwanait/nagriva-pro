@@ -51,7 +51,7 @@ const NAGRIVA_AdminSettings = (() => {
     { title: 'Support Widget', desc: 'Chat widget messages and status text.',
       keys: ['support.welcome','support.auto-reply','support.placeholder','support.online','support.offline'] },
     { title: 'Auth & Section Headings', desc: 'Auth modal and general section headings.',
-      keys: ['auth.welcome','auth.subtitle','auth.signin','auth.signup','auth.create-account','section.testimonials','section.projects','section.pricing','section.social-proof','section.brands-label'] },
+      keys: ['auth.welcome','auth.subtitle','auth.signin','auth.signup','auth.create-account','section.projects','section.pricing'] },
     { title: 'Admin Sidebar', desc: 'Admin dashboard sidebar navigation labels.',
       keys: ['admin.sidebar-dashboard','admin.sidebar-orders','admin.sidebar-clients','admin.sidebar-messages','admin.sidebar-files','admin.sidebar-revisions','admin.sidebar-services','admin.sidebar-payments','admin.sidebar-invoices','admin.sidebar-analytics','admin.sidebar-settings'] }
   ];

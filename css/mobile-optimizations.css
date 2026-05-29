@@ -1,0 +1,328 @@
+/* ════════════════════════════════════════════════════════
+   NAGRIVA — Mobile Performance Overrides
+   Loaded LAST on every page to augment existing mobile CSS
+   ════════════════════════════════════════════════════════ */
+
+/* ─── Base performance fixes ─── */
+html {
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+/* ─── Small screens (max 768px) ─── */
+@media (max-width: 768px) {
+
+  /* ─── Tighter layout ─── */
+  .container { padding: 0 20px !important; }
+  .section { padding: 80px 0 !important; }
+  .section-header { margin-bottom: 40px !important; }
+
+  /* ─── Navbar: reduce blur, prevent scroll when menu open ─── */
+  body.nav-open { overflow: hidden; position: fixed; width: 100%; }
+  .navbar { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .mobile-menu-backdrop { backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; }
+
+  /* ─── Hero: simplify glows, reduce paint ─── */
+  .hero-glow {
+    filter: blur(30px) !important;
+    width: 300px !important;
+    height: 300px !important;
+    animation: none !important;
+    opacity: 0.3 !important;
+  }
+  .hero-glow-2 {
+    filter: blur(20px) !important;
+    width: 200px !important;
+    height: 200px !important;
+    animation: none !important;
+    opacity: 0.2 !important;
+  }
+  .hero-noise { display: none !important; }
+  .hero-grid { mask-image: none !important; -webkit-mask-image: none !important; }
+  .hero-visual-wrapper { min-height: 300px !important; }
+  .hero-right { animation: none !important; }
+
+  /* ─── Ambient blobs ─── */
+  .hero-ambient,
+  .ambient-1,
+  .ambient-2 { animation: none !important; opacity: 0.15 !important; }
+
+  /* ─── Glass card: remove backdrop-filter ─── */
+  .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(11,15,15,0.85) !important;
+  }
+  .glass-chart-svg { display: none !important; }
+  .glass-chart-wrap { height: 0 !important; min-height: 0 !important; padding: 0 !important; }
+
+  /* ─── Float card/pill: remove 3D animation ─── */
+  .float-card {
+    animation: none !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    position: relative !important;
+    margin-top: 12px !important;
+  }
+  .float-card-body {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .float-pill {
+    animation: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* ─── Marquee ─── */
+  .marquee-inner { animation-duration: 25s !important; }
+  .marquee-track:hover .marquee-inner { animation-play-state: running !important; }
+
+  /* ─── Service cards: simpler ─── */
+  .service-img::after { box-shadow: none !important; }
+  .service-icon { box-shadow: none !important; }
+  .services-cta-btn::after { display: none !important; }
+  .services-cta-btn::before { display: none !important; }
+  .services::before {
+    width: 300px !important;
+    height: 300px !important;
+    opacity: 0.3 !important;
+  }
+
+  /* ─── Projects glow ─── */
+  .projects-bg-glow, .process-bg-glow { display: none !important; }
+  .cta-glow, .svc-hero-glow, .svc-cta-glow { display: none !important; }
+
+  /* ─── Process timeline ─── */
+  .timeline-line { animation: none !important; box-shadow: none !important; }
+  .process-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+
+  /* ─── Pricing card backdrop ─── */
+  .pricing-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .pricing-card.featured { box-shadow: 0 0 0 1px rgba(0,245,196,0.08) !important; }
+  .pricing-service-icon { box-shadow: none !important; }
+
+  /* ─── Presentation (sp-*) overrides ─── */
+  .sp-testimonial-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    will-change: auto !important;
+    min-height: auto !important;
+  }
+  .sp-testimonial-card::before { display: none !important; }
+  .sp-testimonials::before,
+  .sp-testimonials::after { display: none !important; }
+  .sp-showcase-result { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .sp-hero-mockup { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .sp-cta-orb { display: none !important; }
+  .sp-cta-grid { display: none !important; }
+
+  /* ─── Pricing page (np-*) overrides ─── */
+  .np-glow, .np-glow-2 {
+    filter: blur(20px) !important;
+    width: 200px !important;
+    height: 200px !important;
+    opacity: 0.15 !important;
+  }
+  .np-hero { padding: 140px 20px 30px !important; }
+
+  /* ─── Blog page overrides ─── */
+  .blog-hero-glow, .blog-hero-glow-2, .blog-hero-glow-3 {
+    filter: blur(20px) !important;
+    width: 200px !important;
+    height: 200px !important;
+    opacity: 0.15 !important;
+    animation: none !important;
+  }
+  .blog-hero { min-height: auto !important; }
+  .blog-categories-wrap {
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* ─── CTA section ─── */
+  .cta-bg { opacity: 0.3 !important; }
+  .results-bg { opacity: 0.25 !important; }
+
+  /* ─── Contact ─── */
+  .contact-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .contact-card-glow-border { display: none !important; }
+
+  /* ─── Buttons: disable expensive hover effects ─── */
+  .btn-primary:hover { box-shadow: none !important; transform: none !important; }
+  .btn-primary::after { display: none !important; }
+  .btn-secondary:hover { transform: none !important; }
+  .btn-book:hover { box-shadow: none !important; transform: none !important; }
+  .btn-order-now:hover { box-shadow: none !important; transform: none !important; }
+  .btn-pricing:hover { border-color: var(--border2) !important; color: var(--gray) !important; background: none !important; }
+  .services-cta-btn:hover { transform: none !important; box-shadow: none !important; }
+  .newsletter-btn:hover { transform: none !important; }
+  .form-btn:hover { transform: none !important; box-shadow: none !important; animation: none !important; }
+  .form-btn::before { display: none !important; }
+
+  /* ─── Card hover simplifications ─── */
+  .service-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
+  .service-card:hover::before { opacity: 0 !important; }
+  .service-card:hover .service-visual { transform: none !important; }
+  .pj-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
+  .pj-card:hover::before { opacity: 0 !important; }
+  .pj-card:hover .pj-svg { transform: none !important; }
+  .pj-card:hover .pj-action { opacity: 0 !important; }
+  .pj-visual::after { box-shadow: none !important; }
+  .pj-badge { box-shadow: none !important; }
+  .stat-card:hover { transform: none !important; box-shadow: none !important; }
+  .pricing-card:hover:not(.featured) { transform: none !important; border-color: var(--border) !important; box-shadow: none !important; }
+  .pricing-card.featured:hover { transform: none !important; box-shadow: 0 0 0 1px rgba(0,245,196,0.08) !important; }
+  .pricing-card:hover .pricing-service-icon { transform: none !important; box-shadow: none !important; }
+  .process-card:hover { transform: none !important; box-shadow: none !important; }
+  .process-card:hover .card-icon { background: rgba(0,245,196,0.06) !important; border-color: rgba(0,245,196,0.15) !important; box-shadow: none !important; }
+  .process-card:hover .card-icon svg { transform: none !important; }
+  .featured-btn:hover { box-shadow: none !important; }
+  .card-btn:hover { transform: none !important; box-shadow: none !important; }
+  .social-icon:hover { transform: none !important; }
+  .footer-links a:hover { color: rgba(255,255,255,0.3) !important; }
+  .brand-item:hover { transform: none !important; color: rgba(255,255,255,0.25) !important; }
+
+  /* ─── Sibling blur effect: disable ─── */
+  .services-grid:has(.service-card:hover) .service-card:not(:hover),
+  .pj-grid:has(.pj-card:hover) .pj-card:not(:hover) { filter: none !important; }
+
+  /* ─── Touch targets (min 44px) ─── */
+  .nav-link { padding: 10px 16px !important; }
+  .hamburger { padding: 10px !important; }
+  .social-icon { width: 44px !important; height: 44px !important; }
+  .mobile-menu-link { padding: 14px 14px !important; }
+  .mobile-menu-close-btn { width: 44px !important; height: 44px !important; }
+  .selector-wrapper select { min-height: 36px !important; }
+  .services-cat-btn { padding: 12px 22px !important; }
+  .blog-cat-btn { padding: 10px 14px !important; }
+  .faq-p-q { padding: 16px 18px !important; }
+
+  /* ─── Touch interaction optimization ─── */
+  * { -webkit-touch-callout: none; }
+  a, button, .nav-link, .service-card, .pj-card, .pricing-card,
+  .process-card, .social-icon, .mobile-menu-link, .blog-cat-btn,
+  .services-cat-btn, .faq-p-q { touch-action: manipulation; }
+
+  /* ─── Content visibility for below-fold sections ─── */
+  .services, .projects, .process, .pricing, .faq,
+  .testimonials, .contact, .footer, .brands,
+  .sp-showcase, .sp-benefits, .sp-pricing, .sp-stats,
+  .sp-testimonials, .sp-cta { content-visibility: auto; contain-intrinsic-size: 500px; }
+
+  /* ─── Reduce animations ─── */
+  .hero-badge .badge-dot { animation: none !important; opacity: 0.6 !important; }
+  .glass-dot { animation: none !important; opacity: 0.6 !important; }
+  .pj-visual-glow { opacity: 0.05 !important; }
+
+  /* ─── Reset will-change on mobile to reduce GPU memory ─── */
+  .navbar { will-change: auto !important; }
+  .service-card, .pj-card, .process-card, .pricing-card { will-change: auto !important; }
+  .hero-glow, .hero-glow-2 { will-change: auto !important; }
+  .hero-ambient, .ambient-1, .ambient-2 { will-change: auto !important; }
+  .float-card, .float-pill { will-change: auto !important; }
+
+  /* ─── Footer compact ─── */
+  .footer { padding: 32px 0 0 !important; }
+  .footer-grid { gap: 20px !important; }
+  .footer-desc { font-size: 0.8rem !important; max-width: 100% !important; }
+  .footer-bottom { padding-bottom: 20px !important; }
+
+  /* ─── Brands compact ─── */
+  .brands { padding: 20px 0 !important; }
+  .brands-label { margin-bottom: 16px !important; }
+  .brand-item { padding: 0 20px !important; }
+
+  /* ─── Service page extras ─── */
+  .svc-hero-glow, .svc-cta-glow { display: none !important; }
+  .svc-benefit-card:hover { transform: none !important; box-shadow: none !important; }
+  .svc-stat-card:hover { transform: none !important; }
+  .svc-result-card:hover { transform: none !important; box-shadow: none !important; }
+  .svc-review-card:hover { transform: none !important; }
+  .svc-step:hover { transform: none !important; box-shadow: none !important; }
+  .svc-step { padding: 24px 20px !important; }
+
+  /* ─── Presentation page extras ─── */
+  .sp-benefit-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+  .sp-pricing-card:hover { transform: none !important; }
+  .sp-pricing-card--featured:hover { box-shadow: 0 0 0 1px rgba(0,245,196,0.04) !important; }
+  .sp-showcase-card:hover { transform: none !important; }
+  .sp-cta-btn:hover { box-shadow: none !important; transform: none !important; }
+  .sp-pricing-btn:hover { transform: none !important; }
+  .sp-pricing-btn--primary:hover { box-shadow: none !important; transform: none !important; }
+
+  /* ─── Scrollable containers with momentum ─── */
+  .services-categories-wrap,
+  .blog-categories-wrap { -webkit-overflow-scrolling: touch !important; }
+
+  /* ─── Prevent horizontal overflow from fixed elements ─── */
+  .hero { overflow-x: hidden !important; }
+  body { overflow-x: hidden !important; }
+}
+
+/* ─── Very small phones (max 400px) ─── */
+@media (max-width: 400px) {
+  .container { padding: 0 14px !important; }
+  .section { padding: 60px 0 !important; }
+  .hero-title { font-size: 1.5rem !important; }
+  .hero-desc { font-size: 0.82rem !important; }
+  .hero-container { gap: 24px !important; }
+  .section-title { font-size: 1.3rem !important; }
+  .stat-card { padding: 16px 10px !important; }
+  .stat-num { font-size: 1.4rem !important; }
+  .hero-visual-wrapper { min-height: 240px !important; }
+  .hero-glow { width: 200px !important; height: 200px !important; }
+}
+
+/* ─── Touch devices only: disable hover effects ─── */
+@media (hover: none) and (pointer: coarse) {
+  .service-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
+  .service-card:hover::before { opacity: 0 !important; }
+  .service-card:hover .service-visual { transform: none !important; }
+  .service-card:hover .service-arrow { border-color: var(--gray2) !important; color: var(--gray2) !important; background: none !important; box-shadow: none !important; transform: none !important; }
+  .pj-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
+  .pj-card:hover::before { opacity: 0 !important; }
+  .stat-card:hover { transform: none !important; box-shadow: none !important; }
+  .pricing-card:hover:not(.featured) { transform: none !important; border-color: var(--border) !important; box-shadow: none !important; }
+  .process-card:hover { transform: none !important; box-shadow: none !important; }
+  .btn-primary:hover { box-shadow: none !important; transform: none !important; }
+  .btn-secondary:hover { transform: none !important; }
+  .btn-book:hover { box-shadow: none !important; transform: none !important; }
+  .brand-item:hover { transform: none !important; color: rgba(255,255,255,0.25) !important; }
+  .services-grid:has(.service-card:hover) .service-card:not(:hover) { filter: none !important; }
+  .pj-grid:has(.pj-card:hover) .pj-card:not(:hover) { filter: none !important; }
+  .process-cards:has(.process-card:hover) .process-card:not(:hover) { filter: none !important; }
+  .marquee-track:hover .marquee-inner { animation-play-state: running !important; }
+
+  .sp-benefit-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+  .sp-pricing-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+  .sp-pricing-card--featured:hover { border-color: rgba(0,245,196,0.18) !important; box-shadow: 0 0 0 1px rgba(0,245,196,0.04) !important; }
+  .sp-testimonial-card:hover { transform: none !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+  .sp-testimonial-card:hover::before { opacity: 0 !important; }
+  .sp-testimonial-card:hover .sp-testimonial-avatar { box-shadow: 0 0 0 2px rgba(0,245,196,0.1), 0 4px 16px rgba(0,0,0,0.25) !important; }
+  .sp-showcase-card:hover { transform: none !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+  .sp-showcase-card:hover .sp-showcase-image img { transform: none !important; }
+  .sp-cta-btn:hover { box-shadow: none !important; transform: none !important; }
+  .sp-pricing-btn:hover { transform: none !important; }
+  .sp-pricing-btn--primary:hover { box-shadow: none !important; transform: none !important; }
+
+  .svc-benefit-card:hover { transform: none !important; box-shadow: none !important; }
+  .svc-stat-card:hover { transform: none !important; }
+  .svc-result-card:hover { transform: none !important; box-shadow: none !important; }
+  .svc-review-card:hover { transform: none !important; }
+  .svc-step:hover { transform: none !important; box-shadow: none !important; }
+
+  .np-card:hover, .np-card--featured:hover { transform: none !important; box-shadow: none !important; }
+  .np-btn-accent:hover { transform: none !important; box-shadow: none !important; }
+}
+
+/* ─── Reduced motion user preference ─── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow, .hero-glow-2 { animation: none !important; }
+  .float-card, .float-pill { animation: none !important; }
+  .marquee-inner { animation: none !important; }
+  .hero-ambient, .ambient-1, .ambient-2 { animation: none !important; }
+  .hero-badge .badge-dot { animation: none !important; }
+  .glass-dot { animation: none !important; }
+  .sp-cta-orb { animation: none !important; }
+  .blog-hero-glow { animation: none !important; }
+}

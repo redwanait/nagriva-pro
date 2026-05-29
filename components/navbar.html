@@ -18,7 +18,7 @@
     </ul>
 
     <div class="nav-right">
-      <a href="/pages/login.html" class="btn-auth" id="authBtn">
+      <a href="/pages/login.html" class="btn-auth" id="authBtn" data-cta="tertiary" data-cta-action="sign-in">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         <span data-i18n="nav.signin">Sign In</span>
       </a>
@@ -49,6 +49,10 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Settings
           </button>
+          <button class="user-dropdown-item" data-nav="admin" role="menuitem" id="adminNavLink" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Admin Panel
+          </button>
           <div class="user-dropdown-divider"></div>
           <button class="user-dropdown-item signout" id="signoutBtn" data-nav="signout" role="menuitem">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -56,7 +60,7 @@
           </button>
         </div>
       </div>
-      <a href="/#contact" class="btn-book" id="bookBtn" data-i18n="nav.book-call">Book a Free Call</a>
+      <a href="/pages/pricing.html" class="btn-book" id="bookBtn" data-i18n="nav.book-call" data-cta="primary" data-cta-action="get-started">Get Started</a>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span>
         <span></span>
@@ -131,6 +135,10 @@
         </svg>
         <span data-i18n="nav.blog">Blog</span>
       </a>
+      <a href="/pages/admin-dashboard.html" class="mobile-menu-link" id="mobileAdminNavLink" style="display:none;" data-page="admin">
+        <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Admin Panel</span>
+      </a>
       <a href="/#contact" class="mobile-menu-link" data-page="contact">
         <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -139,13 +147,13 @@
         <span data-i18n="nav.contact">Contact</span>
       </a>
     </nav>
-    <a href="/pages/login.html" class="mobile-auth-link" id="mobileAuthBtn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-      <span id="mobileAuthText" data-i18n="nav.signin">Sign In</span>
-    </a>
-    <div class="mobile-menu-footer">
-      <a href="/#contact" class="mobile-menu-cta">
-        <span data-i18n="nav.book-call">Book a Free Call</span>
+      <a href="/pages/login.html" class="mobile-auth-link" id="mobileAuthBtn" data-cta="tertiary" data-cta-action="sign-in">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        <span id="mobileAuthText" data-i18n="nav.signin">Sign In</span>
+      </a>
+      <div class="mobile-menu-footer">
+        <a href="/pages/pricing.html" class="mobile-menu-cta" data-cta="primary" data-cta-action="get-started">
+          <span data-i18n="nav.book-call">Get Started</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"/>
           <polyline points="12 5 19 12 12 19"/>

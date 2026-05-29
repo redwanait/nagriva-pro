@@ -27,8 +27,8 @@ const NagrivaAdminAuth = (() => {
   }
 
   /* ─── Get current Supabase user ─── */
-  async function getCurrentUser() {
-    if (_cachedUser && Date.now() - _lastFetch < CACHE_TTL) {
+  async function getCurrentUser(forceRefresh) {
+    if (!forceRefresh && _cachedUser && Date.now() - _lastFetch < CACHE_TTL) {
       return _cachedUser;
     }
     try {
@@ -42,9 +42,9 @@ const NagrivaAdminAuth = (() => {
   }
 
   /* ─── Get full profile from `profiles` table ─── */
-  async function getProfile(userId) {
+  async function getProfile(userId, forceRefresh) {
     if (!userId) return null;
-    if (_cachedProfile && _cachedProfile.id === userId && Date.now() - _lastFetch < CACHE_TTL) {
+    if (!forceRefresh && _cachedProfile && _cachedProfile.id === userId && Date.now() - _lastFetch < CACHE_TTL) {
       return _cachedProfile;
     }
     try {
@@ -64,37 +64,34 @@ const NagrivaAdminAuth = (() => {
   }
 
   /* ─── Get current user's role: 'admin', 'client', or null ─── */
-  async function getCurrentUserRole() {
-    if (_cachedRole && Date.now() - _lastFetch < CACHE_TTL) {
+  async function getCurrentUserRole(forceRefresh) {
+    if (!forceRefresh && _cachedRole && Date.now() - _lastFetch < CACHE_TTL) {
       return _cachedRole;
     }
-    var user = await getCurrentUser();
+    var user = await getCurrentUser(forceRefresh);
     if (!user) return null;
-    var profile = await getProfile(user.id);
+    var profile = await getProfile(user.id, forceRefresh);
     return profile && profile.role || null;
   }
 
   /* ─── Returns true if current user is admin ─── */
-  async function isAdmin() {
-    var role = await getCurrentUserRole();
+  async function isAdmin(forceRefresh) {
+    var role = await getCurrentUserRole(forceRefresh);
     return role === 'admin';
   }
 
   /* ─── Redirects non-admin users. Returns {user, profile} if admin. ─── */
-  async function requireAdmin(redirectUrl, loginUrl) {
-    redirectUrl = redirectUrl || '/pages/dashboard.html';
-    loginUrl = loginUrl || '/pages/login.html';
-
+  async function requireAdmin() {
     var user = await getCurrentUser();
     if (!user) {
       var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-      window.location.href = loginUrl + '?redirect=' + returnUrl;
+      window.location.href = '/pages/login.html?redirect=' + returnUrl;
       return null;
     }
 
     var profile = await getProfile(user.id);
     if (!profile || profile.role !== 'admin') {
-      window.location.href = redirectUrl;
+      window.location.href = '/pages/unauthorized.html';
       return null;
     }
 
@@ -148,8 +145,6 @@ const NagrivaAdminAuth = (() => {
     options = options || {};
     var container = options.container || null;
     var fallback = options.fallback || false;
-    var redirectUrl = options.redirectUrl || '/pages/dashboard.html';
-    var loginUrl = options.loginUrl || '/pages/login.html';
 
     showAuthLoading(container);
 
@@ -162,12 +157,12 @@ const NagrivaAdminAuth = (() => {
             'Authentication Required',
             'Please sign in to access this page.',
             'Sign In',
-            loginUrl + '?redirect=' + encodeURIComponent(window.location.pathname)
+            '/pages/login.html?redirect=' + encodeURIComponent(window.location.pathname)
           );
           return false;
         }
         var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-        window.location.href = loginUrl + '?redirect=' + returnUrl;
+        window.location.href = '/pages/login.html?redirect=' + returnUrl;
         return false;
       }
 
@@ -178,12 +173,12 @@ const NagrivaAdminAuth = (() => {
           showUnauthorized(container,
             'Admin Access Only',
             'You need administrator privileges to access this area.',
-            'Go to Dashboard',
-            redirectUrl
+            'Go Home',
+            '/pages/unauthorized.html'
           );
           return false;
         }
-        window.location.href = redirectUrl;
+        window.location.href = '/pages/unauthorized.html';
         return false;
       }
 
@@ -200,7 +195,7 @@ const NagrivaAdminAuth = (() => {
         );
         return false;
       }
-      window.location.href = loginUrl;
+      window.location.href = '/pages/login.html';
       return false;
     }
   }

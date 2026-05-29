@@ -1,23 +1,20 @@
 /* ════════════════════════════════════════════════════════
    NAGRIVA — Auth Route Guard
-   Protects pages from unauthenticated access.
-   Include on any page that requires login.
-   Admin-only pages also verify role against public.profiles.
+   Protects pages from unauthenticated and unauthorized access.
+   Admin-only pages redirect to /pages/unauthorized.html.
 
    🔐 SECURITY: Role is verified by querying `profiles`
-   directly. Even if client code is bypassed, Supabase
-   RLS blocks non-admin database operations.
+   directly from Supabase on every page load.
    ════════════════════════════════════════════════════════ */
 
 'use strict';
 
 (async function protectPage() {
   var currentPage = window.location.pathname.split('/').pop();
-  var publicPages = ['login.html', 'signup.html', 'forgot-password.html', 'reset-password.html', 'index.html', ''];
+  var publicPages = ['login.html', 'signup.html', 'forgot-password.html', 'reset-password.html', 'unauthorized.html', 'index.html', ''];
   if (publicPages.indexOf(currentPage) !== -1) return;
 
-  var adminPages = ['admin-dashboard.html'];
-
+  /* ─── Pages that require any authenticated session ─── */
   var authRequiredPages = [
     'dashboard.html',
     'profile.html',
@@ -26,6 +23,11 @@
     'submit-order.html',
     'order-tracking.html',
     'client-portal.html'
+  ];
+
+  /* ─── Pages that require admin role ─── */
+  var adminPages = [
+    'admin-dashboard.html'
   ];
 
   var isAdminPage = adminPages.indexOf(currentPage) !== -1;
@@ -53,30 +55,15 @@
     }
   }
 
-  /* ─── Graceful fallback for unauthorized access ─── */
-  function showUnauthorizedFallback() {
+  function redirectToUnauthorized() {
     removeLoading();
-    var title = isAdminPage ? 'Admin Access Only' : 'Authentication Required';
-    var message = isAdminPage
-      ? 'You need administrator privileges to access this area.'
-      : 'Please sign in to access this page.';
-    var btnText = isAdminPage ? 'Go to Dashboard' : 'Sign In';
-    var btnUrl = isAdminPage
-      ? 'dashboard.html'
-      : 'login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+    window.location.href = 'unauthorized.html';
+  }
 
-    document.body.innerHTML =
-      '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;background:#040404;">' +
-        '<div style="max-width:420px;width:100%;text-align:center;">' +
-          '<div style="font-size:3rem;margin-bottom:20px;">🔒</div>' +
-          '<h1 style="font-family:\'Syne\',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px;">' + title + '</h1>' +
-          '<p style="color:#a1a1aa;font-size:0.9rem;margin-bottom:28px;line-height:1.6;">' + message + '</p>' +
-          '<a href="' + btnUrl + '" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;background:#00f5c4;color:#040404;font-weight:600;font-size:0.85rem;text-decoration:none;">' +
-            btnText +
-            '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-          '</a>' +
-        '</div>' +
-      '</div>';
+  function redirectToLogin() {
+    removeLoading();
+    var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
+    window.location.href = 'login.html?redirect=' + returnUrl;
   }
 
   try {
@@ -85,11 +72,10 @@
     if (!session) {
       removeLoading();
       if (isAdminPage) {
-        showUnauthorizedFallback();
+        redirectToUnauthorized();
         return;
       }
-      var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-      window.location.href = 'login.html?redirect=' + returnUrl;
+      redirectToLogin();
       return;
     }
 
@@ -103,7 +89,7 @@
 
       if (error || !profile || profile.role !== 'admin') {
         removeLoading();
-        showUnauthorizedFallback();
+        redirectToUnauthorized();
         return;
       }
     }
@@ -112,10 +98,9 @@
   } catch (e) {
     removeLoading();
     if (isAdminPage) {
-      showUnauthorizedFallback();
+      redirectToUnauthorized();
       return;
     }
-    var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-    window.location.href = 'login.html?redirect=' + returnUrl;
+    redirectToLogin();
   }
 })();

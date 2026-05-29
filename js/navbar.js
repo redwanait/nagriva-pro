@@ -58,9 +58,7 @@
         /* ─── Notify other scripts that navbar is ready ─── */
         document.dispatchEvent(new CustomEvent('navbar:loaded'))
       })
-      .catch(function (err) {
-        console.error('[NAGRIVA] Navbar load error:', err)
-      })
+      .catch(function () {})
   }
 
   if (document.readyState === 'loading') {

@@ -7,22 +7,39 @@
   <meta name="description" content="We turn your website into a client-generating machine. Design, SEO, and growth for modern brands." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" /></noscript>
   <link rel="stylesheet" href="/css/style.css" />
-  <link rel="stylesheet" href="/css/client-messages.css" />
-  <link rel="stylesheet" href="/css/chatbot.css" />
-  <link rel="stylesheet" href="/css/floating-elements.css" />
-  <link rel="stylesheet" href="/css/admin-auth.css" />
-  <link rel="stylesheet" href="/css/auth.css" />
-  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="/css/performance.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/client-messages.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/admin-auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/onboarding.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" href="/assets/images/branding/nagriva-logo.png" />
+  <link rel="preload" href="/js/performance-optimizer.js" as="script" />
+  <link rel="modulepreload" href="/js/performance-optimizer.js" />
+  <!-- Inline critical content-visibility (applied immediately, not deferred) -->
+  <style>
+    .lazy-section { content-visibility: auto; contain-intrinsic-size: 500px; contain: layout style paint; }
+    .lazy-section--small { contain-intrinsic-size: 300px; }
+    .lazy-section--large { contain-intrinsic-size: 800px; }
+    .lazy-section--xl { contain-intrinsic-size: 1200px; }
+    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1) var(--delay,0s), transform 0.5s cubic-bezier(0.4,0,0.2,1) var(--delay,0s); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width:768px) { .lazy-section { contain-intrinsic-size: 400px; } .lazy-section--large { contain-intrinsic-size: 600px; } .lazy-section--xl { contain-intrinsic-size: 800px; } }
+  </style>
 </head>
 <body data-page="home">
 
   <div id="navbar-container"></div>
 
   <!-- ══════════════════════════ AUTH MODAL ══════════════════════════ -->
-  <div class="auth-overlay" id="authOverlay">
+  <div class="auth-overlay" id="authOverlay" style="display:none">
     <div class="auth-backdrop" id="authBackdrop"></div>
     <div class="auth-ambient auth-ambient-1"></div>
     <div class="auth-ambient auth-ambient-2"></div>
@@ -232,7 +249,7 @@
   </div>
 
   <!-- ══════════════════════════ HERO ══════════════════════════ -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" style="content-visibility:visible">
     <div class="hero-bg">
       <div class="hero-glow"></div>
       <div class="hero-glow-2"></div>
@@ -257,12 +274,12 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#contact" class="btn-primary">
-            <span data-i18n="hero.cta2">Book a Free Call</span>
+          <a href="/pages/services.html" class="btn-primary" data-cta="primary" data-cta-action="explore-services">
+            <span data-i18n="hero.cta2">Explore Services</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="#projects" class="btn-secondary">
-            <span data-i18n="hero.view-results">View Results</span>
+          <a href="#services" class="btn-secondary" data-cta="secondary" data-cta-action="learn-more">
+            <span data-i18n="hero.view-results">Learn More</span>
           </a>
         </div>
 
@@ -365,35 +382,15 @@
       </div>
     </div>
   </section>
-<!-- ══════════════════════════ BRANDS ══════════════════════════ -->
+  <!-- ══════════════════════════ TRUST SIGNALS ══════════════════════════ -->
   <section class="brands">
     <div class="container">
-      <div class="brands-label">Trusted by forward-thinking brands</div>
-      <div class="marquee-track">
-        <div class="marquee-inner">
-          <span class="brand-item">Luma Cosmetics</span>
-          <span class="brand-item">Prisma Tech</span>
-          <span class="brand-item">Novu Inc.</span>
-          <span class="brand-item">Retool Systems</span>
-          <span class="brand-item">Stytch Labs</span>
-          <span class="brand-item">Venture Lab</span>
-          <span class="brand-item">Orbit Finance</span>
-          <span class="brand-item">Pulse Health</span>
-          <span class="brand-item">Luma Cosmetics</span>
-          <span class="brand-item">Prisma Tech</span>
-          <span class="brand-item">Novu Inc.</span>
-          <span class="brand-item">Retool Systems</span>
-          <span class="brand-item">Stytch Labs</span>
-          <span class="brand-item">Venture Lab</span>
-          <span class="brand-item">Orbit Finance</span>
-          <span class="brand-item">Pulse Health</span>
-        </div>
-      </div>
+      <div class="brands-label">Modern design. AI-powered workflow. Fast delivery.</div>
     </div>
   </section>
 
   <!-- ══════════════════════════ SERVICES ══════════════════════════ -->
-  <section class="services section" id="services">
+  <section class="services section lazy-section" id="services">
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-tag" data-i18n="services.tag">✦ What we do</div>
@@ -461,7 +458,7 @@
       </div>
 
       <div class="services-cta-wrapper fade-up" id="servicesCta" style="display:none;">
-        <a href="/pages/services.html" class="services-cta-btn">
+        <a href="/pages/services.html" class="services-cta-btn" data-cta="tertiary" data-cta-action="see-services">
           <span>See More Services</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -469,54 +466,118 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════ RESULTS ══════════════════════════ -->
-  <section class="results section" id="results">
+  <!-- ══════════════════════════ APPROACH ══════════════════════════ -->
+  <section class="results section lazy-section" id="approach">
     <div class="results-bg"></div>
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-tag" data-i18n="results.tag">By the numbers</div>
-        <h2 class="section-title" data-i18n="results.title">Our <span class="text-gradient">Impact</span></h2>
-        <p class="section-desc" data-i18n="results.subtitle">Measurable outcomes that compound over time for our clients.</p>
+        <div class="section-tag" data-i18n="approach.tag">✦ How we deliver</div>
+        <h2 class="section-title" data-i18n="approach.title">Built for <span class="text-gradient">Performance</span></h2>
+        <p class="section-desc" data-i18n="approach.subtitle">Every project is engineered for speed, clarity, and measurable business impact.</p>
       </div>
       <div class="stats-grid">
         <div class="stat-card fade-up" style="--delay:0s">
           <div class="stat-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 18 8 12 12 15 17 8 21 11"/></svg>
           </div>
-          <div class="stat-num" data-count="250">0</div>
-          <div class="stat-unit">%</div>
-          <div class="stat-label">Avg. Traffic Increase</div>
+          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">Transparent Process</div>
         </div>
         <div class="stat-card fade-up" style="--delay:0.07s">
           <div class="stat-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <div class="stat-num" data-count="180">0</div>
-          <div class="stat-unit">+</div>
-          <div class="stat-label">Leads Generated</div>
+          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">Fast Delivery</div>
         </div>
         <div class="stat-card fade-up" style="--delay:0.14s">
           <div class="stat-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
           </div>
-          <div class="stat-num" data-count="95">0</div>
-          <div class="stat-unit">%</div>
-          <div class="stat-label">Conversion Boost</div>
+          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">SEO Optimized</div>
         </div>
         <div class="stat-card fade-up" style="--delay:0.21s">
           <div class="stat-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
-          <div class="stat-num" data-count="40">0</div>
-          <div class="stat-unit">+</div>
-          <div class="stat-label">Projects Delivered</div>
+          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">AI-Powered Workflow</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ══════════════════════════ WHY BRANDS CHOOSE NAGRIVA ══════════════════════════ -->
+  <section class="section why-section lazy-section lazy-section--small" id="why-nagriva">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Why Brands Choose Nagriva</div>
+        <h2 class="section-title">Built to <span class="text-gradient">Deliver</span></h2>
+        <p class="section-desc">Three core principles that guide every project we take on.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card fade-up">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3 class="why-title">Fast Execution</h3>
+          <p class="why-desc">From idea to launch in days, not months. We focus on speed without sacrificing quality.</p>
+        </div>
+
+        <div class="why-card fade-up" style="--delay:0.1s">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <h3 class="why-title">Conversion-Focused Design</h3>
+          <p class="why-desc">Every page is designed to increase engagement, trust, and client conversions.</p>
+        </div>
+
+        <div class="why-card fade-up" style="--delay:0.2s">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/>
+            </svg>
+          </div>
+          <h3 class="why-title">AI-Powered Workflow</h3>
+          <p class="why-desc">Modern automation and AI tools help us deliver smarter and scalable digital solutions.</p>
+        </div>
+      </div>
+
+      <div class="why-badges fade-up" style="--delay:0.3s">
+        <div class="why-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>SEO Optimized</span>
+        </div>
+        <div class="why-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span>Fast Performance</span>
+        </div>
+        <div class="why-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span>Modern UI/UX</span>
+        </div>
+        <div class="why-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+          <span>Scalable Infrastructure</span>
+        </div>
+      </div>
+
+      <p class="why-footer fade-up" style="--delay:0.4s">Built for modern brands, startups, creators, and online businesses.</p>
+    </div>
+  </section>
+
   <!-- ══════════════════════════ PROJECTS ══════════════════════════ -->
-  <section class="projects section" id="projects">
+  <section class="projects section lazy-section lazy-section--large" id="projects">
     <div class="projects-bg-glow"></div>
     <div class="container">
       <div class="section-header fade-up">
@@ -610,8 +671,8 @@
       </div>
 
       <div class="pj-cta-wrap fade-up">
-        <a href="#contact" class="pj-cta-btn">
-          <span>Start Your Project</span>
+        <a href="/pages/results.html" class="btn-secondary" data-cta="secondary" data-cta-action="view-results">
+          <span>View Our Work</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -644,210 +705,10 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════ SOCIAL PROOF ══════════════════════════ -->
-  <section class="sp-section section" id="social">
-    <div class="sp-bg"></div>
-    <div class="container">
-      <div class="sp-top fade-up">
-        <div class="section-tag">✦ Social Proof</div>
-        <h2 class="section-title">Trusted by <span class="text-gradient">Innovators</span></h2>
-        <p class="section-desc">Real results and feedback from brands we've helped scale.</p>
-      </div>
 
-      <div class="sp-logos-wrap fade-up">
-        <div class="sp-logos-label">Powering growth for</div>
-        <div class="sp-logos">
-          <span class="sp-logo">Helios</span>
-          <span class="sp-logo">Aether</span>
-          <span class="sp-logo">Flux</span>
-          <span class="sp-logo">Zenith</span>
-          <span class="sp-logo">Atlas</span>
-          <span class="sp-logo">Pulse</span>
-        </div>
-      </div>
 
-      <div class="sp-testi-grid fade-up">
-        <div class="sp-testi-card">
-          <div class="sp-testi-stars">★★★★★</div>
-          <p class="sp-testi-text">"NAGRIVA redesigned our entire platform. The new interface boosted user engagement by 40% and our NPS score jumped 25 points."</p>
-          <div class="sp-testi-author">
-            <div class="sp-testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">AK</div>
-            <div>
-              <div class="sp-testi-name">Alex Kim</div>
-              <div class="sp-testi-role">CTO, Crest Analytics</div>
-            </div>
-          </div>
-        </div>
-        <div class="sp-testi-card sp-testi-featured">
-          <div class="sp-testi-stars">★★★★★</div>
-          <p class="sp-testi-text">"We interviewed five agencies before choosing NAGRIVA. Best decision we made. Organic traffic increased 340% in 6 months."</p>
-          <div class="sp-testi-author">
-            <div class="sp-testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">SM</div>
-            <div>
-              <div class="sp-testi-name">Sofia Martinez</div>
-              <div class="sp-testi-role">CMO, Relay Financial</div>
-            </div>
-          </div>
-        </div>
-        <div class="sp-testi-card">
-          <div class="sp-testi-stars">★★★★★</div>
-          <p class="sp-testi-text">"The level of craftsmanship and attention to detail is outstanding. They didn't just build a website — they built a complete growth system."</p>
-          <div class="sp-testi-author">
-            <div class="sp-testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">JD</div>
-            <div>
-              <div class="sp-testi-name">James Dubois</div>
-              <div class="sp-testi-role">Founder, Tidal Studio</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sp-stats-grid fade-up">
-        <div class="sp-stat-card">
-          <div class="sp-stat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 18 8 12 12 15 17 8 21 11"/></svg>
-          </div>
-          <div><span class="sp-stat-num" data-count="500">0</span><span class="sp-stat-unit">+</span></div>
-          <div class="sp-stat-label">Projects Completed</div>
-        </div>
-        <div class="sp-stat-card">
-          <div class="sp-stat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          </div>
-          <div><span class="sp-stat-num" data-count="98">0</span><span class="sp-stat-unit">%</span></div>
-          <div class="sp-stat-label">Client Satisfaction</div>
-        </div>
-        <div class="sp-stat-card">
-          <div class="sp-stat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div><span class="sp-stat-num" data-count="200">0</span><span class="sp-stat-unit">+</span></div>
-          <div class="sp-stat-label">Active Clients</div>
-        </div>
-        <div class="sp-stat-card">
-          <div class="sp-stat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <div><span class="sp-stat-num" data-count="340">0</span><span class="sp-stat-unit">%</span></div>
-          <div class="sp-stat-label">Revenue Growth</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ TESTIMONIALS ══════════════════════════ -->
-  <section class="testimonials section" id="testimonials">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">Testimonials</div>
-        <h2 class="section-title">What Our <span class="text-gradient">Clients Say</span></h2>
-        <p class="section-desc">Trusted by modern brands worldwide.</p>
-      </div>
-    </div>
-
-    <div class="testimonials-track-wrap fade-up">
-      <div class="testimonials-track" id="testimonialsTrack">
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"NAGRIVA completely transformed our online presence. Traffic doubled within 3 months and our conversion rate has never been higher."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SK</div>
-            <div>
-              <div class="testi-name">Sarah Kim</div>
-              <div class="testi-role">CEO, Luma Cosmetics</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The team's strategic approach to SEO and design is unmatched. We've seen a 180% increase in organic leads since launching our new site."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">MR</div>
-            <div>
-              <div class="testi-name">Marcus Reed</div>
-              <div class="testi-role">Founder, Prisma Tech</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Working with NAGRIVA was a game-changer. Our revenue grew by 94% in the first quarter after the redesign. Highly recommend."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">EL</div>
-            <div>
-              <div class="testi-name">Emily Liu</div>
-              <div class="testi-role">CMO, Novu Inc.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Their performance marketing campaigns delivered a 4.5x ROAS in the first month alone. The data-driven approach really sets them apart."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#007aff,#00f5c4)">JC</div>
-            <div>
-              <div class="testi-name">James Chen</div>
-              <div class="testi-role">Director, Retool Systems</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"NAGRIVA didn't just build us a website — they built a growth engine. Our team is finally spending less time on fixes and more on scaling."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#00c2a8,#8b5cf6)">AP</div>
-            <div>
-              <div class="testi-name">Aisha Patel</div>
-              <div class="testi-role">CEO, Stytch Labs</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Duplicates for seamless scroll -->
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"NAGRIVA completely transformed our online presence. Traffic doubled within 3 months and our conversion rate has never been higher."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SK</div>
-            <div>
-              <div class="testi-name">Sarah Kim</div>
-              <div class="testi-role">CEO, Luma Cosmetics</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The team's strategic approach to SEO and design is unmatched. We've seen a 180% increase in organic leads since launching our new site."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#00f5c4)">MR</div>
-            <div>
-              <div class="testi-name">Marcus Reed</div>
-              <div class="testi-role">Founder, Prisma Tech</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Working with NAGRIVA was a game-changer. Our revenue grew by 94% in the first quarter after the redesign. Highly recommend."</p>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#00f5c4)">EL</div>
-            <div>
-              <div class="testi-name">Emily Liu</div>
-              <div class="testi-role">CMO, Novu Inc.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- ══════════════════════════ FAQ — Premium Redesign ══════════════════════════ -->
-  <section class="section" id="faq">
+  <section class="section lazy-section lazy-section--xl" id="faq">
     <div class="container">
       <div class="faq-split">
         <!-- ─── LEFT SIDE ─── -->
@@ -895,21 +756,11 @@
             </div>
             <div class="faq-trust-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00f5c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-              <span>98% Satisfaction</span>
+              <span>Modern Design Standards</span>
             </div>
           </div>
 
-          <!-- Company Logos -->
-          <div class="faq-brands">
-            <span class="faq-brands-label">Trusted by industry leaders</span>
-            <div class="faq-brands-row">
-              <span class="faq-brand-logo">Google</span>
-              <span class="faq-brand-logo">Meta</span>
-              <span class="faq-brand-logo">TikTok</span>
-              <span class="faq-brand-logo">Shopify</span>
-              <span class="faq-brand-logo">Stripe</span>
-            </div>
-          </div>
+
         </div>
 
         <!-- ─── RIGHT SIDE ─── -->
@@ -1022,7 +873,7 @@
             <h3 class="faq-cta-title">Still have questions?</h3>
             <p class="faq-cta-desc">We're here to help you. Get in touch with our team and we'll get back to you within 2 hours.</p>
           </div>
-          <a href="#contact" class="faq-cta-btn">
+          <a href="#contact" class="faq-cta-btn" data-cta="tertiary" data-cta-action="contact-support">
             <span>Contact Us</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -1033,7 +884,7 @@
 
 
   <!-- ══════════════════════════ CONTACT / CTA ══════════════════════════ -->
-  <section class="cta-section section" id="contact">
+  <section class="cta-section section lazy-section lazy-section--large" id="contact">
 
     <div class="container">
       <div class="contact-grid">
@@ -1049,78 +900,6 @@
               <p class="contact-desc" data-i18n="contact.desc">
                 Book a free strategy call and let's map out a growth plan tailored to your brand. No commitment, just results.
               </p>
-            </div>
-
-            <!-- Floating Stats Cards -->
-            <div class="contact-stats-grid">
-              <div class="c-stat-card c-stat-1" style="--float-d:0s">
-                <div class="c-stat-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                </div>
-                <div class="c-stat-body">
-                  <span class="c-stat-val">284.6K</span>
-                  <span class="c-stat-lbl">Traffic Generated</span>
-                </div>
-                <span class="c-stat-chg positive">+18.2%</span>
-              </div>
-              <div class="c-stat-card c-stat-2" style="--float-d:0.3s">
-                <div class="c-stat-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                </div>
-                <div class="c-stat-body">
-                  <span class="c-stat-val">4.86%</span>
-                  <span class="c-stat-lbl">Conversion Rate</span>
-                </div>
-                <span class="c-stat-chg positive">+2.1%</span>
-              </div>
-              <div class="c-stat-card c-stat-3" style="--float-d:0.6s">
-                <div class="c-stat-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                </div>
-                <div class="c-stat-body">
-                  <span class="c-stat-val">$186K</span>
-                  <span class="c-stat-lbl">Revenue Growth</span>
-                </div>
-                <span class="c-stat-chg positive">+34.7%</span>
-              </div>
-              <div class="c-stat-card c-stat-4" style="--float-d:0.9s">
-                <div class="c-stat-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="c-stat-body">
-                  <span class="c-stat-val">48</span>
-                  <span class="c-stat-lbl">Active Campaigns</span>
-                </div>
-                <span class="c-stat-chg positive">+12</span>
-              </div>
-            </div>
-
-            <!-- Testimonial Card -->
-            <div class="c-testimonial" style="--float-d:0.4s">
-              <div class="c-testi-glow"></div>
-              <div class="c-testi-body">
-                <div class="c-testi-stars">★★★★★</div>
-                <p class="c-testi-text">"NAGRIVA transformed our digital presence. Traffic grew 340% in just 6 months. The best investment we've made."</p>
-                <div class="c-testi-author">
-                  <div class="c-testi-avatar" style="background:linear-gradient(135deg,#00f5c4,#007aff)">SM</div>
-                  <div>
-                    <div class="c-testi-name">Sofia Martinez</div>
-                    <div class="c-testi-role">CMO, Relay Financial</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Trusted Brands -->
-            <div class="c-trusted">
-              <span class="c-trusted-label">Trusted by leading brands</span>
-              <div class="c-trusted-logos">
-                <span class="c-t-logo">Google</span>
-                <span class="c-t-logo">Meta</span>
-                <span class="c-t-logo">TikTok</span>
-                <span class="c-t-logo">YouTube</span>
-                <span class="c-t-logo">Shopify</span>
-              </div>
             </div>
 
             <!-- Ambients -->
@@ -1169,7 +948,7 @@
                   <textarea name="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
                 </div>
               </div>
-              <button type="submit" class="form-btn" id="formBtn">
+              <button type="submit" class="form-btn" id="formBtn" data-cta="primary" data-cta-action="contact-submit">
                 <span class="btn-text">Send Message</span>
                 <span class="btn-spinner"></span>
                 <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1234,23 +1013,35 @@
 
   <div id="footer-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/js/supabase-config.js"></script>
-  <script src="/js/services-api.js"></script>
-  <script src="/js/script.js"></script>
-  <script src="/js/i18n.js"></script>
-  <script src="/js/profile-avatar.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/admin-auth.js"></script>
-  <script src="/modules/notifications/notifications-api.js"></script>
-  <script src="/modules/notifications/notifications-realtime.js"></script>
-  <script src="/modules/notifications/notifications-triggers.js"></script>
-  <script src="/components/notifications-dropdown/notifications-dropdown.js"></script>
-  <script src="/modules/content/content-api.js"></script>
-  <script src="/js/content-loader.js"></script>
-  <script src="/js/floating-elements.js"></script>
-  <script src="/js/chatbot.js"></script>
-  <script src="/js/navbar.js"></script>
-  <script src="/js/footer.js"></script>
+  <!-- Critical: load supabase + config first (deferred, non-blocking) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/services-api.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/navbar.js"></script>
+
+  <!-- Performance optimizer + lazy loader (deferred, executes after critical) -->
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+
+  <script>
+    /* ─── Minimal critical init (runs before defer) ─── */
+    (function() {
+      var heroImg = document.querySelector('.hero-visual-wrapper img, .pj-visual img');
+      if (heroImg) heroImg.setAttribute('fetchpriority', 'high');
+
+      /* Preconnect critical origins */
+      var origins = ['https://fonts.googleapis.com','https://fonts.gstatic.com','https://cdn.jsdelivr.net'];
+      origins.forEach(function(o) {
+        if (!document.querySelector('link[href="'+o+'"][rel="preconnect"]')) {
+          var l = document.createElement('link');
+          l.rel = 'preconnect'; l.href = o; l.crossOrigin = 'anonymous';
+          document.head.appendChild(l);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

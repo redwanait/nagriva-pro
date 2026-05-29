@@ -1,6 +1,7 @@
 /* ════════════════════════════════════════════════════════
    NAGRIVA — Services API
    Supabase queries for the services table
+   All write operations require admin role verification.
    ════════════════════════════════════════════════════════ */
 
 const NAGRIVA_ServicesAPI = (() => {
@@ -18,6 +19,24 @@ const NAGRIVA_ServicesAPI = (() => {
       ...context
     });
     throw error;
+  }
+
+  /* ─── Verify current user is admin ─── */
+  async function _requireAdmin() {
+    try {
+      var { data: { session } } = await window.supabaseClient.auth.getSession();
+      if (!session) throw new Error('Authentication required');
+      var { data: profile } = await window.supabaseClient
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single();
+      if (!profile || profile.role !== 'admin') throw new Error('Admin access required');
+      return true;
+    } catch (err) {
+      if (err.message === 'Authentication required' || err.message === 'Admin access required') throw err;
+      throw new Error('Admin access required');
+    }
   }
 
   async function fetchAllServices() {
@@ -54,6 +73,7 @@ const NAGRIVA_ServicesAPI = (() => {
   }
 
   async function createService(payload) {
+    await _requireAdmin();
     try {
       console.log('[ServicesAPI] createService payload:', JSON.stringify(payload, null, 2));
       const { data, error } = await window.supabaseClient
@@ -73,6 +93,7 @@ const NAGRIVA_ServicesAPI = (() => {
   }
 
   async function updateService(id, payload) {
+    await _requireAdmin();
     try {
       console.log('[ServicesAPI] updateService payload:', JSON.stringify(payload, null, 2));
       const { data, error } = await window.supabaseClient
@@ -93,6 +114,7 @@ const NAGRIVA_ServicesAPI = (() => {
   }
 
   async function deleteService(id) {
+    await _requireAdmin();
     try {
       console.log('[ServicesAPI] deleteService id:', id);
       const { error } = await window.supabaseClient

@@ -8,6 +8,7 @@
 /* ─── Device Helpers ─── */
 const isMobile = window.innerWidth < 768;
 const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+const isAndroid = /android/i.test(navigator.userAgent);
 
 // Detect Android for rendering stability workarounds
 (function detectAndroid() {
@@ -26,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initProjectModals();
   initServiceCTA();
-  initHomepageServices();
+  /* Defer homepage services load to after paint */
+  requestIdleCallback(function() { initHomepageServices(); }, { timeout: 3000 });
 });
 
 /* ─── Navbar-dependent inits (wait for dynamic navbar to load) ─── */
@@ -182,13 +184,13 @@ function initHamburger() {
   function openMenu() {
     overlay.classList.add('open');
     hamburger.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('nav-open');
   }
 
   function closeMenu() {
     overlay.classList.remove('open');
     hamburger.classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.classList.remove('nav-open');
   }
 
   hamburger.addEventListener('click', () => {
@@ -248,9 +250,9 @@ function initScrollAnimations() {
   );
 
   elements.forEach(el => observer.observe(el));
-  window.addEventListener('scroll', revealPassedElements, { passive: true });
-  window.addEventListener('resize', revealPassedElements);
-  window.addEventListener('load', revealPassedElements);
+  if (window.__addScrollHandler) window.__addScrollHandler(revealPassedElements);
+  if (window.__addResizeHandler) window.__addResizeHandler(revealPassedElements);
+  window.addEventListener('load', revealPassedElements, { passive: true });
   requestAnimationFrame(revealPassedElements);
 }
 
@@ -258,14 +260,14 @@ function initScrollAnimations() {
    COUNTERS
 ════════════════════════════════════════════ */
 function initCounters() {
-  const counters = document.querySelectorAll('.stat-num[data-count], .svc-stat-num[data-count], .sp-stat-num[data-count]');
+  const counters = document.querySelectorAll('.svc-stat-num[data-count]');
   if (!counters.length) return;
 
   const easeOut = t => 1 - Math.pow(1 - t, 4);
 
   const animateCounter = (el) => {
     const target   = parseInt(el.dataset.count, 10);
-    const duration = 1800;
+    const duration = 1000;
     const startTime = performance.now();
 
     const tick = (now) => {
@@ -387,107 +389,113 @@ function initActiveNavLink() {
 }
 
 /* ════════════════════════════════════════════
-   GLASS CARD CHART — Animated line
+   GLASS CARD CHART — Animated line (idle-initiated)
 ════════════════════════════════════════════ */
 (function animateGlassChart() {
   if (window.innerWidth < 768) return;
-  const path = document.querySelector('.gc-line');
-  if (!path) return;
-
-  const length = path.getTotalLength?.();
-  if (!length) return;
-
-  path.style.strokeDasharray = length;
-  path.style.strokeDashoffset = length;
-  path.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1) 0.6s';
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          path.style.strokeDashoffset = '0';
-          observer.unobserve(entry.target);
-        }
+  requestIdleCallback(function () {
+    var path = document.querySelector('.gc-line');
+    if (!path) return;
+    var length = path.getTotalLength?.();
+    if (!length) return;
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+    path.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1) 0.3s';
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { path.style.strokeDashoffset = '0'; obs.unobserve(entry.target); }
       });
-    },
-    { threshold: 0.5 }
-  );
-
-  const chart = document.querySelector('.glass-card');
-  if (chart) observer.observe(chart);
+    }, { threshold: 0.5 });
+    var chart = document.querySelector('.glass-card');
+    if (chart) obs.observe(chart);
+  }, { timeout: 2000 });
 })();
 
 /* ════════════════════════════════════════════
-   NEWSLETTER FORM — Fake submit feedback
+   NEWSLETTER FORM — Fake submit feedback (deferred)
 ════════════════════════════════════════════ */
-(function initNewsletter() {
-  const btn   = document.querySelector('.newsletter-btn');
-  const input = document.querySelector('.newsletter-input');
+requestIdleCallback(function () {
+  var btn   = document.querySelector('.newsletter-btn');
+  var input = document.querySelector('.newsletter-input');
   if (!btn || !input) return;
-
-  btn.addEventListener('click', () => {
-    const email = input.value.trim();
+  btn.addEventListener('click', function () {
+    var email = input.value.trim();
     if (!email || !email.includes('@')) {
       input.style.borderColor = 'rgba(255,80,80,0.4)';
-      setTimeout(() => { input.style.borderColor = ''; }, 1500);
+      setTimeout(function () { input.style.borderColor = ''; }, 1500);
       return;
     }
     input.value = '';
-    input.placeholder = '✓ You\'re subscribed!';
+    input.placeholder = '\u2713 You\'re subscribed!';
     btn.style.color = 'var(--accent)';
-    setTimeout(() => {
+    setTimeout(function () {
       input.placeholder = 'your@email.com';
       btn.style.color = '';
     }, 3000);
   });
-})();
+}, { timeout: 3000 });
 
 /* ════════════════════════════════════════════
-   CURSOR GLOW — Subtle follow effect on desktop
+   CURSOR GLOW — optimized, idle-initiated
 ════════════════════════════════════════════ */
 (function initCursorGlow() {
   if (window.matchMedia('(hover: none)').matches) return;
 
-  const glow = document.createElement('div');
-  glow.style.cssText = `
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(circle, rgba(0,245,196,0.04) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-    border-radius: 50%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  `;
-  document.body.appendChild(glow);
+  requestIdleCallback(function () {
+    var glow = document.createElement('div');
+    glow.style.cssText = 'position:fixed;width:250px;height:250px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(0,245,196,0.03) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity 0.3s ease;border-radius:50%;top:0;left:0;opacity:0;';
+    document.body.appendChild(glow);
 
-  let mouseX = 0, mouseY = 0;
-  let glowX = 0, glowY = 0;
-  let frame;
+    var mouseX = 0, mouseY = 0, glowX = 0, glowY = 0, frame;
+    var enabled = true;
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    glow.style.opacity = '1';
-  });
+    document.addEventListener('mousemove', function (e) {
+      if (!enabled) return;
+      mouseX = e.clientX; mouseY = e.clientY;
+      glow.style.opacity = '1';
+    }, { passive: true });
 
-  document.addEventListener('mouseleave', () => {
-    glow.style.opacity = '0';
-  });
+    document.addEventListener('mouseleave', function () { glow.style.opacity = '0'; }, { passive: true });
 
-  const animate = () => {
-    glowX += (mouseX - glowX) * 0.1;
-    glowY += (mouseY - glowY) * 0.1;
-    glow.style.left = glowX + 'px';
-    glow.style.top  = glowY + 'px';
-    frame = requestAnimationFrame(animate);
-  };
-  animate();
+    function animate() {
+      if (!enabled) { frame = null; return; }
+      glowX += (mouseX - glowX) * 0.06;
+      glowY += (mouseY - glowY) * 0.06;
+      glow.style.left = glowX + 'px';
+      glow.style.top = glowY + 'px';
+      frame = requestAnimationFrame(animate);
+    }
+    animate();
+
+    /* Stop on visibility change to save CPU */
+    document.addEventListener('visibilitychange', function () {
+      enabled = !document.hidden;
+      if (enabled && !frame) animate();
+      else if (!enabled && frame) { cancelAnimationFrame(frame); frame = null; }
+    });
+  }, { timeout: 2000 });
 })();
+
+/* ════════════════════════════════════════════
+   IMAGE OPTIMIZATION (deferred)
+════════════════════════════════════════════ */
+/* Hero fetchpriority set inline in HTML; rest deferred */
+requestIdleCallback(function () {
+  document.querySelectorAll('img:not([width]):not([height])').forEach(function (img) {
+    if (img.complete && img.naturalWidth) {
+      img.setAttribute('width', img.naturalWidth);
+      img.setAttribute('height', img.naturalHeight);
+    } else {
+      img.addEventListener('load', function () {
+        img.setAttribute('width', img.naturalWidth);
+        img.setAttribute('height', img.naturalHeight);
+      });
+    }
+  });
+  document.querySelectorAll('.pj-visual img, .service-img img, .art-thumb img').forEach(function (img) {
+    if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+  });
+}, { timeout: 3000 });
 
 /* ════════════════════════════════════════════
    CONTACT FORM — Formspree submission
@@ -550,192 +558,219 @@ function initContactForm() {
 }
 
 /* ════════════════════════════════════════════
-   SERVICE CARDS — Tilt on hover
+   SERVICE CARDS — Tilt on hover (RAF-throttled)
 ════════════════════════════════════════════ */
 (function initCardTilt() {
   if (window.matchMedia('(hover: none)').matches) return;
 
-  document.querySelectorAll('.service-card, .stat-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 6;
-      const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 6;
-      card.style.transform = `translateY(-6px) rotateY(${x}deg) rotateX(${-y}deg)`;
-    });
-    card.addEventListener('mouseleave', () => {
+  document.querySelectorAll('.service-card, .stat-card').forEach(function (card) {
+    var raf = null;
+    card.addEventListener('mousemove', function (e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = null;
+        var rect = card.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width - 0.5) * 3;
+        var y = ((e.clientY - rect.top) / rect.height - 0.5) * 3;
+        card.style.transform = 'translateY(-3px) rotateY(' + x + 'deg) rotateX(' + (-y) + 'deg)';
+      });
+    }, { passive: true });
+    card.addEventListener('mouseleave', function () {
       card.style.transform = '';
-    });
+    }, { passive: true });
   });
 })();
 
 /* ════════════════════════════════════════════
-   STAGGERED REVEAL — Auto-assign delays
+   RAF THROTTLE for expensive handlers
 ════════════════════════════════════════════ */
-;(function initStaggeredReveal() {
-  const isMobile = window.innerWidth < 768;
-  const grids = document.querySelectorAll('.services-grid, .stats-grid, .pj-grid, .pj-grid-bottom, .process-cards, .svc-benefits, .svc-features, .svc-steps, .svc-stats-grid, .svc-results-grid, .svc-reviews-grid');
-  grids.forEach(grid => {
-    const cards = grid.querySelectorAll('.fade-up');
-    cards.forEach((card, i) => {
-      if (isMobile) {
-        card.style.setProperty('--delay', '0s');
-      } else if (!card.style.getPropertyValue('--delay')) {
-        card.style.setProperty('--delay', `${i * 0.07}s`);
-      }
+(function initRafThrottle() {
+  var scrollHandlers = [];
+  var resizeHandlers = [];
+  var scrollRaf = null;
+  var resizeRaf = null;
+
+  window.addEventListener('scroll', function () {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(function () {
+      scrollHandlers.forEach(function (fn) { fn(); });
+      scrollRaf = null;
     });
-  });
+  }, { passive: true });
+
+  window.addEventListener('resize', function () {
+    if (resizeRaf) return;
+    resizeRaf = requestAnimationFrame(function () {
+      resizeHandlers.forEach(function (fn) { fn(); });
+      resizeRaf = null;
+    });
+  }, { passive: true });
+
+  window.__addScrollHandler = function (fn) { scrollHandlers.push(fn); };
+  window.__addResizeHandler = function (fn) { resizeHandlers.push(fn); };
 })();
 
 /* ════════════════════════════════════════════
-   CONTACT PARTICLES
+   STAGGERED REVEAL — Auto-assign delays (deferred)
+════════════════════════════════════════════ */
+requestIdleCallback(function () {
+  var isMobile = window.innerWidth < 768;
+  var grids = document.querySelectorAll('.services-grid, .stats-grid, .pj-grid, .pj-grid-bottom, .process-cards, .svc-benefits, .svc-features, .svc-steps, .svc-stats-grid, .svc-results-grid, .svc-reviews-grid');
+  grids.forEach(function (grid) {
+    var cards = grid.querySelectorAll('.fade-up');
+    cards.forEach(function (card, i) {
+      if (isMobile) card.style.setProperty('--delay', '0s');
+      else if (!card.style.getPropertyValue('--delay')) card.style.setProperty('--delay', (i * 0.05) + 's');
+    });
+  });
+}, { timeout: 2000 });
+
+/* ════════════════════════════════════════════
+   CONTACT PARTICLES — optimized with idle init + observer controlled
 ════════════════════════════════════════════ */
 (function initContactParticles() {
-  const canvas = document.getElementById('contactParticles');
+  var canvas = document.getElementById('contactParticles');
   if (!canvas) return;
   if (window.innerWidth < 768) { canvas.style.display = 'none'; return; }
 
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
-  const COUNT = 50;
+  var ctx = canvas.getContext('2d');
+  var w, h, particles = [];
+  var COUNT = 25;
+  var rafId = null;
+  var isVisible = false;
 
   function resize() {
-    const section = canvas.closest('.cta-section');
+    var section = canvas.closest('.cta-section');
     if (!section) return;
-    const rect = section.getBoundingClientRect();
+    var rect = section.getBoundingClientRect();
     w = canvas.width = rect.width;
     h = canvas.height = rect.height;
   }
 
   function createParticle() {
     return {
-      x: Math.random() * w,
-      y: Math.random() * h,
+      x: Math.random() * w, y: Math.random() * h,
       r: Math.random() * 1.5 + 0.5,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
+      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
       a: Math.random() * 0.35 + 0.1,
     };
   }
 
-  function init() {
-    resize();
-    particles = Array.from({ length: COUNT }, createParticle);
-  }
+  function init() { resize(); particles = Array.from({ length: COUNT }, createParticle); }
 
   function draw() {
+    if (!isVisible) { rafId = null; return; }
     ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,245,196,${p.a})`;
-      ctx.fill();
-    });
-
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,245,196,' + p.a + ')'; ctx.fill();
+    }
+    for (i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,245,196,${0.04 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+          ctx.strokeStyle = 'rgba(0,245,196,' + (0.04 * (1 - dist / 120)) + ')';
+          ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
     }
-
-    requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
   }
 
-  init();
-  draw();
-  window.addEventListener('resize', init);
+  requestIdleCallback(function () {
+    init();
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        isVisible = e.isIntersecting;
+        if (isVisible && !rafId) rafId = requestAnimationFrame(draw);
+        else if (!isVisible && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+    window.addEventListener('resize', init, { passive: true });
+  }, { timeout: 2000 });
 })();
 
 /* ════════════════════════════════════════════
-   FAQ PARTICLES
+   FAQ PARTICLES — optimized
 ════════════════════════════════════════════ */
 (function initFAQparticles() {
-  const canvas = document.getElementById('faqParticles');
+  var canvas = document.getElementById('faqParticles');
   if (!canvas) return;
   if (window.innerWidth < 768) { canvas.style.display = 'none'; return; }
 
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
-  const COUNT = 35;
+  var ctx = canvas.getContext('2d');
+  var w, h, particles = [];
+  var COUNT = 20;
+  var rafId = null;
+  var isVisible = false;
 
   function resize() {
-    const section = canvas.closest('.faq-premium');
+    var section = canvas.closest('.faq-premium');
     if (!section) return;
-    const rect = section.getBoundingClientRect();
+    var rect = section.getBoundingClientRect();
     w = canvas.width = rect.width;
     h = canvas.height = rect.height;
   }
 
   function createParticle() {
     return {
-      x: Math.random() * w,
-      y: Math.random() * h,
+      x: Math.random() * w, y: Math.random() * h,
       r: Math.random() * 1.5 + 0.5,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
       a: Math.random() * 0.3 + 0.08,
     };
   }
 
-  function init() {
-    resize();
-    particles = Array.from({ length: COUNT }, createParticle);
-  }
+  function init() { resize(); particles = Array.from({ length: COUNT }, createParticle); }
 
   function draw() {
+    if (!isVisible) { rafId = null; return; }
     ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,245,196,${p.a})`;
-      ctx.fill();
-    });
-
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,245,196,' + p.a + ')'; ctx.fill();
+    }
+    for (i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 100) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,245,196,${0.03 * (1 - dist / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+          ctx.strokeStyle = 'rgba(0,245,196,' + (0.03 * (1 - dist / 100)) + ')';
+          ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
     }
-
-    requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
   }
 
-  init();
-  draw();
-  window.addEventListener('resize', init);
+  requestIdleCallback(function () {
+    init();
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        isVisible = e.isIntersecting;
+        if (isVisible && !rafId) rafId = requestAnimationFrame(draw);
+        else if (!isVisible && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+    window.addEventListener('resize', init, { passive: true });
+  }, { timeout: 3000 });
 })();
 
 /* ════════════════════════════════════════════
@@ -785,8 +820,8 @@ function initServiceCTA() {
 ════════════════════════════════════════════ */
 
 function rebindServiceEffects(container) {
+  if (window.matchMedia('(hover: none)').matches) return;
   var cards = container.querySelectorAll('.service-card');
-  console.log('[Services] Rebinding effects on', cards.length, 'cards');
 
   cards.forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
@@ -804,7 +839,6 @@ function rebindServiceEffects(container) {
 function observeFadeUpElements(container) {
   var els = container.querySelectorAll('.fade-up:not(.visible)');
   if (!els.length) return;
-  console.log('[Services] Observing', els.length, 'fade-up elements');
 
   els.forEach(function (el) {
     var rect = el.getBoundingClientRect();
@@ -826,15 +860,11 @@ function observeFadeUpElements(container) {
 
 function initHomepageServices() {
   var grid = document.getElementById('homepageServices');
-  if (!grid) {
-    console.warn('[Services] #homepageServices not found');
-    return;
-  }
+  if (!grid) return;
 
   var skeleton = document.getElementById('serviceSkeleton');
 
   if (typeof ServicesAPI === 'undefined') {
-    console.error('[Services] ServicesAPI not loaded');
     if (skeleton) skeleton.style.display = 'none';
     grid.innerHTML =
       '<div class="services-error">' +
@@ -872,7 +902,7 @@ function initHomepageServices() {
     var image = service.image || '';
     var category = service.category || '';
     var icon = getIcon(category);
-    var delay = (index * 0.06) + 's';
+    var delay = (index * 0.04) + 's';
 
     var plainTitle = stripHtml(title);
     var plainDesc = stripHtml(shortDesc);
@@ -930,7 +960,6 @@ function initHomepageServices() {
     var limited = sorted.slice(0, 6);
     var html = limited.map(function (s, i) { return buildCard(s, i); }).join('');
     grid.innerHTML = html;
-    console.log('[Services] Rendered', limited.length, 'cards (featured first)');
 
     var cta = document.getElementById('servicesCta');
     if (cta) {
@@ -942,16 +971,13 @@ function initHomepageServices() {
     observeFadeUpElements(grid);
   }
 
-  console.log('[Services] Fetching services...');
   ServicesAPI.getAllServices().then(function (services) {
-    console.log('[Services] Fetched', services ? services.length : 0, 'services');
     if (!services || !services.length) {
       renderEmpty();
       return;
     }
     renderCards(services);
-  }).catch(function (err) {
-    console.error('[Services] Fetch error:', err);
+  }).catch(function () {
     renderError();
   });
 }

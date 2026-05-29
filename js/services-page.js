@@ -8,12 +8,15 @@
   'use strict';
 
   var CATEGORY_ICONS = {
-    'Design & Development': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="3"/><path d="M9 22h6"/><path d="M12 19v3"/></svg>',
-    'Marketing & Growth': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/><path d="M2 12h20"/></svg>',
-    'Technology & Innovation': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'
+    'Web Design': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    'SEO': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    'Automation': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    'Branding': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-1 1a3 3 0 0 1-4.2 0l-1-1a3 3 0 0 1 0-4.2l1-1a3 3 0 0 1 4.2 0l1 1a3 3 0 0 1 0 4.2z"/><path d="M15 10l-8 8"/><path d="M18 13l-5 5"/><path d="M8 2l-2 2"/><path d="M2 8l-2 2"/></svg>',
+    'Content': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+    'Growth': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>'
   };
 
-  var DEFAULT_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>';
+  var DEFAULT_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
 
   var state = {
     services: [],
@@ -46,13 +49,13 @@
     var image = service.image || '';
     var category = service.category || '';
     var icon = getIcon(category);
-    var delay = (index * 0.06) + 's';
+    var delay = (index * 0.04) + 's';
 
     var plainTitle = stripHtml(title);
     var plainDesc = stripHtml(shortDesc);
     var firstLetter = (plainTitle || 'S').charAt(0).toUpperCase();
 
-    return '<a href="/pages/service.html?slug=' + encodeURIComponent(slug) + '" class="service-card fade-up" style="--delay:' + delay + '">' +
+    return '<a href="/pages/service.html?slug=' + encodeURIComponent(slug) + '" class="service-card fade-up sv-card-premium" style="--delay:' + delay + '">' +
       '<div class="service-img">' +
         (image
           ? '<img class="service-visual" src="' + escapeAttr(image) + '" alt="' + escapeAttr(plainTitle) + '" loading="lazy" onerror="this.style.display=\'none\'">'
@@ -65,7 +68,8 @@
         '<div class="service-name">' + escapeAttr(plainTitle) + '</div>' +
         '<div class="service-desc">' + escapeAttr(plainDesc) + '</div>' +
       '</div>' +
-      '<div class="service-footer">' +
+      '<div class="service-footer sv-card-footer">' +
+        '<span class="sv-card-learn">Learn More</span>' +
         '<div class="service-arrow">' +
           '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
         '</div>' +

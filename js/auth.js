@@ -235,6 +235,9 @@ const NagrivaAuth = (() => {
 
       /* Ensure Book a Call CTA stays visible for authenticated users */
       if (refs.bookBtn) refs.bookBtn.style.display = '';
+
+      /* Update admin link visibility */
+      updateAdminLinkVisibility();
     } else {
       if (refs.authBtn) refs.authBtn.style.display = '';
       if (refs.userAvatar) refs.userAvatar.classList.remove('visible');
@@ -243,13 +246,19 @@ const NagrivaAuth = (() => {
         refs.mobileAuthBtn.style.display = '';
         if (refs.mobileAuthText) refs.mobileAuthText.textContent = 'Sign In';
       }
+      /* Hide admin link when logged out */
+      var adminLink = document.getElementById('adminNavLink');
+      if (adminLink) adminLink.style.display = 'none';
     }
   }
 
   /* ─── Modal Controls ─── */
   function openModal(tab) {
     if (!refs.overlay) return;
-    refs.overlay.classList.add('active');
+    refs.overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      refs.overlay.classList.add('active');
+    });
     document.body.style.overflow = 'hidden';
     switchTab(tab || 'signin');
   }
@@ -263,6 +272,11 @@ const NagrivaAuth = (() => {
     hideMessage(refs.forgotMsg);
     refs.forgotSuccess.classList.remove('show');
     if (refs.forgotFormWrap) refs.forgotFormWrap.style.display = '';
+    setTimeout(() => {
+      if (!refs.overlay.classList.contains('active')) {
+        refs.overlay.style.display = 'none';
+      }
+    }, 500);
   }
 
   const FORM_IDS = { signin: 'signInForm', signup: 'signUpForm', forgot: 'forgotForm' };
@@ -731,7 +745,8 @@ const NagrivaAuth = (() => {
       'profile': '/pages/profile.html',
       'dashboard': '/pages/dashboard.html',
       'notifications': '/pages/notifications.html',
-      'settings': '/pages/settings.html'
+      'settings': '/pages/settings.html',
+      'admin': '/pages/admin-dashboard.html'
     };
     document.querySelectorAll('.user-dropdown-item[data-nav]').forEach(function(item) {
       var nav = item.getAttribute('data-nav');
@@ -744,6 +759,31 @@ const NagrivaAuth = (() => {
         });
       }
     });
+  }
+
+  /* ─── Show admin link only for admin users ─── */
+  async function updateAdminLinkVisibility() {
+    var adminLink = document.getElementById('adminNavLink');
+    var mobileAdminLink = document.getElementById('mobileAdminNavLink');
+    try {
+      var session = currentSession || (await window.supabaseClient.auth.getSession()).data.session;
+      if (!session) {
+        if (adminLink) adminLink.style.display = 'none';
+        if (mobileAdminLink) mobileAdminLink.style.display = 'none';
+        return;
+      }
+      var { data: profile } = await window.supabaseClient
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single();
+      var isAdmin = profile && profile.role === 'admin';
+      if (adminLink) adminLink.style.display = isAdmin ? '' : 'none';
+      if (mobileAdminLink) mobileAdminLink.style.display = isAdmin ? '' : 'none';
+    } catch (_) {
+      if (adminLink) adminLink.style.display = 'none';
+      if (mobileAdminLink) mobileAdminLink.style.display = 'none';
+    }
   }
 
   /* ─── Re-bind navbar-specific events after navbar loads ─── */

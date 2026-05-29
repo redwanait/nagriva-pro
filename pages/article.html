@@ -12,13 +12,15 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="/css/performance.css" />
   <link rel="stylesheet" href="/css/blog.css" />
-  <link rel="stylesheet" href="/css/chatbot.css" />
-  <link rel="stylesheet" href="/css/floating-elements.css" />
-  <link rel="stylesheet" href="/css/auth.css" />
-  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" href="/assets/images/branding/nagriva-logo.png" />
   <style>
     .article-page { display: block; }
@@ -98,7 +100,7 @@
   </section>
 
   <!-- Article Content -->
-  <section class="article-content" id="articleContent">
+  <section class="article-content lazy-section lazy-section--large" id="articleContent">
     <div class="container">
       <div class="article-toolbar">
         <a href="/pages/blog.html" class="article-back-btn">
@@ -128,7 +130,7 @@
   </section>
 
   <!-- Related Articles -->
-  <section class="related-section" id="relatedSection">
+  <section class="related-section lazy-section lazy-section--large" id="relatedSection">
     <div class="container">
       <div class="related-header">
         <h2 class="related-title">Related Articles</h2>
@@ -143,7 +145,7 @@
   </section>
 
   <!-- Newsletter CTA -->
-  <section class="blog-cta">
+  <section class="blog-cta lazy-section lazy-section--large">
     <div class="blog-cta-bg"><div class="blog-cta-glow"></div></div>
     <div class="container">
       <div class="blog-cta-content fade-up">
@@ -171,18 +173,15 @@
 <div id="footer-container"></div>
 
 <!-- ══════════════════════════ SCRIPTS ══════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/js/supabase-config.js"></script>
-<script src="/modules/blog/blog-api.js"></script>
-<script src="/js/script.js"></script>
-<script src="/js/i18n.js"></script>
-<script src="/js/profile-avatar.js"></script>
-<script src="/js/auth.js"></script>
-<script src="/js/floating-elements.js"></script>
-<script src="/js/chatbot.js"></script>
-<script src="/components/notifications-dropdown/notifications-dropdown.js"></script>
-<script src="/js/navbar.js"></script>
-<script src="/js/footer.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/js/supabase-config.js"></script>
+<script defer src="/modules/blog/blog-api.js"></script>
+<script defer src="/js/script.js"></script>
+<script defer src="/js/i18n.js"></script>
+<script defer src="/js/auth.js"></script>
+<script defer src="/js/navbar.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+<script defer src="/js/lazy-loader.js"></script>
 
 <!-- ══════════════════════════ ARTICLE SCRIPT ══════════════════════════ -->
 <script>

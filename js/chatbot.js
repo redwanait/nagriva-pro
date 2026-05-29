@@ -213,10 +213,6 @@
       history: conversationHistory,
     };
 
-    console.log('[Nagriva Chat] → POST ' + url);
-    console.log('[Nagriva Chat]   message:', userMessage.slice(0, 60) + (userMessage.length > 60 ? '...' : ''));
-    console.log('[Nagriva Chat]   history length:', conversationHistory.length);
-
     try {
       var res = await fetch(url, {
         method: 'POST',
@@ -224,27 +220,16 @@
         body: JSON.stringify(payload),
       });
 
-      console.log('[Nagriva Chat] ← status:', res.status, res.statusText);
-
       if (!res.ok) {
         var errorBody = null;
         try { errorBody = await res.json(); } catch (_) {}
         var errMsg = (errorBody && errorBody.error) || 'HTTP ' + res.status;
-        console.error('[Nagriva Chat] ✗ API error:', errMsg);
-        if (errorBody) console.error('[Nagriva Chat]   response body:', JSON.stringify(errorBody));
         throw new Error(errMsg);
       }
 
       var data = await res.json();
-      console.log('[Nagriva Chat] ✓ reply received, length:', data.reply ? data.reply.length : 0);
       return data.reply;
     } catch (err) {
-      console.error('[Nagriva Chat] ✗ Request failed:', err.message);
-      console.error('[Nagriva Chat]   Check that the API server is running.');
-
-      if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
-        console.error('[Nagriva Chat]   This is a network error — API endpoint may be down or unreachable.');
-      }
 
       return "Thanks for reaching out! I'm having a brief technical moment. Please try again, or <a href=\"#contact\" style=\"color:#00f5c4;text-decoration:underline\">book a free call</a> and we'll get right back to you.";
     }

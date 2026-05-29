@@ -7,20 +7,22 @@
   <meta name="description" content="NAGRIVA premium admin dashboard." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="../css/admin-orders.css" />
-  <link rel="stylesheet" href="../css/admin-payments.css" />
-  <link rel="stylesheet" href="../css/admin-invoices.css" />
-  <link rel="stylesheet" href="../css/admin-auth.css" />
-  <link rel="stylesheet" href="../css/admin-services.css" />
-  <link rel="stylesheet" href="../css/admin-settings.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/style.css" />
-  <!-- chatbot.css and floating-elements.css intentionally excluded from admin -->
-  <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" />
-  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
-  <link rel="stylesheet" href="../components/activity-feed/activity-feed.css" />
-  <link rel="stylesheet" href="../css/global-search.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/admin-auth.css" media="print" onload="this.media='all'" />
+  <!-- Deferred admin stylesheets -->
+  <link rel="stylesheet" href="../css/admin-orders.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-payments.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-invoices.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-services.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-settings.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/activity-feed/activity-feed.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/global-search.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
   <style>
     *,
@@ -3696,42 +3698,23 @@
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-  </script>
-  <script src="../js/supabase-config.js"></script>
-  <script src="../js/supabase.js"></script>
-  <script src="../js/auth-guard.js"></script>
-  <script src="../js/admin-auth.js"></script>
-  <script src="../modules/orders/orders-api.js"></script>
-  <script src="../modules/invoices/invoices-api.js"></script>
-  <script src="../modules/activity-logs/activity-logs-api.js"></script>
-  <script src="../modules/activity-logs/activity-logs-realtime.js"></script>
-  <script src="../modules/activity-logs/activity-logs-triggers.js"></script>
-  <script src="../components/activity-feed/activity-feed.js"></script>
-  <script src="../js/toast.js"></script>
-  <script src="../js/admin-orders.js"></script>
-  <script src="../js/admin-modal.js"></script>
-  <script src="../js/admin-dashboard.js"></script>
-  <script src="../js/admin-clients.js"></script>
-  <script src="../modules/services/services-api.js"></script>
-  <script src="../js/admin-services.js"></script>
-  <script src="../js/admin-messages.js"></script>
-  <script src="../js/admin-files.js"></script>
-  <script src="../js/admin-activity.js"></script>
-  <script src="../js/admin-notifications.js"></script>
-  <script src="../js/admin-payments.js"></script>
-  <script src="../modules/invoices/invoices-realtime.js"></script>
-  <script src="../modules/invoices/invoices-notifications.js"></script>
-  <script src="../modules/invoices/invoices-activity.js"></script>
-  <script src="../modules/invoices/invoice-pdf.js"></script>
-  <script src="../js/admin-invoices.js"></script>
-  <script src="../modules/navbar/navbar-api.js"></script>
-  <script src="../js/admin-navbar.js"></script>
-  <script src="../modules/search/global-search.js"></script>
-  <script src="../components/client-drawer/client-drawer.js"></script>
-  <script src="../js/i18n.js"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/supabase.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/admin-auth.js"></script>
+  <script defer src="../js/admin-navbar.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/invoices/invoices-api.js"></script>
+  <script defer src="../modules/activity-logs/activity-logs-api.js"></script>
+  <script defer src="../js/toast.js"></script>
+
+  <!-- Performance optimizer + lazy loader -->
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
 
@@ -4771,14 +4754,5 @@
 
     });
   </script>
-  <script src="../modules/notifications/notifications-api.js"></script>
-  <script src="../modules/notifications/notifications-realtime.js"></script>
-  <script src="../modules/notifications/notifications-triggers.js"></script>
-  <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
-  <script src="../js/footer.js"></script>
-  <script src="../modules/settings/settings-api.js"></script>
-  <script src="../modules/content/content-api.js"></script>
-  <script src="../js/content-loader.js"></script>
-  <script src="../js/admin-settings.js"></script>
 </body>
 </html>

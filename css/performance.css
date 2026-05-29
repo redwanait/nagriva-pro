@@ -1,0 +1,165 @@
+/* ════════════════════════════════════════════════════════
+   NAGRIVA — Performance & Lazy Loading Styles
+   ════════════════════════════════════════════════════════ */
+
+/* ─── Shimmer skeleton animation ─── */
+@keyframes nagriva-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-base {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.05) 37%,
+    rgba(255, 255, 255, 0.02) 63%
+  );
+  background-size: 200% 100%;
+  animation: nagriva-shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-block {
+  height: 20px;
+  margin-bottom: 12px;
+}
+
+.skeleton-block.w20 { width: 20%; }
+.skeleton-block.w30 { width: 30%; }
+.skeleton-block.w40 { width: 40%; }
+.skeleton-block.w50 { width: 50%; }
+.skeleton-block.w60 { width: 60%; }
+.skeleton-block.w70 { width: 70%; }
+.skeleton-block.w80 { width: 80%; }
+.skeleton-block.w90 { width: 90%; }
+.skeleton-block.w100 { width: 100%; }
+
+.skeleton-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.skeleton-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.skeleton-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-line {
+  height: 10px;
+  margin-bottom: 8px;
+}
+
+.skeleton-line:last-child {
+  margin-bottom: 0;
+}
+
+.skeleton-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* ─── Lazy load transition ─── */
+.lazy-fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1),
+              transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.lazy-fade-in.lazy-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Background lazy load ─── */
+[data-lazy-bg] {
+  background-image: none !important;
+}
+
+[data-lazy-bg].lazy-bg-loaded {
+  background-image: var(--lazy-bg-url);
+}
+
+/* ─── Content visibility for below-fold sections ─── */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+  contain: layout style paint;
+}
+
+.lazy-section--small {
+  contain-intrinsic-size: 300px;
+}
+
+.lazy-section--large {
+  contain-intrinsic-size: 800px;
+}
+
+.lazy-section--xl {
+  contain-intrinsic-size: 1200px;
+}
+
+/* ─── Reduce motion for animations ─── */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-base {
+    animation: none;
+    opacity: 0.08;
+  }
+}
+
+/* ─── Mobile performance enhancements ─── */
+@media (max-width: 768px) {
+  .lazy-section {
+    contain-intrinsic-size: 400px;
+  }
+
+  .lazy-section--large {
+    contain-intrinsic-size: 600px;
+  }
+
+  .lazy-section--xl {
+    contain-intrinsic-size: 800px;
+  }
+
+  /* Disable expensive backdrop-filter on mobile for performance */
+  .glass-card,
+  .float-card-body,
+  .float-pill,
+  .contact-card,
+  .np-card,
+  .sp-testimonial-card,
+  .sp-showcase-result,
+  .sp-hero-mockup,
+  .process-card,
+  .pricing-card {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* ─── Print optimization ─── */
+@media print {
+  .lazy-section {
+    content-visibility: visible !important;
+    contain: none !important;
+  }
+
+  [data-lazy-bg] {
+    background-image: var(--lazy-bg-url) !important;
+  }
+}

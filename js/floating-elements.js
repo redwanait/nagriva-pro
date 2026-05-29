@@ -185,13 +185,11 @@
         .eq('conversation_id', supportConversationId)
         .order('created_at', { ascending: true });
       if (res.error) {
-        console.warn('[FloatingElements] Failed to fetch support messages:', res.error);
         return [];
       }
       supportMessages = res.data || [];
       return supportMessages;
     } catch(e) {
-      console.warn('[FloatingElements] Fetch support messages error:', e);
       return [];
     }
   }
@@ -214,7 +212,6 @@
         message: text.trim()
       }).select().single();
       if (res.error) {
-        console.warn('[FloatingElements] Failed to send:', res.error);
         if (typeof NAGRIVA_Toast !== 'undefined') {
           NAGRIVA_Toast.error('Failed to send', 'Please try again.');
         }
@@ -231,7 +228,6 @@
       setTimeout(hideSupportTyping, 1800);
       return res.data;
     } catch(e) {
-      console.warn('[FloatingElements] Send error:', e);
       if (typeof NAGRIVA_Toast !== 'undefined') {
         NAGRIVA_Toast.error('Failed to send', 'Please try again.');
       }

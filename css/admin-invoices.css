@@ -358,11 +358,11 @@
 }
 @keyframes inv-float-icon {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-3px); }
 }
 @keyframes inv-glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(0,245,196,0); }
-  50% { box-shadow: 0 0 30px rgba(0,245,196,0.08); }
+  0%, 100% { box-shadow: 0 0 10px rgba(0,245,196,0); }
+  50% { box-shadow: 0 0 15px rgba(0,245,196,0.05); }
 }
 .inv-empty {
   display: flex;

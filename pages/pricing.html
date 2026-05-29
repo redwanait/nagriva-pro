@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services & Pricing — NAGRIVA</title>
-  <meta name="description" content="Premium growth services for serious brands. Flat-rate packages with no hidden fees." />
+  <title>Pricing — NAGRIVA</title>
+  <meta name="description" content="Simple and transparent pricing for creators, startups, and modern businesses. No hidden fees, no long-term contracts." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" /></noscript>
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
   <link rel="stylesheet" href="../css/pricing.css" />
-  <link rel="stylesheet" href="../css/chatbot.css" />
-  <link rel="stylesheet" href="../css/floating-elements.css" />
-  <link rel="stylesheet" href="../css/auth.css" />
-  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
 </head>
 <body data-page="pricing">
@@ -24,310 +27,289 @@
   <div class="np-bg">
     <div class="np-grid"></div>
     <div class="np-glow"></div>
+    <div class="np-glow-2"></div>
   </div>
 
   <!-- ════════════════════════════════════════
-       SECTION 1 — HERO
+       HERO
   ════════════════════════════════════════ -->
   <section class="np-hero">
     <div class="np-hero-inner">
-      <div class="np-badge">Services & Pricing</div>
-      <h1 class="np-hero-title">Growth systems for<br /><span class="np-text-accent">ambitious brands</span></h1>
-      <p class="np-hero-sub">
-        Flat-rate packages built for results. No hidden fees, no long-term contracts — just<br class="np-br" />
-        a dedicated team executing strategies that move your business forward.
-      </p>
+      <div class="section-tag">✦ Pricing</div>
+      <h1 class="np-hero-title">Simple & <span class="text-gradient">Transparent</span> Pricing</h1>
+      <p class="np-hero-sub">Flexible solutions for creators, startups, and modern businesses. No hidden fees, no surprises.</p>
       <div class="np-hero-actions">
-        <a href="#packages" class="np-btn np-btn--primary">View Packages</a>
-        <a href="../index.html#contact" class="np-btn np-btn--ghost">Book a Call</a>
+        <a href="#plans" class="btn-primary" data-cta="primary" data-cta-action="get-started">
+          Get Started
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="../index.html#contact" class="btn-secondary" data-cta="secondary" data-cta-action="book-call">
+          Book a Free Call
+        </a>
+      </div>
+      <div class="np-hero-trust">
+        <span class="np-hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No hidden fees
+        </span>
+        <span class="np-hero-trust-dot"></span>
+        <span class="np-hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Cancel anytime
+        </span>
+        <span class="np-hero-trust-dot"></span>
+        <span class="np-hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Month-to-month
+        </span>
       </div>
     </div>
   </section>
 
   <!-- ════════════════════════════════════════
-       SECTION 2 — PACKAGES
+       TOGGLE + PLANS
   ════════════════════════════════════════ -->
-  <section class="np-packages" id="packages">
-    <div class="np-section-label">Packages</div>
-    <h2 class="np-section-title">Choose your <span class="np-text-accent">engagement</span></h2>
-    <p class="np-section-desc">Every package includes a dedicated team, strategy roadmap, and monthly reporting.</p>
+  <section class="np-plans" id="plans">
+    <!-- Toggle -->
+    <div class="np-toggle-wrap">
+      <span class="np-toggle-label" data-active="true">Monthly</span>
+      <button class="np-toggle" id="pricingToggle" aria-label="Toggle billing period">
+        <span class="np-toggle-knob"></span>
+      </button>
+      <span class="np-toggle-label" data-active="false">Yearly</span>
+      <span class="np-toggle-save">Save 20%</span>
+    </div>
 
-    <div class="np-cards">
+    <div class="np-cards" id="pricingCards">
 
       <!-- Starter -->
-      <div class="np-card">
+      <div class="np-card fade-up">
         <div class="np-card-header">
           <div class="np-card-name">Starter</div>
-          <p class="np-card-desc">For early-stage brands ready to build a professional digital presence.</p>
+          <p class="np-card-desc">Best for individuals and small creators.</p>
         </div>
         <div class="np-card-price">
-          <span class="np-card-amount">$2,999</span>
-          <span class="np-card-label">starting from</span>
+          <span class="np-card-amount"><span class="np-amount">$29</span><span class="np-period">/month</span></span>
         </div>
         <ul class="np-card-features">
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Brand strategy & positioning
+            Basic website support
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Website design (5 pages)
+            SEO optimization
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Basic SEO foundation
+            1 active project
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Social media setup (3 platforms)
+            Email support
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Monthly performance report
-          </li>
-          <li class="np-card-feature">
-            <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Email support (24h response)
+            Basic analytics
           </li>
         </ul>
-        <a href="../index.html#contact" class="np-btn np-card-btn">Get Started</a>
+        <a href="../pages/signup.html" class="btn-primary np-card-btn" data-cta="primary" data-cta-action="get-started">Get Started</a>
       </div>
 
-      <!-- Scale (Featured) -->
-      <div class="np-card np-card--featured">
+      <!-- Growth (Featured) -->
+      <div class="np-card np-card--featured fade-up">
         <div class="np-card-badge">Most Popular</div>
         <div class="np-card-header">
-          <div class="np-card-name">Scale</div>
-          <p class="np-card-desc">For growing businesses ready to invest in serious market traction.</p>
+          <div class="np-card-name">Growth</div>
+          <p class="np-card-desc">Best for startups and growing brands.</p>
         </div>
         <div class="np-card-price">
-          <span class="np-card-amount">$7,999</span>
-          <span class="np-card-label">starting from</span>
+          <span class="np-card-amount"><span class="np-amount">$79</span><span class="np-period">/month</span></span>
         </div>
         <ul class="np-card-features">
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Full brand identity & guidelines
+            Advanced optimization
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Website design (up to 12 pages)
+            Automation setup
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Advanced SEO & content strategy
+            Priority support
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Social media management & ads
+            Unlimited revisions
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            AI workflow automation
+            Performance analytics
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Priority Slack support
+            Multi-page support
           </li>
         </ul>
-        <a href="../index.html#contact" class="np-btn np-btn--accent np-card-btn">Get Started</a>
+        <a href="../pages/signup.html" class="np-btn-accent np-card-btn" data-cta="primary" data-cta-action="get-started">Get Started</a>
       </div>
 
-      <!-- Enterprise -->
-      <div class="np-card">
+      <!-- Scale -->
+      <div class="np-card fade-up">
         <div class="np-card-header">
-          <div class="np-card-name">Enterprise</div>
-          <p class="np-card-desc">For established organizations requiring a fully custom growth engine.</p>
+          <div class="np-card-name">Scale</div>
+          <p class="np-card-desc">Best for businesses needing advanced solutions.</p>
         </div>
         <div class="np-card-price">
-          <span class="np-card-amount">Custom</span>
-          <span class="np-card-label">tailored quote</span>
+          <span class="np-card-amount np-card-amount--custom">Custom</span>
+          <span class="np-card-label">tailored to your needs</span>
         </div>
         <ul class="np-card-features">
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Custom automation & integrations
+            Custom workflows
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Unlimited web & brand design
+            AI integrations
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Enterprise SEO & CRO
+            Advanced automation
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Multi-channel growth engine
+            Dedicated support
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Dedicated account team
+            Strategy consulting
           </li>
           <li class="np-card-feature">
             <svg class="np-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            VIP support (24/7 phone & Slack)
+            Scalable infrastructure
           </li>
         </ul>
-        <a href="../index.html#contact" class="np-btn np-card-btn">Contact Sales</a>
+        <a href="../index.html#contact" class="btn-secondary np-card-btn" data-cta="secondary" data-cta-action="book-call">Book a Free Call</a>
       </div>
 
     </div>
   </section>
 
   <!-- ════════════════════════════════════════
-       SECTION 3 — COMPARISON
+       COMPARISON TABLE
   ════════════════════════════════════════ -->
-  <section class="np-compare">
-    <div class="np-section-label">Capabilities</div>
-    <h2 class="np-section-title">What's included in <span class="np-text-accent">each package</span></h2>
-    <p class="np-section-desc">Transparent breakdown of deliverables across every engagement tier.</p>
+  <section class="np-compare lazy-section lazy-section--large">
+    <div class="section-header fade-up">
+      <div class="section-tag">✦ Comparison</div>
+      <h2 class="section-title">What's included in <span class="text-gradient">each plan</span></h2>
+      <p class="section-desc">Transparent breakdown of features across every tier.</p>
+    </div>
 
-    <div class="np-compare-table-wrap">
+    <div class="np-compare-table-wrap fade-up">
       <table class="np-compare-table">
         <thead>
           <tr>
             <th>Feature</th>
-            <th><span class="np-text-accent">Starter</span></th>
-            <th class="np-col-featured"><span class="np-text-accent">Scale</span></th>
-            <th><span class="np-text-accent">Enterprise</span></th>
+            <th class="np-col-name">Starter</th>
+            <th class="np-col-name np-col-featured">Growth</th>
+            <th class="np-col-name">Scale</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Brand Strategy</td><td><span class="np-check">&#10003;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td><span class="np-check">&#10003;</span></td></tr>
-          <tr><td>Website Design</td><td>5 pages</td><td class="np-col-featured">12 pages</td><td>Unlimited</td></tr>
-          <tr><td>SEO Foundation</td><td><span class="np-check">&#10003;</span></td><td class="np-col-featured">Advanced</td><td>Enterprise</td></tr>
-          <tr><td>Content Strategy</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td><span class="np-check">&#10003;</span></td></tr>
-          <tr><td>Social Media</td><td>Setup only</td><td class="np-col-featured">Management & Ads</td><td>Full engine</td></tr>
-          <tr><td>AI Automation</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td>Custom</td></tr>
-          <tr><td>Performance Marketing</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td><span class="np-check">&#10003;</span></td></tr>
-          <tr><td>Dedicated Manager</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td><span class="np-check">&#10003;</span></td></tr>
-          <tr><td>Reporting</td><td>Monthly</td><td class="np-col-featured">Bi-weekly</td><td>Real-time</td></tr>
-          <tr><td>Support</td><td>Email (24h)</td><td class="np-col-featured">Priority Slack</td><td>VIP 24/7</td></tr>
-          <tr><td>Custom Integrations</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td><span class="np-check">&#10003;</span></td></tr>
+          <tr><td>SEO Optimization</td><td><span class="np-check">&#10003;</span></td><td class="np-col-featured">Advanced</td><td>Enterprise</td></tr>
+          <tr><td>Analytics</td><td>Basic</td><td class="np-col-featured">Performance</td><td>Custom</td></tr>
+          <tr><td>Support</td><td>Email</td><td class="np-col-featured">Priority</td><td>Dedicated</td></tr>
+          <tr><td>Automation</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td>Advanced</td></tr>
+          <tr><td>AI Integration</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td>Custom</td></tr>
+          <tr><td>Revisions</td><td>Limited</td><td class="np-col-featured">Unlimited</td><td>Unlimited</td></tr>
+          <tr><td>Performance Monitoring</td><td><span class="np-muted">&mdash;</span></td><td class="np-col-featured"><span class="np-check">&#10003;</span></td><td><span class="np-check">&#10003;</span></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <!-- ════════════════════════════════════════
-       SECTION 4 — CLIENT RESULTS
+       FAQ
   ════════════════════════════════════════ -->
-  <section class="np-results">
-    <div class="np-section-label">Results</div>
-    <h2 class="np-section-title">Real outcomes for <span class="np-text-accent">real brands</span></h2>
-    <p class="np-section-desc">Measurable growth across every vertical we serve.</p>
-
-    <div class="np-results-grid">
-      <div class="np-result-card">
-        <div class="np-result-stat">340%</div>
-        <div class="np-result-label">Organic Traffic Increase</div>
-        <div class="np-result-divider"></div>
-        <p class="np-result-desc">Fintech startup scaled from 2K to 8.8K monthly visitors within 6 months of SEO strategy.</p>
-        <div class="np-result-source">Titan Health — Scale Package</div>
-      </div>
-      <div class="np-result-card">
-        <div class="np-result-stat">4.2x</div>
-        <div class="np-result-label">Revenue Growth</div>
-        <div class="np-result-divider"></div>
-        <p class="np-result-desc">Beauty brand tripled their online revenue through full-stack growth automation and funnel optimization.</p>
-        <div class="np-result-source">Lumina Beauty — Scale Package</div>
-      </div>
-      <div class="np-result-card">
-        <div class="np-result-stat">12,000+</div>
-        <div class="np-result-label">Leads Generated</div>
-        <div class="np-result-divider"></div>
-        <p class="np-result-desc">SaaS company filled their pipeline with qualified leads using targeted content and paid acquisition.</p>
-        <div class="np-result-source">NexGen Fintech — Enterprise Package</div>
-      </div>
-      <div class="np-result-card">
-        <div class="np-result-stat">2.8s</div>
-        <div class="np-result-label">Average Page Load</div>
-        <div class="np-result-divider"></div>
-        <p class="np-result-desc">Optimized web infrastructure and core web vitals across all client properties for maximum conversion.</p>
-        <div class="np-result-source">Platform-wide — All Packages</div>
-      </div>
+  <section class="np-faq lazy-section lazy-section--large">
+    <div class="section-header fade-up">
+      <div class="section-tag">✦ FAQ</div>
+      <h2 class="section-title">Frequently asked <span class="text-gradient">questions</span></h2>
+      <p class="section-desc">Everything you should know before getting started.</p>
     </div>
-  </section>
 
-  <!-- ════════════════════════════════════════
-       SECTION 5 — FAQ
-  ════════════════════════════════════════ -->
-  <section class="np-faq">
-    <div class="np-section-label">FAQ</div>
-    <h2 class="np-section-title">Common <span class="np-text-accent">questions</span></h2>
-    <p class="np-section-desc">Everything you should know before getting started.</p>
-
-    <div class="np-faq-list" id="npFaq">
+    <div class="np-faq-list fade-up" id="npFaq">
       <div class="np-faq-item active">
         <button class="np-faq-q">
-          <span>How does your engagement model work?</span>
+          <span>Can I cancel anytime?</span>
           <svg class="np-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="np-faq-a">
-          <p>We work on a flat-rate retainer basis. Each package includes a defined scope of work delivered monthly. You get predictable pricing with no surprises — if your needs grow, we adjust the scope together.</p>
+          <p>Yes. All plans run month-to-month. You can cancel at any time with no penalties. If you cancel, you'll retain access until the end of your billing period.</p>
         </div>
       </div>
       <div class="np-faq-item">
         <button class="np-faq-q">
-          <span>What's the typical onboarding process?</span>
+          <span>Do you offer custom solutions?</span>
           <svg class="np-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="np-faq-a">
-          <p>After signing, we kick off with a 90-minute strategy session. Within the first week, you'll receive a roadmap and design concepts. Full delivery begins in week two with weekly check-ins throughout.</p>
+          <p>Absolutely. If our existing plans don't fit your needs, we'll build a custom package tailored to your goals and budget. Reach out and we'll design something together.</p>
         </div>
       </div>
       <div class="np-faq-item">
         <button class="np-faq-q">
-          <span>Can I upgrade my package later?</span>
+          <span>Is support included in every plan?</span>
           <svg class="np-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="np-faq-a">
-          <p>Absolutely. You can upgrade at any time — we'll prorate the difference and expand your scope immediately. Downgrades take effect at the start of the next billing period.</p>
+          <p>Yes. Every plan includes support. Starter gets email support with a 24-hour response time. Growth includes priority support. Scale comes with a dedicated support team.</p>
         </div>
       </div>
       <div class="np-faq-item">
         <button class="np-faq-q">
-          <span>Do you require long-term contracts?</span>
+          <span>Can I upgrade my plan later?</span>
           <svg class="np-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="np-faq-a">
-          <p>No. All packages run month-to-month with a 30-day cancellation notice. We're confident you'll stay for the results, not because you're locked in.</p>
+          <p>Yes, you can upgrade at any time. We'll prorate the difference and your new features will be available immediately. Downgrades take effect at the next billing cycle.</p>
         </div>
       </div>
       <div class="np-faq-item">
         <button class="np-faq-q">
-          <span>What if I need something custom?</span>
+          <span>Do you work with startups?</span>
           <svg class="np-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="np-faq-a">
-          <p>We build custom engagements for businesses with unique requirements. Reach out to our team and we'll design a package tailored to your specific goals and budget within 48 hours.</p>
+          <p>Yes — startups are at the core of what we do. The Growth plan is specifically designed for early-stage companies. We also offer flexible onboarding and strategy sessions to help you hit the ground running.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ════════════════════════════════════════
-       SECTION 6 — FINAL CTA
+       FINAL CTA
   ════════════════════════════════════════ -->
-  <section class="np-cta">
-    <div class="np-cta-inner">
-      <div class="np-section-label">Let's Talk</div>
-      <h2 class="np-cta-title">Ready to build your <span class="np-text-accent">growth engine</span>?</h2>
-      <p class="np-cta-sub">Join 200+ brands that trust Nagriva. Your first call is free — no pitch, just strategy.</p>
+  <section class="np-cta lazy-section lazy-section--small" id="contact">
+    <div class="np-cta-glow"></div>
+    <div class="np-cta-inner fade-up">
+      <div class="section-tag">✦ Let's Talk</div>
+      <h2 class="np-cta-title">Need a <span class="text-gradient">custom solution</span>?</h2>
+      <p class="np-cta-sub">Let's build something scalable and modern together. Tell us about your project and we'll create a plan that fits.</p>
       <div class="np-cta-actions">
-        <a href="../index.html#contact" class="np-btn np-btn--primary np-btn--lg">
+        <a href="../index.html#contact" class="btn-primary" data-cta="primary" data-cta-action="book-call">
           Book a Free Call
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="submit-order.html" class="np-btn np-btn--ghost np-btn--lg">
-          Start Your Project
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <a href="../index.html#contact" class="btn-secondary" data-cta="secondary" data-cta-action="contact-us">
+          Contact Us
         </a>
       </div>
       <p class="np-cta-trust">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        No commitment required. Free strategy session.
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Free discovery call. No commitment required.
       </p>
     </div>
   </section>
@@ -336,27 +318,17 @@
   <div id="footer-container"></div>
 
   <!-- ═══ SCRIPTS ═══ -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/supabase-config.js"></script>
-  <script src="../js/script.js"></script>
-  <script src="../js/i18n.js"></script>
-  <script src="../js/profile-avatar.js"></script>
-  <script src="../js/auth.js"></script>
-  <script src="../js/admin-auth.js"></script>
-  <script src="../modules/notifications/notifications-api.js"></script>
-  <script src="../modules/notifications/notifications-realtime.js"></script>
-  <script src="../modules/notifications/notifications-triggers.js"></script>
-  <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
-  <script src="../modules/content/content-api.js"></script>
-  <script src="../js/content-loader.js"></script>
-  <script src="../js/floating-elements.js"></script>
-  <script src="../js/chatbot.js"></script>
-  <script src="/js/navbar.js"></script>
-  <script src="../js/footer.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
 
   <script>
     (function() {
-
       /* ─── FAQ Accordion ─── */
       var faqList = document.getElementById('npFaq');
       if (faqList) {
@@ -370,19 +342,19 @@
         });
       }
 
-      /* ─── Scroll fade-in ─── */
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('np-visible');
-          }
+      /* ─── Pricing Toggle ─── */
+      var toggle = document.getElementById('pricingToggle');
+      var labels = document.querySelectorAll('.np-toggle-label');
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          var isYearly = this.classList.contains('active');
+          labels.forEach(function(l) {
+            var txt = l.textContent.trim();
+            l.dataset.active = (txt === 'Monthly' && !isYearly) || (txt === 'Yearly' && isYearly) ? 'true' : 'false';
+          });
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
-
-      document.querySelectorAll('.np-card, .np-result-card, .np-faq-item, .np-cta-inner').forEach(function(el) {
-        el.classList.add('np-hidden');
-        observer.observe(el);
-      });
+      }
 
     })();
   </script>

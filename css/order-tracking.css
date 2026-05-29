@@ -24,7 +24,7 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0,245,196,0.1) 0%, transparent 70%);
   filter: blur(60px);
-  animation: trackGlowPulse 8s ease-in-out infinite;
+  animation: trackGlowPulse 12s ease-in-out infinite;
 }
 .track-hero-glow-2 {
   position: absolute;
@@ -35,16 +35,16 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0,245,196,0.05) 0%, transparent 70%);
   filter: blur(80px);
-  animation: trackGlowPulse2 12s ease-in-out infinite;
+  animation: trackGlowPulse2 16s ease-in-out infinite;
 }
 @keyframes trackGlowPulse {
-  0%, 100% { opacity: 0.4; transform: scale(1) translate(0, 0); }
-  33%      { opacity: 0.7; transform: scale(1.08) translate(30px, -20px); }
-  66%      { opacity: 0.3; transform: scale(0.95) translate(-15px, 10px); }
+  0%, 100% { opacity: 0.3; transform: scale(1) translate(0, 0); }
+  33%      { opacity: 0.5; transform: scale(1.03) translate(10px, -8px); }
+  66%      { opacity: 0.25; transform: scale(0.98) translate(-5px, 4px); }
 }
 @keyframes trackGlowPulse2 {
-  0%, 100% { opacity: 0.2; transform: scale(1) translate(0, 0); }
-  50%      { opacity: 0.4; transform: scale(1.15) translate(-30px, 20px); }
+  0%, 100% { opacity: 0.15; transform: scale(1) translate(0, 0); }
+  50%      { opacity: 0.3; transform: scale(1.05) translate(-10px, 8px); }
 }
 .track-grid-bg {
   position: absolute;
@@ -593,8 +593,8 @@
   animation: stagePulse 2s ease-in-out infinite;
 }
 @keyframes stagePulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(0,245,196,0.15); }
-  50% { box-shadow: 0 0 30px rgba(0,245,196,0.3); }
+  0%, 100% { box-shadow: 0 0 8px rgba(0,245,196,0.1); }
+  50% { box-shadow: 0 0 16px rgba(0,245,196,0.18); }
 }
 .track-stage.pending .track-stage-icon {
   background: rgba(255,255,255,0.03);
@@ -873,8 +873,8 @@
   animation: tlDotPulse 2s ease-in-out infinite;
 }
 @keyframes tlDotPulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(0,245,196,0.2), 0 0 16px rgba(0,245,196,0.15); }
-  50% { box-shadow: 0 0 0 6px rgba(0,245,196,0.12), 0 0 30px rgba(0,245,196,0.25); }
+  0%, 100% { box-shadow: 0 0 0 3px rgba(0,245,196,0.15), 0 0 8px rgba(0,245,196,0.1); }
+  50% { box-shadow: 0 0 0 5px rgba(0,245,196,0.08), 0 0 16px rgba(0,245,196,0.15); }
 }
 .track-tl-item:nth-child(2) .track-tl-dot {
   background: rgba(0,245,196,0.6);

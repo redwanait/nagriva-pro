@@ -120,11 +120,8 @@ const NAGRIVA_ContentLoader = (() => {
     'auth.signin-link': 'Sign in',
 
     /* ─── Section Headings ─── */
-    'section.testimonials': 'What Our Clients Say',
     'section.projects': 'Recent Projects',
     'section.pricing': 'Plans & Packages',
-    'section.social-proof': 'Trusted by Innovators',
-    'section.brands-label': 'Trusted by forward-thinking brands',
 
     /* ─── Admin Dashboard ─── */
     'admin.sidebar-dashboard': 'Dashboard',

@@ -70,6 +70,7 @@ window.ServicesAPI = (function () {
 
     'web-design': {
       slug: 'web-design',
+      category: 'Web Design',
       pageTitle: 'Web Design — NAGRIVA',
       metaDescription: 'Premium web design that converts visitors into customers. Modern, fast, and conversion-optimized websites.',
       breadcrumbCurrent: 'Web Design',
@@ -123,6 +124,7 @@ window.ServicesAPI = (function () {
 
     seo: {
       slug: 'seo',
+      category: 'SEO',
       pageTitle: 'SEO Optimization — NAGRIVA',
       metaDescription: 'Data-driven SEO that drives organic growth. Rank higher, get more traffic, and convert better.',
       breadcrumbCurrent: 'SEO',
@@ -176,6 +178,7 @@ window.ServicesAPI = (function () {
 
     branding: {
       slug: 'branding',
+      category: 'Branding',
       pageTitle: 'Brand Identity — NAGRIVA',
       metaDescription: 'Strategic brand identity design that makes you memorable, credible, and impossible to ignore.',
       breadcrumbCurrent: 'Brand Identity',
@@ -229,6 +232,7 @@ window.ServicesAPI = (function () {
 
     'ai-automation': {
       slug: 'ai-automation',
+      category: 'Automation',
       pageTitle: 'AI Automation — NAGRIVA',
       metaDescription: 'AI-powered automation that streamlines your business. Save time, reduce costs, and scale faster with intelligent workflows.',
       breadcrumbCurrent: 'AI Automation',
@@ -282,6 +286,7 @@ window.ServicesAPI = (function () {
 
     'social-media': {
       slug: 'social-media',
+      category: 'Content',
       pageTitle: 'Social Media Growth — NAGRIVA',
       metaDescription: 'Social media growth that amplifies your brand. Organic and paid strategies to build community, drive engagement, and scale followers.',
       breadcrumbCurrent: 'Social Media',
@@ -335,6 +340,7 @@ window.ServicesAPI = (function () {
 
     strategy: {
       slug: 'strategy',
+      category: 'Growth',
       pageTitle: 'Performance Marketing — NAGRIVA',
       metaDescription: 'Data-driven performance marketing that delivers measurable ROI. Full-funnel campaigns across all channels, optimized for conversions.',
       breadcrumbCurrent: 'Performance Marketing',

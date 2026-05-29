@@ -7,12 +7,14 @@
   <meta name="description" content="NAGRIVA Terms of Service — Review the terms that govern your use of our website and services." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/chatbot.css" />
-  <link rel="stylesheet" href="../css/floating-elements.css" />
-  <link rel="stylesheet" href="../css/auth.css" />
-  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
 </head>
 <body data-page="terms-of-service">
@@ -30,7 +32,7 @@
     </div>
   </section>
 
-  <section class="legal-content section">
+  <section class="legal-content section lazy-section">
     <div class="container">
       <div class="legal-card fade-up">
         <p class="legal-intro">
@@ -145,16 +147,13 @@
 
   <div id="footer-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/supabase-config.js"></script>
-  <script src="../js/profile-avatar.js"></script>
-  <script src="../js/auth.js"></script>
-  <script src="../js/script.js"></script>
-  <script src="../js/floating-elements.js"></script>
-  <script src="../js/i18n.js"></script>
-  <script src="../js/chatbot.js"></script>
-  <script src="../components/notifications-dropdown/notifications-dropdown.js"></script>
-  <script src="../js/navbar.js"></script>
-  <script src="../js/footer.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
 </body>
 </html>
