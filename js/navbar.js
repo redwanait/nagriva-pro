@@ -15,7 +15,8 @@
     pricing:  '/pages/pricing.html',
     about:    '/pages/about.html',
     blog:     '/pages/blog.html',
-    contact:  '/#contact'
+    contact:  '/#contact',
+    'onboarding-qa': '/pages/onboarding-qa.html'
   }
 
   function init () {

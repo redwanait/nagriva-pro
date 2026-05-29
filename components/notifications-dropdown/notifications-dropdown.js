@@ -399,14 +399,12 @@ const NAGRIVA_NotificationsDropdown = (() => {
   /* ─── Empty State ─── */
   function renderEmpty() {
     if (!_list) return;
-    _list.innerHTML =
-      '<div class="notif-dd-empty">' +
-        '<div class="notif-dd-empty-icon">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>' +
-        '</div>' +
-        '<div class="notif-dd-empty-title">All caught up!</div>' +
-        '<div class="notif-dd-empty-text">You\'re up to date. New notifications will appear here as they arrive.</div>' +
-      '</div>';
+    _list.innerHTML = NAGRIVA_EmptyState.render({
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>',
+      title: 'All caught up!',
+      description: 'You\'re up to date. New notifications will appear here as they arrive.',
+      variant: 'sm'
+    });
     const countLabel = document.getElementById('notifDDCount');
     if (countLabel) countLabel.textContent = '';
     if (_markAllBtn) _markAllBtn.disabled = true;
@@ -433,14 +431,12 @@ const NAGRIVA_NotificationsDropdown = (() => {
   /* ─── Error State ─── */
   function renderError(err) {
     if (!_list) return;
-    _list.innerHTML =
-      '<div class="notif-dd-empty">' +
-        '<div class="notif-dd-empty-icon" style="background:rgba(255,80,80,0.06);border-color:rgba(255,80,80,0.1);color:#ff5050;">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
-        '</div>' +
-        '<div class="notif-dd-empty-title">Connection issue</div>' +
-        '<div class="notif-dd-empty-text">' + escapeHtml(err && err.message ? err.message : 'Could not load notifications.') + '</div>' +
-      '</div>';
+    _list.innerHTML = NAGRIVA_EmptyState.render({
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+      title: 'Connection issue',
+      description: escapeHtml(err && err.message ? err.message : 'Could not load notifications.'),
+      variant: 'error'
+    });
   }
 
   /* ─── Update badge ─── */

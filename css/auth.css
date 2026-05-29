@@ -74,6 +74,37 @@
   background: rgba(0,245,196,0.03);
   box-shadow: 0 0 20px rgba(0,245,196,0.04);
 }
+.nav-user-avatar:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ─── Avatar Skeleton ─── */
+.nav-avatar-skeleton {
+  display: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.nav-avatar-skeleton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,245,196,0.06), transparent);
+  animation: avatar-skeleton-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes avatar-skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.nav-user-avatar.loading .nav-avatar-skeleton { display: block; }
+.nav-user-avatar.loading .nav-user-name,
+.nav-user-avatar.loading .nav-user-img { display: none; }
+
 .nav-user-name {
   font-size: 0.78rem;
   font-weight: 500;
@@ -95,6 +126,25 @@
   font-weight: 700;
   color: var(--bg);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.nav-user-img.has-image {
+  background: transparent;
+  box-shadow: 0 0 0 2px rgba(0,245,196,0.1);
+}
+.nav-user-img img.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+.nav-user-avatar:hover .nav-user-img {
+  box-shadow: 0 0 0 2px rgba(0,245,196,0.2), 0 0 20px rgba(0,245,196,0.08);
+  transform: scale(1.05);
 }
 
 /* ════════════════════════════════════════════
@@ -147,6 +197,20 @@
   color: var(--bg);
   flex-shrink: 0;
   box-shadow: 0 0 0 2px rgba(0,245,196,0.08);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+.user-dropdown-avatar img.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+.user-dropdown-avatar.has-image {
+  background: transparent;
 }
 .user-dropdown-info { flex: 1; min-width: 0; }
 .user-dropdown-name {

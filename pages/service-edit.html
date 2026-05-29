@@ -882,13 +882,11 @@
             </div>
           </div>
 
-          <div id="errorState" class="empty-state" style="display:none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>Service Not Found</h3>
-            <p id="errorMessage">The service you're looking for could not be loaded.</p>
-            <a href="admin-dashboard.html" class="btn btn-primary">
-              <i class="fas fa-arrow-left"></i> Back to Dashboard
-            </a>
+          <div id="errorState" class="ne ne-error" style="display:none;">
+            <div class="ne-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 class="ne-title">Service Not Found</h3>
+            <p class="ne-desc" id="errorMessage">The service you're looking for could not be loaded.</p>
+            <div class="ne-actions"><a href="admin-dashboard.html" class="ne-btn ne-btn-primary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a></div>
           </div>
 
           <form id="serviceForm" novalidate autocomplete="off" style="display:none;">

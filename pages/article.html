@@ -52,13 +52,11 @@
   </div>
 
   <!-- Error State -->
-  <div class="article-error" id="articleError">
-    <div class="article-error-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    </div>
-    <div class="article-error-title">Article not found</div>
-    <div class="article-error-desc">The article you're looking for doesn't exist or may have been removed.</div>
-    <button class="article-error-btn" onclick="window.location.href='/pages/blog.html'">Back to Blog</button>
+  <div class="ne ne-error" id="articleError" style="display:none;">
+    <div class="ne-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <h3 class="ne-title">Article not found</h3>
+    <p class="ne-desc">The article you're looking for doesn't exist or may have been removed.</p>
+    <div class="ne-actions"><button class="ne-btn ne-btn-primary" onclick="window.location.href='/pages/blog.html'">Back to Blog</button></div>
   </div>
 
   <!-- Article Hero -->

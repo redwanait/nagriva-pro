@@ -79,13 +79,39 @@ const NAGRIVA_Dashboard = (() => {
     }
   }
 
+  function renderProgressBars(orders) {
+    const container = document.querySelector('.progress-list');
+    if (!container) return;
+    const active = orders.filter(o => o.status === 'in_progress' || o.status === 'revision').slice(0, 6);
+    if (active.length === 0) {
+      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray3);font-size:0.82rem;">No active projects right now.</div>';
+      return;
+    }
+    const pctMap = { pending: 10, in_progress: 60, revision: 85, completed: 100 };
+    const colorMap = { pending: '', in_progress: 'blue', revision: 'orange', completed: '' };
+    container.innerHTML = active.map(o => {
+      const pct = pctMap[o.status] || 10;
+      const color = colorMap[o.status] || '';
+      const name = o.projectTitle || o.clientName || 'Project';
+      return '<div class="progress-item">' +
+        '<div class="progress-head">' +
+          '<span class="progress-name">' + escapeHtml(name) + '</span>' +
+          '<span class="progress-pct">' + pct + '%</span>' +
+        '</div>' +
+        '<div class="progress-track">' +
+          '<div class="progress-bar' + (color ? ' ' + color : '') + '" style="width:' + pct + '%;"></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
   function renderRecentOrders(orders) {
     const container = document.getElementById('dashRecentOrders');
     if (!container) return;
 
     const recent = orders.slice(0, 6);
     if (recent.length === 0) {
-      container.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px 24px;"><div style="width:48px;height:48px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--accent);font-size:1.1rem;"><i class="fas fa-shopping-bag"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:4px;">No recent orders</div><div style="font-size:0.78rem;color:var(--gray2);line-height:1.5;max-width:280px;margin:0 auto;">Your recent orders and projects will appear here once you create them.</div></td></tr>';
+      container.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px 24px;"><div class="ne ne-inline"><div class="ne-icon"><i class="fas fa-shopping-bag"></i></div><h3 class="ne-title">No recent orders</h3><p class="ne-desc">Your recent orders and projects will appear here once you create them.</p></div></td></tr>';
       return;
     }
 
@@ -301,11 +327,7 @@ const NAGRIVA_Dashboard = (() => {
 
     var ordersTbody = document.getElementById('dashRecentOrders');
     if (ordersTbody) {
-      ordersTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:28px 24px;">' +
-        '<div style="color:var(--danger);margin-bottom:6px;font-size:1rem;"><i class="fas fa-exclamation-triangle"></i></div>' +
-        '<div style="color:var(--gray);font-size:0.8rem;margin-bottom:12px;">' + escapedMsg + '</div>' +
-        '<button class="btn btn-secondary btn-sm" onclick="NAGRIVA_Dashboard.retry()"><i class="fas fa-sync"></i> Retry</button>' +
-      '</td></tr>';
+      ordersTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:28px 24px;"><div class="ne ne-error ne-inline"><div class="ne-icon"><i class="fas fa-exclamation-triangle"></i></div><h3 class="ne-title">Connection Error</h3><p class="ne-desc">' + escapedMsg + '</p><div class="ne-actions"><button class="ne-btn ne-btn-primary" onclick="NAGRIVA_Dashboard.retry()"><i class="fas fa-sync"></i> Retry</button></div></div></td></tr>';
     }
 
   }
@@ -321,6 +343,7 @@ const NAGRIVA_Dashboard = (() => {
         if (orders.length > 0) {
           updateStats(NAGRIVA_AdminOrders.getStats());
           renderRecentOrders(orders);
+          renderProgressBars(orders);
           updateCharts(orders);
           _loaded = true;
         } else if (NAGRIVA_AdminOrders.error) {
@@ -347,7 +370,12 @@ const NAGRIVA_Dashboard = (() => {
       return;
     }
     if (NAGRIVA_Notifications && NAGRIVA_Notifications.getNotifications().length === 0) {
-      container.innerHTML = '<div style="padding:24px 16px;text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--accent);font-size:0.9rem;"><i class="fas fa-bell"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.82rem;color:var(--white);margin-bottom:3px;">All caught up</div><div style="font-size:0.72rem;color:var(--gray2);line-height:1.5;">No new notifications to show.</div></div>';
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-bell',
+        title: 'All caught up',
+        description: 'No new notifications to show.',
+        variant: 'inline'
+      });
     }
   }
 
@@ -397,6 +425,7 @@ const NAGRIVA_Dashboard = (() => {
       restoreStatsCards();
       updateStats(updatedStats);
       renderRecentOrders(updatedOrders);
+      renderProgressBars(updatedOrders);
       updateCharts(updatedOrders);
     });
 
@@ -414,6 +443,7 @@ const NAGRIVA_Dashboard = (() => {
       var stats = NAGRIVA_AdminOrders.getStats();
       updateStats(stats);
       renderRecentOrders(orders);
+      renderProgressBars(orders);
       updateCharts(orders);
       _loading = false;
       _loaded = true;
@@ -442,9 +472,10 @@ const NAGRIVA_Dashboard = (() => {
           // Show empty state with stats at 0
           restoreStatsCards();
           updateStats({ active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 });
+          renderProgressBars([]);
           var ordersTbody = document.getElementById('dashRecentOrders');
           if (ordersTbody && !ordersTbody.querySelector('td')) {
-            ordersTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px 24px;"><div style="width:48px;height:48px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--accent);font-size:1.1rem;"><i class="fas fa-shopping-bag"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:4px;">No recent orders</div><div style="font-size:0.78rem;color:var(--gray2);line-height:1.5;max-width:280px;margin:0 auto;">Your recent orders and projects will appear here once you create them.</div></td></tr>';
+            ordersTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px 24px;"><div class="ne ne-inline"><div class="ne-icon"><i class="fas fa-shopping-bag"></i></div><h3 class="ne-title">No recent orders</h3><p class="ne-desc">Your recent orders and projects will appear here once you create them.</p></div></td></tr>';
           }
         }
         if (NAGRIVA_AdminOrders.error) {
@@ -466,15 +497,17 @@ const NAGRIVA_Dashboard = (() => {
             if (!_loaded) {
               var refreshed = NAGRIVA_AdminOrders.getAllOrders();
               if (refreshed.length > 0) {
-                restoreStatsCards();
-                var s = NAGRIVA_AdminOrders.getStats();
-                updateStats(s);
-                renderRecentOrders(refreshed);
-                updateCharts(refreshed);
-                _loaded = true;
-              } else {
-                restoreStatsCards();
-                updateStats({ active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 });
+          restoreStatsCards();
+          var s = NAGRIVA_AdminOrders.getStats();
+          updateStats(s);
+          renderRecentOrders(refreshed);
+          renderProgressBars(refreshed);
+          updateCharts(refreshed);
+          _loaded = true;
+        } else {
+          restoreStatsCards();
+          updateStats({ active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 });
+          renderProgressBars([]);
                 if (NAGRIVA_AdminOrders.error) {
                   _error = NAGRIVA_AdminOrders.error;
                   showError(_error);

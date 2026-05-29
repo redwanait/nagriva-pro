@@ -866,12 +866,7 @@ function initHomepageServices() {
 
   if (typeof ServicesAPI === 'undefined') {
     if (skeleton) skeleton.style.display = 'none';
-    grid.innerHTML =
-      '<div class="services-error">' +
-        '<div class="services-error-icon">&#9888;</div>' +
-        '<h3>Unable to load services</h3>' +
-        '<p>Service module failed to initialize.</p>' +
-      '</div>';
+    grid.innerHTML = '<div class="ne ne-error"><div class="ne-icon"><i class="fas fa-exclamation-triangle"></i></div><h3 class="ne-title">Unable to load services</h3><p class="ne-desc">Service module failed to initialize.</p></div>';
     return;
   }
 
@@ -931,23 +926,12 @@ function initHomepageServices() {
 
   function renderError() {
     if (skeleton) skeleton.style.display = 'none';
-    grid.innerHTML =
-      '<div class="services-error">' +
-        '<div class="services-error-icon">&#9888;</div>' +
-        '<h3>Unable to load services</h3>' +
-        '<p>Something went wrong. Please try again.</p>' +
-        '<button class="services-retry-btn" onclick="initHomepageServices()">Retry</button>' +
-      '</div>';
+    grid.innerHTML = '<div class="ne ne-error"><div class="ne-icon"><i class="fas fa-exclamation-triangle"></i></div><h3 class="ne-title">Unable to load services</h3><p class="ne-desc">Something went wrong. Please try again.</p><div class="ne-actions"><button class="ne-btn ne-btn-primary services-retry-btn" onclick="initHomepageServices()"><i class="fas fa-sync"></i> Retry</button></div></div>';
   }
 
   function renderEmpty() {
     if (skeleton) skeleton.style.display = 'none';
-    grid.innerHTML =
-      '<div class="services-error">' +
-        '<div class="services-error-icon">&#9734;</div>' +
-        '<h3>Coming soon</h3>' +
-        '<p>Check back soon for our latest service offerings.</p>' +
-      '</div>';
+    grid.innerHTML = '<div class="ne"><div class="ne-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3 class="ne-title">Coming soon</h3><p class="ne-desc">We\'re crafting something exceptional. Check back soon for our latest service offerings.</p></div>';
   }
 
   function renderCards(services) {
@@ -981,3 +965,72 @@ function initHomepageServices() {
     renderError();
   });
 }
+
+/* ════════════════════════════════════════════
+   NAGRIVA — Empty State Renderer
+   ════════════════════════════════════════════ */
+window.NAGRIVA_EmptyState = (function () {
+  'use strict';
+
+  function escape(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function render(config) {
+    var icon = config.icon || 'fas fa-inbox';
+    var title = config.title || '';
+    var desc = config.description || '';
+    var primaryCta = config.primaryCta || null;
+    var secondaryCta = config.secondaryCta || null;
+    var variant = config.variant || 'default';
+
+    var cls = 'ne';
+    if (variant === 'search') cls += ' ne-search';
+    else if (variant === 'error') cls += ' ne-error';
+    else if (variant === 'sm') cls += ' ne-sm';
+    else if (variant === 'inline') cls += ' ne-inline';
+
+    var iconHtml;
+    if (icon.indexOf('<svg') === 0 || icon.indexOf('<i') === 0) {
+      iconHtml = icon;
+    } else {
+      iconHtml = '<i class="' + icon + '"></i>';
+    }
+
+    var html = '<div class="' + cls + '">' +
+      '<div class="ne-icon">' + iconHtml + '</div>' +
+      '<h3 class="ne-title">' + escape(title) + '</h3>' +
+      (desc ? '<p class="ne-desc">' + escape(desc) + '</p>' : '');
+
+    if (primaryCta || secondaryCta) {
+      html += '<div class="ne-actions">';
+      if (primaryCta) {
+        var pHref = primaryCta.url || '#';
+        var pOnclick = primaryCta.onclick ? ' onclick="' + primaryCta.onclick + '"' : '';
+        html += '<a href="' + escape(pHref) + '" class="ne-btn ne-btn-primary"' + pOnclick + '>' + (primaryCta.icon ? '<i class="' + primaryCta.icon + '"></i>' : '') + escape(primaryCta.label || '') + '</a>';
+      }
+      if (secondaryCta) {
+        var sHref = secondaryCta.url || '#';
+        var sOnclick = secondaryCta.onclick ? ' onclick="' + secondaryCta.onclick + '"' : '';
+        html += '<a href="' + escape(sHref) + '" class="ne-btn ne-btn-secondary"' + sOnclick + '>' + (secondaryCta.icon ? '<i class="' + secondaryCta.icon + '"></i>' : '') + escape(secondaryCta.label || '') + '</a>';
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  }
+
+  function renderTo(container, config) {
+    if (!container) return;
+    container.innerHTML = render(config);
+  }
+
+  return { render: render, renderTo: renderTo };
+})();

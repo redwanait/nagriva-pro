@@ -99,9 +99,26 @@ const NAGRIVA_Notifications = (() => {
     }, 5000);
   }
 
-  async function init() {
+  function renderSkeleton(el, count) {
+    count = count || 4;
+    if (!el) return;
+    el.innerHTML = '<div class="sk-stagger">' +
+      Array.from({ length: count }, function () {
+        return '<div class="sk-notif">' +
+          '<div class="sk-notif-icon sk-shimmer"></div>' +
+          '<div class="sk-notif-body">' +
+          '<div class="sk-notif-title sk-shimmer"></div>' +
+          '<div class="sk-notif-msg sk-shimmer"></div>' +
+          '<div class="sk-notif-time sk-shimmer"></div>' +
+          '</div></div>';
+      }).join('') +
+      '</div>';
+  }
+
+  async function init(containerEl) {
     _loading = true;
     _error = null;
+    if (containerEl) renderSkeleton(containerEl, 5);
     try {
       const { data: { user } } = await window.supabaseClient.auth.getUser();
       if (!user) {
@@ -119,6 +136,7 @@ const NAGRIVA_Notifications = (() => {
       _loading = false;
       updateBadges();
       notifyChange();
+      if (containerEl) renderNotifications(containerEl);
       if (!_mounted) {
         setupRealtime(user.id);
         _mounted = true;
@@ -127,6 +145,15 @@ const NAGRIVA_Notifications = (() => {
       _loading = false;
       _error = err;
       console.error('[Notifications] init failed:', err);
+      if (containerEl) {
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Notifications',
+          description: err.message || 'Could not connect to database.',
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_Notifications.init(document.getElementById(\'notificationsList\'))' }
+        });
+      }
     }
   }
 
@@ -215,13 +242,18 @@ const NAGRIVA_Notifications = (() => {
 
   function renderNotifications(container, maxItems) {
     if (!container) return;
+    if (_loading) {
+      renderSkeleton(container, maxItems || 4);
+      return;
+    }
     const items = maxItems ? notifications.slice(0, maxItems) : notifications;
     if (items.length === 0) {
-      container.innerHTML = `
-        <div style="padding:24px;text-align:center;color:var(--gray3);font-size:0.82rem;">
-          <i class="fas fa-bell" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>
-          No notifications yet
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-bell',
+        title: 'No notifications yet',
+        description: 'You\'re all caught up! New notifications will appear here as they arrive.',
+        variant: 'sm'
+      });
       return;
     }
     container.innerHTML = items.map(n => `
@@ -264,6 +296,7 @@ const NAGRIVA_Notifications = (() => {
     getNotifications,
     getUnreadCount,
     renderNotifications,
+    renderSkeleton,
     onChange,
     formatDate,
     getTypeIcon,

@@ -22,7 +22,8 @@
     'notifications.html',
     'submit-order.html',
     'order-tracking.html',
-    'client-portal.html'
+    'client-portal.html',
+    'onboarding-qa.html'
   ];
 
   /* ─── Pages that require admin role ─── */

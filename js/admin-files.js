@@ -72,15 +72,13 @@ const NAGRIVA_Files = (() => {
         _error = new Error('Loading timed out');
         console.error('[Files] Loading timed out');
         if (containerEl) {
-          containerEl.innerHTML = `
-            <div class="orders-empty">
-              <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-              <h3>Failed to Load Files</h3>
-              <p>Request timed out. Please check your connection and try again.</p>
-              <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_Files.init(document.getElementById('filesContainer'))">
-                <i class="fas fa-sync"></i> Retry
-              </button>
-            </div>`;
+          containerEl.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'fas fa-exclamation-triangle',
+            title: 'Failed to Load Files',
+            description: 'Request timed out. Please check your connection and try again.',
+            variant: 'error',
+            primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_Files.init(document.getElementById(\'filesContainer\'))' }
+          });
         }
         NAGRIVA_Toast.error('Connection Error', 'Files request timed out.');
       }
@@ -99,15 +97,13 @@ const NAGRIVA_Files = (() => {
       _error = err;
       console.error('[Files] init failed:', err);
       if (containerEl) {
-        containerEl.innerHTML = `
-          <div class="orders-empty">
-            <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3>Failed to Load Files</h3>
-            <p>${err.message || 'Could not connect to database.'}</p>
-            <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_Files.init(document.getElementById('filesContainer'))">
-              <i class="fas fa-sync"></i> Retry
-            </button>
-          </div>`;
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Files',
+          description: err.message || 'Could not connect to database.',
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_Files.init(document.getElementById(\'filesContainer\'))' }
+        });
       }
       NAGRIVA_Toast.error('Connection Error', 'Could not load files from database.');
     }
@@ -273,21 +269,20 @@ const NAGRIVA_Files = (() => {
       countEl.innerHTML = `Showing <strong>${filtered.length}</strong> of <strong>${files.length}</strong> files`;
     }
     if (files.length === 0) {
-      container.innerHTML = `
-        <div class="orders-empty">
-          <div class="orders-empty-icon"><i class="fas fa-folder-open"></i></div>
-          <h3>No files uploaded</h3>
-          <p>Upload files to any order to collaborate with your team. All project files, assets, and deliverables will be stored here.</p>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-folder-open',
+        title: 'No files uploaded',
+        description: 'Upload files to any order to collaborate with your team. All project files, assets, and deliverables will be stored here.'
+      });
       return;
     }
     if (filtered.length === 0) {
-      container.innerHTML = `
-        <div class="orders-empty">
-          <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No matching files</h3>
-          <p>No files match your current search. Try different keywords or clear your filters.</p>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-search',
+        title: 'No matching files',
+        description: 'No files match your current search. Try different keywords or clear your filters.',
+        variant: 'search'
+      });
       return;
     }
     container.innerHTML = `

@@ -436,12 +436,12 @@ const NAGRIVA_ClientMessages = (() => {
 
     const filtered = getFilteredConversations();
     if (filtered.length === 0) {
-      container.innerHTML = `
-        <div style="padding:32px 20px;text-align:center;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="opacity:0.25;margin-bottom:8px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:0.85rem;color:var(--white);margin-bottom:4px;">${_filters.search ? 'No matching conversations' : 'No conversations yet'}</div>
-          <div style="font-size:0.75rem;color:var(--gray2);">${_filters.search ? 'Try different keywords.' : 'Messages will appear here once conversations begin.'}</div>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+        title: _filters.search ? 'No matching conversations' : 'No conversations yet',
+        description: _filters.search ? 'Try different keywords.' : 'Messages will appear here once conversations begin.',
+        variant: _filters.search ? 'search' : 'sm'
+      });
       return;
     }
 
@@ -470,33 +470,34 @@ const NAGRIVA_ClientMessages = (() => {
     if (!container) return;
 
     if (!orderId) {
-      container.innerHTML = `
-        <div class="chat-input-empty">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <span class="cie-label">Select a conversation</span>
-          <span class="cie-text">Choose an order from the sidebar to view and send messages.</span>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+        title: 'Select a conversation',
+        description: 'Choose an order from the sidebar to view and send messages.',
+        variant: 'inline'
+      });
       return;
     }
 
     const conv = _conversations.find(c => c.id === orderId);
     if (!conv) {
-      container.innerHTML = `
-        <div class="chat-input-empty">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span class="cie-label">Conversation not found</span>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+        title: 'Conversation not found',
+        description: 'The selected conversation could not be found.',
+        variant: 'sm'
+      });
       return;
     }
 
     const msgs = _messages[orderId];
     if (!msgs || msgs.length === 0) {
-      container.innerHTML = `
-        <div class="chat-input-empty">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          <span class="cie-label">No messages yet</span>
-          <span class="cie-text">Start the conversation! Send a message to your project team.</span>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+        title: 'No messages yet',
+        description: 'Start the conversation! Send a message to your project team.',
+        variant: 'inline'
+      });
       return;
     }
 
@@ -562,12 +563,12 @@ const NAGRIVA_ClientMessages = (() => {
     } catch (err) {
       warn('Failed to load messages:', err);
       if (_messageAreaEl) {
-        _messageAreaEl.innerHTML = `
-          <div class="chat-input-empty">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <span class="cie-label">Unable to load messages</span>
-            <span class="cie-text">Something went wrong. Please try again.</span>
-          </div>`;
+        _messageAreaEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+          title: 'Unable to load messages',
+          description: 'Something went wrong. Please try again.',
+          variant: 'error'
+        });
       }
     }
   }
@@ -605,13 +606,13 @@ const NAGRIVA_ClientMessages = (() => {
       _error = err;
       warn('init failed:', err);
       if (containerEl) {
-        containerEl.innerHTML = `
-          <div style="padding:40px;text-align:center;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="opacity:0.3;margin-bottom:12px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <h3 style="font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;margin-bottom:4px;">Failed to Load Messages</h3>
-            <p style="font-size:0.78rem;color:var(--gray2);margin-bottom:16px;">${escapeHtml(err.message || 'Could not connect to database.')}</p>
-            <button class="btn btn-primary" onclick="NAGRIVA_ClientMessages.init(document.getElementById('chatConversations'))"><i class="fas fa-sync"></i> Retry</button>
-          </div>`;
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+          title: 'Failed to Load Messages',
+          description: escapeHtml(err.message || 'Could not connect to database.'),
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_ClientMessages.init(document.getElementById(\'chatConversations\'))' }
+        });
       }
     }
   }

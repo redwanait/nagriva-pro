@@ -206,7 +206,7 @@ const NAGRIVA_ClientDrawer = (() => {
               </div>
             </div>`;
         }).join('')
-      : '<div class="cd-empty"><div class="cd-empty-icon"><i class="fas fa-shopping-bag"></i></div><span class="cd-empty-label">No orders yet</span>This client hasn\'t placed any orders yet.</div>';
+      : NAGRIVA_EmptyState.render({ icon: 'fas fa-shopping-bag', title: 'No orders yet', description: 'This client hasn\'t placed any orders yet.', variant: 'sm' });
 
     const activityHtml = _activities.length > 0
       ? _activities.map(a => {
@@ -226,11 +226,11 @@ const NAGRIVA_ClientDrawer = (() => {
               </div>
             </div>`;
         }).join('')
-      : '<div class="cd-empty"><div class="cd-empty-icon"><i class="fas fa-history"></i></div><span class="cd-empty-label">No recent activity</span>No recent activity recorded for this client.</div>';
+      : NAGRIVA_EmptyState.render({ icon: 'fas fa-history', title: 'No recent activity', description: 'No recent activity recorded for this client.', variant: 'sm' });
 
     const statusBadge = latestOrder
       ? getStatusBadge(latestOrder.status)
-      : '<span class="cd-badge cd-badge-neutral"><span class="cd-badge-dot"></span>No orders</span>';
+      : '<span class="cd-badge cd-badge-neutral"><span class="cd-badge-dot"></span>No orders yet</span>';
 
     _bodyEl.innerHTML = `
       <div class="cd-profile">
@@ -283,15 +283,13 @@ const NAGRIVA_ClientDrawer = (() => {
   /* ─── Render error ─── */
   function renderError(err) {
     if (!_bodyEl) return;
-    _bodyEl.innerHTML = `
-      <div class="cd-error">
-        <i class="fas fa-exclamation-triangle"></i>
-        <h3>Failed to Load Client</h3>
-        <p>${escapeHtml(err.message || 'Could not connect to database.')}</p>
-        <button class="cd-retry-btn" id="cdRetryBtn">
-          <i class="fas fa-sync"></i> Retry
-        </button>
-      </div>`;
+    _bodyEl.innerHTML = NAGRIVA_EmptyState.render({
+      icon: 'fas fa-exclamation-triangle',
+      title: 'Failed to Load Client',
+      description: escapeHtml(err.message || 'Could not connect to database.'),
+      variant: 'error',
+      primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: '' }
+    });
     const retry = _bodyEl.querySelector('#cdRetryBtn');
     if (retry) {
       retry.addEventListener('click', () => {

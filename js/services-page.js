@@ -134,8 +134,8 @@
 
     if (!filtered.length) {
       grid.innerHTML = state.services.length === 0
-        ? '<div class="services-error"><div class="services-error-icon">&#9734;</div><h3>Coming soon</h3><p>Check back soon for our latest service offerings.</p></div>'
-        : '<div class="services-error"><div class="services-error-icon">&#128269;</div><h3>No services found</h3><p>Try adjusting your search or filter to find what you\'re looking for.</p></div>';
+        ? '<div class="ne"><div class="ne-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3 class="ne-title">Coming soon</h3><p class="ne-desc">We\'re crafting something exceptional. Check back soon for our latest service offerings.</p></div>'
+        : '<div class="ne ne-search"><div class="ne-icon"><i class="fas fa-search"></i></div><h3 class="ne-title">No services found</h3><p class="ne-desc">Try adjusting your search or filter to find what you\'re looking for.</p><div class="ne-actions"><button class="ne-btn ne-btn-secondary" onclick="NAGRIVA_ServicesPage.resetFilters()"><i class="fas fa-times"></i> Clear Filters</button></div></div>';
       return;
     }
 
@@ -160,11 +160,11 @@
   function renderError() {
     if (skeleton) skeleton.style.display = 'none';
     grid.innerHTML =
-      '<div class="services-error">' +
-        '<div class="services-error-icon">&#9888;</div>' +
-        '<h3>Unable to load services</h3>' +
-        '<p>Something went wrong. Please try again.</p>' +
-        '<button class="services-retry-btn" id="servicesPageRetry">Retry</button>' +
+      '<div class="ne ne-error">' +
+        '<div class="ne-icon"><i class="fas fa-exclamation-triangle"></i></div>' +
+        '<h3 class="ne-title">Unable to load services</h3>' +
+        '<p class="ne-desc">Something went wrong. Please try again.</p>' +
+        '<div class="ne-actions"><button class="ne-btn ne-btn-primary" id="servicesPageRetry"><i class="fas fa-sync"></i> Retry</button></div>' +
       '</div>';
 
     var retryBtn = document.getElementById('servicesPageRetry');
@@ -183,7 +183,7 @@
       if (!services || !services.length) {
         if (skeleton) skeleton.style.display = 'none';
         grid.innerHTML =
-          '<div class="services-error"><div class="services-error-icon">&#9734;</div><h3>Coming soon</h3><p>Check back soon for our latest service offerings.</p></div>';
+          '<div class="ne"><div class="ne-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3 class="ne-title">Coming soon</h3><p class="ne-desc">We\'re crafting something exceptional. Check back soon for our latest service offerings.</p></div>';
         return;
       }
 

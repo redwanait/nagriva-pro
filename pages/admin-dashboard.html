@@ -2751,9 +2751,10 @@
               <div id="messagesContainer" style="overflow-y:auto;flex:1;max-height:500px;"></div>
             </div>
             <div class="card" id="activeConversation" style="display:flex;flex-direction:column;">
-              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--gray3);text-align:center;padding:40px;">
-                <i class="fas fa-comment-dots" style="font-size:2rem;margin-bottom:12px;opacity:0.5;"></i>
-                <p>Select a conversation to view messages</p>
+              <div class="ne ne-inline" style="height:100%;">
+                <div class="ne-icon"><i class="fas fa-comment-dots"></i></div>
+                <h3 class="ne-title">Select a conversation</h3>
+                <p class="ne-desc">Choose a conversation from the sidebar to view messages.</p>
               </div>
             </div>
           </div>
@@ -3705,9 +3706,16 @@
   <script defer src="../js/auth-guard.js"></script>
   <script defer src="../js/admin-auth.js"></script>
   <script defer src="../js/admin-navbar.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
   <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/empty-state.js"></script>
+  <script defer src="../js/admin-orders.js"></script>
   <script defer src="../modules/orders/orders-api.js"></script>
   <script defer src="../modules/invoices/invoices-api.js"></script>
+  <script defer src="../modules/notifications/notifications-api.js"></script>
+  <script defer src="../js/admin-notifications.js"></script>
+  <script defer src="../components/activity-feed/activity-feed.js"></script>
+  <script defer src="../components/notifications-dropdown/notifications-dropdown.js"></script>
   <script defer src="../modules/activity-logs/activity-logs-api.js"></script>
   <script defer src="../js/toast.js"></script>
 
@@ -3715,6 +3723,21 @@
   <script defer src="../js/navbar.js"></script>
   <script defer src="../js/performance-optimizer.js"></script>
   <script defer src="../js/lazy-loader.js"></script>
+
+  <!-- Chart.js for dashboard charts -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Admin modules -->
+  <script defer src="../js/admin-modal.js"></script>
+  <script defer src="../js/admin-messages.js"></script>
+  <script defer src="../js/admin-clients.js"></script>
+  <script defer src="../js/admin-files.js"></script>
+  <script defer src="../js/admin-services.js"></script>
+  <script defer src="../js/admin-activity.js"></script>
+  <script defer src="../js/admin-payments.js"></script>
+  <script defer src="../js/admin-invoices.js"></script>
+  <script defer src="../components/client-drawer/client-drawer.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
 

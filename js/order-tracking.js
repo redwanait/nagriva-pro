@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       /* Files */
       let filesHtml = '';
       if (files.length === 0) {
-        filesHtml = '<div class="track-file-empty"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="tfe-label">No files yet</span><span class="tfe-text">Delivered files and project assets will appear here once they\'re ready.</span></div>';
+        filesHtml = '<div class="ne ne-sm"><div class="ne-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3 class="ne-title">No files yet</h3><p class="ne-desc">Delivered files and project assets will appear here once they\'re ready.</p></div>';
       } else {
         files.forEach(f => {
           const isDeliverable = f.uploaded_by === 'admin';
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       /* Timeline */
       let timelineHtml = '';
       if (activity.length === 0) {
-        timelineHtml = '<div style="text-align:center;padding:32px 20px;color:var(--gray2);font-size:0.82rem;animation:of-fadeInUp 0.4s ease-out;"><div style="width:40px;height:40px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--accent);font-size:0.9rem;"><i class="fas fa-clock"></i></div><div style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.85rem;color:var(--white);margin-bottom:3px;">No activity yet</div><div style="font-size:0.75rem;color:var(--gray2);max-width:220px;margin:0 auto;line-height:1.5;">Project updates and status changes will appear here.</div></div>';
+        timelineHtml = '<div class="ne ne-sm"><div class="ne-icon"><i class="fas fa-clock"></i></div><h3 class="ne-title">No activity yet</h3><p class="ne-desc">Project updates and status changes will appear here.</p></div>';
       } else {
         activity.forEach(a => {
           timelineHtml += '<div class="track-tl-item"><div class="track-tl-dot"></div><div class="track-tl-content">' +
@@ -300,10 +300,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         '<div class="track-tab-content" id="trackTabMessages" style="display:none;">' +
         '<div class="track-chat-container" id="trackChatContainer">' +
         '<div class="track-chat-messages" id="trackChatMessages">' +
-        '<div class="track-chat-empty">' +
-        '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
-        '<span style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.85rem;color:var(--white);">No messages yet</span>' +
-        '<span style="font-size:0.75rem;color:var(--gray2);text-align:center;">Start the conversation! Send a message about this project.</span>' +
+        '<div class="ne ne-sm">' +
+        '<div class="ne-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>' +
+        '<h3 class="ne-title">No messages yet</h3>' +
+        '<p class="ne-desc">Start the conversation! Send a message about this project.</p>' +
         '</div></div>' +
         '<div class="track-chat-input-area">' +
         '<div class="track-chat-input-row">' +
@@ -352,7 +352,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (err) {
       console.error('[OrderTracking] loadOrderTracking failed:', err.message || err);
-      container.innerHTML = '<div style="text-align:center;padding:48px 24px;color:var(--gray2);display:flex;flex-direction:column;align-items:center;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="opacity:0.3;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Failed to load tracking data</span><span style="font-size:0.78rem;color:var(--gray2);">' + err.message + '</span></div>';
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+        title: 'Failed to load tracking data',
+        description: err.message || 'Something went wrong.',
+        variant: 'error'
+      });
     }
   }
 
@@ -413,22 +418,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       const msgs = await NagrivaOrders.getMessages(orderId);
       container.innerHTML = '';
       if (msgs.length === 0) {
-        container.innerHTML =
-          '<div class="track-chat-empty">' +
-          '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
-          '<span style="font-family:\'Syne\',sans-serif;font-weight:600;font-size:0.85rem;color:var(--white);">No messages yet</span>' +
-          '<span style="font-size:0.75rem;color:var(--gray2);text-align:center;">Send a message to start the conversation about this project.</span>' +
-          '</div>';
+        container.innerHTML = NAGRIVA_EmptyState.render({
+          icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+          title: 'No messages yet',
+          description: 'Send a message to start the conversation about this project.',
+          variant: 'sm'
+        });
       } else {
         msgs.forEach(function(m) { appendTrackMessage(m); });
       }
       container.scrollTop = container.scrollHeight;
     } catch (err) {
       container.innerHTML =
-        '<div class="track-chat-empty">' +
-        '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
-        '<span>Failed to load messages</span>' +
-        '</div>';
+        NAGRIVA_EmptyState.renderTo(container, {
+          icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+          title: 'Failed to load messages',
+          variant: 'error'
+        });
     }
   }
 

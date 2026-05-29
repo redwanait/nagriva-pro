@@ -54,6 +54,9 @@ window.NagrivaOnboarding = (function () {
     }
   ]
 
+  var MAX_TOUR_RECURSION = 20
+  var _tourKeyHandler = null
+
   var state = {
     step: 0,
     userId: null,
@@ -62,13 +65,44 @@ window.NagrivaOnboarding = (function () {
     profileName: '',
     profileBio: '',
     profileAvatar: null,
-    started: false
+    started: false,
+    tourActive: false,
+    tourRecursion: 0
   }
 
   var dom = {}
 
   function qs (sel, ctx) { return (ctx || document).querySelector(sel) }
   function qsa (sel, ctx) { return (ctx || document).querySelectorAll(sel) }
+
+  function isQAPage () {
+    return document.body.getAttribute('data-page') === 'onboarding-qa' ||
+           window.location.pathname.indexOf('onboarding-qa.html') !== -1
+  }
+
+  function isTourPage () {
+    return !!qs('.dash-header') || isQAPage()
+  }
+
+  function resolveTourTarget (selector) {
+    var el = qs(selector)
+    if (el) return el
+    if (isQAPage()) {
+      var QA_FALLBACKS = {
+        '.dash-header': '.qa-header',
+        '.nav-link[data-page="services"]': '.nav-link[data-page="services"]',
+        '.nav-link[data-page="pricing"]': '.nav-link[data-page="pricing"]',
+        '.nav-link[data-page="blog"]': '.nav-link[data-page="blog"]',
+        '.nav-user-avatar': '.nav-user-avatar'
+      }
+      var fb = QA_FALLBACKS[selector]
+      if (fb) {
+        console.log('[Onboarding Tour] QA fallback: "' + selector + '" -> "' + fb + '"')
+        return qs(fb)
+      }
+    }
+    return null
+  }
 
   function createElement (tag, attrs, children) {
     var el = document.createElement(tag)
@@ -471,15 +505,36 @@ window.NagrivaOnboarding = (function () {
   }
 
   function showTourStep (index) {
+    console.log('[Onboarding Tour] showTourStep index=' + index + ' target="' + (TOUR_STEPS[index] ? TOUR_STEPS[index].target : 'undefined') + '"')
+
+    /* Strict re-entrancy guard — bail immediately if already showing a step */
+    if (state.tourActive) {
+      console.warn('[Onboarding Tour] Re-entrancy prevented — tour already active at index ' + (state.tourIndex != null ? state.tourIndex : '?'))
+      return
+    }
+    state.tourActive = true
+
+    state.tourRecursion = (state.tourRecursion || 0)
+    if (state.tourRecursion > MAX_TOUR_RECURSION) {
+      console.warn('[Onboarding Tour] Max recursion reached, forcing end')
+      endTour()
+      return
+    }
+
     var overlay = buildTourTooltip()
     var step = TOUR_STEPS[index]
-    if (!step) return
+    if (!step) { state.tourActive = false; return }
 
-    var target = qs(step.target)
+    var target = resolveTourTarget(step.target)
     if (!target) {
+      console.log('[Onboarding Tour] Target "' + step.target + '" not found — skipping step')
+      state.tourRecursion++
+      state.tourActive = false
       nextTourStep()
       return
     }
+
+    state.tourRecursion = 0
 
     var rect = target.getBoundingClientRect()
 
@@ -542,6 +597,17 @@ window.NagrivaOnboarding = (function () {
 
     overlay.style.pointerEvents = 'all'
 
+    function cleanup () {
+      var n = document.getElementById('onboardTourNext')
+      var s = document.getElementById('onboardTourSkip2')
+      if (n) n.removeEventListener('click', nextHandler)
+      if (s) s.removeEventListener('click', skipHandler)
+      if (_tourKeyHandler) document.removeEventListener('keydown', _tourKeyHandler)
+      _tourKeyHandler = null
+      state.tourActive = false
+      console.log('[Onboarding Tour] Cleaned up listeners for step ' + index)
+    }
+
     var nextHandler = function () { cleanup(); nextTourStep() }
     var skipHandler = function () { cleanup(); endTour() }
     var keyHandler = function (e) {
@@ -549,22 +615,16 @@ window.NagrivaOnboarding = (function () {
       if (e.key === 'Enter') { cleanup(); nextTourStep() }
     }
 
-    function cleanup () {
-      var n = document.getElementById('onboardTourNext')
-      var s = document.getElementById('onboardTourSkip2')
-      if (n) n.removeEventListener('click', nextHandler)
-      if (s) s.removeEventListener('click', skipHandler)
-      document.removeEventListener('keydown', keyHandler)
-    }
-
     nextBtn.addEventListener('click', nextHandler)
     skipBtn.addEventListener('click', skipHandler)
+    _tourKeyHandler = keyHandler
     document.addEventListener('keydown', keyHandler)
     target.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   function nextTourStep () {
     state.tourIndex = (state.tourIndex || 0) + 1
+    console.log('[Onboarding Tour] nextTourStep -> tourIndex=' + state.tourIndex + ' total=' + TOUR_STEPS.length)
     if (state.tourIndex >= TOUR_STEPS.length) {
       endTour()
     } else {
@@ -573,6 +633,13 @@ window.NagrivaOnboarding = (function () {
   }
 
   function endTour () {
+    console.log('[Onboarding Tour] endTour called')
+    state.tourActive = false
+    state.tourRecursion = 0
+    if (_tourKeyHandler) {
+      document.removeEventListener('keydown', _tourKeyHandler)
+      _tourKeyHandler = null
+    }
     var overlay = document.getElementById('onboardTourOverlay')
     if (overlay) {
       overlay.innerHTML = ''
@@ -631,10 +698,10 @@ window.NagrivaOnboarding = (function () {
   function saveProgress (step) {
     getUserId().then(function (uid) {
       if (!uid) return
-      var payload = { onboarding_step: step }
+      var payload = { id: uid, onboarding_step: step, updated_at: new Date().toISOString() }
       if (step === 1 && state.goal) payload.user_goal = state.goal
       if (step === 2) payload.interests = state.selectedInterests
-      window.supabaseClient.from('profiles').update(payload).eq('id', uid).then(function (res) {
+      window.supabaseClient.from('profiles').upsert(payload, { onConflict: 'id' }).then(function (res) {
         if (res.error) console.warn('[Onboarding] Save progress failed:', res.error.message)
       })
     })
@@ -643,8 +710,8 @@ window.NagrivaOnboarding = (function () {
   function saveProfile () {
     getUserId().then(function (uid) {
       if (!uid) return
-      var payload = { full_name: state.profileName || undefined }
-      window.supabaseClient.from('profiles').update(payload).eq('id', uid).then(function (res) {
+      var payload = { id: uid, full_name: state.profileName || undefined, updated_at: new Date().toISOString() }
+      window.supabaseClient.from('profiles').upsert(payload, { onConflict: 'id' }).then(function (res) {
         if (res.error) console.warn('[Onboarding] Save profile failed:', res.error.message)
       })
       if (state.profileName && state.profileName.trim()) {
@@ -658,16 +725,24 @@ window.NagrivaOnboarding = (function () {
   }
 
   function completeOnboarding () {
-    getUserId().then(function (uid) {
+    return getUserId().then(function (uid) {
       if (!uid) return
-      window.supabaseClient.from('profiles').update({
+      console.log('[Onboarding] Saving completion...')
+      return window.supabaseClient.from('profiles').upsert({
+        id: uid,
         onboarding_completed: true,
-        onboarding_step: 6
-      }).eq('id', uid).then(function (res) {
-        if (res.error) console.warn('[Onboarding] Complete failed:', res.error.message)
+        onboarding_step: 6,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'id' }).then(function (res) {
+        if (res.error) {
+          console.warn('[Onboarding] Complete failed:', res.error.message)
+          return
+        }
+        console.log('[Onboarding] Completion saved successfully')
+      }).then(function () {
+        trackEvent('completed')
+        try { localStorage.setItem(ONBOARDING_KEY, 'true') } catch (e) {}
       })
-      trackEvent('completed')
-      try { localStorage.setItem(ONBOARDING_KEY, 'true') } catch (e) {}
     })
   }
 
@@ -787,6 +862,17 @@ window.NagrivaOnboarding = (function () {
     var tourStart = document.getElementById('onboardTourStart')
     if (tourStart) {
       tourStart.addEventListener('click', function () {
+        console.log('[Onboarding] Start Tour clicked')
+        if (isQAPage()) {
+          console.log('[Onboarding] QA mode — bypassing tour, advancing to step 5')
+          goToStep(5)
+          return
+        }
+        if (!isTourPage()) {
+          console.log('[Onboarding] Tour skipped: no eligible targets on this page')
+          goToStep(5)
+          return
+        }
         state.tourIndex = 0
         showTourStep(0)
       })
@@ -807,8 +893,15 @@ window.NagrivaOnboarding = (function () {
     var goDash = document.getElementById('onboardGoDashboard')
     if (goDash) {
       goDash.addEventListener('click', function () {
-        completeOnboarding()
+        console.log('[Onboarding] Go to Dashboard clicked')
         close()
+        completeOnboarding().then(function () {
+          console.log('[Onboarding] Redirecting to dashboard')
+          window.location.href = '/pages/dashboard.html'
+        }).catch(function (err) {
+          console.warn('[Onboarding] Completion error, redirecting anyway:', err.message || err)
+          window.location.href = '/pages/dashboard.html'
+        })
       })
     }
 
@@ -914,10 +1007,12 @@ window.NagrivaOnboarding = (function () {
     trackEvent('skipped')
     getUserId().then(function (uid) {
       if (!uid) return
-      window.supabaseClient.from('profiles').update({
+      window.supabaseClient.from('profiles').upsert({
+        id: uid,
         onboarding_completed: true,
-        onboarding_step: -1
-      }).eq('id', uid).then(function (res) {
+        onboarding_step: -1,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'id' }).then(function (res) {
         if (res.error) console.warn('[Onboarding] Skip save failed:', res.error.message)
       })
       try { localStorage.setItem(ONBOARDING_KEY, 'true') } catch (e) {}
@@ -967,12 +1062,14 @@ window.NagrivaOnboarding = (function () {
 
     getUserId().then(function (uid) {
       if (!uid) return
-      window.supabaseClient.from('profiles').update({
+      window.supabaseClient.from('profiles').upsert({
+        id: uid,
         onboarding_completed: false,
         onboarding_step: 0,
         user_goal: null,
-        interests: []
-      }).eq('id', uid).then(function (res) {
+        interests: [],
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'id' }).then(function (res) {
         if (res.error) console.warn('[Onboarding] Reset failed:', res.error.message)
       })
     })

@@ -185,7 +185,7 @@ const NAGRIVA_Modal = (() => {
       : _clientOptions;
     const selectedId = document.getElementById('of_clientId')?.value || '';
     if (filtered.length === 0) {
-      dropdown.innerHTML = '<div class="client-search-no-results">No clients found</div>';
+      dropdown.innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-search', title: 'No clients found', description: 'No clients match your search.', variant: 'inline' });
     } else {
       dropdown.innerHTML = filtered.map(c => {
         const isSelected = c.id === selectedId;

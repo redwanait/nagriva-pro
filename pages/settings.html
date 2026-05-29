@@ -189,9 +189,31 @@
   <script defer src="../js/script.js"></script>
   <script defer src="../js/i18n.js"></script>
   <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/skeleton.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var user;
+
+      function showSkeletons() {
+        var sk = window.NAGRIVA_Skeleton;
+        if (!sk) return;
+        document.querySelectorAll('.settings-card').forEach(function(el, i) {
+          el.setAttribute('data-original-html', el.innerHTML);
+          if (i <= 1) {
+            el.innerHTML = '<div class="sf-group" style="padding:8px 0;"><div class="sk-row-line sk-shimmer" style="height:14px;width:30%;margin-bottom:10px;"></div><div class="sk-row-line sk-shimmer" style="height:36px;"></div></div><div class="sf-group" style="padding:8px 0;"><div class="sk-row-line sk-shimmer" style="height:14px;width:30%;margin-bottom:10px;"></div><div class="sk-row-line sk-shimmer" style="height:36px;"></div></div><div style="margin-top:8px;"><div class="sk-row-line-sm sk-shimmer" style="height:36px;width:120px;"></div></div>';
+          } else {
+            el.innerHTML = '<div class="sf-group" style="padding:8px 0;"><div class="sk-row-line sk-shimmer" style="height:14px;width:40%;margin-bottom:10px;"></div><div class="sk-row-line-sm sk-shimmer" style="height:20px;"></div></div>';
+          }
+        });
+      }
+
+      function hideSkeletons() {
+        document.querySelectorAll('.settings-card').forEach(function(el) {
+          var restored = el.getAttribute('data-original-html');
+          if (restored) el.innerHTML = restored;
+        });
+      }
 
       function getDisplayName(u) {
         if (!u) return 'User';
@@ -208,7 +230,9 @@
         setTimeout(function() { clearInterval(check); }, 5000);
       }
 
+      showSkeletons();
       waitForUser(function() {
+        hideSkeletons();
         document.getElementById('settingsName').value = getDisplayName(user);
         document.getElementById('settingsEmail').value = user.email || '';
       });

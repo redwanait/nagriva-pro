@@ -208,6 +208,20 @@ const NagrivaAuth = (() => {
 
   /* ─── UI Update ─── */
   function updateUI() {
+    /* If user-avatar.js is loaded, it handles the avatar UI exclusively */
+    if (typeof NAGRIVA_UserAvatar !== 'undefined') {
+      if (currentSession && currentUser) {
+        if (refs.authBtn) refs.authBtn.style.display = 'none';
+        if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = 'none';
+        if (refs.bookBtn) refs.bookBtn.style.display = '';
+      } else {
+        if (refs.authBtn) refs.authBtn.style.display = '';
+        if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = '';
+        if (refs.bookBtn) refs.bookBtn.style.display = '';
+      }
+      return;
+    }
+
     if (currentSession && currentUser) {
       const displayName = getDisplayName(currentUser);
       const avatarUrl = currentUser.user_metadata?.avatar_url || currentUser.user_metadata?.picture || null;
@@ -502,8 +516,8 @@ const NagrivaAuth = (() => {
     currentUser = null;
     updateUI();
 
-    /* Redirect away from protected pages after sign-out */
-    window.location.href = '/index.html';
+    /* Redirect to sign in page after sign-out */
+    window.location.href = '/pages/signin.html';
   }
 
   /* ─── Session & Auth State ─── */
@@ -746,7 +760,8 @@ const NagrivaAuth = (() => {
       'dashboard': '/pages/dashboard.html',
       'notifications': '/pages/notifications.html',
       'settings': '/pages/settings.html',
-      'admin': '/pages/admin-dashboard.html'
+      'admin': '/pages/admin-dashboard.html',
+      'onboarding-qa': '/pages/onboarding-qa.html'
     };
     document.querySelectorAll('.user-dropdown-item[data-nav]').forEach(function(item) {
       var nav = item.getAttribute('data-nav');
@@ -786,12 +801,23 @@ const NagrivaAuth = (() => {
     }
   }
 
+  /* ─── Show dev link only in dev mode ─── */
+  function updateDevLinkVisibility() {
+    var devLink = document.getElementById('devNavLink');
+    var mobileDevLink = document.getElementById('mobileDevNavLink');
+    var isDev = window.location.search.indexOf('dev=true') !== -1 ||
+                (function () { try { return localStorage.getItem('nagriva_dev_mode') === 'true' } catch (e) { return false } })();
+    if (devLink) devLink.style.display = isDev ? '' : 'none';
+    if (mobileDevLink) mobileDevLink.style.display = isDev ? '' : 'none';
+  }
+
   /* ─── Re-bind navbar-specific events after navbar loads ─── */
   function initNavbarUI() {
     cacheRefs();
     initDropdown();
     initDropdownNav();
     updateUI();
+    updateDevLinkVisibility();
   }
 
   /* ─── Init ─── */

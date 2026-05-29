@@ -15,11 +15,15 @@
   <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../js/skeleton.js" media="print" onload="this.media='all'" />
   <style>
     .profile-page { padding-top: 100px; min-height: 100vh; }
     .profile-header { display: flex; align-items: center; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
     .profile-avatar-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
     .profile-avatar-wrapper { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+    #profileSkeleton { margin-bottom: 40px; }
+    #profileCardsSkeleton { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+    @media (max-width: 768px) { #profileCardsSkeleton { grid-template-columns: 1fr; } }
     .profile-avatar {
       width: 80px; height: 80px; border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -130,7 +134,8 @@
 
   <section class="profile-page">
     <div class="container">
-      <div class="profile-header">
+      <div id="profileSkeleton"></div>
+      <div class="profile-header" id="profileHeader" style="display:none;">
         <div class="profile-avatar-wrap">
           <div class="profile-avatar-wrapper">
             <div class="profile-avatar" id="profileAvatar">U</div>
@@ -151,7 +156,8 @@
         </div>
       </div>
 
-      <div class="profile-grid">
+      <div id="profileCardsSkeleton"></div>
+      <div class="profile-grid" id="profileGrid" style="display:none;">
         <div class="profile-card">
           <h2>Edit Profile</h2>
           <form class="profile-form" id="profileForm">
@@ -202,12 +208,34 @@
   <script defer src="../js/script.js"></script>
   <script defer src="../js/i18n.js"></script>
   <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
   <script defer src="../js/profile-avatar.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var user, nameEl, emailEl, nameInput, emailInput, joinedEl;
 
+      function showSkeletons() {
+        var skel = window.NAGRIVA_Skeleton;
+        if (skel) {
+          skel.inject('profileSkeleton', skel.profile());
+          skel.inject('profileCardsSkeleton', skel.profileCard(2));
+        }
+      }
+
+      function hideSkeletons() {
+        var header = document.getElementById('profileHeader');
+        var grid = document.getElementById('profileGrid');
+        if (header) header.style.display = '';
+        if (grid) grid.style.display = '';
+        var sk = document.getElementById('profileSkeleton');
+        if (sk) sk.style.display = 'none';
+        var sk2 = document.getElementById('profileCardsSkeleton');
+        if (sk2) sk2.style.display = 'none';
+      }
+
       function initProfile() {
+        showSkeletons();
+
         user = NagrivaAuth.getUser();
         nameEl = document.getElementById('profileName');
         emailEl = document.getElementById('profileEmail');
@@ -245,6 +273,7 @@
         if (emailInput) emailInput.value = user.email || '';
         if (joinedEl) joinedEl.textContent = 'Member since ' + formatDate(user.created_at);
 
+        hideSkeletons();
         loadProviders();
       }
 
@@ -255,7 +284,7 @@
           if (error) throw error;
           var idents = identities?.identities || [];
           if (idents.length === 0) {
-            container.innerHTML = '<div class="no-providers">No connected providers.</div>';
+            container.innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-plug', title: 'No connected providers', description: 'Connect your accounts to manage them from here.', variant: 'sm' });
             return;
           }
           container.innerHTML = '';
@@ -298,7 +327,7 @@
             container.appendChild(div);
           });
         } catch (_) {
-          container.innerHTML = '<div class="no-providers">Could not load providers.</div>';
+          container.innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-exclamation-triangle', title: 'Could not load providers', description: 'There was a problem loading your connected accounts.', variant: 'error' });
         }
       }
 

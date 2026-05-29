@@ -89,15 +89,13 @@ const NAGRIVA_Clients = (() => {
       _error = err;
       console.error('[Clients] init failed:', err);
       if (containerEl) {
-        containerEl.innerHTML = `
-          <div class="orders-empty">
-            <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3>Failed to Load Clients</h3>
-            <p>${err.message || 'Could not connect to database.'}</p>
-            <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_Clients.init(document.getElementById('clientsContainer'))">
-              <i class="fas fa-sync"></i> Retry
-            </button>
-          </div>`;
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Clients',
+          description: err.message || 'Could not connect to database.',
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_Clients.init(document.getElementById(\'clientsContainer\'))' }
+        });
       }
       NAGRIVA_Toast.error('Connection Error', 'Could not load clients from database.');
     }
@@ -273,19 +271,18 @@ const NAGRIVA_Clients = (() => {
 
   function renderEmpty(filtered) {
     if (filtered) {
-      return `
-        <div class="orders-empty">
-          <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No matching clients</h3>
-          <p>No clients match your current search. Try different keywords or clear your filters to see all clients.</p>
-        </div>`;
+      return NAGRIVA_EmptyState.render({
+        icon: 'fas fa-search',
+        title: 'No matching clients',
+        description: 'No clients match your current search. Try different keywords or clear your filters to see all clients.',
+        variant: 'search'
+      });
     }
-    return `
-      <div class="orders-empty">
-        <div class="orders-empty-icon"><i class="fas fa-users"></i></div>
-        <h3>No clients yet</h3>
-        <p>Clients will appear here once they sign up or you create their accounts. Manage all client relationships and projects from this view.</p>
-      </div>`;
+    return NAGRIVA_EmptyState.render({
+      icon: 'fas fa-users',
+      title: 'No clients yet',
+      description: 'Clients will appear here once they sign up or you create their accounts. Manage all client relationships and projects from this view.'
+    });
   }
 
   function renderTableRow(client) {
@@ -371,7 +368,7 @@ const NAGRIVA_Clients = (() => {
             <div class="activity-time">${formatDate(o.created_at)} &middot; ${o.status ? o.status.replace('_', ' ') : 'pending'}</div>
           </div>
         </div>`).join('')
-      : '<div style="color:var(--gray3);padding:12px 0;">No orders yet.</div>';
+      : NAGRIVA_EmptyState.render({ icon: 'fas fa-shopping-bag', title: 'No orders yet', description: 'This client hasn\'t placed any orders yet.', variant: 'inline' });
 
     return `
       <div class="confirm-modal-overlay active" id="clientProfileModal">

@@ -179,30 +179,30 @@ const NAGRIVA_Payments = (() => {
 
   function renderEmpty(container, filtered) {
     if (!container) return;
-    if (filtered) {
-      container.innerHTML = '<div class="pay-empty-state" style="padding:40px 20px;">' +
-        '<div class="pay-empty-icon"><i class="fas fa-search"></i></div>' +
-        '<h3>No matching payments</h3>' +
-        '<p>No payments match your current search. Try adjusting your filters to see all records.</p>' +
-      '</div>';
-    } else {
-      container.innerHTML = '<div class="pay-empty-state">' +
-        '<div class="pay-empty-icon"><i class="fas fa-credit-card"></i></div>' +
-        '<h3>No payments yet</h3>' +
-        '<p>Start tracking revenue by recording your first payment. All payment activity will appear here in real time.</p>' +
-      '</div>';
-    }
+    container.innerHTML = filtered
+      ? NAGRIVA_EmptyState.render({
+          icon: 'fas fa-search',
+          title: 'No matching payments',
+          description: 'No payments match your current search. Try adjusting your filters to see all records.',
+          variant: 'search'
+        })
+      : NAGRIVA_EmptyState.render({
+          icon: 'fas fa-credit-card',
+          title: 'No payments yet',
+          description: 'Start tracking revenue by recording your first payment. All payment activity will appear here in real time.'
+        });
   }
 
   function renderError(container, err) {
     if (!container) return;
     const msg = (err && err.message) || 'Failed to load payments.';
-    container.innerHTML = '<div class="pay-empty-state">' +
-      '<i class="fas fa-exclamation-triangle" style="color:var(--danger);"></i>' +
-      '<h3 style="color:var(--danger);">Error loading payments</h3>' +
-      '<p>' + escapeHtml(msg) + '</p>' +
-      '<button class="btn btn-secondary btn-sm" onclick="NAGRIVA_Payments.retry()"><i class="fas fa-sync"></i> Retry</button>' +
-    '</div>';
+    container.innerHTML = NAGRIVA_EmptyState.render({
+      icon: 'fas fa-exclamation-triangle',
+      title: 'Error loading payments',
+      description: msg,
+      variant: 'error',
+      primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_Payments.retry()' }
+    });
   }
 
   function renderPayments(container) {

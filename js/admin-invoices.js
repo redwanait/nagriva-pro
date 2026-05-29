@@ -134,16 +134,14 @@ const NAGRIVA_AdminInvoices = (() => {
       });
       if (containerEl) {
         const detailMsg = err.hint || err.details || '';
-        containerEl.innerHTML = `
-          <div class="inv-empty">
-            <div class="inv-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3>Failed to Load Invoices</h3>
-            <p>${err.message || 'Could not connect to database.'}</p>
-            ${detailMsg ? `<p style="font-size:0.75rem;color:var(--gray3);margin-top:4px;">${detailMsg}</p>` : ''}
-            <button class="btn btn-primary" style="margin-top:20px;" onclick="NAGRIVA_AdminInvoices.init(document.getElementById('invoicesContainer'))">
-              <i class="fas fa-sync"></i> Retry
-            </button>
-          </div>`;
+        const desc = (err.message || 'Could not connect to database.') + (detailMsg ? ' ' + detailMsg : '');
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Invoices',
+          description: desc,
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_AdminInvoices.init(document.getElementById(\'invoicesContainer\'))' }
+        });
       }
       NAGRIVA_Toast.error('Connection Error', 'Could not load invoices from database.');
     }
@@ -454,22 +452,19 @@ const NAGRIVA_AdminInvoices = (() => {
 
   function renderEmpty(filtered) {
     if (filtered) {
-      return `
-        <div class="inv-empty">
-          <div class="inv-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No matching invoices</h3>
-          <p>No invoices match your current search. Try adjusting your keywords or clearing your filters to see all invoices.</p>
-        </div>`;
+      return NAGRIVA_EmptyState.render({
+        icon: 'fas fa-search',
+        title: 'No matching invoices',
+        description: 'No invoices match your current search. Try adjusting your keywords or clearing your filters to see all invoices.',
+        variant: 'search'
+      });
     }
-    return `
-      <div class="inv-empty">
-        <div class="inv-empty-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-        <h3>No invoices yet</h3>
-        <p>Generate your first invoice to start tracking payments, due dates, and revenue. Every invoice you create will appear here.</p>
-        <button class="btn btn-primary inv-empty-new-btn" style="margin-top:20px;">
-          <i class="fas fa-plus"></i> Create Invoice
-        </button>
-      </div>`;
+    return NAGRIVA_EmptyState.render({
+      icon: 'fas fa-file-invoice-dollar',
+      title: 'No invoices yet',
+      description: 'Generate your first invoice to start tracking payments, due dates, and revenue. Every invoice you create will appear here.',
+      primaryCta: { icon: 'fas fa-plus', label: 'Create Invoice', onclick: 'NAGRIVA_Invoices.openCreateModal()' }
+    });
   }
 
   function renderStats() {
@@ -683,7 +678,7 @@ const NAGRIVA_AdminInvoices = (() => {
         : _clientOptions;
       const selectedId = document.getElementById('inv_clientId')?.value || '';
       if (filtered.length === 0) {
-        dropdown.innerHTML = '<div class="client-search-no-results">No clients found</div>';
+        dropdown.innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-search', title: 'No clients found', description: 'No clients match your search.', variant: 'inline' });
       } else {
         dropdown.innerHTML = filtered.map(c => {
           const isSelected = c.id === selectedId;

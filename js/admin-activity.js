@@ -103,15 +103,13 @@ const NAGRIVA_Activity = (() => {
       _error = err;
       console.error('[Activity] init failed:', err);
       if (containerEl) {
-        containerEl.innerHTML = `
-          <div class="orders-empty" style="padding:20px;">
-            <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3>Failed to Load Activity</h3>
-            <p>${err.message || 'Could not connect to database.'}</p>
-            <button class="btn btn-primary empty-new-order-btn" style="margin-top:16px;" onclick="NAGRIVA_Activity.init(document.getElementById('activityContainer'))">
-              <i class="fas fa-sync"></i> Retry
-            </button>
-          </div>`;
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Activity',
+          description: err.message || 'Could not connect to database.',
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_Activity.init(document.getElementById(\'activityContainer\'))' }
+        });
       }
     }
   }
@@ -216,14 +214,12 @@ const NAGRIVA_Activity = (() => {
     const items = maxItems ? filtered.slice(0, maxItems) : filtered;
 
     if (items.length === 0) {
-      container.innerHTML = `
-        <div style="text-align:center;padding:48px 20px;animation:fadeInUp 0.5s ease-out;">
-          <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--accent);font-size:1.1rem;">
-            <i class="fas fa-stream"></i>
-          </div>
-          <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:4px;">${filters.search || filters.action ? 'No matching activity' : 'No activity yet'}</div>
-          <div style="font-size:0.78rem;color:var(--gray2);line-height:1.5;max-width:280px;margin:0 auto;">${filters.search || filters.action ? 'No activity matches your current filters. Try adjusting your search criteria.' : 'System events, status changes, and user actions will be recorded here in real time.'}</div>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-stream',
+        title: filters.search || filters.action ? 'No matching activity' : 'No activity yet',
+        description: filters.search || filters.action ? 'No activity matches your current filters. Try adjusting your search criteria.' : 'System events, status changes, and user actions will be recorded here in real time.',
+        variant: filters.search || filters.action ? 'search' : 'default'
+      });
       return;
     }
 

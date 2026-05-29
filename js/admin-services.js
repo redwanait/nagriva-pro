@@ -120,16 +120,14 @@ const NAGRIVA_AdminServices = (() => {
       console.error('[AdminServices] init failed:', err);
       if (containerEl) {
         const detailMsg = err.hint || err.details || '';
-        containerEl.innerHTML = `
-          <div class="orders-empty">
-            <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3>Failed to Load Services</h3>
-            <p>${escapeHtml(err.message || 'Could not connect to database.')}</p>
-            ${detailMsg ? '<p style="font-size:0.75rem;color:var(--gray3);margin-top:4px;">' + escapeHtml(detailMsg) + '</p>' : ''}
-            <button class="btn btn-primary empty-new-service-btn" style="margin-top:20px;" onclick="NAGRIVA_AdminServices.init(document.getElementById('servicesContainer'))">
-              <i class="fas fa-sync"></i> Retry
-            </button>
-          </div>`;
+        const desc = escapeHtml(err.message || 'Could not connect to database.') + (detailMsg ? ' ' + escapeHtml(detailMsg) : '');
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Services',
+          description: desc,
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_AdminServices.init(document.getElementById(\'servicesContainer\'))' }
+        });
       }
       showToast('error', 'Connection Error', 'Could not load services from database.');
     }
@@ -334,19 +332,21 @@ const NAGRIVA_AdminServices = (() => {
 
   function renderEmpty(filtered) {
     if (filtered) {
-      return '<div class="orders-empty">' +
-        '<div class="orders-empty-icon"><i class="fas fa-search"></i></div>' +
-        '<h3>No matching services</h3>' +
-        '<p>No services match your current search. Try adjusting your keywords or clearing your filters to see all services.</p>' +
+      return '<div class="ne ne-search">' +
+        '<div class="ne-icon"><i class="fas fa-search"></i></div>' +
+        '<h3 class="ne-title">No matching services</h3>' +
+        '<p class="ne-desc">No services match your current search. Try adjusting your keywords or clearing your filters to see all services.</p>' +
       '</div>';
     }
-    return '<div class="orders-empty">' +
-      '<div class="orders-empty-icon"><i class="fas fa-cube"></i></div>' +
-      '<h3>No services yet</h3>' +
-      '<p>Create your first service to start managing your offerings from one place. All service data and updates will appear here.</p>' +
-      '<button class="btn btn-primary empty-new-service-btn" style="margin-top:20px;">' +
-        '<i class="fas fa-plus"></i> Create Service' +
-      '</button>' +
+    return '<div class="ne">' +
+      '<div class="ne-icon"><i class="fas fa-cube"></i></div>' +
+      '<h3 class="ne-title">No services yet</h3>' +
+      '<p class="ne-desc">Create your first service to start managing your offerings from one place. All service data and updates will appear here.</p>' +
+      '<div class="ne-actions">' +
+        '<button class="ne-btn ne-btn-primary empty-new-service-btn">' +
+          '<i class="fas fa-plus"></i> Create Service' +
+        '</button>' +
+      '</div>' +
     '</div>';
   }
 

@@ -7897,6 +7897,209 @@ img.service-visual {
 }
 
 /* ════════════════════════════════════════════════════════
+   EMPTY STATES — Premium SaaS Empty States
+   ════════════════════════════════════════════════════════ */
+
+@keyframes ne-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes ne-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(0,245,196,0); }
+  50% { box-shadow: 0 0 20px rgba(0,245,196,0.06); }
+}
+@keyframes ne-fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ne {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  border-radius: var(--r);
+  border: 1px dashed var(--border);
+  background: rgba(255,255,255,0.015);
+  animation: ne-fadeInUp 0.5s cubic-bezier(0.4,0,0.2,1);
+  transition: all var(--transition);
+}
+.ne:hover {
+  border-color: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.025);
+}
+
+.ne-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0,245,196,0.04);
+  border: 1.5px solid rgba(0,245,196,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  transition: all var(--transition);
+  animation: ne-float 3s ease-in-out infinite, ne-glow 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.ne:hover .ne-icon {
+  background: rgba(0,245,196,0.08);
+  border-color: rgba(0,245,196,0.2);
+  transform: scale(1.05);
+}
+
+.ne-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.ne-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.ne-desc {
+  font-size: 0.85rem;
+  color: var(--gray2);
+  max-width: 360px;
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+.ne-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ne-btn {
+  padding: 10px 24px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  border: none;
+  line-height: 1.4;
+}
+.ne-btn i, .ne-btn svg {
+  font-size: 0.75rem;
+}
+
+.ne-btn-primary {
+  background: var(--accent);
+  color: #040404;
+}
+.ne-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(0,245,196,0.2);
+}
+
+.ne-btn-secondary {
+  background: rgba(255,255,255,0.03);
+  color: var(--gray);
+  border: 1px solid var(--border);
+}
+.ne-btn-secondary:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* ─── Search variant ─── */
+.ne-search { border-style: dashed; }
+.ne-search .ne-icon {
+  border-color: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: var(--gray);
+}
+.ne-search:hover .ne-icon {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+}
+
+/* ─── Error variant ─── */
+.ne-error { border-color: rgba(239,68,68,0.15); }
+.ne-error .ne-icon {
+  border-color: rgba(239,68,68,0.15);
+  background: rgba(239,68,68,0.04);
+  color: var(--danger);
+}
+.ne-error:hover { border-color: rgba(239,68,68,0.2); }
+.ne-error:hover .ne-icon {
+  border-color: rgba(239,68,68,0.25);
+  background: rgba(239,68,68,0.06);
+}
+.ne-error .ne-title { color: var(--danger); }
+
+/* ─── Small variant (widgets, drawers) ─── */
+.ne-sm { padding: 48px 20px; }
+.ne-sm .ne-icon {
+  width: 52px;
+  height: 52px;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+.ne-sm .ne-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.ne-sm .ne-title { font-size: 0.95rem; }
+.ne-sm .ne-desc { font-size: 0.78rem; max-width: 300px; }
+.ne-sm .ne-actions { margin-top: 20px; }
+.ne-sm .ne-btn { padding: 8px 20px; font-size: 0.78rem; }
+
+/* ─── Inline variant (for tables, lists) ─── */
+.ne-inline {
+  padding: 48px 20px;
+  background: transparent;
+  border: none;
+}
+.ne-inline .ne-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+.ne-inline .ne-icon svg {
+  width: 18px;
+  height: 18px;
+}
+.ne-inline .ne-title { font-size: 0.85rem; }
+.ne-inline .ne-desc { font-size: 0.75rem; max-width: 260px; }
+
+/* ─── Mobile responsive ─── */
+@media (max-width: 480px) {
+  .ne { padding: 48px 16px; }
+  .ne-icon { width: 56px; height: 56px; font-size: 1.1rem; margin-bottom: 18px; }
+  .ne-icon svg { width: 22px; height: 22px; }
+  .ne-sm { padding: 36px 16px; }
+  .ne-sm .ne-icon { width: 44px; height: 44px; }
+  .ne-actions { flex-direction: column; width: 100%; }
+  .ne-btn { width: 100%; justify-content: center; }
+}
+
+/* ════════════════════════════════════════════════════════
    ACCESSIBILITY — Reduced Motion
    ════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {

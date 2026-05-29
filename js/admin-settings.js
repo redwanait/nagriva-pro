@@ -881,7 +881,12 @@ const NAGRIVA_AdminSettings = (() => {
         if (container) {
           const nr = document.createElement('div');
           nr.className = 'cms-no-results';
-          nr.innerHTML = '<i class="fas fa-search"></i><h4>No results found</h4><p>No settings match "' + escHtml(q) + '"</p>';
+          nr.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'fas fa-search',
+            title: 'No results found',
+            description: 'No settings match "' + escHtml(q) + '"',
+            variant: 'sm'
+          });
           container.appendChild(nr);
         }
       }

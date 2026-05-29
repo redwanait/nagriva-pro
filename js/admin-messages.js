@@ -281,15 +281,13 @@ const NAGRIVA_Messages = (() => {
   }
 
   function renderError(message, targetId) {
-    return `
-      <div class="orders-empty">
-        <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-        <h3>Failed to Load Messages</h3>
-        <p>${escapeHtml(message)}</p>
-        <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_Messages.init(document.getElementById('${targetId}'))">
-          <i class="fas fa-sync"></i> Retry
-        </button>
-      </div>`;
+    return NAGRIVA_EmptyState.render({
+      icon: 'fas fa-exclamation-triangle',
+      title: 'Failed to Load Messages',
+      description: escapeHtml(message),
+      variant: 'error',
+      primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: "NAGRIVA_Messages.init(document.getElementById('" + targetId + "'))" }
+    });
   }
 
   function setupRealtime() {
@@ -640,12 +638,12 @@ const NAGRIVA_Messages = (() => {
     }
     const filtered = getFilteredConversations();
     if (filtered.length === 0) {
-      container.innerHTML = `
-        <div class="orders-empty" style="padding:20px;">
-          <div class="orders-empty-icon"><i class="fas fa-comment-dots"></i></div>
-          <h3>${filters.search ? 'No matching conversations' : 'No conversations yet'}</h3>
-          <p>${filters.search ? 'No conversations match your search.' : 'Messages will appear here once clients start conversations.'}</p>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-comment-dots',
+        title: filters.search ? 'No matching conversations' : 'No conversations yet',
+        description: filters.search ? 'No conversations match your search.' : 'Messages will appear here once clients start conversations.',
+        variant: filters.search ? 'search' : 'sm'
+      });
       return;
     }
     container.innerHTML = filtered.map(c => {
@@ -671,12 +669,12 @@ const NAGRIVA_Messages = (() => {
   function renderSupportConversations(container) {
     if (!container) return;
     if (supportFetched && supportConversations.length === 0) {
-      container.innerHTML = `
-        <div class="orders-empty" style="padding:20px;">
-          <div class="orders-empty-icon"><i class="fas fa-headset"></i></div>
-          <h3>No support conversations</h3>
-          <p>Support messages from users will appear here.</p>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-headset',
+        title: 'No support conversations',
+        description: 'Support messages from users will appear here.',
+        variant: 'sm'
+      });
       return;
     }
     if (!supportFetched) {
@@ -686,12 +684,12 @@ const NAGRIVA_Messages = (() => {
 
     const filtered = getFilteredConversations();
     if (filtered.length === 0) {
-      container.innerHTML = `
-        <div class="orders-empty" style="padding:20px;">
-          <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>${filters.search ? 'No matching conversations' : 'No support conversations'}</h3>
-          <p>${filters.search ? 'No conversations match your search.' : 'Support messages will appear here once users start conversations.'}</p>
-        </div>`;
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-search',
+        title: filters.search ? 'No matching conversations' : 'No support conversations',
+        description: filters.search ? 'No conversations match your search.' : 'Support messages will appear here once users start conversations.',
+        variant: 'search'
+      });
       return;
     }
 
@@ -723,7 +721,12 @@ const NAGRIVA_Messages = (() => {
 
     const conv = conversations.find(c => c.id === convId);
     if (!conv) {
-      container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--gray3);">Conversation not found</div>';
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-exclamation-circle',
+        title: 'Conversation not found',
+        description: 'The conversation you\'re looking for could not be found.',
+        variant: 'sm'
+      });
       return;
     }
 
@@ -732,7 +735,12 @@ const NAGRIVA_Messages = (() => {
       try {
         msgs = await loadMessages(convId);
       } catch (_) {
-        container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--gray3);">Failed to load messages</div>';
+        container.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to load messages',
+          description: 'Could not load messages. Please try again.',
+          variant: 'error'
+        });
         return;
       }
     }
@@ -805,7 +813,12 @@ const NAGRIVA_Messages = (() => {
 
     const conv = supportConversations.find(c => c.id === convId);
     if (!conv) {
-      container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--gray3);">Conversation not found</div>';
+      container.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-exclamation-circle',
+        title: 'Conversation not found',
+        description: 'The support conversation you\'re looking for could not be found.',
+        variant: 'sm'
+      });
       return;
     }
 
@@ -814,7 +827,12 @@ const NAGRIVA_Messages = (() => {
       try {
         msgs = await loadSupportMessages(convId);
       } catch (_) {
-        container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--gray3);">Failed to load messages</div>';
+        container.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to load messages',
+          description: 'Could not load messages. Please try again.',
+          variant: 'error'
+        });
         return;
       }
     }

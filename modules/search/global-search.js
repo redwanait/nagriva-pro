@@ -404,12 +404,12 @@ const NAGRIVA_GlobalSearch = (() => {
   }
 
   function renderEmpty() {
-    _el.dropdown.innerHTML =
-      '<div class="gs-empty">' +
-        '<div class="gs-empty-icon"><i class="fas fa-search"></i></div>' +
-        '<div class="gs-empty-title">No results found</div>' +
-        '<div class="gs-empty-text">Try adjusting your search terms</div>' +
-      '</div>';
+    _el.dropdown.innerHTML = NAGRIVA_EmptyState.render({
+      icon: 'fas fa-search',
+      title: 'No results found',
+      description: 'Try adjusting your search terms',
+      variant: 'search'
+    });
   }
 
   function renderResults(grouped, query) {
@@ -435,11 +435,12 @@ const NAGRIVA_GlobalSearch = (() => {
     });
 
     if (total === 0) {
-      _el.dropdown.innerHTML =
-        '<div class="gs-no-results">' +
-          '<i class="fas fa-search-minus"></i>' +
-          '<p>No results for <strong>' + escapeHtml(query) + '</strong></p>' +
-        '</div>';
+      _el.dropdown.innerHTML = NAGRIVA_EmptyState.render({
+        icon: 'fas fa-search-minus',
+        title: 'No results found',
+        description: 'No results for "' + escapeHtml(query) + '"',
+        variant: 'search'
+      });
       return;
     }
 

@@ -78,27 +78,28 @@ const NAGRIVA_ActivityFeed = (() => {
 
   function renderEmpty() {
     if (!_feedEl) return;
-    _feedEl.innerHTML =
-      '<div class="af-empty">' +
-        '<div class="af-empty-icon"><i class="fas fa-clock"></i></div>' +
-        '<div class="af-empty-title">No activity yet</div>' +
-        '<div class="af-empty-text">Client actions, status updates, and system events will appear here in real time as they happen.</div>' +
-      '</div>';
+    _feedEl.innerHTML = NAGRIVA_EmptyState.render({
+      icon: 'fas fa-clock',
+      title: 'No activity yet',
+      description: 'Client actions, status updates, and system events will appear here in real time as they happen.',
+      variant: 'sm'
+    });
   }
 
   function renderError(err) {
     if (!_feedEl) return;
     const msg = (err && err.message) || 'Could not load activity feed.';
-    _feedEl.innerHTML =
-      '<div class="af-error">' +
-        '<div class="af-error-icon"><i class="fas fa-exclamation-triangle"></i></div>' +
-        '<div class="af-error-text">' + escapeHtml(msg) + '</div>' +
-        '<button class="af-error-btn" data-af-retry>' +
-          '<i class="fas fa-sync"></i> Retry' +
-        '</button>' +
-      '</div>';
+    _feedEl.innerHTML = NAGRIVA_EmptyState.render({
+      icon: 'fas fa-exclamation-triangle',
+      title: 'Connection issue',
+      description: escapeHtml(msg),
+      variant: 'error',
+      primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: '' }
+    });
     const retryBtn = _feedEl.querySelector('[data-af-retry]');
-    if (retryBtn) retryBtn.addEventListener('click', () => load());
+    if (!retryBtn) {
+      _feedEl.querySelector('.ne-btn-primary')?.setAttribute('data-af-retry', '');
+    }
   }
 
   function renderFeed() {

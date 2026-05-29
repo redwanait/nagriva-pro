@@ -320,11 +320,12 @@
 
     var list = document.getElementById('supportMsgList');
     if (supportMessages.length === 0) {
-      if (list) list.innerHTML = '\n\
-        <div class="track-chat-empty" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--gray2);font-size:0.85rem;padding:32px;text-align:center;">\n\
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0.2;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>\n\
-          <p style="margin:0;max-width:220px;line-height:1.5;">Start a conversation with NAGRIVA Support</p>\n\
-        </div>';
+      if (list) list.innerHTML = NAGRIVA_EmptyState.render({
+        icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+        title: 'No messages yet',
+        description: 'Start a conversation with NAGRIVA Support',
+        variant: 'inline'
+      });
     } else {
       if (list) supportMessages.forEach(function(m) { appendMsgBubble(list, m); });
     }

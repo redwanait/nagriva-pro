@@ -138,15 +138,13 @@ const NAGRIVA_AdminOrders = (() => {
         _error = new Error('Loading timed out');
         console.error('[AdminOrders] Loading timed out');
         if (containerEl) {
-          containerEl.innerHTML = `
-            <div class="orders-empty">
-              <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-              <h3>Failed to Load Orders</h3>
-              <p>Request timed out. Please check your connection and try again.</p>
-              <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_AdminOrders.init(document.getElementById('ordersContainer'))">
-                <i class="fas fa-sync"></i> Retry
-              </button>
-            </div>`;
+          containerEl.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'fas fa-exclamation-triangle',
+            title: 'Failed to Load Orders',
+            description: 'Request timed out. Please check your connection and try again.',
+            variant: 'error',
+            primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_AdminOrders.init(document.getElementById(\'ordersContainer\'))' }
+          });
         }
         showToast('error', 'Connection Error', 'Orders request timed out.');
       }
@@ -175,16 +173,14 @@ const NAGRIVA_AdminOrders = (() => {
       });
       if (containerEl) {
         const detailMsg = err.hint || err.details || '';
-        containerEl.innerHTML = `
-          <div class="orders-empty">
-            <div class="orders-empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3>Failed to Load Orders</h3>
-            <p>${err.message || 'Could not connect to database. Please check your connection and try again.'}</p>
-            ${detailMsg ? `<p style="font-size:0.75rem;color:var(--gray3);margin-top:4px;">${detailMsg}</p>` : ''}
-            <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;" onclick="NAGRIVA_AdminOrders.init(document.getElementById('ordersContainer'))">
-              <i class="fas fa-sync"></i> Retry
-            </button>
-          </div>`;
+        const desc = (err.message || 'Could not connect to database. Please check your connection and try again.') + (detailMsg ? ' ' + detailMsg : '');
+        containerEl.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'fas fa-exclamation-triangle',
+          title: 'Failed to Load Orders',
+          description: desc,
+          variant: 'error',
+          primaryCta: { icon: 'fas fa-sync', label: 'Retry', onclick: 'NAGRIVA_AdminOrders.init(document.getElementById(\'ordersContainer\'))' }
+        });
       }
       showToast('error', 'Connection Error', 'Could not load orders from database.');
     }
@@ -570,20 +566,22 @@ const NAGRIVA_AdminOrders = (() => {
   function renderEmpty(filtered) {
     if (filtered) {
       return `
-        <div class="orders-empty">
-          <div class="orders-empty-icon"><i class="fas fa-search"></i></div>
-          <h3>No matching orders</h3>
-          <p>No orders match your current search. Try adjusting your keywords or clearing your filters to see all orders.</p>
+        <div class="ne ne-search">
+          <div class="ne-icon"><i class="fas fa-search"></i></div>
+          <h3 class="ne-title">No matching orders</h3>
+          <p class="ne-desc">No orders match your current search. Try adjusting your keywords or clearing your filters to see all orders.</p>
         </div>`;
     }
     return `
-      <div class="orders-empty">
-        <div class="orders-empty-icon"><i class="fas fa-shopping-bag"></i></div>
-        <h3>No orders yet</h3>
-        <p>Create your first order to start managing client projects from one place. All order activity and updates will appear here in real time.</p>
-        <button class="btn btn-primary empty-new-order-btn" style="margin-top:20px;">
-          <i class="fas fa-plus"></i> Create Order
-        </button>
+      <div class="ne">
+        <div class="ne-icon"><i class="fas fa-shopping-bag"></i></div>
+        <h3 class="ne-title">No orders yet</h3>
+        <p class="ne-desc">Create your first order to start managing client projects from one place. All order activity and updates will appear here in real time.</p>
+        <div class="ne-actions">
+          <button class="ne-btn ne-btn-primary empty-new-order-btn">
+            <i class="fas fa-plus"></i> Create Order
+          </button>
+        </div>
       </div>`;
   }
 
