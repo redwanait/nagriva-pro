@@ -48,12 +48,11 @@ const NAGRIVA_UserAvatar = (() => {
       authBtn: document.getElementById('authBtn'),
       bookBtn: document.getElementById('bookBtn'),
       userAvatar: document.getElementById('userAvatar'),
-      userName: document.getElementById('userName'),
       userImg: document.getElementById('userImg'),
       skeleton: document.getElementById('avatarSkeleton'),
       dropdown: document.getElementById('userDropdown'),
       dropdownName: document.getElementById('dropdownName'),
-      dropdownEmail: document.getElementById('dropdownEmail'),
+      dropdownRole: document.getElementById('dropdownRole'),
       dropdownAvatar: document.getElementById('dropdownAvatar'),
       signoutBtn: document.getElementById('signoutBtn'),
       adminLink: document.getElementById('adminNavLink'),
@@ -90,47 +89,48 @@ const NAGRIVA_UserAvatar = (() => {
 
     container.innerHTML =
       '<div class="nav-avatar-skeleton" id="avatarSkeleton"></div>' +
-      '<span class="nav-user-name" id="userName">User</span>' +
-      '<span class="nav-user-img" id="userImg">U</span>' +
+      '<div class="nav-user-img" id="userImg">U</div>' +
       '<div class="user-dropdown" id="userDropdown" role="menu" aria-label="User menu">' +
         '<div class="user-dropdown-header">' +
-          '<span class="user-dropdown-avatar" id="dropdownAvatar">U</span>' +
+          '<div class="user-dropdown-avatar" id="dropdownAvatar">U</div>' +
           '<div class="user-dropdown-info">' +
             '<div class="user-dropdown-name" id="dropdownName">User</div>' +
-            '<div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>' +
+            '<span class="user-dropdown-role" id="dropdownRole">Admin</span>' +
           '</div>' +
         '</div>' +
-        '<button class="user-dropdown-item" data-nav="dashboard" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>' +
-          ' Dashboard' +
-        '</button>' +
-        '<button class="user-dropdown-item" data-nav="profile" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
-          ' Profile' +
-        '</button>' +
-        '<button class="user-dropdown-item" data-nav="orders" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' +
-          ' Orders' +
-        '</button>' +
-        '<button class="user-dropdown-item" data-nav="messages" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
-          ' Messages' +
-        '</button>' +
-        '<button class="user-dropdown-item" data-nav="notifications" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' +
-          ' Notifications' +
-        '</button>' +
-        '<button class="user-dropdown-item" data-nav="settings" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
-          ' Settings' +
-        '</button>' +
-        '<button class="user-dropdown-item" data-nav="admin" role="menuitem" id="adminNavLink" style="display:none;">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
-          ' Admin Panel' +
-        '</button>' +
+        '<div class="user-dropdown-menu">' +
+          '<button class="user-dropdown-item" data-nav="dashboard" role="menuitem">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>' +
+            ' Dashboard' +
+          '</button>' +
+          '<button class="user-dropdown-item" data-nav="profile" role="menuitem">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
+            ' Profile' +
+          '</button>' +
+          '<button class="user-dropdown-item" data-nav="orders" role="menuitem">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' +
+            ' Orders' +
+          '</button>' +
+          '<button class="user-dropdown-item" data-nav="messages" role="menuitem">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+            ' Messages' +
+          '</button>' +
+          '<button class="user-dropdown-item" data-nav="notifications" role="menuitem">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' +
+            ' Notifications' +
+          '</button>' +
+          '<button class="user-dropdown-item" data-nav="settings" role="menuitem">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+            ' Settings' +
+          '</button>' +
+          '<button class="user-dropdown-item" data-nav="admin" role="menuitem" id="adminNavLink" style="display:none;">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+            ' Admin Panel' +
+          '</button>' +
+        '</div>' +
         '<div class="user-dropdown-divider"></div>' +
         '<button class="user-dropdown-item signout" id="signoutBtn" data-nav="signout" role="menuitem">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>' +
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>' +
           ' Logout' +
         '</button>' +
       '</div>'
@@ -174,34 +174,6 @@ const NAGRIVA_UserAvatar = (() => {
     }
   }
 
-  /* ─── Avatar DOM Diagnostics ─── */
-  function debugAvatar() {
-    var el = document.getElementById('userAvatar')
-    if (!el) { console.log('[UserAvatar DEBUG] element #userAvatar NOT in DOM'); return }
-    var cs = getComputedStyle(el)
-    console.log('[UserAvatar DEBUG] display:', cs.display, '| visibility:', cs.visibility, '| opacity:', cs.opacity)
-    console.log('[UserAvatar DEBUG] offsetWidth:', el.offsetWidth, '| offsetHeight:', el.offsetHeight)
-    console.log('[UserAvatar DEBUG] classList:', el.className)
-    console.log('[UserAvatar DEBUG] inline style.display:', el.style.display)
-    console.log('[UserAvatar DEBUG] in DOM:', document.contains(el))
-    if (el.parentElement) {
-      console.log('[UserAvatar DEBUG] parent:', el.parentElement.tagName, el.parentElement.className, 'display:', getComputedStyle(el.parentElement).display)
-    }
-    var ss = document.styleSheets
-    var found = false
-    for (var i = 0; i < ss.length; i++) {
-      if (ss[i].href && ss[i].href.indexOf('auth.css') !== -1) {
-        found = true
-        console.log('[UserAvatar DEBUG] auth.css loaded:', ss[i].href, '| media:', ss[i].media.mediaText, '| rules:', ss[i].cssRules ? ss[i].cssRules.length : 'N/A')
-        break
-      }
-    }
-    if (!found) console.log('[UserAvatar DEBUG] auth.css NOT FOUND in stylesheets')
-    el.style.outline = '3px solid red'
-    el.style.outlineOffset = '2px'
-    console.log('[UserAvatar DEBUG] red border applied to #userAvatar')
-  }
-
   /* ─── UI Update ─── */
   function updateUI() {
     var r = _refs
@@ -217,7 +189,6 @@ const NAGRIVA_UserAvatar = (() => {
     if (s.session && s.user) {
       var displayName = getDisplayName(s.profile, s.user)
       var avatarUrl = getAvatarUrl(s.profile, s.user)
-      var email = getUserEmail(s.profile, s.user)
       var role = getUserRole(s.profile)
 
       if (r.authBtn) r.authBtn.style.display = 'none'
@@ -227,11 +198,14 @@ const NAGRIVA_UserAvatar = (() => {
         r.userAvatar.classList.add('visible')
         r.userAvatar.classList.remove('loading')
       }
-      if (r.userName) r.userName.textContent = displayName
       setAvatarImage(r.userImg, avatarUrl, displayName)
 
       if (r.dropdownName) r.dropdownName.textContent = displayName
-      if (r.dropdownEmail) r.dropdownEmail.textContent = email
+      if (r.dropdownRole) {
+        var roleLabel = role === 'admin' ? 'Admin' : role.charAt(0).toUpperCase() + role.slice(1)
+        r.dropdownRole.textContent = roleLabel
+        r.dropdownRole.style.display = 'inline-flex'
+      }
       setAvatarImage(r.dropdownAvatar, avatarUrl, displayName)
 
       if (r.mobileAuthBtn) r.mobileAuthBtn.style.display = 'none'
@@ -242,7 +216,6 @@ const NAGRIVA_UserAvatar = (() => {
       if (r.mobileAdminLink) r.mobileAdminLink.style.display = isAdmin ? '' : 'none'
 
       console.log('[UserAvatar] avatar rendered')
-      debugAvatar()
     } else {
       if (r.authBtn) r.authBtn.style.display = ''
       if (r.bookBtn) r.bookBtn.style.display = ''

@@ -41,12 +41,11 @@ const NagrivaAuth = (() => {
 
     refs.authBtn = document.getElementById('authBtn');
     refs.userAvatar = document.getElementById('userAvatar');
-    refs.userName = document.getElementById('userName');
     refs.userImg = document.getElementById('userImg');
 
     refs.dropdown = document.getElementById('userDropdown');
     refs.dropdownName = document.getElementById('dropdownName');
-    refs.dropdownEmail = document.getElementById('dropdownEmail');
+    refs.dropdownRole = document.getElementById('dropdownRole');
     refs.dropdownAvatar = document.getElementById('dropdownAvatar');
     refs.signoutBtn = document.getElementById('signoutBtn');
 
@@ -228,7 +227,6 @@ const NagrivaAuth = (() => {
 
       if (refs.authBtn) refs.authBtn.style.display = 'none';
       if (refs.userAvatar) refs.userAvatar.classList.add('visible');
-      if (refs.userName) refs.userName.textContent = displayName;
 
       if (typeof ProfileAvatar !== 'undefined') {
         ProfileAvatar.setAvatarImage(refs.userImg, avatarUrl, displayName);
@@ -237,7 +235,6 @@ const NagrivaAuth = (() => {
       }
 
       if (refs.dropdownName) refs.dropdownName.textContent = displayName;
-      if (refs.dropdownEmail) refs.dropdownEmail.textContent = currentUser.email || '';
 
       if (typeof ProfileAvatar !== 'undefined') {
         ProfileAvatar.setAvatarImage(refs.dropdownAvatar, avatarUrl, displayName);
@@ -783,6 +780,7 @@ const NagrivaAuth = (() => {
   async function updateAdminLinkVisibility() {
     var adminLink = document.getElementById('adminNavLink');
     var mobileAdminLink = document.getElementById('mobileAdminNavLink');
+    var roleBadge = document.getElementById('dropdownRole');
     try {
       var session = currentSession || (await window.supabaseClient.auth.getSession()).data.session;
       if (!session) {
@@ -795,9 +793,15 @@ const NagrivaAuth = (() => {
         .select('role')
         .eq('id', session.user.id)
         .single();
-      var isAdmin = profile && profile.role === 'admin';
+      var role = profile ? profile.role : 'client';
+      var isAdmin = role === 'admin';
       if (adminLink) adminLink.style.display = isAdmin ? '' : 'none';
       if (mobileAdminLink) mobileAdminLink.style.display = isAdmin ? '' : 'none';
+      if (roleBadge) {
+        var roleLabel = isAdmin ? 'Admin' : role.charAt(0).toUpperCase() + role.slice(1);
+        roleBadge.textContent = roleLabel;
+        roleBadge.style.display = 'inline-flex';
+      }
     } catch (_) {
       if (adminLink) adminLink.style.display = 'none';
       if (mobileAdminLink) mobileAdminLink.style.display = 'none';

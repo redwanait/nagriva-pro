@@ -59,21 +59,10 @@
 .nav-user-avatar {
   display: none;
   align-items: center;
-  gap: 8px;
   cursor: pointer;
-  padding: 4px 4px 4px 14px;
-  border-radius: 99px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.02);
-  transition: all var(--transition);
   position: relative;
 }
 .nav-user-avatar.visible { display: flex; }
-.nav-user-avatar:hover {
-  border-color: rgba(0,245,196,0.2);
-  background: rgba(0,245,196,0.03);
-  box-shadow: 0 0 20px rgba(0,245,196,0.04);
-}
 .nav-user-avatar:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -82,8 +71,7 @@
 /* ─── Avatar Skeleton ─── */
 .nav-avatar-skeleton {
   display: none;
-  width: 30px;
-  height: 30px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: rgba(255,255,255,0.04);
   position: relative;
@@ -102,27 +90,18 @@
   100% { transform: translateX(100%); }
 }
 .nav-user-avatar.loading .nav-avatar-skeleton { display: block; }
-.nav-user-avatar.loading .nav-user-name,
 .nav-user-avatar.loading .nav-user-img { display: none; }
 
-.nav-user-name {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--white);
-  max-width: 90px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+/* ─── Avatar Image ─── */
 .nav-user-img {
-  width: 30px; height: 30px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--bg);
   flex-shrink: 0;
@@ -132,7 +111,6 @@
 }
 .nav-user-img.has-image {
   background: transparent;
-  box-shadow: 0 0 0 2px rgba(0,245,196,0.1);
 }
 .nav-user-img img.avatar-image {
   width: 100%;
@@ -143,32 +121,33 @@
   inset: 0;
 }
 .nav-user-avatar:hover .nav-user-img {
-  box-shadow: 0 0 0 2px rgba(0,245,196,0.2), 0 0 20px rgba(0,245,196,0.08);
+  box-shadow: 0 0 0 2px rgba(0,245,196,0.15), 0 0 30px rgba(0,245,196,0.08);
   transform: scale(1.05);
 }
 
 /* ════════════════════════════════════════════
-   USER DROPDOWN MENU
+   USER DROPDOWN MENU — Premium SaaS
 ════════════════════════════════════════════ */
 .user-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 0;
-  width: 264px;
-  background: rgba(6,10,10,0.95);
-  backdrop-filter: blur(36px) saturate(200%);
-  -webkit-backdrop-filter: blur(36px) saturate(200%);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 18px;
-  padding: 8px;
+  width: 280px;
+  background: rgba(8,12,12,0.92);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 6px;
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px) scale(0.96);
   transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
   box-shadow:
-    0 24px 80px rgba(0,0,0,0.65),
-    0 0 0 1px rgba(0,245,196,0.04),
-    0 0 60px rgba(0,0,0,0.3);
+    0 0 0 1px rgba(0,245,196,0.03),
+    0 32px 80px rgba(0,0,0,0.55),
+    0 0 60px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.04);
   z-index: 1001;
 }
 .user-dropdown.open {
@@ -181,25 +160,23 @@
   align-items: center;
   gap: 12px;
   padding: 12px 14px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 2px;
 }
 .user-dropdown-avatar {
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--bg);
   flex-shrink: 0;
-  box-shadow: 0 0 0 2px rgba(0,245,196,0.08);
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
 }
 .user-dropdown-avatar img.avatar-image {
   width: 100%;
@@ -212,9 +189,15 @@
 .user-dropdown-avatar.has-image {
   background: transparent;
 }
-.user-dropdown-info { flex: 1; min-width: 0; }
+.user-dropdown-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 .user-dropdown-name {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--white);
   line-height: 1.3;
@@ -222,81 +205,72 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.user-dropdown-email {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.3);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 1px;
+.user-dropdown-role {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(0,245,196,0.08);
+  border: 1px solid rgba(0,245,196,0.1);
+  padding: 1px 8px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+/* ─── Dropdown Menu Items ─── */
+.user-dropdown-menu {
+  padding: 2px 0;
 }
 .user-dropdown-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 9px 14px;
   border-radius: 10px;
   font-size: 0.82rem;
+  font-weight: 450;
   color: var(--gray);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   background: none;
   border: none;
   width: 100%;
   text-align: left;
   font-family: inherit;
   letter-spacing: 0.01em;
-  position: relative;
-}
-.user-dropdown-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  border-radius: 0 2px 2px 0;
-  background: var(--accent);
-  opacity: 0;
-  transition: opacity 0.25s ease;
 }
 .user-dropdown-item:hover {
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,245,196,0.06);
   color: var(--white);
-}
-.user-dropdown-item:hover::before {
-  opacity: 0.5;
 }
 .user-dropdown-item svg {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
   color: var(--gray2);
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: color 0.2s ease;
 }
 .user-dropdown-item:hover svg {
   color: var(--accent);
-  transform: translateX(2px);
 }
 .user-dropdown-divider {
   height: 1px;
-  background: rgba(255,255,255,0.08);
-  margin: 4px 14px 6px;
+  background: rgba(255,255,255,0.05);
+  margin: 4px 10px 4px;
 }
 .user-dropdown-item.signout {
-  color: rgba(255,100,100,0.6);
-  margin-top: 2px;
-}
-.user-dropdown-item.signout::before {
-  display: none;
+  color: rgba(255,100,100,0.55);
 }
 .user-dropdown-item.signout:hover {
-  background: rgba(255,80,80,0.07);
+  background: rgba(255,80,80,0.08);
   color: #ff7070;
 }
 .user-dropdown-item.signout:hover svg {
   color: #ff7070;
-  transform: none;
 }
 .user-dropdown-item:focus-visible {
   outline: 2px solid var(--accent);
@@ -1120,7 +1094,7 @@
   .auth-logo-text { font-size: 0.8rem; }
   .auth-subtitle { font-size: 0.82rem; }
   .user-dropdown {
-    width: 220px;
+    width: 240px;
     right: 0;
   }
   .auth-form-options {
@@ -1162,8 +1136,8 @@
     font-size: 0.84rem;
   }
   .user-dropdown {
-    width: 200px;
-    right: -8px;
+    width: 220px;
+    right: -4px;
   }
   .auth-form-footer {
     font-size: 0.78rem;
