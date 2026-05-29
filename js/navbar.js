@@ -22,6 +22,7 @@
   function init () {
     var container = document.getElementById(CONTAINER_ID)
     if (!container) return
+    if (container.children.length > 0) return
 
     fetch(PARTIAL_URL)
       .then(function (r) {

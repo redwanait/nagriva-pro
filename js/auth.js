@@ -851,7 +851,6 @@ const NagrivaAuth = (() => {
 
   /* ─── Re-init navbar-dependent UI when the dynamic navbar loads ─── */
   document.addEventListener('navbar:loaded', function onNavbarLoad() {
-    document.removeEventListener('navbar:loaded', onNavbarLoad);
     initNavbarUI();
   });
 

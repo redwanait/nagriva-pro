@@ -426,7 +426,17 @@ const NAGRIVA_UserAvatar = (() => {
   /* ─── Init ─── */
   async function init() {
     console.log('[UserAvatar] init() called')
-    if (_initialized) { console.log('[UserAvatar] init() — already initialized'); return }
+    if (_initialized) {
+      cacheRefs()
+      if (_refs.userAvatar) {
+        ensureAvatarContainer()
+        cacheRefs()
+        bindEvents()
+        bindNav()
+      }
+      updateUI()
+      return
+    }
     _initialized = true
     cacheRefs()
 
@@ -477,7 +487,6 @@ const NAGRIVA_UserAvatar = (() => {
   /* ─── Auto-init on navbar load ─── */
   document.addEventListener('navbar:loaded', function onNavbarLoad() {
     console.log('[UserAvatar] EVENT navbar:loaded received')
-    document.removeEventListener('navbar:loaded', onNavbarLoad)
     init()
   })
 
