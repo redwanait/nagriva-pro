@@ -533,18 +533,21 @@ const NagrivaAuth = (() => {
 
     /* Listen for auth state changes in real time */
     window.supabaseClient.auth.onAuthStateChange((event, session) => {
-      currentSession = session;
-      currentUser = session?.user ?? null;
-
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        currentSession = session;
+        currentUser = session?.user ?? null;
         updateUI();
       }
 
       if (event === 'SIGNED_OUT') {
+        currentSession = null;
+        currentUser = null;
         updateUI();
       }
 
       if (event === 'USER_UPDATED') {
+        currentSession = session;
+        currentUser = session?.user ?? null;
         updateUI();
       }
     });

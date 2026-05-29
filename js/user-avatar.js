@@ -348,14 +348,18 @@ const NAGRIVA_UserAvatar = (() => {
   }
 
   /* ─── Profile Loading ─── */
-  async function loadProfile() {
+  async function loadProfile(session) {
     _state.loading = true
     updateUI()
     try {
-      var supabase = window.supabaseClient
-      var { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        var supabase = window.supabaseClient
+        var { data } = await supabase.auth.getSession()
+        session = data.session
+      }
       console.log('[UserAvatar] session status:', session ? 'exists' : 'null')
       if (!session) {
+        if (_state.session) { _state.loading = false; updateUI(); return }
         _state.session = null; _state.user = null; _state.profile = null
         _state.loading = false
         updateUI()
@@ -408,7 +412,7 @@ const NAGRIVA_UserAvatar = (() => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         _state.session = session
         _state.user = session ? session.user : null
-        loadProfile()
+        loadProfile(session)
       } else if (event === 'SIGNED_OUT') {
         _state.session = null; _state.user = null; _state.profile = null
         _state.loading = false

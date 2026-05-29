@@ -76,7 +76,7 @@ const ProfileAvatar = (() => {
   ════════════════════════════════════════════ */
   function setAvatarImage(container, url, displayName) {
     if (!container) return;
-    container.innerHTML = '';
+    while (container.firstChild) container.removeChild(container.firstChild);
     if (url) {
       container.classList.add('has-image');
       var img = document.createElement('img');
