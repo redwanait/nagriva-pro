@@ -106,6 +106,10 @@ const ProfileAvatar = (() => {
     setAvatarImage(document.getElementById('userImg'), avatarUrl, displayName);
     setAvatarImage(document.getElementById('dropdownAvatar'), avatarUrl, displayName);
     setAvatarImage(document.getElementById('profileAvatar'), avatarUrl, displayName);
+    /* Also notify user-avatar.js (navbar avatar) to re-fetch from profiles table */
+    if (typeof NAGRIVA_UserAvatar !== 'undefined' && typeof NAGRIVA_UserAvatar.refreshProfile === 'function') {
+      NAGRIVA_UserAvatar.refreshProfile();
+    }
   }
 
   /* ════════════════════════════════════════════

@@ -1,5 +1,10 @@
+console.log('[UserAvatar] Script file executing')
+
 const NAGRIVA_UserAvatar = (() => {
   'use strict'
+  console.log('[UserAvatar] IIFE entered')
+
+  try {
 
   let _initialized = false
   let _state = { session: null, user: null, profile: null, loading: true }
@@ -8,8 +13,8 @@ const NAGRIVA_UserAvatar = (() => {
 
   /* ─── Helpers ─── */
   function getInitials(name) {
-    if (!name) return 'N'
-    return name.split(' ').map(function(w) { return w[0] }).join('').toUpperCase().slice(0, 2) || 'N'
+    if (!name) return 'R'
+    return name.split(' ').map(function(w) { return w[0] }).join('').toUpperCase().slice(0, 2) || 'R'
   }
 
   function getDisplayName(profile, user) {
@@ -41,6 +46,7 @@ const NAGRIVA_UserAvatar = (() => {
   function cacheRefs() {
     _refs = {
       authBtn: document.getElementById('authBtn'),
+      bookBtn: document.getElementById('bookBtn'),
       userAvatar: document.getElementById('userAvatar'),
       userName: document.getElementById('userName'),
       userImg: document.getElementById('userImg'),
@@ -53,8 +59,93 @@ const NAGRIVA_UserAvatar = (() => {
       adminLink: document.getElementById('adminNavLink'),
       mobileAdminLink: document.getElementById('mobileAdminNavLink'),
       mobileAuthBtn: document.getElementById('mobileAuthBtn'),
-      mobileAuthText: document.getElementById('mobileAuthText')
+      mobileAuthText: document.getElementById('mobileAuthText'),
+      hamburger: document.getElementById('hamburger')
     }
+  }
+
+  /* ─── Inject avatar container into navbar if missing ─── */
+  function ensureAvatarContainer() {
+    if (document.getElementById('userAvatar')) {
+      console.log('[UserAvatar] navbar target found')
+      return true
+    }
+
+    console.log('[UserAvatar] #userAvatar NOT found in DOM — injecting')
+
+    var navRight = document.querySelector('.nav-right')
+    if (!navRight) {
+      console.warn('[UserAvatar] .nav-right not found, cannot inject avatar')
+      return false
+    }
+
+    var container = document.createElement('div')
+    container.className = 'nav-user-avatar'
+    container.id = 'userAvatar'
+    container.setAttribute('role', 'button')
+    container.setAttribute('tabindex', '0')
+    container.setAttribute('aria-expanded', 'false')
+    container.setAttribute('aria-haspopup', 'true')
+    container.style.display = 'none'
+
+    container.innerHTML =
+      '<div class="nav-avatar-skeleton" id="avatarSkeleton"></div>' +
+      '<span class="nav-user-name" id="userName">User</span>' +
+      '<span class="nav-user-img" id="userImg">U</span>' +
+      '<div class="user-dropdown" id="userDropdown" role="menu" aria-label="User menu">' +
+        '<div class="user-dropdown-header">' +
+          '<span class="user-dropdown-avatar" id="dropdownAvatar">U</span>' +
+          '<div class="user-dropdown-info">' +
+            '<div class="user-dropdown-name" id="dropdownName">User</div>' +
+            '<div class="user-dropdown-email" id="dropdownEmail">user@email.com</div>' +
+          '</div>' +
+        '</div>' +
+        '<button class="user-dropdown-item" data-nav="dashboard" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>' +
+          ' Dashboard' +
+        '</button>' +
+        '<button class="user-dropdown-item" data-nav="profile" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
+          ' Profile' +
+        '</button>' +
+        '<button class="user-dropdown-item" data-nav="orders" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' +
+          ' Orders' +
+        '</button>' +
+        '<button class="user-dropdown-item" data-nav="messages" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+          ' Messages' +
+        '</button>' +
+        '<button class="user-dropdown-item" data-nav="notifications" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' +
+          ' Notifications' +
+        '</button>' +
+        '<button class="user-dropdown-item" data-nav="settings" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+          ' Settings' +
+        '</button>' +
+        '<button class="user-dropdown-item" data-nav="admin" role="menuitem" id="adminNavLink" style="display:none;">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+          ' Admin Panel' +
+        '</button>' +
+        '<div class="user-dropdown-divider"></div>' +
+        '<button class="user-dropdown-item signout" id="signoutBtn" data-nav="signout" role="menuitem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>' +
+          ' Logout' +
+        '</button>' +
+      '</div>'
+
+    var bookBtn = document.getElementById('bookBtn')
+    var hamburger = document.getElementById('hamburger')
+    var ref = bookBtn || hamburger || null
+    if (ref && ref.parentNode === navRight) {
+      navRight.insertBefore(container, ref)
+    } else {
+      navRight.appendChild(container)
+    }
+
+    console.log('[UserAvatar] avatar container injected into .nav-right')
+    return true
   }
 
   /* ─── Avatar Image / Initials ─── */
@@ -83,6 +174,34 @@ const NAGRIVA_UserAvatar = (() => {
     }
   }
 
+  /* ─── Avatar DOM Diagnostics ─── */
+  function debugAvatar() {
+    var el = document.getElementById('userAvatar')
+    if (!el) { console.log('[UserAvatar DEBUG] element #userAvatar NOT in DOM'); return }
+    var cs = getComputedStyle(el)
+    console.log('[UserAvatar DEBUG] display:', cs.display, '| visibility:', cs.visibility, '| opacity:', cs.opacity)
+    console.log('[UserAvatar DEBUG] offsetWidth:', el.offsetWidth, '| offsetHeight:', el.offsetHeight)
+    console.log('[UserAvatar DEBUG] classList:', el.className)
+    console.log('[UserAvatar DEBUG] inline style.display:', el.style.display)
+    console.log('[UserAvatar DEBUG] in DOM:', document.contains(el))
+    if (el.parentElement) {
+      console.log('[UserAvatar DEBUG] parent:', el.parentElement.tagName, el.parentElement.className, 'display:', getComputedStyle(el.parentElement).display)
+    }
+    var ss = document.styleSheets
+    var found = false
+    for (var i = 0; i < ss.length; i++) {
+      if (ss[i].href && ss[i].href.indexOf('auth.css') !== -1) {
+        found = true
+        console.log('[UserAvatar DEBUG] auth.css loaded:', ss[i].href, '| media:', ss[i].media.mediaText, '| rules:', ss[i].cssRules ? ss[i].cssRules.length : 'N/A')
+        break
+      }
+    }
+    if (!found) console.log('[UserAvatar DEBUG] auth.css NOT FOUND in stylesheets')
+    el.style.outline = '3px solid red'
+    el.style.outlineOffset = '2px'
+    console.log('[UserAvatar DEBUG] red border applied to #userAvatar')
+  }
+
   /* ─── UI Update ─── */
   function updateUI() {
     var r = _refs
@@ -102,7 +221,9 @@ const NAGRIVA_UserAvatar = (() => {
       var role = getUserRole(s.profile)
 
       if (r.authBtn) r.authBtn.style.display = 'none'
+      if (r.bookBtn) r.bookBtn.style.display = 'none'
       if (r.userAvatar) {
+        r.userAvatar.style.display = 'flex'
         r.userAvatar.classList.add('visible')
         r.userAvatar.classList.remove('loading')
       }
@@ -119,9 +240,16 @@ const NAGRIVA_UserAvatar = (() => {
       var isAdmin = role === 'admin'
       if (r.adminLink) r.adminLink.style.display = isAdmin ? '' : 'none'
       if (r.mobileAdminLink) r.mobileAdminLink.style.display = isAdmin ? '' : 'none'
+
+      console.log('[UserAvatar] avatar rendered')
+      debugAvatar()
     } else {
       if (r.authBtn) r.authBtn.style.display = ''
-      if (r.userAvatar) r.userAvatar.classList.remove('visible', 'loading')
+      if (r.bookBtn) r.bookBtn.style.display = ''
+      if (r.userAvatar) {
+        r.userAvatar.style.display = 'none'
+        r.userAvatar.classList.remove('visible', 'loading')
+      }
       if (r.mobileAuthBtn) r.mobileAuthBtn.style.display = ''
       if (r.mobileAuthText) r.mobileAuthText.textContent = 'Sign In'
       if (r.adminLink) r.adminLink.style.display = 'none'
@@ -226,20 +354,31 @@ const NAGRIVA_UserAvatar = (() => {
     try {
       var supabase = window.supabaseClient
       var { data: { session } } = await supabase.auth.getSession()
+      console.log('[UserAvatar] session status:', session ? 'exists' : 'null')
       if (!session) {
         _state.session = null; _state.user = null; _state.profile = null
         _state.loading = false
         updateUI()
         return
       }
+      console.log('[UserAvatar] session found')
       _state.session = session
       _state.user = session.user
+      console.log('[UserAvatar] user id:', session.user.id)
       var { data: profile, error } = await supabase
         .from('profiles')
         .select('full_name, email, avatar_url, role')
         .eq('id', session.user.id)
         .single()
-      if (!error && profile) _state.profile = profile
+      if (error) console.warn('[UserAvatar] profile query error:', error.message)
+      if (profile) {
+        _state.profile = profile
+        console.log('[UserAvatar] profile loaded')
+        console.log('[UserAvatar]   full_name:', profile.full_name)
+        console.log('[UserAvatar]   avatar_url:', profile.avatar_url)
+        console.log('[UserAvatar]   email:', profile.email)
+        console.log('[UserAvatar]   role:', profile.role)
+      }
     } catch (err) {
       console.warn('[UserAvatar] loadProfile error:', err)
     } finally {
@@ -282,32 +421,83 @@ const NAGRIVA_UserAvatar = (() => {
 
   /* ─── Init ─── */
   async function init() {
-    if (_initialized) return
+    console.log('[UserAvatar] init() called')
+    if (_initialized) { console.log('[UserAvatar] init() — already initialized'); return }
     _initialized = true
     cacheRefs()
-    if (!_refs.userAvatar) return
+
+    var hasAvatar = ensureAvatarContainer()
+    if (!hasAvatar) {
+      console.warn('[UserAvatar] could not find or create avatar container — aborting')
+      return
+    }
+    cacheRefs()
+
+    if (!_refs.userAvatar) {
+      console.warn('[UserAvatar] #userAvatar still missing after injection — aborting')
+      return
+    }
+
+    console.log('[UserAvatar] navbar target found')
     await loadProfile()
     bindEvents()
     bindNav()
     subscribeProfile()
     initAuthListener()
+    console.log('[UserAvatar] init() complete')
+  }
+
+  /* ─── Refresh profile (called after avatar upload) ─── */
+  async function refreshProfile() {
+    if (!_state.user) {
+      if (!_initialized) { init(); return }
+      return
+    }
+    _state.loading = true
+    updateUI()
+    try {
+      var { data: profile, error } = await window.supabaseClient
+        .from('profiles')
+        .select('full_name, email, avatar_url, role')
+        .eq('id', _state.user.id)
+        .single()
+      if (!error && profile) _state.profile = profile
+    } catch (err) {
+      console.warn('[UserAvatar] refreshProfile error:', err)
+    } finally {
+      _state.loading = false
+      updateUI()
+    }
   }
 
   /* ─── Auto-init on navbar load ─── */
   document.addEventListener('navbar:loaded', function onNavbarLoad() {
+    console.log('[UserAvatar] EVENT navbar:loaded received')
     document.removeEventListener('navbar:loaded', onNavbarLoad)
     init()
   })
 
-  if (document.getElementById('navbar-container') && document.getElementById('navbar-container').children.length > 0) {
+  var nc = document.getElementById('navbar-container')
+  if (nc && nc.children.length > 0) {
+    console.log('[UserAvatar] navbar-container already populated — calling init()')
     init()
+  } else {
+    console.log('[UserAvatar] navbar-container empty or missing — waiting for navbar:loaded event')
   }
 
   /* ─── Public API ─── */
   return {
     init: init,
-    refresh: function() { _initialized = false; init() },
+    refreshProfile: refreshProfile,
     closeDropdown: closeDropdown,
     getState: function() { return { session: _state.session, user: _state.user, profile: _state.profile } }
   }
+
+  } catch (err) {
+    console.error('[UserAvatar FATAL] Exception at IIFE top-level:', err)
+    console.error('[UserAvatar FATAL] Stack:', err.stack)
+    throw err
+  }
 })()
+
+console.log('[UserAvatar] Module registered')

@@ -213,7 +213,7 @@ const NagrivaAuth = (() => {
       if (currentSession && currentUser) {
         if (refs.authBtn) refs.authBtn.style.display = 'none';
         if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = 'none';
-        if (refs.bookBtn) refs.bookBtn.style.display = '';
+        if (refs.bookBtn) refs.bookBtn.style.display = 'none';
       } else {
         if (refs.authBtn) refs.authBtn.style.display = '';
         if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = '';
