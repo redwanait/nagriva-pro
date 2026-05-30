@@ -38,33 +38,39 @@ const NAGRIVA_Files = (() => {
   }
 
   async function fetchFiles() {
+    console.log('[Files] Fetching from deliverables bucket...');
+
     const allOrders = await NAGRIVA_OrdersAPI.fetchOrdersList('id, client_name, project_title, order_number');
     orders = allOrders || [];
+    console.log('[Files] Orders loaded:', orders.length);
 
-    const { data: allFiles, error: filesError } = await window.supabaseClient
-      .from('files')
+    const { data: allDeliverables, error } = await window.supabaseClient
+      .from('deliverables')
       .select('*')
       .order('created_at', { ascending: false });
-    if (filesError) throw filesError;
+    if (error) throw error;
 
-    return (allFiles || []).map(f => {
-      const order = orders.find(o => o.id === f.order_id);
-      const { data: urlData } = window.supabaseClient.storage
-        .from('order-files')
-        .getPublicUrl(f.storage_path);
+    console.log('[Files] Deliverables loaded from DB:', allDeliverables ? allDeliverables.length : 0);
+
+    const enriched = (allDeliverables || []).map(d => {
+      const order = orders.find(o => o.id === d.order_id);
       return {
-        ...f,
-        public_url: urlData.publicUrl,
+        ...d,
+        public_url: d.file_url,
         orderName: order ? (order.client_name || order.project_title || order.order_number) : 'Unknown Order',
-        uploaderName: f.uploaded_by || 'Unknown'
+        uploaderName: 'Admin'
       };
     });
+
+    console.log('[Files] Total files found:', enriched.length);
+    return enriched;
   }
 
   async function init(containerEl) {
     _loading = true;
     _error = null;
     if (containerEl) containerEl.innerHTML = renderSkeleton();
+    updateStats();
 
     const timeout = setTimeout(() => {
       if (_loading) {
@@ -89,6 +95,7 @@ const NAGRIVA_Files = (() => {
       clearTimeout(timeout);
       _loading = false;
       if (containerEl) renderFiles(containerEl);
+      updateStats();
       notifyChange();
       setupRealtime();
     } catch (err) {
@@ -109,6 +116,18 @@ const NAGRIVA_Files = (() => {
     }
   }
 
+  function updateStats() {
+    const totalCountEl = document.getElementById('filesTotalCount');
+    const storageUsedEl = document.getElementById('filesStorageUsed');
+    if (totalCountEl) totalCountEl.textContent = files.length;
+    if (storageUsedEl) {
+      const totalBytes = files.reduce((sum, f) => sum + (f.file_size || 0), 0);
+      storageUsedEl.textContent = formatFileSize(totalBytes);
+    }
+    const statsGrid = document.getElementById('filesStats');
+    if (statsGrid) statsGrid.style.display = files.length > 0 ? '' : 'none';
+  }
+
   function setupRealtime() {
     if (realtimeChannel) {
       window.supabaseClient.removeChannel(realtimeChannel);
@@ -117,11 +136,12 @@ const NAGRIVA_Files = (() => {
     realtimeChannel = window.supabaseClient
       .channel('admin-files-changes')
       .on('postgres_changes',
-        { event: '*', schema: 'public', table: 'files' },
+        { event: '*', schema: 'public', table: 'deliverables' },
         async () => {
           try {
             files = await fetchFiles();
             notifyChange();
+            updateStats();
             const container = document.getElementById('filesContainer');
             if (container) renderFiles(container);
           } catch (e) {
@@ -138,24 +158,23 @@ const NAGRIVA_Files = (() => {
 
     const filePath = user.id + '/' + orderId + '/' + Date.now() + '_' + file.name;
     const { error: uploadError } = await window.supabaseClient.storage
-      .from('order-files')
+      .from('deliverables')
       .upload(filePath, file);
     if (uploadError) throw uploadError;
 
     const { data: urlData } = window.supabaseClient.storage
-      .from('order-files')
+      .from('deliverables')
       .getPublicUrl(filePath);
 
     const { data, error: dbError } = await window.supabaseClient
-      .from('files')
+      .from('deliverables')
       .insert({
         order_id: orderId,
-        user_id: user.id,
+        uploaded_by: user.id,
         file_name: file.name,
+        file_url: urlData.publicUrl,
         file_size: file.size,
-        file_type: file.type || 'application/octet-stream',
-        storage_path: filePath,
-        uploaded_by: 'admin'
+        file_type: file.type || 'application/octet-stream'
       })
       .select()
       .single();
@@ -163,27 +182,33 @@ const NAGRIVA_Files = (() => {
 
     files = await fetchFiles();
     notifyChange();
+    updateStats();
     NAGRIVA_Toast.success('File Uploaded', file.name + ' uploaded successfully');
-    return { ...data, public_url: urlData.publicUrl };
+    return data;
   }
 
   async function deleteFile(fileId) {
     const file = files.find(f => f.id === fileId);
     if (!file) throw new Error('File not found');
 
-    const { error: storageError } = await window.supabaseClient.storage
-      .from('order-files')
-      .remove([file.storage_path]);
-    if (storageError) console.warn('[Files] Storage delete warning:', storageError);
+    const pathPart = file.file_url.split('deliverables/').pop();
+    const storagePath = decodeURIComponent(pathPart.split('?')[0]);
+    if (storagePath) {
+      const { error: storageError } = await window.supabaseClient.storage
+        .from('deliverables')
+        .remove([storagePath]);
+      if (storageError) console.warn('[Files] Storage delete warning:', storageError);
+    }
 
     const { error: dbError } = await window.supabaseClient
-      .from('files')
+      .from('deliverables')
       .delete()
       .eq('id', fileId);
     if (dbError) throw dbError;
 
     files = files.filter(f => f.id !== fileId);
     notifyChange();
+    updateStats();
     NAGRIVA_Toast.info('File Deleted', file.file_name + ' has been removed.');
     return true;
   }
@@ -292,7 +317,7 @@ const NAGRIVA_Files = (() => {
             <tr>
               <th>File</th>
               <th>Order</th>
-              <th>Uploaded By</th>
+              <th>Type</th>
               <th>Size</th>
               <th>Date</th>
               <th style="width:80px;">Actions</th>
@@ -311,7 +336,7 @@ const NAGRIVA_Files = (() => {
                   </div>
                 </td>
                 <td><span style="color:var(--gray);font-size:0.8rem;">${escapeHtml(f.orderName)}</span></td>
-                <td><span style="color:var(--gray);font-size:0.8rem;">${escapeHtml(f.uploaderName)}</span></td>
+                <td><span style="color:var(--gray);font-size:0.8rem;">${(f.file_type || 'Unknown').split('/').pop().toUpperCase()}</span></td>
                 <td><span class="td-amount" style="font-weight:400;">${formatFileSize(f.file_size)}</span></td>
                 <td><span style="color:var(--gray2);font-size:0.78rem;">${formatDate(f.created_at)}</span></td>
                 <td>
@@ -350,6 +375,7 @@ const NAGRIVA_Files = (() => {
     renderFiles,
     formatFileSize,
     getFileIcon,
+    updateStats,
     destroy,
     get loading() { return _loading; },
     get error() { return _error; }

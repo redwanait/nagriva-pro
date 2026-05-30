@@ -108,6 +108,14 @@ const NAGRIVA_Modal = (() => {
               </div>
             </div>
           </form>
+          ${isEditing ? `
+          <div class="order-modal-divider"></div>
+          <div class="deliverables-section-inline">
+            <div class="deliverables-section-inline-header">
+              <div><i class="fas fa-file-export"></i> Deliverables</div>
+            </div>
+            <div id="deliverablesContainer"></div>
+          </div>` : ''}
         </div>
         <div class="order-modal-footer">
           <button class="btn btn-secondary" id="orderModalCancel">Cancel</button>
@@ -371,6 +379,9 @@ const NAGRIVA_Modal = (() => {
         overlay.classList.remove('active');
         setTimeout(() => {
           if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+          if (typeof NAGRIVA_AdminDeliverables !== 'undefined') {
+            NAGRIVA_AdminDeliverables.cleanup();
+          }
           overlay = null; modal = null;
           if (onCloseCallback) onCloseCallback();
         }, 400);
@@ -393,6 +404,11 @@ const NAGRIVA_Modal = (() => {
       });
 
       setupClientSearch(form);
+
+      if (isEditMode && editOrderId && typeof NAGRIVA_AdminDeliverables !== 'undefined') {
+        NAGRIVA_AdminDeliverables.loadDeliverables(editOrderId);
+        NAGRIVA_AdminDeliverables.setupRealtime(editOrderId);
+      }
 
       requestAnimationFrame(() => overlay.classList.add('active'));
       document.body.style.overflow = 'hidden';

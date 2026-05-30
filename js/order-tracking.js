@@ -212,7 +212,16 @@
         const order = await NagrivaOrders.getOrder(orderId);
         _lastOrderData = order;
 
-        const files = await NagrivaOrders.getFiles(orderId);
+        const [files, deliverables] = await Promise.all([
+          NagrivaOrders.getFiles(orderId),
+          typeof NAGRIVA_DeliverablesAPI !== 'undefined'
+            ? NAGRIVA_DeliverablesAPI.getDeliverables(orderId)
+            : []
+        ]);
+        const allFiles = [
+          ...deliverables.map(d => ({ ...d, is_deliverable: true, uploaded_by: 'admin', public_url: d.file_url })),
+          ...files.map(f => ({ ...f, is_deliverable: false }))
+        ];
         const activity = await NagrivaOrders.getActivity(orderId);
         const msgs = await NagrivaOrders.getMessages(orderId);
 
@@ -275,17 +284,16 @@
         const stagesHtml = renderTimelineStages(currentStage);
 
         /* Files */
-        const deliverableFiles = files.filter(function(f) { return f.uploaded_by === 'admin'; });
+        const deliverableCount = allFiles.filter(function(f) { return f.is_deliverable; }).length;
         let filesHtml = '';
-        if (files.length === 0) {
+        if (allFiles.length === 0) {
           filesHtml = '<div class="track-files-empty"><div class="track-files-empty-illustration"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="track-files-empty-title">No files yet</div><div class="track-files-empty-desc">Delivered files and project assets will appear here once they\'re ready.</div></div>';
         } else {
-          files.forEach(function(f) {
-            const isDeliverable = f.uploaded_by === 'admin';
-            filesHtml += '<a href="' + f.public_url + '" target="_blank" class="track-file-item' + (isDeliverable ? ' deliverable' : '') + '" download>' +
+          allFiles.forEach(function(f) {
+            filesHtml += '<a href="' + f.public_url + '" target="_blank" class="track-file-item' + (f.is_deliverable ? ' deliverable' : '') + '" download>' +
               '<div class="track-file-icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>' +
               '<div class="track-file-info"><span class="track-file-name">' + f.file_name + '</span>' +
-              (isDeliverable ? '<span class="track-file-deliverable">\u2713 Deliverable</span>' : '') +
+              (f.is_deliverable ? '<span class="track-file-deliverable">\u2713 Deliverable</span>' : '') +
               '<span class="track-file-size">' + NagrivaOrders.formatFileSize(f.file_size) + '</span></div>' +
               '<div class="track-file-dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>';
           });
@@ -365,7 +373,7 @@
           '<div class="track-card">' +
           '<div class="track-card-header"><div class="track-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>' +
           '<h3 class="track-card-title">Files & Deliverables</h3></div>' +
-          (files.length > 0 ? '<div class="track-files-header"><span class="track-files-count">' + files.length + ' file' + (files.length !== 1 ? 's' : '') + (deliverableFiles.length > 0 ? ' \u2014 <strong>' + deliverableFiles.length + ' deliverable' + (deliverableFiles.length !== 1 ? 's' : '') + '</strong>' : '') + '</span></div>' : '') +
+          (allFiles.length > 0 ? '<div class="track-files-header"><span class="track-files-count">' + allFiles.length + ' file' + (allFiles.length !== 1 ? 's' : '') + (deliverableCount > 0 ? ' \u2014 <strong>' + deliverableCount + ' deliverable' + (deliverableCount !== 1 ? 's' : '') + '</strong>' : '') + '</span></div>' : '') +
           '<div class="track-files">' + filesHtml + '</div></div>' +
 
           /* ── Revision Card ── */
@@ -469,6 +477,14 @@
         .on('postgres_changes',
           { event: 'UPDATE', schema: 'public', table: 'orders', filter: 'id=eq.' + orderId },
           handleOrderUpdate
+        )
+        .on('postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'deliverables', filter: 'order_id=eq.' + orderId },
+          function() { loadOrderTracking(currentOrderId); }
+        )
+        .on('postgres_changes',
+          { event: 'DELETE', schema: 'public', table: 'deliverables', filter: 'order_id=eq.' + orderId },
+          function() { loadOrderTracking(currentOrderId); }
         )
         .subscribe();
     }

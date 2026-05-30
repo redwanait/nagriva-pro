@@ -23,6 +23,7 @@
     'submit-order.html',
     'order-tracking.html',
     'client-portal.html',
+    'client-files.html',
     'onboarding-qa.html'
   ];
 

@@ -275,12 +275,13 @@
   <script defer src="../js/auth.js"></script>
   <script defer src="../js/user-avatar.js"></script>
   <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
   <script defer src="../js/orders.js"></script>
   <script defer src="../js/client-messages.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       let currentOrderId = null;
-      let fileSubscription = null;
+      let _fileSubscriptions = [];
       let orders = [];
       let msgContainer = document.getElementById('portalMessages');
       let msgInput = document.getElementById('portalMsgInput');
@@ -496,6 +497,10 @@
           for (var i = 0; i < orderList.length; i++) {
             var f = await NagrivaOrders.getFiles(orderList[i].id);
             fileCount += f.filter(function(x) { return x.uploaded_by === 'admin'; }).length;
+            if (typeof NAGRIVA_DeliverablesAPI !== 'undefined') {
+              var d = await NAGRIVA_DeliverablesAPI.getDeliverables(orderList[i].id);
+              fileCount += d.length;
+            }
           }
         } catch(e) {}
         document.getElementById('statFiles').textContent = fileCount;
@@ -548,14 +553,30 @@
       });
 
       /* ─── Files ─── */
+      function unsubscribeFileSubs() {
+        _fileSubscriptions.forEach(function(s) { try { s.unsubscribe(); } catch(e) {} });
+        _fileSubscriptions = [];
+      }
+
       document.getElementById('filesOrderSelect').addEventListener('change', function() {
         currentOrderId = this.value;
         if (currentOrderId) {
           loadFiles(currentOrderId);
-          if (fileSubscription) fileSubscription.unsubscribe();
-          fileSubscription = NagrivaOrders.subscribeToFiles(currentOrderId, function(file) {
+          unsubscribeFileSubs();
+          _fileSubscriptions.push(NagrivaOrders.subscribeToFiles(currentOrderId, function(file) {
             appendFileItem(file);
-          });
+          }));
+          if (typeof NAGRIVA_DeliverablesAPI !== 'undefined') {
+            var dlSub = NAGRIVA_DeliverablesAPI.subscribeToDeliverables(currentOrderId, function(d) {
+              appendFileItem({ ...d, is_deliverable: true, uploaded_by: 'admin', public_url: d.file_url });
+            });
+            _fileSubscriptions.push(dlSub);
+            var dlDelSub = NAGRIVA_DeliverablesAPI.subscribeToDeliverableDeletes(currentOrderId, function(id) {
+              var el = document.querySelector('#portalFilesList [data-id="del-' + id + '"]');
+              if (el) el.remove();
+            });
+            _fileSubscriptions.push(dlDelSub);
+          }
         } else {
           document.getElementById('portalFilesList').innerHTML = '';
         }
@@ -565,11 +586,20 @@
         var list = document.getElementById('portalFilesList');
         list.innerHTML = '';
         try {
-          var files = await NagrivaOrders.getFiles(orderId);
-          if (files.length === 0) {
+          var [files, deliverables] = await Promise.all([
+            NagrivaOrders.getFiles(orderId),
+            typeof NAGRIVA_DeliverablesAPI !== 'undefined'
+              ? NAGRIVA_DeliverablesAPI.getDeliverables(orderId)
+              : []
+          ]);
+          var allItems = [
+            ...deliverables.map(function(d) { return { ...d, is_deliverable: true, uploaded_by: 'admin', public_url: d.file_url }; }),
+            ...files.map(function(f) { return { ...f, is_deliverable: false }; })
+          ];
+          if (allItems.length === 0) {
             list.innerHTML = '<div class="pv-empty"><div class="pv-empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>No files yet</h3><p>Upload files above or wait for deliverables from your team.</p></div>';
           } else {
-            files.forEach(function(f) { appendFileItem(f); });
+            allItems.forEach(function(f) { appendFileItem(f); });
           }
         } catch (err) {
           list.innerHTML = '<div class="pv-empty"><div class="pv-empty-icon" style="color:#ff5050;border-color:rgba(255,80,80,0.2);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Failed to load files</h3><p>There was a problem loading your files.</p></div>';
@@ -578,29 +608,30 @@
 
       function appendFileItem(file) {
         var list = document.getElementById('portalFilesList');
-        if (!list || list.querySelector('[data-id="' + file.id + '"]')) return;
-        var isAdmin = file.uploaded_by === 'admin';
+        var itemId = file.is_deliverable ? 'del-' + file.id : file.id;
+        if (!list || list.querySelector('[data-id="' + itemId + '"]')) return;
+        var isDeliverable = file.is_deliverable || file.uploaded_by === 'admin';
         var isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file.file_name);
         var card = document.createElement('div');
         card.className = 'pv-file';
-        card.dataset.id = file.id;
+        card.dataset.id = itemId;
         card.innerHTML =
           '<div class="pv-file-preview">' +
             (isImage ? '<img src="' + file.public_url + '" alt="' + escapeHtml(file.file_name) + '" />' :
               '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>') +
-            (isAdmin ? '<span class="pv-file-badge">Deliverable</span>' : '') +
+            (isDeliverable ? '<span class="pv-file-badge">Deliverable</span>' : '') +
           '</div>' +
           '<div class="pv-file-body">' +
             '<div class="pv-file-name">' + escapeHtml(file.file_name) + '</div>' +
             '<div class="pv-file-meta">' +
               NagrivaOrders.formatFileSize(file.file_size) +
               ' \u00B7 ' + formatDate(file.created_at) +
-              ' \u00B7 ' + (isAdmin ? 'Team' : 'You') +
+              ' \u00B7 ' + (isDeliverable ? 'Team' : 'You') +
             '</div>' +
           '</div>' +
           '<div class="pv-file-actions">' +
             '<a href="' + file.public_url + '" target="_blank" class="pv-file-action" download>Download</a>' +
-            (!isAdmin ? '<button class="pv-file-action danger" onclick="deleteFile(\'' + file.id + '\')">Delete</button>' : '') +
+            (!isDeliverable ? '<button class="pv-file-action danger" onclick="deleteFile(\'' + file.id + '\')">Delete</button>' : '') +
           '</div>';
         list.appendChild(card);
       }

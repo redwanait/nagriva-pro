@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Files — NAGRIVA</title>
+  <meta name="description" content="Access your project files and deliverables." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
+  <style>
+    .cf-page { padding-top: 100px; min-height: 100vh; }
+    .cf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+    .cf-header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .cf-header p { font-size: 0.9rem; color: var(--gray); }
+    .cf-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
+    .cf-stat-card { position: relative; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; padding: 20px 24px; transition: border-color var(--transition), transform var(--transition); overflow: hidden; }
+    .cf-stat-card::before { content: ''; position: absolute; inset: 0; border-radius: 16px; background: linear-gradient(135deg, rgba(0,245,196,0.03) 0%, transparent 50%); pointer-events: none; }
+    .cf-stat-card:hover { border-color: rgba(0,245,196,0.2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .cf-stat-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(0,245,196,0.08); border: 1px solid rgba(0,245,196,0.15); display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 12px; }
+    .cf-stat-icon svg { width: 16px; height: 16px; stroke-width: 1.5; }
+    .cf-stat-value { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 4px; }
+    .cf-stat-label { font-size: 0.78rem; color: var(--gray); font-weight: 500; }
+    .cf-table-wrap { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .cf-table { width: 100%; border-collapse: collapse; }
+    .cf-table thead th { padding: 14px 20px; text-align: left; font-size: 0.68rem; font-weight: 700; color: var(--gray2); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.15); }
+    .cf-table tbody tr { transition: background var(--transition); }
+    .cf-table tbody tr:hover { background: rgba(0,245,196,0.02); }
+    .cf-table tbody td { padding: 14px 20px; font-size: 0.82rem; color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .cf-table tbody tr:last-child td { border-bottom: none; }
+    .cf-file-name { display: flex; align-items: center; gap: 10px; }
+    .cf-file-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+    .cf-file-icon svg { width: 14px; height: 14px; stroke-width: 1.5; }
+    .cf-file-title { font-weight: 600; color: var(--white); margin-bottom: 2px; }
+    .cf-file-meta { font-size: 0.72rem; color: var(--gray2); }
+    .cf-download-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; color: var(--accent); background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.15); cursor: pointer; text-decoration: none; transition: all var(--transition); }
+    .cf-download-btn:hover { background: rgba(0,245,196,0.12); border-color: rgba(0,245,196,0.3); }
+    .cf-empty { text-align: center; padding: 64px 20px; }
+    .cf-empty-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(0,245,196,0.03); border: 1px solid rgba(0,245,196,0.08); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--accent); }
+    .cf-empty-icon svg { width: 24px; height: 24px; stroke-width: 1.2; }
+    .cf-empty h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .cf-empty p { font-size: 0.85rem; color: var(--gray2); max-width: 360px; margin: 0 auto; line-height: 1.6; }
+    .cf-skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%); background-size: 200% 100%; animation: cfShimmer 1.5s infinite; border-radius: 8px; }
+    @keyframes cfShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .cf-skeleton-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr 100px; gap: 12px; padding: 16px 20px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .cf-skeleton-row:last-child { border-bottom: none; }
+    .cf-skeleton-bar { height: 14px; background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%); background-size: 200% 100%; animation: cfShimmer 1.5s infinite; border-radius: 6px; }
+    .cf-skeleton-bar.icon { width: 32px; height: 32px; border-radius: 8px; }
+    .cf-order-link { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .cf-order-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .cf-stats { grid-template-columns: 1fr; }
+      .cf-table thead { display: none; }
+      .cf-table tbody tr { display: block; padding: 16px 14px; }
+      .cf-table tbody td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: none; }
+      .cf-table tbody td::before { content: attr(data-label); font-size: 0.65rem; font-weight: 700; color: var(--gray2); text-transform: uppercase; letter-spacing: 0.06em; }
+      .cf-skeleton-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="client-files">
+
+  <div id="navbar-container"></div>
+
+  <section class="cf-page">
+    <div class="container">
+
+      <div class="cf-header">
+        <div>
+          <h1>My Files</h1>
+          <p>Access your project deliverables and uploaded assets</p>
+        </div>
+      </div>
+
+      <div class="cf-stats" id="cfStats">
+        <div class="cf-stat-card">
+          <div class="cf-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="cf-stat-value" id="cfTotalFiles">0</div>
+          <div class="cf-stat-label">Total Files</div>
+        </div>
+        <div class="cf-stat-card">
+          <div class="cf-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="cf-stat-value" id="cfStorageUsed">0 B</div>
+          <div class="cf-stat-label">Total Storage Used</div>
+        </div>
+      </div>
+
+      <div class="cf-table-wrap" id="cfTableWrap">
+        <div id="cfContent"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script defer src="../js/client-files.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+</body>
+</html>

@@ -2206,6 +2206,173 @@
       font-size: 0.85rem;
       color: var(--gray2);
     }
+
+    /* ─── DELIVERABLES (inline in modal) ─── */
+    .order-modal-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+    .deliverables-section-inline {
+      padding: 0;
+    }
+    .deliverables-section-inline-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .deliverables-section-inline-header i {
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+    .deliverables-section-inline .deliverables-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .deliverables-section-inline .deliverables-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .deliverables-section-inline .deliverables-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+    .deliverables-section-inline .deliverables-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 600;
+      border-radius: 99px;
+      padding: 0 6px;
+    }
+    .deliverables-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .deliverable-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: var(--r-xs);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .deliverable-item:hover {
+      border-color: var(--border-light);
+      background: var(--surface-hover);
+    }
+    .deliverable-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .deliverable-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .deliverable-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .deliverable-meta {
+      font-size: 0.65rem;
+      color: var(--gray2);
+      margin-top: 1px;
+    }
+    .deliverable-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .deliverable-action-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--gray2);
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .deliverable-action-btn:hover {
+      background: var(--surface-hover);
+      color: var(--accent);
+      border-color: var(--accent-dim);
+    }
+    .deliverable-action-btn.danger:hover {
+      color: var(--danger);
+      border-color: rgba(239,68,68,0.2);
+      background: rgba(239,68,68,0.08);
+    }
+    .deliverables-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .deliverables-empty-icon {
+      font-size: 1.5rem;
+      color: var(--gray3);
+      margin-bottom: 8px;
+    }
+    .deliverables-empty-text {
+      font-size: 0.78rem;
+      color: var(--gray2);
+      font-weight: 500;
+    }
+    .deliverables-empty-hint {
+      font-size: 0.68rem;
+      color: var(--gray3);
+      margin-top: 4px;
+    }
+    .deliverables-error {
+      padding: 16px;
+      text-align: center;
+      color: var(--danger);
+      font-size: 0.78rem;
+    }
+    .order-modal-body .btn-primary.btn-sm {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+    }
   </style>
 </head>
 <body>
@@ -2798,6 +2965,18 @@
                 <option value="document">Documents</option>
                 <option value="archive">Archives</option>
               </select>
+            </div>
+          </div>
+          <div class="stats-grid" id="filesStats" style="margin-bottom:20px;display:none;">
+            <div class="card stat-card">
+              <div class="stat-icon teal"><i class="fas fa-folder-open"></i></div>
+              <div class="stat-value" id="filesTotalCount">0</div>
+              <div class="stat-label">Total Files</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-icon blue"><i class="fas fa-database"></i></div>
+              <div class="stat-value" id="filesStorageUsed">0 B</div>
+              <div class="stat-label">Storage Used</div>
             </div>
           </div>
           <div class="orders-count" id="filesCount" style="margin-bottom:16px;"></div>
@@ -3740,6 +3919,10 @@
 
   <!-- Chart.js for dashboard charts -->
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Deliverables modules -->
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
+  <script defer src="../js/admin-deliverables.js"></script>
 
   <!-- Admin modules -->
   <script defer src="../js/admin-modal.js"></script>

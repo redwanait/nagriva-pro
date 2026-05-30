@@ -308,6 +308,17 @@ const NAGRIVA_AdminOrders = (() => {
     const updated = await NAGRIVA_OrdersAPI.updateOrder(id, payload);
     _updateInProgress = false;
 
+    if (!updated) {
+      console.warn('[AdminOrders] updateOrder — no row returned, re-fetching order id:', id);
+      const refetched = await NAGRIVA_OrdersAPI.getOrderById(id);
+      const order = mapFromDB(refetched);
+      const idx = orders.findIndex(o => o.id === id);
+      if (idx !== -1) orders[idx] = order;
+      notifyChange();
+      showToast('success', 'Order Updated', `${order.clientName || order.projectTitle} \u2014 ${order.service} updated successfully`);
+      return order;
+    }
+
     const order = mapFromDB(updated);
     const idx = orders.findIndex(o => o.id === id);
     if (idx !== -1) orders[idx] = order;
