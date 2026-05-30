@@ -93,7 +93,7 @@ const NAGRIVA_Messages = (() => {
 
     var { data: orders } = await supabaseClient
       .from('orders')
-      .select('id, order_number, project_title, project_name, user_id');
+      .select('id, order_number, project_title, user_id');
 
     var orderMap = {};
     if (orders) orders.forEach(function(o) { orderMap[o.id] = o; });
@@ -117,9 +117,9 @@ const NAGRIVA_Messages = (() => {
 
       return {
         id: oid,
-        clientName: firstClientMsg._profileName || order.project_title || order.project_name || 'Unknown',
+        clientName: firstClientMsg._profileName ||       order.project_title || 'Unknown',
         clientEmail: firstClientMsg._profileEmail || '',
-        projectTitle: order.project_title || order.project_name || '',
+        projectTitle:       order.project_title || '',
         orderNumber: order.order_number || '#' + oid.slice(0, 8),
         lastMessage: lastMsg ? lastMsg.message : null,
         lastMessageTime: lastMsg ? lastMsg.created_at : null,

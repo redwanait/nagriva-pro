@@ -43,11 +43,11 @@ window.NAGRIVA_Dashboard = (function () {
   }
 
   function getStatusBadgeClass(status) {
-    return { pending: 'pending', in_progress: 'in_progress', review: 'review', delivered: 'delivered', cancelled: 'cancelled' }[status] || 'pending';
+    return { pending: 'pending', approved: 'approved', in_progress: 'in_progress', review: 'review', delivered: 'completed', completed: 'completed', cancelled: 'cancelled' }[status] || 'pending';
   }
 
   function getStatusLabel(status) {
-    return { pending: 'Pending', in_progress: 'In Progress', review: 'Review', delivered: 'Delivered', cancelled: 'Cancelled' }[status] || status;
+    return { pending: 'Pending', approved: 'Approved', in_progress: 'In Progress', review: 'Review', delivered: 'Completed', completed: 'Completed', cancelled: 'Cancelled' }[status] || status;
   }
 
   function safeServiceType(s) {
@@ -235,16 +235,18 @@ window.NAGRIVA_Dashboard = (function () {
     container.innerHTML = '';
     var display = orders.slice(0, 4);
     display.forEach(function (o) {
-      var item = document.createElement('a');
+      var item = document.createElement('div');
       item.className = 'dash-order-item';
-      item.href = 'order-tracking.html?id=' + (o.id || '');
       item.innerHTML =
         '<div class="dash-order-info">' +
         '<div class="dash-order-name">' + escapeHtml(o.project_title || 'Untitled') + '</div>' +
-        '<div class="dash-order-meta">' + safeServiceType(o.service_type) + ' \u00b7 ' + formatDate(o.created_at) + formatBudget(o.budget) + '</div>' +
+        '<div class="dash-order-meta">' + safeServiceType(o.service_type) + ' \u00b7 ' + formatDate(o.created_at) + '</div>' +
+        '<div class="dash-order-progress"><div class="dash-order-progress-bar"><div class="dash-order-progress-fill" style="width:' + (o.progress || 0) + '%;"></div></div><span class="dash-order-progress-text">' + (o.progress || 0) + '%</span></div>' +
         '</div>' +
+        '<div class="dash-order-right">' +
         '<span class="dash-order-badge ' + getStatusBadgeClass(o.status) + '">' + getStatusLabel(o.status) + '</span>' +
-        '<span class="dash-order-arrow"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+        '<a href="order-tracking.html?id=' + (o.id || '') + '" class="dash-order-track-btn">Track \u2192</a>' +
+        '</div>';
       container.appendChild(item);
     });
   }
@@ -351,8 +353,8 @@ window.NAGRIVA_Dashboard = (function () {
   async function fetchStats() {
     if (!_user) return { active: 0, completed: 0, pending: 0, messages: 0, notifications: 0 };
     var orders = _data.orders || [];
-    var active = orders.filter(function (o) { return o.status === 'in_progress' || o.status === 'review'; }).length;
-    var completed = orders.filter(function (o) { return o.status === 'delivered'; }).length;
+    var active = orders.filter(function (o) { return o.status === 'approved' || o.status === 'in_progress' || o.status === 'review'; }).length;
+    var completed = orders.filter(function (o) { return o.status === 'completed' || o.status === 'delivered'; }).length;
     var pending = orders.filter(function (o) { return o.status === 'pending'; }).length;
 
     var msgCount = 0;
@@ -495,7 +497,17 @@ window.NAGRIVA_Dashboard = (function () {
       .channel('dash-orders')
       .on('postgres_changes',
         { event: '*', schema: 'public', table: 'orders', filter: 'user_id=eq.' + _user.id },
-        function () { refresh(); }
+        function (payload) {
+          if (payload.eventType === 'UPDATE' && typeof NAGRIVA_Toast !== 'undefined') {
+            var newStatus = payload.new && payload.new.status;
+            var oldStatus = payload.old && payload.old.status;
+            if (newStatus && newStatus !== oldStatus) {
+              var label = getStatusLabel(newStatus);
+              NAGRIVA_Toast.info('Order Updated', 'Status changed to ' + label);
+            }
+          }
+          refresh();
+        }
       )
       .subscribe();
     _subscriptions.push(ordersSub);

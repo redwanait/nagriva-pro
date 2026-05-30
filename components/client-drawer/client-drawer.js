@@ -196,7 +196,7 @@ const NAGRIVA_ClientDrawer = (() => {
               <div class="cd-order-dot ${cfg.dot}"></div>
               <div class="cd-order-info">
                 <div class="cd-order-service">
-                  ${escapeHtml(o.service_type || o.service || o.project_name || 'Order')}
+                  ${escapeHtml(o.project_title || o.service_type || o.service || 'Order')}
                   <span class="cd-order-amount">${formatCurrency(o.budget)}</span>
                 </div>
                 <div class="cd-order-meta">

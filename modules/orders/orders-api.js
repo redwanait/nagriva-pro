@@ -165,11 +165,41 @@ const NAGRIVA_OrdersAPI = (() => {
     return {
       total: orders.length,
       pending: orders.filter(o => o.status === 'pending').length,
+      approved: orders.filter(o => o.status === 'approved').length,
       in_progress: orders.filter(o => o.status === 'in_progress').length,
       review: orders.filter(o => o.status === 'review').length,
       delivered: orders.filter(o => o.status === 'delivered').length,
+      completed: orders.filter(o => o.status === 'completed' || o.status === 'delivered').length,
       cancelled: orders.filter(o => o.status === 'cancelled').length
     };
+  }
+
+  /* ─── Subscribe to order changes for realtime tracking ─── */
+  function subscribeToOrder(orderId, callback) {
+    const subscription = window.supabaseClient
+      .channel('order-tracking-' + orderId)
+      .on('postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'orders',
+          filter: 'id=eq.' + orderId
+        },
+        async (payload) => {
+          const fresh = await getOrderById(orderId);
+          if (fresh) callback(fresh);
+        }
+      )
+      .subscribe();
+    return subscription;
+  }
+
+  /* ─── Update order progress/stage (Admin) ─── */
+  async function updateOrderProgress(id, progress, currentStage) {
+    const payload = { progress };
+    if (currentStage !== undefined) payload.current_stage = currentStage;
+    if (progress >= 100) payload.completed_at = new Date().toISOString();
+    return await updateOrder(id, payload);
   }
 
   /* ─── Get user's order IDs for activity queries ─── */
@@ -196,5 +226,7 @@ const NAGRIVA_OrdersAPI = (() => {
     getUserDashboardStats,
     getAdminDashboardStats,
     getUserOrderIds,
+    subscribeToOrder,
+    updateOrderProgress,
   };
 })();

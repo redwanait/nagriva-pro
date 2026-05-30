@@ -1684,6 +1684,12 @@
     .progress-item:hover .progress-bar.purple {
       box-shadow: 0 0 12px rgba(168,85,247,0.3);
     }
+    .progress-item:hover .progress-bar.red {
+      box-shadow: 0 0 12px rgba(239,68,68,0.3);
+    }
+    .progress-item:hover .progress-bar.teal {
+      box-shadow: 0 0 12px rgba(0,245,196,0.3);
+    }
     }
     .progress-bar.orange {
       background: linear-gradient(90deg, var(--warning), #f97316);
@@ -1693,6 +1699,12 @@
     }
     .progress-bar.purple {
       background: linear-gradient(90deg, #a855f7, #d946ef);
+    }
+    .progress-bar.red {
+      background: linear-gradient(90deg, var(--danger), #dc2626);
+    }
+    .progress-bar.teal {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
     }
 
     /* ─── UPLOAD AREA ─── */
@@ -2646,9 +2658,11 @@
               <select class="orders-filter-select" id="ordersStatusFilter">
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
                 <option value="in_progress">In Progress</option>
-                <option value="revision">Revision</option>
+                <option value="review">Review</option>
                 <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
               </select>
               <select class="orders-filter-select" id="ordersSort">
                 <option value="newest">Newest First</option>

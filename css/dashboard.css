@@ -229,13 +229,11 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 12px 14px;
   background: rgba(255,255,255,0.015);
   border: 1px solid var(--border);
   border-radius: 10px;
   transition: border-color var(--transition), background var(--transition);
-  cursor: pointer;
-  text-decoration: none;
 }
 .dash-order-item:hover {
   border-color: rgba(0,245,196,0.2);
@@ -257,6 +255,40 @@
 .dash-order-meta {
   font-size: 0.7rem;
   color: var(--gray2);
+  margin-bottom: 6px;
+}
+.dash-order-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dash-order-progress-bar {
+  flex: 1;
+  max-width: 100px;
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.dash-order-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.dash-order-progress-text {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--gray2);
+  min-width: 28px;
+  text-align: right;
+}
+.dash-order-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
 }
 .dash-order-badge {
   font-size: 0.58rem;
@@ -266,21 +298,28 @@
   padding: 2px 8px;
   border-radius: 99px;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 .dash-order-badge.pending { color:#f59e0b; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.2); }
-.dash-order-badge.in_progress { color:#4facfe; background:rgba(79,172,254,0.1); border:1px solid rgba(79,172,254,0.2); }
+.dash-order-badge.approved { color:#3b82f6; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2); }
+.dash-order-badge.in_progress { color:var(--accent); background:rgba(0,245,196,0.1); border:1px solid rgba(0,245,196,0.2); }
 .dash-order-badge.review { color:#a855f7; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); }
-.dash-order-badge.delivered { color:var(--accent); background:rgba(0,245,196,0.1); border:1px solid rgba(0,245,196,0.2); }
+.dash-order-badge.completed { color:#10b981; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); }
 .dash-order-badge.cancelled { color:#ff5050; background:rgba(255,80,80,0.1); border:1px solid rgba(255,80,80,0.2); }
-.dash-order-arrow {
-  color: var(--gray2);
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-.dash-order-item:hover .dash-order-arrow {
-  transform: translateX(3px);
+.dash-order-track-btn {
+  font-size: 0.65rem;
+  font-weight: 600;
   color: var(--accent);
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(0,245,196,0.08);
+  border: 1px solid rgba(0,245,196,0.15);
+  transition: all 0.25s ease;
+}
+.dash-order-track-btn:hover {
+  background: rgba(0,245,196,0.15);
+  border-color: rgba(0,245,196,0.3);
+  box-shadow: 0 0 16px rgba(0,245,196,0.1);
 }
 
 /* ─── Activity List ─── */

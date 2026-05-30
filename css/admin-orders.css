@@ -287,12 +287,24 @@
   border: 1px solid rgba(168,85,247,0.2);
 }
 .order-status-badge.revision .status-dot { background: #a855f7; box-shadow: 0 0 6px rgba(168,85,247,0.5); }
+.order-status-badge.approved {
+  color: #3b82f6;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+.order-status-badge.approved .status-dot { background: #3b82f6; box-shadow: 0 0 6px rgba(59,130,246,0.5); }
 .order-status-badge.completed {
   color: #10b981;
   background: rgba(16,185,129,0.1);
   border: 1px solid rgba(16,185,129,0.2);
 }
 .order-status-badge.completed .status-dot { background: #10b981; box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+.order-status-badge.cancelled {
+  color: #ef4444;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+.order-status-badge.cancelled .status-dot { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.5); }
 
 /* ─── Orders Card View ─── */
 .orders-grid-view {

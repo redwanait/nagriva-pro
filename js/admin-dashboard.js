@@ -38,7 +38,7 @@ const NAGRIVA_Dashboard = (() => {
 
   function updateStats(stats) {
     if (!stats) stats = { active: 0, revision: 0, completed: 0, revenue: 0, pending: 0, total: 0 };
-    const active = Math.max(0, stats.active || 0);
+    const active = Math.max(0, (stats.active || 0) + (stats.approved || 0));
     const revision = Math.max(0, stats.revision || 0);
     const completed = Math.max(0, stats.completed || 0);
     const revenue = Math.max(0, stats.revenue || 0);
@@ -82,13 +82,13 @@ const NAGRIVA_Dashboard = (() => {
   function renderProgressBars(orders) {
     const container = document.querySelector('.progress-list');
     if (!container) return;
-    const active = orders.filter(o => o.status === 'in_progress' || o.status === 'revision').slice(0, 6);
+    const active = orders.filter(o => o.status === 'approved' || o.status === 'in_progress' || o.status === 'review' || o.status === 'revision').slice(0, 6);
     if (active.length === 0) {
       container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray3);font-size:0.82rem;">No active projects right now.</div>';
       return;
     }
-    const pctMap = { pending: 10, in_progress: 60, revision: 85, completed: 100 };
-    const colorMap = { pending: '', in_progress: 'blue', revision: 'orange', completed: '' };
+    const pctMap = { pending: 10, approved: 25, in_progress: 45, review: 70, revision: 85, completed: 100, cancelled: 0 };
+    const colorMap = { pending: '', approved: 'blue', in_progress: 'teal', review: 'purple', revision: 'orange', completed: '', cancelled: 'red' };
     container.innerHTML = active.map(o => {
       const pct = pctMap[o.status] || 10;
       const color = colorMap[o.status] || '';
@@ -122,9 +122,12 @@ const NAGRIVA_Dashboard = (() => {
       const statusLabel = NAGRIVA_AdminOrders.STATUS[o.status]?.label || o.status;
       const badgeCls = {
         pending: 'badge-warning',
+        approved: 'badge-info',
         in_progress: 'badge-info',
+        review: 'badge-neutral',
         revision: 'badge-neutral',
         completed: 'badge-success',
+        cancelled: 'badge-danger',
       }[o.status] || 'badge-neutral';
 
       return '<tr>' +

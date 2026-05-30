@@ -41,9 +41,11 @@ const NagrivaOrders = (() => {
   function getStatusBadgeClass(status) {
     const map = {
       pending: 'pending',
+      approved: 'approved',
       in_progress: 'in_progress',
       review: 'review',
-      delivered: 'delivered',
+      delivered: 'completed',
+      completed: 'completed',
       cancelled: 'cancelled'
     };
     return map[status] || 'pending';
@@ -52,12 +54,38 @@ const NagrivaOrders = (() => {
   function getStatusLabel(status) {
     const map = {
       pending: 'Pending',
+      approved: 'Approved',
       in_progress: 'In Progress',
       review: 'Review',
-      delivered: 'Delivered',
+      delivered: 'Completed',
+      completed: 'Completed',
       cancelled: 'Cancelled'
     };
     return map[status] || status;
+  }
+
+  function getStageLabel(stage) {
+    const map = {
+      order_received: 'Order Received',
+      project_approved: 'Project Approved',
+      work_started: 'Work Started',
+      first_draft: 'First Draft',
+      client_review: 'Client Review',
+      final_delivery: 'Final Delivery'
+    };
+    return map[stage] || stage || 'Order Received';
+  }
+
+  function getProgressForStage(stage) {
+    const map = {
+      order_received: 10,
+      project_approved: 25,
+      work_started: 45,
+      first_draft: 65,
+      client_review: 80,
+      final_delivery: 100
+    };
+    return map[stage] || 0;
   }
 
   /* ─── Get Current User ─── */
@@ -567,6 +595,8 @@ const NagrivaOrders = (() => {
     formatFileSize,
     getStatusBadgeClass,
     getStatusLabel,
+    getStageLabel,
+    getProgressForStage,
     createOrder,
     getUserOrders,
     getOrder,

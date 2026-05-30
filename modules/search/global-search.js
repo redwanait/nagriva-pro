@@ -167,8 +167,8 @@ const NAGRIVA_GlobalSearch = (() => {
   function searchOrders(supabase, pattern) {
     return supabase
       .from('orders')
-      .select('id, order_number, project_name, project_title, client_name, service, status, created_at')
-      .or('order_number.ilike.' + pattern + ',project_name.ilike.' + pattern + ',project_title.ilike.' + pattern + ',client_name.ilike.' + pattern)
+      .select('id, order_number, project_title, client_name, service, status, created_at')
+      .or('order_number.ilike.' + pattern + ',project_title.ilike.' + pattern + ',client_name.ilike.' + pattern)
       .order('created_at', { ascending: false })
       .limit(5)
       .then(function(r) { return r.error ? [] : r.data; });
@@ -478,7 +478,7 @@ const NAGRIVA_GlobalSearch = (() => {
      ════════════════════════════════════ */
   function getTitle(item, type) {
     switch (type) {
-      case 'orders': return item.order_number || item.project_name || item.project_title || 'Order';
+      case 'orders': return item.order_number || item.project_title || 'Order';
       case 'clients': return item.full_name || item.email || 'Client';
       case 'services': return item.title || 'Service';
       case 'payments': return 'Payment #' + item.id.slice(0, 8);
@@ -491,7 +491,7 @@ const NAGRIVA_GlobalSearch = (() => {
 
   function getLabel(item, type) {
     switch (type) {
-      case 'orders': return item.order_number || item.project_name || '';
+      case 'orders': return item.order_number || item.project_title || '';
       case 'clients': return item.full_name || item.email || '';
       case 'services': return item.title || '';
       case 'payments': return item.id;
@@ -569,7 +569,7 @@ const NAGRIVA_GlobalSearch = (() => {
   function getSub(item, type) {
     switch (type) {
       case 'orders':
-        return item.project_title || item.project_name || '';
+        return item.project_title || '';
       case 'clients':
         return item.company || '';
       case 'payments':
