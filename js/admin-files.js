@@ -37,6 +37,13 @@ const NAGRIVA_Files = (() => {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  function getStoragePathFromUrl(val) {
+    if (!val) return null;
+    var match = val.match(/\/object\/public\/[^/]+\/(.+)/);
+    if (match) return decodeURIComponent(match[1].split('?')[0]);
+    return val;
+  }
+
   async function fetchFiles() {
     console.log('[Files] Fetching from deliverables bucket...');
 
@@ -54,9 +61,17 @@ const NAGRIVA_Files = (() => {
 
     const enriched = (allDeliverables || []).map(d => {
       const order = orders.find(o => o.id === d.order_id);
+      let publicUrl = '';
+      const storagePath = getStoragePathFromUrl(d.file_url);
+      if (storagePath) {
+        const { data: urlData } = window.supabaseClient.storage
+          .from('deliverables')
+          .getPublicUrl(storagePath);
+        publicUrl = urlData.publicUrl;
+      }
       return {
         ...d,
-        public_url: d.file_url,
+        public_url: publicUrl,
         orderName: order ? (order.client_name || order.project_title || order.order_number) : 'Unknown Order',
         uploaderName: 'Admin'
       };
@@ -162,17 +177,13 @@ const NAGRIVA_Files = (() => {
       .upload(filePath, file);
     if (uploadError) throw uploadError;
 
-    const { data: urlData } = window.supabaseClient.storage
-      .from('deliverables')
-      .getPublicUrl(filePath);
-
     const { data, error: dbError } = await window.supabaseClient
       .from('deliverables')
       .insert({
         order_id: orderId,
         uploaded_by: user.id,
         file_name: file.name,
-        file_url: urlData.publicUrl,
+        file_url: filePath,
         file_size: file.size,
         file_type: file.type || 'application/octet-stream'
       })
@@ -191,8 +202,7 @@ const NAGRIVA_Files = (() => {
     const file = files.find(f => f.id === fileId);
     if (!file) throw new Error('File not found');
 
-    const pathPart = file.file_url.split('deliverables/').pop();
-    const storagePath = decodeURIComponent(pathPart.split('?')[0]);
+    const storagePath = getStoragePathFromUrl(file.file_url);
     if (storagePath) {
       const { error: storageError } = await window.supabaseClient.storage
         .from('deliverables')

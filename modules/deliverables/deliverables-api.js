@@ -16,6 +16,13 @@ const NAGRIVA_DeliverablesAPI = (() => {
 
   const ALLOWED_EXTENSIONS = ['.zip', '.pdf', '.png', '.jpg', '.jpeg', '.mp4', '.docx'];
 
+  function getStoragePathFromUrl(val) {
+    if (!val) return null;
+    var match = val.match(/\/object\/public\/[^/]+\/(.+)/);
+    if (match) return decodeURIComponent(match[1].split('?')[0]);
+    return val;
+  }
+
   function validateFile(file) {
     if (!file) throw new Error('No file provided');
     if (file.size > MAX_SIZE) throw new Error('File exceeds 50MB limit');
@@ -59,15 +66,11 @@ const NAGRIVA_DeliverablesAPI = (() => {
 
     if (uploadError) throw uploadError;
 
-    const { data: urlData } = window.supabaseClient.storage
-      .from(BUCKET)
-      .getPublicUrl(filePath);
-
     const payload = {
       order_id: orderId,
       uploaded_by: user.id,
       file_name: file.name,
-      file_url: urlData.publicUrl,
+      file_url: filePath,
       file_size: file.size,
       file_type: file.type || 'application/octet-stream'
     };
@@ -112,12 +115,11 @@ const NAGRIVA_DeliverablesAPI = (() => {
     if (fetchError) throw fetchError;
     if (!deliverable) throw new Error('Deliverable not found');
 
-    const storagePath = deliverable.file_url.split(BUCKET + '/').pop();
+    const storagePath = getStoragePathFromUrl(deliverable.file_url);
     if (storagePath) {
-      const fullPath = decodeURIComponent(storagePath.split('?')[0]);
       await window.supabaseClient.storage
         .from(BUCKET)
-        .remove([fullPath]);
+        .remove([storagePath]);
     }
 
     const { error: dbError } = await window.supabaseClient

@@ -95,11 +95,99 @@
     return mime.includes('pdf') || ext === 'pdf';
   }
 
+  function getStoragePathFromUrl(fileUrl) {
+    if (!fileUrl) return null;
+    var marker = '/object/public/';
+    var idx = fileUrl.indexOf(marker);
+    if (idx === -1) return fileUrl;
+    var after = fileUrl.substring(idx + marker.length);
+    var slash = after.indexOf('/');
+    if (slash === -1) return after;
+    var path = after.substring(slash + 1);
+    var q = path.indexOf('?');
+    if (q !== -1) path = path.substring(0, q);
+    return decodeURIComponent(path);
+  }
+
+  async function getFileUrl(file) {
+    var fileUrl = file.file_url || '';
+    var bucket = file.bucket || 'deliverables';
+    if (!fileUrl) return '';
+
+    var storagePath = getStoragePathFromUrl(fileUrl);
+    if (!storagePath) return '';
+
+    if (bucket === 'order-files') {
+      var { data } = window.supabaseClient.storage
+        .from(bucket)
+        .getPublicUrl(storagePath);
+      return data ? data.publicUrl : '';
+    }
+
+    try {
+      var { data, error } = await window.supabaseClient.storage
+        .from(bucket)
+        .createSignedUrl(storagePath, 3600);
+      if (error) throw error;
+      return data ? data.signedUrl : '';
+    } catch (err) {
+      console.error('[ClientFiles] createSignedUrl failed:', err);
+      return '';
+    }
+  }
+
+  function getFileBucket(file) {
+    return file.bucket || 'deliverables';
+  }
+
+  function getStoragePath(file) {
+    var rawPath = file.storage_path || file.file_path || file.file_url || '';
+    return getStoragePathFromUrl(rawPath);
+  }
+
+  async function downloadFile(file) {
+    var storagePath = getStoragePath(file);
+    var bucket = getFileBucket(file);
+    var fileName = file.file_name || 'download';
+    console.log('[ClientFiles] Download:', { method: 'download()', path: storagePath, bucket: bucket, name: fileName });
+    if (storagePath) {
+      try {
+        console.log('[DEBUG] downloadFile — calling .from("' + bucket + '").download("' + storagePath + '")');
+        var { data, error } = await window.supabaseClient.storage
+          .from(bucket)
+          .download(storagePath);
+        if (error) throw error;
+        var blobUrl = URL.createObjectURL(data);
+        var a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(blobUrl); }, 10000);
+        return;
+      } catch (err) {
+        console.error('[ClientFiles] download() failed:', err);
+      }
+    }
+    console.log('[DEBUG] downloadFile — download() failed or no storagePath, falling back to getFileUrl as href');
+    var fallbackUrl = getFileUrl(file);
+    console.log('[DEBUG] downloadFile — fallback URL:', fallbackUrl);
+    var a = document.createElement('a');
+    a.href = fallbackUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   /* ════════════════════════════════════════
      PREVIEW MODAL
      ════════════════════════════════════════ */
 
-  function openPreview(file) {
+  async function openPreview(file) {
     var overlay = document.getElementById('cfPreviewOverlay');
     var body = document.getElementById('cfPreviewBody');
     var nameEl = document.getElementById('cfPreviewName');
@@ -108,7 +196,7 @@
     var downloadLink = document.getElementById('cfPreviewDownload');
     if (!overlay || !body) return;
 
-    var url = file.public_url || file.file_url || '';
+    var url = await getFileUrl(file);
     var fileName = file.file_name || 'file';
     var fileType = file.file_type || '';
     var fileSize = file.file_size || 0;
@@ -118,6 +206,10 @@
     sizeEl.textContent = formatFileSize(fileSize);
     downloadLink.href = url;
     downloadLink.download = fileName;
+    downloadLink.onclick = function (e) {
+      e.preventDefault();
+      downloadFile(file);
+    };
 
     body.innerHTML = '<div class="cf-modal-loading"><div class="cf-modal-spinner"></div></div>';
     overlay.classList.add('active');
@@ -275,7 +367,10 @@
       card.addEventListener('click', function () {
         var idx = parseInt(this.getAttribute('data-file-index'), 10);
         if (idx >= 0 && idx < _files.length) {
-          openPreview(_files[idx]);
+          var clickedFile = _files[idx];
+          console.log('[DEBUG] Recent card clicked — index:', idx);
+          console.log('[DEBUG] Recent card clicked — file:', clickedFile);
+          openPreview(clickedFile);
         }
       });
     });
@@ -299,7 +394,6 @@
       var orderLink = getOrderLink(f.order_id);
       var fileTypeLabel = getFileTypeLabel(f.file_type, f.file_name);
       var badgeClass = getBadgeClass(f.file_type, f.file_name);
-      var downloadUrl = f.public_url || f.file_url || '#';
       var fileIndex = _files.indexOf(f);
 
       return '<tr>' +
@@ -319,7 +413,7 @@
         '<td data-label="Actions">' +
           '<div class="cf-actions">' +
             '<button class="cf-action-btn cf-action-btn-preview" data-file-index="' + fileIndex + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span>Preview</span></button>' +
-            '<button class="cf-action-btn cf-action-btn-download" data-url="' + escapeHtml(downloadUrl) + '" data-name="' + escapeHtml(f.file_name || 'download') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="cf-btn-spinner"></span><span class="cf-btn-text">Download</span></button>' +
+            '<button class="cf-action-btn cf-action-btn-download" data-file-index="' + fileIndex + '" data-name="' + escapeHtml(f.file_name || 'download') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="cf-btn-spinner"></span><span class="cf-btn-text">Download</span></button>' +
           '</div>' +
         '</td>' +
       '</tr>';
@@ -342,29 +436,33 @@
       btn.addEventListener('click', function () {
         var idx = parseInt(this.getAttribute('data-file-index'), 10);
         if (idx >= 0 && idx < _files.length) {
-          openPreview(_files[idx]);
+          var clickedFile = _files[idx];
+          console.log('[DEBUG] Preview button clicked — file index:', idx);
+          console.log('[DEBUG] Preview button clicked — _files entry:', clickedFile);
+          console.log('[DEBUG] Preview button clicked — file_url:', clickedFile.file_url);
+          console.log('[DEBUG] Preview button clicked — bucket:', clickedFile.bucket);
+          openPreview(clickedFile);
+        } else {
+          console.error('[DEBUG] Preview button clicked — invalid index:', idx);
         }
       });
     });
 
     container.querySelectorAll('.cf-action-btn-download').forEach(function (btn) {
-      var url = btn.getAttribute('data-url');
-      var name = btn.getAttribute('data-name');
-      if (url && url !== '#') {
-        btn.addEventListener('click', function (e) {
+      var idx = parseInt(btn.getAttribute('data-file-index'), 10);
+      if (idx >= 0 && idx < _files.length) {
+        btn.addEventListener('click', async function (e) {
           if (btn.classList.contains('loading')) return;
           btn.classList.add('loading');
-          var a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.download = name;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          setTimeout(function () {
-            btn.classList.remove('loading');
-          }, 1200);
+          try {
+            await downloadFile(_files[idx]);
+          } catch (err) {
+            console.error('[ClientFiles] Download failed:', err);
+          } finally {
+            setTimeout(function () {
+              btn.classList.remove('loading');
+            }, 1200);
+          }
         });
       } else {
         btn.style.opacity = '0.4';
@@ -383,7 +481,7 @@
     if (!btn) return;
     if (btn.classList.contains('loading')) return;
 
-    var downloadable = _files.filter(function (f) { return f.public_url || f.file_url; });
+    var downloadable = _files.filter(function (f) { return getStoragePath(f) || f.file_url; });
     if (downloadable.length === 0) return;
 
     btn.classList.add('loading');
@@ -391,19 +489,11 @@
     btn.innerHTML = '<span class="cf-btn-spinner" style="display:inline-block;width:14px;height:14px;border:2px solid rgba(4,4,4,0.2);border-top-color:var(--bg);border-radius:50%;animation:cfSpin 0.6s linear infinite;"></span> Downloading...';
 
     for (var i = 0; i < downloadable.length; i++) {
-      var f = downloadable[i];
       try {
-        var a = document.createElement('a');
-        a.href = f.public_url || f.file_url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.download = f.file_name || 'download';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        await downloadFile(downloadable[i]);
         await new Promise(function (r) { setTimeout(r, 400); });
       } catch (e) {
-        console.warn('[ClientFiles] Failed to download:', f.file_name, e);
+        console.warn('[ClientFiles] Failed to download:', downloadable[i].file_name, e);
       }
     }
 
@@ -461,8 +551,24 @@
           var deliverables = typeof NAGRIVA_DeliverablesAPI !== 'undefined'
             ? await NAGRIVA_DeliverablesAPI.getDeliverables(orderId)
             : [];
+          console.log('[DEBUG] loadFiles — getDeliverables(' + orderId + ') returned:', deliverables ? deliverables.length : 0, 'items');
+          if (deliverables && deliverables.length > 0) {
+            deliverables.forEach(function (d, di) {
+              console.log('[DEBUG] loadFiles — deliverable[' + di + '] raw:', JSON.stringify(d));
+            });
+          }
 
           deliverables.forEach(function (d) {
+            console.log('[DEBUG] loadFiles — deliverable from DB:', {
+              id: d.id,
+              file_name: d.file_name,
+              file_url: d.file_url,
+              file_url_type: typeof d.file_url,
+              file_url_length: d.file_url ? d.file_url.length : 0,
+              file_url_starts_http: d.file_url ? d.file_url.startsWith('http') : false,
+              file_url_includes_object_public: d.file_url ? d.file_url.indexOf('/object/public/') !== -1 : false,
+              bucket: 'deliverables'
+            });
             allFiles.push({
               id: d.id,
               order_id: d.order_id,
@@ -470,7 +576,10 @@
               file_size: d.file_size,
               file_type: d.file_type,
               created_at: d.created_at,
-              public_url: d.file_url,
+              file_url: d.file_url,
+              file_path: d.file_url || '',
+              storage_path: d.storage_path || null,
+              bucket: 'deliverables',
               source: 'deliverable'
             });
           });
@@ -488,7 +597,10 @@
               file_size: f.file_size,
               file_type: f.file_type,
               created_at: f.created_at,
-              public_url: f.public_url,
+              file_url: f.public_url,
+              file_path: f.storage_path || f.public_url || '',
+              storage_path: f.storage_path || null,
+              bucket: 'order-files',
               source: 'upload'
             });
           });
@@ -503,6 +615,19 @@
         if (seen[key]) return false;
         seen[key] = true;
         return true;
+      });
+
+      console.log('=== [DEBUG] _files populated ===');
+      console.log('[DEBUG] _files count:', _files.length);
+      _files.forEach(function (f, fi) {
+        console.log('[DEBUG] _files[' + fi + ']:', {
+          id: f.id,
+          file_name: f.file_name,
+          file_url: f.file_url,
+          bucket: f.bucket,
+          source: f.source,
+          order_id: f.order_id
+        });
       });
 
       renderRecentDeliverables();
