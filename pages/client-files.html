@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Files — NAGRIVA</title>
-  <meta name="description" content="Access your project files and deliverables." />
+  <meta name="description" content="Access, preview and download your project deliverables." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -12,54 +12,519 @@
   <link rel="stylesheet" href="../css/dashboard.css" />
   <link rel="stylesheet" href="../css/mobile-optimizations.css" />
   <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/client-messages.css" />
+  <link rel="stylesheet" href="../css/onboarding.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" href="../assets/images/branding/nagriva-logo.png" />
   <style>
-    .cf-page { padding-top: 100px; min-height: 100vh; }
-    .cf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
-    .cf-header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
-    .cf-header p { font-size: 0.9rem; color: var(--gray); }
-    .cf-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
-    .cf-stat-card { position: relative; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; padding: 20px 24px; transition: border-color var(--transition), transform var(--transition); overflow: hidden; }
-    .cf-stat-card::before { content: ''; position: absolute; inset: 0; border-radius: 16px; background: linear-gradient(135deg, rgba(0,245,196,0.03) 0%, transparent 50%); pointer-events: none; }
-    .cf-stat-card:hover { border-color: rgba(0,245,196,0.2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-    .cf-stat-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(0,245,196,0.08); border: 1px solid rgba(0,245,196,0.15); display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 12px; }
-    .cf-stat-icon svg { width: 16px; height: 16px; stroke-width: 1.5; }
-    .cf-stat-value { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 4px; }
-    .cf-stat-label { font-size: 0.78rem; color: var(--gray); font-weight: 500; }
-    .cf-table-wrap { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .cf-table { width: 100%; border-collapse: collapse; }
-    .cf-table thead th { padding: 14px 20px; text-align: left; font-size: 0.68rem; font-weight: 700; color: var(--gray2); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.15); }
-    .cf-table tbody tr { transition: background var(--transition); }
+    /* ════════════════════════════════════════
+       CLIENT FILES
+       ════════════════════════════════════════ */
+
+    .dash-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.78rem;
+      color: var(--gray2);
+    }
+    .dash-breadcrumb a {
+      color: var(--gray2);
+      transition: color var(--transition);
+      text-decoration: none;
+    }
+    .dash-breadcrumb a:hover { color: var(--accent); }
+    .dash-breadcrumb svg {
+      width: 12px; height: 12px;
+      color: var(--gray2);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+    .dash-breadcrumb span {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .cf-stats-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .cf-recent-section {
+      margin-bottom: 24px;
+    }
+    .cf-recent-section .dash-section-title {
+      margin-bottom: 4px;
+    }
+    .cf-recent-desc {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .cf-recent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .cf-recent-card {
+      position: relative;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      overflow: hidden;
+    }
+    .cf-recent-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(0,245,196,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cf-recent-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .cf-recent-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cf-recent-card-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .cf-recent-card-icon svg { width: 15px; height: 15px; stroke-width: 1.5; }
+    .cf-recent-card-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .cf-recent-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cf-recent-card-meta {
+      font-size: 0.68rem;
+      color: var(--gray2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cf-recent-card-meta svg { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.6; }
+    .cf-recent-card-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .cf-recent-card-badge.pdf { color:#ff5050; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.12); }
+    .cf-recent-card-badge.image { color:#4facfe; background:rgba(79,172,254,0.08); border:1px solid rgba(79,172,254,0.12); }
+    .cf-recent-card-badge.zip { color:#f59e0b; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.12); }
+    .cf-recent-card-badge.video { color:#22c55e; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.12); }
+    .cf-recent-card-badge.doc { color:#a855f7; background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.12); }
+    .cf-recent-card-badge.default { color:var(--gray); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); }
+
+    .cf-table-wrap {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .cf-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .cf-table thead th {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+      white-space: nowrap;
+    }
+    .cf-table thead th:last-child { text-align: center; }
+    .cf-table tbody tr {
+      transition: background var(--transition);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .cf-table tbody tr:last-child { border-bottom: none; }
     .cf-table tbody tr:hover { background: rgba(0,245,196,0.02); }
-    .cf-table tbody td { padding: 14px 20px; font-size: 0.82rem; color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.03); }
-    .cf-table tbody tr:last-child td { border-bottom: none; }
-    .cf-file-name { display: flex; align-items: center; gap: 10px; }
-    .cf-file-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
-    .cf-file-icon svg { width: 14px; height: 14px; stroke-width: 1.5; }
-    .cf-file-title { font-weight: 600; color: var(--white); margin-bottom: 2px; }
-    .cf-file-meta { font-size: 0.72rem; color: var(--gray2); }
-    .cf-download-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; color: var(--accent); background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.15); cursor: pointer; text-decoration: none; transition: all var(--transition); }
-    .cf-download-btn:hover { background: rgba(0,245,196,0.12); border-color: rgba(0,245,196,0.3); }
-    .cf-empty { text-align: center; padding: 64px 20px; }
-    .cf-empty-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(0,245,196,0.03); border: 1px solid rgba(0,245,196,0.08); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--accent); }
-    .cf-empty-icon svg { width: 24px; height: 24px; stroke-width: 1.2; }
-    .cf-empty h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
-    .cf-empty p { font-size: 0.85rem; color: var(--gray2); max-width: 360px; margin: 0 auto; line-height: 1.6; }
-    .cf-skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%); background-size: 200% 100%; animation: cfShimmer 1.5s infinite; border-radius: 8px; }
-    @keyframes cfShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    .cf-skeleton-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr 100px; gap: 12px; padding: 16px 20px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .cf-table tbody td {
+      padding: 14px 20px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      vertical-align: middle;
+    }
+    .cf-table tbody td:last-child { text-align: center; }
+
+    .cf-file-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cf-file-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(0,245,196,0.06);
+      border: 1px solid rgba(0,245,196,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .cf-file-icon svg { width: 15px; height: 15px; stroke-width: 1.5; }
+    tr:hover .cf-file-icon {
+      background: rgba(0,245,196,0.1);
+      border-color: rgba(0,245,196,0.2);
+    }
+    .cf-file-title {
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 240px;
+    }
+    .cf-file-meta { font-size: 0.7rem; color: var(--gray2); }
+
+    .cf-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .cf-type-badge.pdf { color:#ff5050; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.15); }
+    .cf-type-badge.zip { color:#f59e0b; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.15); }
+    .cf-type-badge.png,
+    .cf-type-badge.jpg,
+    .cf-type-badge.jpeg,
+    .cf-type-badge.gif,
+    .cf-type-badge.webp,
+    .cf-type-badge.svg,
+    .cf-type-badge.image { color:#4facfe; background:rgba(79,172,254,0.08); border:1px solid rgba(79,172,254,0.15); }
+    .cf-type-badge.doc,
+    .cf-type-badge.docx { color:#a855f7; background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.15); }
+    .cf-type-badge.mp4,
+    .cf-type-badge.mov,
+    .cf-type-badge.avi,
+    .cf-type-badge.webm,
+    .cf-type-badge.video { color:#22c55e; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.15); }
+    .cf-type-badge.default { color:var(--gray); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); }
+
+    .cf-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .cf-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+    .cf-action-btn svg {
+      width: 13px; height: 13px;
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cf-action-btn-preview {
+      color: var(--gray);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border2);
+    }
+    .cf-action-btn-preview:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+    .cf-action-btn-preview:hover svg { transform: scale(1.1); }
+    .cf-action-btn-download {
+      color: var(--bg);
+      background: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .cf-action-btn-download:hover {
+      box-shadow: 0 0 20px rgba(0,245,196,0.3);
+      transform: translateY(-1px);
+    }
+    .cf-action-btn-download:hover svg { transform: translateY(2px); }
+    .cf-action-btn-download.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .cf-action-btn-download.loading svg {
+      animation: cfSpin 0.8s linear infinite;
+      transform: none;
+    }
+    @keyframes cfSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .cf-action-btn-download .cf-btn-spinner {
+      display: none;
+      width: 13px; height: 13px;
+      border: 2px solid rgba(4,4,4,0.2);
+      border-top-color: var(--bg);
+      border-radius: 50%;
+      animation: cfSpin 0.6s linear infinite;
+    }
+    .cf-action-btn-download.loading .cf-btn-spinner { display: inline-block; }
+    .cf-action-btn-download.loading svg { display: none; }
+    .cf-action-btn-download.loading .cf-btn-text { opacity: 0.6; }
+
+    .cf-order-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transition: all var(--transition);
+    }
+    .cf-order-link:hover { text-decoration: underline; color: var(--accent2); }
+
+    .cf-skeleton-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr 140px;
+      gap: 12px;
+      padding: 14px 20px;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
     .cf-skeleton-row:last-child { border-bottom: none; }
-    .cf-skeleton-bar { height: 14px; background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%); background-size: 200% 100%; animation: cfShimmer 1.5s infinite; border-radius: 6px; }
-    .cf-skeleton-bar.icon { width: 32px; height: 32px; border-radius: 8px; }
-    .cf-order-link { color: var(--accent); text-decoration: none; font-weight: 500; }
-    .cf-order-link:hover { text-decoration: underline; }
+    .cf-skeleton-row .dash-skeleton { height: 14px; border-radius: 6px; }
+    .cf-skeleton-row .dash-skeleton.icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; }
+    .cf-skeleton-recent { height: 100px; border-radius: 14px; border: 1px solid var(--border); }
+
+    /* ═══ PREVIEW MODAL ═══ */
+    .cf-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cf-modal-overlay.active { display: flex; opacity: 1; }
+    .cf-modal {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      background: rgba(20,20,22,0.95);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+    .cf-modal-overlay.active .cf-modal { transform: scale(1) translateY(0); }
+    .cf-modal-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      z-index: 10;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .cf-modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+    .cf-modal-close svg { width: 16px; height: 16px; }
+    .cf-modal-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      max-height: 65vh;
+      overflow: hidden;
+      background: rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .cf-modal-body img { max-width: 100%; max-height: 65vh; object-fit: contain; display: block; }
+    .cf-modal-body video { max-width: 100%; max-height: 65vh; width: 100%; display: block; }
+    .cf-modal-body embed,
+    .cf-modal-body iframe { width: 100%; height: 65vh; border: none; }
+    .cf-modal-body .cf-modal-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--gray2);
+    }
+    .cf-modal-body .cf-modal-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
+    .cf-modal-body .cf-modal-placeholder span { font-size: 0.85rem; }
+    .cf-modal-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+    .cf-modal-footer-info { flex: 1; min-width: 0; }
+    .cf-modal-footer-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .cf-modal-footer-meta {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cf-modal-footer-meta span { display: flex; align-items: center; gap: 4px; }
+    .cf-modal-footer-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 20px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .cf-modal-footer-download:hover {
+      box-shadow: 0 0 24px rgba(0,245,196,0.3);
+      transform: translateY(-1px);
+    }
+    .cf-modal-footer-download svg { width: 14px; height: 14px; }
+    .cf-modal-loading { display: flex; align-items: center; justify-content: center; min-height: 300px; }
+    .cf-modal-spinner {
+      width: 32px; height: 32px;
+      border: 3px solid rgba(255,255,255,0.06);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: cfSpin 0.7s linear infinite;
+    }
+
+    .cf-empty-wrap { padding: 40px 24px; }
+
+    @media (max-width: 1024px) {
+      .cf-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
     @media (max-width: 768px) {
-      .cf-stats { grid-template-columns: 1fr; }
+      .cf-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+      .cf-recent-grid { grid-template-columns: repeat(2, 1fr); }
       .cf-table thead { display: none; }
-      .cf-table tbody tr { display: block; padding: 16px 14px; }
-      .cf-table tbody td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: none; }
-      .cf-table tbody td::before { content: attr(data-label); font-size: 0.65rem; font-weight: 700; color: var(--gray2); text-transform: uppercase; letter-spacing: 0.06em; }
-      .cf-skeleton-row { grid-template-columns: 1fr; }
+      .cf-table tbody tr {
+        display: block;
+        padding: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+      .cf-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border-bottom: none;
+        text-align: right;
+      }
+      .cf-table tbody td::before {
+        content: attr(data-label);
+        font-size: 0.62rem;
+        font-weight: 700;
+        color: var(--gray2);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+      .cf-table tbody td:last-child { text-align: right; }
+      .cf-file-title { max-width: 180px; }
+      .cf-skeleton-row { grid-template-columns: 1fr; gap: 8px; }
+      .cf-actions { justify-content: flex-end; }
+      .cf-action-btn { padding: 5px 10px; font-size: 0.65rem; }
+      .cf-modal-overlay { padding: 16px; }
+      .cf-modal-footer { flex-direction: column; gap: 12px; padding: 14px 18px; }
+      .cf-modal-footer-download { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .cf-stats-grid { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+      .cf-recent-grid { grid-template-columns: 1fr; }
+      .cf-table tbody td { font-size: 0.75rem; }
+      .cf-file-title { max-width: 120px; font-size: 0.78rem; }
+      .cf-action-btn { padding: 4px 8px; font-size: 0.62rem; }
+      .cf-action-btn svg { width: 11px; height: 11px; }
     }
   </style>
 </head>
@@ -67,45 +532,107 @@
 
   <div id="navbar-container"></div>
 
-  <section class="cf-page">
+  <section class="dash-page">
     <div class="container">
 
-      <div class="cf-header">
-        <div>
+      <nav class="dash-breadcrumb">
+        <a href="dashboard.html">Dashboard</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>My Files</span>
+      </nav>
+
+      <div class="dash-header">
+        <div class="dash-greeting">
           <h1>My Files</h1>
-          <p>Access your project deliverables and uploaded assets</p>
+          <p>Access, preview and download your project deliverables.</p>
         </div>
       </div>
 
-      <div class="cf-stats" id="cfStats">
-        <div class="cf-stat-card">
-          <div class="cf-stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <div class="dash-stats-grid cf-stats-grid" id="cfStats">
+        <div class="dash-stat-card dash-fade-in">
+          <div class="dash-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
-          <div class="cf-stat-value" id="cfTotalFiles">0</div>
-          <div class="cf-stat-label">Total Files</div>
+          <div class="dash-stat-value" id="cfTotalFiles">0</div>
+          <div class="dash-stat-label">Total Files</div>
         </div>
-        <div class="cf-stat-card">
-          <div class="cf-stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        <div class="dash-stat-card dash-fade-in">
+          <div class="dash-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
           </div>
-          <div class="cf-stat-value" id="cfStorageUsed">0 B</div>
-          <div class="cf-stat-label">Total Storage Used</div>
+          <div class="dash-stat-value" id="cfStorageUsed">0 B</div>
+          <div class="dash-stat-label">Storage Used</div>
+        </div>
+        <div class="dash-stat-card dash-fade-in">
+          <div class="dash-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="dash-stat-value" id="cfLatestDate">—</div>
+          <div class="dash-stat-label">Latest Upload</div>
         </div>
       </div>
 
-      <div class="cf-table-wrap" id="cfTableWrap">
+      <div class="dash-quick-links">
+        <a href="dashboard.html" class="dash-quick-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8H13M13 8L9 4M13 8L9 12"/></svg>
+          Dashboard
+        </a>
+        <a href="order-tracking.html" class="dash-quick-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Track Orders
+        </a>
+        <a href="#" class="dash-quick-link primary" id="downloadAllBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download All Files
+        </a>
+      </div>
+
+      <div class="cf-recent-section">
+        <h2 class="dash-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Recent Deliverables
+        </h2>
+        <p class="cf-recent-desc">Latest files uploaded to your projects</p>
+        <div class="cf-recent-grid" id="cfRecentGrid"></div>
+      </div>
+
+      <div class="cf-table-wrap dash-fade-in" id="cfTableWrap">
         <div id="cfContent"></div>
       </div>
 
     </div>
   </section>
 
+  <div class="cf-modal-overlay" id="cfPreviewOverlay">
+    <div class="cf-modal" id="cfPreviewModal">
+      <button class="cf-modal-close" id="cfPreviewClose" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="cf-modal-body" id="cfPreviewBody">
+        <div class="cf-modal-loading"><div class="cf-modal-spinner"></div></div>
+      </div>
+      <div class="cf-modal-footer" id="cfPreviewFooter">
+        <div class="cf-modal-footer-info">
+          <div class="cf-modal-footer-name" id="cfPreviewName">filename.ext</div>
+          <div class="cf-modal-footer-meta">
+            <span id="cfPreviewType">—</span>
+            <span id="cfPreviewSize">—</span>
+          </div>
+        </div>
+        <a class="cf-modal-footer-download" id="cfPreviewDownload" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div id="footer-container"></div>
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
   <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/admin-auth.js"></script>
   <script defer src="../js/script.js"></script>
   <script defer src="../js/i18n.js"></script>
   <script defer src="../js/auth.js"></script>
