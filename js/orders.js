@@ -13,16 +13,18 @@ const NagrivaOrders = (() => {
     return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || 'U';
   }
 
-  function formatDate(dateStr) {
-    if (!dateStr) return '';
-    const d = new Date(dateStr);
+  function formatDate(dateInput) {
+    if (!dateInput) return '';
+    const d = new Date(dateInput);
+    if (isNaN(d.getTime())) return '';
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
   function formatTimeAgo(dateStr) {
     if (!dateStr) return '';
-    const now = new Date();
     const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    const now = new Date();
     const diff = Math.floor((now - d) / 1000);
     if (diff < 60) return 'just now';
     if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
@@ -81,8 +83,8 @@ const NagrivaOrders = (() => {
       order_received: 10,
       project_approved: 25,
       work_started: 45,
-      first_draft: 65,
-      client_review: 80,
+      first_draft: 70,
+      client_review: 85,
       final_delivery: 100
     };
     return map[stage] || 0;
@@ -150,10 +152,20 @@ const NagrivaOrders = (() => {
       throw insertError;
     }
 
+    console.log('[TEST] createOrder activity log start', {orderId: data.id, userId: user.id});
     try {
       await logActivity(data.id, user.id, 'order_created', 'Order submitted: ' + orderData.service_type);
     } catch (e) {
       console.warn('[NagrivaOrders] Failed to log activity:', e);
+    }
+    console.log('[TEST] createOrder activity log finished');
+
+    try {
+      if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+        await NAGRIVA_NotificationTriggers.newOrder(data, user.id);
+      }
+    } catch (e) {
+      console.warn('[NagrivaOrders] Failed to notify:', e);
     }
 
     return data;
@@ -225,6 +237,17 @@ const NagrivaOrders = (() => {
 
     await logActivity(orderId, user.id, 'status_changed',
       'Status changed to ' + getStatusLabel(status));
+
+    try {
+      if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+        var targetUserId = data.user_id || data.client_id;
+        if (targetUserId) {
+          await NAGRIVA_NotificationTriggers.statusChanged(data, targetUserId, status);
+        }
+      }
+    } catch (e) {
+      console.warn('[NagrivaOrders] Failed to notify status change:', e);
+    }
 
     return data;
   }
@@ -341,6 +364,36 @@ const NagrivaOrders = (() => {
 
     await logActivity(orderId, user.id, 'message_sent', 'New message from ' + senderRole);
 
+    try {
+      if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+        if (senderRole === 'client') {
+          await NAGRIVA_NotificationTriggers.notifyAdmins(
+            'New Message',
+            'New message regarding order #' + orderId.slice(0, 8),
+            '/pages/admin-messages.html?id=' + orderId,
+            { trigger: 'new_message', order_id: orderId }
+          );
+        } else {
+          var { data: order } = await window.supabaseClient
+            .from('orders')
+            .select('user_id')
+            .eq('id', orderId)
+            .single();
+          if (order && order.user_id) {
+            await NAGRIVA_NotificationTriggers.adminAction(
+              order.user_id,
+              'New Message',
+              'You have a new message regarding your order.',
+              '/pages/client-portal.html?id=' + orderId,
+              { trigger: 'new_message', order_id: orderId }
+            );
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('[NagrivaOrders] Failed to notify message:', e);
+    }
+
     return data;
   }
 
@@ -456,12 +509,37 @@ const NagrivaOrders = (() => {
      ════════════════════════════════════════════ */
 
   async function logActivity(orderId, userId, action, description) {
+    console.log('[TEST] logActivity called', {orderId, userId, action});
+    if (!orderId) { console.warn('[NagrivaOrders] logActivity skipped: no orderId'); return null; }
     try {
-      await window.supabaseClient
+      var payload = { user_id: userId, action: action, description: description };
+      if (orderId) payload.order_id = orderId;
+      console.log('[TEST] inserting into activity_log', JSON.stringify(payload));
+      var { data, error } = await window.supabaseClient
         .from('activity_log')
-        .insert({ order_id: orderId, user_id: userId, action, description });
+        .insert(payload)
+        .select()
+        .single();
+      console.log('[TEST] insert result', {data, error: error ? error.message : null});
+      if (error) {
+        console.warn('[NagrivaOrders] logActivity insert error:', error.message);
+        if (error.message && error.message.includes('column') && error.message.includes('order_id')) {
+          console.warn('[NagrivaOrders] activity_log table missing order_id column — run the migration (supabase-migration-activity-log-fix.sql / supabase-notification-fix.sql).');
+          delete payload.order_id;
+          var { data: retryData, error: retryError } = await window.supabaseClient
+            .from('activity_log')
+            .insert(payload)
+            .select()
+            .single();
+          if (retryError) console.warn('[NagrivaOrders] logActivity fallback also failed:', retryError.message);
+          return retryData || null;
+        }
+        return null;
+      }
+      return data;
     } catch (e) {
-      console.warn('Failed to log activity:', e);
+      console.warn('[NagrivaOrders] logActivity unexpected error:', e.message || e);
+      return null;
     }
   }
 
@@ -473,10 +551,16 @@ const NagrivaOrders = (() => {
         .eq('order_id', orderId)
         .order('created_at', { ascending: false })
         .limit(20);
-      if (error) throw error;
+      if (error) {
+        if (error.message && error.message.includes('column') && error.message.includes('does not exist')) {
+          console.warn('[NagrivaOrders] activity_log table missing order_id column — run the migration.');
+          return [];
+        }
+        throw error;
+      }
       return data || [];
     } catch (err) {
-      console.error('[NagrivaOrders] getActivity error:', err.message || err);
+      console.warn('[NagrivaOrders] getActivity failed:', err.message || err);
       return [];
     }
   }

@@ -911,6 +911,35 @@
   flex-shrink: 0;
 }
 
+/* ── Delivery Placeholder (Not Scheduled) ── */
+.track-delivery-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 8px;
+  width: 100%;
+  gap: 10px;
+}
+.track-delivery-placeholder-icon {
+  opacity: 0.25;
+  color: var(--gray2);
+  margin-bottom: 4px;
+}
+.track-delivery-placeholder-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.track-delivery-placeholder-desc {
+  font-size: 0.78rem;
+  color: var(--gray2);
+  line-height: 1.5;
+  max-width: 260px;
+}
+
 /* ════════════════════════════════════════════════════════
    FILES
    ════════════════════════════════════════════════════════ */

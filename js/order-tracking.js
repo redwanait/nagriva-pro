@@ -209,45 +209,68 @@
         '</div></div>';
 
       try {
-        console.log('[OrderTracking] Fetching order:', orderId);
         const order = await NagrivaOrders.getOrder(orderId);
         _lastOrderData = order;
-        console.log('[OrderTracking] Full order object:', JSON.parse(JSON.stringify(order)));
-        console.log('[OrderTracking] Fields check:', {
-          id: order.id,
-          status: order.status,
-          current_stage: order.current_stage,
-          progress: order.progress,
-          estimated_delivery: order.estimated_delivery,
-          title: order.project_title,
-          created_at: order.created_at,
-          service_type: order.service_type,
-          order_number: order.order_number
-        });
 
         const files = await NagrivaOrders.getFiles(orderId);
         const activity = await NagrivaOrders.getActivity(orderId);
         const msgs = await NagrivaOrders.getMessages(orderId);
 
         const status = order.status || 'pending';
-        const currentStage = order.current_stage || 'order_received';
-        const progress = order.progress != null ? order.progress : NagrivaOrders.getProgressForStage(currentStage);
 
-        console.log('[OrderTracking] Derived values:', { status, currentStage, progress });
+        const STATUS_STAGE_MAP = {
+          pending: 'order_received',
+          approved: 'project_approved',
+          in_progress: 'work_started',
+          review: 'client_review',
+          completed: 'final_delivery',
+          cancelled: 'order_received'
+        };
+        const currentStage = order.current_stage || STATUS_STAGE_MAP[status] || 'order_received';
+        const progress = (order.progress != null && order.progress > 0)
+          ? order.progress
+          : NagrivaOrders.getProgressForStage(currentStage);
 
-        const createdDate = new Date(order.created_at);
-        const deadlineDate = order.estimated_delivery ? new Date(order.estimated_delivery) : (order.deadline ? new Date(order.deadline) : new Date(createdDate.getTime() + 30 * 24 * 60 * 60 * 1000));
-        const remainingDays = Math.max(0, Math.ceil((deadlineDate - Date.now()) / (1000 * 60 * 60 * 24)));
-        const totalDuration = Math.max(1, Math.ceil((deadlineDate - createdDate) / (1000 * 60 * 60 * 24)));
-        const elapsedFromStart = Math.max(0, (Date.now() - createdDate) / (1000 * 60 * 60 * 24));
-        const timePercent = Math.min(100, Math.round((elapsedFromStart / totalDuration) * 100));
+        const createdDate = order.created_at ? new Date(order.created_at) : null;
+        const validCreated = createdDate && !isNaN(createdDate.getTime());
 
-        console.log('[OrderTracking] Date calculations:', { createdDate, deadlineDate, remainingDays, totalDuration, timePercent });
+        function isReasonableDate(d) {
+          if (!d) return false;
+          if (isNaN(d.getTime())) return false;
+          const max = new Date();
+          max.setFullYear(max.getFullYear() + 3);
+          const min = new Date('2020-01-01');
+          return d >= min && d <= max;
+        }
+
+        let deliveryDate = null;
+        if (order.estimated_delivery) {
+          const d = new Date(order.estimated_delivery);
+          if (isReasonableDate(d)) deliveryDate = d;
+        }
+        if (!deliveryDate && order.deadline) {
+          const d = new Date(order.deadline);
+          if (isReasonableDate(d)) deliveryDate = d;
+        }
+
+        let deadlineDate = null;
+        let remainingDays = null;
+        let timePercent = 0;
+
+        if (deliveryDate) {
+          deadlineDate = deliveryDate;
+          if (validCreated) {
+            const totalDuration = Math.max(1, Math.ceil((deadlineDate - createdDate) / (1000 * 60 * 60 * 24)));
+            const elapsedFromStart = Math.max(0, (Date.now() - createdDate) / (1000 * 60 * 60 * 24));
+            remainingDays = Math.max(0, Math.ceil((deadlineDate - Date.now()) / (1000 * 60 * 60 * 24)));
+            timePercent = Math.min(100, Math.round((elapsedFromStart / totalDuration) * 100));
+          }
+        }
 
         const statusLabel = NagrivaOrders.getStatusLabel(status);
         const badgeClass = NagrivaOrders.getStatusBadgeClass(status);
-        const createdFormatted = NagrivaOrders.formatDate(order.created_at);
-        const deadlineFormatted = NagrivaOrders.formatDate(deadlineDate);
+        const createdFormatted = validCreated ? NagrivaOrders.formatDate(order.created_at) : '\u2014';
+        const deadlineFormatted = deadlineDate ? NagrivaOrders.formatDate(deadlineDate) : null;
 
         const stagesHtml = renderTimelineStages(currentStage);
 
@@ -286,7 +309,24 @@
 
         const budgetFormatted = order.budget ? '$' + parseInt(order.budget).toLocaleString() : '\u2014';
 
-        console.log('[OrderTracking] Rendering template...');
+        let deliveryCardBody;
+        if (deadlineDate) {
+          deliveryCardBody = '<div class="track-delivery-body">' +
+            '<div class="track-delivery-ring">' + renderProgressCircle(timePercent) + '</div>' +
+            '<div class="track-delivery-info">' +
+            '<div class="track-delivery-label">Expected by</div>' +
+            '<div class="track-delivery-date">' + deadlineFormatted + '</div>' +
+            '<div class="track-delivery-remaining"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' + remainingDays + ' days remaining</div></div></div>';
+        } else {
+          deliveryCardBody = '<div class="track-delivery-body">' +
+            '<div class="track-delivery-placeholder">' +
+            '<div class="track-delivery-placeholder-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>' +
+            '<div class="track-delivery-placeholder-title">Not Scheduled</div>' +
+            '<div class="track-delivery-placeholder-desc">An estimated delivery date has not been set for this project yet.</div>' +
+            '</div></div>';
+        }
+
+
         container.innerHTML =
           /* ═══ TIMELINE SECTION (hero) ═══ */
           '<div class="track-timeline-section">' +
@@ -306,7 +346,7 @@
           '<div class="track-stat-card"><div class="track-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="track-stat-label">Progress</div><div class="track-stat-value accent">' + Math.round(progress) + '%</div></div>' +
           (order.budget ? '<div class="track-stat-card"><div class="track-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="track-stat-label">Budget</div><div class="track-stat-value accent">' + budgetFormatted + '</div></div>' : '') +
           '<div class="track-stat-card"><div class="track-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="track-stat-label">Created</div><div class="track-stat-value">' + createdFormatted + '</div></div>' +
-          '<div class="track-stat-card"><div class="track-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="track-stat-label">Delivery</div><div class="track-stat-value">' + deadlineFormatted + '</div></div>' +
+          '<div class="track-stat-card"><div class="track-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="track-stat-label">Delivery</div><div class="track-stat-value">' + (deadlineFormatted || 'Not Scheduled') + '</div></div>' +
           '</div>' +
 
           /* ═══ MAIN CONTENT GRID ═══ */
@@ -318,12 +358,8 @@
           '<div class="track-delivery-glow"></div>' +
           '<div class="track-card-header"><div class="track-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>' +
           '<h3 class="track-card-title">Estimated Delivery</h3></div>' +
-          '<div class="track-delivery-body">' +
-          '<div class="track-delivery-ring">' + renderProgressCircle(timePercent) + '</div>' +
-          '<div class="track-delivery-info">' +
-          '<div class="track-delivery-label">Expected by</div>' +
-          '<div class="track-delivery-date">' + deadlineFormatted + '</div>' +
-          '<div class="track-delivery-remaining"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' + remainingDays + ' days remaining</div></div></div></div>' +
+          deliveryCardBody +
+          '</div>' +
 
           /* ── Files & Deliverables Card ── */
           '<div class="track-card">' +
@@ -386,8 +422,6 @@
           '</div>' +
 
           '</div></div>';
-
-        console.log('[OrderTracking] Template rendered successfully');
 
         /* Reveal fade-up elements for animation */
         if (typeof window.observeFadeUpElements === 'function') {

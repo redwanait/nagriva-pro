@@ -520,6 +520,27 @@ const NAGRIVA_Messages = (() => {
       conv.lastSenderRole = 'admin';
     }
 
+    try {
+      if (typeof NAGRIVA_NotificationTriggers !== 'undefined') {
+        var { data: orderRow } = await supabaseClient
+          .from('orders')
+          .select('user_id')
+          .eq('id', orderId)
+          .single();
+        if (orderRow && orderRow.user_id) {
+          await NAGRIVA_NotificationTriggers.adminAction(
+            orderRow.user_id,
+            'New Message',
+            'You have a new message regarding your order.',
+            '/pages/client-portal.html?id=' + orderId,
+            { trigger: 'new_message', order_id: orderId }
+          );
+        }
+      }
+    } catch (e) {
+      console.warn('[AdminMessages] Failed to notify:', e);
+    }
+
     return data;
   }
 

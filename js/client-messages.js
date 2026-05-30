@@ -214,6 +214,20 @@ const NAGRIVA_ClientMessages = (() => {
 
     updateUnreadBadges();
     notifyChange();
+
+    try {
+      if (typeof NAGRIVA_NotificationTriggers !== 'undefined' && senderRole === 'client') {
+        NAGRIVA_NotificationTriggers.notifyAdmins(
+          'New Message',
+          'New message regarding ' + (conv ? conv.projectTitle : 'order'),
+          '/pages/admin-messages.html?id=' + orderId,
+          { trigger: 'new_message', order_id: orderId }
+        );
+      }
+    } catch (e) {
+      warn('Failed to notify:', e);
+    }
+
     return data;
   }
 
