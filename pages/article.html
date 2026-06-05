@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Article — NAGRIVA</title>
+  <meta name="description" id="metaDesc" content="Read the latest insights from NAGRIVA." />
+  <meta property="og:title" id="ogTitle" content="Article — NAGRIVA" />
+  <meta property="og:description" id="ogDesc" content="Read the latest insights from NAGRIVA." />
+  <meta property="og:image" id="ogImage" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" id="ogUrl" content="https://nagriva.com/pages/article" />
+  <meta property="og:site_name" content="NAGRIVA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" id="twTitle" content="Article — NAGRIVA" />
+  <meta name="twitter:description" id="twDesc" content="Read the latest insights from NAGRIVA." />
+  <meta name="twitter:image" id="twImage" content="" />
+  <link rel="canonical" href="https://nagriva.com/pages/article.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="/css/performance.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    .article-page { display: block; }
+    .article-page .article-loading { display: none; }
+    .article-page .article-error { display: none; }
+    .article-page .article-hero,
+    .article-page .article-content,
+    .article-page .related-section { display: none; }
+    .article-page.loading .article-loading { display: flex; }
+    .article-page.error .article-error { display: flex; }
+    .article-page.loaded .article-hero { display: flex; }
+    .article-page.loaded .article-content { display: block; }
+    .article-page.loaded .related-section { display: block; }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com",
+  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com/pages/article",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+</head>
+<body data-page="blog">
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div id="navbar-container"></div>
+
+<!-- ══════════════════════════ ARTICLE PAGE WRAPPER ══════════════════════════ -->
+<div class="article-page" id="articlePage">
+
+  <!-- Loading State -->
+  <div class="article-loading">
+    <div class="article-loading-spinner"></div>
+    <div class="article-loading-text">Loading article…</div>
+  </div>
+
+  <!-- Error State -->
+  <div class="ne ne-error" id="articleError" style="display:none;">
+    <div class="ne-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <h3 class="ne-title">Article not found</h3>
+    <p class="ne-desc">The article you're looking for doesn't exist or may have been removed.</p>
+    <div class="ne-actions"><button class="ne-btn ne-btn-primary" onclick="window.location.href='/pages/blog.html'">Back to Blog</button></div>
+  </div>
+
+  <!-- Article Hero -->
+  <section class="article-hero" id="articleHero">
+    <div class="article-hero-bg">
+      <img id="heroImage" src="" alt="" />
+      <div class="article-hero-overlay"></div>
+      <div class="blog-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="article-header">
+        <a href="/pages/blog.html" class="article-back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Blog
+        </a>
+
+        <div class="art-cat" id="articleCategory"></div>
+        <h1 id="articleTitle"></h1>
+        <p class="art-lead" id="articleExcerpt"></p>
+
+        <div class="art-meta-bar">
+          <div class="art-meta-author">
+            <div class="art-meta-avatar" id="articleAvatar"></div>
+            <div>
+              <div class="art-meta-name" id="articleAuthor"></div>
+            </div>
+          </div>
+          <span class="art-meta-item" id="articleDate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span id="articleDateText"></span>
+          </span>
+          <span class="art-meta-item" id="articleReadingTime">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span id="articleReadingText"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <section class="article-content lazy-section lazy-section--large" id="articleContent">
+    <div class="container">
+      <div class="article-toolbar">
+        <a href="/pages/blog.html" class="article-back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Blog
+        </a>
+        <div class="article-share-wrap">
+          <span class="article-share-label">Share</span>
+          <button class="article-share-btn" id="shareCopy" aria-label="Copy link" title="Copy link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
+          <button class="article-share-btn" id="shareTwitter" aria-label="Share on Twitter/X" title="Share on X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </button>
+          <button class="article-share-btn" id="shareLinkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </button>
+          <button class="article-share-btn" id="shareFacebook" aria-label="Share on Facebook" title="Share on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </button>
+          <span class="article-share-tooltip" id="shareTooltip">Link copied!</span>
+        </div>
+      </div>
+
+      <div class="article-body" id="articleBody"></div>
+    </div>
+  </section>
+
+  <!-- Related Articles -->
+  <section class="related-section lazy-section lazy-section--large" id="relatedSection">
+    <div class="container">
+      <div class="related-header">
+        <h2 class="related-title">Related Articles</h2>
+        <a href="/pages/blog.html" class="related-back-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          View All Articles
+        </a>
+      </div>
+      <div class="related-grid" id="relatedGrid"></div>
+      <div class="related-empty" id="relatedEmpty">No related articles found.</div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="blog-cta lazy-section lazy-section--large">
+    <div class="blog-cta-bg"><div class="blog-cta-glow"></div></div>
+    <div class="container">
+      <div class="blog-cta-content fade-up">
+        <div class="section-tag">Stay Ahead</div>
+        <h2 class="blog-cta-title">Join 5,000+ Leaders Reading the NAGRIVA Journal</h2>
+        <p class="blog-cta-desc">Get exclusive insights on AI, automation, and digital growth delivered to your inbox every week.</p>
+        <div class="blog-cta-form">
+          <input type="email" class="blog-cta-input" placeholder="your@email.com" id="ctaEmail" aria-label="Email for newsletter" />
+          <button class="blog-cta-submit" id="ctaSubscribe">
+            <span>Subscribe</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+        <span class="blog-cta-trust">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No spam. Unsubscribe anytime.
+        </span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<div id="footer-container"></div>
+
+<!-- ══════════════════════════ SCRIPTS ══════════════════════════ -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/js/supabase-config.js"></script>
+<script defer src="/modules/blog/blog-api.js"></script>
+<script defer src="/js/script.js"></script>
+<script defer src="/js/i18n.js"></script>
+<script defer src="/js/auth.js"></script>
+<script defer src="/js/navbar.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+<script defer src="/js/lazy-loader.js"></script>
+  <script defer src="/js/cookie-consent.js"></script>
+
+<!-- ══════════════════════════ ARTICLE SCRIPT ══════════════════════════ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+(function() {
+  'use strict';
+
+  const page = document.getElementById('articlePage');
+  const heroSection = document.getElementById('articleHero');
+  const contentSection = document.getElementById('articleContent');
+  const relatedSection = document.getElementById('relatedSection');
+
+  const heroImage = document.getElementById('heroImage');
+  const articleCategory = document.getElementById('articleCategory');
+  const articleTitle = document.getElementById('articleTitle');
+  const articleExcerpt = document.getElementById('articleExcerpt');
+  const articleAvatar = document.getElementById('articleAvatar');
+  const articleAuthor = document.getElementById('articleAuthor');
+  const articleDateText = document.getElementById('articleDateText');
+  const articleReadingText = document.getElementById('articleReadingText');
+  const articleBody = document.getElementById('articleBody');
+  const relatedGrid = document.getElementById('relatedGrid');
+  const relatedEmpty = document.getElementById('relatedEmpty');
+
+  const shareCopy = document.getElementById('shareCopy');
+  const shareTwitter = document.getElementById('shareTwitter');
+  const shareLinkedin = document.getElementById('shareLinkedin');
+  const shareFacebook = document.getElementById('shareFacebook');
+  const shareTooltip = document.getElementById('shareTooltip');
+
+  const progressBar = document.getElementById('readingProgress');
+
+  const pageTitle = document.getElementById('pageTitle');
+  const metaDesc = document.getElementById('metaDesc');
+  const ogTitle = document.getElementById('ogTitle');
+  const ogDesc = document.getElementById('ogDesc');
+  const ogImage = document.getElementById('ogImage');
+  const ogUrl = document.getElementById('ogUrl');
+  const twTitle = document.getElementById('twTitle');
+  const twDesc = document.getElementById('twDesc');
+  const twImage = document.getElementById('twImage');
+
+  let article = null;
+  let tooltipTimeout = null;
+
+  // ─── Get slug from URL ───
+
+  function getSlug() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('slug') || '';
+  }
+
+  // ─── Format helpers ───
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function formatReadCount(count) {
+    if (!count) return '0 reads';
+    if (count >= 1000) return (count / 1000).toFixed(1).replace('.0', '') + 'K reads';
+    return count + ' reads';
+  }
+
+  // ─── Show states ───
+
+  function showLoading() {
+    page.classList.remove('loaded', 'error');
+    page.classList.add('loading');
+  }
+
+  function showError() {
+    page.classList.remove('loaded', 'loading');
+    page.classList.add('error');
+  }
+
+  function showLoaded() {
+    page.classList.remove('loading', 'error');
+    page.classList.add('loaded');
+  }
+
+  // ─── Render article ───
+
+  function renderArticle(data) {
+    article = data;
+    injectArticleSchema(data);
+
+    // Meta / OG
+    document.title = data.title + ' — NAGRIVA';
+    pageTitle.textContent = data.title + ' — NAGRIVA';
+    metaDesc.content = data.excerpt;
+    ogTitle.content = data.title;
+    ogDesc.content = data.excerpt;
+    ogImage.content = data.imageUrl;
+    ogUrl.content = window.location.href;
+    twTitle.content = data.title;
+    twDesc.content = data.excerpt;
+    twImage.content = data.imageUrl;
+
+    // Hero
+    heroImage.src = data.imageUrl;
+    heroImage.alt = data.title;
+    articleCategory.textContent = data.category;
+    articleTitle.textContent = data.title;
+    articleExcerpt.textContent = data.excerpt;
+
+    // Author
+    articleAvatar.textContent = data.authorInitials;
+    articleAvatar.style.background = data.authorAvatarColor;
+    articleAuthor.textContent = data.authorName;
+
+    // Meta
+    articleDateText.textContent = formatDate(data.publishedAt);
+    articleReadingText.textContent = data.readingTime + ' min read';
+
+    // Content
+    articleBody.innerHTML = data.content || '';
+
+    showLoaded();
+    updateProgress();
+
+    // Increment read count
+    NAGRIVA_BlogAPI.incrementReadCount(data.id).catch(() => {});
+  }
+
+  // ─── Fetch article ───
+
+  async function loadArticle() {
+    const slug = getSlug();
+    if (!slug) {
+      showError();
+      return;
+    }
+
+    showLoading();
+
+    try {
+      const data = await NAGRIVA_BlogAPI.fetchArticleByIdentifier(slug);
+      if (!data) {
+        showError();
+        return;
+      }
+      renderArticle(data);
+      loadRelated(data);
+    } catch (err) {
+      console.error('[NAGRIVA Article] Failed to load:', err);
+      showError();
+    }
+  }
+
+  // ─── Related articles ───
+
+  async function loadRelated(current) {
+    try {
+      const result = await NAGRIVA_BlogAPI.fetchLatest({
+        per_page: 6,
+        category: current.category,
+        search: null
+      });
+
+      let related = result.data.filter(a => a.id !== current.id);
+      if (related.length === 0) {
+        const fallback = await NAGRIVA_BlogAPI.fetchLatest({ per_page: 6 });
+        related = fallback.data.filter(a => a.id !== current.id);
+      }
+
+      related = related.slice(0, 3);
+
+      if (related.length === 0) {
+        relatedEmpty.style.display = 'block';
+        relatedGrid.innerHTML = '';
+        return;
+      }
+
+      relatedEmpty.style.display = 'none';
+      relatedGrid.innerHTML = related.map(a => {
+        const date = new Date(a.publishedAt).toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', year: 'numeric'
+        });
+        return `
+          <article class="art-card" data-slug="${a.slug}" data-id="${a.id}">
+            <div class="art-thumb">
+              <img src="${a.imageUrl}" alt="${a.title}" loading="lazy" />
+              <div class="art-thumb-overlay"></div>
+            </div>
+            <div class="art-body">
+              <span class="art-cat">${a.category}</span>
+              <h3 class="art-title">${a.title}</h3>
+              <p class="art-excerpt">${a.excerpt}</p>
+              <div class="art-meta">
+                <div class="art-meta-left">
+                  <div class="art-avatar" style="background:${a.authorAvatarColor}">${a.authorInitials}</div>
+                  <span class="art-author-name">${a.authorName}</span>
+                </div>
+                <div class="art-meta-right">
+                  <span class="art-time">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    ${a.readingTime} min
+                  </span>
+                  <span class="arrow-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Bind related article clicks
+      relatedGrid.querySelectorAll('.art-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const slug = this.dataset.slug;
+          const id = this.dataset.id;
+          if (id) {
+            NAGRIVA_BlogAPI.incrementReadCount(id).catch(() => {});
+          }
+          if (slug) {
+            window.location.href = '/pages/article.html?slug=' + encodeURIComponent(slug);
+          }
+        });
+      });
+
+    } catch (err) {
+      console.warn('[NAGRIVA Article] Related articles failed:', err.message);
+      relatedEmpty.style.display = 'block';
+    }
+  }
+
+  // ─── Reading progress bar ───
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + '%';
+  }
+
+  // ─── Share buttons ───
+
+  function getShareUrl() {
+    return window.location.href;
+  }
+
+  function showTooltip() {
+    if (tooltipTimeout) clearTimeout(tooltipTimeout);
+    shareTooltip.classList.add('show');
+    tooltipTimeout = setTimeout(() => {
+      shareTooltip.classList.remove('show');
+    }, 2000);
+  }
+
+  if (shareCopy) {
+    shareCopy.addEventListener('click', function() {
+      navigator.clipboard.writeText(getShareUrl()).then(showTooltip).catch(() => {});
+    });
+  }
+
+  if (shareTwitter) {
+    shareTwitter.addEventListener('click', function() {
+      const text = article ? article.title : 'Check out this article';
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(getShareUrl()), '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (shareLinkedin) {
+    shareLinkedin.addEventListener('click', function() {
+      window.open('https://linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(getShareUrl()), '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (shareFacebook) {
+    shareFacebook.addEventListener('click', function() {
+      window.open('https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(getShareUrl()), '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  // ─── Events ───
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ─── Init ───
+
+  loadArticle();
+
+})();
+});
+</script>
+
+<div id="cookie-consent-container"></div>
+</body>
+</html>

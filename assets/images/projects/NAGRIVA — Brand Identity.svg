@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0a0a0f"/>
+  <rect x="0" y="0" width="800" height="600" fill="url(#bgGrad)" opacity="0.4"/>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(0,245,196,0.06)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00f5c4"/>
+      <stop offset="50%" stop-color="#00c2a8"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+  </defs>
+  <rect x="60" y="40" width="160" height="40" rx="8" fill="rgba(0,245,196,0.08)" stroke="rgba(0,245,196,0.15)" stroke-width="0.5"/>
+  <text x="78" y="66" font-family="'Syne',sans-serif" font-size="14" font-weight="700" fill="#00f5c4">NAGRIVA</text>
+  <text x="240" y="66" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.3)">Brand · Identity · Digital</text>
+  <rect x="60" y="100" width="680" height="200" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <rect x="80" y="120" width="300" height="160" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="100" y="155" font-family="'Syne',sans-serif" font-size="22" font-weight="800" fill="#fff" letter-spacing="-0.5">NAGRIVA</text>
+  <text x="100" y="182" font-family="system-ui" font-size="11" fill="rgba(255,255,255,0.35)">Digital Growth Agency</text>
+  <rect x="100" y="200" width="240" height="1" fill="rgba(255,255,255,0.06)"/>
+  <rect x="100" y="215" width="100" height="28" rx="14" fill="rgba(0,245,196,0.1)" stroke="rgba(0,245,196,0.15)" stroke-width="0.5"/>
+  <text x="115" y="234" font-family="system-ui" font-size="10" font-weight="500" fill="#00f5c4">Est. 2024</text>
+  <rect x="215" y="215" width="120" height="28" rx="14" fill="rgba(79,172,254,0.1)" stroke="rgba(79,172,254,0.15)" stroke-width="0.5"/>
+  <text x="228" y="234" font-family="system-ui" font-size="10" font-weight="500" fill="#4facfe">Full Rebrand</text>
+  <!-- Brand board mockup -->
+  <rect x="400" y="120" width="160" height="75" rx="8" fill="#1a1a28" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <rect x="415" y="135" width="50" height="50" rx="25" fill="rgba(0,245,196,0.15)"/>
+  <text x="431" y="165" font-family="'Syne',sans-serif" font-size="18" font-weight="800" fill="#00f5c4">N</text>
+  <text x="478" y="155" font-family="system-ui" font-size="10" font-weight="600" fill="#fff">Primary Mark</text>
+  <text x="478" y="170" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.3)">Gradient version</text>
+  <rect x="400" y="205" width="160" height="75" rx="8" fill="#1a1a28" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <rect x="415" y="220" width="50" height="50" rx="4" fill="rgba(0,245,196,0.06)" stroke="rgba(0,245,196,0.1)" stroke-width="0.5"/>
+  <rect x="422" y="227" width="36" height="36" rx="2" fill="#00f5c4"/>
+  <text x="478" y="240" font-family="system-ui" font-size="10" font-weight="600" fill="#fff">Symbol</text>
+  <text x="478" y="255" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.3)">Solid accent</text>
+  <rect x="580" y="120" width="140" height="160" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="598" y="150" font-family="system-ui" font-size="10" font-weight="600" fill="#fff">Color Palette</text>
+  <rect x="598" y="165" width="24" height="24" rx="6" fill="#00f5c4"/>
+  <text x="630" y="182" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">#00f5c4</text>
+  <rect x="598" y="195" width="24" height="24" rx="6" fill="#0a0a0f" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <text x="630" y="212" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">#0a0a0f</text>
+  <rect x="598" y="225" width="24" height="24" rx="6" fill="#fff"/>
+  <text x="630" y="242" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">#ffffff</text>
+  <rect x="598" y="255" width="24" height="24" rx="6" fill="#4facfe"/>
+  <text x="630" y="272" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.4)">#4facfe</text>
+  <!-- Typography -->
+  <rect x="60" y="320" width="320" height="120" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="80" y="348" font-family="system-ui" font-size="10" font-weight="600" fill="#fff">Typography</text>
+  <text x="80" y="375" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#fff" letter-spacing="-0.3">Syne Bold</text>
+  <text x="80" y="395" font-family="Georgia,serif" font-size="14" fill="rgba(255,255,255,0.4)">Syne Regular · DM Sans · System UI</text>
+  <text x="80" y="418" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.25)">ABCDEFGHIJKLMNOPQRSTUVWXYZ</text>
+  <!-- Brand mockups -->
+  <rect x="400" y="320" width="340" height="120" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="420" y="348" font-family="system-ui" font-size="10" font-weight="600" fill="#fff">Applications</text>
+  <rect x="420" y="362" width="90" height="60" rx="6" fill="rgba(0,245,196,0.04)" stroke="rgba(0,245,196,0.08)" stroke-width="0.5"/>
+  <rect x="435" y="377" width="60" height="30" rx="4" fill="rgba(0,245,196,0.1)"/>
+  <text x="442" y="396" font-family="'Syne',sans-serif" font-size="8" font-weight="700" fill="#00f5c4">N</text>
+  <rect x="525" y="362" width="90" height="60" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <rect x="540" y="375" width="60" height="36" rx="4" fill="#1a1a28" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <rect x="548" y="383" width="20" height="20" rx="3" fill="rgba(0,245,196,0.08)"/>
+  <text x="630" y="362" width="90" height="60" rx="6" fill="rgba(79,172,254,0.04)" stroke="rgba(79,172,254,0.08)" stroke-width="0.5"/>
+  <text x="642" y="387" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.3)">Coming Soon</text>
+  <!-- Brand values -->
+  <rect x="60" y="460" width="220" height="60" rx="10" fill="rgba(0,245,196,0.04)" stroke="rgba(0,245,196,0.08)" stroke-width="0.5"/>
+  <text x="80" y="488" font-family="system-ui" font-size="12" font-weight="600" fill="#00f5c4">Precision</text>
+  <text x="80" y="506" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Every pixel, deliberate.</text>
+  <rect x="295" y="460" width="220" height="60" rx="10" fill="rgba(79,172,254,0.04)" stroke="rgba(79,172,254,0.08)" stroke-width="0.5"/>
+  <text x="315" y="488" font-family="system-ui" font-size="12" font-weight="600" fill="#4facfe">Performance</text>
+  <text x="315" y="506" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Built for speed.</text>
+  <rect x="530" y="460" width="210" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <text x="550" y="488" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">Simplicity</text>
+  <text x="550" y="506" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Clean. Clear. Effective.</text>
+</svg>

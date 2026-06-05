@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin-dashboard
+Disallow: /dashboard
+Disallow: /client-portal
+Disallow: /client-files
+Disallow: /profile
+Disallow: /settings
+Disallow: /notifications
+Disallow: /service-edit
+Disallow: /service-new
+Disallow: /submit-order
+Disallow: /order-tracking
+Disallow: /onboarding-qa
+Disallow: /rls-verify
+Disallow: /unauthorized
+Disallow: /reset-password
+Disallow: /forgot-password
+
+Sitemap: https://nagriva.com/sitemap.xml

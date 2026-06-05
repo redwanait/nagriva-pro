@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Order — NAGRIVA</title>
+  <meta name="description" content="Submit a new service order to NAGRIVA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/orders.css" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+</head>
+<body data-page="submit-order">
+
+  <div id="navbar-container"></div>
+
+  <section class="order-hero">
+    <div class="order-hero-bg">
+      <div class="order-hero-glow"></div>
+      <div class="order-hero-glow-2"></div>
+    </div>
+    <div class="container">
+      <div class="order-hero-inner fade-up">
+        <div class="order-hero-badge">
+          <span class="badge-dot"></span>
+          New Order
+        </div>
+        <h1 class="order-hero-title">Submit a <span class="text-gradient">Service Order</span></h1>
+        <p class="order-hero-desc">Tell us about your project and we'll get started on transforming your digital presence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section lazy-section" style="padding-top: 0;">
+    <div class="container">
+      <div class="order-form-wrap fade-up">
+        <form class="order-form" id="orderForm" novalidate>
+          <div class="order-form-row">
+            <div class="order-form-group form-field-anim" style="--delay:0s;">
+              <label class="order-form-label">Service Type <span class="required">*</span></label>
+              <select class="order-form-select" id="serviceType" required>
+                <option value="">Select a service...</option>
+                <option value="web_design">Web Design</option>
+                <option value="web_development">Web Development</option>
+                <option value="seo">SEO Optimization</option>
+                <option value="brand_identity">Brand Identity</option>
+                <option value="social_media">Social Media Management</option>
+                <option value="content_writing">Content Writing</option>
+                <option value="performance_marketing">Performance Marketing</option>
+                <option value="ai_automation">AI Automation</option>
+                <option value="strategy">Strategy & Consulting</option>
+                <option value="other">Other</option>
+              </select>
+              <div class="order-form-error" id="serviceTypeError"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Please select a service type</div>
+            </div>
+            <div class="order-form-group form-field-anim" style="--delay:0.05s;">
+              <label class="order-form-label">Budget Range (USD)</label>
+              <select class="order-form-select" id="budget">
+                <option value="">Not sure yet</option>
+                <option value="500">$500 - $1,000</option>
+                <option value="1000">$1,000 - $2,500</option>
+                <option value="2500">$2,500 - $5,000</option>
+                <option value="5000">$5,000 - $10,000</option>
+                <option value="10000">$10,000+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="order-form-group form-field-anim" style="--delay:0.1s;">
+            <label class="order-form-label">Project Title <span class="required">*</span></label>
+            <input type="text" class="order-form-input" id="projectName" placeholder="e.g. Homepage Redesign" required />
+            <div class="order-form-error" id="projectNameError"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Please enter a project title</div>
+          </div>
+
+          <div class="order-form-row">
+            <div class="order-form-group form-field-anim" style="--delay:0.15s;">
+              <label class="order-form-label">Deadline</label>
+              <input type="date" class="order-form-input" id="deadline" min="" />
+            </div>
+            <div class="order-form-group form-field-anim" style="--delay:0.2s;">
+              <label class="order-form-label">Budget Amount (Custom)</label>
+              <input type="number" class="order-form-input" id="customBudget" placeholder="e.g. 7500" min="0" step="100" />
+            </div>
+          </div>
+
+          <div class="order-form-group form-field-anim" style="--delay:0.25s;">
+            <label class="order-form-label">Project Description</label>
+            <textarea class="order-form-textarea" id="projectDescription" placeholder="Describe your project goals, requirements, timeline, and any other details we should know..."></textarea>
+          </div>
+
+          <div class="order-form-group form-field-anim" style="--delay:0.3s;">
+            <label class="order-form-label">Additional Notes</label>
+            <textarea class="order-form-textarea" id="additionalNotes" placeholder="Any specific requirements, preferences, or questions for our team..." style="min-height:80px;"></textarea>
+          </div>
+
+          <div class="order-form-group form-field-anim" style="--delay:0.35s;">
+            <label class="order-form-label">Attach Files</label>
+            <div class="order-form-file">
+              <input type="file" class="order-form-file-input" id="orderFiles" multiple accept=".pdf,.doc,.docx,.jpg,.png,.fig,.zip,.mp4,.mov,.svg,.ai,.psd" />
+              <div class="order-form-file-label">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Upload brief, references, or inspiration files</span>
+              </div>
+            </div>
+            <div class="order-form-file-names" id="fileNames"></div>
+          </div>
+
+          <button type="submit" class="order-submit form-field-anim" id="orderSubmit" style="--delay:0.4s;">
+            <span class="order-btn-text">Submit Order</span>
+            <span class="order-btn-spinner"></span>
+            <svg class="order-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <div class="order-success" id="orderSuccess">
+          <div class="order-success-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="order-success-title">Order Submitted!</h3>
+          <p class="order-success-desc">Your order has been received. You can track its progress in real-time.</p>
+          <div class="order-success-id" id="orderNumberDisplay"></div>
+          <div class="order-success-actions">
+            <a href="order-tracking.html" class="btn-primary" id="trackOrderBtn">Track Order</a>
+            <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <!-- auth-guard.js removed: guest submissions allowed temporarily -->
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('orderForm');
+      var submitBtn = document.getElementById('orderSubmit');
+      var success = document.getElementById('orderSuccess');
+      var orderNumDisplay = document.getElementById('orderNumberDisplay');
+      var trackBtn = document.getElementById('trackOrderBtn');
+
+      var serviceType = document.getElementById('serviceType');
+      var projectName = document.getElementById('projectName');
+      var deadline = document.getElementById('deadline');
+      var customBudget = document.getElementById('customBudget');
+      var budget = document.getElementById('budget');
+
+      var serviceTypeError = document.getElementById('serviceTypeError');
+      var projectNameError = document.getElementById('projectNameError');
+
+      function generateFallbackOrderNumber() {
+        var year = new Date().getFullYear();
+        var rand = Math.floor(1000 + Math.random() * 9000);
+        return 'NRV-' + year + '-' + rand;
+      }
+
+      /* Set min date for deadline to tomorrow */
+      var tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      deadline.min = tomorrow.toISOString().split('T')[0];
+
+      /* Pre-select service from URL param */
+      var params = new URLSearchParams(window.location.search);
+      var serviceParam = params.get('service');
+      if (serviceParam) {
+        var found = false;
+        for (var i = 0; i < serviceType.options.length; i++) {
+          if (serviceType.options[i].value === serviceParam) {
+            serviceType.value = serviceParam;
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          var opt = document.createElement('option');
+          opt.value = serviceParam;
+          opt.textContent = serviceParam.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+          serviceType.appendChild(opt);
+          serviceType.value = serviceParam;
+        }
+      }
+
+      /* Budget sync: budget select sets customBudget, customBudget clears select */
+      budget.addEventListener('change', function() {
+        if (this.value) customBudget.value = this.value;
+      });
+      customBudget.addEventListener('input', function() {
+        if (this.value) budget.value = '';
+      });
+
+      /* File upload display */
+      document.getElementById('orderFiles').addEventListener('change', function() {
+        var namesContainer = document.getElementById('fileNames');
+        if (this.files.length === 0) {
+          namesContainer.textContent = '';
+          return;
+        }
+        var names = Array.from(this.files).map(function(f) {
+          var size = f.size;
+          var sizeStr = '';
+          if (size < 1024) sizeStr = size + ' B';
+          else if (size < 1048576) sizeStr = (size / 1024).toFixed(1) + ' KB';
+          else sizeStr = (size / 1048576).toFixed(1) + ' MB';
+          return f.name + ' (' + sizeStr + ')';
+        }).join(', ');
+        namesContainer.innerHTML = '<span style="color:var(--accent);font-size:0.75rem;">' + names + '</span>';
+      });
+
+      /* Clear errors on input */
+      function clearErrors() {
+        serviceType.classList.remove('error');
+        projectName.classList.remove('error');
+        serviceTypeError.classList.remove('show');
+        projectNameError.classList.remove('show');
+      }
+
+      serviceType.addEventListener('change', clearErrors);
+      projectName.addEventListener('input', clearErrors);
+
+      /* Inline validation */
+      function validate() {
+        clearErrors();
+        var valid = true;
+
+        if (!serviceType.value) {
+          serviceType.classList.add('error');
+          serviceTypeError.classList.add('show');
+          valid = false;
+        }
+        if (!projectName.value.trim()) {
+          projectName.classList.add('error');
+          projectNameError.classList.add('show');
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      /* Form submission */
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (submitBtn.classList.contains('loading')) return;
+        if (!validate()) return;
+
+        /* Require authentication */
+        var r = await window.supabaseClient.auth.getUser();
+        var currentUser = r.data.user;
+        if (!currentUser) {
+          if (typeof NagrivaAuth !== 'undefined' && NagrivaAuth.openModal) {
+            NagrivaAuth.openModal('signin');
+          } else {
+            window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+          }
+          return;
+        }
+
+        submitBtn.classList.add('loading');
+        submitBtn.querySelector('.order-btn-text').textContent = 'Submitting...';
+
+        try {
+          var budgetVal = budget.value || customBudget.value;
+          var order;
+
+          order = await NagrivaOrders.createOrder({
+            service_type: serviceType.value,
+            project_title: projectName.value.trim(),
+            project_description: document.getElementById('projectDescription').value.trim(),
+            additional_notes: document.getElementById('additionalNotes').value.trim(),
+            budget: budgetVal ? parseFloat(budgetVal) : null,
+            deadline: deadline.value || null
+          });
+
+          /* File upload */
+          var files = document.getElementById('orderFiles').files;
+          if (files.length > 0) {
+            for (var i = 0; i < files.length; i++) {
+              try {
+                await NagrivaOrders.uploadFile(order.id, files[i], 'client');
+              } catch (err) {
+                console.warn('File upload failed:', err);
+              }
+            }
+          }
+
+
+
+          orderNumDisplay.textContent = order.order_number || (order.id ? '#' + order.id.slice(0, 8) : generateFallbackOrderNumber());
+          trackBtn.href = 'order-tracking.html?id=' + (order.id || '');
+          submitBtn.classList.remove('loading');
+          submitBtn.classList.add('success');
+          submitBtn.querySelector('.order-btn-text').textContent = 'Submitted!';
+          form.style.display = 'none';
+          success.classList.add('show');
+        } catch (err) {
+          console.error('[SubmitOrder] Submission failed:', err.message || err);
+          submitBtn.classList.remove('loading');
+          submitBtn.querySelector('.order-btn-text').textContent = 'Submit Order';
+          var errMsg = err.message || err;
+          if (errMsg.includes('duplicate') || errMsg.includes('already exists')) {
+            alert('An order with this information already exists. Please check your dashboard.');
+          } else if (errMsg.includes('duplicate key')) {
+            /* Retry with a new order number */
+            alert('Please try submitting again (order number collision).');
+          } else {
+            alert('Failed to submit order: ' + errMsg);
+          }
+        }
+      });
+    });
+  </script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

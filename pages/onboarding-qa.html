@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding QA — NAGRIVA</title>
+  <meta name="description" content="Onboarding QA and developer testing panel." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/onboarding.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    .qa-page {
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+    .qa-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .qa-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .qa-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #f59e0b;
+    }
+    .qa-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .qa-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+    .qa-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .qa-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .qa-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+    .qa-item.pass {
+      border-color: rgba(16,185,129,0.25);
+      background: rgba(16,185,129,0.04);
+    }
+    .qa-item.fail {
+      border-color: rgba(239,68,68,0.25);
+      background: rgba(239,68,68,0.04);
+    }
+    .qa-item-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .qa-item-status.pass { background: var(--success); box-shadow: 0 0 8px rgba(16,185,129,0.4); }
+    .qa-item-status.fail { background: var(--danger); box-shadow: 0 0 8px rgba(239,68,68,0.4); }
+    .qa-item-status.pending { background: var(--gray2); }
+    .qa-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .qa-item-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .qa-item-desc {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-top: 2px;
+    }
+    .qa-item-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .qa-btn {
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .qa-btn:hover {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+    }
+    .qa-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+    .qa-btn.primary:hover {
+      box-shadow: 0 0 20px rgba(0,245,196,0.3);
+    }
+    .qa-btn.danger {
+      border-color: rgba(239,68,68,0.3);
+      color: var(--danger);
+    }
+    .qa-btn.danger:hover {
+      background: rgba(239,68,68,0.1);
+      border-color: var(--danger);
+    }
+    .qa-btn.warning {
+      border-color: rgba(245,158,11,0.3);
+      color: #f59e0b;
+    }
+    .qa-btn.warning:hover {
+      background: rgba(245,158,11,0.1);
+      border-color: #f59e0b;
+    }
+    .qa-btn.success {
+      border-color: rgba(16,185,129,0.3);
+      color: var(--success);
+    }
+    .qa-btn.success:hover {
+      background: rgba(16,185,129,0.1);
+      border-color: var(--success);
+    }
+    .qa-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+    .qa-field:last-child {
+      border-bottom: none;
+    }
+    .qa-field-label {
+      font-size: 0.82rem;
+      color: var(--gray);
+      font-weight: 500;
+      min-width: 140px;
+    }
+    .qa-field-value {
+      font-size: 0.82rem;
+      color: var(--white);
+      font-family: 'DM Sans', monospace;
+      word-break: break-all;
+      text-align: right;
+    }
+    .qa-field-value.null {
+      color: var(--gray2);
+      font-style: italic;
+    }
+    .qa-field-value.true {
+      color: var(--success);
+    }
+    .qa-field-value.false {
+      color: var(--danger);
+    }
+    .qa-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .qa-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      z-index: 99999;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .qa-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .qa-toast.success { border-color: rgba(16,185,129,0.3); color: var(--success); }
+    .qa-toast.error { border-color: rgba(239,68,68,0.3); color: var(--danger); }
+    .qa-loading {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--gray2);
+      font-size: 0.85rem;
+    }
+    .qa-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(0,245,196,0.1);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: qaSpin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes qaSpin { to { transform: rotate(360deg); } }
+    @media (max-width: 768px) {
+      .qa-layout { grid-template-columns: 1fr; }
+      .qa-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body data-page="onboarding-qa">
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+
+  <div id="navbar-container"></div>
+
+  <section class="qa-page">
+    <div class="container">
+      <div class="qa-header">
+        <div>
+          <h1>Onboarding QA Panel</h1>
+          <p style="font-size:0.82rem;color:var(--gray2);margin-top:4px;">Developer testing interface for the onboarding wizard</p>
+        </div>
+        <span class="qa-badge">DEV MODE</span>
+      </div>
+
+      <div id="qaContent">
+        <div class="qa-loading">
+          <span class="qa-spinner"></span>
+          Loading profile data...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="qaToast" class="qa-toast"></div>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/onboarding.js"></script>
+  <script>
+    /* ─── Dev-mode guard — runs immediately during parsing (no deferred deps needed) ─── */
+    (function () {
+      var isDev = window.location.search.indexOf('dev=true') !== -1 ||
+                  (function () { try { return localStorage.getItem('nagriva_dev_mode') === 'true' } catch (e) { return false } })()
+      if (!isDev) {
+        window.location.href = 'dashboard.html'
+      }
+    })()
+  </script>
+  <script>
+    /* ─── QA Panel logic — runs after DOMContentLoaded (all deferred scripts are ready) ─── */
+    document.addEventListener('DOMContentLoaded', function () {
+      'use strict'
+
+      var supabase = window.supabaseClient
+      if (!supabase) {
+        document.getElementById('qaContent').innerHTML =
+          '<div style="text-align:center;padding:40px;color:var(--danger);">Supabase client not loaded.</div>'
+        return
+      }
+
+      var toastEl = document.getElementById('qaToast')
+      var toastTimer = null
+
+      function showToast (msg, type) {
+        if (!toastEl) return
+        toastEl.textContent = msg
+        toastEl.className = 'qa-toast ' + (type || '') + ' show'
+        clearTimeout(toastTimer)
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('show')
+        }, 2500)
+      }
+
+      /* ─── Profile helpers ─── */
+      function getSession () {
+        return supabase.auth.getSession().then(function (r) {
+          if (r.error) throw r.error
+          return r.data.session
+        })
+      }
+
+      function getProfile (userId) {
+        return supabase.from('profiles').select('*').eq('id', userId).single().then(function (r) {
+          if (r.error) throw r.error
+          return r.data
+        })
+      }
+
+      function updateProfile (userId, payload) {
+        return supabase.from('profiles').update(payload).eq('id', userId).then(function (r) {
+          if (r.error) throw r.error
+          return r.data
+        })
+      }
+
+      /* ─── Checklist definitions ─── */
+      var CHECKLIST = [
+        { id: 'welcome',        label: 'Welcome Screen',        desc: 'Step 0 — onboarding overlay appears after signup',                     checkKey: null,                                      checkPass: function (p) { return p.onboarding_step >= 0 } },
+        { id: 'goal',           label: 'Goal Selection',        desc: 'Step 1 — user selects a goal (buy / sell / grow / learn / explore)',    checkKey: 'user_goal',                               checkPass: function (p) { return !!p.user_goal } },
+        { id: 'interests',      label: 'Interest Selection',    desc: 'Step 2 — user selects interests (web-design, seo, ai, etc.)',             checkKey: 'interests',                               checkPass: function (p) { return p.interests && p.interests.length > 0 } },
+        { id: 'profile',        label: 'Profile Setup',         desc: 'Step 3 — user fills name / bio',                                         checkKey: 'full_name',                               checkPass: function (p) { return !!p.full_name } },
+        { id: 'tour',           label: 'Quick Tour',            desc: 'Step 4 — guided tour of dashboard',                                      checkKey: null,                                      checkPass: function (p) { return p.onboarding_step >= 4 } },
+        { id: 'action',         label: 'First Action',          desc: 'Step 5 — user takes a meaningful action',                                 checkKey: null,                                      checkPass: function (p) { return p.onboarding_step >= 5 } },
+        { id: 'completed',      label: 'Onboarding Complete',   desc: 'Step 6 — wizard marked as done',                                         checkKey: 'onboarding_completed',                    checkPass: function (p) { return p.onboarding_completed === true } }
+      ]
+
+      /* ─── Profile fields for dev panel ─── */
+      var PROFILE_FIELDS = [
+        { key: 'id',                     label: 'User ID' },
+        { key: 'email',                  label: 'Email' },
+        { key: 'full_name',              label: 'Full Name' },
+        { key: 'role',                   label: 'Role' },
+        { key: 'onboarding_completed',   label: 'Onboarding Complete' },
+        { key: 'onboarding_step',        label: 'Onboarding Step' },
+        { key: 'user_goal',              label: 'Goal' },
+        { key: 'interests',              label: 'Interests' }
+      ]
+
+      function renderChecklist (profile) {
+        var html = ''
+        CHECKLIST.forEach(function (item) {
+          var passed = item.checkPass(profile)
+          var statusClass = passed ? 'pass' : 'fail'
+          var statusDot = passed ? 'pass' : 'fail'
+          var value = item.checkKey ? profile[item.checkKey] : null
+          var valueDisplay = ''
+          if (item.checkKey && value != null) {
+            if (Array.isArray(value)) {
+              valueDisplay = value.length > 0 ? value.join(', ') : '(empty)'
+            } else if (typeof value === 'boolean') {
+              valueDisplay = value ? 'true' : 'false'
+            } else {
+              valueDisplay = String(value)
+            }
+          } else if (item.checkKey && value == null) {
+            valueDisplay = '(null)'
+          }
+
+          html +=
+            '<div class="qa-item ' + statusClass + '">' +
+              '<span class="qa-item-status ' + statusDot + '"></span>' +
+              '<div class="qa-item-info">' +
+                '<div class="qa-item-label">' + item.label + '</div>' +
+                '<div class="qa-item-desc">' + item.desc + (valueDisplay ? ' — ' + valueDisplay : '') + '</div>' +
+              '</div>' +
+              '<div class="qa-item-actions">' +
+                '<button class="qa-btn success" data-action="step" data-id="' + item.id + '" data-step="' + CHECKLIST.indexOf(item) + '">Mark Done</button>' +
+              '</div>' +
+            '</div>'
+        })
+        return html
+      }
+
+      function renderProfilePanel (profile) {
+        var html = ''
+        PROFILE_FIELDS.forEach(function (f) {
+          var val = profile[f.key]
+          var displayVal, valueClass
+          if (val == null) {
+            displayVal = 'null'
+            valueClass = 'null'
+          } else if (typeof val === 'boolean') {
+            displayVal = String(val)
+            valueClass = val ? 'true' : 'false'
+          } else if (Array.isArray(val)) {
+            displayVal = val.length > 0 ? '[' + val.join(', ') + ']' : '[]'
+          } else {
+            displayVal = String(val)
+            valueClass = ''
+          }
+          html +=
+            '<div class="qa-field">' +
+              '<span class="qa-field-label">' + f.label + '</span>' +
+              '<span class="qa-field-value ' + (valueClass || '') + '">' + displayVal + '</span>' +
+            '</div>'
+        })
+        return html
+      }
+
+      function renderPage (profile) {
+        var userId = profile.id
+        document.getElementById('qaContent').innerHTML =
+          '<div class="qa-layout">' +
+            '<div class="qa-card">' +
+              '<div class="qa-card-title">QA Checklist</div>' +
+              '<div class="qa-checklist">' + renderChecklist(profile) + '</div>' +
+            '</div>' +
+            '<div class="qa-card">' +
+              '<div class="qa-card-title">Profile Data <span style="font-weight:400;font-size:0.75rem;color:var(--gray2);">(from profiles table)</span></div>' +
+              '<div id="qaProfileFields">' + renderProfilePanel(profile) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="qa-card" style="margin-top:24px;">' +
+            '<div class="qa-card-title">Actions</div>' +
+            '<div class="qa-actions">' +
+              '<button class="qa-btn warning" id="qaResetBtn">Reset Onboarding</button>' +
+              '<button class="qa-btn success" id="qaMarkCompleteBtn">Mark Complete</button>' +
+              '<button class="qa-btn primary" id="qaTriggerBtn">Trigger Onboarding</button>' +
+              '<button class="qa-btn danger" id="qaSignoutBtn">Log Out</button>' +
+              '<button class="qa-btn" id="qaRefreshBtn">Refresh</button>' +
+            '</div>' +
+          '</div>'
+
+        bindActions(userId, profile)
+      }
+
+      function bindActions (userId, profile) {
+        document.querySelectorAll('[data-action="step"]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var step = parseInt(btn.getAttribute('data-step'), 10)
+            if (isNaN(step)) return
+            var payload = { onboarding_step: step }
+            if (step === 1) payload.user_goal = profile.user_goal || 'explore'
+            if (step === 6) payload.onboarding_completed = true
+            updateProfile(userId, payload).then(function () {
+              showToast('Step ' + step + ' marked done', 'success')
+              refreshProfile(userId)
+            }).catch(function (err) {
+              showToast('Error: ' + (err.message || err), 'error')
+            })
+          })
+        })
+
+        var resetBtn = document.getElementById('qaResetBtn')
+        if (resetBtn) {
+          resetBtn.addEventListener('click', function () {
+            if (!confirm('Reset onboarding for this user?')) return
+            updateProfile(userId, {
+              onboarding_step: 0,
+              onboarding_completed: false,
+              user_goal: null,
+              interests: []
+            }).then(function () {
+              showToast('Onboarding reset to step 0', 'success')
+              refreshProfile(userId)
+            }).catch(function (err) {
+              showToast('Error: ' + (err.message || err), 'error')
+            })
+          })
+        }
+
+        var completeBtn = document.getElementById('qaMarkCompleteBtn')
+        if (completeBtn) {
+          completeBtn.addEventListener('click', function () {
+            updateProfile(userId, {
+              onboarding_step: 6,
+              onboarding_completed: true
+            }).then(function () {
+              showToast('Onboarding marked complete', 'success')
+              refreshProfile(userId)
+            }).catch(function (err) {
+              showToast('Error: ' + (err.message || err), 'error')
+            })
+          })
+        }
+
+        var triggerBtn = document.getElementById('qaTriggerBtn')
+        if (triggerBtn) {
+          triggerBtn.addEventListener('click', function () {
+            if (typeof NagrivaOnboarding === 'undefined') {
+              showToast('NagrivaOnboarding not loaded', 'error')
+              return
+            }
+            try { localStorage.removeItem('nagriva_onboarding_seen') } catch (e) {}
+            updateProfile(userId, {
+              onboarding_completed: false,
+              onboarding_step: 0,
+              user_goal: null,
+              interests: []
+            }).then(function () {
+              NagrivaOnboarding.checkAndRun()
+              showToast('Onboarding wizard launched', 'success')
+            }).catch(function (err) {
+              showToast('Error: ' + (err.message || err), 'error')
+            })
+          })
+        }
+
+        var signoutBtn = document.getElementById('qaSignoutBtn')
+        if (signoutBtn) {
+          signoutBtn.addEventListener('click', function () {
+            supabase.auth.signOut().then(function () {
+              window.location.href = 'login.html'
+            })
+          })
+        }
+
+        var refreshBtn = document.getElementById('qaRefreshBtn')
+        if (refreshBtn) {
+          refreshBtn.addEventListener('click', function () {
+            refreshProfile(userId)
+          })
+        }
+      }
+
+      function refreshProfile (userId) {
+        document.getElementById('qaContent').innerHTML =
+          '<div class="qa-loading"><span class="qa-spinner"></span>Refreshing profile data...</div>'
+        getProfile(userId).then(function (profile) {
+          renderPage(profile)
+        }).catch(function (err) {
+          document.getElementById('qaContent').innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-exclamation-triangle', title: 'Failed to load profile', description: err.message || err, variant: 'error' })
+        })
+      }
+
+      getSession().then(function (session) {
+        if (!session) {
+          window.location.href = 'login.html'
+          return
+        }
+        return getProfile(session.user.id)
+      }).then(function (profile) {
+        if (!profile) return
+        renderPage(profile)
+      }).catch(function (err) {
+        document.getElementById('qaContent').innerHTML =
+          '<div style="text-align:center;padding:40px;color:var(--danger);">Error: ' + (err.message || err) + '</div>'
+      })
+    })
+  </script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

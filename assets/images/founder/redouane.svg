@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f0f"/>
+      <stop offset="100%" stop-color="#040404"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5c4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00c2a8" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5c4" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#00f5c4" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#00f5c4" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="text" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0e0e0"/>
+    </linearGradient>
+    <linearGradient id="accentText" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5c4"/>
+      <stop offset="100%" stop-color="#00c2a8"/>
+    </linearGradient>
+    <clipPath id="circle">
+      <circle cx="200" cy="160" r="100"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bg)" rx="0"/>
+
+  <!-- Outer glow -->
+  <circle cx="200" cy="160" r="130" fill="url(#glow)" filter="url(#blur)"/>
+
+  <!-- Avatar circle -->
+  <circle cx="200" cy="160" r="100" fill="none" stroke="url(#border)" stroke-width="2.5"/>
+  <circle cx="200" cy="160" r="98" fill="rgba(0,245,196,0.03)"/>
+
+  <!-- Head silhouette -->
+  <ellipse cx="200" cy="148" rx="38" ry="40" fill="rgba(255,255,255,0.92)"/>
+
+  <!-- Body / shoulders -->
+  <path d="M 155 210 Q 165 185 170 185 Q 175 195 182 200 Q 185 205 200 210 Q 215 205 218 200 Q 225 195 230 185 Q 235 185 245 210 Z" fill="rgba(255,255,255,0.92)"/>
+
+  <!-- Glow dot accent -->
+  <circle cx="200" cy="280" r="3" fill="#00f5c4" opacity="0.6">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Decorative corner accents -->
+  <path d="M 20 40 L 20 20 L 40 20" fill="none" stroke="#00f5c4" stroke-width="1.5" opacity="0.3"/>
+  <path d="M 380 40 L 380 20 L 360 20" fill="none" stroke="#00f5c4" stroke-width="1.5" opacity="0.3"/>
+  <path d="M 20 360 L 20 380 L 40 380" fill="none" stroke="#00f5c4" stroke-width="1.5" opacity="0.3"/>
+  <path d="M 380 360 L 380 380 L 360 380" fill="none" stroke="#00f5c4" stroke-width="1.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Portal — NAGRIVA</title>
+  <meta name="description" content="Manage your NAGRIVA projects in one place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/client-messages.css" />
+  <link rel="stylesheet" href="../css/client-portal-redesign.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body data-page="client-portal">
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+  <div id="navbar-container"></div>
+
+  <div class="portal-bg-glow portal-bg-glow-1"></div>
+  <div class="portal-bg-glow portal-bg-glow-2"></div>
+
+  <div class="cp-overlay" id="cpOverlay"></div>
+
+  <div class="portal-layout">
+    <!-- ─── Sidebar ─── -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      <div class="ps-header">
+        <div class="ps-logo">✦</div>
+        <div class="ps-title">Client Portal</div>
+        <div class="ps-sub" id="psSub">Loading...</div>
+      </div>
+
+      <nav class="ps-nav">
+        <div class="ps-section-label">Workspace</div>
+        <button class="ps-nav-item active" data-view="orders">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+          My Orders
+        </button>
+        <button class="ps-nav-item" data-view="messages">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Messages
+          <span class="ps-badge" id="psMsgBadge" style="display:none;">0</span>
+        </button>
+        <button class="ps-nav-item" data-view="files">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Files
+        </button>
+        <button class="ps-nav-item" data-view="revisions">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Revisions
+        </button>
+        <div class="ps-section-label" style="margin-top:24px;">Account</div>
+        <button class="ps-nav-item" data-view="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </button>
+      </nav>
+
+      <div class="ps-footer">
+        <a href="../index.html" class="ps-back-link">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to Home
+        </a>
+      </div>
+    </aside>
+
+    <!-- ─── Main Content ─── -->
+    <main class="portal-main">
+      <!-- Mobile top bar -->
+      <div class="pm-mobile-bar">
+        <button class="pm-mobile-toggle" id="pmMobileToggle" aria-label="Toggle sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span class="pm-mobile-title">Client Portal</span>
+        <a href="submit-order.html" class="pm-mobile-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </a>
+      </div>
+
+      <div class="portal-content">
+        <!-- ════════════════════════════════════ -->
+        <!-- ORDERS VIEW -->
+        <!-- ════════════════════════════════════ -->
+        <div class="pv active" id="view-orders">
+
+          <div class="pv-header">
+            <div>
+              <h1 class="pv-title">My Orders</h1>
+              <p class="pv-subtitle" id="ordersSubtitle">Track and manage your projects</p>
+            </div>
+            <a href="submit-order.html" class="pv-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Order
+            </a>
+          </div>
+
+          <!-- Stats row -->
+          <div class="pv-stats" id="pvStats">
+            <div class="pv-stat">
+              <div class="pv-stat-value" id="statActive">0</div>
+              <div class="pv-stat-label">Active</div>
+            </div>
+            <div class="pv-stat">
+              <div class="pv-stat-value" id="statCompleted">0</div>
+              <div class="pv-stat-label">Completed</div>
+            </div>
+            <div class="pv-stat">
+              <div class="pv-stat-value" id="statMessages">0</div>
+              <div class="pv-stat-label">Unread</div>
+            </div>
+            <div class="pv-stat">
+              <div class="pv-stat-value" id="statFiles">0</div>
+              <div class="pv-stat-label">Files</div>
+            </div>
+          </div>
+
+          <!-- Orders list -->
+          <div id="ordersList" class="pv-orders"></div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- MESSAGES VIEW -->
+        <!-- ════════════════════════════════════ -->
+        <div class="pv" id="view-messages">
+
+          <div class="pv-header">
+            <div>
+              <h1 class="pv-title">Messages</h1>
+              <p class="pv-subtitle">Conversations about your projects</p>
+            </div>
+          </div>
+
+          <div class="pv-chat">
+            <div class="pv-chat-sidebar">
+              <div class="pv-chat-sidebar-header">
+                <input type="text" class="pv-chat-search" placeholder="Search conversations..." id="chatSearch" />
+              </div>
+              <div class="pv-chat-conversations" id="chatConversations"></div>
+            </div>
+            <div class="pv-chat-main">
+              <div class="pv-chat-top">
+                <span id="chatActiveOrder">Select a conversation</span>
+                <span class="pv-chat-status" id="chatActiveStatus"></span>
+              </div>
+              <div class="pv-chat-messages" id="portalMessages"></div>
+              <div class="pv-chat-input-row">
+                <input type="text" class="pv-chat-input" id="portalMsgInput" placeholder="Type your message..." autocomplete="off" />
+                <button class="pv-chat-send" id="portalMsgSend">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- FILES VIEW -->
+        <!-- ════════════════════════════════════ -->
+        <div class="pv" id="view-files">
+
+          <div class="pv-header">
+            <div>
+              <h1 class="pv-title">Files</h1>
+              <p class="pv-subtitle">Deliverables and uploaded assets</p>
+            </div>
+          </div>
+
+          <div class="pv-files-order-select">
+            <select class="pv-select" id="filesOrderSelect">
+              <option value="">Select an order to view files...</option>
+            </select>
+          </div>
+
+          <div class="pv-upload-zone" id="portalUploadArea">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Upload files — PDF, PNG, JPG, ZIP up to 50MB</span>
+            <input type="file" id="portalFileInput" multiple />
+          </div>
+
+          <div id="portalFilesList" class="pv-files-grid"></div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- REVISIONS VIEW -->
+        <!-- ════════════════════════════════════ -->
+        <div class="pv" id="view-revisions">
+
+          <div class="pv-header">
+            <div>
+              <h1 class="pv-title">Revisions</h1>
+              <p class="pv-subtitle">Request changes and track history</p>
+            </div>
+          </div>
+
+          <div class="pv-rev-select">
+            <select class="pv-select" id="revOrderSelect">
+              <option value="">Select an order...</option>
+            </select>
+          </div>
+
+          <div class="pv-rev-layout">
+            <div class="pv-rev-form">
+              <h3 class="pv-rev-form-title">Request a Revision</h3>
+              <p class="pv-rev-form-desc">Describe what changes you'd like. We'll review and respond within 24 hours.</p>
+              <textarea class="pv-rev-textarea" id="revisionText" placeholder="Describe the changes you need in detail..."></textarea>
+              <button class="pv-rev-submit" id="submitRevisionBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                Submit Revision
+              </button>
+            </div>
+            <div class="pv-rev-history">
+              <div class="pv-rev-history-top">
+                <h3 class="pv-rev-history-title">History</h3>
+                <span class="pv-rev-count" id="revCountBadge">0</span>
+              </div>
+              <div id="revisionHistory"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- SETTINGS VIEW -->
+        <!-- ════════════════════════════════════ -->
+        <div class="pv" id="view-settings">
+
+          <div class="pv-header">
+            <div>
+              <h1 class="pv-title">Settings</h1>
+              <p class="pv-subtitle">Manage your account preferences</p>
+            </div>
+          </div>
+
+          <div class="pv-settings">
+            <div class="pv-settings-card">
+              <h3 class="pv-settings-card-title">Profile</h3>
+              <div class="pv-settings-row">
+                <div>
+                  <div class="pv-settings-label">Name</div>
+                  <div class="pv-settings-value" id="settingsName">—</div>
+                </div>
+                <div>
+                  <div class="pv-settings-label">Email</div>
+                  <div class="pv-settings-value" id="settingsEmail">—</div>
+                </div>
+              </div>
+            </div>
+            <div class="pv-settings-card">
+              <h3 class="pv-settings-card-title">Account</h3>
+              <div class="pv-settings-row">
+                <div>
+                  <div class="pv-settings-label">Member since</div>
+                  <div class="pv-settings-value" id="settingsMemberSince">—</div>
+                </div>
+                <div>
+                  <div class="pv-settings-label">Total orders</div>
+                  <div class="pv-settings-value" id="settingsTotalOrders">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script defer src="../js/client-messages.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let currentOrderId = null;
+      let _fileSubscriptions = [];
+      let orders = [];
+      let msgContainer = document.getElementById('portalMessages');
+      let msgInput = document.getElementById('portalMsgInput');
+      let msgSend = document.getElementById('portalMsgSend');
+
+      /* ─── View Navigation ─── */
+      function switchView(viewId) {
+        document.querySelectorAll('.pv').forEach(function(v) { v.classList.remove('active'); });
+        document.querySelectorAll('.ps-nav-item').forEach(function(b) { b.classList.remove('active'); });
+        var view = document.getElementById('view-' + viewId);
+        if (view) view.classList.add('active');
+        var navBtn = document.querySelector('.ps-nav-item[data-view="' + viewId + '"]');
+        if (navBtn) navBtn.classList.add('active');
+
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+
+        if (viewId === 'messages' && NAGRIVA_ClientMessages.getConversations().length === 0) {
+          NAGRIVA_ClientMessages.init(document.getElementById('chatConversations'));
+        }
+      }
+
+      document.querySelectorAll('.ps-nav-item').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          switchView(this.dataset.view);
+        });
+      });
+
+      /* ─── Mobile Sidebar ─── */
+      var sidebar = document.getElementById('portalSidebar');
+      var overlay = document.getElementById('cpOverlay');
+      var toggleBtn = document.getElementById('pmMobileToggle');
+
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+      });
+      overlay.addEventListener('click', function() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      /* ─── Helpers ─── */
+      function getStatusProgress(status) {
+        return { pending: 5, in_progress: 35, review: 65, delivered: 100, completed: 100, cancelled: 100 }[status] || 0;
+      }
+
+      function getStatusLabel(status) {
+        return { pending: 'Pending', approved: 'Approved', in_progress: 'In Progress', review: 'Review', delivered: 'Delivered', completed: 'Completed', cancelled: 'Cancelled' }[status] || status;
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) return '\u2014';
+        return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      function timeAgo(dateStr) {
+        if (!dateStr) return '';
+        var diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+        if (diff < 60) return 'just now';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        if (diff < 2592000) return Math.floor(diff / 86400) + 'd ago';
+        return formatDate(dateStr);
+      }
+
+      function escapeHtml(text) {
+        var d = document.createElement('div');
+        d.textContent = text;
+        return d.innerHTML;
+      }
+
+      function getServiceIconSvg(type) {
+        var icons = {
+          'web-design': 'M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.5L14.5 2z M16 13H8 M16 17H8 M10 9H8',
+          'brand-identity': 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
+          'seo': 'M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9',
+          'social-media': 'M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z M8.56 2.75c4.37 2.73 4.37 7.77 0 10.5M15.44 2.75c-4.37 2.73-4.37 7.77 0 10.5 M12 2v20',
+          'logo-design': 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
+          'development': 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M16 13H8 M16 17H8 M10 9H8'
+        };
+        var d = icons[type] || 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z';
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="' + d + '"/></svg>';
+      }
+
+      /* ─── Load Orders ─── */
+      async function loadOrders() {
+        try {
+          orders = await NagrivaOrders.getUserOrders();
+
+          if (orders.length === 0) {
+            document.getElementById('ordersList').innerHTML =
+              '<div class="pv-empty"><div class="pv-empty-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></div><h3>No orders yet</h3><p>Submit your first project to get started.</p><div class="pv-empty-actions"><a href="submit-order.html" class="pv-btn">Submit an Order</a></div></div>';
+            updateStats(orders);
+            populateSelects(orders);
+            return;
+          }
+
+          renderOrders(orders);
+          updateStats(orders);
+          populateSelects(orders);
+          loadSettings();
+
+          var user = await NagrivaOrders.getCurrentUser();
+          if (user) {
+            var displayName = user.user_metadata?.full_name || user.email?.split('@')[0] || '';
+            document.getElementById('psSub').textContent = 'Welcome, ' + displayName.split(' ')[0];
+          }
+
+          var params = new URLSearchParams(window.location.search);
+          var orderId = params.get('id');
+          if (orderId) {
+            var select = document.getElementById('filesOrderSelect');
+            if (select.querySelector('option[value="' + orderId + '"]')) {
+              select.value = orderId;
+              select.dispatchEvent(new Event('change'));
+              switchView('files');
+            }
+          }
+
+        } catch (err) {
+          console.error('Failed to load orders:', err);
+          document.getElementById('ordersList').innerHTML =
+            '<div class="pv-empty"><div class="pv-empty-icon" style="color:#ff5050;border-color:rgba(255,80,80,0.2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Failed to load orders</h3><p>' + escapeHtml(err.message) + '</p></div>';
+        }
+      }
+
+      function renderOrders(orderList) {
+        var list = document.getElementById('ordersList');
+        list.innerHTML = '';
+        orderList.forEach(function(o) {
+          var progress = getStatusProgress(o.status);
+          var label = getStatusLabel(o.status);
+          var badgeClass = (o.status === 'delivered' || o.status === 'completed') ? 'delivered' : o.status === 'in_progress' ? 'in_progress' : o.status === 'review' ? 'review' : o.status === 'cancelled' ? 'cancelled' : 'pending';
+          var iconSvg = getServiceIconSvg(o.service_type);
+          var orderNum = o.order_number || '#' + (o.id || '').slice(0, 8);
+          var stage = { order_received: 'Received', project_approved: 'Approved', work_started: 'In Progress', first_draft: 'Draft', client_review: 'Review', final_delivery: 'Final' }[o.current_stage] || o.current_stage || 'Received';
+
+          var card = document.createElement('div');
+          card.className = 'pv-order';
+          card.innerHTML =
+            '<div class="pv-order-left">' +
+              '<div class="pv-order-icon">' + iconSvg + '</div>' +
+              '<div class="pv-order-info">' +
+                '<div class="pv-order-name">' + escapeHtml(o.project_title || 'Untitled') + '</div>' +
+                '<div class="pv-order-meta">' +
+                  '<span>' + escapeHtml(orderNum) + '</span>' +
+                  '<span class="dot"></span>' +
+                  '<span>' + escapeHtml(o.service_type || 'Service') + '</span>' +
+                  '<span class="dot"></span>' +
+                  '<span>Created ' + formatDate(o.created_at) + '</span>' +
+                  (o.estimated_delivery ? '<span class="dot"></span><span>Due ' + formatDate(o.estimated_delivery) + '</span>' : '') +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="pv-order-right">' +
+              '<span class="pv-order-badge ' + badgeClass + '"><span class="pv-badge-dot"></span>' + label + '</span>' +
+              '<div class="pv-order-progress">' +
+                '<div class="pv-order-progress-bar"><div class="pv-order-progress-fill" style="width:' + progress + '%;"></div></div>' +
+                '<span class="pv-order-progress-label">' + progress + '%</span>' +
+              '</div>' +
+              '<div class="pv-order-actions">' +
+                '<a href="order-tracking.html?id=' + o.id + '" class="pv-order-action primary">Track Order</a>' +
+                '<button class="pv-order-action" onclick="openOrderMessages(\'' + o.id + '\')">Messages</button>' +
+                '<button class="pv-order-action" onclick="openOrderFiles(\'' + o.id + '\')">Files</button>' +
+              '</div>' +
+            '</div>';
+
+          list.appendChild(card);
+        });
+      }
+
+      function updateStats(orderList) {
+        var active = orderList.filter(function(o) { return o.status === 'in_progress' || o.status === 'review' || o.status === 'pending'; }).length;
+        var completed = orderList.filter(function(o) { return o.status === 'delivered' || o.status === 'completed'; }).length;
+        document.getElementById('statActive').textContent = active;
+        document.getElementById('statCompleted').textContent = completed;
+        document.getElementById('ordersSubtitle').textContent = active + ' active, ' + completed + ' completed';
+      }
+
+      function populateSelects(orderList) {
+        var filesSelect = document.getElementById('filesOrderSelect');
+        var revSelect = document.getElementById('revOrderSelect');
+        filesSelect.innerHTML = '<option value="">Select an order to view files...</option>';
+        revSelect.innerHTML = '<option value="">Select an order...</option>';
+        orderList.forEach(function(o) {
+          var opt1 = document.createElement('option');
+          opt1.value = o.id;
+          opt1.textContent = (o.order_number || '#' + (o.id || '').slice(0, 8)) + ' \u2014 ' + (o.project_title || 'Untitled');
+          filesSelect.appendChild(opt1);
+          var opt2 = opt1.cloneNode(true);
+          revSelect.appendChild(opt2);
+        });
+      }
+
+      /* ─── File Stats ─── */
+      async function loadFileStats(orderList) {
+        var fileCount = 0;
+        try {
+          for (var i = 0; i < orderList.length; i++) {
+            var f = await NagrivaOrders.getFiles(orderList[i].id);
+            fileCount += f.filter(function(x) { return x.uploaded_by === 'admin'; }).length;
+            if (typeof NAGRIVA_DeliverablesAPI !== 'undefined') {
+              var d = await NAGRIVA_DeliverablesAPI.getDeliverables(orderList[i].id);
+              fileCount += d.length;
+            }
+          }
+        } catch(e) {}
+        document.getElementById('statFiles').textContent = fileCount;
+      }
+
+      /* ─── Order Navigation Helpers ─── */
+      window.openOrderMessages = function(orderId) {
+        document.getElementById('chatSearch').value = '';
+        NAGRIVA_ClientMessages.setSearch('');
+        setTimeout(function() {
+          if (NAGRIVA_ClientMessages.getConversations().length === 0) {
+            NAGRIVA_ClientMessages.init(document.getElementById('chatConversations'));
+          }
+          NAGRIVA_ClientMessages.selectConversation(orderId);
+        }, 100);
+        switchView('messages');
+      };
+
+      window.openOrderFiles = function(orderId) {
+        document.getElementById('filesOrderSelect').value = orderId;
+        document.getElementById('filesOrderSelect').dispatchEvent(new Event('change'));
+        switchView('files');
+      };
+
+      /* ─── Messages ─── */
+      function initMessages() {
+        if (NAGRIVA_ClientMessages.getConversations().length === 0) {
+          NAGRIVA_ClientMessages.init(document.getElementById('chatConversations'));
+        }
+      }
+      setTimeout(initMessages, 1000);
+
+      msgSend.addEventListener('click', async function() {
+        var text = msgInput.value.trim();
+        var activeId = NAGRIVA_ClientMessages.activeOrderId;
+        if (!text || !activeId) return;
+        msgInput.value = '';
+        try { await NAGRIVA_ClientMessages.sendMessage(activeId, text); }
+        catch (err) {
+          if (typeof NAGRIVA_Toast !== 'undefined') NAGRIVA_Toast.error('Send Failed', err.message);
+          else alert('Failed to send message');
+        }
+      });
+      msgInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); msgSend.click(); }
+      });
+
+      document.getElementById('chatSearch').addEventListener('input', function() {
+        NAGRIVA_ClientMessages.setSearch(this.value);
+      });
+
+      /* ─── Files ─── */
+      function unsubscribeFileSubs() {
+        _fileSubscriptions.forEach(function(s) { try { s.unsubscribe(); } catch(e) {} });
+        _fileSubscriptions = [];
+      }
+
+      document.getElementById('filesOrderSelect').addEventListener('change', function() {
+        currentOrderId = this.value;
+        if (currentOrderId) {
+          loadFiles(currentOrderId);
+          unsubscribeFileSubs();
+          _fileSubscriptions.push(NagrivaOrders.subscribeToFiles(currentOrderId, function(file) {
+            appendFileItem(file);
+          }));
+          if (typeof NAGRIVA_DeliverablesAPI !== 'undefined') {
+            var dlSub = NAGRIVA_DeliverablesAPI.subscribeToDeliverables(currentOrderId, function(d) {
+              appendFileItem({ ...d, is_deliverable: true, uploaded_by: 'admin', public_url: d.file_url });
+            });
+            _fileSubscriptions.push(dlSub);
+            var dlDelSub = NAGRIVA_DeliverablesAPI.subscribeToDeliverableDeletes(currentOrderId, function(id) {
+              var el = document.querySelector('#portalFilesList [data-id="del-' + id + '"]');
+              if (el) el.remove();
+            });
+            _fileSubscriptions.push(dlDelSub);
+          }
+        } else {
+          document.getElementById('portalFilesList').innerHTML = '';
+        }
+      });
+
+      async function loadFiles(orderId) {
+        var list = document.getElementById('portalFilesList');
+        list.innerHTML = '';
+        try {
+          var [files, deliverables] = await Promise.all([
+            NagrivaOrders.getFiles(orderId),
+            typeof NAGRIVA_DeliverablesAPI !== 'undefined'
+              ? NAGRIVA_DeliverablesAPI.getDeliverables(orderId)
+              : []
+          ]);
+          var allItems = [
+            ...deliverables.map(function(d) { return { ...d, is_deliverable: true, uploaded_by: 'admin', public_url: d.file_url }; }),
+            ...files.map(function(f) { return { ...f, is_deliverable: false }; })
+          ];
+          if (allItems.length === 0) {
+            list.innerHTML = '<div class="pv-empty"><div class="pv-empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>No files yet</h3><p>Upload files above or wait for deliverables from your team.</p></div>';
+          } else {
+            allItems.forEach(function(f) { appendFileItem(f); });
+          }
+        } catch (err) {
+          list.innerHTML = '<div class="pv-empty"><div class="pv-empty-icon" style="color:#ff5050;border-color:rgba(255,80,80,0.2);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Failed to load files</h3><p>There was a problem loading your files.</p></div>';
+        }
+      }
+
+      function appendFileItem(file) {
+        var list = document.getElementById('portalFilesList');
+        var itemId = file.is_deliverable ? 'del-' + file.id : file.id;
+        if (!list || list.querySelector('[data-id="' + itemId + '"]')) return;
+        var isDeliverable = file.is_deliverable || file.uploaded_by === 'admin';
+        var isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file.file_name);
+        var card = document.createElement('div');
+        card.className = 'pv-file';
+        card.dataset.id = itemId;
+        card.innerHTML =
+          '<div class="pv-file-preview">' +
+            (isImage ? '<img src="' + file.public_url + '" alt="' + escapeHtml(file.file_name) + '" />' :
+              '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>') +
+            (isDeliverable ? '<span class="pv-file-badge">Deliverable</span>' : '') +
+          '</div>' +
+          '<div class="pv-file-body">' +
+            '<div class="pv-file-name">' + escapeHtml(file.file_name) + '</div>' +
+            '<div class="pv-file-meta">' +
+              NagrivaOrders.formatFileSize(file.file_size) +
+              ' \u00B7 ' + formatDate(file.created_at) +
+              ' \u00B7 ' + (isDeliverable ? 'Team' : 'You') +
+            '</div>' +
+          '</div>' +
+          '<div class="pv-file-actions">' +
+            '<a href="' + file.public_url + '" target="_blank" class="pv-file-action" download>Download</a>' +
+            (!isDeliverable ? '<button class="pv-file-action danger" onclick="deleteFile(\'' + file.id + '\')">Delete</button>' : '') +
+          '</div>';
+        list.appendChild(card);
+      }
+
+      window.deleteFile = async function(fileId) {
+        if (!confirm('Delete this file?')) return;
+        try {
+          var user = await NagrivaOrders.getCurrentUser();
+          await window.supabaseClient.from('files').delete().eq('id', fileId).eq('user_id', user.id);
+          if (currentOrderId) loadFiles(currentOrderId);
+        } catch (err) { alert('Failed to delete file'); }
+      };
+
+      var uploadArea = document.getElementById('portalUploadArea');
+      var fileInput = document.getElementById('portalFileInput');
+      uploadArea.addEventListener('click', function() { fileInput.click(); });
+      uploadArea.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('drag-over'); });
+      uploadArea.addEventListener('dragleave', function(e) { e.preventDefault(); this.classList.remove('drag-over'); });
+      uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault(); this.classList.remove('drag-over');
+        if (!currentOrderId) { alert('Please select an order first.'); return; }
+        handleFiles(e.dataTransfer.files);
+      });
+      fileInput.addEventListener('change', async function() {
+        if (!currentOrderId) { alert('Please select an order first.'); return; }
+        handleFiles(this.files);
+        this.value = '';
+      });
+      async function handleFiles(files) {
+        for (var i = 0; i < files.length; i++) {
+          try { await NagrivaOrders.uploadFile(currentOrderId, files[i], 'client'); }
+          catch (err) { alert('Failed to upload ' + files[i].name); }
+        }
+        if (currentOrderId) loadFiles(currentOrderId);
+      }
+
+      /* ─── Revisions ─── */
+      document.getElementById('revOrderSelect').addEventListener('change', function() {
+        if (this.value) loadRevisionHistory(this.value);
+        else document.getElementById('revisionHistory').innerHTML = '';
+      });
+
+      document.getElementById('submitRevisionBtn').addEventListener('click', async function() {
+        var orderId = document.getElementById('revOrderSelect').value;
+        if (!orderId) { alert('Please select an order first.'); return; }
+        var text = revisionText.value.trim();
+        if (!text) { alert('Please describe the changes you need.'); return; }
+        try {
+          await NagrivaOrders.sendMessage(orderId, '[REVISION REQUEST] ' + text);
+          revisionText.value = '';
+          if (typeof NAGRIVA_Toast !== 'undefined') NAGRIVA_Toast.success('Revision Submitted', 'We\'ll review it within 24 hours.');
+          else alert('Revision submitted!');
+          loadRevisionHistory(orderId);
+        } catch (err) { alert('Failed to submit revision.'); }
+      });
+
+      var revisionText = document.getElementById('revisionText');
+      var revisionHistory = document.getElementById('revisionHistory');
+
+      async function loadRevisionHistory(orderId) {
+        revisionHistory.innerHTML = '';
+        try {
+          var msgs = await NagrivaOrders.getMessages(orderId);
+          var revisions = msgs.filter(function(m) { return m.message.startsWith('[REVISION REQUEST]'); });
+          document.getElementById('revCountBadge').textContent = revisions.length;
+          if (revisions.length === 0) {
+            revisionHistory.innerHTML = '<div class="pv-empty" style="padding:32px 16px;"><div class="pv-empty-icon" style="width:48px;height:48px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div><h3>No revisions yet</h3></div>';
+            return;
+          }
+          revisions.slice().reverse().forEach(function(r) {
+            var item = document.createElement('div');
+            item.className = 'pv-rev-item';
+            var text = r.message.replace('[REVISION REQUEST] ', '');
+            item.innerHTML =
+              '<div class="pv-rev-item-top">' +
+                '<span class="pv-rev-item-status">Pending Review</span>' +
+                '<span class="pv-rev-item-time">' + timeAgo(r.created_at) + '</span>' +
+              '</div>' +
+              '<div class="pv-rev-item-text">' + escapeHtml(text) + '</div>';
+            revisionHistory.appendChild(item);
+          });
+        } catch (err) {
+          revisionHistory.innerHTML = '<div style="text-align:center;padding:32px;color:var(--gray2);font-size:0.85rem;">Failed to load revision history.</div>';
+        }
+      }
+
+      /* ─── Settings ─── */
+      async function loadSettings() {
+        try {
+          var user = await NagrivaOrders.getCurrentUser();
+          if (user) {
+            document.getElementById('settingsName').textContent = user.user_metadata?.full_name || '—';
+            document.getElementById('settingsEmail').textContent = user.email || '—';
+            document.getElementById('settingsMemberSince').textContent = user.created_at ? formatDate(user.created_at) : '—';
+          }
+          document.getElementById('settingsTotalOrders').textContent = orders.length;
+        } catch(e) {}
+      }
+
+      /* ─── Init ─── */
+      loadOrders();
+      loadFileStats(orders);
+
+      /* ─── Message Badge Updates ─── */
+      if (NAGRIVA_ClientMessages && NAGRIVA_ClientMessages.onChange) {
+        NAGRIVA_ClientMessages.onChange(function(convs, total) {
+          var badge = document.getElementById('psMsgBadge');
+          if (badge) {
+            badge.textContent = total;
+            badge.style.display = total > 0 ? '' : 'none';
+          }
+          document.getElementById('statMessages').textContent = total || 0;
+        });
+      }
+
+    });
+  </script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

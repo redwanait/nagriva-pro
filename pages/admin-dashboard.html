@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAGRIVA — Admin Dashboard</title>
+  <meta name="description" content="NAGRIVA premium admin dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/admin-auth.css" media="print" onload="this.media='all'" />
+  <!-- Deferred admin stylesheets -->
+  <link rel="stylesheet" href="../css/admin-orders.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-payments.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-invoices.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-services.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-settings.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/activity-feed/activity-feed.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/global-search.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ AI ASSISTANT ═══ -->
+                <div class="cms-section" id="section-ai-assistant">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-robot"></i></div>
+                    <div class="cms-section-info">
+                      <h3>AI Assistant</h3>
+                      <p>Personality, tone, prompts, and features</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">8 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Assistant Name</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_ai_name" placeholder="Nova" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Tone</span></div></div>
+                          <select class="cms-field-input" id="set_ai_tone">
+                            <option value="professional">Professional</option>
+                            <option value="friendly">Friendly</option>
+                            <option value="casual">Casual</option>
+                            <option value="formal">Formal</option>
+                          </select>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Welcome Message</span></div></div>
+                          <textarea class="cms-field-input" id="set_ai_welcome" placeholder="Hello! I am Nova, your NAGRIVA assistant." rows="2"></textarea>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">System Prompt</span><span class="cms-field-key">Core instructions</span></div></div>
+                          <textarea class="cms-field-input" id="set_ai_system_prompt" placeholder="You are Nova, an AI assistant for NAGRIVA..." rows="3"></textarea>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Personality Prompt</span><span class="cms-field-key">Additional layer</span></div></div>
+                          <textarea class="cms-field-input" id="set_ai_prompt" placeholder="You are a helpful, professional digital agency assistant..." rows="2"></textarea>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Response Style</span></div></div>
+                          <select class="cms-field-input" id="set_ai_response_style">
+                            <option value="concise">Concise</option>
+                            <option value="balanced">Balanced</option>
+                            <option value="detailed">Detailed</option>
+                          </select>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Enable AI Suggestions</div>
+                            <div class="cms-toggle-desc">Show AI-powered suggestions in the dashboard</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_ai_suggestions" aria-label="Toggle AI suggestions"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Smart Reply</div>
+                            <div class="cms-toggle-desc">Enable AI-generated smart replies in messaging</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_smart_reply" aria-label="Toggle smart reply"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ SUPPORT CHAT ═══ -->
+                <div class="cms-section" id="section-support-chat">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-comments"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Support Chat</h3>
+                      <p>Widget behavior, messages, and avatar</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">6 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Enable Support Widget</div>
+                            <div class="cms-toggle-desc">Show the chat widget across the platform</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_chat_enabled" aria-label="Toggle support widget"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Online Status</div>
+                            <div class="cms-toggle-desc">Show support agents as online</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_chat_online" aria-label="Toggle online status"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Typing Indicator</div>
+                            <div class="cms-toggle-desc">Show typing indicator for chat responses</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_chat_typing" aria-label="Toggle typing indicator"></button>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Welcome Message</span></div></div>
+                          <textarea class="cms-field-input" id="set_chat_welcome" placeholder="Hello! How can we help you today?" rows="2"></textarea>
+                        </div>
+                        <div class="cms-field full-span">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Auto Reply</span></div></div>
+                          <textarea class="cms-field-input" id="set_chat_auto_reply" placeholder="Thank you for your message. Our team will get back to you shortly." rows="2"></textarea>
+                        </div>
+                        <div class="cms-field-upload full-span">
+                          <div class="cms-upload-preview round" id="set_chat_avatar_preview"><i class="fas fa-user-circle placeholder-icon"></i></div>
+                          <div class="cms-upload-info">
+                            <div class="cms-upload-name" id="set_chat_avatar_name">No file selected</div>
+                            <button class="cms-upload-btn"><i class="fas fa-upload"></i> Upload Avatar</button>
+                            <input type="file" id="set_chat_avatar_input" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ PAYMENTS ═══ -->
+                <div class="cms-section" id="section-payments">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-credit-card"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Payments</h3>
+                      <p>Gateways, keys, invoice, and tax</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">Sensitive</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Currency</span></div></div>
+                          <select class="cms-field-input" id="set_currency"></select>
+                        </div>
+                        <div class="cms-field"></div>
+                        <div class="full-span"><span style="font-size:0.68rem;font-weight:600;color:var(--gray);display:block;padding:2px 0;">Stripe Keys</span></div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Public Key</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_stripe_public" placeholder="pk_live_..." />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Secret Key</span></div></div>
+                          <input type="password" class="cms-field-input" id="set_stripe_secret" placeholder="sk_live_..." />
+                        </div>
+                        <div class="full-span"><span style="font-size:0.68rem;font-weight:600;color:var(--gray);display:block;padding:2px 0;">PayPal Keys</span></div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Client ID</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_paypal_client" placeholder="PayPal Client ID" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Secret</span></div></div>
+                          <input type="password" class="cms-field-input" id="set_paypal_secret" placeholder="PayPal Secret" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Invoice Prefix</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_invoice_prefix" placeholder="INV-" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Tax Percentage</span></div></div>
+                          <input type="number" class="cms-field-input" id="set_tax_percentage" min="0" max="100" step="0.1" placeholder="0" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ NOTIFICATIONS ═══ -->
+                <div class="cms-section" id="section-notifications">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-bell"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Notifications</h3>
+                      <p>Email, push, alerts, and sounds</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">4 channels</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Email Notifications</div>
+                            <div class="cms-toggle-desc">Send email for important updates</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_email_notifs" aria-label="Toggle email notifications"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Push Notifications</div>
+                            <div class="cms-toggle-desc">Send push notifications to browsers</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_push_notifs" aria-label="Toggle push notifications"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Admin Alerts</div>
+                            <div class="cms-toggle-desc">Alerts for new orders, signups, payments</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_admin_alerts" aria-label="Toggle admin alerts"></button>
+                        </div>
+                        <div class="cms-field-toggle full-span">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Sound Notifications</div>
+                            <div class="cms-toggle-desc">Play sounds for real-time events</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_sound_notifs" aria-label="Toggle sound notifications"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ ORDERS ═══ -->
+                <div class="cms-section" id="section-orders">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Orders</h3>
+                      <p>Defaults, limits, and ID generation</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">4 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Default Status</span></div></div>
+                          <select class="cms-field-input" id="set_default_status">
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="revision">Revision</option>
+                            <option value="completed">Completed</option>
+                          </select>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Revisions Limit</span></div></div>
+                          <input type="number" class="cms-field-input" id="set_revisions_limit" min="0" max="20" placeholder="3" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Deadline (days)</span></div></div>
+                          <input type="number" class="cms-field-input" id="set_deadline_days" min="1" max="90" placeholder="14" />
+                        </div>
+                        <div class="cms-field-toggle">
+                          <div class="cms-toggle-info">
+                            <div class="cms-toggle-title">Auto-generate IDs</div>
+                            <div class="cms-toggle-desc">Generate unique order IDs</div>
+                          </div>
+                          <button class="cms-toggle-switch active" id="set_auto_order_ids" aria-label="Toggle auto-generate order IDs"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ OTHER CONTENT ═══ -->
+                <div class="cms-section" id="section-other-content">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="cms-section-info">
+                      <h3>Other Content</h3>
+                      <p>Dashboard, Contact, Services, FAQ, Auth</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge" id="contentSaveBadge" style="cursor:pointer;">Save Changes</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div id="contentEditor"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ GENERAL ═══ -->
+                <div class="cms-section" id="section-general">
+                  <div class="cms-section-header">
+                    <div class="cms-section-icon"><i class="fas fa-sliders-h"></i></div>
+                    <div class="cms-section-info">
+                      <h3>General</h3>
+                      <p>Timezone, language, and contact details</p>
+                    </div>
+                    <div class="cms-section-meta">
+                      <span class="cms-section-badge">4 fields</span>
+                      <div class="cms-section-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="cms-section-body">
+                    <div class="cms-section-body-inner">
+                      <div class="cms-field-grid">
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Support Email</span></div></div>
+                          <input type="email" class="cms-field-input" id="set_support_email" placeholder="hello@nagriva.com" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">WhatsApp Number</span></div></div>
+                          <input type="text" class="cms-field-input" id="set_whatsapp" placeholder="+1234567890" />
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Timezone</span></div></div>
+                          <select class="cms-field-input" id="set_timezone"></select>
+                        </div>
+                        <div class="cms-field">
+                          <div class="cms-field-header"><div class="cms-field-left"><span class="cms-field-label">Language</span></div></div>
+                          <select class="cms-field-input" id="set_language"></select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="settings-preview">
+              <div class="preview-header">
+                <div class="preview-header-left">
+                  <i class="fas fa-eye" style="color:var(--accent);font-size:0.75rem;"></i>
+                  <h4>Preview</h4>
+                </div>
+                <div style="display:flex;align-items:center;gap:4px;">
+                  <div class="preview-device-toggle">
+                    <button class="preview-device-btn active" data-device="desktop" title="Desktop"><i class="fas fa-desktop"></i></button>
+                    <button class="preview-device-btn" data-device="mobile" title="Mobile"><i class="fas fa-mobile-alt"></i></button>
+                  </div>
+                  <button class="preview-toggle-btn" title="Toggle"><i class="fas fa-chevron-right"></i></button>
+                </div>
+              </div>
+              <div class="preview-body">
+                <div class="preview-frame" id="previewFrame">
+                  <div id="previewContent"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Floating Quick Action Bar -->
+          <div class="cms-float-bar">
+            <button class="cms-float-btn primary" data-action="save-all"><i class="fas fa-cloud-upload-alt"></i> Save All</button>
+            <div class="cms-float-divider"></div>
+            <button class="cms-float-btn" data-action="reset"><i class="fas fa-undo"></i> Reset</button>
+            <div class="cms-float-divider"></div>
+            <button class="cms-float-btn" data-action="collapse-all"><i class="fas fa-compress-alt"></i> Collapse</button>
+            <button class="cms-float-btn" data-action="expand-all"><i class="fas fa-expand-alt"></i> Expand</button>
+          </div>
+
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /main -->
+  </div><!-- /app -->
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/supabase.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/admin-auth.js"></script>
+  <script defer src="../js/admin-navbar.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/empty-state.js"></script>
+  <script defer src="../js/admin-orders.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/invoices/invoices-api.js"></script>
+  <script defer src="../modules/notifications/notifications-api.js"></script>
+  <script defer src="../js/admin-notifications.js"></script>
+  <script defer src="../components/activity-feed/activity-feed.js"></script>
+  <script defer src="../components/notifications-dropdown/notifications-dropdown.js"></script>
+  <script defer src="../modules/activity-logs/activity-logs-api.js"></script>
+  <script defer src="../js/toast.js"></script>
+
+  <!-- Performance optimizer + lazy loader -->
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+
+  <!-- Chart.js for dashboard charts -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Deliverables modules -->
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
+  <script defer src="../js/admin-deliverables.js"></script>
+
+  <!-- Admin modules -->
+  <script defer src="../js/admin-modal.js"></script>
+  <script defer src="../js/admin-messages.js"></script>
+  <script defer src="../js/admin-clients.js"></script>
+  <script defer src="../js/admin-files.js"></script>
+  <script defer src="../js/admin-services.js"></script>
+  <script defer src="../js/admin-activity.js"></script>
+  <script defer src="../js/admin-payments.js"></script>
+  <script defer src="../js/admin-invoices.js"></script>
+  <script defer src="../js/admin-contact-requests.js"></script>
+  <script defer src="../js/admin-newsletter.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+  <script defer src="../components/client-drawer/client-drawer.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+
+      // ─── Debounce utility ───
+      function debounce(fn, ms) {
+        let timer;
+        return function() {
+          const context = this, args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => fn.apply(context, args), ms || 300);
+        };
+      }
+
+      // ─── Sidebar Navigation ───
+      const sidebarItems = document.querySelectorAll('.sidebar-item[data-page]');
+      const pages = document.querySelectorAll('.page');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const hamburger = document.getElementById('hamburger');
+      const topbarTitle = document.querySelector('.topbar-title');
+
+      function switchPage(pageId) {
+        pages.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('page-' + pageId);
+        if (target) target.classList.add('active');
+
+        sidebarItems.forEach(item => item.classList.remove('active'));
+        const activeItem = document.querySelector('.sidebar-item[data-page="' + pageId + '"]');
+        if (activeItem) activeItem.classList.add('active');
+
+        const names = {
+          dashboard: 'Dashboard',
+          orders: 'Orders',
+          clients: 'Clients',
+          messages: 'Messages',
+          files: 'Files',
+          revisions: 'Activity',
+          services: 'Services',
+          payments: 'Payments',
+          invoices: 'Invoices',
+          analytics: 'Analytics',
+          settings: 'Settings',
+          'contact-requests': 'Contact Requests',
+          newsletter: 'Newsletter'
+        };
+        topbarTitle.innerHTML = (names[pageId] || 'Dashboard') + ' <span>/ overview</span>';
+
+        /* Only render the page being switched to — others are lazy-init'd */
+        if (pageId === 'orders') {
+          renderOrdersView();
+        } else if (pageId === 'clients') {
+          renderClientsView();
+        } else if (pageId === 'messages') {
+          renderMessagesView();
+        } else if (pageId === 'files') {
+          renderFilesView();
+        } else if (pageId === 'services') {
+          renderServicesView();
+        } else if (pageId === 'revisions') {
+          renderActivityView();
+        } else if (pageId === 'payments') {
+          renderPaymentsView();
+        } else if (pageId === 'invoices') {
+          renderInvoicesView();
+        } else if (pageId === 'contact-requests') {
+          renderContactRequestsView();
+        } else if (pageId === 'newsletter') {
+          renderNewsletterView();
+        }
+
+        if (window.innerWidth <= 1024) {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('open');
+        }
+      }
+      window.switchPage = switchPage;
+
+      sidebarItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const page = this.dataset.page;
+          switchPage(page);
+        });
+      });
+
+      // ─── Mobile sidebar ───
+      hamburger.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', function() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+
+      // ─── Charts ───
+      Chart.defaults.color = '#71717a';
+      Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+      Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+      const revCtx = document.getElementById('revenueChart').getContext('2d');
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+      const gradient = revCtx.createLinearGradient(0, 0, 0, 260);
+      gradient.addColorStop(0, 'rgba(0,245,196,0.25)');
+      gradient.addColorStop(0.5, 'rgba(0,245,196,0.08)');
+      gradient.addColorStop(1, 'rgba(0,245,196,0)');
+
+      new Chart(revCtx, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Revenue',
+            data: [28500, 32000, 29800, 35600, 41200, 45300],
+            borderColor: '#00f5c4',
+            backgroundColor: gradient,
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#040404',
+            pointBorderColor: '#00f5c4',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(4,4,4,0.9)',
+              titleColor: '#fff',
+              bodyColor: '#a1a1aa',
+              borderColor: 'rgba(255,255,255,0.06)',
+              borderWidth: 1,
+              padding: 12,
+              cornerRadius: 10
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#52525b', font: { size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.03)' },
+              ticks: {
+                color: '#52525b',
+                font: { size: 11 },
+                callback: function(v) { return '$' + (v / 1000).toFixed(0) + 'k'; }
+              }
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          }
+        }
+      });
+
+      const donutCtx = document.getElementById('donutChart').getContext('2d');
+      new Chart(donutCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Web Design', 'SEO', 'Branding', 'AI Automation', 'Social Media'],
+          datasets: [{
+            data: [35, 22, 18, 15, 10],
+            backgroundColor: ['#00f5c4', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444'],
+            borderColor: '#040404',
+            borderWidth: 3,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#a1a1aa',
+                font: { size: 11, family: "'DM Sans', sans-serif" },
+                padding: 12,
+                usePointStyle: true,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(4,4,4,0.9)',
+              titleColor: '#fff',
+              bodyColor: '#a1a1aa',
+              borderColor: 'rgba(255,255,255,0.06)',
+              borderWidth: 1,
+              padding: 12,
+              cornerRadius: 10,
+              callbacks: {
+                label: function(ctx) {
+                  return ctx.label + ': ' + ctx.parsed + '%';
+                }
+              }
+            }
+          },
+          cutout: '65%'
+        }
+      });
+
+      // ─── Populate charts with real data ───
+      if (typeof NAGRIVA_Dashboard !== 'undefined') {
+        var _allOrders = NAGRIVA_AdminOrders.getAllOrders();
+        if (_allOrders.length > 0) {
+          NAGRIVA_Dashboard.updateCharts(_allOrders);
+        }
+      }
+
+      // ─── File Upload ───
+      const uploadArea = document.getElementById('uploadArea');
+      const uploadFiles = document.getElementById('uploadFiles');
+      let files = [];
+
+      uploadArea.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = '*/*';
+        input.onchange = function(e) {
+          handleFiles(e.target.files);
+        };
+        input.click();
+      });
+
+      uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.classList.add('dragover');
+      });
+      uploadArea.addEventListener('dragleave', function() {
+        this.classList.remove('dragover');
+      });
+      uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('dragover');
+        handleFiles(e.dataTransfer.files);
+      });
+
+      function handleFiles(fileList) {
+        for (let f of fileList) {
+          files.push(f);
+          const size = f.size > 1024 * 1024 ?
+            (f.size / (1024 * 1024)).toFixed(1) + ' MB' :
+            (f.size / 1024).toFixed(1) + ' KB';
+          const div = document.createElement('div');
+          div.className = 'upload-file';
+          div.innerHTML =
+            '<i class="fas fa-file"></i><div class="file-info"><div class="file-name">' +
+            f.name + '</div><div class="file-size">' + size + '</div></div>' +
+            '<span class="file-remove"><i class="fas fa-times"></i></span>';
+          div.querySelector('.file-remove').addEventListener('click', function() {
+            div.remove();
+            files = files.filter(fi => fi !== f);
+          });
+          uploadFiles.appendChild(div);
+        }
+      }
+
+      // ─── Dashboard Live Messages ───
+      function refreshDashboardMessages() {
+        const messageList = document.getElementById('messageList');
+        if (!messageList) return;
+        if (typeof NAGRIVA_Messages !== 'undefined' && NAGRIVA_Messages.getConversations().length > 0) {
+          const convos = NAGRIVA_Messages.getConversations().slice(0, 4);
+          messageList.innerHTML = convos.map(function(c) {
+            const name = c.senderName || c.senderEmail || 'Unknown';
+            const initials = NAGRIVA_Messages.getInitials(name);
+            const preview = c.lastMessage ? c.lastMessage.substring(0, 80) + (c.lastMessage.length > 80 ? '...' : '') : 'No messages yet';
+            const time = NAGRIVA_Messages.formatDate(c.lastMessageTime);
+            return '<div class="message-item open-page" data-page="messages" style="cursor:pointer;">' +
+              '<div class="message-avatar ma1">' + initials + '</div>' +
+              '<div class="message-body">' +
+              '<div class="message-head"><span class="message-name">' + name.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</span>' +
+              '<span class="message-time">' + time + '</span></div>' +
+              '<div class="message-text">' + preview.replace(/</g,'&lt;') + '</div>' +
+              '</div></div>';
+          }).join('');
+        }
+      }
+
+      if (typeof NAGRIVA_Messages !== 'undefined') {
+        NAGRIVA_Messages.onChange(function() {
+          refreshDashboardMessages();
+        });
+      }
+
+      const messageInput = document.getElementById('messageInput');
+      const sendBtn = document.getElementById('sendMessage');
+      if (messageInput && sendBtn) {
+        sendBtn.addEventListener('click', function() {
+          const conversationId = NAGRIVA_Messages.getConversations();
+          if (conversationId.length > 0) {
+            const text = messageInput.value.trim();
+            if (!text) return;
+            NAGRIVA_Messages.sendMessage(conversationId[0].id, text).then(function() {
+              messageInput.value = '';
+              refreshDashboardMessages();
+            }).catch(function(err) {
+              console.warn('[Dashboard] Send failed:', err);
+            });
+          } else {
+            switchPage('messages');
+          }
+        });
+        messageInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendBtn.click();
+          }
+        });
+      }
+
+      /* ════════════════════════════════════════
+         ORDERS SYSTEM INITIALIZATION
+         ════════════════════════════════════════ */
+
+      let currentView = 'table';
+      const ordersContainer = document.getElementById('ordersContainer');
+
+      function renderOrdersView() {
+        if (!ordersContainer) return;
+        NAGRIVA_AdminOrders.renderOrders(ordersContainer, currentView);
+      }
+
+      if (typeof NAGRIVA_Dashboard !== 'undefined') {
+        NAGRIVA_Dashboard.init();
+      }
+
+      await NAGRIVA_AdminOrders.init(ordersContainer);
+
+      if (NAGRIVA_AdminOrders.error && typeof NAGRIVA_Dashboard !== 'undefined') {
+        NAGRIVA_Dashboard.showErrorState(NAGRIVA_AdminOrders.error);
+      }
+
+      // ─── Clients ───
+      const clientsContainer = document.getElementById('clientsContainer');
+      let clientsInitialized = false;
+
+      async function renderClientsView() {
+        if (!clientsInitialized) {
+          await NAGRIVA_Clients.init(clientsContainer);
+          clientsInitialized = true;
+        }
+        updateClientsStats();
+      }
+
+      function updateClientsStats() {
+        const stats = NAGRIVA_Clients.getStats();
+        document.getElementById('clientsTotal').textContent = stats.total;
+        document.getElementById('clientsActive').textContent = stats.activeClients;
+        document.getElementById('clientsRevenue').textContent = '$' + stats.totalRevenue.toLocaleString('en-US');
+        document.getElementById('clientsAvgOrder').textContent = '$' + stats.avgOrderValue.toLocaleString('en-US');
+      }
+
+      NAGRIVA_Clients.onChange(function(clientsList) {
+        updateClientsStats();
+      });
+
+      document.getElementById('clientsSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_Clients.setSearch(this.value);
+        const clear = document.getElementById('clientsSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Clients.renderClients(clientsContainer);
+      }, 250));
+
+      document.getElementById('clientsSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('clientsSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Clients.setSearch('');
+        NAGRIVA_Clients.renderClients(clientsContainer);
+      });
+
+      document.getElementById('clientsSort')?.addEventListener('change', function() {
+        NAGRIVA_Clients.setSort(this.value);
+        NAGRIVA_Clients.renderClients(clientsContainer);
+      });
+
+      document.getElementById('clientsNewBtn')?.addEventListener('click', function() {
+        showNewClientModal();
+      });
+
+      // ─── Messages ───
+      const messagesContainer = document.getElementById('messagesContainer');
+      let messagesInitialized = false;
+
+      async function renderMessagesView() {
+        if (!messagesInitialized) {
+          await NAGRIVA_Messages.init(messagesContainer);
+          messagesInitialized = true;
+        } else {
+          if (messagesContainer) NAGRIVA_Messages.renderConversations(messagesContainer);
+        }
+      }
+
+      document.getElementById('messagesSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_Messages.setSearch(this.value);
+        NAGRIVA_Messages.renderConversations(messagesContainer);
+      }, 250));
+
+      // ─── Files ───
+      const filesContainer = document.getElementById('filesContainer');
+      let filesInitialized = false;
+
+      async function renderFilesView() {
+        if (!filesInitialized) {
+          await NAGRIVA_Files.init(filesContainer);
+          filesInitialized = true;
+        }
+      }
+
+      document.getElementById('filesSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_Files.setSearch(this.value);
+        const clear = document.getElementById('filesSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Files.renderFiles(filesContainer);
+      }, 250));
+
+      document.getElementById('filesSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('filesSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Files.setSearch('');
+        NAGRIVA_Files.renderFiles(filesContainer);
+      });
+
+      document.getElementById('filesTypeFilter')?.addEventListener('change', function() {
+        NAGRIVA_Files.setTypeFilter(this.value);
+        NAGRIVA_Files.renderFiles(filesContainer);
+      });
+
+      document.getElementById('filesUploadBtn')?.addEventListener('click', function() {
+        showFileUploadModal();
+      });
+
+      // ─── Services ───
+      const servicesContainer = document.getElementById('servicesContainer');
+      let servicesInitialized = false;
+
+      async function renderServicesView() {
+        if (!servicesInitialized) {
+          await NAGRIVA_AdminServices.init(servicesContainer);
+          servicesInitialized = true;
+        }
+        NAGRIVA_AdminServices.renderStats();
+      }
+
+      function updateServicesStats() {
+        const stats = NAGRIVA_AdminServices.getStats();
+        document.getElementById('svcTotal').textContent = stats.total;
+        document.getElementById('svcPublished').textContent = stats.published;
+        document.getElementById('svcDraft').textContent = stats.draft;
+        document.getElementById('svcArchived').textContent = stats.archived;
+      }
+
+      NAGRIVA_AdminServices.onChange(function() {
+        updateServicesStats();
+      });
+
+      document.getElementById('servicesSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_AdminServices.setSearch(this.value);
+        const clear = document.getElementById('servicesSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_AdminServices.renderServices(servicesContainer);
+      }, 250));
+
+      document.getElementById('servicesSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('servicesSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_AdminServices.setSearch('');
+        NAGRIVA_AdminServices.renderServices(servicesContainer);
+      });
+
+      document.getElementById('servicesStatusFilter')?.addEventListener('change', function() {
+        NAGRIVA_AdminServices.setStatusFilter(this.value);
+        NAGRIVA_AdminServices.renderServices(servicesContainer);
+      });
+
+      document.getElementById('servicesNewBtn')?.addEventListener('click', function() {
+        NAGRIVA_AdminServices.openServiceModal(null);
+      });
+
+      // ─── Activity / Revisions ───
+      const activityContainer = document.getElementById('activityContainer');
+      let activityInitialized = false;
+
+      async function renderActivityView() {
+        if (!activityInitialized) {
+          await NAGRIVA_Activity.init(activityContainer);
+          activityInitialized = true;
+        }
+      }
+
+      document.getElementById('activityActionFilter')?.addEventListener('change', function() {
+        NAGRIVA_Activity.setActionFilter(this.value);
+        NAGRIVA_Activity.renderActivities(activityContainer);
+      });
+
+      // ─── Payments ───
+      const paymentsContainer = document.getElementById('paymentsContainer');
+      let paymentsInitialized = false;
+
+      async function renderPaymentsView() {
+        if (!paymentsInitialized) {
+          await NAGRIVA_Payments.init(paymentsContainer);
+          paymentsInitialized = true;
+        }
+      }
+
+      NAGRIVA_Payments.onChange(function() {
+        if (document.getElementById('page-payments').classList.contains('active')) {
+          NAGRIVA_Payments.renderPayments(paymentsContainer);
+          NAGRIVA_Payments.renderStats();
+          NAGRIVA_Payments.renderRevenueChart();
+          NAGRIVA_Payments.renderHistoryCompact();
+        }
+      });
+
+      document.getElementById('paymentsSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_Payments.setSearch(this.value);
+        const clear = document.getElementById('paymentsSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      }, 250));
+
+      document.getElementById('paymentsSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('paymentsSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Payments.setSearch('');
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsStatusFilter')?.addEventListener('change', function() {
+        NAGRIVA_Payments.setStatusFilter(this.value);
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsSort')?.addEventListener('change', function() {
+        NAGRIVA_Payments.setSort(this.value);
+        NAGRIVA_Payments.renderPayments(paymentsContainer);
+      });
+
+      document.getElementById('paymentsNewBtn')?.addEventListener('click', function() {
+        NAGRIVA_Payments.openPaymentModal();
+      });
+
+      // Open history links (delegated)
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.pay-history-link')) {
+          const page = document.getElementById('page-payments');
+          if (page && page.classList.contains('active')) {
+            e.preventDefault();
+            NAGRIVA_Payments.openHistoryModal(null);
+          }
+        }
+      });
+
+      // View payment history on row click (delegated)
+      document.addEventListener('click', function(e) {
+        const row = e.target.closest('#paymentsContainer tr[data-id]');
+        if (row) {
+          const paymentId = row.dataset.id;
+          NAGRIVA_Payments.openHistoryModal(paymentId);
+        }
+      });
+
+      // ─── Invoices ───
+      const invoicesContainer = document.getElementById('invoicesContainer');
+      let invoicesInitialized = false;
+
+      async function renderInvoicesView() {
+        if (!invoicesInitialized) {
+          await NAGRIVA_AdminInvoices.init(invoicesContainer);
+          invoicesInitialized = true;
+        }
+      }
+
+      NAGRIVA_AdminInvoices.onChange(function() {
+        if (document.getElementById('page-invoices').classList.contains('active')) {
+          NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+          NAGRIVA_AdminInvoices.renderStats();
+        }
+      });
+
+      document.getElementById('invoicesSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_AdminInvoices.setSearch(this.value);
+        const clear = document.getElementById('invoicesSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+      }, 250));
+
+      document.getElementById('invoicesSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('invoicesSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_AdminInvoices.setSearch('');
+        NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+      });
+
+      document.getElementById('invoicesStatusFilter')?.addEventListener('change', function() {
+        NAGRIVA_AdminInvoices.setStatusFilter(this.value);
+        NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+      });
+
+      document.getElementById('invoicesNewBtn')?.addEventListener('click', function() {
+        NAGRIVA_AdminInvoices.openInvoiceModal();
+      });
+
+      // ─── Contact Requests ───
+      const contactRequestsContainer = document.getElementById('contactRequestsContainer');
+      let contactRequestsInitialized = false;
+
+      async function renderContactRequestsView() {
+        if (!contactRequestsInitialized) {
+          await NAGRIVA_ContactRequests.init(contactRequestsContainer);
+          contactRequestsInitialized = true;
+        }
+        var totalEl = document.getElementById('contactRequestsTotal');
+        if (totalEl) totalEl.textContent = contactRequestsContainer.querySelectorAll('.data-table tbody tr').length;
+      }
+
+      document.getElementById('contactRequestsSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_ContactRequests.setSearch(this.value);
+        const clear = document.getElementById('contactRequestsSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_ContactRequests.renderTable(contactRequestsContainer);
+      }, 250));
+
+      document.getElementById('contactRequestsSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('contactRequestsSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_ContactRequests.setSearch('');
+        NAGRIVA_ContactRequests.renderTable(contactRequestsContainer);
+      });
+
+      const newsletterContainer = document.getElementById('newsletterContainer');
+      let newsletterInitialized = false;
+
+      async function renderNewsletterView() {
+        if (!newsletterInitialized) {
+          await NAGRIVA_Newsletter.init(newsletterContainer);
+          newsletterInitialized = true;
+        }
+      }
+
+      document.getElementById('newsletterSearch')?.addEventListener('input', debounce(function() {
+        NAGRIVA_Newsletter.setSearch(this.value);
+        const clear = document.getElementById('newsletterSearchClear');
+        if (clear) clear.classList.toggle('visible', this.value.length > 0);
+        NAGRIVA_Newsletter.renderTable(newsletterContainer);
+      }, 250));
+
+      document.getElementById('newsletterSearchClear')?.addEventListener('click', function() {
+        const input = document.getElementById('newsletterSearch');
+        if (input) { input.value = ''; input.focus(); }
+        this.classList.remove('visible');
+        NAGRIVA_Newsletter.setSearch('');
+        NAGRIVA_Newsletter.renderTable(newsletterContainer);
+      });
+
+      // ─── Notifications ───
+      NAGRIVA_Notifications.init();
+      document.querySelector('.notif-list')?.parentElement?.querySelector('.card-link')?.addEventListener('click', function() {
+        NAGRIVA_Notifications.markAllAsRead();
+      });
+
+      // ─── Refresh dashboard widgets after modules load ───
+      setTimeout(function() {
+        refreshDashboardMessages();
+      }, 1000);
+
+      function openNewOrderModal() {
+        NAGRIVA_Modal.open({
+          onSubmit: function() {
+            renderOrdersView();
+            if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
+          }
+        });
+      }
+      document.getElementById('ordersNewBtn').addEventListener('click', openNewOrderModal);
+      document.getElementById('dashNewOrderBtn').addEventListener('click', openNewOrderModal);
+
+      // ─── Search ───
+      const searchInput = document.getElementById('ordersSearch');
+      const searchClear = document.getElementById('ordersSearchClear');
+
+      searchInput.addEventListener('input', debounce(function() {
+        NAGRIVA_AdminOrders.setSearch(this.value);
+        searchClear.classList.toggle('visible', this.value.length > 0);
+        renderOrdersView();
+      }, 250));
+
+      searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.focus();
+        this.classList.remove('visible');
+        NAGRIVA_AdminOrders.setSearch('');
+        renderOrdersView();
+      });
+
+      // ─── Status Filter ───
+      document.getElementById('ordersStatusFilter').addEventListener('change', function() {
+        NAGRIVA_AdminOrders.setStatusFilter(this.value);
+        renderOrdersView();
+      });
+
+      // ─── Sort ───
+      document.getElementById('ordersSort').addEventListener('change', function() {
+        NAGRIVA_AdminOrders.setSort(this.value);
+        renderOrdersView();
+      });
+
+      // ─── View Toggle ───
+      document.querySelectorAll('.orders-view-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.orders-view-btn').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          this.classList.add('active');
+          currentView = this.dataset.view;
+          renderOrdersView();
+        });
+      });
+
+      // ─── Empty state new order / invoice / service buttons ───
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.empty-new-order-btn')) {
+          openNewOrderModal();
+        }
+        if (e.target.closest('.inv-empty-new-btn')) {
+          NAGRIVA_AdminInvoices.openInvoiceModal();
+        }
+        if (e.target.closest('.empty-new-service-btn')) {
+          NAGRIVA_AdminServices.openServiceModal(null);
+        }
+      });
+
+      // ─── New Client Modal ───
+      function showNewClientModal(clientData) {
+        const isEditing = !!clientData;
+        const overlay = document.createElement('div');
+        overlay.className = 'order-modal-overlay';
+        overlay.id = 'newClientModal';
+        overlay.innerHTML = `
+          <div class="order-modal">
+            <div class="order-modal-glow"></div>
+            <div class="order-modal-header">
+              <div>
+                <h2>${isEditing ? 'Edit Client' : 'New Client'}</h2>
+                <p>${isEditing ? 'Update client details.' : 'Create a new client account.'}</p>
+              </div>
+              <button class="order-modal-close" id="clientModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="order-modal-body">
+              <form id="clientForm" autocomplete="off">
+                <div class="order-form-grid">
+                  <div class="order-form-field">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="cf_name" placeholder="e.g. Sarah Kim" value="${clientData ? clientData.name : ''}" required />
+                  </div>
+                  <div class="order-form-field">
+                    <label>Email${isEditing ? '' : ' <span class="required">*</span>'}</label>
+                    <input type="email" id="cf_email" placeholder="client@example.com" value="${clientData ? clientData.email : ''}" ${isEditing ? '' : 'required'} />
+                  </div>
+                  <div class="order-form-field">
+                    <label>Company</label>
+                    <input type="text" id="cf_company" placeholder="e.g. Acme Inc." value="${clientData ? clientData.company : ''}" />
+                  </div>
+                  <div class="order-form-field">
+                    <label>Phone</label>
+                    <input type="text" id="cf_phone" placeholder="+1 (555) 000-0000" value="${clientData ? clientData.phone : ''}" />
+                  </div>
+                  ${isEditing ? '' : '<div class="order-form-field"><label>Temporary Password</label><input type="text" id="cf_password" value="TempPass123!" /><span style="font-size:0.7rem;color:var(--gray3);">Change after first login</span></div>'}
+                </div>
+              </form>
+            </div>
+            <div class="order-modal-footer">
+              <button class="btn btn-secondary" id="clientModalCancel">Cancel</button>
+              <button class="btn btn-primary" id="clientModalSubmit"><i class="fas ${isEditing ? 'fa-save' : 'fa-plus'}"></i> ${isEditing ? 'Save Changes' : 'Create Client'}</button>
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add('active'));
+
+        function closeModal() {
+          overlay.classList.remove('active');
+          setTimeout(() => overlay.remove(), 400);
+        }
+        overlay.querySelector('#clientModalClose').addEventListener('click', closeModal);
+        overlay.querySelector('#clientModalCancel').addEventListener('click', closeModal);
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+
+        overlay.querySelector('#clientModalSubmit').addEventListener('click', async function() {
+          const name = overlay.querySelector('#cf_name').value.trim();
+          const email = overlay.querySelector('#cf_email').value.trim();
+          const company = overlay.querySelector('#cf_company').value.trim();
+          const phone = overlay.querySelector('#cf_phone').value.trim();
+          const password = overlay.querySelector('#cf_password') ? overlay.querySelector('#cf_password').value : 'TempPass123!';
+          if (!name) { showToast('error', 'Validation Error', 'Name is required'); return; }
+          if (!isEditing && !email) { showToast('error', 'Validation Error', 'Email is required'); return; }
+          this.disabled = true;
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+          try {
+            if (isEditing) {
+              await NAGRIVA_Clients.updateClient(clientData.id, { full_name: name, phone, company });
+            } else {
+              await NAGRIVA_Clients.createClient({ full_name: name, email, phone, company, password });
+            }
+            closeModal();
+            NAGRIVA_Clients.renderClients(clientsContainer);
+          } catch (err) {
+            this.disabled = false;
+            this.innerHTML = '<i class="fas ' + (isEditing ? 'fa-save' : 'fa-plus') + '"></i> ' + (isEditing ? 'Save Changes' : 'Create Client');
+            showToast('error', 'Operation Failed', err.message || 'Something went wrong');
+          }
+        });
+      }
+
+      // ─── File Upload Modal ───
+      function showFileUploadModal() {
+        const orders = NAGRIVA_Files.getOrders();
+        const orderOptions = orders.map(o =>
+          `<option value="${o.id}">${o.client_name || o.project_title || o.order_number || 'Untitled'}</option>`
+        ).join('');
+
+        const overlay = document.createElement('div');
+        overlay.className = 'order-modal-overlay';
+        overlay.innerHTML = `
+          <div class="order-modal" style="max-width:480px;">
+            <div class="order-modal-glow"></div>
+            <div class="order-modal-header">
+              <div>
+                <h2>Upload File</h2>
+                <p>Attach a file to an order.</p>
+              </div>
+              <button class="order-modal-close" id="fileModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="order-modal-body">
+              <form id="fileUploadForm">
+                <div class="order-form-grid">
+                  <div class="order-form-field full-width">
+                    <label>Select Order <span class="required">*</span></label>
+                    <select id="uf_order" required>
+                      <option value="">Choose an order...</option>
+                      ${orderOptions}
+                    </select>
+                  </div>
+                  <div class="order-form-field full-width">
+                    <label>Choose File <span class="required">*</span></label>
+                    <input type="file" id="uf_file" required />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="order-modal-footer">
+              <button class="btn btn-secondary" id="fileModalCancel">Cancel</button>
+              <button class="btn btn-primary" id="fileModalSubmit"><i class="fas fa-upload"></i> Upload</button>
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add('active'));
+
+        function closeModal() {
+          overlay.classList.remove('active');
+          setTimeout(() => overlay.remove(), 400);
+        }
+        overlay.querySelector('#fileModalClose').addEventListener('click', closeModal);
+        overlay.querySelector('#fileModalCancel').addEventListener('click', closeModal);
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+
+        overlay.querySelector('#fileModalSubmit').addEventListener('click', async function() {
+          const orderId = overlay.querySelector('#uf_order').value;
+          const fileInput = overlay.querySelector('#uf_file');
+          if (!orderId) { showToast('error', 'Validation Error', 'Please select an order'); return; }
+          if (!fileInput.files || !fileInput.files[0]) { showToast('error', 'Validation Error', 'Please select a file'); return; }
+          this.disabled = true;
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+          try {
+            await NAGRIVA_Files.uploadFile(fileInput.files[0], orderId);
+            closeModal();
+            NAGRIVA_Files.renderFiles(filesContainer);
+          } catch (err) {
+            this.disabled = false;
+            this.innerHTML = '<i class="fas fa-upload"></i> Upload';
+            showToast('error', 'Upload Failed', err.message || 'Something went wrong');
+          }
+        });
+      }
+
+      // ─── Toast helper for page scripts ───
+      function showToast(type, title, message) {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
+        toast.innerHTML = '<div class="toast-icon ' + type + '"><i class="fas ' + (icons[type] || icons.info) + '"></i></div><div class="toast-content"><div class="toast-title">' + title + '</div><div class="toast-message">' + message + '</div></div><button class="toast-close"><i class="fas fa-times"></i></button>';
+        container.appendChild(toast);
+        requestAnimationFrame(function() { toast.classList.add('visible'); });
+        toast.querySelector('.toast-close').addEventListener('click', function() {
+          toast.classList.remove('visible');
+          setTimeout(function() { toast.remove(); }, 400);
+        });
+        setTimeout(function() {
+          toast.classList.remove('visible');
+          setTimeout(function() { toast.remove(); }, 400);
+        }, 4000);
+      }
+
+      // ─── Delegated events for table/card actions ───
+      document.addEventListener('click', async function(e) {
+        const actionBtn = e.target.closest('[data-action]');
+        if (!actionBtn) return;
+
+        const action = actionBtn.dataset.action;
+        const row = actionBtn.closest('tr[data-id]') || actionBtn.closest('.order-card[data-id]');
+        if (!row) return;
+        const orderId = row.dataset.id;
+
+        if (action === 'edit') {
+          const order = NAGRIVA_AdminOrders.getOrder(orderId);
+          if (!order) return;
+          NAGRIVA_Modal.open({
+            prefill: order,
+            onSubmit: function() {
+              renderOrdersView();
+              if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
+            }
+          });
+        } else if (action === 'delete') {
+          const order = NAGRIVA_AdminOrders.getOrder(orderId);
+          if (!order) {
+            console.warn('[AdminDashboard] No order found for id:', orderId);
+            return;
+          }
+          console.debug('[AdminDashboard] Delete requested for order:', { id: order.id, clientName: order.clientName, projectTitle: order.projectTitle, service: order.service });
+          const confirmed = await NAGRIVA_Modal.showConfirm(
+            'Delete Order',
+            `Are you sure you want to delete ${order.clientName || order.projectTitle}'s order? This action cannot be undone.`
+          );
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_AdminOrders.deleteOrder(orderId);
+            renderOrdersView();
+            if (NAGRIVA_Dashboard) NAGRIVA_Dashboard.updateStats(NAGRIVA_AdminOrders.getStats());
+          } catch (err) {
+            console.error('[AdminDashboard] Delete failed:', { id: orderId, error: err.message, code: err.code });
+          }
+        } else if (action === 'view-client') {
+          NAGRIVA_ClientDrawer.open(orderId);
+        } else if (action === 'edit-invoice') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow) {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (invoice) NAGRIVA_AdminInvoices.openInvoiceModal(invoice);
+          }
+        } else if (action === 'delete-invoice') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow) {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (!invoice) return;
+            const confirmed = await NAGRIVA_AdminInvoices.showConfirm(
+              'Delete Invoice',
+              `Are you sure you want to delete Invoice ${invoice.invoiceNumber}? This action cannot be undone.`
+            );
+            if (!confirmed) return;
+            try {
+              await NAGRIVA_AdminInvoices.deleteInvoice(invoice.id);
+              NAGRIVA_AdminInvoices.renderInvoices(invoicesContainer);
+              NAGRIVA_AdminInvoices.renderStats();
+            } catch (err) {
+              console.error('Delete invoice failed:', err);
+            }
+          }
+        } else if (action === 'download-invoice-pdf') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow && typeof NAGRIVA_InvoicePDF !== 'undefined') {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (invoice) {
+              try {
+                actionBtn.disabled = true;
+                actionBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                await NAGRIVA_InvoicePDF.downloadInvoice(invoice);
+              } catch (err) {
+                showToast('error', 'Download Failed', err.message || 'Could not generate PDF');
+              } finally {
+                actionBtn.disabled = false;
+                actionBtn.innerHTML = '<i class="fas fa-file-pdf"></i>';
+              }
+            }
+          }
+        } else if (action === 'print-invoice') {
+          const invRow = actionBtn.closest('#page-invoices tr[data-id]');
+          if (invRow && typeof NAGRIVA_InvoicePDF !== 'undefined') {
+            const invoice = NAGRIVA_AdminInvoices.getInvoice(invRow.dataset.id);
+            if (invoice) {
+              try {
+                await NAGRIVA_InvoicePDF.printInvoice(invoice);
+              } catch (err) {
+                showToast('error', 'Print Failed', err.message || 'Could not print invoice');
+              }
+            }
+          }
+        } else if (action === 'edit-client') {
+          const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
+          if (client) showNewClientModal(client);
+        } else if (action === 'delete-client') {
+          const client = NAGRIVA_Clients.getFilteredClients().find(c => c.id === orderId);
+          if (!client) return;
+          const confirmed = await NAGRIVA_Modal.showConfirm('Delete Client', 'Are you sure you want to remove ' + client.name + '? This will not delete their orders.');
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_Clients.deleteClient(orderId);
+            NAGRIVA_Clients.renderClients(clientsContainer);
+          } catch (err) {
+            showToast('error', 'Delete Failed', err.message);
+          }
+        } else if (action === 'delete-file') {
+          const confirmed = await NAGRIVA_Modal.showConfirm('Delete File', 'Are you sure you want to delete this file?');
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_Files.deleteFile(orderId);
+            NAGRIVA_Files.renderFiles(filesContainer);
+          } catch (err) {
+            showToast('error', 'Delete Failed', err.message);
+          }
+        } else if (action === 'edit-service') {
+          const service = NAGRIVA_AdminServices.getService(orderId);
+          if (service) NAGRIVA_AdminServices.openServiceModal(service);
+        } else if (action === 'delete-service') {
+          const service = NAGRIVA_AdminServices.getService(orderId);
+          if (!service) return;
+          const confirmed = await NAGRIVA_AdminServices.showConfirm('Delete Service', 'Are you sure you want to delete "' + service.title + '"? This action cannot be undone.');
+          if (!confirmed) return;
+          try {
+            await NAGRIVA_AdminServices.deleteService(orderId);
+            NAGRIVA_AdminServices.renderServices(servicesContainer);
+            NAGRIVA_AdminServices.renderStats();
+          } catch (err) {
+            showToast('error', 'Delete Failed', err.message);
+          }
+        }
+      });
+
+      // ─── Open client drawer from order/client table rows ───
+      document.addEventListener('click', function(e) {
+        const clientEl = e.target.closest('.td-client, .td-user');
+        if (!clientEl) return;
+        const row = clientEl.closest('tr[data-id]');
+        if (!row) return;
+        const actionBtn = e.target.closest('[data-action]');
+        if (actionBtn) return;
+        const id = row.dataset.id;
+        const orderRow = clientEl.closest('#page-orders tr[data-id]');
+        if (orderRow) {
+          const order = NAGRIVA_AdminOrders.getOrder(id);
+          if (order && order.clientId) {
+            NAGRIVA_ClientDrawer.open(order.clientId);
+          }
+        } else {
+          NAGRIVA_ClientDrawer.open(id);
+        }
+      });
+
+      // ─── Subscribe to order changes (orders page refresh only) ───
+      NAGRIVA_AdminOrders.onChange(function() {
+        if (document.getElementById('page-orders').classList.contains('active')) {
+          renderOrdersView();
+        }
+      });
+
+      // ─── Open page from dashboard widgets ───
+      document.addEventListener('click', function(e) {
+        const openPage = e.target.closest('.open-page');
+        if (openPage && openPage.dataset.page) {
+          switchPage(openPage.dataset.page);
+        }
+      });
+
+      // ─── Keyboard shortcut ───
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          document.getElementById('ordersSearch')?.focus();
+        }
+      });
+
+    });
+  </script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

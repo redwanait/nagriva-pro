@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Files — NAGRIVA</title>
+  <meta name="description" content="Access, preview and download your project deliverables." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/admin-auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/client-messages.css" />
+  <link rel="stylesheet" href="../css/onboarding.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    /* ════════════════════════════════════════════════════════
+       NAGRIVA CLIENT FILES 2.0 — Premium SaaS Design
+       ════════════════════════════════════════════════════════ */
+
+    /* ─── Page Layout ─── */
+    .nf-page {
+      padding-top: 88px;
+      min-height: 0;
+    }
+    .nf-page > .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 40px 48px;
+      width: 100%;
+    }
+
+    /* ─── Breadcrumb ─── */
+    .nf-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 0.75rem;
+      color: var(--gray2);
+      letter-spacing: 0.01em;
+    }
+    .nf-breadcrumb a {
+      color: var(--gray2);
+      transition: color 0.2s ease;
+      text-decoration: none;
+      position: relative;
+    }
+    .nf-breadcrumb a:hover { color: var(--accent); }
+    .nf-breadcrumb svg {
+      width: 12px; height: 12px;
+      color: var(--gray2);
+      opacity: 0.3;
+      flex-shrink: 0;
+    }
+    .nf-breadcrumb span {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* ─── Page Header ─── */
+    .nf-header {
+      margin-bottom: 32px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nf-header-left h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+    .nf-header-left p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.5;
+      max-width: 480px;
+    }
+    .nf-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(0,245,196,0.06);
+      border: 1px solid rgba(0,245,196,0.12);
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .nf-header-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ─── Actions Bar ─── */
+    .nf-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .nf-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      line-height: 1.4;
+      color: var(--gray);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+    }
+    .nf-action-btn:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-1px);
+    }
+    .nf-action-btn svg {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+    }
+    .nf-action-btn-spacer {
+      flex: 1;
+    }
+    .nf-action-btn.primary {
+      color: #040404;
+      background: var(--accent);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+    .nf-action-btn.primary:hover {
+      box-shadow: 0 0 30px rgba(0,245,196,0.25);
+      transform: translateY(-1px);
+    }
+    .nf-action-btn.primary.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    /* ─── Stats Cards ─── */
+    #cfStats {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 16px !important;
+      margin-bottom: 40px !important;
+    }
+    #cfStats .dash-stat-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.008) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #cfStats .dash-stat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0,245,196,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    #cfStats .dash-stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,245,196,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    #cfStats .dash-stat-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 60px rgba(0,245,196,0.03);
+    }
+    #cfStats .dash-stat-card:hover::after { opacity: 1; }
+    #cfStats .dash-stat-card:hover .dash-stat-icon {
+      background: rgba(0,245,196,0.12);
+      border-color: rgba(0,245,196,0.25);
+      transform: scale(1.05);
+    }
+    #cfStats .dash-stat-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: rgba(0,245,196,0.06);
+      border: 1px solid rgba(0,245,196,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-bottom: 14px;
+      transition: all 0.3s ease;
+    }
+    #cfStats .dash-stat-icon svg {
+      width: 18px; height: 18px;
+      stroke-width: 1.5;
+    }
+    #cfStats .dash-stat-icon::after { display: none; }
+    #cfStats .dash-stat-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 2px;
+      letter-spacing: -0.02em;
+    }
+    #cfStats .dash-stat-label {
+      font-size: 0.78rem;
+      color: var(--gray2);
+    }
+    #cfStats .dash-stat-change { display: none; }
+
+    /* ─── Section Divider ─── */
+    .nf-section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .nf-section-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ─── Section Title ─── */
+    .nf-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nf-section-title svg {
+      width: 18px; height: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .nf-section-desc {
+      font-size: 0.8rem;
+      color: var(--gray2);
+      margin-bottom: 20px;
+    }
+
+    /* ─── Recent Deliverables Grid ─── */
+    .nf-recent-section { margin-bottom: 40px; }
+    .cf-recent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .cf-recent-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.018) 0%, rgba(255,255,255,0.005) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    .cf-recent-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(0,245,196,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cf-recent-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,245,196,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .cf-recent-card:hover {
+      border-color: rgba(0,245,196,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 60px rgba(0,245,196,0.02);
+    }
+    .cf-recent-card:hover::after { opacity: 1; }
+    .cf-recent-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .cf-recent-card-icon {
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      background: rgba(0,245,196,0.06);
+      border: 1px solid rgba(0,245,196,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .cf-recent-card:hover .cf-recent-card-icon {
+      background: rgba(0,245,196,0.1);
+      border-color: rgba(0,245,196,0.2);
+      transform: scale(1.05);
+    }
+    .cf-recent-card-icon svg { width: 16px; height: 16px; stroke-width: 1.5; }
+    .cf-recent-card-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .cf-recent-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cf-recent-card-meta {
+      font-size: 0.7rem;
+      color: var(--gray2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cf-recent-card-meta svg { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.5; }
+    .cf-recent-card-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+    .cf-recent-card-badge.pdf { color:#ff5050; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.12); }
+    .cf-recent-card-badge.image { color:#4facfe; background:rgba(79,172,254,0.08); border:1px solid rgba(79,172,254,0.12); }
+    .cf-recent-card-badge.zip { color:#f59e0b; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.12); }
+    .cf-recent-card-badge.video { color:#22c55e; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.12); }
+    .cf-recent-card-badge.doc { color:#a855f7; background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.12); }
+    .cf-recent-card-badge.default { color:var(--gray); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); }
+
+    /* ─── Table Wrapper ─── */
+    .cf-table-wrap {
+      background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0.005) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .cf-table-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,245,196,0.06), transparent);
+      opacity: 0.6;
+    }
+    .cf-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .cf-table thead {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .cf-table thead th {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      white-space: nowrap;
+    }
+    .cf-table thead th:last-child { text-align: center; }
+    .cf-table tbody tr {
+      transition: background 0.2s ease, border-color 0.2s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    .cf-table tbody tr:last-child { border-bottom: none; }
+    .cf-table tbody tr:hover { background: rgba(0,245,196,0.02); }
+    .cf-table tbody td {
+      padding: 14px 20px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      vertical-align: middle;
+    }
+    .cf-table tbody td:last-child { text-align: center; }
+
+    .cf-file-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cf-file-icon {
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      background: rgba(0,245,196,0.05);
+      border: 1px solid rgba(0,245,196,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .cf-file-icon svg { width: 16px; height: 16px; stroke-width: 1.5; }
+    tr:hover .cf-file-icon {
+      background: rgba(0,245,196,0.08);
+      border-color: rgba(0,245,196,0.18);
+      transform: scale(1.05);
+    }
+    .cf-file-title {
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 260px;
+      font-size: 0.82rem;
+    }
+    .cf-file-meta { font-size: 0.7rem; color: var(--gray2); }
+
+    .cf-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .cf-type-badge.pdf { color:#ff5050; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.15); }
+    .cf-type-badge.zip { color:#f59e0b; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.15); }
+    .cf-type-badge.png,
+    .cf-type-badge.jpg,
+    .cf-type-badge.jpeg,
+    .cf-type-badge.gif,
+    .cf-type-badge.webp,
+    .cf-type-badge.svg,
+    .cf-type-badge.image { color:#4facfe; background:rgba(79,172,254,0.08); border:1px solid rgba(79,172,254,0.15); }
+    .cf-type-badge.doc,
+    .cf-type-badge.docx { color:#a855f7; background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.15); }
+    .cf-type-badge.mp4,
+    .cf-type-badge.mov,
+    .cf-type-badge.avi,
+    .cf-type-badge.webm,
+    .cf-type-badge.video { color:#22c55e; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.15); }
+    .cf-type-badge.default { color:var(--gray); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); }
+
+    .cf-order-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+    .cf-order-link:hover { color: var(--accent2); opacity: 0.85; }
+
+    .cf-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .cf-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 9px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+    .cf-action-btn svg {
+      width: 13px; height: 13px;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cf-action-btn-preview {
+      color: var(--gray);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+    }
+    .cf-action-btn-preview:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+    }
+    .cf-action-btn-preview:hover svg { transform: scale(1.1); }
+    .cf-action-btn-download {
+      color: #040404;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .cf-action-btn-download:hover {
+      box-shadow: 0 0 20px rgba(0,245,196,0.25);
+      transform: translateY(-1px);
+    }
+    .cf-action-btn-download:hover svg { transform: translateY(1px); }
+    .cf-action-btn-download.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .cf-action-btn-download.loading svg {
+      animation: cfSpin 0.8s linear infinite;
+      transform: none;
+    }
+    .cf-action-btn-download .cf-btn-spinner {
+      display: none;
+      width: 13px; height: 13px;
+      border: 2px solid rgba(4,4,4,0.2);
+      border-top-color: var(--bg);
+      border-radius: 50%;
+      animation: cfSpin 0.6s linear infinite;
+    }
+    .cf-action-btn-download.loading .cf-btn-spinner { display: inline-block; }
+    .cf-action-btn-download.loading svg { display: none; }
+    .cf-action-btn-download.loading .cf-btn-text { opacity: 0.6; }
+
+    @keyframes cfSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─── Skeleton Loaders ─── */
+    .cf-skeleton-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr 150px;
+      gap: 14px;
+      padding: 14px 20px;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    .cf-skeleton-row:last-child { border-bottom: none; }
+    .cf-skeleton-row .dash-skeleton { height: 14px; border-radius: 7px; }
+    .cf-skeleton-row .dash-skeleton.icon { width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0; }
+    .cf-skeleton-recent {
+      height: 110px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ─── Preview Modal ─── */
+    .cf-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      opacity: 0;
+      transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cf-modal-overlay.active { display: flex; opacity: 1; }
+    .cf-modal {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      background: rgba(14,14,18,0.97);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.95) translateY(12px);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 32px 100px rgba(0,0,0,0.6);
+    }
+    .cf-modal-overlay.active .cf-modal { transform: scale(1) translateY(0); }
+    .cf-modal-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      z-index: 10;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .cf-modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.15);
+      transform: rotate(90deg) scale(1.05);
+    }
+    .cf-modal-close svg { width: 16px; height: 16px; }
+    .cf-modal-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      max-height: 65vh;
+      overflow: hidden;
+      background: rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .cf-modal-body img { max-width: 100%; max-height: 65vh; object-fit: contain; display: block; }
+    .cf-modal-body video { max-width: 100%; max-height: 65vh; width: 100%; display: block; }
+    .cf-modal-body embed,
+    .cf-modal-body iframe { width: 100%; height: 65vh; border: none; }
+    .cf-modal-body .cf-modal-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      color: var(--gray2);
+    }
+    .cf-modal-body .cf-modal-placeholder svg { width: 48px; height: 48px; opacity: 0.3; }
+    .cf-modal-body .cf-modal-placeholder span { font-size: 0.85rem; }
+    .cf-modal-footer {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 24px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      background: rgba(0,0,0,0.2);
+    }
+    .cf-modal-footer-info { flex: 1; min-width: 0; }
+    .cf-modal-footer-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+    .cf-modal-footer-meta {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .cf-modal-footer-meta span { display: flex; align-items: center; gap: 5px; }
+    .cf-modal-footer-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 22px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #040404;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .cf-modal-footer-download:hover {
+      box-shadow: 0 0 28px rgba(0,245,196,0.25);
+      transform: translateY(-1px);
+    }
+    .cf-modal-footer-download svg { width: 14px; height: 14px; }
+    .cf-modal-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+    .cf-modal-spinner {
+      width: 32px; height: 32px;
+      border: 3px solid rgba(255,255,255,0.04);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: cfSpin 0.7s linear infinite;
+    }
+
+    /* ─── Empty State (overrides dash-empty inside table) ─── */
+    #cfContent .dash-empty.cf-empty-wrap {
+      min-height: 220px;
+      max-height: none;
+      padding: 40px 24px;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+    }
+    #cfContent .dash-empty .dash-empty-title {
+      font-size: 0.95rem;
+    }
+    #cfContent .dash-empty .dash-empty-desc {
+      font-size: 0.78rem;
+    }
+
+    /* ─── Error State ─── */
+    .dash-error {
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(239,68,68,0.1);
+      background: rgba(239,68,68,0.01);
+    }
+    .dash-error-icon {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(239,68,68,0.1);
+      background: rgba(239,68,68,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ef4444;
+      margin-bottom: 12px;
+    }
+    .dash-error-icon svg { width: 18px; height: 18px; }
+    .dash-error-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #ef4444;
+      margin-bottom: 4px;
+    }
+    .dash-error-desc {
+      font-size: 0.75rem;
+      color: var(--gray2);
+      max-width: 300px;
+      line-height: 1.5;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1200px) {
+      .nf-page > .container { padding: 0 32px 40px; }
+      .cf-recent-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    }
+    @media (max-width: 1024px) {
+      #cfStats { grid-template-columns: repeat(3, 1fr) !important; gap: 14px !important; }
+      .nf-page > .container { padding: 0 28px 36px; }
+      .cf-recent-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    }
+    @media (max-width: 768px) {
+      .nf-page > .container { padding: 0 20px 32px; }
+      #cfStats { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+      #cfStats .dash-stat-card { padding: 18px; }
+      #cfStats .dash-stat-value { font-size: 1.25rem; }
+      #cfStats .dash-stat-icon { width: 36px; height: 36px; margin-bottom: 10px; }
+      #cfStats .dash-stat-icon svg { width: 16px; height: 16px; }
+
+      .cf-recent-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .cf-recent-card { padding: 16px; }
+
+      .cf-table thead { display: none; }
+      .cf-table tbody tr {
+        display: block;
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.02);
+      }
+      .cf-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border-bottom: none;
+        text-align: right;
+      }
+      .cf-table tbody td::before {
+        content: attr(data-label);
+        font-size: 0.62rem;
+        font-weight: 700;
+        color: var(--gray2);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+      .cf-table tbody td:last-child { text-align: right; }
+      .cf-file-title { max-width: 180px; font-size: 0.8rem; }
+      .cf-skeleton-row { grid-template-columns: 1fr; gap: 8px; }
+      .cf-actions { justify-content: flex-end; }
+      .cf-action-btn { padding: 6px 10px; font-size: 0.65rem; }
+
+      .cf-modal-overlay { padding: 16px; }
+      .cf-modal-footer { flex-direction: column; gap: 12px; padding: 14px 18px; }
+      .cf-modal-footer-download { width: 100%; justify-content: center; }
+
+      .nf-header { flex-direction: column; align-items: flex-start; }
+      .nf-actions-bar { margin-bottom: 28px; }
+      .nf-header-badge { align-self: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .nf-page > .container { padding: 0 16px 24px; }
+      #cfStats { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+      #cfStats .dash-stat-card { padding: 14px; }
+      #cfStats .dash-stat-value { font-size: 1.1rem; }
+      #cfStats .dash-stat-icon { width: 32px; height: 32px; margin-bottom: 8px; }
+      #cfStats .dash-stat-icon svg { width: 14px; height: 14px; }
+      #cfStats .dash-stat-label { font-size: 0.68rem; }
+
+      .cf-recent-grid { grid-template-columns: 1fr; gap: 10px; }
+      .cf-recent-card { padding: 14px; }
+
+      .cf-table tbody td { font-size: 0.74rem; }
+      .cf-file-title { max-width: 130px; font-size: 0.76rem; }
+      .cf-action-btn { padding: 5px 8px; font-size: 0.62rem; }
+      .cf-action-btn svg { width: 11px; height: 11px; }
+
+      .nf-action-btn { padding: 7px 14px; font-size: 0.74rem; }
+      .nf-breadcrumb { font-size: 0.68rem; }
+      .cf-modal-overlay { padding: 12px; }
+      .cf-modal-footer { padding: 12px 14px; gap: 10px; }
+      .cf-modal-footer-download { padding: 8px 16px; font-size: 0.74rem; }
+    }
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body data-page="client-files">
+
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+  <div id="navbar-container"></div>
+
+  <main class="nf-page">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="nf-breadcrumb">
+        <a href="dashboard.html">Dashboard</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="client-portal.html">Client Portal</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>My Files</span>
+      </nav>
+
+      <!-- Header -->
+      <div class="nf-header">
+        <div class="nf-header-left">
+          <h1>My Files</h1>
+          <p>Access, preview and download your project deliverables and uploaded files.</p>
+        </div>
+        <div class="nf-header-badge">
+          <span class="nf-header-badge-dot"></span>
+          Client Access
+        </div>
+      </div>
+
+      <!-- Actions Bar -->
+      <div class="nf-actions-bar">
+        <a href="dashboard.html" class="nf-action-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8H13M13 8L9 4M13 8L9 12"/></svg>
+          Dashboard
+        </a>
+        <a href="order-tracking.html" class="nf-action-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Track Orders
+        </a>
+        <a href="client-portal.html" class="nf-action-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Client Portal
+        </a>
+        <span class="nf-action-btn-spacer"></span>
+        <a href="#" class="nf-action-btn primary" id="downloadAllBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download All Files
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="dash-stats-grid cf-stats-grid" id="cfStats">
+        <div class="dash-stat-card dash-fade-in">
+          <div class="dash-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="dash-stat-value" id="cfTotalFiles">0</div>
+          <div class="dash-stat-label">Total Files</div>
+        </div>
+        <div class="dash-stat-card dash-fade-in">
+          <div class="dash-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="dash-stat-value" id="cfStorageUsed">0 B</div>
+          <div class="dash-stat-label">Storage Used</div>
+        </div>
+        <div class="dash-stat-card dash-fade-in">
+          <div class="dash-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="dash-stat-value" id="cfLatestDate">—</div>
+          <div class="dash-stat-label">Latest Upload</div>
+        </div>
+      </div>
+
+      <!-- Recent Deliverables -->
+      <div class="nf-recent-section">
+        <div class="nf-section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Recent Deliverables
+        </div>
+        <p class="nf-section-desc">Latest files uploaded to your projects</p>
+        <div class="cf-recent-grid" id="cfRecentGrid"></div>
+      </div>
+
+      <!-- All Files Table -->
+      <div class="nf-section-title" style="margin-bottom:16px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        All Files
+      </div>
+      <div class="cf-table-wrap dash-fade-in" id="cfTableWrap">
+        <div id="cfContent"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Preview Modal -->
+  <div class="cf-modal-overlay" id="cfPreviewOverlay">
+    <div class="cf-modal" id="cfPreviewModal">
+      <button class="cf-modal-close" id="cfPreviewClose" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="cf-modal-body" id="cfPreviewBody">
+        <div class="cf-modal-loading"><div class="cf-modal-spinner"></div></div>
+      </div>
+      <div class="cf-modal-footer" id="cfPreviewFooter">
+        <div class="cf-modal-footer-info">
+          <div class="cf-modal-footer-name" id="cfPreviewName">filename.ext</div>
+          <div class="cf-modal-footer-meta">
+            <span id="cfPreviewType">—</span>
+            <span id="cfPreviewSize">—</span>
+          </div>
+        </div>
+        <a class="cf-modal-footer-download" id="cfPreviewDownload" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/admin-auth.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script defer src="../js/client-files.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

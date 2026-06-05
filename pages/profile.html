@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — NAGRIVA</title>
+  <meta name="description" content="Your NAGRIVA profile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <style>
+    .profile-page { padding-top: 80px; min-height: 100vh; }
+    .profile-header { display: flex; align-items: center; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; margin-top: 50px; }
+    .profile-avatar-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .profile-avatar-wrapper { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+    #profileSkeleton { margin-bottom: 40px; }
+    #profileCardsSkeleton { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+    @media (max-width: 768px) { #profileCardsSkeleton { grid-template-columns: 1fr; } }
+    .profile-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700;
+      color: var(--bg);
+    }
+    .profile-avatar-badge {
+      position: absolute; bottom: 0; right: 0;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .profile-avatar-badge svg { width: 11px; height: 11px; color: var(--bg); display: block; }
+    .profile-info { flex: 1; min-width: 0; }
+    .profile-info h1 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+    .profile-info .profile-email { font-size: 0.85rem; color: var(--gray); }
+    .profile-info .profile-joined { font-size: 0.78rem; color: var(--gray2); margin-top: 4px; }
+    .profile-sections {
+      display: flex; flex-direction: column; gap: 20px;
+      margin-bottom: 40px; max-width: 680px;
+    }
+    .profile-card {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 24px;
+    }
+    .profile-card h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: -0.01em; }
+    .profile-card .pf-desc { font-size: 0.82rem; color: var(--gray2); margin-bottom: 20px; margin-top: -14px; }
+
+    .profile-form { display: flex; flex-direction: column; gap: 16px; }
+    .pf-group { display: flex; flex-direction: column; gap: 6px; }
+    .pf-label { font-size: 0.78rem; font-weight: 500; color: var(--gray); letter-spacing: 0.01em; }
+    .pf-input {
+      width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--white); outline: none;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .pf-input:focus { border-color: rgba(0,245,196,0.3); background: rgba(0,245,196,0.02); }
+    .pf-input:disabled { opacity: 0.5; cursor: not-allowed; }
+    .pf-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      border: none; align-self: flex-start;
+      color: var(--bg); background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .pf-btn:hover { box-shadow: 0 0 30px rgba(0,245,196,0.25); transform: translateY(-1px); }
+    .pf-btn:active { transform: translateY(0) scale(0.98); }
+    .pf-btn.loading { pointer-events: none; opacity: 0.9; }
+    .pf-btn.loading .pf-btn-text { display: none; }
+    .pf-btn.loading .pf-btn-spinner { display: inline-block; }
+    .pf-btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(4,4,4,0.15); border-top-color: #040404; border-radius: 50%; animation: auth-spin 0.6s linear infinite; }
+
+    .connected-provider { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.015); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; }
+    .connected-provider:last-child { margin-bottom: 0; }
+    .connected-provider-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); }
+    .connected-provider-info { flex: 1; min-width: 0; }
+    .connected-provider-name { font-size: 0.85rem; font-weight: 500; color: var(--white); }
+    .connected-provider-email { font-size: 0.75rem; color: var(--gray2); }
+    .connected-provider-badge { font-size: 0.65rem; font-weight: 600; color: var(--accent); background: rgba(0,245,196,0.08); padding: 2px 8px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .no-providers { font-size: 0.85rem; color: var(--gray2); text-align: center; padding: 24px 0; }
+    .profile-avatar.has-image { background: none; border: 2px solid var(--accent); }
+    .profile-avatar img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .profile-avatar img.loaded { opacity: 1; }
+    .change-photo-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; margin-top: 12px; padding: 7px 16px; min-height: 32px;
+      border-radius: 8px; font-size: 0.75rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; border: none; outline: none;
+      color: var(--accent); background: rgba(0,245,196,0.08);
+      transition: all var(--transition); line-height: 1;
+    }
+    .change-photo-btn:hover { background: rgba(0,245,196,0.15); }
+    .change-photo-btn.loading { pointer-events: none; opacity: 0.6; }
+    .change-photo-btn svg { flex-shrink: 0; display: block; }
+
+    /* ─── Toast Notifications ─── */
+    .toast-container {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      display: flex; flex-direction: column; gap: 10px; pointer-events: none;
+    }
+    .toast {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px; border-radius: var(--r-sm);
+      background: rgba(9,12,12,0.95);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(0,245,196,0.03);
+      min-width: 300px; max-width: 420px;
+      pointer-events: all;
+      transform: translateX(120%); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden;
+    }
+    .toast.visible { transform: translateX(0); opacity: 1; }
+    .toast.hiding { transform: translateX(120%); opacity: 0; }
+    .toast-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 0.75rem;
+    }
+    .toast-icon.success { background: rgba(16,185,129,0.12); color: #10b981; }
+    .toast-icon.error { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .toast-icon.warning { background: rgba(245,158,11,0.12); color: #f59e0b; }
+    .toast-icon.info { background: rgba(59,130,246,0.12); color: #3b82f6; }
+    .toast-content { flex: 1; min-width: 0; }
+    .toast-title { font-size: 0.82rem; font-weight: 600; color: var(--white); }
+    .toast-message { font-size: 0.72rem; color: var(--gray2); margin-top: 2px; }
+    .toast-progress {
+      position: absolute; bottom: 0; left: 0; height: 2px; width: 100%;
+      transform: scaleX(1); transform-origin: left center;
+    }
+    .toast-progress.success { background: #10b981; }
+    .toast-progress.error { background: #ef4444; }
+    .toast-progress.warning { background: #f59e0b; }
+    .toast-progress.info { background: #3b82f6; }
+    .toast-close {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; color: #71717a;
+      cursor: pointer; font-size: 0.65rem; flex-shrink: 0;
+      position: relative; z-index: 1;
+      transition: color var(--transition);
+    }
+    .toast-close:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .profile-sections { max-width: 100%; }
+      .profile-header { flex-direction: column; text-align: center; }
+      .profile-info { text-align: center; }
+      .pf-btn { align-self: stretch; }
+    }
+
+  /* ─── Delete Account ─── */
+  .profile-card.danger-card {
+    border-color: rgba(239,68,68,0.15);
+    background: rgba(239,68,68,0.02);
+    margin-top: 20px;
+  }
+  .profile-card.danger-card h2 {
+    color: #ef4444;
+  }
+  .delete-warning {
+    font-size: 0.82rem;
+    color: var(--gray2);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .delete-warning strong {
+    color: #ef4444;
+  }
+  .pf-btn-danger {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+    font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    border: none; color: #fff;
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.2);
+  }
+  .pf-btn-danger:hover {
+    background: rgba(239,68,68,0.25);
+    box-shadow: 0 0 24px rgba(239,68,68,0.15);
+    transform: translateY(-1px);
+  }
+  .pf-btn-danger:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .pf-btn-danger.loading {
+    pointer-events: none; opacity: 0.7;
+  }
+  .pf-btn-danger .pf-btn-spinner {
+    display: none; width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: #fff;
+    border-radius: 50%; animation: auth-spin 0.6s linear infinite;
+  }
+  .pf-btn-danger.loading .pf-btn-text { display: none; }
+  .pf-btn-danger.loading .pf-btn-spinner { display: inline-block; }
+  .pf-btn-cancel {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+    font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    border: 1px solid var(--border); color: var(--gray);
+    background: transparent;
+  }
+  .pf-btn-cancel:hover {
+    border-color: var(--border2); color: var(--white);
+  }
+  .pf-btn-delete {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+    font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    border: none; color: #fff;
+    background: #dc2626;
+  }
+  .pf-btn-delete:hover {
+    background: #b91c1c;
+    box-shadow: 0 0 24px rgba(220,38,38,0.2);
+    transform: translateY(-1px);
+  }
+  .pf-btn-delete:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .pf-btn-delete.loading {
+    pointer-events: none; opacity: 0.7;
+  }
+  .pf-btn-delete .pf-btn-spinner {
+    display: none; width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: #fff;
+    border-radius: 50%; animation: auth-spin 0.6s linear infinite;
+  }
+  .pf-btn-delete.loading .pf-btn-text { display: none; }
+  .pf-btn-delete.loading .pf-btn-spinner { display: inline-block; }
+
+  /* ─── Confirmation Modal ─── */
+  .confirm-delete-overlay {
+    display: none; position: fixed; inset: 0; z-index: 99999;
+    background: rgba(4,4,4,0.7);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .confirm-delete-overlay.active {
+    display: flex;
+  }
+  .confirm-delete-modal {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 18px; padding: 32px; max-width: 440px; width: 100%;
+    animation: auth-msg-in 0.3s ease;
+  }
+  .confirm-delete-modal .cd-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .confirm-delete-modal .cd-icon svg {
+    width: 24px; height: 24px;
+    color: #ef4444;
+  }
+  .confirm-delete-modal h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: #ef4444; margin-bottom: 8px;
+  }
+  .confirm-delete-modal p {
+    font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 20px;
+  }
+  .confirm-delete-modal .cd-input-label {
+    font-size: 0.78rem; font-weight: 500; color: var(--gray2);
+    margin-bottom: 6px; display: block;
+  }
+  .confirm-delete-modal .cd-input {
+    width: 100%; background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06); border-radius: 10px;
+    padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--white); outline: none;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    margin-bottom: 20px;
+  }
+  .confirm-delete-modal .cd-input:focus {
+    border-color: rgba(239,68,68,0.3);
+    background: rgba(239,68,68,0.02);
+  }
+  .confirm-delete-modal .cd-input.mismatch {
+    border-color: rgba(239,68,68,0.4);
+  }
+  .confirm-delete-actions {
+    display: flex; gap: 12px; justify-content: flex-end;
+  }
+
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body data-page="profile">
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+  <div id="navbar-container"></div>
+
+  <section class="profile-page">
+    <div class="container">
+
+      <div class="profile-header" id="profileHeader" style="display:none;">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar" id="profileAvatar">U</div>
+            <div class="profile-avatar-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <button class="change-photo-btn" id="changePhotoBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Change Photo
+          </button>
+          <input type="file" accept="image/jpeg,image/png,image/webp" id="avatarInput" style="display:none" />
+        </div>
+        <div class="profile-info">
+          <h1 id="profileName">User</h1>
+          <div class="profile-email" id="profileEmail">user@email.com</div>
+          <div class="profile-joined" id="profileJoined">Member since ...</div>
+        </div>
+      </div>
+
+
+      <div class="profile-sections" id="profileGrid" style="display:none;">
+
+        <!-- ─── Personal Information ─── -->
+        <div class="profile-card">
+          <h2>Personal Information</h2>
+          <div class="pf-desc">Update your name and contact details.</div>
+          <form class="profile-form" id="profileForm">
+            <div class="pf-group">
+              <label class="pf-label">Full Name</label>
+              <input type="text" class="pf-input" id="profileNameInput" placeholder="Your full name" />
+            </div>
+            <div class="pf-group">
+              <label class="pf-label">Email</label>
+              <input type="email" class="pf-input" id="profileEmailInput" disabled />
+            </div>
+            <button type="submit" class="pf-btn" id="profileSaveBtn">
+              <span class="pf-btn-text">Save Changes</span>
+              <span class="pf-btn-spinner"></span>
+            </button>
+          </form>
+        </div>
+
+        <!-- ─── Connected Providers ─── -->
+        <div class="profile-card">
+          <h2>Connected Providers</h2>
+          <div id="connectedProviders">
+            <div class="no-providers">Loading...</div>
+          </div>
+        </div>
+
+        <!-- ─── Delete Account ─── -->
+        <div class="profile-card danger-card" id="deleteAccountCard" style="display:none;">
+          <h2>Delete Account</h2>
+          <div class="delete-warning">
+            Permanently delete your account and all associated data.
+            This action <strong>cannot</strong> be undone.
+          </div>
+          <button class="pf-btn-danger" id="deleteAccountBtn">
+            <span class="pf-btn-text">Delete My Account</span>
+            <span class="pf-btn-spinner"></span>
+          </button>
+          <div class="pf-error" id="deleteError" style="margin-top:12px;"></div>
+        </div>
+
+      <!-- ─── Delete Confirmation Modal ─── -->
+      <div class="confirm-delete-overlay" id="confirmDeleteOverlay">
+        <div class="confirm-delete-modal">
+          <div class="cd-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <h3>Delete Your Account</h3>
+          <p>
+            This will permanently delete your account, profile, and all associated data.
+            This action cannot be undone. To confirm, type <strong style="color:#fff;">DELETE</strong> below.
+          </p>
+          <label class="cd-input-label">Type DELETE to confirm</label>
+          <input type="text" class="cd-input" id="deleteConfirmInput" placeholder="Type DELETE here" autocomplete="off" />
+          <div class="pf-error" id="confirmDeleteError" style="margin-bottom:12px;"></div>
+          <div class="confirm-delete-actions">
+            <button class="pf-btn-cancel" id="deleteCancelBtn">Cancel</button>
+            <button class="pf-btn-delete" id="deleteConfirmBtn" disabled>
+              <span class="pf-btn-text">Permanently Delete</span>
+              <span class="pf-btn-spinner"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/skeleton.js"></script>
+  <script defer src="../js/loading-manager.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/profile-avatar.js"></script>
+  
+  <script defer src="../js/toast.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var user, nameEl, emailEl, nameInput, emailInput, joinedEl;
+
+      function showSkeletons() {
+        var skel = window.NAGRIVA_Skeleton;
+        var lm = window.NAGRIVA_Loading;
+        if (skel && lm) {
+          lm.show('profileSkeleton', skel.profile());
+          lm.show('profileCardsSkeleton', skel.profileCard(2));
+        } else if (skel) {
+          skel.inject('profileSkeleton', skel.profile());
+          skel.inject('profileCardsSkeleton', skel.profileCard(2));
+        }
+      }
+
+      function hideSkeletons() {
+        var header = document.getElementById('profileHeader');
+        var grid = document.getElementById('profileGrid');
+        if (header) header.style.display = '';
+        if (grid) grid.style.display = '';
+        var lm = window.NAGRIVA_Loading;
+        if (lm) {
+          lm.clear('profileSkeleton');
+          lm.clear('profileCardsSkeleton');
+        } else {
+          var sk = document.getElementById('profileSkeleton');
+          if (sk) sk.style.display = 'none';
+          var sk2 = document.getElementById('profileCardsSkeleton');
+          if (sk2) sk2.style.display = 'none';
+        }
+      }
+
+      function initProfile() {
+        showSkeletons();
+
+        user = NagrivaAuth.getUser();
+        nameEl = document.getElementById('profileName');
+        emailEl = document.getElementById('profileEmail');
+        nameInput = document.getElementById('profileNameInput');
+        emailInput = document.getElementById('profileEmailInput');
+        joinedEl = document.getElementById('profileJoined');
+
+        if (!user) {
+          var check = setInterval(function() {
+            user = NagrivaAuth.getUser();
+            if (user) { clearInterval(check); populateProfile(); }
+          }, 100);
+          setTimeout(function() { clearInterval(check); }, 5000);
+          return;
+        }
+        populateProfile();
+      }
+
+      function getDisplayName(u) {
+        if (!u) return 'User';
+        return u.user_metadata?.full_name || u.email?.split('@')[0] || 'User';
+      }
+
+      function formatDate(iso) {
+        if (!iso) return 'N/A';
+        var d = new Date(iso);
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function populateProfile() {
+        var displayName = getDisplayName(user);
+        if (nameEl) nameEl.textContent = displayName;
+        if (emailEl) emailEl.textContent = user.email || '';
+        if (nameInput) nameInput.value = displayName;
+        if (emailInput) emailInput.value = user.email || '';
+        if (joinedEl) joinedEl.textContent = 'Member since ' + formatDate(user.created_at);
+
+        hideSkeletons();
+        loadProviders();
+      }
+
+      async function loadProviders() {
+        var container = document.getElementById('connectedProviders');
+        try {
+          var { data: { identities }, error } = await window.supabaseClient.auth.getUser();
+          if (error) throw error;
+          var idents = identities?.identities || [];
+          if (idents.length === 0) {
+            container.innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-plug', title: 'No connected providers', description: 'Connect your accounts to manage them from here.', variant: 'sm' });
+            return;
+          }
+          container.innerHTML = '';
+          idents.forEach(function(ident) {
+            var isEmail = ident.provider === 'email';
+            var div = document.createElement('div');
+            div.className = 'connected-provider';
+
+            var icon = document.createElement('div');
+            icon.className = 'connected-provider-icon';
+            if (ident.provider === 'google') {
+              icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>';
+            } else if (ident.provider === 'github') {
+              icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>';
+            } else {
+              icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
+            }
+            div.appendChild(icon);
+
+            var info = document.createElement('div');
+            info.className = 'connected-provider-info';
+            var pName = document.createElement('div');
+            pName.className = 'connected-provider-name';
+            pName.textContent = ident.provider ? ident.provider.charAt(0).toUpperCase() + ident.provider.slice(1) : 'Email';
+            info.appendChild(pName);
+
+            if (ident.email) {
+              var pEmail = document.createElement('div');
+              pEmail.className = 'connected-provider-email';
+              pEmail.textContent = ident.email;
+              info.appendChild(pEmail);
+            }
+            div.appendChild(info);
+
+            var badge = document.createElement('span');
+            badge.className = 'connected-provider-badge';
+            badge.textContent = isEmail ? 'Primary' : 'Connected';
+            div.appendChild(badge);
+
+            container.appendChild(div);
+          });
+        } catch (_) {
+          container.innerHTML = NAGRIVA_EmptyState.render({ icon: 'fas fa-exclamation-triangle', title: 'Could not load providers', description: 'There was a problem loading your connected accounts.', variant: 'error' });
+        }
+      }
+
+      var submitting = false;
+      document.getElementById('profileForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (submitting) return;
+        var saveBtn = document.getElementById('profileSaveBtn');
+
+        var newName = document.getElementById('profileNameInput').value.trim();
+        if (!newName) {
+          NAGRIVA_Toast.error('Validation Error', 'Please enter your name.');
+          return;
+        }
+
+        submitting = true;
+        saveBtn.classList.add('loading');
+        try {
+          var { error } = await window.supabaseClient.auth.updateUser({
+            data: { full_name: newName }
+          });
+          if (error) throw error;
+
+          NAGRIVA_Toast.success('Profile Updated', 'Profile updated successfully.');
+          var displayName = getDisplayName({ user_metadata: { full_name: newName }, email: user.email });
+          if (nameEl) nameEl.textContent = displayName;
+          ProfileAvatar.refreshAll();
+        } catch (err) {
+          NAGRIVA_Toast.error('Update Failed', err.message || 'Failed to update profile.');
+        } finally {
+          submitting = false;
+          saveBtn.classList.remove('loading');
+        }
+      });
+
+      initProfile();
+
+      /* ─── Delete Account Logic ─── */
+      var deleteAccountCard = document.getElementById('deleteAccountCard');
+      var deleteAccountBtn = document.getElementById('deleteAccountBtn');
+      var confirmOverlay = document.getElementById('confirmDeleteOverlay');
+      var confirmInput = document.getElementById('deleteConfirmInput');
+      var confirmBtn = document.getElementById('deleteConfirmBtn');
+      var cancelBtn = document.getElementById('deleteCancelBtn');
+      var deleteError = document.getElementById('deleteError');
+      var confirmDeleteError = document.getElementById('confirmDeleteError');
+
+      function showDeleteCard() {
+        if (deleteAccountCard) deleteAccountCard.style.display = '';
+      }
+
+      function openConfirmModal() {
+        if (confirmOverlay) confirmOverlay.classList.add('active');
+        if (confirmInput) {
+          confirmInput.value = '';
+          confirmInput.classList.remove('mismatch');
+        }
+        if (confirmBtn) confirmBtn.disabled = true;
+        if (confirmDeleteError) {
+          confirmDeleteError.classList.remove('show');
+          confirmDeleteError.textContent = '';
+        }
+        if (confirmInput) setTimeout(function() { confirmInput.focus(); }, 100);
+      }
+
+      function closeConfirmModal() {
+        if (confirmOverlay) confirmOverlay.classList.remove('active');
+      }
+
+      /* Show delete card after profile populates */
+      var origPopulate = populateProfile;
+      populateProfile = function() {
+        origPopulate();
+        showDeleteCard();
+      };
+
+      /* Confirm input validation */
+      if (confirmInput) {
+        confirmInput.addEventListener('input', function() {
+          var isValid = this.value.trim() === 'DELETE';
+          if (confirmBtn) confirmBtn.disabled = !isValid;
+          if (isValid) {
+            this.classList.remove('mismatch');
+          } else if (this.value.length > 0) {
+            this.classList.add('mismatch');
+          } else {
+            this.classList.remove('mismatch');
+          }
+        });
+      }
+
+      /* Open confirmation on delete button click */
+      if (deleteAccountBtn) {
+        deleteAccountBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (deleteError) {
+            deleteError.classList.remove('show');
+            deleteError.textContent = '';
+          }
+          openConfirmModal();
+        });
+      }
+
+      /* Cancel button */
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeConfirmModal();
+        });
+      }
+
+      /* Close on overlay click */
+      if (confirmOverlay) {
+        confirmOverlay.addEventListener('click', function(e) {
+          if (e.target === confirmOverlay) closeConfirmModal();
+        });
+      }
+
+      /* Close on Escape */
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape' && confirmOverlay && confirmOverlay.classList.contains('active')) {
+          closeConfirmModal();
+        }
+      });
+
+      /* Confirm delete */
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', async function(e) {
+          e.preventDefault();
+
+          /* Double-check confirmation text */
+          var typed = confirmInput ? confirmInput.value.trim() : '';
+          if (typed !== 'DELETE') {
+            if (confirmDeleteError) {
+              confirmDeleteError.textContent = 'Please type DELETE to confirm.';
+              confirmDeleteError.classList.add('show');
+            }
+            return;
+          }
+
+          confirmBtn.classList.add('loading');
+
+          try {
+            var { error } = await window.supabaseClient.rpc('delete_account');
+            if (error) throw error;
+
+            /* Account deleted successfully — sign out */
+            await window.supabaseClient.auth.signOut();
+
+            window.location.href = '/pages/login.html?account_deleted=true';
+          } catch (err) {
+            console.error('[DeleteAccount]', err);
+            if (confirmDeleteError) {
+              confirmDeleteError.textContent = err.message || 'Failed to delete account. Please try again or contact support.';
+              confirmDeleteError.classList.add('show');
+            }
+            confirmBtn.classList.remove('loading');
+          }
+        });
+      }
+
+      NagrivaAuth.onAuthStateChange = NagrivaAuth.onAuthStateChange || function() {};
+      var origHandler = window.supabaseClient.auth.onAuthStateChange;
+      if (origHandler) {
+        window.supabaseClient.auth.onAuthStateChange(function(event, session) {
+          if (event === 'USER_UPDATED') {
+            user = session?.user || null;
+            if (user) populateProfile();
+          }
+        });
+      }
+    });
+  </script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

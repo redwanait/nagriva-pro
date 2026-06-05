@@ -1,0 +1,852 @@
+/* ════════════════════════════════════════════════════════
+   NAGRIVA — Performance & Lazy Loading Styles
+   ════════════════════════════════════════════════════════ */
+
+/* ─── Layout Shift Prevention ─── */
+.sk-container {
+  contain: layout style paint;
+  min-height: 40px;
+}
+
+.sk-container--stats { min-height: 120px; }
+.sk-container--orders { min-height: 200px; }
+.sk-container--activity { min-height: 200px; }
+.sk-container--messages { min-height: 200px; }
+.sk-container--notifications { min-height: 200px; }
+.sk-container--projects { min-height: 250px; }
+.sk-container--services { min-height: 600px; }
+.sk-container--profile { min-height: 300px; }
+.sk-container--results { min-height: 400px; }
+.sk-container--full { min-height: 60vh; }
+
+/* ─── Premium Shimmer Animation ─── */
+@keyframes nagriva-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes nagriva-shimmer-reverse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes nagriva-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ─── Reusable Skeleton Base ─── */
+.skeleton-base {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.05) 37%,
+    rgba(255, 255, 255, 0.02) 63%
+  );
+  background-size: 200% 100%;
+  animation: nagriva-shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-block {
+  height: 20px;
+  margin-bottom: 12px;
+}
+
+.skeleton-block.w20 { width: 20%; }
+.skeleton-block.w30 { width: 30%; }
+.skeleton-block.w40 { width: 40%; }
+.skeleton-block.w50 { width: 50%; }
+.skeleton-block.w60 { width: 60%; }
+.skeleton-block.w70 { width: 70%; }
+.skeleton-block.w80 { width: 80%; }
+.skeleton-block.w90 { width: 90%; }
+.skeleton-block.w100 { width: 100%; }
+
+/* ─── Skeleton Card Container ─── */
+.skeleton-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.skeleton-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.skeleton-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-line {
+  height: 10px;
+  margin-bottom: 8px;
+}
+
+.skeleton-line:last-child {
+  margin-bottom: 0;
+}
+
+.skeleton-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* ─── Premium Skeleton System ─── */
+
+/* Skeleton shimmer bar - universal */
+.sk-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.02) 0%,
+    rgba(255,255,255,0.06) 40%,
+    rgba(255,255,255,0.02) 80%
+  );
+  background-size: 200% 100%;
+  animation: nagriva-shimmer-reverse 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* Skeleton stat card (dashboard stats) */
+.sk-stat {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.sk-stat-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+.sk-stat-value {
+  height: 24px; width: 55%;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+.sk-stat-label {
+  height: 12px; width: 65%;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.sk-stat-change {
+  height: 10px; width: 40%;
+  border-radius: 99px;
+}
+
+/* Skeleton row (orders, activity, messages, notifications) */
+.sk-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border);
+}
+.sk-row-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.sk-row-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.sk-row-line {
+  height: 12px;
+  border-radius: 6px;
+}
+.sk-row-line-sm {
+  height: 8px;
+  width: 55%;
+  border-radius: 6px;
+}
+.sk-row-end {
+  width: 40px; height: 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Skeleton avatar row (messages) */
+.sk-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border);
+}
+.sk-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sk-avatar-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sk-avatar-name {
+  height: 12px; width: 30%;
+  border-radius: 6px;
+}
+.sk-avatar-preview {
+  height: 10px; width: 65%;
+  border-radius: 6px;
+}
+.sk-avatar-time {
+  width: 32px; height: 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Skeleton project card */
+.sk-project {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.015);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sk-project-line {
+  height: 12px;
+  border-radius: 6px;
+}
+.sk-project-line.w70 { width: 70%; }
+.sk-project-line.w50 { width: 50%; }
+.sk-project-line.w40 { width: 40%; }
+
+/* Skeleton notification row */
+.sk-notif {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border);
+}
+.sk-notif-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sk-notif-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sk-notif-title {
+  height: 13px; width: 45%;
+  border-radius: 6px;
+}
+.sk-notif-msg {
+  height: 10px; width: 75%;
+  border-radius: 6px;
+}
+.sk-notif-time {
+  height: 8px; width: 20%;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* Skeleton timeline (activity feed) */
+.sk-timeline {
+  display: flex;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border);
+}
+.sk-timeline-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.sk-timeline-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sk-timeline-title {
+  height: 12px; width: 55%;
+  border-radius: 6px;
+}
+.sk-timeline-desc {
+  height: 10px; width: 80%;
+  border-radius: 6px;
+}
+.sk-timeline-time {
+  height: 8px; width: 22%;
+  border-radius: 4px;
+}
+
+/* Skeleton profile header */
+.sk-profile {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.sk-profile-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sk-profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sk-profile-name {
+  height: 24px; width: 35%;
+  border-radius: 6px;
+}
+.sk-profile-email {
+  height: 14px; width: 45%;
+  border-radius: 6px;
+}
+.sk-profile-joined {
+  height: 12px; width: 30%;
+  border-radius: 6px;
+}
+
+/* Skeleton services card */
+.sk-service-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.sk-service-img {
+  height: 200px;
+}
+.sk-service-body {
+  padding: 22px 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sk-service-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+}
+.sk-service-line {
+  height: 14px;
+  border-radius: 6px;
+}
+.sk-service-line.w70 { width: 70%; }
+.sk-service-line.w100 { width: 100%; }
+.sk-service-line.w50 { width: 50%; }
+
+/* Skeleton admin stat card */
+.sk-admin-stat {
+  padding: 24px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.sk-admin-stat-icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.sk-admin-stat-value {
+  height: 28px; width: 55%;
+  border-radius: 99px;
+  margin-bottom: 8px;
+}
+.sk-admin-stat-label {
+  height: 10px; width: 40%;
+  border-radius: 99px;
+}
+
+/* Skeleton admin table row */
+.sk-admin-tr {
+  display: flex;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  align-items: center;
+}
+.sk-admin-td {
+  height: 12px;
+  border-radius: 99px;
+  flex: 1;
+}
+.sk-admin-td.w35 { max-width: 35%; flex: none; }
+.sk-admin-td.w25 { max-width: 25%; flex: none; }
+.sk-admin-td.w15 { max-width: 15%; flex: none; }
+.sk-admin-td.w10 { max-width: 10%; flex: none; }
+
+/* Skeleton order card (client portal) */
+.sk-order-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+}
+.sk-order-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.sk-order-body {
+  flex: 1;
+  min-width: 0;
+}
+.sk-order-name {
+  height: 16px; width: 55%;
+  border-radius: 99px;
+  margin-bottom: 8px;
+}
+.sk-order-meta {
+  height: 10px; width: 40%;
+  border-radius: 99px;
+}
+.sk-order-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.sk-order-badge {
+  height: 22px; width: 90px;
+  border-radius: 99px;
+}
+.sk-order-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sk-order-bar {
+  width: 120px; height: 5px;
+  border-radius: 99px;
+}
+.sk-order-pct {
+  width: 28px; height: 8px;
+  border-radius: 99px;
+}
+
+/* Administrative skeleton widget */
+.sk-widget {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.sk-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.sk-widget-title {
+  height: 14px; width: 40%;
+  border-radius: 99px;
+}
+.sk-widget-action {
+  height: 14px; width: 20%;
+  border-radius: 99px;
+}
+
+/* ─── Result Card Skeletons (Results/Projects page) ─── */
+.sk-result-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.sk-result-img {
+  height: 220px;
+}
+.sk-result-card.cs-full .sk-result-img { height: 280px; }
+.sk-result-body {
+  padding: 22px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sk-result-tag {
+  height: 18px; width: 80px;
+  border-radius: 99px;
+}
+.sk-result-title {
+  height: 20px; width: 75%;
+  border-radius: 6px;
+}
+.sk-result-desc {
+  height: 12px; width: 100%;
+  border-radius: 6px;
+}
+.sk-result-desc-sm {
+  height: 12px; width: 60%;
+  border-radius: 6px;
+}
+.sk-result-services {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.sk-result-service-tag {
+  height: 20px; width: 60px;
+  border-radius: 99px;
+}
+
+/* ─── Page Shell / Auth Check Skeleton ─── */
+.sk-page-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sk-shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sk-shell-logo {
+  width: 120px; height: 28px;
+  border-radius: 6px;
+}
+.sk-shell-nav {
+  display: flex;
+  gap: 20px;
+}
+.sk-shell-nav-item {
+  width: 60px; height: 12px;
+  border-radius: 6px;
+}
+.sk-shell-nav-item:last-child {
+  width: 80px;
+}
+.sk-shell-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.sk-shell-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.015);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.sk-shell-brand {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+}
+.sk-shell-title {
+  width: 160px; height: 18px;
+  border-radius: 6px;
+}
+.sk-shell-desc {
+  width: 220px; height: 12px;
+  border-radius: 6px;
+}
+.sk-shell-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.sk-shell-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.sk-shell-dot-pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: skShellPulse 1.8s ease-in-out infinite;
+}
+.sk-shell-text {
+  width: 100px; height: 10px;
+  border-radius: 6px;
+}
+@keyframes skShellPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ─── Fade Transition for Skeleton → Content ─── */
+.sk-fade-container {
+  position: relative;
+  min-height: 40px;
+}
+.sk-fade-container > .sk-content {
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.sk-fade-container > .sk-content.sk-visible {
+  opacity: 1;
+}
+.sk-fade-container > .sk-skeleton {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.sk-fade-container > .sk-skeleton.sk-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── Staggered skeleton children ─── */
+.sk-stagger > .sk-shimmer,
+.sk-stagger > .sk-stat,
+.sk-stagger > .sk-row,
+.sk-stagger > .sk-avatar-row,
+.sk-stagger > .sk-notif,
+.sk-stagger > .sk-timeline,
+.sk-stagger > .sk-project,
+.sk-stagger > .sk-widget,
+.sk-stagger > .sk-service-card,
+.sk-stagger > .sk-order-card,
+.sk-stagger > .sk-admin-stat,
+.sk-stagger > .sk-admin-tr,
+.sk-stagger > .sk-result-card {
+  opacity: 0;
+  animation: skFadeIn 0.35s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.sk-stagger > .sk-shimmer:nth-child(1),
+.sk-stagger > .sk-stat:nth-child(1),
+.sk-stagger > .sk-row:nth-child(1),
+.sk-stagger > .sk-avatar-row:nth-child(1),
+.sk-stagger > .sk-notif:nth-child(1),
+.sk-stagger > .sk-timeline:nth-child(1),
+.sk-stagger > .sk-project:nth-child(1),
+.sk-stagger > .sk-widget:nth-child(1),
+.sk-stagger > .sk-service-card:nth-child(1),
+.sk-stagger > .sk-order-card:nth-child(1),
+.sk-stagger > .sk-admin-stat:nth-child(1),
+.sk-stagger > .sk-admin-tr:nth-child(1),
+.sk-stagger > .sk-result-card:nth-child(1) { animation-delay: 0.02s; }
+.sk-stagger > .sk-shimmer:nth-child(2),
+.sk-stagger > .sk-stat:nth-child(2),
+.sk-stagger > .sk-row:nth-child(2),
+.sk-stagger > .sk-avatar-row:nth-child(2),
+.sk-stagger > .sk-notif:nth-child(2),
+.sk-stagger > .sk-timeline:nth-child(2),
+.sk-stagger > .sk-project:nth-child(2),
+.sk-stagger > .sk-widget:nth-child(2),
+.sk-stagger > .sk-service-card:nth-child(2),
+.sk-stagger > .sk-order-card:nth-child(2),
+.sk-stagger > .sk-admin-stat:nth-child(2),
+.sk-stagger > .sk-admin-tr:nth-child(2),
+.sk-stagger > .sk-result-card:nth-child(2) { animation-delay: 0.06s; }
+.sk-stagger > .sk-shimmer:nth-child(3),
+.sk-stagger > .sk-stat:nth-child(3),
+.sk-stagger > .sk-row:nth-child(3),
+.sk-stagger > .sk-avatar-row:nth-child(3),
+.sk-stagger > .sk-notif:nth-child(3),
+.sk-stagger > .sk-timeline:nth-child(3),
+.sk-stagger > .sk-project:nth-child(3),
+.sk-stagger > .sk-widget:nth-child(3),
+.sk-stagger > .sk-service-card:nth-child(3),
+.sk-stagger > .sk-order-card:nth-child(3),
+.sk-stagger > .sk-admin-stat:nth-child(3),
+.sk-stagger > .sk-admin-tr:nth-child(3),
+.sk-stagger > .sk-result-card:nth-child(3) { animation-delay: 0.1s; }
+.sk-stagger > .sk-shimmer:nth-child(4),
+.sk-stagger > .sk-stat:nth-child(4),
+.sk-stagger > .sk-row:nth-child(4),
+.sk-stagger > .sk-avatar-row:nth-child(4),
+.sk-stagger > .sk-notif:nth-child(4),
+.sk-stagger > .sk-timeline:nth-child(4),
+.sk-stagger > .sk-project:nth-child(4),
+.sk-stagger > .sk-widget:nth-child(4),
+.sk-stagger > .sk-service-card:nth-child(4),
+.sk-stagger > .sk-order-card:nth-child(4),
+.sk-stagger > .sk-admin-stat:nth-child(4),
+.sk-stagger > .sk-admin-tr:nth-child(4),
+.sk-stagger > .sk-result-card:nth-child(4) { animation-delay: 0.14s; }
+.sk-stagger > .sk-shimmer:nth-child(5),
+.sk-stagger > .sk-stat:nth-child(5),
+.sk-stagger > .sk-row:nth-child(5),
+.sk-stagger > .sk-avatar-row:nth-child(5),
+.sk-stagger > .sk-notif:nth-child(5),
+.sk-stagger > .sk-timeline:nth-child(5),
+.sk-stagger > .sk-project:nth-child(5),
+.sk-stagger > .sk-widget:nth-child(5),
+.sk-stagger > .sk-service-card:nth-child(5),
+.sk-stagger > .sk-order-card:nth-child(5),
+.sk-stagger > .sk-admin-stat:nth-child(5),
+.sk-stagger > .sk-admin-tr:nth-child(5),
+.sk-stagger > .sk-result-card:nth-child(5) { animation-delay: 0.18s; }
+
+@keyframes skFadeIn {
+  to { opacity: 1; }
+}
+
+/* ─── Lazy load transition ─── */
+.lazy-fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1),
+              transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.lazy-fade-in.lazy-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Background lazy load ─── */
+[data-lazy-bg] {
+  background-image: none !important;
+}
+
+[data-lazy-bg].lazy-bg-loaded {
+  background-image: var(--lazy-bg-url);
+}
+
+/* ─── Content visibility for below-fold sections ─── */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+  contain: layout style paint;
+}
+
+.lazy-section--small {
+  contain-intrinsic-size: 300px;
+}
+
+.lazy-section--large {
+  contain-intrinsic-size: 800px;
+}
+
+.lazy-section--xl {
+  contain-intrinsic-size: 1200px;
+}
+
+/* ─── Reduce motion for animations ─── */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-base,
+  .sk-shimmer,
+  .sk-stat-icon, .sk-stat-value, .sk-stat-label, .sk-stat-change,
+  .sk-row-icon, .sk-row-line, .sk-row-line-sm, .sk-row-end,
+  .sk-avatar, .sk-avatar-name, .sk-avatar-preview, .sk-avatar-time,
+  .sk-project-line,
+  .sk-notif-icon, .sk-notif-title, .sk-notif-msg, .sk-notif-time,
+  .sk-timeline-dot, .sk-timeline-title, .sk-timeline-desc, .sk-timeline-time,
+  .sk-profile-avatar, .sk-profile-name, .sk-profile-email, .sk-profile-joined,
+  .sk-service-img, .sk-service-icon, .sk-service-line,
+  .sk-admin-stat-icon, .sk-admin-stat-value, .sk-admin-stat-label,
+  .sk-admin-td,
+  .sk-order-icon, .sk-order-name, .sk-order-meta, .sk-order-badge, .sk-order-bar, .sk-order-pct,
+  .sk-widget-title, .sk-widget-action,
+  .sk-result-img, .sk-result-tag, .sk-result-title, .sk-result-desc, .sk-result-desc-sm, .sk-result-service-tag,
+  .sk-shell-header, .sk-shell-logo, .sk-shell-nav-item, .sk-shell-brand, .sk-shell-title, .sk-shell-desc, .sk-shell-text,
+  .sk-shell-dot {
+    animation: none !important;
+    opacity: 0.08;
+  }
+  .sk-stagger > .sk-shimmer,
+  .sk-stagger > .sk-stat,
+  .sk-stagger > .sk-row,
+  .sk-stagger > .sk-avatar-row,
+  .sk-stagger > .sk-notif,
+  .sk-stagger > .sk-timeline,
+  .sk-stagger > .sk-project,
+  .sk-stagger > .sk-widget,
+  .sk-stagger > .sk-service-card,
+  .sk-stagger > .sk-order-card,
+  .sk-stagger > .sk-admin-stat,
+  .sk-stagger > .sk-admin-tr,
+  .sk-stagger > .sk-result-card {
+    opacity: 0.08;
+    animation: none !important;
+  }
+}
+
+/* ─── Mobile performance enhancements ─── */
+@media (max-width: 768px) {
+  .lazy-section {
+    contain-intrinsic-size: 400px;
+  }
+
+  .lazy-section--large {
+    contain-intrinsic-size: 600px;
+  }
+
+  .lazy-section--xl {
+    contain-intrinsic-size: 800px;
+  }
+
+  /* Disable expensive backdrop-filter on mobile for performance */
+  .glass-card,
+  .float-card-body,
+  .float-pill,
+  .contact-card,
+  .np-card,
+  .sp-testimonial-card,
+  .sp-showcase-result,
+  .sp-hero-mockup,
+  .process-card,
+  .pricing-card {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* ─── Print optimization ─── */
+@media print {
+  .lazy-section {
+    content-visibility: visible !important;
+    contain: none !important;
+  }
+
+  [data-lazy-bg] {
+    background-image: var(--lazy-bg-url) !important;
+  }
+}

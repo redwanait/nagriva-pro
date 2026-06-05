@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation</title>
+  <meta name="description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing. NAGRIVA's tech blog delivers cutting-edge strategies for modern brands." />
+  <meta name="keywords" content="AI blog, tech blog, SaaS insights, digital marketing, automation, startups, SEO strategies, web design, NAGRIVA" />
+  <meta property="og:title" content="Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation" />
+  <meta property="og:description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <meta property="og:url" content="https://nagriva.com/pages/blog" />
+  <meta property="og:site_name" content="NAGRIVA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation" />
+  <meta name="twitter:description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing." />
+  <meta name="twitter:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <link rel="canonical" href="https://nagriva.com/pages/blog.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="/css/performance.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com",
+  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com/pages/blog",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+</head>
+<body data-page="blog">
+
+  <div id="navbar-container"></div>
+
+  <!-- Mobile menu is loaded from navbar.html via #navbar-container -->
+
+  <!-- ══════════════════════════ HERO ══════════════════════════ -->
+  <section class="blog-hero" id="hero">
+    <div class="blog-hero-bg">
+      <div class="blog-hero-glow"></div>
+      <div class="blog-hero-glow-2"></div>
+      <div class="blog-hero-glow-3"></div>
+      <div class="blog-hero-grid"></div>
+      <div class="blog-hero-noise"></div>
+    </div>
+    <div class="container">
+      <div class="blog-hero-content fade-up">
+        <div class="blog-hero-badge">
+          <span class="blog-hero-badge-dot"></span>
+          <span>Insights & Innovation</span>
+        </div>
+
+        <h1 class="blog-hero-title">
+          Insights, Growth & <span>Digital Strategies</span>
+        </h1>
+
+        <p class="blog-hero-desc">
+          Actionable insights on AI, SEO, design, automation, branding, and digital growth — crafted for founders, marketers, and innovators.
+        </p>
+
+         <div class="blog-search-wrap">
+          <svg class="blog-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="blog-search" placeholder="Search articles..." id="blogSearch" aria-label="Search articles" />
+          <button class="blog-search-clear" id="searchClear" aria-label="Clear search">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="blog-search-results" id="searchResults"></div>
+
+        <div class="blog-categories-wrap">
+          <span class="blog-categories-label">Browse by topic</span>
+          <div class="blog-categories" id="blogCategories">
+            <button class="blog-cat-btn active" data-cat="all">All</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ BLOG MAIN ══════════════════════════ -->
+  <section class="blog-main lazy-section lazy-section--xl" id="blogMain">
+    <div class="blog-main-bg">
+      <div class="blog-main-glow"></div>
+    </div>
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- ─── LEFT: Content ─── -->
+        <div class="blog-content">
+
+          <!-- Featured Article -->
+          <div class="featured-article fade-up" id="featuredContainer">
+            <!-- Rendered by blog-api.js -->
+          </div>
+
+          <!-- Blog Grid -->
+          <div class="blog-grid" id="blogGrid">
+            <!-- Rendered by blog-api.js -->
+          </div>
+
+          <!-- Skeleton Loading -->
+          <div class="skeleton-grid" id="skeletonGrid">
+            <div class="skeleton-card">
+              <div class="skeleton-thumb"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line w20 h8"></div>
+                <div class="skeleton-line w80 h14"></div>
+                <div class="skeleton-line w60 h8"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-avatar"></div>
+                  <div class="skeleton-line w20 h8"></div>
+                </div>
+              </div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton-thumb"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line w20 h8"></div>
+                <div class="skeleton-line w80 h14"></div>
+                <div class="skeleton-line w60 h8"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-avatar"></div>
+                  <div class="skeleton-line w20 h8"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div class="blog-empty" id="blogEmpty">
+            <div class="blog-empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <h3 class="blog-empty-title">No articles found</h3>
+            <p class="blog-empty-desc">We couldn't find any articles matching your search. Try adjusting your filters or browse all categories.</p>
+            <button class="blog-empty-reset" id="emptyResetBtn">← Reset Filters</button>
+          </div>
+
+          <!-- Load More -->
+          <div class="blog-load-more fade-up">
+            <button class="btn-load-more" id="loadMoreBtn">
+              <span class="btn-label">Load More Articles</span>
+              <span class="spinner"></span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"/><polyline points="7 7 12 12 17 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ─── RIGHT: Sidebar ─── -->
+        <aside class="blog-sidebar">
+
+          <!-- Trending Articles -->
+          <div class="sidebar-widget fade-up">
+            <div class="sidebar-widget-title">Trending Now</div>
+            <div class="trending-list" id="trendingList">
+              <!-- Rendered by blog-api.js -->
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget fade-up" style="--delay:0.05s">
+            <div class="sidebar-widget-title">Categories</div>
+            <div class="cat-list" id="catList">
+              <!-- Rendered by blog-api.js -->
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="sidebar-widget sidebar-newsletter fade-up" style="--delay:0.1s">
+            <div class="sidebar-widget-title">Newsletter</div>
+            <p class="newsletter-desc">Get weekly insights on AI, growth strategies, and digital innovation delivered to your inbox.</p>
+            <div class="newsletter-input-wrap">
+              <input type="email" class="sidebar-newsletter-input" placeholder="your@email.com" aria-label="Email for newsletter" />
+              <button class="sidebar-newsletter-btn" aria-label="Subscribe">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget fade-up" style="--delay:0.15s">
+            <div class="sidebar-widget-title">Recent Posts</div>
+            <div class="recent-list" id="recentList">
+              <!-- Rendered by blog-api.js -->
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════════════════ NEWSLETTER ══════════════════════════ -->
+  <section class="blog-cta lazy-section lazy-section--small" style="padding-top:0;padding-bottom:100px;">
+    <div class="container">
+      <div class="blog-cta-content fade-up">
+        <div class="section-tag">Stay Ahead</div>
+        <h2 class="blog-cta-title">Get growth insights directly <span>to your inbox</span></h2>
+        <p class="blog-cta-desc">Join 5,000+ leaders receiving weekly insights on AI, automation, and digital growth. No spam, just actionable strategies.</p>
+        <div class="blog-cta-form">
+          <input type="email" class="blog-cta-input" placeholder="your@email.com" id="ctaEmail" aria-label="Email for newsletter" />
+          <button class="blog-cta-submit" id="ctaSubscribe" data-cta="secondary" data-cta-action="subscribe">
+            <span>Subscribe</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+        <span class="blog-cta-trust">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No spam. Unsubscribe anytime.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+  <div id="footer-container"></div>
+
+  <!-- ══════════════════════════ SCRIPTS ══════════════════════════ -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/modules/blog/blog-api.js"></script>
+  <script defer src="/js/navbar.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <script defer src="/js/cookie-consent.js"></script>
+
+  <!-- ══════════════════════════ BLOG SCRIPT ══════════════════════════ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  (function() {
+    'use strict';
+
+    // ─── State ───
+    let allArticles = [];
+    let currentPage = 1;
+    let hasMore = true;
+    let isLoading = false;
+    let currentCategory = 'all';
+    let currentSearch = '';
+
+    // ─── DOM refs ───
+    const featuredContainer = document.getElementById('featuredContainer');
+    const grid = document.getElementById('blogGrid');
+    const skeletonGrid = document.getElementById('skeletonGrid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const catContainer = document.getElementById('blogCategories');
+    const catList = document.getElementById('catList');
+    const trendingList = document.getElementById('trendingList');
+    const recentList = document.getElementById('recentList');
+    const searchInput = document.getElementById('blogSearch');
+    const searchClear = document.getElementById('searchClear');
+    const searchResults = document.getElementById('searchResults');
+    const emptyState = document.getElementById('blogEmpty');
+    const emptyReset = document.getElementById('emptyResetBtn');
+
+    // ─── Helpers ───
+
+    function formatReadCount(count) {
+      if (!count) return '0 reads';
+      if (count >= 1000) return (count / 1000).toFixed(1).replace('.0', '') + 'K reads';
+      return count + ' reads';
+    }
+
+    function renderFeatured(article) {
+      if (!featuredContainer || !article) return;
+      const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      featuredContainer.innerHTML = `
+        <article class="featured-card" data-category="${article.category}" data-id="${article.id}" data-slug="${article.slug}">
+          <div class="art-thumb">
+            <img src="${article.imageUrl}" alt="${article.title}" loading="lazy" />
+            <div class="art-thumb-overlay"></div>
+            <div class="art-thumb-glow"></div>
+            <div class="featured-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Featured
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-meta-top">
+              <span class="art-cat">${article.category}</span>
+              <span class="art-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                ${article.readingTime} min read
+              </span>
+            </div>
+            <h2 class="art-title">${article.title}</h2>
+            <p class="art-excerpt">${article.excerpt}</p>
+            <div class="art-footer">
+              <div class="art-author">
+                <div class="art-avatar" style="background:${article.authorAvatarColor}">${article.authorInitials}</div>
+                <div>
+                  <div class="art-author-name">${article.authorName}</div>
+                  <div class="art-date">${date}</div>
+                </div>
+              </div>
+              <div class="art-read-btn">
+                <span>Read Article</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCard(article, index) {
+      const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      const div = document.createElement('article');
+      div.className = 'art-card fade-up' + (index < 8 ? '' : '');
+      div.dataset.category = article.category;
+      div.dataset.id = article.id;
+      div.dataset.slug = article.slug;
+      div.innerHTML = `
+        <div class="art-thumb">
+          <img src="${article.imageUrl}" alt="${article.title}" loading="lazy" />
+          <div class="art-thumb-overlay"></div>
+        </div>
+        <div class="art-body">
+          <span class="art-cat">${article.category}</span>
+          <h3 class="art-title">${article.title}</h3>
+          <p class="art-excerpt">${article.excerpt}</p>
+          <div class="art-meta">
+            <div class="art-meta-left">
+              <div class="art-avatar" style="background:${article.authorAvatarColor}">${article.authorInitials}</div>
+              <span class="art-author-name">${article.authorName}</span>
+            </div>
+            <div class="art-meta-right">
+              <span class="art-date">${date}</span>
+              <span class="art-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                ${article.readingTime} min
+              </span>
+              <span class="art-read-more">Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    function renderTrending(articles) {
+      if (!trendingList) return;
+      trendingList.innerHTML = articles.map((a, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        return `
+          <div class="trending-item" data-id="${a.id}" data-slug="${a.slug}">
+            <span class="trending-num">${num}</span>
+            <div class="trending-info">
+              <div class="trending-title">${a.title}</div>
+              <span class="trending-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                ${formatReadCount(a.readCount)}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCategories(categories) {
+      if (!catList || !catContainer) return;
+
+      // Build sidebar category list (only categories with articles)
+      catList.innerHTML = categories.filter(c => c.count > 0).map(c => `
+        <div class="cat-item" data-cat="${c.name}">
+          <span class="cat-name">${c.name}</span>
+          <span class="cat-count">${c.count}</span>
+        </div>
+      `).join('');
+
+      // Build filter buttons (keep All at front, then add dynamic)
+      const allBtn = catContainer.querySelector('.blog-cat-btn');
+      if (allBtn) {
+        allBtn.remove();
+      } else {
+        catContainer.innerHTML = '';
+      }
+
+      let html = '<button class="blog-cat-btn active" data-cat="all">All</button>';
+      categories.forEach(c => {
+        html += `<button class="blog-cat-btn" data-cat="${c.name}">${c.name}</button>`;
+      });
+      catContainer.innerHTML = html;
+
+      // Re-bind click events for category buttons
+      document.querySelectorAll('.blog-cat-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentCategory = this.dataset.cat;
+          currentPage = 1;
+          loadArticles(true);
+        });
+      });
+
+      // Bind sidebar category clicks
+      document.querySelectorAll('.cat-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const cat = this.dataset.cat;
+          const targetBtn = document.querySelector(`.blog-cat-btn[data-cat="${cat}"]`);
+          if (targetBtn) {
+            targetBtn.click();
+            targetBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        });
+      });
+    }
+
+    function renderRecent(articles) {
+      if (!recentList) return;
+      recentList.innerHTML = articles.map(a => {
+        const date = new Date(a.publishedAt).toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', year: 'numeric'
+        });
+        return `
+          <div class="recent-item" data-id="${a.id}" data-slug="${a.slug}">
+            <div class="recent-thumb">
+              <img src="${a.imageUrl}" alt="" loading="lazy" />
+            </div>
+            <div class="recent-info">
+              <div class="recent-title">${a.title}</div>
+              <span class="recent-meta">${date}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showSkeletons(show) {
+      if (!skeletonGrid) return;
+      skeletonGrid.classList.toggle('loading', show);
+    }
+
+    function updateLoadMoreBtn(result) {
+      if (!loadMoreBtn) return;
+      hasMore = result.page < result.totalPages;
+      loadMoreBtn.disabled = !hasMore;
+      loadMoreBtn.querySelector('.btn-label').textContent = hasMore ? 'Load More Articles' : 'All articles loaded';
+    }
+
+    function updateSearchResults() {
+      if (!searchResults) return;
+      const q = currentSearch;
+      if (!q) {
+        searchResults.textContent = '';
+        return;
+      }
+      const visible = getAllCurrentArticles().length;
+      if (visible === 0) {
+        searchResults.textContent = 'No results found';
+      } else {
+        searchResults.textContent = visible + ' article' + (visible > 1 ? 's' : '') + ' found';
+      }
+    }
+
+    function toggleEmptyState() {
+      if (!emptyState) return;
+      const visible = getAllCurrentArticles().length;
+      const isFiltering = currentCategory !== 'all' || currentSearch.length > 0;
+      if (visible === 0 && isFiltering && !isLoading) {
+        emptyState.style.display = 'flex';
+      } else {
+        emptyState.style.display = 'none';
+      }
+    }
+
+    function getAllCurrentArticles() {
+      return document.querySelectorAll('.art-card:not([style*="display: none"])');
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function applyFilters() {
+      if (!grid) return;
+      const q = currentSearch.toLowerCase().trim();
+      grid.classList.add('filtering');
+
+      document.querySelectorAll('.art-card').forEach(card => {
+        const cat = card.dataset.category || '';
+        const title = card.querySelector('.art-title')?.textContent?.toLowerCase() || '';
+        const excerpt = card.querySelector('.art-excerpt')?.textContent?.toLowerCase() || '';
+        const catText = (card.querySelector('.art-cat')?.textContent || '').toLowerCase();
+
+        const matchesCat = currentCategory === 'all' || cat === currentCategory;
+        const matchesSearch = !q || title.includes(q) || excerpt.includes(q) || catText.includes(q);
+
+        card.style.display = (matchesCat && matchesSearch) ? '' : 'none';
+      });
+
+      if (featuredContainer) {
+        const fc = featuredContainer.querySelector('.featured-card');
+        if (fc) {
+          const fCat = fc.dataset.category || '';
+          const fTitle = fc.querySelector('.art-title')?.textContent?.toLowerCase() || '';
+          const fExcerpt = fc.querySelector('.art-excerpt')?.textContent?.toLowerCase() || '';
+          const fCatText = (fc.querySelector('.art-cat')?.textContent || '').toLowerCase();
+
+          const matchesCat = currentCategory === 'all' || fCat === currentCategory;
+          const matchesSearch = !q || fTitle.includes(q) || fExcerpt.includes(q) || fCatText.includes(q);
+
+          fc.style.display = (matchesCat && matchesSearch) ? '' : 'none';
+        }
+      }
+
+      updateSearchResults();
+      toggleEmptyState();
+
+      requestAnimationFrame(() => {
+        grid.classList.remove('filtering');
+      });
+    }
+
+    // ─── Load articles from API ───
+
+    async function loadArticles(reset) {
+      if (isLoading) return;
+      isLoading = true;
+
+      if (reset) {
+        currentPage = 1;
+        if (grid) grid.innerHTML = '';
+        showSkeletons(true);
+        if (loadMoreBtn) loadMoreBtn.classList.add('loading');
+      }
+
+      try {
+        const result = await NAGRIVA_BlogAPI.fetchLatest({
+          page: currentPage,
+          per_page: 8,
+          category: currentCategory === 'all' ? null : currentCategory,
+          search: currentSearch || null
+        });
+
+        if (reset) {
+          showSkeletons(false);
+          if (grid) grid.innerHTML = '';
+        }
+
+        result.data.forEach((article, i) => {
+          const card = renderCard(article, i);
+          if (grid) grid.appendChild(card);
+          requestAnimationFrame(() => {
+            card.classList.add('visible');
+          });
+        });
+
+        allArticles = reset ? result.data : allArticles.concat(result.data);
+        updateLoadMoreBtn(result);
+        applyFilters();
+
+      } catch (err) {
+        console.error('[NAGRIVA Blog] Failed to load articles:', err);
+        if (reset) {
+          showSkeletons(false);
+        }
+      } finally {
+        isLoading = false;
+        if (loadMoreBtn) loadMoreBtn.classList.remove('loading');
+      }
+    }
+
+    // ─── Load sidebar data ───
+
+    async function loadSidebar() {
+      try {
+        const [categories, trending, recent] = await Promise.all([
+          NAGRIVA_BlogAPI.fetchCategories(),
+          NAGRIVA_BlogAPI.fetchTrending({ limit: 5 }),
+          NAGRIVA_BlogAPI.fetchRecent({ limit: 4 })
+        ]);
+
+        renderCategories(categories);
+        renderTrending(trending);
+        renderRecent(recent);
+
+      } catch (err) {
+        console.error('[NAGRIVA Blog] Failed to load sidebar:', err);
+      }
+    }
+
+    // ─── Load featured article ───
+
+    async function loadFeatured() {
+      try {
+        const featured = await NAGRIVA_BlogAPI.fetchFeatured({ limit: 1 });
+        if (featured.length > 0) {
+          renderFeatured(featured[0]);
+        }
+      } catch (err) {
+        console.error('[NAGRIVA Blog] Failed to load featured:', err);
+      }
+    }
+
+    // ─── Init ───
+
+    async function init() {
+      try {
+        const connection = await NAGRIVA_BlogAPI.checkConnection();
+        if (!connection.ok) {
+          console.info('[NAGRIVA Blog] Supabase unavailable: ' + (connection.message || 'fallback active'));
+        } else {
+          console.info('[NAGRIVA Blog] Connected to Supabase');
+        }
+      } catch (e) {
+        console.info('[NAGRIVA Blog] Starting with built-in fallback data');
+      }
+
+      await loadFeatured();
+      await loadSidebar();
+      await loadArticles(true);
+    }
+
+    // ─── Search ───
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const q = this.value.trim();
+        currentSearch = q;
+        if (searchClear) {
+          searchClear.classList.toggle('show', q.length > 0);
+        }
+        currentPage = 1;
+        loadArticles(true);
+      });
+    }
+
+    if (searchClear) {
+      searchClear.addEventListener('click', function() {
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+          currentSearch = '';
+          this.classList.remove('show');
+          currentPage = 1;
+          loadArticles(true);
+        }
+      });
+    }
+
+    // ─── Empty state reset ───
+
+    if (emptyReset) {
+      emptyReset.addEventListener('click', function() {
+        if (searchInput) {
+          searchInput.value = '';
+          currentSearch = '';
+          if (searchClear) searchClear.classList.remove('show');
+        }
+        currentCategory = 'all';
+        currentPage = 1;
+        document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+        const allBtn = document.querySelector('.blog-cat-btn[data-cat="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        loadArticles(true);
+      });
+    }
+
+    // ─── Load More ───
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function() {
+        if (isLoading || !hasMore) return;
+        currentPage++;
+        loadArticles(false);
+      });
+    }
+
+    // ─── Article card click → article page ───
+
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest(
+        '.featured-card, .art-card, .trending-item, .recent-item'
+      );
+      if (!target) return;
+
+      const slug = target.dataset.slug;
+      const id = target.dataset.id;
+
+      if (slug) {
+        if (id) {
+          NAGRIVA_BlogAPI.incrementReadCount(id).catch(() => {});
+        }
+        window.location.href = '/pages/article.html?slug=' + encodeURIComponent(slug);
+      }
+    });
+
+    // ─── Sidebar Newsletter ───
+
+    const nlBtn = document.querySelector('.sidebar-newsletter-btn');
+    const nlInput = document.querySelector('.sidebar-newsletter-input');
+    if (nlBtn && nlInput) {
+      nlBtn.addEventListener('click', () => {
+        const email = nlInput.value.trim();
+        if (!email || !email.includes('@')) {
+          nlInput.style.borderColor = 'rgba(255,80,80,0.4)';
+          setTimeout(() => { nlInput.style.borderColor = ''; }, 1500);
+          return;
+        }
+        nlInput.value = '';
+        nlInput.placeholder = "✓ You're subscribed!";
+        setTimeout(() => { nlInput.placeholder = 'your@email.com'; }, 3000);
+      });
+      nlInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') nlBtn.click();
+      });
+    }
+
+    // ─── CTA Newsletter ───
+
+    const ctaBtn = document.getElementById('ctaSubscribe');
+    const ctaInput = document.getElementById('ctaEmail');
+    if (ctaBtn && ctaInput) {
+      ctaBtn.addEventListener('click', () => {
+        const email = ctaInput.value.trim();
+        if (!email || !email.includes('@')) {
+          ctaInput.style.borderColor = 'rgba(255,80,80,0.4)';
+          setTimeout(() => { ctaInput.style.borderColor = ''; }, 1500);
+          return;
+        }
+        ctaInput.value = '';
+        ctaBtn.innerHTML = '<span>Subscribed ✓</span>';
+        setTimeout(() => {
+          ctaBtn.innerHTML = '<span>Subscribe</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+        }, 2500);
+      });
+      ctaInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') ctaBtn.click();
+      });
+    }
+
+    // ─── Start ───
+    init();
+
+  })();
+  });
+  </script>
+
+<div id="cookie-consent-container"></div>
+</body>
+</html>

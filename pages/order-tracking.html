@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Tracking — NAGRIVA</title>
+  <meta name="description" content="Track your NAGRIVA project status in real-time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/order-tracking.css" />
+  <link rel="stylesheet" href="../css/client-messages.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body data-page="order-tracking">
+
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+  <div id="navbar-container"></div>
+
+  <!-- ══════════════════════════ HERO ══════════════════════════ -->
+  <section class="track-hero">
+    <div class="track-hero-bg">
+      <div class="track-hero-glow"></div>
+      <div class="track-hero-glow-2"></div>
+      <div class="track-grid-bg"></div>
+    </div>
+    <div class="container">
+      <div class="track-hero-inner fade-up">
+        <div class="track-hero-badge">
+          <span class="badge-dot"></span>
+          Order Tracking
+        </div>
+        <h1 class="track-hero-title">Track Your <span class="text-gradient">Project</span></h1>
+        <p class="track-hero-desc">Real-time updates on your order status, progress, and deliverables.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ ORDER SELECTOR ══════════════════════════ -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="track-select-wrap">
+        <label class="track-select-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Select Order to Track
+        </label>
+        <div class="custom-select" id="customTrackSelect">
+          <button class="custom-select-trigger" type="button" id="customSelectTrigger">
+            <span class="custom-select-value placeholder" id="customSelectValue">Loading your orders...</span>
+            <svg class="custom-select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="custom-select-dropdown" id="customSelectDropdown">
+            <div class="custom-select-options" id="customSelectOptions"></div>
+          </div>
+        </div>
+        <select class="sr-only" id="trackOrderSelect" tabindex="-1" aria-hidden="true">
+          <option value="">Loading your orders...</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ MAIN TRACKING DASHBOARD ══════════════════════════ -->
+  <section class="track-dashboard section" id="trackDashboard" style="display:none;">
+    <div class="track-dash-bg-glow"></div>
+    <div class="container">
+
+      <div id="trackContent">
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ NO ORDER PLACEHOLDER ══════════════════════════ -->
+  <section class="section" id="noOrderSection" style="padding-top:0;">
+    <div class="container">
+      <div class="ne ne-search">
+        <div class="ne-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3 class="ne-title">No order selected</h3>
+        <p class="ne-desc">Select an order from the dropdown above to see its tracking details.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../modules/deliverables/deliverables-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script defer src="../js/order-tracking.js"></script>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0a0a0f"/>
+  <rect x="0" y="0" width="800" height="56" fill="#0d0d14"/>
+  <rect x="0" y="56" width="800" height="1" fill="rgba(255,255,255,0.04)"/>
+  <text x="30" y="34" font-family="system-ui" font-size="14" font-weight="700" fill="#fff" letter-spacing="-0.3">Client Portal</text>
+  <rect x="144" y="16" width="80" height="24" rx="12" fill="rgba(168,85,247,0.08)" stroke="rgba(168,85,247,0.12)" stroke-width="0.5"/>
+  <text x="156" y="32" font-family="system-ui" font-size="9" font-weight="500" fill="#a855f7">● Live</text>
+  <rect x="600" y="16" width="80" height="24" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <text x="616" y="32" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.4)">Projects</text>
+  <rect x="690" y="16" width="80" height="24" rx="12" fill="rgba(168,85,247,0.1)" stroke="rgba(168,85,247,0.15)" stroke-width="0.5"/>
+  <text x="704" y="32" font-family="system-ui" font-size="9" font-weight="500" fill="#a855f7">+ New</text>
+  <!-- Dashboard layout -->
+  <rect x="30" y="78" width="230" height="160" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="46" y="102" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Active Projects</text>
+  <text x="46" y="130" font-family="system-ui" font-size="28" font-weight="700" fill="#fff">6</text>
+  <text x="120" y="130" font-family="system-ui" font-size="11" fill="#a855f7">+2 this month</text>
+  <rect x="46" y="150" width="200" height="1" fill="rgba(255,255,255,0.04)"/>
+  <rect x="46" y="162" width="200" height="60" rx="8" fill="rgba(168,85,247,0.04)" stroke="rgba(168,85,247,0.08)" stroke-width="0.5"/>
+  <text x="60" y="182" font-family="system-ui" font-size="10" font-weight="500" fill="#fff">NAGRIVA Rebrand</text>
+  <rect x="60" y="192" width="100" height="4" rx="2" fill="rgba(168,85,247,0.15)"/>
+  <rect x="60" y="192" width="70" height="4" rx="2" fill="#a855f7"/>
+  <text x="60" y="210" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.3)">70% complete</text>
+  <rect x="280" y="78" width="230" height="160" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="296" y="102" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Pending Tasks</text>
+  <text x="296" y="130" font-family="system-ui" font-size="28" font-weight="700" fill="#fff">12</text>
+  <text x="370" y="130" font-family="system-ui" font-size="11" fill="#f97316">3 overdue</text>
+  <rect x="296" y="150" width="200" height="1" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="304" cy="168" r="3" fill="#22c55e"/>
+  <text x="314" y="172" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">Review homepage mockups</text>
+  <text x="460" y="172" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">Today</text>
+  <circle cx="304" cy="188" r="3" fill="#22c55e"/>
+  <text x="314" y="192" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">Approve brand guidelines</text>
+  <text x="460" y="192" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">Today</text>
+  <circle cx="304" cy="208" r="3" fill="#f97316"/>
+  <text x="314" y="212" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">SEO audit feedback</text>
+  <text x="460" y="212" font-family="system-ui" font-size="8" fill="rgba(168,85,247,0.4)">Due yesterday</text>
+  <rect x="530" y="78" width="240" height="160" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="546" y="102" font-family="system-ui" font-size="10" fill="rgba(255,255,255,0.35)">Recent Activity</text>
+  <rect x="546" y="114" width="208" height="1" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="554" cy="132" r="3" fill="#a855f7"/>
+  <text x="564" y="136" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">Files uploaded: Brand assets</text>
+  <text x="726" y="136" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">1h</text>
+  <circle cx="554" cy="152" r="3" fill="#a855f7"/>
+  <text x="564" y="156" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">New message from team</text>
+  <text x="726" y="156" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">3h</text>
+  <circle cx="554" cy="172" r="3" fill="#a855f7"/>
+  <text x="564" y="176" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">Invoice #0042 generated</text>
+  <text x="726" y="176" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">5h</text>
+  <circle cx="554" cy="192" r="3" fill="#a855f7"/>
+  <text x="564" y="196" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">Milestone: Design complete</text>
+  <text x="726" y="196" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">1d</text>
+  <!-- Project timeline -->
+  <rect x="30" y="255" width="740" height="200" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="46" y="280" font-family="system-ui" font-size="13" font-weight="600" fill="#fff">Project Timeline</text>
+  <rect x="170" y="268" width="80" height="24" rx="12" fill="rgba(168,85,247,0.1)" stroke="rgba(168,85,247,0.15)" stroke-width="0.5"/>
+  <text x="184" y="284" font-family="system-ui" font-size="9" font-weight="500" fill="#a855f7">All Projects</text>
+  <!-- Timeline items -->
+  <rect x="60" y="310" width="320" height="60" rx="8" fill="rgba(168,85,247,0.03)" stroke="rgba(168,85,247,0.06)" stroke-width="0.5"/>
+  <circle cx="80" cy="335" r="5" fill="#a855f7"/>
+  <circle cx="80" cy="335" r="10" fill="rgba(168,85,247,0.1)"/>
+  <text x="100" y="330" font-family="system-ui" font-size="11" font-weight="500" fill="#fff">Brand Identity · Research Phase</text>
+  <text x="100" y="348" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Due: Mar 15 · 4 tasks</text>
+  <rect x="320" y="318" width="44" height="12" rx="6" fill="#22c55e" opacity="0.15"/>
+  <text x="326" y="327" font-family="system-ui" font-size="7" font-weight="500" fill="#22c55e">Done</text>
+  <rect x="60" y="380" width="320" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="80" cy="405" r="5" fill="#4facfe"/>
+  <circle cx="80" cy="405" r="10" fill="rgba(79,172,254,0.1)"/>
+  <text x="100" y="400" font-family="system-ui" font-size="11" font-weight="500" fill="#fff">Web Design · Homepage</text>
+  <text x="100" y="418" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Due: Apr 10 · 6 tasks</text>
+  <rect x="320" y="388" width="44" height="12" rx="6" fill="#4facfe" opacity="0.15"/>
+  <text x="326" y="397" font-family="system-ui" font-size="7" font-weight="500" fill="#4facfe">Active</text>
+  <!-- Right timeline items -->
+  <rect x="420" y="310" width="320" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="440" cy="335" r="5" fill="#f97316"/>
+  <circle cx="440" cy="335" r="10" fill="rgba(249,115,22,0.1)"/>
+  <text x="460" y="330" font-family="system-ui" font-size="11" font-weight="500" fill="#fff">SEO · Technical Audit</text>
+  <text x="460" y="348" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.3)">Due: Mar 20 · 3 tasks</text>
+  <rect x="640" y="338" width="44" height="12" rx="6" fill="#f97316" opacity="0.15"/>
+  <text x="646" y="347" font-family="system-ui" font-size="7" font-weight="500" fill="#f97316">Review</text>
+  <rect x="420" y="380" width="320" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="440" cy="405" r="5" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="440" cy="405" r="10" fill="rgba(255,255,255,0.04)"/>
+  <text x="460" y="400" font-family="system-ui" font-size="11" font-weight="500" fill="rgba(255,255,255,0.4)">Performance Marketing</text>
+  <text x="460" y="418" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.2)">Due: May 1 · Planning</text>
+  <rect x="640" y="408" width="44" height="12" rx="6" fill="rgba(255,255,255,0.06)"/>
+  <text x="647" y="417" font-family="system-ui" font-size="7" fill="rgba(255,255,255,0.3)">Queue</text>
+  <!-- File sharing -->
+  <rect x="30" y="472" width="360" height="108" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="46" y="498" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">Recent Files</text>
+  <rect x="46" y="510" width="160" height="52" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <rect x="58" y="522" width="28" height="28" rx="4" fill="rgba(168,85,247,0.1)"/>
+  <text x="62" y="540" font-family="system-ui" font-size="10" font-weight="600" fill="#a855f7">PDF</text>
+  <text x="94" y="530" font-family="system-ui" font-size="9" fill="#fff">Brand Guidelines</text>
+  <text x="94" y="548" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">2.4 MB</text>
+  <rect x="220" y="510" width="160" height="52" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <rect x="232" y="522" width="28" height="28" rx="4" fill="rgba(79,172,254,0.1)"/>
+  <text x="236" y="540" font-family="system-ui" font-size="10" font-weight="600" fill="#4facfe">AI</text>
+  <text x="268" y="530" font-family="system-ui" font-size="9" fill="#fff">SEO Report</text>
+  <text x="268" y="548" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">1.1 MB</text>
+  <!-- Messaging -->
+  <rect x="410" y="472" width="360" height="108" rx="12" fill="#12121e" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="426" y="498" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">Messages</text>
+  <rect x="426" y="510" width="328" height="1" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="434" cy="528" r="4" fill="#a855f7"/>
+  <text x="446" y="532" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">Design team: Homepage mockups ready for review</text>
+  <text x="736" y="532" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">5m</text>
+  <circle cx="434" cy="548" r="4" fill="#a855f7"/>
+  <text x="446" y="552" font-family="system-ui" font-size="9" fill="rgba(255,255,255,0.5)">You: Looks great, let's schedule a review call</text>
+  <text x="736" y="552" font-family="system-ui" font-size="8" fill="rgba(255,255,255,0.2)">2m</text>
+</svg>

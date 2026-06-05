@@ -1,0 +1,89 @@
+<!-- ══════════════════════════════ COOKIE CONSENT ══════════════════════════════ -->
+<div class="cookie-overlay" id="cookieOverlay">
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie Consent">
+    <div class="cookie-banner-glow"></div>
+    <div class="cookie-banner-content">
+      <div class="cookie-banner-header">
+        <svg class="cookie-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+          <path d="M8.5 8.5v.01"/>
+          <path d="M15.5 15.5v.01"/>
+          <path d="M11 12v.01"/>
+        </svg>
+        <span class="cookie-title" data-i18n="cookie.title">Cookie Preferences</span>
+      </div>
+      <p class="cookie-desc" data-i18n="cookie.desc">
+        We use cookies to enhance your browsing experience, analyze site traffic, and deliver personalized content. You can choose which categories to allow.
+      </p>
+      <div class="cookie-actions">
+        <button class="cookie-btn cookie-btn-accept" data-cookie-action="accept-all" data-i18n="cookie.accept-all">Accept All</button>
+        <button class="cookie-btn cookie-btn-reject" data-cookie-action="reject" data-i18n="cookie.reject">Reject Non-Essential</button>
+        <button class="cookie-btn cookie-btn-manage" data-cookie-action="manage" data-i18n="cookie.manage">Manage Preferences</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ COOKIE PREFERENCES MODAL ══════════════════════════════ -->
+<div class="cookie-modal-overlay" id="cookieModalOverlay" style="display:none">
+  <div class="cookie-modal" role="dialog" aria-label="Cookie Preferences">
+    <div class="cookie-modal-glow"></div>
+    <div class="cookie-modal-header">
+      <svg class="cookie-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+        <path d="M8.5 8.5v.01"/>
+        <path d="M15.5 15.5v.01"/>
+        <path d="M11 12v.01"/>
+      </svg>
+      <h3 class="cookie-modal-title" data-i18n="cookie.manage-title">Manage Cookie Preferences</h3>
+      <button class="cookie-modal-close" id="cookieModalClose" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cookie-modal-body">
+      <p class="cookie-modal-desc" data-i18n="cookie.manage-desc">Customize which cookies you allow on this website.</p>
+      <div class="cookie-categories">
+        <div class="cookie-category">
+          <div class="cookie-category-info">
+            <span class="cookie-category-name" data-i18n="cookie.necessary">Necessary</span>
+            <span class="cookie-category-desc" data-i18n="cookie.necessary-desc">Essential for the website to function properly. Cannot be disabled.</span>
+          </div>
+          <label class="cookie-toggle cookie-toggle-on" aria-label="Necessary cookies always enabled">
+            <input type="checkbox" checked disabled />
+            <span class="cookie-toggle-track">
+              <span class="cookie-toggle-thumb"></span>
+            </span>
+          </label>
+        </div>
+        <div class="cookie-category">
+          <div class="cookie-category-info">
+            <span class="cookie-category-name" data-i18n="cookie.analytics">Analytics</span>
+            <span class="cookie-category-desc" data-i18n="cookie.analytics-desc">Help us understand how visitors use our site to improve performance.</span>
+          </div>
+          <label class="cookie-toggle" data-cookie-toggle="analytics">
+            <input type="checkbox" id="cookieAnalytics" />
+            <span class="cookie-toggle-track">
+              <span class="cookie-toggle-thumb"></span>
+            </span>
+          </label>
+        </div>
+        <div class="cookie-category">
+          <div class="cookie-category-info">
+            <span class="cookie-category-name" data-i18n="cookie.marketing">Marketing</span>
+            <span class="cookie-category-desc" data-i18n="cookie.marketing-desc">Used to deliver relevant advertisements and track campaign effectiveness.</span>
+          </div>
+          <label class="cookie-toggle" data-cookie-toggle="marketing">
+            <input type="checkbox" id="cookieMarketing" />
+            <span class="cookie-toggle-track">
+              <span class="cookie-toggle-thumb"></span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="cookie-modal-footer">
+      <button class="cookie-btn cookie-btn-save" data-cookie-action="save" data-i18n="cookie.save">Save Preferences</button>
+      <button class="cookie-btn cookie-btn-accept" data-cookie-action="accept-all" data-i18n="cookie.accept-all">Accept All</button>
+    </div>
+  </div>
+</div>

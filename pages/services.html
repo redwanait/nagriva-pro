@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Services — NAGRIVA</title>
+  <meta name="description" content="Explore all NAGRIVA services. Web design, SEO, branding, AI automation, social media, and performance marketing." />
+  <meta property="og:title" content="All Services — NAGRIVA" />
+  <meta property="og:description" content="Explore all NAGRIVA services. Web design, SEO, branding, AI automation, social media, and performance marketing." />
+  <meta property="og:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <meta property="og:url" content="https://nagriva.com/pages/services" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NAGRIVA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="All Services — NAGRIVA" />
+  <meta name="twitter:description" content="Explore all NAGRIVA services. Web design, SEO, branding, AI automation, social media, and performance marketing." />
+  <meta name="twitter:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <link rel="canonical" href="https://nagriva.com/pages/services.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="/css/performance.css" />
+  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/admin-auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root { --sv-gap: 100px; }
+
+    /* ════════════════════════════════════════════
+       HERO — Background Glow & Grid
+       ════════════════════════════════════════════ */
+    .services-page-hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .sv-hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .sv-hero-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,196,0.06) 0%, transparent 70%);
+      filter: blur(120px);
+      animation: svGlowPulse 8s ease-in-out infinite;
+    }
+    .sv-hero-glow-2 {
+      position: absolute;
+      bottom: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,196,0.04) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: svGlowPulse2 12s ease-in-out infinite;
+    }
+    .sv-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%);
+    }
+    .services-page-hero .container {
+      position: relative; z-index: 1;
+    }
+    .section-header {
+      position: relative; z-index: 1;
+    }
+
+    /* ─── Hero Trust Badges ─── */
+    .sv-hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .sv-hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--gray2);
+      letter-spacing: 0.02em;
+    }
+    .sv-hero-trust-item svg {
+      width: 13px; height: 13px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .sv-hero-trust-divider {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--gray2);
+      opacity: 0.3;
+    }
+
+    /* ════════════════════════════════════════════
+       CARD PREMIUM ENHANCEMENTS
+       ════════════════════════════════════════════ */
+    .sv-card-premium {
+      backdrop-filter: blur(4px);
+      background: rgba(255,255,255,0.022);
+    }
+    .sv-card-premium:hover {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.035);
+    }
+    .sv-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px 22px;
+    }
+    .sv-card-learn {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray2);
+      letter-spacing: 0.02em;
+      padding: 6px 12px;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .sv-card-premium:hover .sv-card-learn {
+      color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .sv-card-premium { backdrop-filter: none; }
+      .sv-card-learn { display: none; }
+    }
+
+    /* ════════════════════════════════════════════
+       CATEGORY FILTER ENHANCEMENTS
+       ════════════════════════════════════════════ */
+    .services-cat-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .services-cat-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 99px;
+      background: radial-gradient(circle at center, rgba(0,245,196,0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .services-cat-btn.active::after {
+      opacity: 1;
+    }
+
+    /* ════════════════════════════════════════════
+       PROCESS SECTION
+       ════════════════════════════════════════════ */
+    .sv-process {
+      padding: var(--sv-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+    .sv-process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      position: relative;
+      margin-top: 48px;
+    }
+    .sv-process-steps::before {
+      content: '';
+      position: absolute;
+      top: 48px;
+      left: calc(16.67% + 40px);
+      right: calc(16.67% + 40px);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,245,196,0.06), rgba(0,245,196,0.25), rgba(0,245,196,0.06));
+      box-shadow: 0 0 16px rgba(0,245,196,0.04);
+    }
+    .sv-process-step {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 32px 28px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.008);
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sv-process-step:hover {
+      border-color: rgba(0,245,196,0.18);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(0,245,196,0.03);
+      background: rgba(255,255,255,0.015);
+    }
+    .sv-process-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sv-process-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(0,245,196,0.12);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      transition: color 0.4s ease;
+    }
+    .sv-process-step:hover .sv-process-num {
+      color: rgba(0,245,196,0.35);
+    }
+    .sv-process-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0,245,196,0.06);
+      border: 1px solid rgba(0,245,196,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .sv-process-step:hover .sv-process-icon {
+      background: rgba(0,245,196,0.1);
+      box-shadow: 0 0 20px rgba(0,245,196,0.06);
+    }
+    .sv-process-icon svg { width: 20px; height: 20px; }
+    .sv-process-step h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .sv-process-step p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════════
+       TRUST ELEMENTS SECTION
+       ════════════════════════════════════════════ */
+    .sv-trust {
+      padding: var(--sv-gap) 0;
+      border-top: 1px solid var(--border);
+      background: rgba(0,245,196,0.005);
+    }
+    .sv-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+    .sv-trust-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 32px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sv-trust-badge:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,245,196,0.18);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.02);
+    }
+    .sv-trust-badge-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(0,245,196,0.06);
+      display: flex;
+      align-items: center; justify-content: center;
+      color: var(--accent);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .sv-trust-badge:hover .sv-trust-badge-icon {
+      background: rgba(0,245,196,0.1);
+      box-shadow: 0 0 24px rgba(0,245,196,0.06);
+    }
+    .sv-trust-badge-icon svg { width: 22px; height: 22px; }
+    .sv-trust-badge span {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+
+    /* ════════════════════════════════════════════
+       CTA SECTION
+       ════════════════════════════════════════════ */
+    .sv-cta {
+      padding: var(--sv-gap) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .sv-cta-glow {
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,196,0.05) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .sv-cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .sv-cta-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .sv-cta-inner p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .sv-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #00f5c4, #00c2a8);
+      color: #040404;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .sv-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,245,196,0.25);
+    }
+    .sv-cta-btn svg {
+      width: 16px; height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .sv-cta-btn:hover svg { transform: translateX(4px); }
+    .sv-cta-trust {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .sv-cta-trust svg {
+      width: 12px; height: 12px;
+      color: var(--accent);
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    /* ════════════════════════════════════════════
+       ANIMATIONS
+       ════════════════════════════════════════════ */
+    @keyframes svGlowPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes svGlowPulse2 {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      :root { --sv-gap: 80px; }
+      .sv-trust-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .sv-process-steps { gap: 20px; }
+    }
+    @media (max-width: 768px) {
+      :root { --sv-gap: 72px; }
+      .sv-process-steps { grid-template-columns: 1fr; gap: 18px; }
+      .sv-process-steps::before { display: none; }
+      .sv-process-step { padding: 28px 24px; }
+      .sv-trust-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .sv-trust-badge { padding: 24px 14px; }
+      .sv-hero-trust { gap: 14px; }
+    }
+    @media (max-width: 480px) {
+      :root { --sv-gap: 56px; }
+      .sv-trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .sv-trust-badge { padding: 20px 12px; }
+      .sv-trust-badge-icon { width: 40px; height: 40px; }
+      .sv-trust-badge-icon svg { width: 18px; height: 18px; }
+      .sv-trust-badge span { font-size: 0.75rem; }
+      .sv-process-step { padding: 24px 20px; }
+      .sv-process-num { font-size: 1.6rem; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com/pages/services",
+  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com/pages/services",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+</head>
+<body data-page="services">
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO — Enhanced with Glow & Trust Badges
+       ════════════════════════════════════════════ -->
+  <section class="services-page-hero section">
+    <div class="sv-hero-bg">
+      <div class="sv-hero-glow"></div>
+      <div class="sv-hero-glow-2"></div>
+      <div class="sv-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Our Services</div>
+        <h1 class="section-title">Everything We <span class="text-gradient">Offer</span></h1>
+        <p class="section-desc">High-converting digital services designed to help brands grow faster online.</p>
+        <div class="sv-hero-trust">
+          <span class="sv-hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Trusted Agency
+          </span>
+          <span class="sv-hero-trust-divider"></span>
+          <span class="sv-hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Premium Quality
+          </span>
+          <span class="sv-hero-trust-divider"></span>
+          <span class="sv-hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            Fast Delivery
+          </span>
+        </div>
+      </div>
+
+      <!-- ─── Search & Filter ─── -->
+      <div class="services-page-controls fade-up">
+        <div class="services-search-wrap">
+          <svg class="services-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="services-search-input" id="servicesSearch" placeholder="Search services..." autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="services-categories-wrap fade-up" id="servicesCategoriesWrap">
+        <div class="services-categories" id="servicesCategories"></div>
+      </div>
+
+      <!-- ─── Services Grid ─── -->
+      <div class="services-grid sk-container sk-container--services" id="servicesPageGrid">
+        <div id="servicesPageSkeleton" class="services-skeleton-grid sk-stagger">
+          <div class="service-skeleton-card"><div class="service-skeleton-img sk-shimmer"></div><div class="service-skeleton-body sk-shimmer"><div class="service-skeleton-icon sk-shimmer"></div><div class="service-skeleton-line sk-shimmer w70"></div><div class="service-skeleton-line sk-shimmer w100"></div><div class="service-skeleton-line sk-shimmer w50"></div></div></div>
+          <div class="service-skeleton-card"><div class="service-skeleton-img sk-shimmer"></div><div class="service-skeleton-body sk-shimmer"><div class="service-skeleton-icon sk-shimmer"></div><div class="service-skeleton-line sk-shimmer w70"></div><div class="service-skeleton-line sk-shimmer w100"></div><div class="service-skeleton-line sk-shimmer w50"></div></div></div>
+          <div class="service-skeleton-card"><div class="service-skeleton-img sk-shimmer"></div><div class="service-skeleton-body sk-shimmer"><div class="service-skeleton-icon sk-shimmer"></div><div class="service-skeleton-line sk-shimmer w70"></div><div class="service-skeleton-line sk-shimmer w100"></div><div class="service-skeleton-line sk-shimmer w50"></div></div></div>
+          <div class="service-skeleton-card"><div class="service-skeleton-img sk-shimmer"></div><div class="service-skeleton-body sk-shimmer"><div class="service-skeleton-icon sk-shimmer"></div><div class="service-skeleton-line sk-shimmer w70"></div><div class="service-skeleton-line sk-shimmer w100"></div><div class="service-skeleton-line sk-shimmer w50"></div></div></div>
+          <div class="service-skeleton-card"><div class="service-skeleton-img sk-shimmer"></div><div class="service-skeleton-body sk-shimmer"><div class="service-skeleton-icon sk-shimmer"></div><div class="service-skeleton-line sk-shimmer w70"></div><div class="service-skeleton-line sk-shimmer w100"></div><div class="service-skeleton-line sk-shimmer w50"></div></div></div>
+          <div class="service-skeleton-card"><div class="service-skeleton-img sk-shimmer"></div><div class="service-skeleton-body sk-shimmer"><div class="service-skeleton-icon sk-shimmer"></div><div class="service-skeleton-line sk-shimmer w70"></div><div class="service-skeleton-line sk-shimmer w100"></div><div class="service-skeleton-line sk-shimmer w50"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       PROCESS — 3-Step Timeline
+       ════════════════════════════════════════════ -->
+  <section class="sv-process lazy-section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ How We Deliver</div>
+        <h2 class="section-title">From Strategy to <span class="text-gradient">Results</span></h2>
+        <p class="section-desc">A proven 3-phase system for building digital solutions that perform.</p>
+      </div>
+      <div class="sv-process-steps fade-up">
+        <div class="sv-process-step">
+          <div class="sv-process-top">
+            <span class="sv-process-num">01</span>
+            <div class="sv-process-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+          </div>
+          <h4>Strategy</h4>
+          <p>Deep research and data-driven planning to define clear goals, identify opportunities, and build the winning roadmap for your brand.</p>
+        </div>
+        <div class="sv-process-step">
+          <div class="sv-process-top">
+            <span class="sv-process-num">02</span>
+            <div class="sv-process-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="21 15 15 15 15 21"/><polyline points="3 9 9 9 9 3"/><path d="M21 3l-6 6"/><path d="M3 21l6-6"/></svg>
+            </div>
+          </div>
+          <h4>Execution</h4>
+          <p>Design, development, and automation converge to build polished, high-performance digital solutions optimized for every device.</p>
+        </div>
+        <div class="sv-process-step">
+          <div class="sv-process-top">
+            <span class="sv-process-num">03</span>
+            <div class="sv-process-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+          </div>
+          <h4>Growth</h4>
+          <p>Continuous optimization, performance tracking, and strategic scaling to maximize conversions and long-term ROI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       TRUST ELEMENTS — Premium Badges
+       ════════════════════════════════════════════ -->
+  <section class="sv-trust lazy-section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Built Different</div>
+        <h2 class="section-title">Quality You Can <span class="text-gradient">Rely On</span></h2>
+        <p class="section-desc">Every service is engineered for performance, built with modern tools, and designed to scale.</p>
+      </div>
+      <div class="sv-trust-grid fade-up">
+        <div class="sv-trust-badge">
+          <div class="sv-trust-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span>Fast Delivery</span>
+        </div>
+        <div class="sv-trust-badge">
+          <div class="sv-trust-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <span>Modern Stack</span>
+        </div>
+        <div class="sv-trust-badge">
+          <div class="sv-trust-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span>Mobile Optimized</span>
+        </div>
+        <div class="sv-trust-badge">
+          <div class="sv-trust-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span>SEO Friendly</span>
+        </div>
+        <div class="sv-trust-badge">
+          <div class="sv-trust-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <span>Conversion Focused</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       CTA — Ready to Scale?
+       ════════════════════════════════════════════ -->
+  <section class="sv-cta lazy-section">
+    <div class="sv-cta-glow"></div>
+    <div class="container">
+      <div class="sv-cta-inner fade-up">
+        <h2>Ready to scale <span class="text-gradient">your brand?</span></h2>
+        <p>Let's talk about your goals and build a strategy that drives real results. No fluff — just premium execution.</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+          <a href="../pricing.html" class="sv-cta-btn" data-cta="primary" data-cta-action="view-pricing">
+            View Pricing
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="../index.html#contact" class="btn-secondary" data-cta="secondary" data-cta-action="contact-us" style="height:46px;padding:0 28px;border-radius:99px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            Contact Us
+          </a>
+        </div>
+        <div class="sv-cta-trust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Free discovery call. No commitment required.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/skeleton.js"></script>
+  <script defer src="/js/loading-manager.js"></script>
+  <script defer src="/js/services-api.js"></script>
+  <script defer src="/js/services-page.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/admin-auth.js"></script>
+  <script defer src="/js/user-avatar.js"></script>
+  <script defer src="/js/navbar.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <script defer src="/js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

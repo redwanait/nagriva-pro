@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAGRIVA — Edit Service</title>
+  <meta name="description" content="Edit your service offering." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/admin-services.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    :root {
+      --bg: #040404;
+      --bg2: #090c0c;
+      --surface: rgba(255, 255, 255, 0.025);
+      --surface-hover: rgba(255, 255, 255, 0.04);
+      --accent: #00f5c4;
+      --accent2: #00c2a8;
+      --accent-glow: rgba(0, 245, 196, 0.08);
+      --accent-dim: rgba(0, 245, 196, 0.15);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --white: #ffffff;
+      --gray: #a1a1aa;
+      --gray2: #71717a;
+      --gray3: #52525b;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --info: #3b82f6;
+      --r: 22px;
+      --r-sm: 14px;
+      --r-xs: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --sidebar-w: 264px;
+    }
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 245, 196, 0.2); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0, 245, 196, 0.35); }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; font-size: inherit; }
+    input, textarea, select { font-family: inherit; outline: none; }
+
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .glow-top-right {
+      position: fixed; top: -300px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 245, 196, 0.04) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .glow-bottom-left {
+      position: fixed; bottom: -300px; left: -200px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 194, 168, 0.03) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .app { display: flex; min-height: 100vh; position: relative; z-index: 1; }
+    .sidebar {
+      width: var(--sidebar-w); height: 100vh; position: fixed; top: 0; left: 0;
+      z-index: 100; display: flex; flex-direction: column;
+      background: rgba(4, 4, 4, 0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-right: 1px solid var(--border);
+      transition: transform var(--transition);
+    }
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .sidebar-brand::after {
+      content: '';
+      position: absolute;
+      inset: 12px 20px;
+      border-radius: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+      background: radial-gradient(ellipse at center, rgba(0, 245, 196, 0.08) 0%, transparent 70%);
+    }
+    .sidebar-brand:hover::after {
+      opacity: 1;
+    }
+    .sidebar-logo {
+      width: 130px;
+      height: auto;
+      max-height: 42px;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+      image-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      transition: filter var(--transition), opacity var(--transition);
+    }
+    .sidebar-logo:hover {
+      filter: drop-shadow(0 0 12px rgba(0, 245, 196, 0.25));
+    }
+    .sidebar-nav {
+      flex: 1; padding: 16px 12px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .sidebar-label {
+      font-size: 0.65rem; font-weight: 600; color: var(--gray3);
+      text-transform: uppercase; letter-spacing: 0.12em; padding: 16px 14px 8px;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px; border-radius: var(--r-xs);
+      font-size: 0.84rem; font-weight: 500; color: var(--gray);
+      transition: all var(--transition); cursor: pointer; position: relative;
+    }
+    .sidebar-item i { width: 18px; text-align: center; font-size: 0.9rem; }
+    .sidebar-item:hover { background: var(--surface-hover); color: var(--white); }
+    .sidebar-item.active { background: var(--accent-glow); color: var(--accent); }
+    .sidebar-item.active::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 20px; border-radius: 0 3px 3px 0; background: var(--accent);
+    }
+    .sidebar-footer {
+      position: relative;
+      padding: 12px 10px 14px;
+      border-top: 1px solid var(--border);
+    }
+    .sidebar-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: var(--r-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      user-select: none;
+    }
+    .sidebar-profile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--r-xs);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+      background: radial-gradient(ellipse at 0% 50%, rgba(0, 245, 196, 0.06) 0%, transparent 70%);
+    }
+    .sidebar-profile:hover {
+      background: var(--surface-hover);
+    }
+    .sidebar-profile:hover::after {
+      opacity: 1;
+    }
+    .sidebar-profile:active {
+      transform: scale(0.98);
+    }
+    .sidebar-profile-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--bg);
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .sidebar-profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+    .sidebar-profile-avatar img.loaded {
+      display: block;
+    }
+    .sidebar-profile-avatar img.loaded ~ #sidebarProfileInitials {
+      display: none;
+    }
+    .sidebar-profile-status {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 2px solid var(--bg);
+      z-index: 2;
+      box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+    }
+    .sidebar-profile-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .sidebar-profile-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-profile-role {
+      font-size: 0.68rem;
+      color: var(--gray2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-profile-chevron {
+      font-size: 0.55rem;
+      color: var(--gray3);
+      transition: transform var(--transition), color var(--transition);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .sidebar-profile:hover .sidebar-profile-chevron {
+      color: var(--accent);
+      opacity: 1;
+    }
+    .sidebar-profile.active .sidebar-profile-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    .sidebar-profile-dropdown {
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 10px;
+      right: 10px;
+      background: rgba(8, 12, 12, 0.97);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--r-sm);
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 245, 196, 0.03);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px) scale(0.96);
+      transform-origin: bottom center;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 300;
+      padding: 6px;
+    }
+    .sidebar-profile-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .sidebar-profile-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .sidebar-profile-item i {
+      width: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray2);
+      transition: color var(--transition);
+      flex-shrink: 0;
+    }
+    .sidebar-profile-item span {
+      flex: 1;
+    }
+    .sidebar-profile-item:hover {
+      background: var(--surface-hover);
+      color: var(--white);
+    }
+    .sidebar-profile-item:hover i {
+      color: var(--accent);
+    }
+    .sidebar-profile-item[data-action="logout"]:hover {
+      color: var(--danger);
+    }
+    .sidebar-profile-item[data-action="logout"]:hover i {
+      color: var(--danger);
+    }
+    .sidebar-profile-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 8px;
+    }
+
+    .main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 1; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 16px;
+      padding: 16px 32px;
+      background: rgba(4, 4, 4, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-title {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem;
+      letter-spacing: -0.01em; color: var(--white);
+    }
+    .topbar-title span { color: var(--gray2); font-weight: 400; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .topbar-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.7rem; color: var(--bg); cursor: pointer;
+    }
+
+    .content {
+      flex: 1; padding: 32px; max-width: 1000px; width: 100%; margin: 0 auto;
+      animation: pageIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .page-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+    }
+    .page-header h1 {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.6rem;
+      letter-spacing: -0.02em; color: var(--white);
+    }
+    .page-header p { font-size: 0.88rem; color: var(--gray); margin-top: 4px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 18px; border-radius: var(--r-xs);
+      font-size: 0.82rem; font-weight: 500;
+      transition: all var(--transition); cursor: pointer; border: none;
+      font-family: inherit; line-height: 1.3; position: relative; overflow: hidden;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover {
+      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(0, 245, 196, 0.15);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--surface); border: 1px solid var(--border); color: var(--gray);
+    }
+    .btn-secondary:hover { background: var(--surface-hover); color: var(--white); border-color: var(--border-light); }
+
+    .card {
+      background: var(--surface); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: var(--r); padding: 32px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .status-badge.draft { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+    .status-badge.draft::before { background: var(--warning); }
+    .status-badge.published { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+    .status-badge.published::before { background: var(--success); }
+    .status-badge.archived { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+    .status-badge.archived::before { background: #a855f7; }
+
+    .meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xs);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--gray2);
+    }
+    .meta-item i { font-size: 0.7rem; opacity: 0.5; }
+    .meta-item strong { color: var(--gray); font-weight: 500; }
+
+    @media (max-width: 1024px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .sidebar-overlay {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 99;
+      }
+      .sidebar-overlay.open { display: block; }
+    }
+    @media (max-width: 768px) {
+      .topbar { padding: 12px 16px; }
+      .content { padding: 16px; }
+      .page-header h1 { font-size: 1.3rem; }
+      .meta-bar { flex-direction: column; gap: 8px; align-items: flex-start; }
+    }
+  </style>
+  <style>
+    .form-card {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 32px;
+      transition: border-color var(--transition);
+    }
+    .form-card:hover { border-color: rgba(255, 255, 255, 0.08); }
+
+    .form-card-header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .form-card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .form-card-subtitle {
+      font-size: 0.82rem;
+      color: var(--gray2);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 24px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full-width { grid-column: 1 / -1; }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.01em;
+    }
+    .form-label .required { color: var(--danger); margin-left: 2px; }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: var(--r-xs);
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-size: 0.82rem;
+      transition: all var(--transition);
+      line-height: 1.5;
+    }
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-color: var(--accent-dim);
+      background: rgba(255, 255, 255, 0.035);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--gray3);
+    }
+    .form-input.error,
+    .form-textarea.error {
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+    .form-select option { background: #1a1a1a; color: var(--white); }
+
+    .form-hint {
+      font-size: 0.68rem;
+      color: var(--gray3);
+      margin-top: 2px;
+    }
+    .form-error {
+      font-size: 0.68rem;
+      color: var(--danger);
+      margin-top: 2px;
+      display: none;
+    }
+    .form-error.visible { display: block; }
+
+    .form-input-wrap { position: relative; }
+    .form-input-wrap .form-input { padding-right: 36px; }
+
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--r-xs);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all var(--transition);
+      user-select: none;
+    }
+    .toggle-wrap:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .toggle-track {
+      width: 40px;
+      height: 22px;
+      border-radius: 99px;
+      background: var(--gray3);
+      position: relative;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+    .toggle-track.active { background: var(--accent); }
+    .toggle-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--white);
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform var(--transition);
+    }
+    .toggle-track.active .toggle-thumb { transform: translateX(18px); }
+    .toggle-label {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.3;
+    }
+    .toggle-label strong { color: var(--white); font-weight: 500; }
+
+    .slug-preview {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      color: var(--gray2);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      margin-top: 4px;
+      min-height: 28px;
+    }
+    .slug-preview span { color: var(--accent); }
+
+    .save-bar {
+      position: sticky;
+      bottom: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 18px 32px;
+      background: rgba(4, 4, 4, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-top: 1px solid var(--border);
+      border-radius: var(--r-sm);
+    }
+    .save-bar-info { font-size: 0.78rem; color: var(--gray2); }
+    .save-bar-actions { display: flex; align-items: center; gap: 8px; }
+
+    .btn-save {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 28px;
+      border-radius: var(--r-xs);
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: inherit;
+      line-height: 1.3;
+    }
+    .btn-save:hover {
+      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(0, 245, 196, 0.15);
+      transform: translateY(-1px);
+    }
+    .btn-save:active { transform: scale(0.97); }
+    .btn-save:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-save .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(0, 0, 0, 0.15);
+      border-top-color: var(--bg);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+    .btn-save.loading .spinner { display: block; }
+    .btn-save.loading .btn-text { display: none; }
+    .btn-save.loading .icon { display: none; }
+
+    .form-skeleton { padding: 0; }
+    .skel-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .skel-field { display: flex; flex-direction: column; gap: 8px; }
+    .skel-field.full { grid-column: 1 / -1; }
+    .skel-label {
+      height: 12px; width: 30%; border-radius: 99px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s ease-in-out infinite;
+    }
+    .skel-input {
+      height: 42px; border-radius: var(--r-xs);
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s ease-in-out infinite;
+    }
+    .skel-textarea {
+      height: 100px; border-radius: var(--r-xs);
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s ease-in-out infinite;
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .empty-state i {
+      font-size: 2.5rem;
+      color: var(--gray3);
+      margin-bottom: 16px;
+    }
+    .empty-state h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .empty-state p {
+      font-size: 0.85rem;
+      color: var(--gray2);
+      max-width: 400px;
+    }
+    .empty-state .btn { margin-top: 20px; }
+
+    .character-count {
+      font-size: 0.65rem;
+      color: var(--gray3);
+      text-align: right;
+      margin-top: 2px;
+    }
+    .character-count.warning { color: var(--warning); }
+    .character-count.over { color: var(--danger); }
+
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; gap: 16px; }
+      .form-card { padding: 20px; }
+      .save-bar { flex-direction: column; padding: 14px 20px; }
+      .save-bar-actions { width: 100%; }
+      .save-bar-actions .btn { flex: 1; justify-content: center; }
+      .btn-save { flex: 1; justify-content: center; }
+    }
+  </style>
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body>
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+
+  <div class="grid-bg"></div>
+  <div class="glow-top-right"></div>
+  <div class="glow-bottom-left"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <a href="../index.html" class="sidebar-logo-link">
+          <img src="../assets/images/branding/nagriva-logo.png" alt="NAGRIVA" class="sidebar-logo" />
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-label">Main Menu</div>
+        <div class="sidebar-item" data-page="dashboard">
+          <i class="fas fa-th-large"></i> Dashboard
+        </div>
+        <div class="sidebar-item" data-page="orders">
+          <i class="fas fa-shopping-bag"></i> Orders
+        </div>
+        <div class="sidebar-item active" data-page="services">
+          <i class="fas fa-cube"></i> Services
+        </div>
+        <div class="sidebar-item" data-page="payments">
+          <i class="fas fa-credit-card"></i> Payments
+        </div>
+        <div class="sidebar-item" data-page="invoices">
+          <i class="fas fa-file-invoice-dollar"></i> Invoices
+        </div>
+        <div class="sidebar-item" data-page="settings">
+          <i class="fas fa-cog"></i> Settings
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-profile" id="sidebarProfile" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          <div class="sidebar-profile-avatar" id="sidebarProfileAvatar">
+            <img src="" alt="" id="sidebarProfileImg" />
+            <span id="sidebarProfileInitials">AK</span>
+            <span class="sidebar-profile-status"></span>
+          </div>
+          <div class="sidebar-profile-info">
+            <div class="sidebar-profile-name" id="sidebarProfileName">Admin</div>
+            <div class="sidebar-profile-role" id="sidebarProfileRole">Administrator</div>
+          </div>
+          <i class="fas fa-chevron-up sidebar-profile-chevron" id="sidebarProfileChevron"></i>
+        </div>
+        <div class="sidebar-profile-dropdown" id="sidebarProfileDropdown">
+          <a class="sidebar-profile-item" href="profile.html" data-action="profile">
+            <i class="fas fa-user"></i>
+            <span>My Profile</span>
+          </a>
+          <a class="sidebar-profile-item" href="#" data-action="settings">
+            <i class="fas fa-sliders-h"></i>
+            <span>Account Settings</span>
+          </a>
+          <a class="sidebar-profile-item" href="#" data-action="notifications">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+          </a>
+          <div class="sidebar-profile-divider"></div>
+          <a class="sidebar-profile-item" href="#" data-action="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main">
+
+      <header class="topbar">
+        <div class="topbar-title">Services <span>/ edit</span></div>
+        <div class="topbar-right">
+          <div class="topbar-avatar" id="topbarAvatar">AK</div>
+        </div>
+      </header>
+
+      <div class="content" id="pageContent">
+
+        <div class="page-header" id="pageHeader">
+          <div>
+            <h1 id="pageTitle">Edit Service</h1>
+            <p id="pageSubtitle">Update your service offering details.</p>
+          </div>
+          <div class="page-actions">
+            <a href="admin-dashboard.html" class="btn btn-secondary btn-sm">
+              <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+          </div>
+        </div>
+
+        <div id="formContainer">
+
+          <div class="form-skeleton" id="formSkeleton">
+            <div class="skel-row">
+              <div class="skel-field full"><div class="skel-label"></div><div class="skel-input"></div></div>
+            </div>
+            <div class="skel-row">
+              <div class="skel-field"><div class="skel-label"></div><div class="skel-input"></div></div>
+              <div class="skel-field"><div class="skel-label"></div><div class="skel-input"></div></div>
+            </div>
+            <div class="skel-row">
+              <div class="skel-field full"><div class="skel-label"></div><div class="skel-textarea"></div></div>
+            </div>
+            <div class="skel-row">
+              <div class="skel-field full"><div class="skel-label"></div><div class="skel-textarea"></div></div>
+            </div>
+            <div class="skel-row">
+              <div class="skel-field"><div class="skel-label"></div><div class="skel-input"></div></div>
+              <div class="skel-field" style="justify-content:flex-end;"><div class="skel-label"></div><div class="skel-input" style="height:46px;"></div></div>
+            </div>
+          </div>
+
+          <div id="errorState" class="ne ne-error" style="display:none;">
+            <div class="ne-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 class="ne-title">Service Not Found</h3>
+            <p class="ne-desc" id="errorMessage">The service you're looking for could not be loaded.</p>
+            <div class="ne-actions"><a href="admin-dashboard.html" class="ne-btn ne-btn-primary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a></div>
+          </div>
+
+          <form id="serviceForm" novalidate autocomplete="off" style="display:none;">
+            <div class="meta-bar" id="metaBar">
+              <div class="meta-item"><i class="fas fa-fingerprint"></i> ID: <strong id="metaId">—</strong></div>
+              <div class="meta-item"><i class="fas fa-calendar"></i> Created: <strong id="metaCreated">—</strong></div>
+              <div class="meta-item"><i class="fas fa-clock"></i> Updated: <strong id="metaUpdated">—</strong></div>
+              <div class="meta-item"><span class="status-badge draft" id="metaStatus"></span></div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-header">
+                <div class="form-card-title">Service Details</div>
+                <div class="form-card-subtitle">Update the core information for this service.</div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label" for="sf_title">Title <span class="required">*</span></label>
+                  <input type="text" id="sf_title" class="form-input" placeholder="e.g. Premium Web Design" maxlength="120" required />
+                  <div class="form-hint">A clear, descriptive name for the service.</div>
+                  <div class="form-error" id="titleError">Title is required.</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="sf_slug">Slug <span class="required">*</span></label>
+                  <div class="form-input-wrap">
+                    <input type="text" id="sf_slug" class="form-input" placeholder="e.g. premium-web-design" maxlength="120" required />
+                  </div>
+                  <div class="slug-preview" id="slugPreview">
+                    <i class="fas fa-link" style="font-size:0.6rem;opacity:0.5;"></i>
+                    <span id="slugPreviewText">Slug identifies this service in URLs</span>
+                  </div>
+                  <div class="form-error" id="slugError">Slug is required.</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="sf_category">Category <span class="required">*</span></label>
+                  <select id="sf_category" class="form-select" required>
+                    <option value="">Select a category...</option>
+                    <option value="Design & Development">Design & Development</option>
+                    <option value="Marketing & SEO">Marketing & SEO</option>
+                    <option value="Branding & Identity">Branding & Identity</option>
+                    <option value="AI & Automation">AI & Automation</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Strategy & Consulting">Strategy & Consulting</option>
+                    <option value="Content & Copywriting">Content & Copywriting</option>
+                    <option value="Video & Animation">Video & Animation</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <div class="form-error" id="categoryError">Category is required.</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="sf_status">Status</label>
+                  <select id="sf_status" class="form-select">
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                    <option value="archived">Archived</option>
+                  </select>
+                  <div class="form-hint">Draft services are not visible on the site.</div>
+                </div>
+
+                <div class="form-group full-width" style="margin-top:4px;">
+                  <label class="form-label">Featured Service</label>
+                  <div class="toggle-wrap" id="featuredToggle">
+                    <div class="toggle-track" id="featuredTrack">
+                      <div class="toggle-thumb"></div>
+                    </div>
+                    <div class="toggle-label">
+                      <strong>Feature this service</strong> — prominently displayed on the services page
+                    </div>
+                    <input type="checkbox" id="sf_featured" style="display:none;" />
+                  </div>
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label" for="sf_shortDescription">Short Description</label>
+                  <textarea id="sf_shortDescription" class="form-textarea" placeholder="Brief description of the service (displayed in cards and listings)..." rows="2" maxlength="300"></textarea>
+                  <div class="character-count" id="shortDescCount">0 / 300</div>
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label" for="sf_fullDescription">Full Description</label>
+                  <textarea id="sf_fullDescription" class="form-textarea" placeholder="Detailed description of the service, what's included, benefits, etc..." rows="6" maxlength="5000"></textarea>
+                  <div class="character-count" id="fullDescCount">0 / 5000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="save-bar">
+              <div class="save-bar-info">
+                <i class="fas fa-info-circle" style="margin-right:4px;opacity:0.5;"></i>
+                All fields marked with <span style="color:var(--danger);">*</span> are required
+              </div>
+              <div class="save-bar-actions">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+                <button type="submit" class="btn-save" id="saveBtn">
+                  <span class="icon"><i class="fas fa-save"></i></span>
+                  <span class="spinner"></span>
+                  <span class="btn-text">Save Changes</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/admin-auth.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../modules/services/services-api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      var adminGuard = await NagrivaAdminAuth.guardAdminPage({ fallback: true });
+      if (!adminGuard) {
+        document.getElementById('formContainer').innerHTML = '';
+        return;
+      }
+
+      /* ─── Populate sidebar profile from Supabase ─── */
+      (async function loadSidebarProfile() {
+        try {
+          var supabase = window.supabaseClient;
+          var { data: { user } } = await supabase.auth.getUser();
+          if (!user) return;
+          var { data: profile } = await supabase
+            .from('profiles')
+            .select('id, full_name, avatar_url, role')
+            .eq('id', user.id)
+            .single();
+          var displayName = profile && profile.full_name
+            ? profile.full_name
+            : (user.email ? user.email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }) : 'Admin');
+          var role = profile && profile.role ? profile.role : 'admin';
+          var avatarUrl = profile && profile.avatar_url ? profile.avatar_url
+            : (user.user_metadata && user.user_metadata.avatar_url ? user.user_metadata.avatar_url : null);
+          function getInitials(n) { if (!n) return 'A'; return n.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2) || 'A'; }
+          var sidebarNameEl = document.getElementById('sidebarProfileName');
+          var sidebarRoleEl = document.getElementById('sidebarProfileRole');
+          var sidebarInitials = document.getElementById('sidebarProfileInitials');
+          var sidebarImg = document.getElementById('sidebarProfileImg');
+          var sidebarAvatar = document.getElementById('sidebarProfileAvatar');
+          if (sidebarNameEl) sidebarNameEl.textContent = displayName;
+          if (sidebarRoleEl) sidebarRoleEl.textContent = role.charAt(0).toUpperCase() + role.slice(1);
+          if (avatarUrl && sidebarImg && sidebarInitials && sidebarAvatar) {
+            sidebarAvatar.classList.add('has-image');
+            sidebarInitials.textContent = getInitials(displayName);
+            sidebarInitials.style.display = '';
+            sidebarImg.onload = function() {
+              sidebarImg.classList.add('loaded');
+              sidebarInitials.style.display = 'none';
+            };
+            sidebarImg.onerror = function() {
+              sidebarAvatar.classList.remove('has-image');
+              sidebarImg.classList.remove('loaded');
+            };
+            sidebarImg.src = avatarUrl;
+          }
+        } catch (e) { console.warn('[SidebarProfile] load error:', e); }
+      })();
+
+      var serviceId = null;
+
+      function getParam(name) {
+        var url = new URL(window.location.href);
+        return url.searchParams.get(name);
+      }
+
+      function slugify(text) {
+        return text.toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '')
+          .trim();
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) return '\u2014';
+        var d = new Date(dateStr);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      }
+
+      function getStatusBadgeClass(status) {
+        var map = { draft: 'draft', published: 'published', archived: 'archived' };
+        return map[status] || 'draft';
+      }
+
+      function getStatusLabel(status) {
+        var map = { draft: 'Draft', published: 'Published', archived: 'Archived' };
+        return map[status] || 'Unknown';
+      }
+
+      var form = document.getElementById('serviceForm');
+      var skeleton = document.getElementById('formSkeleton');
+      var errorState = document.getElementById('errorState');
+      var errorMessage = document.getElementById('errorMessage');
+      var titleInput = document.getElementById('sf_title');
+      var slugInput = document.getElementById('sf_slug');
+      var categorySelect = document.getElementById('sf_category');
+      var statusSelect = document.getElementById('sf_status');
+      var featuredCheckbox = document.getElementById('sf_featured');
+      var featuredTrack = document.getElementById('featuredTrack');
+      var featuredToggle = document.getElementById('featuredToggle');
+      var shortDesc = document.getElementById('sf_shortDescription');
+      var fullDesc = document.getElementById('sf_fullDescription');
+      var slugPreviewText = document.getElementById('slugPreviewText');
+      var saveBtn = document.getElementById('saveBtn');
+      var cancelBtn = document.getElementById('cancelBtn');
+
+      var metaId = document.getElementById('metaId');
+      var metaCreated = document.getElementById('metaCreated');
+      var metaUpdated = document.getElementById('metaUpdated');
+      var metaStatus = document.getElementById('metaStatus');
+
+      var shortDescCount = document.getElementById('shortDescCount');
+      var fullDescCount = document.getElementById('fullDescCount');
+      var pageTitle = document.getElementById('pageTitle');
+      var pageSubtitle = document.getElementById('pageSubtitle');
+
+      var slugUserEdited = false;
+
+      function updateSlugPreview(text) {
+        if (!text) {
+          slugPreviewText.textContent = 'Auto-generated from title';
+          return;
+        }
+        slugPreviewText.textContent = text;
+      }
+
+      titleInput.addEventListener('input', function() {
+        if (!slugUserEdited) {
+          slugInput.value = slugify(this.value);
+          updateSlugPreview(slugInput.value);
+        }
+        clearError(this);
+      });
+
+      slugInput.addEventListener('input', function() {
+        slugUserEdited = this.value.length > 0;
+        this.value = slugify(this.value);
+        updateSlugPreview(this.value);
+        clearError(this);
+      });
+
+      slugInput.addEventListener('blur', function() {
+        if (!this.value && titleInput.value) {
+          this.value = slugify(titleInput.value);
+          updateSlugPreview(this.value);
+        }
+      });
+
+      featuredToggle.addEventListener('click', function(e) {
+        if (e.target.closest('input')) return;
+        featuredCheckbox.checked = !featuredCheckbox.checked;
+        featuredTrack.classList.toggle('active', featuredCheckbox.checked);
+      });
+
+      function updateCharCount(input, counter) {
+        var len = input.value.length;
+        var max = input.maxLength;
+        counter.textContent = len + ' / ' + max;
+        counter.className = 'character-count';
+        if (len > max * 0.9) counter.classList.add('warning');
+        if (len >= max) counter.classList.add('over');
+      }
+
+      shortDesc.addEventListener('input', function() { updateCharCount(this, shortDescCount); });
+      fullDesc.addEventListener('input', function() { updateCharCount(this, fullDescCount); });
+      categorySelect.addEventListener('change', function() { clearError(this); });
+      statusSelect.addEventListener('change', function() { clearError(this); });
+
+      function showError(el) {
+        el.classList.add('error');
+        var errorEl = document.getElementById(el.id + 'Error');
+        if (errorEl) errorEl.style.display = 'block';
+      }
+
+      function clearError(el) {
+        el.classList.remove('error');
+        var errorEl = document.getElementById(el.id + 'Error');
+        if (errorEl) errorEl.style.display = 'none';
+      }
+
+      function validate() {
+        var valid = true;
+        var title = titleInput.value.trim();
+        var slug = slugInput.value.trim();
+        var category = categorySelect.value;
+
+        if (!title) { showError(titleInput); valid = false; }
+        else { clearError(titleInput); }
+
+        if (!slug) { showError(slugInput); valid = false; }
+        else { clearError(slugInput); }
+
+        if (!category) { showError(categorySelect); valid = false; }
+        else { clearError(categorySelect); }
+
+        return valid;
+      }
+
+      function setLoading(loading) {
+        if (loading) {
+          saveBtn.classList.add('loading');
+          saveBtn.disabled = true;
+        } else {
+          saveBtn.classList.remove('loading');
+          saveBtn.disabled = false;
+        }
+      }
+
+      function populateForm(data) {
+        titleInput.value = data.title || '';
+        slugInput.value = data.slug || '';
+        categorySelect.value = data.category || '';
+        statusSelect.value = data.status || 'draft';
+        featuredCheckbox.checked = !!data.featured;
+        featuredTrack.classList.toggle('active', !!data.featured);
+        shortDesc.value = data.short_description || '';
+        fullDesc.value = data.full_description || '';
+
+        if (!slugUserEdited) updateSlugPreview(slugInput.value);
+
+        shortDescCount.textContent = (shortDesc.value.length || 0) + ' / 300';
+        fullDescCount.textContent = (fullDesc.value.length || 0) + ' / 5000';
+      }
+
+      function showMeta(data) {
+        metaId.textContent = data.id;
+        metaCreated.textContent = formatDate(data.created_at);
+        metaUpdated.textContent = data.updated_at ? formatDate(data.updated_at) : '\u2014';
+        metaStatus.className = 'status-badge ' + getStatusBadgeClass(data.status);
+        metaStatus.textContent = getStatusLabel(data.status);
+      }
+
+      async function loadService(id) {
+        skeleton.style.display = '';
+        form.style.display = 'none';
+        errorState.style.display = 'none';
+
+        try {
+          var data = await NAGRIVA_ServicesAPI.fetchServiceById(id);
+          if (!data) throw new Error('Service not found');
+
+          serviceId = data.id;
+          populateForm(data);
+          showMeta(data);
+          pageTitle.textContent = 'Edit: ' + data.title;
+          pageSubtitle.textContent = 'Update your "' + data.title + '" service offering.';
+
+          skeleton.style.display = 'none';
+          form.style.display = '';
+        } catch (err) {
+          skeleton.style.display = 'none';
+          errorState.style.display = '';
+          errorMessage.textContent = err.message || 'Could not load service. It may have been deleted or you may not have access.';
+          NAGRIVA_Toast.error('Load Failed', 'Could not load service data.');
+        }
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!validate()) {
+          NAGRIVA_Toast.error('Validation Error', 'Please fill in all required fields.');
+          return;
+        }
+
+        if (!serviceId) {
+          NAGRIVA_Toast.error('Error', 'Service ID is missing. Please reload the page.');
+          return;
+        }
+
+        setLoading(true);
+
+        var payload = {
+          title: titleInput.value.trim(),
+          slug: slugInput.value.trim(),
+          category: categorySelect.value,
+          short_description: shortDesc.value.trim(),
+          full_description: fullDesc.value.trim(),
+          status: statusSelect.value,
+          featured: featuredCheckbox.checked
+        };
+        console.log('[ServiceEdit] update payload:', JSON.stringify(payload, null, 2));
+
+        try {
+          var result = await NAGRIVA_ServicesAPI.updateService(serviceId, payload);
+          console.log('[ServiceEdit] update success:', JSON.stringify(result, null, 2));
+          NAGRIVA_Toast.success('Service Updated', result.title + ' updated successfully.');
+          setLoading(false);
+          showMeta(result);
+          pageTitle.textContent = 'Edit: ' + result.title;
+          pageSubtitle.textContent = 'Update your "' + result.title + '" service offering.';
+        } catch (err) {
+          setLoading(false);
+          console.error('[ServiceEdit] update failed:', err);
+          var msg = err.message || 'Something went wrong. Please try again.';
+          NAGRIVA_Toast.error('Update Failed', msg);
+        }
+      });
+
+      cancelBtn.addEventListener('click', function() {
+        window.location.href = 'admin-dashboard.html';
+      });
+
+      serviceId = getParam('id');
+
+      if (!serviceId) {
+        errorState.style.display = '';
+        skeleton.style.display = 'none';
+        errorMessage.textContent = 'No service ID provided. Please select a service to edit.';
+        NAGRIVA_Toast.error('Missing Parameter', 'No service ID specified in the URL.');
+      } else {
+        loadService(serviceId);
+      }
+
+      document.getElementById('sidebar').querySelectorAll('.sidebar-item[data-page]').forEach(function(item) {
+        item.addEventListener('click', function() {
+          window.location.href = 'admin-dashboard.html';
+        });
+      });
+
+      var hamburger = document.createElement('button');
+      hamburger.className = 'topbar-hamburger';
+      hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+      hamburger.style.cssText = 'display:none;width:36px;height:36px;border-radius:var(--r-xs);background:var(--surface);border:1px solid var(--border);color:var(--gray);align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;';
+      document.querySelector('.topbar').insertBefore(hamburger, document.querySelector('.topbar').firstChild);
+
+      hamburger.addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('open');
+      });
+
+      document.getElementById('sidebarOverlay').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('open');
+        this.classList.remove('open');
+      });
+
+      if (window.innerWidth <= 1024) {
+        hamburger.style.display = 'flex';
+      }
+
+      window.addEventListener('resize', function() {
+        hamburger.style.display = window.innerWidth <= 1024 ? 'flex' : 'none';
+      });
+
+      /* ─── Sidebar Profile Dropdown ─── */
+      (function initSidebarProfile() {
+        var profile = document.getElementById('sidebarProfile');
+        var dropdown = document.getElementById('sidebarProfileDropdown');
+        if (!profile || !dropdown) return;
+
+        profile.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var isOpen = dropdown.classList.contains('show');
+          dropdown.classList.toggle('show');
+          profile.classList.toggle('active', !isOpen);
+          profile.setAttribute('aria-expanded', !isOpen);
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target) && !profile.contains(e.target)) {
+            dropdown.classList.remove('show');
+            profile.classList.remove('active');
+            profile.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            dropdown.classList.remove('show');
+            profile.classList.remove('active');
+            profile.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        dropdown.querySelectorAll('.sidebar-profile-item[data-action]').forEach(function(item) {
+          item.addEventListener('click', function(e) {
+            dropdown.classList.remove('show');
+            profile.classList.remove('active');
+            profile.setAttribute('aria-expanded', 'false');
+
+            var action = this.dataset.action;
+            if (action === 'profile') {
+              window.location.href = 'profile.html';
+            } else if (action === 'notifications') {
+              window.location.href = 'admin-dashboard.html';
+            } else if (action === 'logout') {
+              e.preventDefault();
+              this.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Signing out...</span>';
+              (async function() {
+                try { await window.supabaseClient.auth.signOut(); } catch(e) {}
+                window.location.href = 'login.html';
+              })();
+            }
+          });
+        });
+      })();
+    });
+  </script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — NAGRIVA</title>
+  <meta name="description" content="Your NAGRIVA settings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/onboarding.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <style>
+    .settings-page { padding-top: 100px; min-height: 100vh; }
+    .settings-header { margin-bottom: 36px; }
+    .settings-header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .settings-header p { font-size: 0.88rem; color: var(--gray); }
+    .settings-sections { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; max-width: 640px; }
+    .settings-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; }
+    .settings-card h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .settings-card .settings-desc { font-size: 0.82rem; color: var(--gray2); margin-bottom: 20px; }
+    .settings-form { display: flex; flex-direction: column; gap: 14px; }
+    .sf-group { display: flex; flex-direction: column; gap: 6px; }
+    .sf-label { font-size: 0.78rem; font-weight: 500; color: var(--gray); letter-spacing: 0.01em; }
+    .sf-input {
+      width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--white); outline: none;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sf-input:focus { border-color: rgba(0,245,196,0.3); background: rgba(0,245,196,0.02); }
+    .sf-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      align-self: flex-start; border: none;
+    }
+    .sf-btn.primary { color: var(--bg); background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+    .sf-btn.primary:hover { box-shadow: 0 0 30px rgba(0,245,196,0.25); transform: translateY(-1px); }
+    .sf-btn.primary:active { transform: translateY(0) scale(0.98); }
+    .sf-btn.secondary { color: var(--gray); border: 1px solid var(--border2); background: none; }
+    .sf-btn.secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+    .sf-btn.danger { color: #ff6464; background: rgba(255,80,80,0.06); border: 1px solid rgba(255,80,80,0.15); }
+    .sf-btn.danger:hover { background: rgba(255,80,80,0.1); border-color: rgba(255,80,80,0.25); }
+    .sf-btn.loading { pointer-events: none; opacity: 0.9; }
+    .sf-btn.loading .sf-btn-text { display: none; }
+    .sf-btn.loading .sf-btn-spinner { display: inline-block; }
+    .sf-btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(4,4,4,0.15); border-top-color: #040404; border-radius: 50%; animation: auth-spin 0.6s linear infinite; }
+    .sf-success { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(0,245,196,0.05); border: 1px solid rgba(0,245,196,0.12); color: rgba(255,255,255,0.7); display: none; }
+    .sf-success.show { display: block; animation: auth-msg-in 0.35s ease; }
+    .sf-error { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(255,80,80,0.05); border: 1px solid rgba(255,80,80,0.12); color: rgba(255,255,255,0.7); display: none; }
+    .sf-error.show { display: block; animation: auth-msg-in 0.35s ease; }
+    .sf-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+    .sf-toggle-info { flex: 1; }
+    .sf-toggle-info .sf-toggle-title { font-size: 0.88rem; font-weight: 500; color: var(--white); }
+    .sf-toggle-info .sf-toggle-desc { font-size: 0.78rem; color: var(--gray2); }
+    .sf-toggle-switch { width: 44px; height: 24px; border-radius: 99px; background: rgba(255,255,255,0.08); border: none; cursor: pointer; position: relative; transition: background 0.3s ease; flex-shrink: 0; }
+    .sf-toggle-switch.active { background: var(--accent); }
+    .sf-toggle-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--white); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .sf-toggle-switch.active::after { transform: translateX(20px); }
+    .sf-divider { height: 1px; background: rgba(255,255,255,0.04); margin: 8px 0; }
+    @media (max-width: 768px) {
+      .settings-sections { max-width: 100%; }
+      .sf-btn { align-self: stretch; }
+    }
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+</head>
+<body data-page="settings">
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+  <div id="navbar-container"></div>
+
+  <section class="settings-page">
+    <div class="container">
+      <div class="settings-header">
+        <h1>Settings</h1>
+        <p>Manage your account settings and preferences.</p>
+      </div>
+
+      <div class="settings-sections">
+        <!-- Account Settings -->
+        <div class="settings-card">
+          <h2>Account</h2>
+          <div class="settings-desc">Update your account details and manage your profile.</div>
+          <form class="settings-form" id="settingsAccountForm">
+            <div class="sf-success" id="accSuccess">Account updated successfully.</div>
+            <div class="sf-error" id="accError"></div>
+            <div class="sf-group">
+              <label class="sf-label">Full Name</label>
+              <input type="text" class="sf-input" id="settingsName" placeholder="Your full name" />
+            </div>
+            <div class="sf-group">
+              <label class="sf-label">Email</label>
+              <input type="email" class="sf-input" id="settingsEmail" disabled />
+            </div>
+            <button type="submit" class="sf-btn primary" id="settingsSaveBtn">
+              <span class="sf-btn-text">Save Changes</span>
+              <span class="sf-btn-spinner"></span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Password -->
+        <div class="settings-card">
+          <h2>Change Password</h2>
+          <div class="settings-desc">Update your password to keep your account secure.</div>
+          <form class="settings-form" id="settingsPasswordForm">
+            <div class="sf-success" id="pwSuccess">Password updated successfully.</div>
+            <div class="sf-error" id="pwError"></div>
+            <div class="sf-group">
+              <label class="sf-label">New Password</label>
+              <input type="password" class="sf-input" id="settingsNewPassword" placeholder="Enter new password" autocomplete="new-password" />
+            </div>
+            <div class="sf-group">
+              <label class="sf-label">Confirm New Password</label>
+              <input type="password" class="sf-input" id="settingsConfirmPassword" placeholder="Confirm new password" autocomplete="new-password" />
+            </div>
+            <button type="submit" class="sf-btn primary" id="settingsPwBtn">
+              <span class="sf-btn-text">Update Password</span>
+              <span class="sf-btn-spinner"></span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Preferences -->
+        <div class="settings-card">
+          <h2>Preferences</h2>
+          <div class="settings-desc">Customize your experience.</div>
+          <div class="sf-toggle">
+            <div class="sf-toggle-info">
+              <div class="sf-toggle-title">Email Notifications</div>
+              <div class="sf-toggle-desc">Receive email updates about your projects and billing.</div>
+            </div>
+            <button class="sf-toggle-switch active" id="emailNotifToggle" aria-label="Toggle email notifications"></button>
+          </div>
+          <div class="sf-divider"></div>
+          <div class="sf-toggle">
+            <div class="sf-toggle-info">
+              <div class="sf-toggle-title">Dark Mode</div>
+              <div class="sf-toggle-desc">Currently using system preference. (Coming soon)</div>
+            </div>
+            <button class="sf-toggle-switch active" id="darkModeToggle" aria-label="Toggle dark mode" disabled style="opacity: 0.5;"></button>
+          </div>
+          <div class="sf-divider"></div>
+          <div class="sf-toggle">
+            <div class="sf-toggle-info">
+              <div class="sf-toggle-title">Restart Onboarding</div>
+              <div class="sf-toggle-desc">Go through the welcome flow again to update your preferences.</div>
+            </div>
+            <button class="sf-btn secondary" id="restartOnboardingBtn" type="button" style="flex-shrink:0;padding:7px 16px;font-size:0.78rem;">Restart</button>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-card" style="border-color: rgba(255,80,80,0.12);">
+          <h2 style="color: #ff6464;">Danger Zone</h2>
+          <div class="settings-desc" style="color: rgba(255,100,100,0.5);">Irreversible account actions.</div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="sf-btn danger" id="settingsSignOut">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+        <div class="footer-bottom-logos">
+          <img src="https://i.ibb.co/GfQ5pZXy/visa.png" alt="Visa" loading="lazy" />
+          <img src="https://i.ibb.co/hR7WDPDQ/card.png" alt="Mastercard" loading="lazy" />
+          <img src="https://i.ibb.co/Z6HcFfY9/apple-pay.png" alt="Apple Pay" loading="lazy" />
+          <img src="https://i.ibb.co/gbBV4fBg/google-pay.png" alt="Google Pay" loading="lazy" />
+          <img src="https://i.ibb.co/qFMfm6g9/stripe.png" alt="Stripe" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/skeleton.js"></script>
+  <script defer src="../js/loading-manager.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var user;
+
+      function showSkeletons() {
+        var sk = window.NAGRIVA_Skeleton;
+        var lm = window.NAGRIVA_Loading;
+        if (!sk) return;
+        document.querySelectorAll('.settings-card').forEach(function(el, i) {
+          el.setAttribute('data-original-html', el.innerHTML);
+          var skeletonHtml = i <= 1
+            ? '<div class="sf-group" style="padding:8px 0;"><div class="sk-row-line sk-shimmer" style="height:14px;width:30%;margin-bottom:10px;"></div><div class="sk-row-line sk-shimmer" style="height:36px;"></div></div><div class="sf-group" style="padding:8px 0;"><div class="sk-row-line sk-shimmer" style="height:14px;width:30%;margin-bottom:10px;"></div><div class="sk-row-line sk-shimmer" style="height:36px;"></div></div><div style="margin-top:8px;"><div class="sk-row-line-sm sk-shimmer" style="height:36px;width:120px;"></div></div>'
+            : '<div class="sf-group" style="padding:8px 0;"><div class="sk-row-line sk-shimmer" style="height:14px;width:40%;margin-bottom:10px;"></div><div class="sk-row-line-sm sk-shimmer" style="height:20px;"></div></div>';
+          if (lm) {
+            lm.show(el, skeletonHtml);
+          } else {
+            el.innerHTML = skeletonHtml;
+          }
+        });
+      }
+
+      function hideSkeletons() {
+        var lm = window.NAGRIVA_Loading;
+        document.querySelectorAll('.settings-card').forEach(function(el) {
+          var restored = el.getAttribute('data-original-html');
+          if (restored) {
+            if (lm) {
+              lm.hide(el, restored);
+            } else {
+              el.innerHTML = restored;
+            }
+          }
+        });
+      }
+
+      function getDisplayName(u) {
+        if (!u) return 'User';
+        return u.user_metadata?.full_name || u.email?.split('@')[0] || 'User';
+      }
+
+      function waitForUser(cb) {
+        user = NagrivaAuth.getUser();
+        if (user) { cb(); return; }
+        var check = setInterval(function() {
+          user = NagrivaAuth.getUser();
+          if (user) { clearInterval(check); cb(); }
+        }, 100);
+        setTimeout(function() { clearInterval(check); }, 5000);
+      }
+
+      showSkeletons();
+      waitForUser(function() {
+        hideSkeletons();
+        document.getElementById('settingsName').value = getDisplayName(user);
+        document.getElementById('settingsEmail').value = user.email || '';
+      });
+
+      /* Account form */
+      document.getElementById('settingsAccountForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var successEl = document.getElementById('accSuccess');
+        var errorEl = document.getElementById('accError');
+        var btn = document.getElementById('settingsSaveBtn');
+        successEl.classList.remove('show');
+        errorEl.classList.remove('show');
+
+        var name = document.getElementById('settingsName').value.trim();
+        if (!name) { errorEl.textContent = 'Please enter your name.'; errorEl.classList.add('show'); return; }
+
+        btn.classList.add('loading');
+        try {
+          var { error } = await window.supabaseClient.auth.updateUser({ data: { full_name: name } });
+          if (error) throw error;
+          successEl.classList.add('show');
+        } catch (err) {
+          errorEl.textContent = err.message || 'Failed to update.';
+          errorEl.classList.add('show');
+        }
+        btn.classList.remove('loading');
+      });
+
+      /* Password form */
+      document.getElementById('settingsPasswordForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var successEl = document.getElementById('pwSuccess');
+        var errorEl = document.getElementById('pwError');
+        var btn = document.getElementById('settingsPwBtn');
+        successEl.classList.remove('show');
+        errorEl.classList.remove('show');
+
+        var pw = document.getElementById('settingsNewPassword').value;
+        var confirmPw = document.getElementById('settingsConfirmPassword').value;
+
+        if (!pw) { errorEl.textContent = 'Please enter a new password.'; errorEl.classList.add('show'); return; }
+        if (pw.length < 6) { errorEl.textContent = 'Password must be at least 6 characters.'; errorEl.classList.add('show'); return; }
+        if (pw !== confirmPw) { errorEl.textContent = 'Passwords do not match.'; errorEl.classList.add('show'); return; }
+
+        btn.classList.add('loading');
+        try {
+          var { error } = await window.supabaseClient.auth.updateUser({ password: pw });
+          if (error) throw error;
+          successEl.classList.add('show');
+          document.getElementById('settingsNewPassword').value = '';
+          document.getElementById('settingsConfirmPassword').value = '';
+        } catch (err) {
+          errorEl.textContent = err.message || 'Failed to update password.';
+          errorEl.classList.add('show');
+        }
+        btn.classList.remove('loading');
+      });
+
+      /* Toggles */
+      document.getElementById('emailNotifToggle').addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+
+      /* Sign out */
+      document.getElementById('settingsSignOut').addEventListener('click', async function() {
+        if (typeof NagrivaAuthGuard !== 'undefined') {
+          NagrivaAuthGuard.logout();
+        } else {
+          try { if (window.supabaseClient) await window.supabaseClient.auth.signOut(); } catch (_) {}
+          window.location.href = 'login.html';
+        }
+      });
+
+      /* Restart onboarding */
+      document.getElementById('restartOnboardingBtn').addEventListener('click', function() {
+        if (typeof NagrivaOnboarding !== 'undefined') {
+          NagrivaOnboarding.restart();
+        }
+      });
+    });
+  </script>
+  <script defer src="../js/onboarding.js"></script>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

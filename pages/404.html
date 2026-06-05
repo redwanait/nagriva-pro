@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | NAGRIVA</title>
+  <meta name="description" content="The page you're looking for doesn't exist or has been moved. Return home or explore our services." />
+  <meta name="robots" content="noindex, follow" />
+  <meta property="og:title" content="404 — Page Not Found | NAGRIVA" />
+  <meta property="og:description" content="The page you're looking for doesn't exist or has been moved. Return home or explore our services." />
+  <meta property="og:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <meta property="og:url" content="https://nagriva.com/404" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NAGRIVA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="404 — Page Not Found | NAGRIVA" />
+  <meta name="twitter:description" content="The page you're looking for doesn't exist or has been moved. Return home or explore our services." />
+  <meta name="twitter:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <link rel="canonical" href="https://nagriva.com/pages/404.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #040404;
+      --accent: #00f5c4;
+      --accent2: #00c2a8;
+      --accent-glow: rgba(0, 245, 196, 0.08);
+      --border: rgba(255, 255, 255, 0.06);
+      --white: #ffffff;
+      --gray: #a1a1aa;
+      --gray2: #71717a;
+      --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      position: relative;
+      padding: 40px 20px 220px;
+    }
+
+    .grid-bg {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .glow {
+      position: fixed;
+      top: -250px; right: -150px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,196,0.06) 0%, transparent 70%);
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+
+    .glow-2 {
+      position: fixed;
+      bottom: -180px; left: -180px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,196,0.035) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+      animation: glowPulse2 12s ease-in-out infinite;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      width: 100%;
+      padding: 60px 48px 56px;
+      text-align: center;
+      animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: 36px;
+      transition: opacity var(--transition);
+    }
+    .logo-link:hover {
+      opacity: 0.8;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .error-code {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(7rem, 22vw, 11rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, #007aff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: float404 6s ease-in-out infinite;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      margin: 0 auto 24px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border-radius: 1px;
+      opacity: 0.4;
+    }
+
+    .message {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--bg);
+      font-weight: 600;
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,245,196,0.25);
+    }
+    .btn-primary svg {
+      transition: transform 0.3s ease;
+    }
+    .btn-primary:hover svg {
+      transform: translateX(-3px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      border-radius: 99px;
+      background: transparent;
+      color: var(--gray);
+      font-weight: 500;
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-secondary:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    .btn-secondary svg {
+      transition: transform 0.3s ease;
+    }
+    .btn-secondary:hover svg {
+      transform: translateX(3px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.12); }
+    }
+
+    @keyframes glowPulse2 {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    @keyframes float404 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 24px 16px 200px; }
+      .card { padding: 40px 24px 36px; }
+      .logo-link { margin-bottom: 28px; }
+      .logo-text { font-size: 1rem; }
+      .logo-icon { width: 30px; height: 30px; }
+      .subtitle { font-size: 1rem; margin-bottom: 20px; }
+      .divider { width: 48px; margin-bottom: 20px; }
+      .message { font-size: 0.88rem; margin-bottom: 32px; }
+      .actions { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 16px 12px 180px; }
+      .card { padding: 28px 16px 24px; }
+      .logo-link { margin-bottom: 24px; }
+      .error-code { font-size: clamp(5rem, 18vw, 6rem); }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com",
+  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "NAGRIVA",
+  "url": "https://nagriva.com/pages/404",
+  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+}
+</script>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
+  <div class="glow-2"></div>
+
+  <div class="card">
+    <a href="/" class="logo-link">
+      <span class="logo-icon">
+        <img src="/assets/images/branding/nagriva-logo.png" alt="NAGRIVA" />
+      </span>
+      <span class="logo-text">NAGRIVA</span>
+    </a>
+
+    <div class="error-code">404</div>
+    <div class="subtitle">Page Not Found</div>
+    <div class="divider"></div>
+    <p class="message">The page you're looking for doesn't exist or has been moved.</p>
+
+    <div class="actions">
+      <a href="/" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3L2 7L6 11"/><path d="M2 7H14"/></svg>
+        Back Home
+      </a>
+      <a href="/pages/services.html" class="btn-secondary">
+        View Services
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8H13M13 8L9 4M13 8L9 12"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div id="cookie-consent-container"></div>
+  <script defer src="/js/cookie-consent.js"></script>
+</body>
+</html>
