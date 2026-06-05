@@ -5,10 +5,8 @@
   (function ensureCSS() {
     if (document.querySelector('link[href*="client-messages.css"]')) return;
     var link = document.createElement('link');
-    var path = window.location.pathname;
-    var basePath = path.startsWith('/pages/') || path.startsWith('/admin/') ? '../' : '/';
     link.rel = 'stylesheet';
-    link.href = basePath + 'css/client-messages.css';
+    link.href = '/css/client-messages.css';
     document.head.appendChild(link);
   })();
 
@@ -124,7 +122,7 @@
     </div>\n\
     <div class="chat-fab-wrapper">\n\
       <button class="chat-fab" id="globalChatFab" aria-label="Nagriva Assistant">\n\
-        <img src="../assets/images/branding/chat-fab-icon.webp" alt="Nagriva" />\n\
+        <img src="/assets/images/branding/chat-fab-icon.webp" alt="" />\n\
       </button>\n\
       <span class="chat-fab-badge" id="globalChatBadge"></span>\n\
     </div>\n\

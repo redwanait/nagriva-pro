@@ -4,6 +4,15 @@
    floating-elements.css
    ════════════════════════════════════════════════════════ */
 
+/* Safety: keep container out of document flow */
+#nagriva-floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
 /* ─── FAB Container ─── */
 .fab-container {
   position: fixed;
