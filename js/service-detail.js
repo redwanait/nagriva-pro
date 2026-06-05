@@ -173,12 +173,41 @@
     });
   }
 
+  /* ─── ORDER NOW AUTH CHECK ─── */
+  function initOrderNowButtons() {
+    var buttons = document.querySelectorAll('.fv-cta--primary');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        var href = btn.getAttribute('href');
+        if (!href || !href.includes('checkout.html')) return;
+
+        e.preventDefault();
+
+        if (window.supabaseClient) {
+          window.supabaseClient.auth.getSession().then(function (result) {
+            if (result.data.session) {
+              window.location.href = href;
+            } else {
+              var redirect = encodeURIComponent(href);
+              window.location.href = '/pages/login.html?redirect=' + redirect;
+            }
+          }).catch(function () {
+            window.location.href = '/pages/login.html?redirect=' + encodeURIComponent(href);
+          });
+        } else {
+          window.location.href = '/pages/login.html?redirect=' + encodeURIComponent(href);
+        }
+      });
+    });
+  }
+
   /* ─── INIT ─── */
   document.addEventListener('DOMContentLoaded', function () {
     initGallery();
     initPackageTabs();
     initFAQ();
     initScrollAnimations();
+    initOrderNowButtons();
   });
 
 })();

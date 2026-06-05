@@ -45,14 +45,12 @@ const NAGRIVA_OrdersAPI = (() => {
 
   /* ─── Get single order (optionally scoped to user) ─── */
   async function getOrderById(orderId, userId) {
-    console.log('[OrdersAPI] getOrderById — before query', { orderId, userId });
     let query = window.supabaseClient
       .from(TABLE)
       .select('*')
       .eq('id', orderId);
     if (userId) query = query.eq('user_id', userId);
     const { data, error } = await query.maybeSingle();
-    console.log('[OrdersAPI] getOrderById — after query', { data, error });
     if (error) throw error;
     if (!data) throw new Error('Order not found: ' + orderId);
     return data;

@@ -768,40 +768,40 @@ requestIdleCallback(function () {
 /* ════════════════════════════════════════════
    SERVICE PAGE CTA REBINDING
    Auto-converts primary CTAs on service pages
-   to "Order Now" → submit-order.html
+   to "Order Now" → checkout.html
 ════════════════════════════════════════════ */
 function initServiceCTA() {
   var path = window.location.pathname.split('/').pop().replace('.html', '');
 
-  var SERVICE_MAP = {
-    'website-development': 'website_development',
-    'ecommerce-stores': 'ecommerce_development',
-    'blog-creation': 'blog_creation',
-    'video-editing': 'video_editing'
+  var slugMap = {
+    'seo': 'seo-optimization',
+    'branding': 'brand-identity',
+    'social-media': 'social-media-growth',
+    'strategy': 'performance-marketing',
+    'ai-automation': 'ai-automation',
+    'website-development': 'website-development',
+    'ecommerce-stores': 'ecommerce-stores',
+    'blog-creation': 'blog-creation',
+    'video-editing': 'video-editing'
   };
 
-  var service = SERVICE_MAP[path];
+  var service = slugMap[path] || path;
   if (!service) return;
 
-  var orderUrl = 'submit-order.html?service=' + service;
+  var orderUrl = '/pages/checkout.html?service=' + service + '&pkg=1';
 
   document.querySelectorAll('.sp-btn--primary, .sp-cta-btn, .fv-cta--primary').forEach(function (btn) {
-    var svg = btn.querySelector('svg');
-    btn.innerHTML = 'Order Now ';
-    if (svg) btn.appendChild(svg);
-    btn.setAttribute('href', orderUrl);
+    var href = btn.getAttribute('href') || '';
+    if (!href.includes('checkout.html')) {
+      btn.setAttribute('href', orderUrl);
+    }
   });
 
   document.querySelectorAll('.svc-hero-actions .btn-primary').forEach(function (btn) {
-    var span = btn.querySelector('span');
-    var svg = btn.querySelector('svg');
-    if (span) {
-      span.textContent = 'Order Now';
-    } else {
-      btn.innerHTML = 'Order Now ';
-      if (svg) btn.appendChild(svg);
+    var href = btn.getAttribute('href') || '';
+    if (!href.includes('checkout.html')) {
+      btn.setAttribute('href', orderUrl);
     }
-    btn.setAttribute('href', orderUrl);
   });
 }
 

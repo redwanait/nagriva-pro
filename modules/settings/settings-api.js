@@ -40,7 +40,7 @@ const NAGRIVA_SettingsAPI = (() => {
       deadline_default_days: 14
     },
     payments: {
-      currency: 'USD',
+      currency: 'MAD',
       stripe_public_key: '',
       stripe_secret_key: '',
       paypal_client_id: '',

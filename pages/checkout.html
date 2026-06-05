@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Nagriva</title>
+  <meta name="description" content="Complete your order securely. Premium digital agency checkout." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/checkout.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+</head>
+<body data-page="checkout">
+
+  <div id="navbar-container"></div>
+
+  <main class="chk-page">
+    <div class="chk-container">
+
+      <!-- ═══════════ SECTION 1 — HEADER ═══════════ -->
+      <header class="chk-header">
+        <div class="chk-header-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Secure Checkout
+        </div>
+        <h1 class="chk-title">Complete Your Order</h1>
+        <p class="chk-subtitle">You're one step away from growing your business with Nagriva.</p>
+      </header>
+
+      <!-- Message -->
+      <div class="chk-message" id="chkMessage" role="alert"></div>
+
+      <!-- ═══════════ SECTION 2 — MAIN CHECKOUT LAYOUT ═══════════ -->
+      <div class="chk-grid">
+
+        <!-- LEFT COLUMN (70%) -->
+        <div class="chk-left">
+
+          <!-- Large Service Preview Card -->
+          <div class="chk-card chk-preview-card" id="servicePreview">
+            <div class="chk-preview-banner" id="previewBanner">
+              <div class="chk-preview-banner-overlay"></div>
+              <div class="chk-preview-category" id="previewCategory">Web Development</div>
+            </div>
+            <div class="chk-preview-body">
+              <h2 class="chk-preview-title" id="previewTitle">Website Development</h2>
+              <div class="chk-preview-package" id="previewPackage">
+                <span class="chk-preview-pkg-badge">Growth Package</span>
+              </div>
+              <p class="chk-preview-desc" id="previewDesc">We build high-converting professional websites tailored for your business.</p>
+              <div class="chk-preview-features">
+                <div class="chk-preview-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Responsive Design
+                </div>
+                <div class="chk-preview-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  SEO Optimized
+                </div>
+                <div class="chk-preview-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Mobile Friendly
+                </div>
+                <div class="chk-preview-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  CMS Integration
+                </div>
+                <div class="chk-preview-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Fast Loading
+                </div>
+                <div class="chk-preview-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Unlimited Revisions
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════════ SECTION 4 — PAYMENT METHODS ═══════════ -->
+          <div class="chk-card chk-payment-section">
+            <div class="chk-section-header">
+              <h3 class="chk-section-title">Choose a Payment Method</h3>
+              <p class="chk-section-subtitle">Select your preferred payment option below</p>
+            </div>
+
+            <div class="chk-payment-grid" id="paymentMethods">
+
+              <label class="chk-payment-option">
+                <input type="radio" name="payment" value="paypal" />
+                <div class="chk-payment-card">
+                  <div class="chk-payment-icon chk-payment-icon--paypal">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.972.382-1.053.9l-1.12 7.106z"/></svg>
+                  </div>
+                  <div class="chk-payment-info">
+                    <div class="chk-payment-name">PayPal</div>
+                    <div class="chk-payment-desc">Pay securely using your PayPal account</div>
+                  </div>
+                  <div class="chk-payment-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </label>
+
+              <label class="chk-payment-option">
+                <input type="radio" name="payment" value="payoneer" />
+                <div class="chk-payment-card">
+                  <div class="chk-payment-icon chk-payment-icon--payoneer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                  </div>
+                  <div class="chk-payment-info">
+                    <div class="chk-payment-name">Payoneer</div>
+                    <div class="chk-payment-desc">Receive invoice &amp; pay via Payoneer</div>
+                  </div>
+                  <div class="chk-payment-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </label>
+
+              <label class="chk-payment-option chk-payment-option--disabled">
+                <input type="radio" name="payment" value="visa" disabled />
+                <div class="chk-payment-card">
+                  <div class="chk-payment-icon chk-payment-icon--card">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.508 15.602H7.264l-1.182-4.717c-.14-.545-.37-.704-.976-.856l.024-.11h2.812c.53 0 .938.282 1.059.764l.94 4.92zm1.184-4.716l-.799 4.716h1.634l.799-4.716h-1.634zm6.646 1.563c0-.659-.422-1.11-1.174-1.11h-1.174l.094-.47h1.174c.752 0 1.504.376 1.504 1.034 0 .611-.423.894-.846 1.174-.376.282-.752.564-.752 1.034 0 .517.423.846.893.846h.846l-.094.47h-.799c-.752 0-1.41-.376-1.41-1.034s.47-.94.893-1.221c.376-.282.752-.517.752-1.034v.011zm2.483 3.153h-.47l.094-.47h.47c.329 0 .47-.188.564-.423l.094-.235-1.41-3.578h1.692l.846 2.866 1.034-2.866h1.598l-2.165 4.716h-1.598l-.094-.235c-.094.188-.282.235-.517.235l-.038-.01zM9.102 8.887c-.376-.094-.799-.141-1.174-.141H4.545l-.094.47c1.034.235 1.927.611 2.678 1.174.517.376.752.752.893 1.174l.094.47z"/></svg>
+                  </div>
+                  <div class="chk-payment-info">
+                    <div class="chk-payment-name">Visa</div>
+                    <div class="chk-payment-desc">Pay with Visa credit or debit card</div>
+                  </div>
+                  <div class="chk-payment-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div class="chk-coming-soon-badge">Coming Soon</div>
+                </div>
+              </label>
+
+              <label class="chk-payment-option chk-payment-option--disabled">
+                <input type="radio" name="payment" value="mastercard" disabled />
+                <div class="chk-payment-card">
+                  <div class="chk-payment-icon chk-payment-icon--card">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="12" r="7"/><circle cx="16" cy="12" r="7" fill="#f9a825"/></svg>
+                  </div>
+                  <div class="chk-payment-info">
+                    <div class="chk-payment-name">Mastercard</div>
+                    <div class="chk-payment-desc">Pay with Mastercard credit or debit card</div>
+                  </div>
+                  <div class="chk-payment-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div class="chk-coming-soon-badge">Coming Soon</div>
+                </div>
+              </label>
+
+              <label class="chk-payment-option">
+                <input type="radio" name="payment" value="whatsapp" />
+                <div class="chk-payment-card">
+                  <div class="chk-payment-icon chk-payment-icon--whatsapp">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  </div>
+                  <div class="chk-payment-info">
+                    <div class="chk-payment-name">WhatsApp Order</div>
+                    <div class="chk-payment-desc">Order via WhatsApp message</div>
+                  </div>
+                  <div class="chk-payment-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </label>
+
+            </div>
+
+            <!-- PayPal Button Container -->
+            <div class="chk-paypal-section" id="paypalSection" style="display:none;">
+              <div class="chk-paypal-header">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.972.382-1.053.9l-1.12 7.106z"/></svg>
+                <span>Pay with PayPal</span>
+              </div>
+              <p class="chk-paypal-desc">You will be redirected to PayPal to complete your payment securely.</p>
+              <div id="paypal-button-container"></div>
+              <div class="chk-paypal-loading" id="paypalLoading">
+                <div class="chk-loading-spinner"></div>
+                <span>Loading PayPal...</span>
+              </div>
+            </div>
+
+            <!-- Payoneer Section -->
+            <div class="chk-payoneer-section" id="payoneerSection" style="display:none;">
+              <div class="chk-payoneer-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+              </div>
+              <h4>Request Payment Invoice</h4>
+              <p>We will generate a Payoneer payment invoice for you. An invoice will be sent to your email with payment instructions.</p>
+              <button class="chk-payoneer-btn" id="payoneerBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span class="chk-payoneer-btn-text">Request Payment Invoice</span>
+              </button>
+            </div>
+
+            <!-- WhatsApp Section -->
+            <div class="chk-whatsapp" id="whatsappSection" style="display:none;">
+              <div class="chk-whatsapp-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <h4>Order via WhatsApp</h4>
+              <p>Contact us on WhatsApp with your order details and we'll help you complete your purchase.</p>
+              <a href="#" class="chk-whatsapp-btn" id="whatsappBtn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order via WhatsApp
+              </a>
+            </div>
+
+          </div>
+
+          <!-- ═══════════ BOOST YOUR ORDER — ADD-ONS ═══════════ -->
+          <div class="chk-card chk-addons-section">
+            <div class="chk-addons-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Boost Your Order</span>
+            </div>
+            <p class="chk-addons-subtitle">Add optional services to enhance your project.</p>
+            <div class="chk-addons-list" id="addonsList">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- ═══════════ WHATSAPP HELP CARD ═══════════ -->
+          <div class="chk-card chk-help-card">
+            <div class="chk-help-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="chk-help-card-content">
+              <h4 class="chk-help-card-title">Need Help?</h4>
+              <p class="chk-help-card-text">Chat directly with our team before ordering.</p>
+              <a href="https://wa.me/21261818403" target="_blank" rel="noopener" class="chk-help-card-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (30%) -->
+        <aside class="chk-right">
+          <div class="chk-sidebar-sticky">
+
+            <!-- Order Summary -->
+            <div class="chk-card chk-summary-card">
+              <div class="chk-summary-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Order Summary
+              </div>
+
+              <div class="chk-summary-body" id="orderSummary">
+                <div class="chk-summary-row">
+                  <span class="chk-summary-label">Service</span>
+                  <span class="chk-summary-value" id="summaryService">Loading...</span>
+                </div>
+                <div class="chk-summary-row">
+                  <span class="chk-summary-label">Package</span>
+                  <span class="chk-summary-value" id="summaryPackage">—</span>
+                </div>
+                <div class="chk-summary-row">
+                  <span class="chk-summary-label">Delivery</span>
+                  <span class="chk-summary-value" id="summaryDelivery">—</span>
+                </div>
+                <div class="chk-summary-row">
+                  <span class="chk-summary-label">Support</span>
+                  <span class="chk-summary-value" id="summarySupport">30 Days Support</span>
+                </div>
+                <div class="chk-summary-row">
+                  <span class="chk-summary-label">Revisions</span>
+                  <span class="chk-summary-value" id="summaryRevisions">—</span>
+                </div>
+
+                <div class="chk-summary-divider"></div>
+
+                <!-- Coupon Section -->
+                <div class="chk-coupon-section" id="couponSection">
+                  <div class="chk-coupon-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    <span>Promo Code</span>
+                  </div>
+                  <div class="chk-coupon-input-group">
+                    <input type="text" class="chk-coupon-input" id="couponInput" placeholder="Enter coupon code" autocomplete="off" spellcheck="false" />
+                    <button class="chk-coupon-btn" id="couponApplyBtn">Apply</button>
+                  </div>
+                  <div class="chk-coupon-feedback" id="couponFeedback"></div>
+                  <div class="chk-coupon-applied" id="couponApplied" style="display:none;"></div>
+                </div>
+
+                <!-- Savings Section (shown when coupon applied) -->
+                <div class="chk-savings" id="savingsSection" style="display:none;">
+                  <div class="chk-savings-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  </div>
+                  <div class="chk-savings-info">
+                    <div class="chk-savings-amount" id="savingsAmount">You Save 0 MAD</div>
+                    <div class="chk-savings-reason" id="savingsReason">Because you applied: <strong id="savingsCode">NAGRIVA10</strong></div>
+                  </div>
+                </div>
+
+                <!-- Subtotal row -->
+                <div class="chk-summary-row" id="summarySubtotalRow">
+                  <span class="chk-summary-label">Subtotal</span>
+                  <span class="chk-summary-value" id="summarySubtotal">—</span>
+                </div>
+
+                <!-- Discount row (hidden when no coupon) -->
+                <div class="chk-summary-row chk-summary-row--discount" id="summaryDiscountRow" style="display:none;">
+                  <span class="chk-summary-label">Discount</span>
+                  <span class="chk-summary-value chk-summary-value--discount" id="summaryDiscount">—</span>
+                </div>
+
+                <!-- Add-ons row (hidden when no add-ons) -->
+                <div class="chk-summary-row chk-summary-row--addons" id="summaryAddonsRow" style="display:none;">
+                  <span class="chk-summary-label">Add-ons</span>
+                  <span class="chk-summary-value chk-summary-value--addons" id="summaryAddons">—</span>
+                </div>
+
+                <!-- Divider before final total -->
+                <div class="chk-summary-divider"></div>
+
+                <div class="chk-summary-total">
+                  <span class="chk-summary-total-label">Final Total</span>
+                  <span class="chk-summary-total-value" id="summaryTotal">—</span>
+                </div>
+              </div>
+
+              <!-- Limited Availability -->
+              <div class="chk-availability">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <span>Only 3 Project Slots Available This Month</span>
+              </div>
+
+              <button class="chk-place-order" id="placeOrderBtn">
+                <span class="chk-place-order-text">Complete Order</span>
+                <span class="chk-place-order-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </button>
+
+              <!-- Trust Indicators -->
+              <div class="chk-trust-indicators">
+                <div class="chk-trust-indicator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>120+ Projects Completed</span>
+                </div>
+                <div class="chk-trust-indicator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>98% Client Satisfaction</span>
+                </div>
+                <div class="chk-trust-indicator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Secure Checkout</span>
+                </div>
+                <div class="chk-trust-indicator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Fast Delivery</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile CTA (only visible on mobile) -->
+            <button class="chk-place-order chk-place-order--mobile" id="placeOrderBtnMobile">
+              <span class="chk-place-order-text">Complete Order</span>
+              <span class="chk-place-order-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </button>
+
+          </div>
+        </aside>
+      </div>
+
+      <!-- ═══════════ SECTION 3 — TRUST BADGES ═══════════ -->
+      <div class="chk-trust">
+        <div class="chk-trust-card">
+          <div class="chk-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <span class="chk-trust-text">Secure Payment</span>
+        </div>
+        <div class="chk-trust-card">
+          <div class="chk-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="chk-trust-text">30 Days Support</span>
+        </div>
+        <div class="chk-trust-card">
+          <div class="chk-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="chk-trust-text">Fast Delivery</span>
+        </div>
+        <div class="chk-trust-card">
+          <div class="chk-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="chk-trust-text">Money Back Guarantee</span>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION 5 — SECURITY BAR ═══════════ -->
+      <div class="chk-security">
+        <p class="chk-security-text">Your payment information is encrypted and secure.</p>
+        <div class="chk-security-logos">
+          <div class="chk-security-logo" title="PayPal">
+            <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.6"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.972.382-1.053.9l-1.12 7.106z"/></svg>
+          </div>
+          <div class="chk-security-logo" title="Payoneer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+          </div>
+          <div class="chk-security-logo chk-security-logo--visa" title="Visa">
+            <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.6"><path d="M9.508 15.602H7.264l-1.182-4.717c-.14-.545-.37-.704-.976-.856l.024-.11h2.812c.53 0 .938.282 1.059.764l.94 4.92zm1.184-4.716l-.799 4.716h1.634l.799-4.716h-1.634zm6.646 1.563c0-.659-.422-1.11-1.174-1.11h-1.174l.094-.47h1.174c.752 0 1.504.376 1.504 1.034 0 .611-.423.894-.846 1.174-.376.282-.752.564-.752 1.034 0 .517.423.846.893.846h.846l-.094.47h-.799c-.752 0-1.41-.376-1.41-1.034s.47-.94.893-1.221c.376-.282.752-.517.752-1.034v.011zm2.483 3.153h-.47l.094-.47h.47c.329 0 .47-.188.564-.423l.094-.235-1.41-3.578h1.692l.846 2.866 1.034-2.866h1.598l-2.165 4.716h-1.598l-.094-.235c-.094.188-.282.235-.517.235l-.038-.01zM9.102 8.887c-.376-.094-.799-.141-1.174-.141H4.545l-.094.47c1.034.235 1.927.611 2.678 1.174.517.376.752.752.893 1.174l.094.47z"/></svg>
+          </div>
+          <div class="chk-security-logo" title="Mastercard">
+            <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.6"><circle cx="8" cy="12" r="7"/><circle cx="16" cy="12" r="7" fill="#f9a825"/></svg>
+          </div>
+          <div class="chk-security-logo chk-security-logo--ssl" title="SSL Secure">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>SSL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION 6 — TESTIMONIALS ═══════════ -->
+      <div class="chk-testimonials" id="testimonialsSection">
+        <h3 class="chk-testimonials-title">What Our Clients Say</h3>
+        <div class="chk-testimonials-track" id="testimonialsTrack">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION 7 — HELP BOX ═══════════ -->
+      <div class="chk-help">
+        <div class="chk-help-content">
+          <h3 class="chk-help-title">Need Help?</h3>
+          <p class="chk-help-text">Our support team is ready to help you.</p>
+          <div class="chk-help-buttons">
+            <a href="https://wa.me/21261818403" target="_blank" rel="noopener" class="chk-help-btn chk-help-btn--whatsapp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Chat on WhatsApp
+            </a>
+            <a href="/pages/contact.html" class="chk-help-btn chk-help-btn--call">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Book a Free Call
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/services-api.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../js/checkout.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+  <div id="cookie-consent-container"></div>
+
+  <script>
+  window.openNagrivaChat = window.openNagrivaChat || function() {
+    window.__chatRequested = true;
+    if (!document.querySelector('script[src$="chatbot.js"]')) {
+      var s = document.createElement('script');
+      s.src = '/js/chatbot.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  };
+  </script>
+</body>
+</html>

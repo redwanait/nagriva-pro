@@ -265,8 +265,8 @@
           <div class="fv-pkg-data" data-pkg="0" style="display:none">
             <div class="fv-pkg-name">Starter Package</div>
             <div class="fv-price">
-              <span class="fv-price-currency">$</span>
               <span class="fv-price-amount">3,499</span>
+              <span class="fv-price-currency">MAD</span>
             </div>
             <div class="fv-meta">
               <div class="fv-meta-item">
@@ -286,7 +286,7 @@
               <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Mobile Responsive</li>
               <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Contact Form Integration</li>
             </ul>
-            <a href="submit-order.html?service=web_design" class="fv-cta fv-cta--primary" data-service="cta-primary">
+            <a href="/pages/checkout.html?service=website-development&pkg=0" class="fv-cta fv-cta--primary" data-service="cta-primary">
               Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </a>
             <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
@@ -300,8 +300,8 @@
           <div class="fv-pkg-data" data-pkg="1">
             <div class="fv-pkg-name">Growth Package &bull; Most Popular</div>
             <div class="fv-price">
-              <span class="fv-price-currency">$</span>
               <span class="fv-price-amount">6,499</span>
+              <span class="fv-price-currency">MAD</span>
             </div>
             <div class="fv-meta">
               <div class="fv-meta-item">
@@ -322,7 +322,7 @@
               <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Analytics Dashboard</li>
               <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>30-Day Support</li>
             </ul>
-            <a href="submit-order.html?service=web_design" class="fv-cta fv-cta--primary" data-service="cta-primary">
+            <a href="/pages/checkout.html?service=website-development&pkg=1" class="fv-cta fv-cta--primary" data-service="cta-primary">
               Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </a>
             <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
@@ -336,8 +336,8 @@
           <div class="fv-pkg-data" data-pkg="2" style="display:none">
             <div class="fv-pkg-name">Scale Package</div>
             <div class="fv-price">
-              <span class="fv-price-currency">$</span>
-              <span class="fv-price-amount">12K</span>
+              <span class="fv-price-amount">12,000</span>
+              <span class="fv-price-currency">MAD</span>
             </div>
             <div class="fv-meta">
               <div class="fv-meta-item">
@@ -358,7 +358,7 @@
               <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Priority Support</li>
               <li class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>90-Day Maintenance</li>
             </ul>
-            <a href="submit-order.html?service=web_design" class="fv-cta fv-cta--primary" data-service="cta-primary">
+            <a href="/pages/checkout.html?service=website-development&pkg=2" class="fv-cta fv-cta--primary" data-service="cta-primary">
               Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </a>
             <a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>
@@ -401,5 +401,17 @@
   <script defer src="/js/lazy-loader.js"></script>
   <script defer src="/js/cookie-consent.js"></script>
 <div id="cookie-consent-container"></div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('slug');
+  if (slug && slug !== 'website-development') {
+    document.querySelectorAll('.fv-cta--primary[href*="website-development"]').forEach(function(btn) {
+      btn.setAttribute('href', btn.getAttribute('href').replace('website-development', slug));
+    });
+  }
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful — Nagriva</title>
+  <meta name="description" content="Your payment was successful. Thank you for choosing Nagriva." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    .osc-page {
+      padding-top: calc(68px + 48px);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .osc-card {
+      max-width: 520px;
+      width: 100%;
+      margin: 0 24px;
+      background: rgba(255, 255, 255, 0.018);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 24px;
+      padding: 56px 40px 40px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.02), 0 8px 32px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .osc-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .osc-icon svg {
+      width: 34px;
+      height: 34px;
+      color: #22c55e;
+    }
+
+    .osc-card h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .osc-success-sub {
+      color: var(--gray);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    .osc-details {
+      text-align: left;
+      margin-bottom: 28px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+    }
+
+    .osc-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .osc-detail-row + .osc-detail-row {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .osc-detail-label {
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    .osc-detail-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .osc-detail-value.price {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .osc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .osc-badge--paid {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    .osc-badge--pending {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .osc-ref-box {
+      margin-bottom: 28px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+    }
+
+    .osc-ref-label {
+      color: var(--gray);
+      font-size: 0.82rem;
+    }
+
+    .osc-ref-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .osc-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .osc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .osc-btn--primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .osc-btn--primary:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .osc-btn--secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .osc-btn--secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .osc-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .osc-card {
+        padding: 40px 24px 32px;
+      }
+      .osc-card h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body data-page="order-success">
+
+  <div id="navbar-container"></div>
+
+  <main class="osc-page">
+    <div class="osc-card">
+      <div class="osc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h1>Payment Successful</h1>
+      <p class="osc-success-sub">Thank you for your order. We will start working on your project shortly.</p>
+
+      <div id="orderRef" class="osc-ref-box" style="display:none;">
+        <div class="osc-ref-label">Order Number</div>
+        <div class="osc-ref-value" id="orderIdDisplay"></div>
+      </div>
+
+      <div id="orderDetails" class="osc-details" style="display:none;">
+        <div class="osc-detail-row">
+          <span class="osc-detail-label">Service</span>
+          <span class="osc-detail-value" id="detailService">—</span>
+        </div>
+        <div class="osc-detail-row">
+          <span class="osc-detail-label">Package</span>
+          <span class="osc-detail-value" id="detailPackage">—</span>
+        </div>
+        <div class="osc-detail-row">
+          <span class="osc-detail-label">Price</span>
+          <span class="osc-detail-value price" id="detailPrice">—</span>
+        </div>
+        <div class="osc-detail-row">
+          <span class="osc-detail-label">Payment Method</span>
+          <span class="osc-detail-value" id="detailMethod">—</span>
+        </div>
+        <div class="osc-detail-row">
+          <span class="osc-detail-label">Status</span>
+          <span class="osc-detail-value"><span class="osc-badge osc-badge--paid" id="detailStatus">Paid</span></span>
+        </div>
+      </div>
+
+      <div class="osc-actions">
+        <a href="/" class="osc-btn osc-btn--secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back Home
+        </a>
+        <a href="dashboard.html" class="osc-btn osc-btn--primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          View Dashboard
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var orderId = params.get('order_id');
+      var serviceName = params.get('service');
+      var packageName = params.get('package');
+      var price = params.get('price');
+      var method = params.get('method');
+
+      if (orderId) {
+        var refEl = document.getElementById('orderRef');
+        var idEl = document.getElementById('orderIdDisplay');
+        if (refEl && idEl) {
+          idEl.textContent = '#' + orderId.slice(0, 8);
+          refEl.style.display = 'block';
+        }
+      }
+
+      if (serviceName || packageName || price) {
+        var detailsEl = document.getElementById('orderDetails');
+        if (detailsEl) detailsEl.style.display = 'block';
+
+        if (serviceName) document.getElementById('detailService').textContent = decodeURIComponent(serviceName);
+        if (packageName) document.getElementById('detailPackage').textContent = decodeURIComponent(packageName);
+        if (price) document.getElementById('detailPrice').textContent = Number(price).toLocaleString('en-US') + ' MAD';
+
+        if (method) {
+          var methodLabels = {
+            'paypal': 'PayPal',
+            'payoneer': 'Payoneer',
+            'whatsapp': 'WhatsApp Order',
+            'visa': 'Visa',
+            'mastercard': 'Mastercard'
+          };
+          document.getElementById('detailMethod').textContent = methodLabels[method] || method;
+        }
+      }
+    })();
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+  <div id="cookie-consent-container"></div>
+</body>
+</html>

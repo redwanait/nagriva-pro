@@ -8,6 +8,8 @@
     { "handle": "filesystem" },
     { "src": "^/login$", "dest": "/pages/login.html" },
     { "src": "^/services/(?<slug>[^/]+)$", "dest": "/pages/service.html?slug=$slug" },
+    { "src": "^/checkout$", "dest": "/pages/checkout.html" },
+    { "src": "^/order-success$", "dest": "/pages/order-success.html" },
     { "src": "/.*", "dest": "/pages/404.html", "status": 404 }
   ],
   "headers": [

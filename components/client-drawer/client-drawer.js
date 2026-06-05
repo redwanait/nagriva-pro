@@ -36,8 +36,8 @@ const NAGRIVA_ClientDrawer = (() => {
   }
 
   function formatCurrency(amount) {
-    if (!amount || isNaN(amount)) return '$0';
-    return '$' + Number(amount).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    if (!amount || isNaN(amount)) return '0 MAD';
+    return Number(amount).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' MAD';
   }
 
   function escapeHtml(str) {

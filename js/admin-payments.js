@@ -22,7 +22,7 @@ const NAGRIVA_Payments = (() => {
       orderId: row.order_id || null,
       clientId: row.client_id || null,
       amount: Number(row.amount) || 0,
-      currency: row.currency || 'USD',
+      currency: row.currency || 'MAD',
       status: row.status || 'pending',
       paymentMethod: row.payment_method || '',
       paymentIntent: row.payment_intent || '',
@@ -43,7 +43,7 @@ const NAGRIVA_Payments = (() => {
       order_id: data.orderId || null,
       client_id: data.clientId || null,
       amount: Number(data.amount) || 0,
-      currency: data.currency || 'USD',
+      currency: data.currency || 'MAD',
       status: data.status || 'pending',
       payment_method: data.paymentMethod || '',
       payment_intent: data.paymentIntent || '',
@@ -417,6 +417,7 @@ const NAGRIVA_Payments = (() => {
               <div class="pay-form-field">
                 <label>Currency</label>
                 <select id="pf_currency">
+                  <option value="MAD" ${isEditing && paymentData.currency === 'MAD' ? 'selected' : ''}>MAD</option>
                   <option value="USD" ${isEditing && paymentData.currency === 'USD' ? 'selected' : ''}>USD</option>
                   <option value="EUR" ${isEditing && paymentData.currency === 'EUR' ? 'selected' : ''}>EUR</option>
                   <option value="GBP" ${isEditing && paymentData.currency === 'GBP' ? 'selected' : ''}>GBP</option>

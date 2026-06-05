@@ -95,9 +95,9 @@ window.ServicesAPI = (function () {
         { num: '2 Weeks', label: 'Avg. Delivery Time' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '2,499', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['5-Page Professional Website', 'Mobile Responsive Design', 'Contact Form Integration', 'Basic SEO Setup', 'Google Business Profile Setup'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '4,499', delivery: '3-Week Delivery', revisions: 'Unlimited Revisions', features: ['8-Page Website', 'Unlimited Revisions', 'CMS Integration', 'Full SEO Optimization', 'Analytics Dashboard', '30-Day Support'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '7,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Multi-Page Site', 'Booking/Appointment System', 'Advanced SEO Package', 'Dedicated Project Manager', 'Priority Support', '90-Day Maintenance'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '1,499', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['5-Page Professional Website', 'Mobile Responsive Design', 'Contact Form Integration', 'Basic SEO Setup', 'Google Business Profile Setup'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '2,999', delivery: '3-Week Delivery', revisions: 'Unlimited Revisions', features: ['8-Page Website', 'Unlimited Revisions', 'CMS Integration', 'Full SEO Optimization', 'Analytics Dashboard', '30-Day Support'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '4,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Multi-Page Site', 'Booking/Appointment System', 'Advanced SEO Package', 'Dedicated Project Manager', 'Priority Support', '90-Day Maintenance'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
@@ -151,9 +151,9 @@ window.ServicesAPI = (function () {
         { num: '99.9%', label: 'Uptime Guarantee' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '3,499', delivery: '3-Week Delivery', revisions: '2 Revisions', features: ['WooCommerce Store Setup', 'Up to 20 Products', 'Mobile Responsive Design', 'Payment Gateway Setup', 'Basic SEO Setup'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '5,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Store Design', 'Up to 50 Products', 'Unlimited Revisions', 'Advanced SEO', 'Analytics Dashboard', 'Team Training'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '9,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Store Build', 'Unlimited Products', 'Inventory Management', 'Email Marketing Setup', 'Dedicated Manager', '90-Day Support'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '2,499', delivery: '3-Week Delivery', revisions: '2 Revisions', features: ['WooCommerce Store Setup', 'Up to 20 Products', 'Mobile Responsive Design', 'Payment Gateway Setup', 'Basic SEO Setup'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '3,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Store Design', 'Up to 50 Products', 'Unlimited Revisions', 'Advanced SEO', 'Analytics Dashboard', 'Team Training'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '5,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Store Build', 'Unlimited Products', 'Inventory Management', 'Email Marketing Setup', 'Dedicated Manager', '90-Day Support'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
@@ -207,9 +207,9 @@ window.ServicesAPI = (function () {
         { num: '2 Weeks', label: 'Avg. Setup Time' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '1,499', delivery: '1-Week Delivery', revisions: '2 Revisions', features: ['Blog Platform Setup', 'Professional Design', 'Basic SEO Setup', '3 Categories Setup', 'Social Media Integration'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '2,999', delivery: '2-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Blog Creation', 'Custom Branded Design', 'Unlimited Revisions', 'Advanced SEO Setup', 'Email List Integration', 'Content Strategy Session'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '4,999', delivery: '3-Week Delivery', revisions: 'Unlimited Revisions', features: ['Premium Blog Build', 'Complete Brand Identity', 'Custom Features & Plugins', 'Monetization Setup', 'Dedicated Manager', 'Priority Support'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '799', delivery: '1-Week Delivery', revisions: '2 Revisions', features: ['Blog Platform Setup', 'Professional Design', 'Basic SEO Setup', '3 Categories Setup', 'Social Media Integration'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '1,499', delivery: '2-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Blog Creation', 'Custom Branded Design', 'Unlimited Revisions', 'Advanced SEO Setup', 'Email List Integration', 'Content Strategy Session'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '2,499', delivery: '3-Week Delivery', revisions: 'Unlimited Revisions', features: ['Premium Blog Build', 'Complete Brand Identity', 'Custom Features & Plugins', 'Monetization Setup', 'Dedicated Manager', 'Priority Support'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
@@ -263,9 +263,9 @@ window.ServicesAPI = (function () {
         { num: '24hrs', label: 'Avg. Turnaround' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '499', delivery: '48-Hour Delivery', revisions: '2 Revisions', features: ['1 Short-Form Video Edit', 'Captions & Subtitles', 'Background Music', 'Color Grading', 'Platform Optimization'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '1,299', delivery: '1-Week Delivery', revisions: 'Unlimited Revisions', features: ['5 Short-Form Videos', 'Unlimited Revisions', 'Custom Graphics', 'Sound Design', 'Trending Effects', 'Priority Support'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '2,999', delivery: '2-Week Delivery', revisions: 'Unlimited Revisions', features: ['15 Short-Form Videos', 'Bulk Content Strategy', 'Full Post-Production', 'Custom Animation', 'Dedicated Editor', 'Rush Delivery Available'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '199', delivery: '48-Hour Delivery', revisions: '2 Revisions', features: ['1 Short-Form Video Edit', 'Captions & Subtitles', 'Background Music', 'Color Grading', 'Platform Optimization'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '399', delivery: '1-Week Delivery', revisions: 'Unlimited Revisions', features: ['5 Short-Form Videos', 'Unlimited Revisions', 'Custom Graphics', 'Sound Design', 'Trending Effects', 'Priority Support'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '699', delivery: '2-Week Delivery', revisions: 'Unlimited Revisions', features: ['15 Short-Form Videos', 'Bulk Content Strategy', 'Full Post-Production', 'Custom Animation', 'Dedicated Editor', 'Rush Delivery Available'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },

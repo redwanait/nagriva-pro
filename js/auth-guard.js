@@ -26,7 +26,9 @@ var NagrivaAuthGuard = (function() {
     'submit-order.html',
     'order-tracking.html',
     'client-portal.html',
-    'onboarding-qa.html'
+    'onboarding-qa.html',
+    'checkout.html',
+    'order-success.html'
   ];
 
   var ADMIN_PAGES = [

@@ -209,12 +209,11 @@ window.ServicesRenderer = (function () {
           featuresHtml += '<li class="fv-feature-item">' + ICONS.check + f + '</li>';
         });
 
-        var orderHref = '/pages/submit-order.html?service=' + data.slug;
-        if (i > 0) orderHref += '&pkg=' + i;
+        var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=' + i;
 
         div.innerHTML =
           '<div class="fv-pkg-name">' + (pkg.featured ? pkg.name + ' &bull; Most Popular' : pkg.name) + '</div>' +
-          '<div class="fv-price"><span class="fv-price-currency">$</span><span class="fv-price-amount">' + pkg.price + '</span></div>' +
+          '<div class="fv-price"><span class="fv-price-amount">' + pkg.price + '</span><span class="fv-price-currency">MAD</span></div>' +
           '<div class="fv-meta">' +
             '<div class="fv-meta-item">' + ICONS.clockMeta + pkg.delivery + '</div>' +
             '<div class="fv-meta-item">' + ICONS.editMeta + pkg.revisions + '</div>' +
@@ -244,7 +243,7 @@ window.ServicesRenderer = (function () {
 
   function renderCTA(data) {
     var primaryLinks = qsa('[data-service="cta-primary"]');
-    var orderHref = '/pages/submit-order.html?service=' + data.slug;
+    var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=1';
     primaryLinks.forEach(function (link) {
       link.href = orderHref;
     });

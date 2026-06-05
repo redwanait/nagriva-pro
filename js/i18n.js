@@ -8,7 +8,7 @@
   var STORAGE_LANG = 'nagriva_lang'
   var STORAGE_CURRENCY = 'nagriva_currency'
   var DEFAULT_LANG = 'en'
-  var DEFAULT_CURRENCY = 'USD'
+  var DEFAULT_CURRENCY = 'MAD'
 
   /* ─── Translations ─── */
   var translations = {
@@ -379,7 +379,7 @@
     USD: { symbol: '$', label: 'USD $', rate: 1 },
     EUR: { symbol: '€', label: 'EUR €', rate: 0.92 },
     GBP: { symbol: '£', label: 'GBP £', rate: 0.79 },
-    MAD: { symbol: 'DH', label: 'MAD DH', rate: 10.0 }
+    MAD: { symbol: 'MAD', label: 'MAD', rate: 1 }
   }
 
   /* ─── State ─── */

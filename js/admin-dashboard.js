@@ -240,7 +240,7 @@ const NAGRIVA_Dashboard = (() => {
     return '' +
       '<div class="card stat-card">' +
         '<div class="stat-icon blue"><i class="fas fa-dollar-sign"></i></div>' +
-        '<div class="stat-value" id="dashRevenue">$0</div>' +
+        '<div class="stat-value" id="dashRevenue">0 MAD</div>' +
         '<div class="stat-label">Total Revenue</div>' +
         '<div class="stat-change up"><i class="fas fa-arrow-up"></i> From completed orders</div>' +
       '</div>' +

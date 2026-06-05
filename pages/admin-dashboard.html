@@ -605,7 +605,7 @@
               ticks: {
                 color: '#52525b',
                 font: { size: 11 },
-                callback: function(v) { return '$' + (v / 1000).toFixed(0) + 'k'; }
+                callback: function(v) { return (v / 1000).toFixed(0) + 'k MAD'; }
               }
             }
           },
@@ -811,8 +811,8 @@
         const stats = NAGRIVA_Clients.getStats();
         document.getElementById('clientsTotal').textContent = stats.total;
         document.getElementById('clientsActive').textContent = stats.activeClients;
-        document.getElementById('clientsRevenue').textContent = '$' + stats.totalRevenue.toLocaleString('en-US');
-        document.getElementById('clientsAvgOrder').textContent = '$' + stats.avgOrderValue.toLocaleString('en-US');
+        document.getElementById('clientsRevenue').textContent = stats.totalRevenue.toLocaleString('en-US') + ' MAD';
+        document.getElementById('clientsAvgOrder').textContent = stats.avgOrderValue.toLocaleString('en-US') + ' MAD';
       }
 
       NAGRIVA_Clients.onChange(function(clientsList) {
