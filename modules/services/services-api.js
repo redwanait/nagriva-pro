@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Services API
+   Nagriva — Services API
    Supabase queries for the services table
    All write operations require admin role verification.
    ════════════════════════════════════════════════════════ */

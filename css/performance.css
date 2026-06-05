@@ -340,23 +340,19 @@
 
 /* Skeleton services card */
 .sk-service-card {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 20px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
   overflow: hidden;
 }
 .sk-service-img {
   height: 200px;
 }
 .sk-service-body {
-  padding: 22px 24px 12px;
+  padding: 24px 28px 28px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-.sk-service-icon {
-  width: 36px; height: 36px;
-  border-radius: 10px;
+  gap: 16px;
 }
 .sk-service-line {
   height: 14px;
@@ -365,6 +361,7 @@
 .sk-service-line.w70 { width: 70%; }
 .sk-service-line.w100 { width: 100%; }
 .sk-service-line.w50 { width: 50%; }
+.sk-service-line.w40 { width: 40%; }
 
 /* Skeleton admin stat card */
 .sk-admin-stat {
@@ -780,7 +777,7 @@
   .sk-notif-icon, .sk-notif-title, .sk-notif-msg, .sk-notif-time,
   .sk-timeline-dot, .sk-timeline-title, .sk-timeline-desc, .sk-timeline-time,
   .sk-profile-avatar, .sk-profile-name, .sk-profile-email, .sk-profile-joined,
-  .sk-service-img, .sk-service-icon, .sk-service-line,
+  .sk-service-img, .sk-service-line,
   .sk-admin-stat-icon, .sk-admin-stat-value, .sk-admin-stat-label,
   .sk-admin-td,
   .sk-order-icon, .sk-order-name, .sk-order-meta, .sk-order-badge, .sk-order-bar, .sk-order-pct,

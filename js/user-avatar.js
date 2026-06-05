@@ -160,7 +160,7 @@ const NAGRIVA_UserAvatar = (() => {
     if (url) {
       var img = document.createElement('img')
       img.className = 'avatar-image'
-      img.alt = displayName || 'Avatar'
+      img.alt = displayName || 'User avatar'
       img.style.cssText = 'width:100%;height:100%;border-radius:50%;object-fit:cover;position:absolute;inset:0;'
       img.loading = 'lazy'
       img.onload = function() {

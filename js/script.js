@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Premium Digital Agency
+   Nagriva — Premium Digital Agency
    script.js
 ════════════════════════════════════════════════════════ */
 
@@ -41,10 +41,10 @@ document.addEventListener('navbar:loaded', () => {
 ════════════════════════════════════════════ */
 const projectData = {
   nagriva: {
-    title: 'NAGRIVA — Brand Identity & Digital Presence',
+    title: 'Nagriva — Brand Identity & Digital Presence',
     category: '✦ Brand Identity',
     image: '/assets/images/projects/NAGRIVA — Brand Identity.svg',
-    desc: 'The complete NAGRIVA brand ecosystem — from visual identity and design system to a fully responsive web platform engineered for performance, clarity, and conversion.',
+    desc: 'The complete Nagriva brand ecosystem — from visual identity and design system to a fully responsive web platform engineered for performance, clarity, and conversion.',
     services: ['Brand Identity', 'Web Design', 'Strategy'],
     results: []
   },
@@ -440,7 +440,7 @@ requestIdleCallback(function () {
 
   requestIdleCallback(function () {
     var glow = document.createElement('div');
-    glow.style.cssText = 'position:fixed;width:250px;height:250px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(0,245,196,0.03) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity 0.3s ease;border-radius:50%;top:0;left:0;opacity:0;';
+    glow.style.cssText = 'position:fixed;width:250px;height:250px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(59,130,246,0.03) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity 0.3s ease;border-radius:50%;top:0;left:0;opacity:0;';
     document.body.appendChild(glow);
 
     var mouseX = 0, mouseY = 0, glowX = 0, glowY = 0, frame;
@@ -489,7 +489,7 @@ requestIdleCallback(function () {
       });
     }
   });
-  document.querySelectorAll('.pj-visual img, .service-img img, .art-thumb img').forEach(function (img) {
+  document.querySelectorAll('.pj-visual img, .sv-card-media img, .art-thumb img').forEach(function (img) {
     if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
   });
 }, { timeout: 3000 });
@@ -555,7 +555,7 @@ function initContactForm() {
 (function initCardTilt() {
   if (window.matchMedia('(hover: none)').matches) return;
 
-  document.querySelectorAll('.service-card, .stat-card').forEach(function (card) {
+  document.querySelectorAll('.sv-card, .stat-card').forEach(function (card) {
     var raf = null;
     card.addEventListener('mousemove', function (e) {
       if (raf) return;
@@ -607,7 +607,7 @@ function initContactForm() {
 ════════════════════════════════════════════ */
 requestIdleCallback(function () {
   var isMobile = window.innerWidth < 768;
-  var grids = document.querySelectorAll('.services-grid, .stats-grid, .pj-grid, .pj-grid-bottom, .process-cards, .svc-benefits, .svc-features, .svc-steps, .svc-stats-grid, .svc-results-grid, .svc-reviews-grid');
+  var grids = document.querySelectorAll('.sv-grid, .stats-grid, .pj-grid, .pj-grid-bottom, .process-cards, .svc-benefits, .svc-features, .svc-steps, .svc-stats-grid, .svc-results-grid, .svc-reviews-grid');
   grids.forEach(function (grid) {
     var cards = grid.querySelectorAll('.fade-up');
     cards.forEach(function (card, i) {
@@ -659,7 +659,7 @@ requestIdleCallback(function () {
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,245,196,' + p.a + ')'; ctx.fill();
+      ctx.fillStyle = 'rgba(59,130,246,' + p.a + ')'; ctx.fill();
     }
     for (i = 0; i < particles.length; i++) {
       for (var j = i + 1; j < particles.length; j++) {
@@ -669,7 +669,7 @@ requestIdleCallback(function () {
         if (dist < 120) {
           ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(0,245,196,' + (0.04 * (1 - dist / 120)) + ')';
+          ctx.strokeStyle = 'rgba(59,130,246,' + (0.04 * (1 - dist / 120)) + ')';
           ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
@@ -733,7 +733,7 @@ requestIdleCallback(function () {
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,245,196,' + p.a + ')'; ctx.fill();
+      ctx.fillStyle = 'rgba(59,130,246,' + p.a + ')'; ctx.fill();
     }
     for (i = 0; i < particles.length; i++) {
       for (var j = i + 1; j < particles.length; j++) {
@@ -743,7 +743,7 @@ requestIdleCallback(function () {
         if (dist < 100) {
           ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(0,245,196,' + (0.03 * (1 - dist / 100)) + ')';
+          ctx.strokeStyle = 'rgba(59,130,246,' + (0.03 * (1 - dist / 100)) + ')';
           ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
@@ -774,12 +774,10 @@ function initServiceCTA() {
   var path = window.location.pathname.split('/').pop().replace('.html', '');
 
   var SERVICE_MAP = {
-    'web-design': 'web_design',
-    'seo': 'seo',
-    'branding': 'brand_identity',
-    'ai-automation': 'ai_automation',
-    'social-media': 'social_media',
-    'strategy': 'strategy'
+    'website-development': 'website_development',
+    'ecommerce-stores': 'ecommerce_development',
+    'blog-creation': 'blog_creation',
+    'video-editing': 'video_editing'
   };
 
   var service = SERVICE_MAP[path];
@@ -813,7 +811,7 @@ function initServiceCTA() {
 
 function rebindServiceEffects(container) {
   if (window.matchMedia('(hover: none)').matches) return;
-  var cards = container.querySelectorAll('.service-card');
+  var cards = container.querySelectorAll('.sv-card');
 
   cards.forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
@@ -862,18 +860,6 @@ function initHomepageServices() {
     return;
   }
 
-  var CATEGORY_ICONS = {
-    'Design & Development': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="3"/><path d="M9 22h6"/><path d="M12 19v3"/></svg>',
-    'Marketing & Growth': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/><path d="M2 12h20"/></svg>',
-    'Technology & Innovation': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'
-  };
-
-  var DEFAULT_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>';
-
-  function getIcon(category) {
-    return CATEGORY_ICONS[category] || DEFAULT_ICON;
-  }
-
   function stripHtml(str) {
     return String(str || '').replace(/<[^>]*>/g, '').trim();
   }
@@ -885,32 +871,37 @@ function initHomepageServices() {
   function buildCard(service, index) {
     var slug = service.slug || '';
     var title = service.title || '';
-    var shortDesc = service.short_description || '';
     var image = service.image || '';
-    var category = service.category || '';
-    var icon = getIcon(category);
+    var features = service.cardFeatures || [];
     var delay = (index * 0.04) + 's';
 
     var plainTitle = stripHtml(title);
-    var plainDesc = stripHtml(shortDesc);
     var firstLetter = (plainTitle || 'S').charAt(0).toUpperCase();
 
-    return '<a href="/pages/service.html?slug=' + encodeURIComponent(slug) + '" class="service-card fade-up" style="--delay:' + delay + '">' +
-      '<div class="service-img">' +
+    var checkSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    var arrowSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+    var featuresHtml = features.length
+      ? '<ul class="sv-card-list">' + features.map(function (f) {
+          return '<li class="sv-card-list-item">' + checkSvg + '<span>' + escapeAttr(stripHtml(f)) + '</span></li>';
+        }).join('') + '</ul>'
+      : '';
+
+    return '<a href="/pages/services/' + encodeURIComponent(slug) + '.html" class="sv-card fade-up" style="--delay:' + delay + '">' +
+      '<div class="sv-card-media">' +
         (image
-          ? '<img class="service-visual" src="' + escapeAttr(image) + '" alt="' + escapeAttr(plainTitle) + '" loading="lazy" onerror="this.style.display=\'none\'">'
-          : '<div class="service-visual" style="background:linear-gradient(135deg,rgba(0,245,196,0.04),rgba(0,0,0,0.3));display:flex;align-items:center;justify-content:center;"><span style="font-size:2rem;font-family:Syne,sans-serif;font-weight:700;color:rgba(0,245,196,0.12);">' + escapeAttr(firstLetter) + '</span></div>'
+          ? '<img src="' + escapeAttr(image) + '" alt="' + escapeAttr(plainTitle) + '" loading="lazy" onerror="this.style.display=\'none\'">'
+          : '<div class="sv-card-media-fallback">' + escapeAttr(firstLetter) + '</div>'
         ) +
-        '<div class="service-overlay"></div>' +
+        '<div class="sv-card-overlay"></div>' +
+        '<div class="sv-card-glow"></div>' +
       '</div>' +
-      '<div class="service-body">' +
-        '<div class="service-icon">' + icon + '</div>' +
-        '<div class="service-name">' + escapeAttr(plainTitle) + '</div>' +
-        '<div class="service-desc">' + escapeAttr(plainDesc) + '</div>' +
-      '</div>' +
-      '<div class="service-footer">' +
-        '<div class="service-arrow">' +
-          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
+      '<div class="sv-card-body">' +
+        '<h3 class="sv-card-title">' + escapeAttr(plainTitle) + '</h3>' +
+        featuresHtml +
+        '<div class="sv-card-action">' +
+          '<span>View Service</span>' +
+          arrowSvg +
         '</div>' +
       '</div>' +
     '</a>';
@@ -959,7 +950,7 @@ function initHomepageServices() {
 }
 
 /* ════════════════════════════════════════════
-   NAGRIVA — Empty State Renderer
+   Nagriva — Empty State Renderer
    ════════════════════════════════════════════ */
 window.NAGRIVA_EmptyState = (function () {
   'use strict';
@@ -1041,7 +1032,7 @@ function injectServiceSchema(serviceData) {
     '@context': 'https://schema.org',
     '@type': 'Service',
     'name': serviceData.name || serviceData.title,
-    'provider': { '@type': 'Organization', 'name': 'NAGRIVA' },
+    'provider': { '@type': 'Organization', 'name': 'Nagriva' },
     'description': serviceData.description || serviceData.metaDescription,
     'url': 'https://nagriva.com/pages/service'
   });
@@ -1079,20 +1070,20 @@ function injectArticleSchema(articleData) {
   script.textContent = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
-    'headline': articleData.title || 'Article — NAGRIVA',
+    'headline': articleData.title || 'Article — Nagriva',
     'description': articleData.description || articleData.excerpt || '',
     'image': articleData.image || articleData.imageUrl || '',
     'datePublished': articleData.date || articleData.publishedAt || '',
     'author': {
       '@type': 'Organization',
-      'name': 'NAGRIVA'
+      'name': 'Nagriva'
     },
     'publisher': {
       '@type': 'Organization',
-      'name': 'NAGRIVA',
+      'name': 'Nagriva',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://nagriva.com/assets/images/branding/nagriva-logo.png'
+        'url': '/assets/images/branding/nagriva-logo.png'
       }
     }
   });

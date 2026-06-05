@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation</title>
-  <meta name="description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing. NAGRIVA's tech blog delivers cutting-edge strategies for modern brands." />
-  <meta name="keywords" content="AI blog, tech blog, SaaS insights, digital marketing, automation, startups, SEO strategies, web design, NAGRIVA" />
-  <meta property="og:title" content="Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation" />
+  <title>Blog — Nagriva | Insights on AI, Tech & Digital Innovation</title>
+  <meta name="description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing. Nagriva's tech blog delivers cutting-edge strategies for modern brands." />
+  <meta name="keywords" content="AI blog, tech blog, SaaS insights, digital marketing, automation, startups, SEO strategies, web design, Nagriva" />
+  <meta property="og:title" content="Blog — Nagriva | Insights on AI, Tech & Digital Innovation" />
   <meta property="og:description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png" />
   <meta property="og:url" content="https://nagriva.com/pages/blog" />
-  <meta property="og:site_name" content="NAGRIVA" />
+  <meta property="og:site_name" content="Nagriva" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blog — NAGRIVA | Insights on AI, Tech & Digital Innovation" />
+  <meta name="twitter:title" content="Blog — Nagriva | Insights on AI, Tech & Digital Innovation" />
   <meta name="twitter:description" content="Explore expert insights on AI, SaaS growth, automation, web design, and digital marketing." />
-  <meta name="twitter:image" content="https://nagriva.com/assets/images/branding/nagriva-og.svg" />
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png" />
   <link rel="canonical" href="https://nagriva.com/pages/blog.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,9 +37,9 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "NAGRIVA",
+  "name": "Nagriva",
   "url": "https://nagriva.com",
-  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "logo": "/assets/images/branding/nagriva-logo.png",
   "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
 }
 </script>
@@ -47,7 +47,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "NAGRIVA",
+  "name": "Nagriva",
   "url": "https://nagriva.com/pages/blog",
   "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
 }
@@ -452,7 +452,7 @@
         return `
           <div class="recent-item" data-id="${a.id}" data-slug="${a.slug}">
             <div class="recent-thumb">
-              <img src="${a.imageUrl}" alt="" loading="lazy" />
+              <img src="${a.imageUrl}" alt="${a.title}" loading="lazy" />
             </div>
             <div class="recent-info">
               <div class="recent-title">${a.title}</div>
@@ -589,7 +589,7 @@
         applyFilters();
 
       } catch (err) {
-        console.error('[NAGRIVA Blog] Failed to load articles:', err);
+        console.error('[Nagriva Blog] Failed to load articles:', err);
         if (reset) {
           showSkeletons(false);
         }
@@ -614,7 +614,7 @@
         renderRecent(recent);
 
       } catch (err) {
-        console.error('[NAGRIVA Blog] Failed to load sidebar:', err);
+        console.error('[Nagriva Blog] Failed to load sidebar:', err);
       }
     }
 
@@ -627,7 +627,7 @@
           renderFeatured(featured[0]);
         }
       } catch (err) {
-        console.error('[NAGRIVA Blog] Failed to load featured:', err);
+        console.error('[Nagriva Blog] Failed to load featured:', err);
       }
     }
 
@@ -637,12 +637,12 @@
       try {
         const connection = await NAGRIVA_BlogAPI.checkConnection();
         if (!connection.ok) {
-          console.info('[NAGRIVA Blog] Supabase unavailable: ' + (connection.message || 'fallback active'));
+          console.info('[Nagriva Blog] Supabase unavailable: ' + (connection.message || 'fallback active'));
         } else {
-          console.info('[NAGRIVA Blog] Connected to Supabase');
+          console.info('[Nagriva Blog] Connected to Supabase');
         }
       } catch (e) {
-        console.info('[NAGRIVA Blog] Starting with built-in fallback data');
+        console.info('[Nagriva Blog] Starting with built-in fallback data');
       }
 
       await loadFeatured();

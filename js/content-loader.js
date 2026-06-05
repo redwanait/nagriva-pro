@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Dynamic Content Loader
+   Nagriva — Dynamic Content Loader
    Loads custom content from Supabase and merges into
    the i18n system. Falls back to hardcoded defaults.
    ════════════════════════════════════════════════════════ */
@@ -19,10 +19,10 @@ const NAGRIVA_ContentLoader = (() => {
     'nav.about': 'About',
     'nav.contact': 'Contact',
     'nav.blog': 'Blog',
-    'nav.web-design': 'Web Design',
-    'nav.seo': 'SEO',
-    'nav.branding': 'Branding',
-    'nav.ai-automation': 'AI Automation',
+    'nav.web-design': 'Websites',
+    'nav.seo': 'E-Commerce',
+    'nav.branding': 'Blogs',
+    'nav.ai-automation': 'Video',
     'nav.social-media': 'Social Media',
     'nav.strategy': 'Strategy',
     'nav.dashboard': 'Dashboard',
@@ -58,7 +58,7 @@ const NAGRIVA_ContentLoader = (() => {
 
     /* ─── Footer ─── */
     'footer.desc': 'We turn your website into a client-generating machine. Design, SEO, and growth for modern brands.',
-    'footer.copyright': '© 2026 NAGRIVA. All rights reserved.',
+    'footer.copyright': '© 2026 Nagriva. All rights reserved.',
     'footer.quick-links': 'Quick Links',
     'footer.services': 'Services',
     'footer.legal': 'Legal',

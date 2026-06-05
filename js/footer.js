@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Footer Include (Reusable Component)
+   Nagriva — Footer Include (Reusable Component)
    ════════════════════════════════════════════════════════ */
 ;(function () {
   'use strict'
@@ -95,7 +95,7 @@
               if (existing) {
                 NAGRIVA_Toast.info('Already Subscribed', 'This email is already subscribed to our newsletter.')
                 setLoading(false)
-                input.style.borderColor = 'rgba(0,245,196,0.4)'
+                input.style.borderColor = 'rgba(59,130,246,0.4)'
                 setTimeout(function () { input.style.borderColor = '' }, 1500)
                 return
               }
@@ -124,7 +124,7 @@
         }
       })
       .catch(function (err) {
-        console.error('[NAGRIVA] Footer load error:', err)
+        console.error('[Nagriva] Footer load error:', err)
       })
   }
 

@@ -38,7 +38,7 @@
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 245, 196, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.12);
   background: rgba(8, 12, 12, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -46,16 +46,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 24px rgba(0, 245, 196, 0.2), 0 0 60px rgba(0, 245, 196, 0.06);
+  box-shadow: 0 4px 24px rgba(59, 130, 246, 0.2), 0 0 60px rgba(59, 130, 246, 0.06);
   transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s ease;
   position: relative;
-  color: #00f5c4;
+  color: #3b82f6;
 }
 
 .chat-fab:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(0, 245, 196, 0.2), 0 0 40px rgba(0, 245, 196, 0.08);
-  border-color: rgba(0, 245, 196, 0.2);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.2);
 }
 
 .chat-fab:active {
@@ -96,9 +96,9 @@
   background: rgba(8, 12, 12, 0.96);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(0, 245, 196, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.1);
   border-radius: 16px;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 245, 196, 0.05);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(59, 130, 246, 0.05);
   padding: 6px;
   width: 250px;
   transform-origin: bottom right;
@@ -126,7 +126,7 @@
 }
 
 .fab-popup-item:hover {
-  background: rgba(0, 245, 196, 0.06);
+  background: rgba(59, 130, 246, 0.06);
 }
 
 .fab-popup-item:active {
@@ -137,20 +137,20 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(0, 245, 196, 0.06);
-  border: 1px solid rgba(0, 245, 196, 0.08);
+  background: rgba(59, 130, 246, 0.06);
+  border: 1px solid rgba(59, 130, 246, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #00f5c4;
+  color: #3b82f6;
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .fab-popup-item:hover .fab-popup-icon {
-  background: rgba(0, 245, 196, 0.12);
-  border-color: rgba(0, 245, 196, 0.18);
-  box-shadow: 0 0 20px rgba(0, 245, 196, 0.1);
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.18);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
 }
 
 .fab-popup-icon svg {
@@ -203,7 +203,7 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 245, 196, 0.02), 0 0 30px rgba(0, 245, 196, 0.03);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(59, 130, 246, 0.02), 0 0 30px rgba(59, 130, 246, 0.03);
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   font-family: 'DM Sans', sans-serif;
@@ -217,8 +217,8 @@
 }
 
 .book-call-btn:hover {
-  border-color: rgba(0, 245, 196, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 245, 196, 0.03), 0 0 20px rgba(0, 245, 196, 0.04);
+  border-color: rgba(59, 130, 246, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(59, 130, 246, 0.03), 0 0 20px rgba(59, 130, 246, 0.04);
   color: #fff;
 }
 
@@ -230,14 +230,14 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  color: #00f5c4;
+  color: #3b82f6;
 }
 
 .book-call-btn .book-call-sparkle {
   width: 13px;
   height: 13px;
   flex-shrink: 0;
-  color: rgba(0, 245, 196, 0.5);
+  color: rgba(59, 130, 246, 0.5);
 }
 
 @keyframes ctaFadeIn {

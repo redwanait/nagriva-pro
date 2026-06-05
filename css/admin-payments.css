@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════
    NAGRIVA — Admin Payments System Styles
-   Futuristic dark UI with teal neon accents
+   Premium dark UI with blue neon accents
    ════════════════════════════════════════════════════════ */
 
 /* ─── Payment Status Badges ─── */
@@ -26,7 +26,7 @@
 }
 .pay-status.pending::before { background: var(--warning); }
 .pay-status.paid {
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   color: var(--success);
 }
 .pay-status.paid::before { background: var(--success); }
@@ -81,7 +81,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,245,196,0.04), transparent 70%);
+  background: radial-gradient(circle, rgba(59,130,246,0.04), transparent 70%);
   pointer-events: none;
 }
 .pay-stat-card .pay-stat-icon {
@@ -96,9 +96,9 @@
   border: 1px solid var(--border);
 }
 .pay-stat-card .pay-stat-icon.teal {
-  background: rgba(0,245,196,0.08);
+  background: rgba(59,130,246,0.08);
   color: var(--accent);
-  border-color: rgba(0,245,196,0.15);
+  border-color: rgba(59,130,246,0.15);
 }
 .pay-stat-card .pay-stat-icon.orange {
   background: rgba(245,158,11,0.08);
@@ -145,7 +145,7 @@
 }
 .pay-stat-change.up {
   color: var(--success);
-  background: rgba(16,185,129,0.1);
+  background: rgba(59,130,246,0.1);
 }
 .pay-stat-change.down {
   color: var(--danger);
@@ -195,7 +195,7 @@
 .payments-search-wrap input:focus {
   border-color: var(--accent-dim);
   background: var(--surface-hover);
-  box-shadow: 0 0 0 1px rgba(0,245,196,0.06);
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.06);
 }
 .payments-search-clear {
   position: absolute;
@@ -306,7 +306,7 @@
   color: var(--bg);
   flex-shrink: 0;
 }
-.pay-td-avatar.pa1 { background: #00f5c4; }
+.pay-td-avatar.pa1 { background: #3b82f6; }
 .pay-td-avatar.pa2 { background: #f59e0b; }
 .pay-td-avatar.pa3 { background: #3b82f6; }
 .pay-td-avatar.pa4 { background: #ef4444; }
@@ -416,7 +416,7 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,245,196,0.06), transparent 70%);
+  background: radial-gradient(circle, rgba(59,130,246,0.06), transparent 70%);
   pointer-events: none;
 }
 .pay-modal-header {
@@ -505,7 +505,7 @@
 .pay-form-field textarea:focus {
   border-color: var(--accent-dim);
   background: var(--surface-hover);
-  box-shadow: 0 0 0 1px rgba(0,245,196,0.06);
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.06);
 }
 .pay-form-field input::placeholder {
   color: var(--gray3);
@@ -626,7 +626,7 @@
 }
 .pay-h-dot.paid {
   border-color: var(--success);
-  background: rgba(16,185,129,0.15);
+  background: rgba(59,130,246,0.15);
 }
 .pay-h-dot.refunded {
   border-color: #818cf8;
@@ -702,8 +702,8 @@
   50% { transform: translateY(-3px); }
 }
 @keyframes pay-glow-pulse {
-  0%, 100% { box-shadow: 0 0 10px rgba(0,245,196,0); }
-  50% { box-shadow: 0 0 15px rgba(0,245,196,0.05); }
+  0%, 100% { box-shadow: 0 0 10px rgba(59,130,246,0); }
+  50% { box-shadow: 0 0 15px rgba(59,130,246,0.05); }
 }
 .pay-empty-state {
   display: flex;
@@ -721,8 +721,8 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: rgba(0,245,196,0.05);
-  border: 1px solid rgba(0,245,196,0.1);
+  background: rgba(59,130,246,0.05);
+  border: 1px solid rgba(59,130,246,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -733,8 +733,8 @@
   transition: all var(--transition);
 }
 .pay-empty-state:hover .pay-empty-icon {
-  background: rgba(0,245,196,0.08);
-  border-color: rgba(0,245,196,0.2);
+  background: rgba(59,130,246,0.08);
+  border-color: rgba(59,130,246,0.2);
   transform: scale(1.05);
 }
 .pay-empty-state h3 {
@@ -793,7 +793,7 @@
   width: 3px;
 }
 .pay-history-list-compact::-webkit-scrollbar-thumb {
-  background: rgba(0,245,196,0.15);
+  background: rgba(59,130,246,0.15);
   border-radius: 99px;
 }
 

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════
-   NAGRIVA — Premium Client Dashboard
+   Nagriva — Premium Client Dashboard
    Supabase integrated · Real-time · Skeleton loaders
    ════════════════════════════════════════════ */
 window.NAGRIVA_Dashboard = (function () {

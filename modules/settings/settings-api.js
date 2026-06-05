@@ -11,7 +11,7 @@ const NAGRIVA_SettingsAPI = (() => {
 
   const DEFAULT_VALUES = {
     general: {
-      company_name: 'NAGRIVA',
+      company_name: 'Nagriva',
       logo_url: '',
       support_email: 'hello@nagriva.com',
       whatsapp_number: '',
@@ -19,11 +19,11 @@ const NAGRIVA_SettingsAPI = (() => {
       language: 'en'
     },
     branding: {
-      primary_color: '#00f5c4',
-      secondary_color: '#00c2a8',
+      primary_color: '#3b82f6',
+      secondary_color: '#2563EB',
       glow_intensity: 100,
       border_radius: 22,
-      theme_preset: 'dark-emerald'
+      theme_preset: 'dark-blue'
     },
     support_chat: {
       chat_enabled: true,
@@ -55,7 +55,7 @@ const NAGRIVA_SettingsAPI = (() => {
       sound_notifications: true
     },
     seo: {
-      meta_title: 'NAGRIVA — Premium Digital Agency',
+      meta_title: 'Nagriva — Premium Digital Agency',
       meta_description: 'Premium digital agency offering web design, SEO, branding, AI automation, and social media management services.',
       og_image_url: '',
       favicon_url: '',
@@ -63,9 +63,9 @@ const NAGRIVA_SettingsAPI = (() => {
     },
     ai_assistant: {
       ai_assistant_name: 'Nova',
-      ai_welcome_message: 'Hello! I am Nova, your NAGRIVA assistant. How can I help you today?',
-      ai_personality_prompt: 'You are a helpful, professional digital agency assistant. Be concise, friendly, and knowledgeable about NAGRIVA services.',
-      ai_system_prompt: 'You are Nova, an AI assistant for NAGRIVA — a premium digital agency. You help clients with inquiries about web design, SEO, branding, AI automation, and social media management. Be professional, concise, and helpful. Always represent NAGRIVA in a positive light.',
+      ai_welcome_message: 'Hello! I am Nova, your Nagriva assistant. How can I help you today?',
+      ai_personality_prompt: 'You are a helpful, professional digital agency assistant. Be concise, friendly, and knowledgeable about Nagriva services.',
+      ai_system_prompt: 'You are Nova, an AI assistant for Nagriva — a premium digital agency. You help clients with inquiries about web design, SEO, branding, AI automation, and social media management. Be professional, concise, and helpful. Always represent Nagriva in a positive light.',
       ai_tone: 'professional',
       ai_response_style: 'concise',
       ai_suggestions_enabled: true,

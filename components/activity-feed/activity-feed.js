@@ -19,21 +19,21 @@ const NAGRIVA_ActivityFeed = (() => {
   let _itemCount = 0;
 
   const ACTION_MAP = {
-    order_created:     { icon: 'fa-plus-circle', color: 'teal',   label: 'Order Created' },
+    order_created:     { icon: 'fa-plus-circle', color: 'blue',   label: 'Order Created' },
     order_updated:     { icon: 'fa-pen',          color: 'blue',   label: 'Order Updated' },
     status_changed:    { icon: 'fa-exchange-alt', color: 'blue',   label: 'Status Changed' },
-    client_registered: { icon: 'fa-user-plus',    color: 'teal',   label: 'New Client' },
+    client_registered: { icon: 'fa-user-plus',    color: 'blue',   label: 'New Client' },
     admin_action:      { icon: 'fa-shield-alt',   color: 'purple', label: 'Admin Action' },
     notification_sent: { icon: 'fa-bell',         color: 'orange', label: 'Notification' },
     message_sent:      { icon: 'fa-comment',      color: 'purple', label: 'Message' },
     file_uploaded:     { icon: 'fa-upload',       color: 'orange', label: 'File Uploaded' },
-    project_completed: { icon: 'fa-check-circle', color: 'teal',   label: 'Completed' },
+    project_completed: { icon: 'fa-check-circle', color: 'blue',   label: 'Completed' },
     project_added:     { icon: 'fa-tasks',        color: 'blue',   label: 'Project Added' },
     manager_assigned:  { icon: 'fa-user-tie',     color: 'orange', label: 'Manager Assigned' },
     profile_updated:   { icon: 'fa-user-edit',    color: 'gray',   label: 'Profile Updated' },
-    invoice_created:   { icon: 'fa-file-invoice-dollar', color: 'teal',   label: 'Invoice Created' },
+    invoice_created:   { icon: 'fa-file-invoice-dollar', color: 'blue',   label: 'Invoice Created' },
     invoice_updated:   { icon: 'fa-pen',                color: 'blue',   label: 'Invoice Updated' },
-    invoice_paid:      { icon: 'fa-check-circle',        color: 'green',  label: 'Invoice Paid' },
+    invoice_paid:      { icon: 'fa-check-circle',        color: 'blue',  label: 'Invoice Paid' },
     invoice_deleted:   { icon: 'fa-trash',               color: 'gray',   label: 'Invoice Deleted' }
   };
 

@@ -1,7 +1,7 @@
 const NAGRIVA_NavbarAPI = (() => {
   'use strict';
 
-  const DEFAULT_AVATAR = 'https://i.ibb.co/KzBBXjwt/Whats-App-Image-2026-01-29-at-11-43-13-3.jpg';
+  const DEFAULT_AVATAR = '../../assets/images/team/nagriva-team.webp';
 
   function getInitials(name) {
     if (!name) return 'A';

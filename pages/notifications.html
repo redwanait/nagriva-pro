@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notifications — NAGRIVA</title>
-  <meta name="description" content="Your NAGRIVA notifications." />
+  <title>Notifications — Nagriva</title>
+  <meta name="description" content="Your Nagriva notifications." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -33,7 +33,7 @@
       cursor: pointer; font-family: inherit; transition: all 0.2s ease;
     }
     .notif-filter:hover { color: var(--gray); }
-    .notif-filter.active { color: var(--accent); border-color: rgba(0,245,196,0.2); background: rgba(0,245,196,0.06); }
+    .notif-filter.active { color: var(--accent); border-color: rgba(59,130,246,0.2); background: rgba(59,130,246,0.06); }
     .notif-count { font-size: 0.7rem; color: var(--gray2); margin-left: 4px; }
     .notif-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 40px; }
     .notif-item {
@@ -43,12 +43,12 @@
       transition: border-color 0.2s ease; cursor: pointer;
     }
     .notif-item:hover { border-color: rgba(255,255,255,0.1); }
-    .notif-item.unread { background: rgba(0,245,196,0.02); border-color: rgba(0,245,196,0.08); }
+    .notif-item.unread { background: rgba(59,130,246,0.02); border-color: rgba(59,130,246,0.08); }
     .notif-item.unread .notif-dot { display: block; }
     .notif-dot {
       display: none; width: 8px; height: 8px; border-radius: 50%;
       background: var(--accent); flex-shrink: 0; margin-top: 6px;
-      box-shadow: 0 0 8px rgba(0,245,196,0.3);
+      box-shadow: 0 0 8px rgba(59,130,246,0.3);
     }
     .notif-content { flex: 1; min-width: 0; }
     .notif-title { font-size: 0.88rem; font-weight: 500; color: var(--white); margin-bottom: 2px; }
@@ -69,8 +69,8 @@
       border-radius: 18px;
       animation: nf-fadeInUp 0.5s ease-out;
     }
-    .notif-empty-icon { width: 52px; height: 52px; margin: 0 auto 18px; border-radius: 50%; background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); animation: nf-float-icon 3s ease-in-out infinite; transition: all 0.3s ease; }
-    .notif-empty:hover .notif-empty-icon { background: rgba(0,245,196,0.09); border-color: rgba(0,245,196,0.2); transform: scale(1.05); }
+    .notif-empty-icon { width: 52px; height: 52px; margin: 0 auto 18px; border-radius: 50%; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); animation: nf-float-icon 3s ease-in-out infinite; transition: all 0.3s ease; }
+    .notif-empty:hover .notif-empty-icon { background: rgba(59,130,246,0.09); border-color: rgba(59,130,246,0.2); transform: scale(1.05); }
     .notif-empty h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
     .notif-empty p { font-size: 0.85rem; color: var(--gray2); line-height: 1.6; max-width: 320px; margin: 0 auto; }
 
@@ -84,7 +84,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(59,130,246,0.1);border-top-color:#3b82f6;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
 </head>
 <body data-page="notifications">
   <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>

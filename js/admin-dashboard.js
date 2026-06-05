@@ -88,7 +88,7 @@ const NAGRIVA_Dashboard = (() => {
       return;
     }
     const pctMap = { pending: 10, approved: 25, in_progress: 45, review: 70, revision: 85, completed: 100, cancelled: 0 };
-    const colorMap = { pending: '', approved: 'blue', in_progress: 'teal', review: 'purple', revision: 'orange', completed: '', cancelled: 'red' };
+    const colorMap = { pending: '', approved: 'blue', in_progress: 'blue', review: 'purple', revision: 'orange', completed: '', cancelled: 'red' };
     container.innerHTML = active.map(o => {
       const pct = pctMap[o.status] || 10;
       const color = colorMap[o.status] || '';
@@ -199,7 +199,7 @@ const NAGRIVA_Dashboard = (() => {
     }
 
     if (donutChart) {
-      var COLORS = ['#00f5c4', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444', '#ec4899', '#14b8a6', '#8b5cf6'];
+      var COLORS = ['#3b82f6', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444', '#ec4899', '#3b82f6', '#8b5cf6'];
       donutChart.data.labels = serviceDist.labels;
       donutChart.data.datasets[0].data = serviceDist.data;
       donutChart.data.datasets[0].backgroundColor = serviceDist.labels.map(function(_, i) {
@@ -239,7 +239,7 @@ const NAGRIVA_Dashboard = (() => {
   function renderStatCards() {
     return '' +
       '<div class="card stat-card">' +
-        '<div class="stat-icon teal"><i class="fas fa-dollar-sign"></i></div>' +
+        '<div class="stat-icon blue"><i class="fas fa-dollar-sign"></i></div>' +
         '<div class="stat-value" id="dashRevenue">$0</div>' +
         '<div class="stat-label">Total Revenue</div>' +
         '<div class="stat-change up"><i class="fas fa-arrow-up"></i> From completed orders</div>' +

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Global Loading State Manager (loading-manager.js)
+   Nagriva — Global Loading State Manager (loading-manager.js)
    Unified skeleton injection, fade transitions, error recovery.
    Prevents flash of empty content and layout shift.
    ════════════════════════════════════════════════════════ */

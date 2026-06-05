@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Content Settings API
+   Nagriva — Content Settings API
    CRUD for dynamic content management.
    ════════════════════════════════════════════════════════ */
 

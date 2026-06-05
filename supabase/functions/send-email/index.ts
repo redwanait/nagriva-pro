@@ -1,7 +1,7 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
-const FROM_EMAIL = 'NAGRIVA <noreply@nagriva.com>'
+const FROM_EMAIL = 'Nagriva <noreply@nagriva.com>'
 
 interface EmailPayload {
   type: 'welcome' | 'order_confirmation'
@@ -57,11 +57,11 @@ serve(async (req) => {
 
     switch (type) {
       case 'welcome':
-        subject = 'Welcome to NAGRIVA 🚀'
+        subject = 'Welcome to Nagriva 🚀'
         html = buildWelcomeEmail(payload)
         break
       case 'order_confirmation':
-        subject = 'Your NAGRIVA Order Has Been Received'
+        subject = 'Your Nagriva Order Has Been Received'
         html = buildOrderConfirmationEmail(payload)
         break
       default:
@@ -159,7 +159,7 @@ function buildWelcomeEmail(payload: EmailPayload): string {
       <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
         <tr>
           <td style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:40px 30px;text-align:center;">
-            <h1 style="color:#e94560;margin:0;font-size:28px;">NAGRIVA</h1>
+            <h1 style="color:#e94560;margin:0;font-size:28px;">Nagriva</h1>
             <p style="color:#ffffff;font-size:16px;margin-top:8px;">Premium Academic Solutions</p>
           </td>
         </tr>
@@ -167,11 +167,11 @@ function buildWelcomeEmail(payload: EmailPayload): string {
           <td style="padding:40px 30px;">
             <h2 style="color:#1a1a2e;font-size:24px;margin:0 0 16px 0;">Welcome, ${escapeHtml(firstName)}! 🚀</h2>
             <p style="color:#555;font-size:16px;line-height:1.6;margin:0 0 20px 0;">
-              Thank you for joining NAGRIVA! We're excited to have you on board.
+              Thank you for joining Nagriva! We're excited to have you on board.
               Your journey to academic excellence starts here.
             </p>
             <p style="color:#555;font-size:16px;line-height:1.6;margin:0 0 24px 0;">
-              With NAGRIVA, you can access top-tier academic services tailored to your needs.
+              With Nagriva, you can access top-tier academic services tailored to your needs.
               Get started by exploring your dashboard or browsing our services.
             </p>
             <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
@@ -188,10 +188,10 @@ function buildWelcomeEmail(payload: EmailPayload): string {
         </tr>
         <tr>
           <td style="background-color:#f8f8f8;padding:20px 30px;text-align:center;border-top:1px solid #eee;">
-            <p style="color:#888;font-size:13px;margin:0 0 4px 0;">&copy; ${new Date().getFullYear()} NAGRIVA. All rights reserved.</p>
+            <p style="color:#888;font-size:13px;margin:0 0 4px 0;">&copy; ${new Date().getFullYear()} Nagriva. All rights reserved.</p>
             <p style="color:#888;font-size:13px;margin:0;">Premium Academic Solutions</p>
             <p style="color:#aaa;font-size:12px;margin:8px 0 0 0;">
-              This email was sent to you because you created an account with NAGRIVA.
+              This email was sent to you because you created an account with Nagriva.
             </p>
           </td>
         </tr>
@@ -228,7 +228,7 @@ function buildOrderConfirmationEmail(payload: EmailPayload): string {
       <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
         <tr>
           <td style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:40px 30px;text-align:center;">
-            <h1 style="color:#e94560;margin:0;font-size:28px;">NAGRIVA</h1>
+            <h1 style="color:#e94560;margin:0;font-size:28px;">Nagriva</h1>
             <p style="color:#ffffff;font-size:16px;margin-top:8px;">Order Confirmation</p>
           </td>
         </tr>
@@ -270,10 +270,10 @@ function buildOrderConfirmationEmail(payload: EmailPayload): string {
         </tr>
         <tr>
           <td style="background-color:#f8f8f8;padding:20px 30px;text-align:center;border-top:1px solid #eee;">
-            <p style="color:#888;font-size:13px;margin:0 0 4px 0;">&copy; ${new Date().getFullYear()} NAGRIVA. All rights reserved.</p>
+            <p style="color:#888;font-size:13px;margin:0 0 4px 0;">&copy; ${new Date().getFullYear()} Nagriva. All rights reserved.</p>
             <p style="color:#888;font-size:13px;margin:0;">Premium Academic Solutions</p>
             <p style="color:#aaa;font-size:12px;margin:8px 0 0 0;">
-              This email was sent to you because you placed an order with NAGRIVA.
+              This email was sent to you because you placed an order with Nagriva.
             </p>
           </td>
         </tr>

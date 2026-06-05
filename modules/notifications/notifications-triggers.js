@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Automatic Notification Triggers
+   Nagriva — Automatic Notification Triggers
    notifications-triggers.js
    Creates notifications for system events using the API
 ════════════════════════════════════════════════════════ */

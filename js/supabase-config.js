@@ -15,4 +15,4 @@ window.supabaseClient = supabase.createClient(
   }
 );
 
-console.log('[NAGRIVA] Supabase client loaded');
+console.log('[Nagriva] Supabase client loaded');

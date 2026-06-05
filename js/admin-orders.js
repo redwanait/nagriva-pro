@@ -2,9 +2,9 @@ const NAGRIVA_AdminOrders = (() => {
   const STATUS = {
     pending:     { label: 'Pending',     color: '#f59e0b', cls: 'pending',   progress: 10  },
     approved:    { label: 'Approved',    color: '#3b82f6', cls: 'approved',  progress: 25  },
-    in_progress: { label: 'In Progress', color: '#00f5c4', cls: 'active',    progress: 45  },
+    in_progress: { label: 'In Progress', color: '#3b82f6', cls: 'active',    progress: 45  },
     review:      { label: 'Review',      color: '#a855f7', cls: 'revision',  progress: 70  },
-    completed:   { label: 'Completed',   color: '#10b981', cls: 'completed', progress: 100 },
+    completed:   { label: 'Completed',   color: '#2563EB', cls: 'completed', progress: 100 },
     cancelled:   { label: 'Cancelled',   color: '#ef4444', cls: 'cancelled', progress: 0   },
   };
 

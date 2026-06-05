@@ -76,11 +76,11 @@ html {
   }
 
   /* ─── Service cards: simpler ─── */
-  .service-img::after { box-shadow: none !important; }
+  .sv-card-glow { opacity: 0.3 !important; }
   .service-icon { box-shadow: none !important; }
   .services-cta-btn::after { display: none !important; }
   .services-cta-btn::before { display: none !important; }
-  .services::before {
+  .sv-section::before {
     width: 300px !important;
     height: 300px !important;
     opacity: 0.3 !important;
@@ -96,7 +96,7 @@ html {
 
   /* ─── Pricing card backdrop ─── */
   .pricing-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-  .pricing-card.featured { box-shadow: 0 0 0 1px rgba(0,245,196,0.08) !important; }
+  .pricing-card.featured { box-shadow: 0 0 0 1px rgba(59,130,246,0.08) !important; }
   .pricing-service-icon { box-shadow: none !important; }
 
   /* ─── Presentation (sp-*) overrides ─── */
@@ -153,7 +153,7 @@ html {
   .ct-info-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
   .ct-form-card .ct-form-input, .ct-form-card .ct-form-select, .ct-form-card .ct-form-textarea { font-size: 16px !important; }
   .ct-why-card:hover { transform: none !important; box-shadow: none !important; }
-  .ct-why-card:hover .ct-why-icon { background: rgba(0,245,196,0.06) !important; box-shadow: none !important; }
+  .ct-why-card:hover .ct-why-icon { background: rgba(59,130,246,0.06) !important; box-shadow: none !important; }
 
   /* ─── Buttons: disable expensive hover effects ─── */
   .btn-primary:hover { box-shadow: none !important; transform: none !important; }
@@ -168,9 +168,7 @@ html {
   .form-btn::before { display: none !important; }
 
   /* ─── Card hover simplifications ─── */
-  .service-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
-  .service-card:hover::before { opacity: 0 !important; }
-  .service-card:hover .service-visual { transform: none !important; }
+  .sv-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
   .pj-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
   .pj-card:hover::before { opacity: 0 !important; }
   .pj-card:hover .pj-svg { transform: none !important; }
@@ -179,10 +177,10 @@ html {
   .pj-badge { box-shadow: none !important; }
   .stat-card:hover { transform: none !important; box-shadow: none !important; }
   .pricing-card:hover:not(.featured) { transform: none !important; border-color: var(--border) !important; box-shadow: none !important; }
-  .pricing-card.featured:hover { transform: none !important; box-shadow: 0 0 0 1px rgba(0,245,196,0.08) !important; }
+  .pricing-card.featured:hover { transform: none !important; box-shadow: 0 0 0 1px rgba(59,130,246,0.08) !important; }
   .pricing-card:hover .pricing-service-icon { transform: none !important; box-shadow: none !important; }
   .process-card:hover { transform: none !important; box-shadow: none !important; }
-  .process-card:hover .card-icon { background: rgba(0,245,196,0.06) !important; border-color: rgba(0,245,196,0.15) !important; box-shadow: none !important; }
+  .process-card:hover .card-icon { background: rgba(59,130,246,0.06) !important; border-color: rgba(59,130,246,0.15) !important; box-shadow: none !important; }
   .process-card:hover .card-icon svg { transform: none !important; }
   .featured-btn:hover { box-shadow: none !important; }
   .card-btn:hover { transform: none !important; box-shadow: none !important; }
@@ -191,7 +189,7 @@ html {
   .marquee-section:hover .marquee-inner { animation-play-state: running !important; }
 
   /* ─── Content visibility for below-fold sections ─── */
-  .services, .projects, .process, .pricing, .faq,
+  .sv-section, .projects, .process, .pricing, .faq,
   .testimonials, .contact, .footer, .marquee-section,
   .sp-showcase, .sp-benefits, .sp-pricing, .sp-stats,
   .sp-testimonials, .sp-cta { content-visibility: auto; contain-intrinsic-size: 500px; }
@@ -203,7 +201,7 @@ html {
 
   /* ─── Reset will-change on mobile to reduce GPU memory ─── */
   .navbar { will-change: auto !important; }
-  .service-card, .pj-card, .process-card, .pricing-card { will-change: auto !important; }
+  .sv-card, .pj-card, .process-card, .pricing-card { will-change: auto !important; }
   .hero-glow, .hero-glow-2 { will-change: auto !important; }
   .hero-ambient, .ambient-1, .ambient-2 { will-change: auto !important; }
   .float-card, .float-pill { will-change: auto !important; }
@@ -231,7 +229,7 @@ html {
   /* ─── Presentation page extras ─── */
   .sp-benefit-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
   .sp-pricing-card:hover { transform: none !important; }
-  .sp-pricing-card--featured:hover { box-shadow: 0 0 0 1px rgba(0,245,196,0.04) !important; }
+  .sp-pricing-card--featured:hover { box-shadow: 0 0 0 1px rgba(59,130,246,0.04) !important; }
   .sp-showcase-card:hover { transform: none !important; }
   .sp-cta-btn:hover { box-shadow: none !important; transform: none !important; }
   .sp-pricing-btn:hover { transform: none !important; }
@@ -277,10 +275,8 @@ html {
 
 /* ─── Touch devices only: disable hover effects ─── */
 @media (hover: none) and (pointer: coarse) {
-  .service-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
-  .service-card:hover::before { opacity: 0 !important; }
-  .service-card:hover .service-visual { transform: none !important; }
-  .service-card:hover .service-arrow { border-color: var(--gray2) !important; color: var(--gray2) !important; background: none !important; box-shadow: none !important; transform: none !important; }
+  .sv-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
+  .sv-card:hover .sv-card-media img { transform: none !important; }
   .pj-card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border) !important; }
   .pj-card:hover::before { opacity: 0 !important; }
   .stat-card:hover { transform: none !important; box-shadow: none !important; }
@@ -290,16 +286,16 @@ html {
   .btn-secondary:hover { transform: none !important; }
   .btn-book:hover { box-shadow: none !important; transform: none !important; }
   .marquee-section:hover .marquee-inner { animation-play-state: running !important; }
-  .services-grid:has(.service-card:hover) .service-card:not(:hover) { filter: none !important; }
+  .sv-grid:has(.sv-card:hover) .sv-card:not(:hover) { filter: none !important; }
   .pj-grid:has(.pj-card:hover) .pj-card:not(:hover) { filter: none !important; }
   .process-cards:has(.process-card:hover) .process-card:not(:hover) { filter: none !important; }
 
   .sp-benefit-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
   .sp-pricing-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
-  .sp-pricing-card--featured:hover { border-color: rgba(0,245,196,0.18) !important; box-shadow: 0 0 0 1px rgba(0,245,196,0.04) !important; }
+  .sp-pricing-card--featured:hover { border-color: rgba(59,130,246,0.18) !important; box-shadow: 0 0 0 1px rgba(59,130,246,0.04) !important; }
   .sp-testimonial-card:hover { transform: none !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
   .sp-testimonial-card:hover::before { opacity: 0 !important; }
-  .sp-testimonial-card:hover .sp-testimonial-avatar { box-shadow: 0 0 0 2px rgba(0,245,196,0.1), 0 4px 16px rgba(0,0,0,0.25) !important; }
+  .sp-testimonial-card:hover .sp-testimonial-avatar { box-shadow: 0 0 0 2px rgba(59,130,246,0.1), 0 4px 16px rgba(0,0,0,0.25) !important; }
   .sp-showcase-card:hover { transform: none !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
   .sp-showcase-card:hover .sp-showcase-image img { transform: none !important; }
   .sp-cta-btn:hover { box-shadow: none !important; transform: none !important; }

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Admin Authentication Helpers
+   Nagriva — Admin Authentication Helpers
    Reusable vanilla JS helpers for route protection,
    role verification, and secure session handling.
 

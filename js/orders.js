@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Orders & Client Management
+   Nagriva — Orders & Client Management
    Handles order CRUD, file uploads, messaging, activity
    ════════════════════════════════════════════════════════ */
 

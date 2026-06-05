@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Service Detail Page Controller
+   Nagriva — Service Detail Page Controller
    services-detail.js
    Reads slug from URL, loads data via ServicesAPI, renders, initializes UI
    ════════════════════════════════════════════════════════ */
@@ -14,7 +14,13 @@
 
   function getSlug() {
     var params = new URLSearchParams(window.location.search);
-    return params.get('slug') || 'web-design';
+    var slug = params.get('slug');
+    if (slug) return slug;
+    var pathParts = window.location.pathname.split('/').filter(Boolean);
+    if (pathParts.length >= 2 && pathParts[0] === 'services') {
+      return pathParts[pathParts.length - 1];
+    }
+    return 'website-development';
   }
 
   /* ════════════════════════════════════════════════════════
@@ -64,7 +70,7 @@
       if (currentGallery >= totalGallery) currentGallery = 0;
 
       main.src = galleryImages[currentGallery];
-      main.alt = 'Gallery image ' + (currentGallery + 1);
+      main.alt = (document.querySelector('[data-service="og-title"]')?.getAttribute('content') || 'Service') + ' gallery image ' + (currentGallery + 1);
 
       thumbs.forEach(function (t, i) {
         t.classList.toggle('active', i === currentGallery);

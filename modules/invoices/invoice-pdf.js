@@ -43,7 +43,7 @@ const NAGRIVA_InvoicePDF = (() => {
   }
 
   function getStatusColor(status) {
-    const map = { pending: '#f59e0b', paid: '#10b981', overdue: '#ef4444', cancelled: '#71717a', refunded: '#818cf8' };
+    const map = { pending: '#f59e0b', paid: '#2563EB', overdue: '#ef4444', cancelled: '#71717a', refunded: '#818cf8' };
     return map[status] || '#71717a';
   }
 
@@ -66,9 +66,9 @@ const NAGRIVA_InvoicePDF = (() => {
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#1a1a2e;background:#fff;padding:0;margin:0;-webkit-font-smoothing:antialiased}
 .wrap{max-width:800px;margin:0 auto;padding:48px 40px}
-.hdr{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:24px;border-bottom:2.5px solid #00f5c4;margin-bottom:32px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:24px;border-bottom:2.5px solid #3b82f6;margin-bottom:32px}
 .brand{display:flex;align-items:center;gap:14px}
-.brand-icon{width:44px;height:44px;background:#00f5c4;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#040404;flex-shrink:0}
+.brand-icon{width:44px;height:44px;background:#3b82f6;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#040404;flex-shrink:0}
 .brand-txt h1{font-weight:800;font-size:1.35rem;color:#040404;letter-spacing:0.04em;line-height:1.2}
 .brand-txt span{font-size:0.62rem;color:#a1a1aa;letter-spacing:0.15em;text-transform:uppercase}
 .title-area{text-align:right}
@@ -77,11 +77,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:99px;font-size:0.72rem;font-weight:600;margin-top:10px;background:${statusColor}14;border:1px solid ${statusColor}30;color:${statusColor}}
 .status-dot{width:6px;height:6px;border-radius:50%;background:${statusColor};flex-shrink:0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:32px}
-.grp h3{font-size:0.65rem;font-weight:600;color:#00f5c4;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.grp h3{font-size:0.65rem;font-weight:600;color:#3b82f6;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
 .grp p{font-size:0.88rem;color:#1a1a2e;line-height:1.7}
 .grp .lbl{font-size:0.7rem;color:#a1a1aa;font-weight:500}
 .tbl{width:100%;border-collapse:collapse;margin-bottom:24px}
-.tbl th{text-align:left;padding:10px 16px;font-size:0.65rem;font-weight:600;color:#00f5c4;text-transform:uppercase;letter-spacing:0.08em;background:#f8fafc;border-bottom:1.5px solid #e2e8f0}
+.tbl th{text-align:left;padding:10px 16px;font-size:0.65rem;font-weight:600;color:#3b82f6;text-transform:uppercase;letter-spacing:0.08em;background:#f8fafc;border-bottom:1.5px solid #e2e8f0}
 .tbl td{padding:14px 16px;font-size:0.88rem;color:#1a1a2e;border-bottom:1px solid #f1f5f9}
 .tbl td:last-child{text-align:right;font-weight:600}
 .tbl tr:last-child td{border-bottom:none}
@@ -90,16 +90,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .totals td{padding:7px 16px;font-size:0.85rem;color:#1a1a2e}
 .totals td:last-child{text-align:right;font-weight:500}
 .totals .sub td:last-child{color:#71717a}
-.totals .total td{padding:12px 16px;font-size:1.05rem;font-weight:700;border-top:2px solid #00f5c4;color:#040404}
-.totals .total td:last-child{color:#00f5c4}
-.notes-box{padding:16px 20px;background:#f8fafc;border-radius:10px;border-left:3px solid #00f5c4;margin-bottom:32px}
-.notes-box h4{font-size:0.65rem;font-weight:600;color:#00f5c4;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.totals .total td{padding:12px 16px;font-size:1.05rem;font-weight:700;border-top:2px solid #3b82f6;color:#040404}
+.totals .total td:last-child{color:#3b82f6}
+.notes-box{padding:16px 20px;background:#f8fafc;border-radius:10px;border-left:3px solid #3b82f6;margin-bottom:32px}
+.notes-box h4{font-size:0.65rem;font-weight:600;color:#3b82f6;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
 .notes-box p{font-size:0.82rem;color:#52525b;line-height:1.7}
 .ftr{text-align:center;padding-top:24px;border-top:1px solid #e2e8f0}
 .ftr p{font-size:0.7rem;color:#a1a1aa;line-height:1.8}
 .ftr strong{color:#040404;font-weight:600}
 
-.paid-stamp{display:inline-block;padding:4px 12px;border-radius:6px;font-size:0.72rem;font-weight:600;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);margin-top:4px}
+.paid-stamp{display:inline-block;padding:4px 12px;border-radius:6px;font-size:0.72rem;font-weight:600;color:#2563EB;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);margin-top:4px}
 @media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.wrap{padding:24px 20px}}
 </style>
 </head>
@@ -110,7 +110,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="brand">
 <div class="brand-icon">N</div>
 <div class="brand-txt">
-<h1>NAGRIVA</h1>
+<h1>Nagriva</h1>
 <span>Brand Growth Platform</span>
 </div>
 </div>
@@ -125,7 +125,7 @@ ${paidDate ? `<div class="paid-stamp"><i class="lbl">Paid on:</i> ${paidDate}</d
 <div class="grid">
 <div class="grp">
 <h3>From</h3>
-<p><strong>NAGRIVA</strong><br>Brand Growth Platform<br>contact@nagriva.ai</p>
+<p><strong>Nagriva</strong><br>Brand Growth Platform<br>contact@nagriva.ai</p>
 </div>
 <div class="grp">
 <h3>Bill To</h3>
@@ -169,7 +169,7 @@ ${inv.orderService ? '<span class="lbl">Service:</span> ' + inv.orderService : '
 ${notes ? '<div class="notes-box"><h4>Notes</h4><p>' + notes.replace(/</g, '&lt;').replace(/\n/g, '<br>') + '</p></div>' : ''}
 
 <div class="ftr">
-<p><strong>NAGRIVA</strong> \u2014 AI-Powered Brand Growth Platform<br>Thank you for your business.</p>
+<p><strong>Nagriva</strong> \u2014 AI-Powered Brand Growth Platform<br>Thank you for your business.</p>
 </div>
 
 </div>

@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="pageTitle">Article — NAGRIVA</title>
-  <meta name="description" id="metaDesc" content="Read the latest insights from NAGRIVA." />
-  <meta property="og:title" id="ogTitle" content="Article — NAGRIVA" />
-  <meta property="og:description" id="ogDesc" content="Read the latest insights from NAGRIVA." />
+  <title id="pageTitle">Article — Nagriva</title>
+  <meta name="description" id="metaDesc" content="Read the latest insights from Nagriva." />
+  <meta property="og:title" id="ogTitle" content="Article — Nagriva" />
+  <meta property="og:description" id="ogDesc" content="Read the latest insights from Nagriva." />
   <meta property="og:image" id="ogImage" content="" />
   <meta property="og:type" content="article" />
   <meta property="og:url" id="ogUrl" content="https://nagriva.com/pages/article" />
-  <meta property="og:site_name" content="NAGRIVA" />
+  <meta property="og:site_name" content="Nagriva" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" id="twTitle" content="Article — NAGRIVA" />
-  <meta name="twitter:description" id="twDesc" content="Read the latest insights from NAGRIVA." />
+  <meta name="twitter:title" id="twTitle" content="Article — Nagriva" />
+  <meta name="twitter:description" id="twDesc" content="Read the latest insights from Nagriva." />
   <meta name="twitter:image" id="twImage" content="" />
   <link rel="canonical" href="https://nagriva.com/pages/article.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,9 +48,9 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "NAGRIVA",
+  "name": "Nagriva",
   "url": "https://nagriva.com",
-  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "logo": "/assets/images/branding/nagriva-logo.png",
   "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
 }
 </script>
@@ -58,7 +58,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "NAGRIVA",
+  "name": "Nagriva",
   "url": "https://nagriva.com/pages/article",
   "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
 }
@@ -176,7 +176,7 @@
     <div class="container">
       <div class="blog-cta-content fade-up">
         <div class="section-tag">Stay Ahead</div>
-        <h2 class="blog-cta-title">Join 5,000+ Leaders Reading the NAGRIVA Journal</h2>
+        <h2 class="blog-cta-title">Join 5,000+ Leaders Reading the Nagriva Journal</h2>
         <p class="blog-cta-desc">Get exclusive insights on AI, automation, and digital growth delivered to your inbox every week.</p>
         <div class="blog-cta-form">
           <input type="email" class="blog-cta-input" placeholder="your@email.com" id="ctaEmail" aria-label="Email for newsletter" />
@@ -299,8 +299,8 @@ document.addEventListener('DOMContentLoaded', function() {
     injectArticleSchema(data);
 
     // Meta / OG
-    document.title = data.title + ' — NAGRIVA';
-    pageTitle.textContent = data.title + ' — NAGRIVA';
+    document.title = data.title + ' — Nagriva';
+    pageTitle.textContent = data.title + ' — Nagriva';
     metaDesc.content = data.excerpt;
     ogTitle.content = data.title;
     ogDesc.content = data.excerpt;
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
       renderArticle(data);
       loadRelated(data);
     } catch (err) {
-      console.error('[NAGRIVA Article] Failed to load:', err);
+      console.error('[Nagriva Article] Failed to load:', err);
       showError();
     }
   }
@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
     } catch (err) {
-      console.warn('[NAGRIVA Article] Related articles failed:', err.message);
+      console.warn('[Nagriva Article] Related articles failed:', err.message);
       relatedEmpty.style.display = 'block';
     }
   }

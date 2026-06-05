@@ -112,7 +112,7 @@
   background: var(--accent);
 }
 .af-dot.teal::after {
-  background: radial-gradient(circle, rgba(0, 245, 196, 0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25), transparent 70%);
 }
 .af-dot.blue {
   background: var(--info);
@@ -164,9 +164,9 @@
   overflow: hidden;
 }
 .af-icon-wrap.teal {
-  background: rgba(0, 245, 196, 0.08);
+  background: rgba(59, 130, 246, 0.08);
   color: var(--accent);
-  border-color: rgba(0, 245, 196, 0.15);
+  border-color: rgba(59, 130, 246, 0.15);
 }
 .af-icon-wrap.blue {
   background: rgba(59, 130, 246, 0.08);
@@ -240,7 +240,7 @@
 }
 .af-action-label.teal {
   color: var(--accent);
-  background: rgba(0, 245, 196, 0.08);
+  background: rgba(59, 130, 246, 0.08);
 }
 .af-action-label.blue {
   color: var(--info);
@@ -285,15 +285,15 @@
   justify-content: center;
   font-size: 1.2rem;
   margin-bottom: 16px;
-  background: rgba(0,245,196,0.05);
-  border: 1px solid rgba(0,245,196,0.1);
+  background: rgba(59,130,246,0.05);
+  border: 1px solid rgba(59,130,246,0.1);
   color: var(--accent);
   animation: af-float-icon 3s ease-in-out infinite;
   transition: all var(--transition);
 }
 .af-empty:hover .af-empty-icon {
-  background: rgba(0,245,196,0.08);
-  border-color: rgba(0,245,196,0.2);
+  background: rgba(59,130,246,0.08);
+  border-color: rgba(59,130,246,0.2);
   transform: scale(1.05);
 }
 .af-empty-title {

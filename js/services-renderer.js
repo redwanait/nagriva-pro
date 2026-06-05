@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Service Detail Renderer
+   Nagriva — Service Detail Renderer
    services-renderer.js
    Renders dynamic service data into the service.html template
    ════════════════════════════════════════════════════════ */
@@ -105,7 +105,7 @@ window.ServicesRenderer = (function () {
 
     if (mainImg) {
       mainImg.src = data.gallery[0];
-      mainImg.alt = 'Gallery image 1';
+      mainImg.alt = data.title ? data.title + ' showcase' : 'Gallery image 1';
     }
 
     if (thumbsContainer) {
@@ -115,7 +115,7 @@ window.ServicesRenderer = (function () {
         div.className = 'fv-gallery-thumb' + (i === 0 ? ' active' : '');
         var img = document.createElement('img');
         img.src = src;
-        img.alt = 'Thumb ' + (i + 1);
+        img.alt = (data.title ? data.title + ' ' : '') + 'gallery image ' + (i + 1);
         img.setAttribute('data-src', src);
         div.appendChild(img);
         thumbsContainer.appendChild(div);
@@ -209,7 +209,7 @@ window.ServicesRenderer = (function () {
           featuresHtml += '<li class="fv-feature-item">' + ICONS.check + f + '</li>';
         });
 
-        var orderHref = 'submit-order.html?service=' + data.slug;
+        var orderHref = '/pages/submit-order.html?service=' + data.slug;
         if (i > 0) orderHref += '&pkg=' + i;
 
         div.innerHTML =
@@ -222,7 +222,7 @@ window.ServicesRenderer = (function () {
           '<div class="fv-features-title">What\'s Included</div>' +
           '<ul class="fv-features">' + featuresHtml + '</ul>' +
           '<a href="' + orderHref + '" class="fv-cta fv-cta--primary" data-service="cta-primary">Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>' +
-          '<a href="../index.html#contact" class="fv-cta fv-cta--secondary">Contact Us</a>' +
+          '<a href="/pages/contact.html" class="fv-cta fv-cta--secondary">Contact Us</a>' +
           '<div class="fv-sidebar-trust">' + ICONS.lock + 'Secure checkout &bull; Money-back guarantee</div>';
 
         dataContainer.appendChild(div);
@@ -244,7 +244,7 @@ window.ServicesRenderer = (function () {
 
   function renderCTA(data) {
     var primaryLinks = qsa('[data-service="cta-primary"]');
-    var orderHref = 'submit-order.html?service=' + data.slug;
+    var orderHref = '/pages/submit-order.html?service=' + data.slug;
     primaryLinks.forEach(function (link) {
       link.href = orderHref;
     });

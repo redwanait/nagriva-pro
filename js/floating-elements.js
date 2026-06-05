@@ -123,8 +123,8 @@
       </div>\n\
     </div>\n\
     <div class="chat-fab-wrapper">\n\
-      <button class="chat-fab" id="globalChatFab" aria-label="NAGRIVA Assistant">\n\
-        <img src="https://i.ibb.co/QLzsBT8/1-removebg-preview.png" alt="NAGRIVA" />\n\
+      <button class="chat-fab" id="globalChatFab" aria-label="Nagriva Assistant">\n\
+        <img src="../assets/images/branding/chat-fab-icon.webp" alt="Nagriva" />\n\
       </button>\n\
       <span class="chat-fab-badge" id="globalChatBadge"></span>\n\
     </div>\n\
@@ -137,7 +137,7 @@
       <div class="support-modal-header-left">\n\
         <div class="support-modal-avatar">&#x2726;</div>\n\
         <div class="support-modal-header-info">\n\
-          <h4>NAGRIVA Support</h4>\n\
+          <h4>Nagriva Support</h4>\n\
           <span class="support-status"><span class="chat-status-dot"></span> Online</span>\n\
         </div>\n\
       </div>\n\
@@ -323,7 +323,7 @@
       if (list) list.innerHTML = NAGRIVA_EmptyState.render({
         icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
         title: 'No messages yet',
-        description: 'Start a conversation with NAGRIVA Support',
+        description: 'Start a conversation with Nagriva Support',
         variant: 'inline'
       });
     } else {
@@ -426,7 +426,7 @@
           }
 
           if (document.visibilityState !== 'visible' && typeof NAGRIVA_Toast !== 'undefined') {
-            NAGRIVA_Toast.info('NAGRIVA Support',
+            NAGRIVA_Toast.info('Nagriva Support',
               msg.message.length > 60 ? msg.message.substring(0, 60) + '...' : msg.message,
               { duration: 5000 }
             );

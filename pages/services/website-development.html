@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Development — Nagriva</title>
+  <meta name="description" content="Professional website development services. Custom dentist websites, lawyer websites, and car rental websites. Modern, responsive, and conversion-optimized." />
+  <meta property="og:title" content="Website Development — Nagriva" />
+  <meta property="og:description" content="Custom website development for dentists, lawyers, and car rental businesses. Modern design, fast performance, SEO optimized." />
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png" />
+  <meta property="og:url" content="https://nagriva.com/pages/services/website-development" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Nagriva" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Website Development — Nagriva" />
+  <meta name="twitter:description" content="Custom website development for dentists, lawyers, and car rental businesses." />
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png" />
+  <link rel="canonical" href="https://nagriva.com/pages/services/website-development.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/service-detail.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="/css/performance.css" />
+  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+  <style>
+    .fv-main .fv-section:last-of-type { margin-bottom: 0; }
+  </style>
+</head>
+<body data-page="services">
+<script>
+  window.openNagrivaChat = window.openNagrivaChat || function() {
+    window.__chatRequested = true;
+    if (!document.querySelector('script[src$="chatbot.js"]')) {
+      var s = document.createElement('script');
+      s.src = '/js/chatbot.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  };
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJP8X4CBH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NJP8X4CBH2');
+</script>
+
+  <div id="navbar-container"></div>
+
+  <!-- ══════════════════════════ AUTH MODAL ══════════════════════════ -->
+  <div class="auth-overlay" id="authOverlay" style="display:none">
+    <div class="auth-backdrop" id="authBackdrop"></div>
+    <div class="auth-ambient auth-ambient-1"></div>
+    <div class="auth-ambient auth-ambient-2"></div>
+    <div class="auth-modal" id="authModal">
+      <div class="auth-modal-glow"></div>
+      <button class="auth-close-btn" id="authCloseBtn" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="auth-inner" id="authInner">
+
+        <!-- Header -->
+        <div class="auth-header">
+          <div class="auth-logo">
+            <img src="/assets/images/branding/nagriva-logo.png" alt="Nagriva" />
+            <span class="auth-logo-text">Nagriva</span>
+          </div>
+          <h3 class="auth-title" id="authTitle">Welcome Back</h3>
+          <p class="auth-subtitle" id="authSubtitle">Sign in to access your dashboard and manage your projects.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="signin">Sign In</button>
+          <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+
+        <!-- ═══ SIGN IN FORM ═══ -->
+        <form class="auth-form active" id="signInForm" autocomplete="off">
+          <div class="auth-message" id="signinMessage"></div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <span>Password</span>
+              <button type="button" class="auth-forgot-link">Forgot password?</button>
+            </label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" class="auth-input" placeholder="Enter your password" autocomplete="current-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-form-options">
+            <label class="auth-remember">
+              <input type="checkbox" checked />
+              <span class="auth-remember-label">Remember me</span>
+            </label>
+          </div>
+
+          <button type="submit" class="auth-submit" id="signinSubmit">
+            <span class="auth-btn-text">Sign In</span>
+            <span class="auth-btn-spinner"></span>
+            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="auth-divider">
+            <span class="auth-divider-line"></span>
+            <span class="auth-divider-text">or continue with</span>
+            <span class="auth-divider-line"></span>
+          </div>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="auth-social-btn github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-form-footer">
+            <span>Don't have an account? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signup">Create one</button>
+          </div>
+        </form>
+
+        <!-- ═══ SIGN UP FORM ═══ -->
+        <form class="auth-form" id="signUpForm" autocomplete="off">
+          <div class="auth-message" id="signupMessage"></div>
+
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" class="auth-input" name="name" placeholder="John Doe" autocomplete="name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" class="auth-input" name="password" placeholder="Create a password" autocomplete="new-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              <input type="password" class="auth-input" name="confirmPassword" placeholder="Confirm your password" autocomplete="new-password" />
+              <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-pw-strength" id="passwordStrength">
+            <div class="auth-pw-strength-bar">
+              <div class="auth-pw-strength-fill" id="passwordStrengthFill"></div>
+            </div>
+            <span class="auth-pw-strength-label" id="passwordStrengthLabel">Strength</span>
+          </div>
+
+          <label class="auth-terms">
+            <input type="checkbox" id="termsCheckbox" />
+            <span class="auth-terms-label">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span>
+          </label>
+
+          <button type="submit" class="auth-submit" id="signupSubmit">
+            <span class="auth-btn-text">Create Account</span>
+            <span class="auth-btn-spinner"></span>
+            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="auth-divider">
+            <span class="auth-divider-line"></span>
+            <span class="auth-divider-text">or continue with</span>
+            <span class="auth-divider-line"></span>
+          </div>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="auth-social-btn github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-form-footer">
+            <span>Already have an account? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signin">Sign in</button>
+          </div>
+        </form>
+
+        <!-- ═══ FORGOT PASSWORD FORM ═══ -->
+        <form class="auth-form" id="forgotForm" autocomplete="off">
+          <div class="auth-message" id="forgotMessage"></div>
+
+          <div id="forgotFormWrap">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <div class="auth-input-wrap">
+                <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <button type="submit" class="auth-submit" id="forgotSubmit">
+              <span class="auth-btn-text">Send Reset Link</span>
+              <span class="auth-btn-spinner"></span>
+              <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="auth-forgot-success" id="forgotSuccess">
+            <div class="auth-forgot-success-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <p class="auth-forgot-success-text">Check your email for a password reset link. If it doesn't appear within a few minutes, check your spam folder.</p>
+          </div>
+
+          <div class="auth-form-footer">
+            <span>Remember your password? </span>
+            <button type="button" class="auth-switch-tab" data-tab="signin">Back to sign in</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="fv-page">
+    <div class="fv-container">
+      <!-- ═══ MAIN CONTENT ═══ -->
+      <div class="fv-main">
+
+        <!-- Breadcrumb -->
+        <nav class="fv-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="fv-bc-sep">/</span>
+          <a href="/pages/services.html">Services</a>
+          <span class="fv-bc-sep">/</span>
+          <span class="fv-bc-current">Website Development</span>
+        </nav>
+
+        <!-- Title -->
+        <div class="fv-header">
+          <h1 class="fv-title">Website Development</h1>
+          <div class="fv-highlights">
+            <span class="fv-highlight-tag">Custom Design</span>
+            <span class="fv-highlight-tag">Responsive</span>
+            <span class="fv-highlight-tag">SEO Optimized</span>
+            <span class="fv-highlight-tag">Fast Loading</span>
+          </div>
+        </div>
+
+        <!-- Seller Trust -->
+        <div class="fv-seller">
+          <div class="fv-seller-avatar">N</div>
+          <div class="fv-seller-info">
+            <span class="fv-seller-name">Nagriva Agency</span>
+            <span class="fv-seller-label">Premium Digital Agency</span>
+          </div>
+          <span class="fv-seller-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Top-Rated Agency
+          </span>
+        </div>
+
+        <!-- Reviews -->
+        <div class="fv-reviews">
+          <div class="fv-reviews-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="fv-reviews-rating">4.9</span>
+          <span class="fv-reviews-count">(128 reviews)</span>
+          <div class="fv-reviews-bar">
+            <div class="fv-reviews-bar-fill" style="width:98%"></div>
+          </div>
+          <span class="fv-reviews-score">98% Satisfaction</span>
+        </div>
+
+        <!-- Gallery -->
+        <div class="fv-gallery">
+          <div class="fv-gallery-main">
+            <img src="/assets/images/services/website-development.png" alt="Website development showcase" />
+            <button class="fv-gallery-nav fv-gallery-prev" aria-label="Previous image">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="fv-gallery-nav fv-gallery-next" aria-label="Next image">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <div class="fv-gallery-dots"></div>
+          </div>
+          <div class="fv-gallery-thumbs">
+            <div class="fv-gallery-thumb active" data-src="/assets/images/services/website-development.png">
+              <img src="/assets/images/services/website-development.png" alt="Website showcase 1" />
+            </div>
+            <div class="fv-gallery-thumb" data-src="/assets/images/services/website-development.png">
+              <img src="/assets/images/services/website-development.png" alt="Website showcase 2" />
+            </div>
+            <div class="fv-gallery-thumb" data-src="/assets/images/services/website-development.png">
+              <img src="/assets/images/services/website-development.png" alt="Website showcase 3" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="fv-section">
+          <h2 class="fv-section-title">About This Service</h2>
+          <div class="fv-description">
+            <p>We build custom, high-performance websites that are tailored to your industry. Every site is crafted with modern design principles, optimized for search engines, and built to convert visitors into customers.</p>
+            <p>Our expertise spans multiple industries, with specialized solutions for <strong>dentist websites</strong>, <strong>lawyer websites</strong>, and <strong>car rental websites</strong>. Each niche comes with its own unique requirements, and we have the experience to deliver results.</p>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="fv-section">
+          <h2 class="fv-section-title">What You Get</h2>
+          <div class="fv-benefits-grid">
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+              </div>
+              <div class="fv-benefit-text">
+                <h4>Custom Design</h4>
+                <p>Tailored layouts and branding that sets you apart from competitors.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="fv-benefit-text">
+                <h4>Mobile-First</h4>
+                <p>Fully responsive across all devices and screen sizes.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+              <div class="fv-benefit-text">
+                <h4>SEO Optimized</h4>
+                <p>Built-in SEO best practices to help you rank higher.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="fv-benefit-text">
+                <h4>Fast Performance</h4>
+                <p>Optimized code and assets for lightning-fast load times.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/><polyline points="16 16 12 12 8 16"/></svg>
+              </div>
+              <div class="fv-benefit-text">
+                <h4>CMS Integration</h4>
+                <p>Easy content management so you can update your site anytime.</p>
+              </div>
+            </div>
+            <div class="fv-benefit-item">
+              <div class="fv-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="fv-benefit-text">
+                <h4>Ongoing Support</h4>
+                <p>Continuous maintenance and support after launch.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results / Trust Metrics -->
+        <div class="fv-section">
+          <h2 class="fv-section-title">Results By The Numbers</h2>
+          <div class="fv-results-grid">
+            <div class="fv-result-item">
+              <div class="fv-result-num">50+</div>
+              <div class="fv-result-label">Websites Delivered</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">4.9</div>
+              <div class="fv-result-label">Avg. Client Rating</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">98%</div>
+              <div class="fv-result-label">Client Satisfaction</div>
+            </div>
+            <div class="fv-result-item">
+              <div class="fv-result-num">14d</div>
+              <div class="fv-result-label">Avg. Delivery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Process / Workflow -->
+        <div class="fv-section">
+          <h2 class="fv-section-title">Our Process</h2>
+          <div class="fv-process">
+            <div class="fv-process-step">
+              <div class="fv-process-num">01</div>
+              <div class="fv-process-content">
+                <h4>Discovery</h4>
+                <p>We dive deep into your business, target audience, and goals to create a strategic blueprint for your website.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">02</div>
+              <div class="fv-process-content">
+                <h4>Design</h4>
+                <p>Our designers craft pixel-perfect mockups that align with your brand identity and conversion goals.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">03</div>
+              <div class="fv-process-content">
+                <h4>Development</h4>
+                <p>We build using modern frameworks and best practices, ensuring fast performance and scalability.</p>
+              </div>
+            </div>
+            <div class="fv-process-step">
+              <div class="fv-process-num">04</div>
+              <div class="fv-process-content">
+                <h4>Launch</h4>
+                <p>After rigorous testing and your approval, we deploy your site and provide ongoing support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="fv-section">
+          <h2 class="fv-section-title">Frequently Asked Questions</h2>
+          <div class="fv-faq">
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                How long does it take to build a website?
+                <svg class="fv-faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer"><p>Timelines vary based on complexity. A standard website takes 7-14 days, while more advanced projects may require 21+ days. We provide a clear timeline during our discovery call.</p></div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                Do you offer custom designs for specific industries?
+                <svg class="fv-faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer"><p>Yes. We specialize in dentist, lawyer, and car rental websites, each with industry-specific features and compliance requirements.</p></div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                Will my website be mobile-friendly?
+                <svg class="fv-faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer"><p>Absolutely. Every site we build is mobile-first and fully responsive across all devices, from phones to desktops.</p></div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                Do you include SEO optimization?
+                <svg class="fv-faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer"><p>Yes, all our websites come with built-in SEO optimization including meta tags, structured data, fast loading, and mobile optimization.</p></div>
+            </div>
+            <div class="fv-faq-item">
+              <button class="fv-faq-question">
+                What happens after the website is launched?
+                <svg class="fv-faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="fv-faq-answer"><p>We provide ongoing maintenance and support. You'll also have access to our CMS to manage content yourself, or we can handle updates for you.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Services -->
+        <div class="fv-section fv-related">
+          <h2 class="fv-section-title">Related Services</h2>
+          <div class="fv-related-grid">
+            <a href="/pages/services/ecommerce-stores.html" class="fv-related-card">
+              <div class="fv-related-card-img">
+                <img src="/assets/images/services/ecommerce-stores.png" alt="E-Commerce Stores" loading="lazy" />
+              </div>
+              <div class="fv-related-card-body">
+                <h3 class="fv-related-card-title">E-Commerce Stores</h3>
+                <p class="fv-related-card-desc">Full-featured online stores with payment integration and inventory management.</p>
+                <span class="fv-related-card-action">
+                  View Service
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </a>
+            <a href="/pages/services/blog-creation.html" class="fv-related-card">
+              <div class="fv-related-card-img">
+                <img src="/assets/images/services/blog-creation.png" alt="Blog Creation" loading="lazy" />
+              </div>
+              <div class="fv-related-card-body">
+                <h3 class="fv-related-card-title">Blog Creation</h3>
+                <p class="fv-related-card-desc">Custom blogs designed for content marketing and audience engagement.</p>
+                <span class="fv-related-card-action">
+                  View Service
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </a>
+            <a href="/pages/services/video-editing.html" class="fv-related-card">
+              <div class="fv-related-card-img">
+                <img src="/assets/images/services/video-editing.png" alt="Video Editing" loading="lazy" />
+              </div>
+              <div class="fv-related-card-body">
+                <h3 class="fv-related-card-title">Video Editing</h3>
+                <p class="fv-related-card-desc">Professional video editing with motion graphics and color grading.</p>
+                <span class="fv-related-card-action">
+                  View Service
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ═══ SIDEBAR ═══ -->
+      <aside class="fv-sidebar">
+        <div class="fv-sidebar-inner">
+          <!-- Package Tabs -->
+          <div class="fv-pkg-tabs">
+            <button class="fv-pkg-tab" data-pkg="basic">Basic</button>
+            <button class="fv-pkg-tab active" data-pkg="standard">Standard</button>
+            <button class="fv-pkg-tab" data-pkg="premium">Premium</button>
+          </div>
+
+          <!-- Basic Package -->
+          <div class="fv-pkg-data" data-pkg="basic" style="display:none">
+            <div class="fv-pkg-name">Basic Website</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">999</span>
+            </div>
+            <div class="fv-meta">
+              <span class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                7 Days Delivery
+              </span>
+              <span class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                2 Revisions
+              </span>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <div class="fv-features">
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 1-Page Website</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Responsive Design</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Contact Form</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Basic SEO</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 1 Revision</span>
+            </div>
+          </div>
+
+          <!-- Standard Package (Default) -->
+          <div class="fv-pkg-data" data-pkg="standard">
+            <div class="fv-pkg-name">Standard Website</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">2,499</span>
+            </div>
+            <div class="fv-meta">
+              <span class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                14 Days Delivery
+              </span>
+              <span class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                Unlimited Revisions
+              </span>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <div class="fv-features">
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 5 Pages</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Custom Design</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Mobile &amp; Tablet Optimized</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Full SEO Setup</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> CMS Integration</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Performance Optimization</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 30 Days Support</span>
+            </div>
+          </div>
+
+          <!-- Premium Package -->
+          <div class="fv-pkg-data" data-pkg="premium" style="display:none">
+            <div class="fv-pkg-name">Premium Website</div>
+            <div class="fv-price">
+              <span class="fv-price-currency">$</span>
+              <span class="fv-price-amount">4,999</span>
+            </div>
+            <div class="fv-meta">
+              <span class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                21 Days Delivery
+              </span>
+              <span class="fv-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                Unlimited Revisions
+              </span>
+            </div>
+            <div class="fv-features-title">What's Included</div>
+            <div class="fv-features">
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Pages</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Premium Custom Design</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced Animations</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Custom Functionality</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Priority Support</span>
+              <span class="fv-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 90 Days Maintenance</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <a href="/pages/submit-order?service=website_development" class="fv-cta fv-cta--primary">
+            Start Project
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://calendly.com/nagriva/discovery" target="_blank" rel="noopener" class="fv-cta fv-cta--secondary">
+            Book Free Call
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </a>
+
+          <!-- Trust -->
+          <div class="fv-sidebar-trust">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Secure checkout with Nagriva Guarantee
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Trust Bar -->
+    <div class="fv-container">
+      <div class="fv-trust-bar">
+        <span class="fv-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure Payment
+        </span>
+        <span class="fv-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Fast Turnaround
+        </span>
+        <span class="fv-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Premium Quality
+        </span>
+        <span class="fv-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          24/7 Support
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/services-api.js"></script>
+  <script defer src="/js/toast.js"></script>
+  <script defer src="/js/service-detail.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/user-avatar.js"></script>
+  <script defer src="/js/navbar.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <script defer src="/js/cookie-consent.js"></script>
+  <script defer src="/js/floating-elements.js"></script>
+  <div id="cookie-consent-container"></div>
+</body>
+</html>

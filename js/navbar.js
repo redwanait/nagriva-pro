@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Navbar Include (Reusable Component)
+   Nagriva — Navbar Include (Reusable Component)
    ════════════════════════════════════════════════════════ */
 ;(function () {
   'use strict'

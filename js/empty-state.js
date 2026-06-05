@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════
-   NAGRIVA — Premium Empty State Renderer v2
+   Nagriva — Premium Empty State Renderer v2
    Lucide SVG icons · Glassmorphism · Glow effects
    Usage: NAGRIVA_EmptyState.render({ ... })
    ════════════════════════════════════════════ */

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Client Details Drawer
+   Nagriva — Client Details Drawer
    client-drawer.js
    ════════════════════════════════════════════════════════ */
 
@@ -61,8 +61,8 @@ const NAGRIVA_ClientDrawer = (() => {
       in_progress: { dot: 'blue',   cls: 'in_progress', label: 'In Progress' },
       review:      { dot: 'orange', cls: 'pending',     label: 'Review' },
       revision:    { dot: 'orange', cls: 'revision',    label: 'Revision' },
-      delivered:   { dot: 'teal',   cls: 'completed',   label: 'Delivered' },
-      completed:   { dot: 'teal',   cls: 'completed',   label: 'Completed' },
+      delivered:   { dot: 'blue',   cls: 'completed',   label: 'Delivered' },
+      completed:   { dot: 'blue',   cls: 'completed',   label: 'Completed' },
       cancelled:   { dot: 'gray',   cls: 'neutral',     label: 'Cancelled' }
     };
     return map[status] || { dot: 'gray', cls: 'neutral', label: status || 'Unknown' };
@@ -185,7 +185,7 @@ const NAGRIVA_ClientDrawer = (() => {
     const recentOrders = _orders.slice(0, 5);
 
     const avatarHtml = avatarUrl
-      ? `<img src="${escapeHtml(avatarUrl)}" alt="" class="cd-avatar-img" />`
+      ? `<img src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(name)}" class="cd-avatar-img" />`
       : `<div class="td-avatar ${getAvatarClass(name)}" style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:var(--bg);">${getInitials(name)}</div>`;
 
     const ordersHtml = recentOrders.length > 0

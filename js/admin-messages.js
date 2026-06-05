@@ -385,7 +385,7 @@ const NAGRIVA_Messages = (() => {
               if (activeSupportConvId === cid) renderActiveSupportConversation(cid);
 
               if (document.visibilityState !== 'visible' && typeof NAGRIVA_Toast !== 'undefined') {
-                var sender = fullMsg.sender_role === 'client' ? (fullMsg._profileName || 'Client') : 'NAGRIVA Support';
+                var sender = fullMsg.sender_role === 'client' ? (fullMsg._profileName || 'Client') : 'Nagriva Support';
                 NAGRIVA_Toast.info('New Message from ' + sender,
                   fullMsg.message.length > 60 ? fullMsg.message.substring(0, 60) + '...' : fullMsg.message,
                   { duration: 5000 }

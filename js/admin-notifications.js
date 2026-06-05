@@ -39,20 +39,20 @@ const NAGRIVA_Notifications = (() => {
 
   function getTypeColor(type) {
     const map = {
-      project_update: 'teal',
+      project_update: 'blue',
       message: 'blue',
       payment: 'green',
       report: 'orange',
       milestone: 'purple',
       file: 'orange',
       status: 'blue',
-      invoice_created: 'teal',
+      invoice_created: 'blue',
       invoice_updated: 'blue',
       invoice_paid: 'green',
       invoice_overdue: 'orange',
       invoice_deleted: 'gray'
     };
-    return map[type] || 'teal';
+    return map[type] || 'blue';
   }
 
   function escapeHtml(str) {

@@ -3,7 +3,7 @@ const NAGRIVA_AdminInvoices = (() => {
 
   const STATUS = {
     pending:  { label: 'Pending',  color: '#f59e0b', cls: 'pending' },
-    paid:     { label: 'Paid',     color: '#10b981', cls: 'paid' },
+    paid:     { label: 'Paid',     color: '#2563EB', cls: 'paid' },
     overdue:  { label: 'Overdue',  color: '#ef4444', cls: 'overdue' },
     cancelled:{ label: 'Cancelled',color: '#71717a', cls: 'cancelled' },
     refunded: { label: 'Refunded', color: '#818cf8', cls: 'refunded' },

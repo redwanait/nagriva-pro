@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Auth Route Guard (Reusable Module)
+   Nagriva — Auth Route Guard (Reusable Module)
    Protects pages from unauthenticated access.
    Prevents Flash of Unauthenticated Content (FOUC).
    Works with the blocking loading overlay in <head>.
@@ -70,7 +70,7 @@ var NagrivaAuthGuard = (function() {
       el.innerHTML = window.NAGRIVA_Skeleton.pageShell();
     } else {
       el.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;';
-      el.innerHTML = '<div style="width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite;"></div><span style="color:#a1a1aa;font-size:.85rem;font-family:\'DM Sans\',sans-serif;">Checking access...</span><style>@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>';
+      el.innerHTML = '<div style="width:40px;height:40px;border:2px solid rgba(59,130,246,0.1);border-top-color:#3b82f6;border-radius:50%;animation:nagGuardSpin .8s linear infinite;"></div><span style="color:#a1a1aa;font-size:.85rem;font-family:\'DM Sans\',sans-serif;">Checking access...</span><style>@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>';
     }
     return el;
   }

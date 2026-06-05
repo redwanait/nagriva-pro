@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Centralized Avatar System
+   Nagriva — Centralized Avatar System
    Handles avatar display, upload, and sync across the
    entire website. Auto-initializes on every page.
    ════════════════════════════════════════════════════════ */
@@ -87,7 +87,7 @@ const ProfileAvatar = (() => {
         container.textContent = getInitials(displayName);
       };
       img.src = url;
-      img.alt = '';
+      img.alt = displayName;
       img.loading = 'lazy';
       container.appendChild(img);
     } else {

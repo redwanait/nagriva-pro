@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — GDPR Cookie Consent Manager
+   Nagriva — GDPR Cookie Consent Manager
    ════════════════════════════════════════════════════════ */
 ;(function () {
   'use strict'
@@ -287,7 +287,7 @@
         }
       })
       .catch(function (err) {
-        console.error('[NAGRIVA] Cookie consent load error:', err)
+        console.error('[Nagriva] Cookie consent load error:', err)
       })
   }
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings — NAGRIVA</title>
-  <meta name="description" content="Your NAGRIVA settings." />
+  <title>Settings — Nagriva</title>
+  <meta name="description" content="Your Nagriva settings." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -34,7 +34,7 @@
       font-size: 0.9rem; color: var(--white); outline: none;
       transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
     }
-    .sf-input:focus { border-color: rgba(0,245,196,0.3); background: rgba(0,245,196,0.02); }
+    .sf-input:focus { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.02); }
     .sf-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
@@ -42,7 +42,7 @@
       align-self: flex-start; border: none;
     }
     .sf-btn.primary { color: var(--bg); background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-    .sf-btn.primary:hover { box-shadow: 0 0 30px rgba(0,245,196,0.25); transform: translateY(-1px); }
+    .sf-btn.primary:hover { box-shadow: 0 0 30px rgba(59,130,246,0.25); transform: translateY(-1px); }
     .sf-btn.primary:active { transform: translateY(0) scale(0.98); }
     .sf-btn.secondary { color: var(--gray); border: 1px solid var(--border2); background: none; }
     .sf-btn.secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
@@ -52,7 +52,7 @@
     .sf-btn.loading .sf-btn-text { display: none; }
     .sf-btn.loading .sf-btn-spinner { display: inline-block; }
     .sf-btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(4,4,4,0.15); border-top-color: #040404; border-radius: 50%; animation: auth-spin 0.6s linear infinite; }
-    .sf-success { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(0,245,196,0.05); border: 1px solid rgba(0,245,196,0.12); color: rgba(255,255,255,0.7); display: none; }
+    .sf-success { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.12); color: rgba(255,255,255,0.7); display: none; }
     .sf-success.show { display: block; animation: auth-msg-in 0.35s ease; }
     .sf-error { padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; background: rgba(255,80,80,0.05); border: 1px solid rgba(255,80,80,0.12); color: rgba(255,255,255,0.7); display: none; }
     .sf-error.show { display: block; animation: auth-msg-in 0.35s ease; }
@@ -74,7 +74,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(0,245,196,0.1);border-top-color:#00f5c4;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(59,130,246,0.1);border-top-color:#3b82f6;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
 </head>
 <body data-page="settings">
   <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
@@ -178,11 +178,11 @@
 
   <div id="footer-container"></div>
         <div class="footer-bottom-logos">
-          <img src="https://i.ibb.co/GfQ5pZXy/visa.png" alt="Visa" loading="lazy" />
-          <img src="https://i.ibb.co/hR7WDPDQ/card.png" alt="Mastercard" loading="lazy" />
-          <img src="https://i.ibb.co/Z6HcFfY9/apple-pay.png" alt="Apple Pay" loading="lazy" />
-          <img src="https://i.ibb.co/gbBV4fBg/google-pay.png" alt="Google Pay" loading="lazy" />
-          <img src="https://i.ibb.co/qFMfm6g9/stripe.png" alt="Stripe" loading="lazy" />
+          <img src="../assets/images/misc/visa.webp" alt="Visa" loading="lazy" />
+          <img src="../assets/images/misc/mastercard.webp" alt="Mastercard" loading="lazy" />
+          <img src="../assets/images/misc/apple-pay.webp" alt="Apple Pay" loading="lazy" />
+          <img src="../assets/images/misc/google-pay.webp" alt="Google Pay" loading="lazy" />
+          <img src="../assets/images/misc/stripe.webp" alt="Stripe" loading="lazy" />
         </div>
       </div>
     </div>

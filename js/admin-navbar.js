@@ -63,7 +63,7 @@ const NAGRIVA_AdminNavbar = (() => {
     } else if (user && user.user_metadata && user.user_metadata.avatar_url) {
       avatarUrl = user.user_metadata.avatar_url;
     } else {
-      avatarUrl = 'https://i.ibb.co/KzBBXjwt/Whats-App-Image-2026-01-29-at-11-43-13-3.jpg';
+      avatarUrl = '../assets/images/team/nagriva-team.webp';
     }
 
     setAvatar('adminAvatar', 'adminAvatarImg', 'adminAvatarInitials', avatarUrl, displayName);
@@ -393,7 +393,7 @@ const NAGRIVA_AdminNavbar = (() => {
         var card = notifCard.closest('.card');
         if (card) {
           card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          card.style.borderColor = 'rgba(0,245,196,0.3)';
+          card.style.borderColor = 'rgba(59,130,246,0.3)';
           setTimeout(function() { card.style.borderColor = ''; }, 2000);
         }
       }

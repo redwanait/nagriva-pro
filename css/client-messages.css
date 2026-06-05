@@ -60,7 +60,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(0,245,196,0.5);
+  background: rgba(59,130,246,0.5);
   animation: cmTypingDot 1.2s ease-in-out infinite;
 }
 
@@ -114,7 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: radial-gradient(ellipse at top, rgba(0,245,196,0.01) 0%, transparent 60%);
+  background: radial-gradient(ellipse at top, rgba(59,130,246,0.01) 0%, transparent 60%);
 }
 
 .track-chat-messages::-webkit-scrollbar { width: 4px; }
@@ -149,7 +149,7 @@
 }
 
 .track-chat-message.admin .chat-message-avatar {
-  background: linear-gradient(135deg, #4facfe, #007aff);
+  background: linear-gradient(135deg, #3b82f6, #007aff);
 }
 
 .track-chat-message .chat-message-bubble {
@@ -165,8 +165,8 @@
 }
 
 .track-chat-message.client .chat-message-bubble {
-  background: linear-gradient(135deg, rgba(0,245,196,0.08), rgba(0,245,196,0.03));
-  border-color: rgba(0,245,196,0.12);
+  background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(59,130,246,0.03));
+  border-color: rgba(59,130,246,0.12);
   color: var(--white);
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 4px;
@@ -211,9 +211,9 @@
 }
 
 .track-chat-input:focus {
-  border-color: rgba(0,245,196,0.3);
-  box-shadow: 0 0 0 1px rgba(0,245,196,0.06);
-  background: rgba(0,245,196,0.02);
+  border-color: rgba(59,130,246,0.3);
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.06);
+  background: rgba(59,130,246,0.02);
 }
 
 .track-chat-input::placeholder { color: var(--gray2); }
@@ -234,7 +234,7 @@
 }
 
 .track-chat-send:hover {
-  box-shadow: 0 0 30px rgba(0,245,196,0.3);
+  box-shadow: 0 0 30px rgba(59,130,246,0.3);
   transform: translateY(-1px);
 }
 
@@ -284,8 +284,8 @@
   background: rgba(8,12,12,0.96);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(0,245,196,0.1);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(0,245,196,0.05);
+  border: 1px solid rgba(59,130,246,0.1);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(59,130,246,0.05);
   display: flex;
   flex-direction: column;
   transform-origin: bottom right;
@@ -391,7 +391,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: radial-gradient(ellipse at top, rgba(0,245,196,0.01) 0%, transparent 60%);
+  background: radial-gradient(ellipse at top, rgba(59,130,246,0.01) 0%, transparent 60%);
 }
 
 .support-modal-chat .track-chat-input-area {
@@ -448,7 +448,7 @@
 }
 
 .support-modal-auth .btn-primary:hover {
-  box-shadow: 0 0 30px rgba(0,245,196,0.3);
+  box-shadow: 0 0 30px rgba(59,130,246,0.3);
   transform: translateY(-1px);
 }
 
@@ -485,7 +485,7 @@
 }
 
 .support-modal-footer input:focus {
-  border-color: rgba(0,245,196,0.25);
+  border-color: rgba(59,130,246,0.25);
 }
 
 .support-modal-footer input::placeholder {
@@ -510,7 +510,7 @@
 
 .support-modal-footer .support-send-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(0,245,196,0.25);
+  box-shadow: 0 0 20px rgba(59,130,246,0.25);
 }
 
 .support-modal-footer .support-send-btn:active {

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Service Detail Page Interactivity
+   Nagriva — Service Detail Page Interactivity
    service-detail.js
 ════════════════════════════════════════════════════════ */
 

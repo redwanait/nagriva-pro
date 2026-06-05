@@ -207,7 +207,7 @@
       if (result.error) throw result.error;
       showSuccessState();
     }).catch(function (err) {
-      console.error('[NAGRIVA] Application submission error:', err);
+      console.error('[Nagriva] Application submission error:', err);
       var message = 'Something went wrong while submitting your application. Please try again later.';
 
       if (err && err.message) {
@@ -229,7 +229,7 @@
   function init() {
     if (!form) return;
     if (!supabase) {
-      console.error('[NAGRIVA] Supabase client not found. Make sure supabase-config.js is loaded before careers-apply.js');
+      console.error('[Nagriva] Supabase client not found. Make sure supabase-config.js is loaded before careers-apply.js');
       return;
     }
 

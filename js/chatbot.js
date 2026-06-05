@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — AI Chatbot Widget
+   Nagriva — AI Chatbot Widget
    chatbot.js
 ════════════════════════════════════════════════════════ */
 
@@ -18,7 +18,7 @@
       <div class="chat-header-left">
         <div class="chat-avatar">✦</div>
         <div class="chat-header-info">
-          <h4>NAGRIVA AI</h4>
+          <h4>Nagriva AI</h4>
           <span class="chat-status"><span class="chat-status-dot"></span> Online</span>
         </div>
       </div>
@@ -229,7 +229,7 @@
       return data.reply;
     } catch (err) {
 
-      return "Thanks for reaching out! I'm having a brief technical moment. Please try again, or <a href=\"#contact\" style=\"color:#00f5c4;text-decoration:underline\">book a free call</a> and we'll get right back to you.";
+      return "Thanks for reaching out! I'm having a brief technical moment. Please try again, or <a href=\"#contact\" style=\"color:#3b82f6;text-decoration:underline\">book a free call</a> and we'll get right back to you.";
     }
   }
 

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Premium Notifications Dropdown
+   Nagriva — Premium Notifications Dropdown
    notifications-dropdown.js
    Standalone component — injects into navbar
 ════════════════════════════════════════════════════════ */
@@ -76,7 +76,7 @@ const NAGRIVA_NotificationsDropdown = (() => {
       invoice_overdue: 'orange',
       invoice_deleted: 'gray'
     };
-    return map[type] || 'teal';
+    return map[type] || 'blue';
   }
 
   /* ─── Inject bell into navbar ─── */

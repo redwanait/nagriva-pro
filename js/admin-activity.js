@@ -20,17 +20,17 @@ const NAGRIVA_Activity = (() => {
 
   function getActionDot(action) {
     const map = {
-      order_created: 'teal',
+      order_created: 'blue',
       status_changed: 'blue',
       message_sent: 'purple',
       file_uploaded: 'orange',
-      project_completed: 'teal',
+      project_completed: 'blue',
       project_added: 'blue',
       manager_assigned: 'orange',
       profile_updated: 'gray',
-      invoice_created: 'teal',
+      invoice_created: 'blue',
       invoice_updated: 'blue',
-      invoice_paid: 'green',
+      invoice_paid: 'blue',
       invoice_deleted: 'gray'
     };
     return map[action] || 'gray';

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Premium Reusable Skeleton Loader
+   Nagriva — Premium Reusable Skeleton Loader
    skeleton.js
    Unified skeleton generator for all pages
    ════════════════════════════════════════════════════════ */
@@ -143,10 +143,9 @@ window.NAGRIVA_Skeleton = (function () {
       html += '<div class="sk-service-card">' +
         '<div class="sk-service-img sk-shimmer"></div>' +
         '<div class="sk-service-body">' +
-        '<div class="sk-service-icon sk-shimmer"></div>' +
         '<div class="sk-service-line sk-shimmer w70"></div>' +
-        '<div class="sk-service-line sk-shimmer w100"></div>' +
         '<div class="sk-service-line sk-shimmer w50"></div>' +
+        '<div class="sk-service-line sk-shimmer w40"></div>' +
         '</div>' +
         '</div>';
     }

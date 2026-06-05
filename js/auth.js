@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Supabase Authentication
+   Nagriva — Supabase Authentication
    Handles sign in, sign up, forgot password, session
    management, and UI state for the auth system.
    ════════════════════════════════════════════════════════ */
@@ -335,7 +335,7 @@ const NagrivaAuth = (() => {
 
     const titles = {
       signin: ['Welcome Back', 'Sign in to access your dashboard and manage your projects.'],
-      signup: ['Create Your Account', 'Join NAGRIVA and start growing your digital presence.'],
+      signup: ['Create Your Account', 'Join Nagriva and start growing your digital presence.'],
       forgot: ['Reset Password', 'Enter your email and we\'ll send you a reset link.']
     };
     const titleEl = document.getElementById('authTitle');
@@ -930,7 +930,7 @@ const NagrivaAuth = (() => {
   };
 })();
 
-console.log('[NAGRIVA] Auth module loaded');
+console.log('[Nagriva] Auth module loaded');
 
 /* ─── Auto-initialize on DOM ready ─── */
 if (document.readyState === 'loading') {

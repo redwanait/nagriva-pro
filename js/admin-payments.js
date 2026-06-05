@@ -1,7 +1,7 @@
 const NAGRIVA_Payments = (() => {
   const STATUS = {
     pending:  { label: 'Pending',  color: '#f59e0b', cls: 'pending' },
-    paid:     { label: 'Paid',     color: '#10b981', cls: 'paid' },
+    paid:     { label: 'Paid',     color: '#2563EB', cls: 'paid' },
     refunded: { label: 'Refunded', color: '#818cf8', cls: 'refunded' },
     failed:   { label: 'Failed',   color: '#ef4444', cls: 'failed' },
   };
@@ -286,9 +286,9 @@ const NAGRIVA_Payments = (() => {
 
     const ctx = canvas.getContext('2d');
     const grad = ctx.createLinearGradient(0, 0, 0, 230);
-    grad.addColorStop(0, 'rgba(0,245,196,0.2)');
-    grad.addColorStop(0.5, 'rgba(0,245,196,0.06)');
-    grad.addColorStop(1, 'rgba(0,245,196,0)');
+    grad.addColorStop(0, 'rgba(59,130,246,0.2)');
+    grad.addColorStop(0.5, 'rgba(59,130,246,0.06)');
+    grad.addColorStop(1, 'rgba(59,130,246,0)');
 
     new Chart(ctx, {
       type: 'bar',
@@ -298,7 +298,7 @@ const NAGRIVA_Payments = (() => {
           label: 'Revenue',
           data: data,
           backgroundColor: grad,
-          borderColor: '#00f5c4',
+          borderColor: '#3b82f6',
           borderWidth: 2,
           borderRadius: 6,
           borderSkipped: false,

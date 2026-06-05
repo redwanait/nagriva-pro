@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Onboarding Flow
+   Nagriva — Onboarding Flow
    7-step wizard for first-time users after signup
    ════════════════════════════════════════════════════════ */
 

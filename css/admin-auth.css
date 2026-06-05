@@ -29,7 +29,7 @@
 .admin-auth-spinner-ring {
   width: 42px;
   height: 42px;
-  border: 2.5px solid rgba(0, 245, 196, 0.1);
+  border: 2.5px solid rgba(59, 130, 246, 0.1);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: adminSpin 0.75s linear infinite;
@@ -100,7 +100,7 @@
 }
 
 .admin-unauthorized-btn:hover {
-  box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(0, 245, 196, 0.15);
+  box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(59, 130, 246, 0.15);
   transform: translateY(-2px);
 }
 
@@ -136,7 +136,7 @@
 .admin-content-loading .spinner {
   width: 36px;
   height: 36px;
-  border: 2px solid rgba(0, 245, 196, 0.1);
+  border: 2px solid rgba(59, 130, 246, 0.1);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: adminSpin 0.75s linear infinite;

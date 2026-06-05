@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Compact CMS Settings (Accordion + Search)
+   Nagriva — Compact CMS Settings (Accordion + Search)
    ════════════════════════════════════════════════════════ */
 
 'use strict';
@@ -24,8 +24,8 @@ const NAGRIVA_AdminSettings = (() => {
     { value: 'de', label: 'Deutsch' }, { value: 'pt', label: 'Português' }
   ];
   const THEME_PRESETS = [
-    { id: 'dark-emerald', name: 'Emerald', colors: ['#00f5c4', '#00c2a8'] },
-    { id: 'dark-cyan', name: 'Cyan', colors: ['#06b6d4', '#0891b2'] },
+    { id: 'dark-blue', name: 'Blue', colors: ['#3b82f6', '#2563EB'] },
+    { id: 'dark-ocean', name: 'Ocean', colors: ['#2563EB', '#1d4ed8'] },
     { id: 'dark-purple', name: 'Royal', colors: ['#a78bfa', '#7c3aed'] },
     { id: 'dark-gold', name: 'Gold', colors: ['#fbbf24', '#d97706'] },
     { id: 'dark-rose', name: 'Rose', colors: ['#fb7185', '#e11d48'] }
@@ -276,7 +276,7 @@ const NAGRIVA_AdminSettings = (() => {
   function setPreview(id, url) {
     const container = el(id);
     if (!container) return;
-    container.innerHTML = url ? '<img src="' + url + '" alt="preview" loading="lazy" />' : '<i class="fas fa-image placeholder-icon"></i>';
+    container.innerHTML = url ? '<img src="' + url + '" alt="OG image preview" loading="lazy" />' : '<i class="fas fa-image placeholder-icon"></i>';
   }
 
   function setUploadName(id, name) {
@@ -395,8 +395,8 @@ const NAGRIVA_AdminSettings = (() => {
 
   /* ─── Branding preview ─── */
   function applyBrandingPreview() {
-    const primary = val('branding','primary_color') || '#00f5c4';
-    const secondary = val('branding','secondary_color') || '#00c2a8';
+    const primary = val('branding','primary_color') || '#3b82f6';
+    const secondary = val('branding','secondary_color') || '#2563EB';
     document.documentElement.style.setProperty('--accent-preview', primary);
     document.documentElement.style.setProperty('--accent2-preview', secondary);
   }
@@ -421,8 +421,8 @@ const NAGRIVA_AdminSettings = (() => {
 
   /* ─── Populate Branding ─── */
   function populateBranding() {
-    const primary = val('branding','primary_color') || '#00f5c4';
-    const secondary = val('branding','secondary_color') || '#00c2a8';
+    const primary = val('branding','primary_color') || '#3b82f6';
+    const secondary = val('branding','secondary_color') || '#2563EB';
     if (el('set_primary_color')) {
       el('set_primary_color').value = primary;
       el('set_secondary_color').value = secondary;
@@ -469,7 +469,7 @@ const NAGRIVA_AdminSettings = (() => {
     const container = document.querySelector('.cms-theme-grid');
     if (!container) return;
     container.innerHTML = '';
-    const activePreset = val('branding','theme_preset') || 'dark-emerald';
+    const activePreset = val('branding','theme_preset') || 'dark-blue';
     THEME_PRESETS.forEach(p => {
       const div = document.createElement('div');
       div.className = 'cms-theme-card' + (p.id === activePreset ? ' active' : '');
@@ -983,7 +983,7 @@ const NAGRIVA_AdminSettings = (() => {
   function updatePreview() {
     const preview = document.getElementById('previewContent');
     if (!preview) return;
-    const companyName = val('general','company_name') || 'NAGRIVA';
+    const companyName = val('general','company_name') || 'Nagriva';
     const navItems = {};
     const heroContent = {};
     const contentKeys = ['nav.home','nav.services','nav.about','nav.contact','hero.badge','hero.title','hero.subtitle','hero.cta'];

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NAGRIVA — Services API Layer
+   Nagriva — Services API Layer
    services-api.js
    Fetches service data from Supabase with TTL cache + fallback
    ════════════════════════════════════════════════════════ */
@@ -12,52 +12,36 @@ window.ServicesAPI = (function () {
   var _allCache = null;
 
   var SERVICE_PHOTOS = {
-    'web-design': {
-      image: '/assets/images/services/web-design-1.jpg',
+    'website-development': {
+      image: '/assets/images/services/website-development.png',
       gallery: [
-        '../assets/images/services/web-design-1.jpg',
-        '../assets/images/services/web-design-2.jpg',
-        '../assets/images/services/web-design-3.jpg'
+        '/assets/images/services/website-development.png',
+        '/assets/images/services/website-development.png',
+        '/assets/images/services/website-development.png'
       ]
     },
-    seo: {
-      image: '/assets/images/services/seo-1.jpg',
+    'ecommerce-stores': {
+      image: '/assets/images/services/ecommerce-stores.png',
       gallery: [
-        '../assets/images/services/seo-1.jpg',
-        '../assets/images/services/seo-2.jpg',
-        '../assets/images/services/seo-3.jpg'
+        '/assets/images/services/ecommerce-stores.png',
+        '/assets/images/services/ecommerce-stores.png',
+        '/assets/images/services/ecommerce-stores.png'
       ]
     },
-    branding: {
-      image: '/assets/images/services/branding-1.jpg',
+    'blog-creation': {
+      image: '/assets/images/services/blog-creation.png',
       gallery: [
-        '../assets/images/services/branding-1.jpg',
-        '../assets/images/services/branding-2.jpg',
-        '../assets/images/services/branding-3.jpg'
+        '/assets/images/services/blog-creation.png',
+        '/assets/images/services/blog-creation.png',
+        '/assets/images/services/blog-creation.png'
       ]
     },
-    'ai-automation': {
-      image: '/assets/images/services/ai-automation-1.jpg',
+    'video-editing': {
+      image: '/assets/images/services/video-editing.png',
       gallery: [
-        '../assets/images/services/ai-automation-1.jpg',
-        '../assets/images/services/ai-automation-2.jpg',
-        '../assets/images/services/ai-automation-3.jpg'
-      ]
-    },
-    'social-media': {
-      image: '/assets/images/services/social-media-1.jpg',
-      gallery: [
-        '../assets/images/services/social-media-1.jpg',
-        '../assets/images/services/social-media-2.jpg',
-        '../assets/images/services/social-media-3.jpg'
-      ]
-    },
-    strategy: {
-      image: '/assets/images/services/performance-marketing-1.jpg',
-      gallery: [
-        '../assets/images/services/performance-marketing-1.jpg',
-        '../assets/images/services/performance-marketing-2.jpg',
-        '../assets/images/services/performance-marketing-3.jpg'
+        '/assets/images/services/video-editing.png',
+        '/assets/images/services/video-editing.png',
+        '/assets/images/services/video-editing.png'
       ]
     }
   };
@@ -68,50 +52,52 @@ window.ServicesAPI = (function () {
 
   var FALLBACK = {
 
-    'web-design': {
-      slug: 'web-design',
-      category: 'Web Design',
-      pageTitle: 'Web Design — NAGRIVA',
-      metaDescription: 'Premium web design that converts visitors into customers. Modern, fast, and conversion-optimized websites.',
-      breadcrumbCurrent: 'Web Design',
-      title: 'Premium Web Design That <span class="sp-text-glow">Converts</span>',
-      highlights: ['Conversion-Optimized', 'Lightning Fast', 'Mobile-First', 'SEO-Ready'],
-      sellerName: 'NAGRIVA Agency',
-      sellerLabel: 'Premium Digital Agency \u2022 Top 1% of Designers',
+    'website-development': {
+      slug: 'website-development',
+      category: 'Web Development',
+      cardEmoji: '&#127760;',
+      cardFeatures: ['Dentist Websites', 'Lawyer Websites', 'Car Rental Websites'],
+      pageTitle: 'Website Development — Nagriva',
+      metaDescription: 'Professional website development for dentists, lawyers, and car rental companies. Modern, conversion-optimized sites that generate leads.',
+      breadcrumbCurrent: 'Website Development',
+      title: 'Website Development That <span class="sp-text-glow">Generates</span> Clients',
+      highlights: ['Dentist Websites', 'Lawyer Websites', 'Car Rental Websites', 'Conversion Optimized'],
+      sellerName: 'Nagriva Agency',
+      sellerLabel: 'Premium Digital Agency \u2022 Industry-Focused',
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS['web-design'].image,
-      gallery: SERVICE_PHOTOS['web-design'].gallery,
-      description: '<p>We build premium, conversion-optimized websites that look stunning and drive measurable growth for your business. Every pixel serves a purpose, every interaction is intentional, and every page is built to convert.</p><p>From sleek landing pages to complex web applications, our designs are crafted to elevate your brand, engage your audience, and deliver results \u2014 fast.</p>',
+      image: SERVICE_PHOTOS['website-development'].image,
+      gallery: SERVICE_PHOTOS['website-development'].gallery,
+      description: '<p>We build high-converting professional websites tailored specifically for dentists, lawyers, and car rental companies. Your website is your most powerful marketing tool \u2014 we make sure it works as hard as you do.</p><p>From appointment-driven dental practices to client-seeking law firms and booking-focused car rental agencies, every site we build is strategically designed to attract your ideal clients and convert them into paying customers.</p>',
       benefits: [
-        { icon: 'layers', title: 'Conversion Focused', text: 'Data-backed design decisions that turn visitors into customers.' },
-        { icon: 'file', title: 'Blazing Fast', text: 'Optimized code, lazy loading, and modern performance practices.' },
-        { icon: 'image', title: 'Premium Aesthetic', text: 'Modern, luxurious design that positions your brand at the top.' },
-        { icon: 'users', title: 'SEO Optimized', text: 'Built with search engines in mind from day one.' }
+        { icon: 'layers', title: 'Industry-Specific Design', text: 'Tailored layouts and messaging that resonate with your specific audience and drive conversions.' },
+        { icon: 'clock', title: 'Fast Turnaround', text: 'Professional websites delivered in as little as 2 weeks without compromising on quality.' },
+        { icon: 'file', title: 'SEO Optimized', text: 'Built with on-page SEO best practices so local clients find you first on Google.' },
+        { icon: 'users', title: 'Mobile Responsive', text: 'Flawless performance across all devices \u2014 phones, tablets, and desktops.' }
       ],
       process: [
-        { num: '01', title: 'Discovery & Strategy', text: 'We dive deep into your brand, audience, and goals to craft a strategy that drives results.' },
-        { num: '02', title: 'Design & Prototype', text: 'High-fidelity designs with interactive prototypes that bring your vision to life.' },
-        { num: '03', title: 'Development & Testing', text: 'Clean, performant code with rigorous testing across devices and browsers.' },
-        { num: '04', title: 'Launch & Optimize', text: 'Seamless deployment with ongoing optimization and performance monitoring.' }
+        { num: '01', title: 'Discovery Call', text: 'We learn about your practice or business, your goals, and what makes you unique.' },
+        { num: '02', title: 'Design & Draft', text: 'We create a custom design tailored to your industry and brand identity.' },
+        { num: '03', title: 'Development & Content', text: 'We build your site with clean code and populate it with compelling content.' },
+        { num: '04', title: 'Launch & Grow', text: 'We deploy your site and set up the tools you need to keep growing.' }
       ],
       faq: [
-        { question: 'How long does a typical web design project take?', answer: 'Timelines vary based on scope. A standard 5-page website takes 3-4 weeks, while more complex projects can take 6-8 weeks. We\'ll provide a clear timeline during our discovery call.' },
-        { question: 'What is included in the price?', answer: 'Each package includes custom design, development, content population, basic SEO setup, and 2 rounds of revisions. Higher-tier packages include additional pages, CMS integration, and dedicated support.' },
-        { question: 'Do you offer ongoing maintenance?', answer: 'Yes, we offer monthly maintenance packages to keep your website secure, updated, and performing at its best. Contact us for custom maintenance plans.' },
-        { question: 'Will my website be mobile-friendly?', answer: 'Absolutely. Every website we build is fully responsive and optimized for all devices \u2014 from mobile phones to large desktop screens. We test thoroughly across 20+ device configurations.' }
+        { question: 'Do you specialize in specific industries?', answer: 'Yes. We focus on three industries: dental practices, law firms, and car rental companies. This specialization allows us to create websites that speak directly to your clients and meet the specific needs of your profession.' },
+        { question: 'How long does it take to build my website?', answer: 'Most professional websites are completed within 2-4 weeks, depending on complexity and content readiness. We\'ll provide a clear timeline during our discovery call.' },
+        { question: 'Will my website rank on Google?', answer: 'Absolutely. Every website we build includes on-page SEO optimization, local SEO setup, and Google Business Profile integration to help you rank higher in local searches.' },
+        { question: 'Do you offer maintenance after launch?', answer: 'Yes, we offer monthly maintenance plans to keep your site secure, updated, and optimized. We also provide ongoing support for content updates and changes.' }
       ],
       results: [
-        { num: '50+', label: 'Webships Delivered' },
-        { num: '4.2x', label: 'Avg. Conversion Lift' },
+        { num: '50+', label: 'Websites Built' },
+        { num: '3.2x', label: 'Avg. Lead Increase' },
         { num: '98%', label: 'Client Satisfaction' },
-        { num: '2.8x', label: 'Faster Load Times' }
+        { num: '2 Weeks', label: 'Avg. Delivery Time' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '3,499', delivery: '4-Week Delivery', revisions: '2 Revisions', features: ['5-Page Custom Website', '2 Rounds of Revisions', 'Basic SEO Setup', 'Mobile Responsive', 'Contact Form Integration'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '6,499', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['10-Page Custom Website', 'Unlimited Revisions', 'CMS Integration', 'Full SEO Optimization', 'Analytics Dashboard', '30-Day Support'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '12K', delivery: '8-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Pages & Features', 'Complete Design System', 'Advanced Animations', 'Dedicated Project Manager', 'Priority Support', '90-Day Maintenance'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '2,499', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['5-Page Professional Website', 'Mobile Responsive Design', 'Contact Form Integration', 'Basic SEO Setup', 'Google Business Profile Setup'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '4,499', delivery: '3-Week Delivery', revisions: 'Unlimited Revisions', features: ['8-Page Website', 'Unlimited Revisions', 'CMS Integration', 'Full SEO Optimization', 'Analytics Dashboard', '30-Day Support'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '7,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Multi-Page Site', 'Booking/Appointment System', 'Advanced SEO Package', 'Dedicated Project Manager', 'Priority Support', '90-Day Maintenance'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
@@ -122,271 +108,169 @@ window.ServicesAPI = (function () {
       ]
     },
 
-    seo: {
-      slug: 'seo',
-      category: 'SEO',
-      pageTitle: 'SEO Optimization — NAGRIVA',
-      metaDescription: 'Data-driven SEO that drives organic growth. Rank higher, get more traffic, and convert better.',
-      breadcrumbCurrent: 'SEO',
-      title: 'SEO Optimization That <span class="sp-text-glow">Dominates</span> Search',
-      highlights: ['Data-Driven', 'White Hat', 'Industry Leading', 'ROI Focused'],
-      sellerName: 'NAGRIVA Agency',
-      sellerLabel: 'Premium Digital Agency \u2022 Top 1% of Designers',
+    'ecommerce-stores': {
+      slug: 'ecommerce-stores',
+      category: 'E-Commerce',
+      cardEmoji: '&#128722;',
+      cardFeatures: ['WooCommerce Stores', 'Product Setup', 'Mobile Responsive Design'],
+      pageTitle: 'E-Commerce Development — Nagriva',
+      metaDescription: 'WordPress + WooCommerce e-commerce stores with product setup and mobile responsive design. Launch your online store fast.',
+      breadcrumbCurrent: 'E-Commerce Development',
+      title: 'E-Commerce Stores That <span class="sp-text-glow">Sell</span>',
+      highlights: ['WordPress + WooCommerce', 'Product Setup', 'Mobile Responsive', 'Ready to Launch'],
+      sellerName: 'Nagriva Agency',
+      sellerLabel: 'Premium Digital Agency \u2022 E-Commerce Experts',
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS.seo.image,
-      gallery: SERVICE_PHOTOS.seo.gallery,
-      description: '<p>We deliver data-driven SEO strategies that propel your website to the top of search results. Our white-hat approach combines technical expertise, content excellence, and proven link-building tactics to drive sustainable organic growth.</p><p>From comprehensive site audits to ongoing performance monitoring, every tactic is meticulously executed to maximize your ROI and establish your brand as an authority in your industry.</p>',
+      image: SERVICE_PHOTOS['ecommerce-stores'].image,
+      gallery: SERVICE_PHOTOS['ecommerce-stores'].gallery,
+      description: '<p>We build professional e-commerce stores using WordPress and WooCommerce that are ready to accept orders from day one. From product setup to payment gateway integration, we handle everything so you can focus on selling.</p><p>Our stores are designed to be intuitive for your customers and easy for you to manage. Every store is fully mobile responsive, SEO optimized, and built to convert browsers into buyers.</p>',
       benefits: [
-        { icon: 'layers', title: 'Data-Driven Strategy', text: 'Comprehensive keyword research and competitive analysis backed by real search data.' },
-        { icon: 'file', title: 'Technical SEO', text: 'Site structure optimization, speed enhancements, schema markup, and mobile-first indexing.' },
-        { icon: 'image', title: 'Content Optimization', text: 'Authority-building content crafted to rank, engage, and convert your target audience.' },
-        { icon: 'clock', title: 'Performance Tracking', text: 'Transparent monthly reports with actionable insights and real-time ranking dashboards.' }
+        { icon: 'layers', title: 'WordPress + WooCommerce', text: 'The most powerful and flexible e-commerce platform with complete control over your store.' },
+        { icon: 'clock', title: 'Product Setup Included', text: 'We configure your products, categories, pricing, and images so your store is ready to sell.' },
+        { icon: 'image', title: 'Mobile Responsive Design', text: 'Beautiful shopping experiences on every device \u2014 mobile, tablet, and desktop.' },
+        { icon: 'users', title: 'Payment & Shipping Ready', text: 'Integrated payment gateways, shipping options, and tax configurations out of the box.' }
       ],
       process: [
-        { num: '01', title: 'Audit & Research', text: 'In-depth site analysis, competitor benchmarking, and high-value keyword discovery to build your roadmap.' },
-        { num: '02', title: 'Strategy & Planning', text: 'Custom SEO roadmap with prioritized actions, content calendar, and technical optimization plan.' },
-        { num: '03', title: 'Implementation', text: 'On-page optimization, technical fixes, content creation, and quality link building executed with precision.' },
-        { num: '04', title: 'Monitoring & Optimization', text: 'Continuous tracking, A/B testing, and iterative improvements to maximize your rankings and ROI.' }
+        { num: '01', title: 'Store Strategy', text: 'We define your product catalog structure, target audience, and store goals.' },
+        { num: '02', title: 'Design & Setup', text: 'Custom store design with product pages, categories, and seamless navigation.' },
+        { num: '03', title: 'Product Configuration', text: 'Full product setup with descriptions, images, pricing, inventory, and variations.' },
+        { num: '04', title: 'Launch & Test', text: 'Payment testing, checkout optimization, and full quality assurance before going live.' }
       ],
       faq: [
-        { question: 'How long does a typical SEO engagement take?', answer: 'SEO engagements typically run 3-6 months for meaningful results. We recommend a minimum of 6 months to build sustainable organic growth.' },
-        { question: 'What deliverables can I expect?', answer: 'You\'ll receive a detailed SEO audit, keyword research report, on-page optimizations, content production, monthly performance reports, and a live ranking dashboard.' },
-        { question: 'How long until I see results?', answer: 'Initial improvements can be seen within 4-6 weeks, with significant ranking gains in 3-6 months. SEO compounds over time.' },
-        { question: 'Do you provide regular reporting?', answer: 'Yes, you\'ll get monthly performance reports covering rankings, organic traffic, conversions, and key KPIs. Higher tiers include bi-weekly check-ins.' }
+        { question: 'Why WooCommerce over other platforms?', answer: 'WooCommerce gives you complete ownership of your store, unlimited customization options, no transaction fees, and full control over your data. It scales from a few products to thousands.' },
+        { question: 'How many products can you set up?', answer: 'Our packages include setup for up to 20 products (Starter), 50 products (Growth), and unlimited products (Scale). Additional products can be added at a per-product rate.' },
+        { question: 'Do you integrate payment gateways?', answer: 'Yes, we integrate all major payment gateways including Stripe, PayPal, Square, and bank transfers. We also configure tax settings and shipping zones.' },
+        { question: 'Can I manage the store myself after launch?', answer: 'Absolutely. We provide a walkthrough of the WooCommerce dashboard and ongoing support. The Growth and Scale packages include training sessions for your team.' }
       ],
       results: [
-        { num: '150+', label: 'Clients Served' },
-        { num: '4.8x', label: 'Avg. Traffic Growth' },
-        { num: '96%', label: 'Client Retention' },
-        { num: '150+', label: 'Clients Served' }
+        { num: '30+', label: 'Stores Launched' },
+        { num: '4.5x', label: 'Avg. Revenue Growth' },
+        { num: '96%', label: 'Client Satisfaction' },
+        { num: '99.9%', label: 'Uptime Guarantee' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '1,999', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['Keyword Research', 'On-Page SEO', '10 Keywords', 'Monthly Report', '2 Revisions'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '3,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full SEO Audit', 'On-Page + Off-Page SEO', '25 Keywords', 'Content Strategy', '4 Reports', 'Unlimited Revisions'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '7,999', delivery: '8-Week Delivery', revisions: 'Unlimited Revisions', features: ['Enterprise SEO Strategy', 'Technical + Local SEO', '50+ Keywords', 'Content Production', 'Dedicated Manager', 'Priority Support'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '3,499', delivery: '3-Week Delivery', revisions: '2 Revisions', features: ['WooCommerce Store Setup', 'Up to 20 Products', 'Mobile Responsive Design', 'Payment Gateway Setup', 'Basic SEO Setup'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '5,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Store Design', 'Up to 50 Products', 'Unlimited Revisions', 'Advanced SEO', 'Analytics Dashboard', 'Team Training'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '9,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Custom Store Build', 'Unlimited Products', 'Inventory Management', 'Email Marketing Setup', 'Dedicated Manager', '90-Day Support'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
-        { icon: 'star', text: '96% Retention' },
+        { icon: 'star', text: '96% Satisfaction' },
         { icon: 'clockMeta', text: 'On-Time Delivery' },
         { icon: 'users', text: 'Dedicated Support' },
         { icon: 'shield', text: 'Money-Back Guarantee' }
       ]
     },
 
-    branding: {
-      slug: 'branding',
-      category: 'Branding',
-      pageTitle: 'Brand Identity — NAGRIVA',
-      metaDescription: 'Strategic brand identity design that makes you memorable, credible, and impossible to ignore.',
-      breadcrumbCurrent: 'Brand Identity',
-      title: 'Brand Identity That <span class="sp-text-glow">Stands Out</span>',
-      highlights: ['Strategic', 'Memorable', 'Premium', 'Consistent'],
-      sellerName: 'NAGRIVA Agency',
-      sellerLabel: 'Premium Digital Agency \u2022 Top 1% of Designers',
-      rating: 4.9,
-      reviewCount: 128,
-      satisfaction: 98,
-      image: SERVICE_PHOTOS.branding.image,
-      gallery: SERVICE_PHOTOS.branding.gallery,
-      description: '<p>We craft strategic brand identities that make you unforgettable. From logos and color palettes to complete visual systems and brand guidelines \u2014 every element is designed to communicate your unique value, connect with your audience, and set you apart from the competition.</p><p>Whether you\'re launching a new brand or evolving an existing one, our comprehensive approach ensures consistency, credibility, and impact across every touchpoint.</p>',
-      benefits: [
-        { icon: 'clockAlt', title: 'Strategic Positioning', text: 'We define your brand\'s unique market position to differentiate and dominate.' },
-        { icon: 'layers', title: 'Visual Identity System', text: 'Cohesive logos, colors, typography, and imagery that tell your story.' },
-        { icon: 'fileText', title: 'Brand Guidelines', text: 'Comprehensive rules to ensure consistency across every touchpoint.' },
-        { icon: 'usersPlus', title: 'Market Differentiation', text: 'Stand out with a distinct brand personality that customers remember and trust.' }
-      ],
-      process: [
-        { num: '01', title: 'Discovery & Research', text: 'We dive into your industry, competitors, audience, and vision to uncover your brand\'s core identity.' },
-        { num: '02', title: 'Brand Strategy', text: 'Define positioning, messaging, personality, and visual direction that aligns with your goals.' },
-        { num: '03', title: 'Visual Identity', text: 'Craft logo, color palette, typography, and visual system with precision and purpose.' },
-        { num: '04', title: 'Brand Guidelines', text: 'Deliver a comprehensive guide for consistent brand recognition across all channels.' }
-      ],
-      faq: [
-        { question: 'How long does a branding project take?', answer: 'Starter packages take approximately 2 weeks, Growth packages 4 weeks, and Scale packages 6 weeks. We provide a detailed timeline during your discovery call.' },
-        { question: 'What\'s included in the branding packages?', answer: 'Every package includes logo design, color palette, typography, and brand board. Higher tiers add guidelines, stationery, iconography, brand strategy, and dedicated management.' },
-        { question: 'What\'s the difference between a logo and a full brand identity?', answer: 'A logo is one element of your brand. Full brand identity includes logos, color systems, typography, imagery style, brand voice, guidelines, and applications.' },
-        { question: 'How many revisions can I request?', answer: 'Starter packages include 2 rounds of revisions. Growth and Scale packages include unlimited revisions until you\'re satisfied.' }
-      ],
-      results: [
-        { num: '80+', label: 'Brands Built' },
-        { num: '3.5x', label: 'Brand Recognition' },
-        { num: '94%', label: 'Client Retention' },
-        { num: '4.9', label: 'Star Avg. Rating' }
-      ],
-      packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '2,499', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['Logo Design', 'Color Palette', 'Typography', 'Brand Board', '2 Concepts'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '4,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Identity Package', 'Logo + Variations', 'Brand Guidelines', 'Stationery', '4 Concepts', 'Unlimited Revisions'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '8,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Complete Brand System', 'Guidelines Book', 'Brand Strategy', 'Iconography', 'Web Assets', 'Dedicated Manager + Priority Support'], popular: false }
-      ],
-      trustItems: [
-        { icon: 'lock', text: 'Secure Payment' },
-        { icon: 'star', text: '94% Retention' },
-        { icon: 'clockMeta', text: 'On-Time Delivery' },
-        { icon: 'users', text: 'Dedicated Support' },
-        { icon: 'shield', text: 'Money-Back Guarantee' }
-      ]
-    },
-
-    'ai-automation': {
-      slug: 'ai-automation',
-      category: 'Automation',
-      pageTitle: 'AI Automation — NAGRIVA',
-      metaDescription: 'AI-powered automation that streamlines your business. Save time, reduce costs, and scale faster with intelligent workflows.',
-      breadcrumbCurrent: 'AI Automation',
-      title: 'AI Automation That <span class="sp-text-glow">Transforms</span> Workflows',
-      highlights: ['Smart Automation', 'Custom AI', 'Scalable', 'Future-Ready'],
-      sellerName: 'NAGRIVA Agency',
-      sellerLabel: 'Premium Digital Agency \u2022 Top 1% of Designers',
-      rating: 4.9,
-      reviewCount: 128,
-      satisfaction: 98,
-      image: SERVICE_PHOTOS['ai-automation'].image,
-      gallery: SERVICE_PHOTOS['ai-automation'].gallery,
-      description: '<p>We build intelligent AI automation systems that eliminate repetitive tasks, streamline complex workflows, and unlock new levels of efficiency for your business. From custom AI agents to enterprise-grade pipelines, every solution is designed to scale with you.</p><p>Whether you need to automate data processing, integrate smart chatbots, or build a fully autonomous operational layer \u2014 our AI engineers deliver future-ready systems that drive real results.</p>',
-      benefits: [
-        { icon: 'clockAlt', title: 'Workflow Automation', text: 'End-to-end automation that connects your tools and eliminates manual busywork.' },
-        { icon: 'layers', title: 'Intelligent Processing', text: 'AI-powered data extraction, classification, and decision-making at scale.' },
-        { icon: 'search', title: 'Custom Integrations', text: 'Seamless API connections to your existing stack \u2014 CRM, ERP, email, and more.' },
-        { icon: 'users', title: '24/7 Operation', text: 'Your automation runs around the clock \u2014 no breaks, no downtime, no limits.' }
-      ],
-      process: [
-        { num: '01', title: 'Process Analysis', text: 'Map current operations, identify bottlenecks, and pinpoint high-impact automation opportunities.' },
-        { num: '02', title: 'Solution Design', text: 'Architecture blueprints, workflow diagrams, and AI model selection tailored to your needs.' },
-        { num: '03', title: 'Implementation', text: 'Rapid build and integration with rigorous testing at every stage of development.' },
-        { num: '04', title: 'Training & Scale', text: 'Team onboarding, performance monitoring, and iterative optimization for maximum impact.' }
-      ],
-      faq: [
-        { question: 'How do you integrate AI into existing workflows?', answer: 'We conduct a deep audit of your current processes, then design custom AI pipelines that connect seamlessly via APIs to your existing tools.' },
-        { question: 'Is my data secure with your AI systems?', answer: 'Enterprise-grade encryption, role-based access control, and GDPR/SOC 2 compliance. Your data never leaves your infrastructure unless configured.' },
-        { question: 'Do you build custom AI or use templates?', answer: 'Every solution is custom-built for your specific use case, tailored to your unique business requirements and challenges.' },
-        { question: 'What kind of support do you provide after launch?', answer: 'Comprehensive training, documentation, and a dedicated support channel. Higher tiers include ongoing monitoring and 24/7 priority support.' }
-      ],
-      results: [
-        { num: '60+', label: 'Automations Delivered' },
-        { num: '12x', label: 'Efficiency Boost' },
-        { num: '99.9%', label: 'Uptime Guarantee' },
-        { num: '$2M+', label: 'Client Savings' }
-      ],
-      packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '3,999', delivery: '3-Week Delivery', revisions: '2 Revisions', features: ['Process Analysis', 'Basic Automation', '1 Integration', 'Workflow Design', '2 Revisions'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '7,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Multi-Process Automation', '3 Integrations', 'Custom AI Agent', 'Dashboard', 'Training', 'Unlimited Revisions'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '15K', delivery: '10-Week Delivery', revisions: 'Unlimited Revisions', features: ['Enterprise Automation', 'Unlimited Integrations', 'Full AI System', 'Dedicated Infrastructure', '24/7 Support', 'Priority Delivery'], popular: false }
-      ],
-      trustItems: [
-        { icon: 'lock', text: 'Secure Payment' },
-        { icon: 'star', text: '99.9% Uptime' },
-        { icon: 'clockMeta', text: 'On-Time Delivery' },
-        { icon: 'users', text: 'Dedicated Support' },
-        { icon: 'shield', text: 'Money-Back Guarantee' }
-      ]
-    },
-
-    'social-media': {
-      slug: 'social-media',
+    'blog-creation': {
+      slug: 'blog-creation',
       category: 'Content',
-      pageTitle: 'Social Media Growth — NAGRIVA',
-      metaDescription: 'Social media growth that amplifies your brand. Organic and paid strategies to build community, drive engagement, and scale followers.',
-      breadcrumbCurrent: 'Social Media',
-      title: 'Social Media Growth That <span class="sp-text-glow">Amplifies</span> Your Brand',
-      highlights: ['Organic Growth', 'Paid Strategy', 'Content Led', 'Engagement Driven'],
-      sellerName: 'NAGRIVA Agency',
-      sellerLabel: 'Premium Digital Agency \u2022 Top 1% of Designers',
+      cardEmoji: '&#128221;',
+      cardFeatures: ['WordPress Blogs', 'Blogger Blogs', 'SEO Ready Setup'],
+      pageTitle: 'Blog Creation — Nagriva',
+      metaDescription: 'Professional blog creation on WordPress and Blogger. SEO-ready setup with professional design to grow your audience.',
+      breadcrumbCurrent: 'Blog Creation',
+      title: 'Blog Creation That <span class="sp-text-glow">Builds</span> Your Audience',
+      highlights: ['WordPress Blogs', 'Blogger Blogs', 'SEO-Ready Setup', 'Professional Design'],
+      sellerName: 'Nagriva Agency',
+      sellerLabel: 'Premium Digital Agency \u2022 Content Specialists',
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS['social-media'].image,
-      gallery: SERVICE_PHOTOS['social-media'].gallery,
-      description: '<p>We build social media growth systems that amplify your brand\'s voice and drive measurable engagement. From organic content strategies to paid ad campaigns, every move is data-informed and results-driven.</p><p>Whether you\'re launching a new presence or scaling an existing community, our strategies are designed to grow your following, boost engagement, and deliver a real return on your social investment.</p>',
+      image: SERVICE_PHOTOS['blog-creation'].image,
+      gallery: SERVICE_PHOTOS['blog-creation'].gallery,
+      description: '<p>We create professional blogs on WordPress and Blogger that are designed to attract readers, rank on Google, and grow your audience. Whether you\'re a personal brand, a business, or a content creator, we set up everything for success.</p><p>From platform selection and hosting setup to professional design and SEO configuration, we handle the technical heavy lifting so you can focus on writing great content.</p>',
       benefits: [
-        { icon: 'edit', title: 'Content Strategy', text: 'Data-backed content calendars and creative direction tailored to your brand voice.' },
-        { icon: 'users', title: 'Community Management', text: 'Active engagement with your audience to build loyalty and drive conversations.' },
-        { icon: 'image', title: 'Paid Advertising', text: 'Targeted ad campaigns optimized for reach, engagement, and conversions.' },
-        { icon: 'file', title: 'Analytics & Reporting', text: 'Transparent monthly reports with insights and recommendations for continuous growth.' }
+        { icon: 'layers', title: 'Platform Flexibility', text: 'Choose between WordPress (self-hosted) or Blogger \u2014 we\'ll set up and optimize either platform.' },
+        { icon: 'search', title: 'SEO-Ready From Day One', text: 'Pre-configured SEO settings, meta tags, XML sitemaps, and search engine verification.' },
+        { icon: 'image', title: 'Professional Design', text: 'Modern, clean blog design with custom typography, colors, and layout that matches your brand.' },
+        { icon: 'file', title: 'Content Structure', text: 'Organized categories, tags, author profiles, and a content strategy framework to keep you on track.' }
       ],
       process: [
-        { num: '01', title: 'Audit & Strategy', text: 'Analyze current presence, audience, and competitors to build a custom growth roadmap.' },
-        { num: '02', title: 'Content Creation', text: 'High-quality visuals, copy, and media designed to stop the scroll and spark engagement.' },
-        { num: '03', title: 'Community Engagement', text: 'Daily monitoring, replies, and proactive interaction to build a loyal following.' },
-        { num: '04', title: 'Optimize & Scale', text: 'Data-driven optimization and scaling of what works to maximize reach and results.' }
+        { num: '01', title: 'Platform Selection', text: 'We help you choose the right platform based on your goals, budget, and technical comfort.' },
+        { num: '02', title: 'Setup & Configuration', text: 'Domain, hosting, platform installation, and all technical configurations handled for you.' },
+        { num: '03', title: 'Design & Branding', text: 'Custom blog design with your brand colors, logo, typography, and layout preferences.' },
+        { num: '04', title: 'SEO & Launch', text: 'Complete SEO setup, content structure, and launch with ongoing optimization recommendations.' }
       ],
       faq: [
-        { question: 'Which social media platforms do you manage?', answer: 'We manage all major platforms including Instagram, TikTok, LinkedIn, Twitter/X, Facebook, and YouTube, tailored to your brand.' },
-        { question: 'Do you create the content or do I provide it?', answer: 'We handle full content creation including graphics, copywriting, video editing, and motion design. We can also work with your existing assets.' },
-        { question: 'How long before I see results?', answer: 'Measurable engagement growth within 4-6 weeks. Significant follower and conversion growth in 2-3 months.' },
-        { question: 'Do you provide detailed reports?', answer: 'Yes, every package includes a monthly performance report with key metrics, growth trends, content analysis, and recommendations.' }
+        { question: 'Should I choose WordPress or Blogger?', answer: 'WordPress offers more flexibility, ownership, and scalability \u2014 ideal for serious bloggers and businesses. Blogger is simpler and free, great for beginners or hobby bloggers. We\'ll help you decide.' },
+        { question: 'Do you provide hosting for WordPress blogs?', answer: 'We recommend and can set up hosting with trusted providers. Hosting costs are separate from our service fee. We handle the entire setup process for you.' },
+        { question: 'Will my blog be ready to rank on Google?', answer: 'Yes. Every blog we create includes full SEO configuration \u2014 meta tags, keyword optimization, XML sitemaps, Google Search Console setup, and more.' },
+        { question: 'Can you help with content after launch?', answer: 'Absolutely. We offer content strategy sessions, editorial calendar setup, and can connect you with professional writers if needed. Just ask!' }
       ],
       results: [
-        { num: '200+', label: 'Campaigns Run' },
-        { num: '5.6x', label: 'Engagement Rate' },
-        { num: '150K+', label: 'Followers Grown' },
-        { num: '4.2x', label: 'Avg. ROAS' }
+        { num: '40+', label: 'Blogs Created' },
+        { num: '5.2x', label: 'Avg. Traffic Growth' },
+        { num: '97%', label: 'Client Satisfaction' },
+        { num: '2 Weeks', label: 'Avg. Setup Time' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '1,499', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['Content Calendar', '8 Posts/Month', 'Hashtag Strategy', 'Monthly Report', '2 Revisions'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '3,499', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Management', '16 Posts/Month', 'Stories + Reels', 'Community Engagement', 'Paid Ads Setup', 'Unlimited Revisions'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '6,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Complete Growth System', '30+ Posts/Month', 'Full Ad Management', 'Influencer Strategy', 'Dedicated Manager', 'Priority Support'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '1,499', delivery: '1-Week Delivery', revisions: '2 Revisions', features: ['Blog Platform Setup', 'Professional Design', 'Basic SEO Setup', '3 Categories Setup', 'Social Media Integration'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '2,999', delivery: '2-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Blog Creation', 'Custom Branded Design', 'Unlimited Revisions', 'Advanced SEO Setup', 'Email List Integration', 'Content Strategy Session'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '4,999', delivery: '3-Week Delivery', revisions: 'Unlimited Revisions', features: ['Premium Blog Build', 'Complete Brand Identity', 'Custom Features & Plugins', 'Monetization Setup', 'Dedicated Manager', 'Priority Support'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
-        { icon: 'star', text: '5.6x Engagement' },
-        { icon: 'clockMeta', text: 'On-Time Delivery' },
+        { icon: 'star', text: '97% Satisfaction' },
+        { icon: 'clockMeta', text: 'Fast Delivery' },
         { icon: 'users', text: 'Dedicated Support' },
         { icon: 'shield', text: 'Money-Back Guarantee' }
       ]
     },
 
-    strategy: {
-      slug: 'strategy',
-      category: 'Growth',
-      pageTitle: 'Performance Marketing — NAGRIVA',
-      metaDescription: 'Data-driven performance marketing that delivers measurable ROI. Full-funnel campaigns across all channels, optimized for conversions.',
-      breadcrumbCurrent: 'Performance Marketing',
-      title: 'Performance Marketing That <span class="sp-text-glow">Delivers</span> ROI',
-      highlights: ['Data-Driven', 'Full Funnel', 'Multi-Channel', 'ROI Guaranteed'],
-      sellerName: 'NAGRIVA Agency',
-      sellerLabel: 'Premium Digital Agency \u2022 Top 1% of Designers',
+    'video-editing': {
+      slug: 'video-editing',
+      category: 'Video',
+      cardEmoji: '&#127916;',
+      cardFeatures: ['Reels Editing', 'YouTube Shorts', 'Social Media Videos'],
+      pageTitle: 'Video Editing — Nagriva',
+      metaDescription: 'Professional short-form video editing for social media. Reels, Shorts, and TikTok videos that stop the scroll and grow your audience.',
+      breadcrumbCurrent: 'Video Editing',
+      title: 'Video Editing That <span class="sp-text-glow">Stops</span> the Scroll',
+      highlights: ['Short-Form Editing', 'Social Media Content', 'Reels & Shorts', 'TikTok Videos'],
+      sellerName: 'Nagriva Agency',
+      sellerLabel: 'Premium Digital Agency \u2022 Video Specialists',
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS.strategy.image,
-      gallery: SERVICE_PHOTOS.strategy.gallery,
-      description: '<p>We build data-driven performance marketing campaigns that deliver measurable ROI across every channel. From paid media strategy to conversion optimization, every dollar is tracked, optimized, and scaled for maximum impact.</p><p>Our full-funnel approach ensures your brand reaches the right audience at every stage \u2014 from awareness to conversion \u2014 with real-time analytics driving every decision.</p>',
+      image: SERVICE_PHOTOS['video-editing'].image,
+      gallery: SERVICE_PHOTOS['video-editing'].gallery,
+      description: '<p>We create scroll-stopping short-form videos optimized for social media platforms. From Instagram Reels to YouTube Shorts and TikTok, our edits are designed to capture attention, drive engagement, and grow your following.</p><p>Our video editing service includes professional cuts, transitions, captions, color grading, sound design, and platform-specific optimization so your content performs its best everywhere.</p>',
       benefits: [
-        { icon: 'layers', title: 'Paid Media Strategy', text: 'Strategic ad placements across Google, Meta, LinkedIn, and more for maximum ROI.' },
-        { icon: 'file', title: 'Conversion Optimization', text: 'Landing pages, funnels, and creative refined through continuous A/B testing.' },
-        { icon: 'image', title: 'Multi-Channel Campaigns', text: 'Integrated campaigns across search, social, display, and programmatic channels.' },
-        { icon: 'users', title: 'Real-Time Analytics', text: 'Live dashboards with actionable insights and transparent performance reporting.' }
+        { icon: 'edit', title: 'Short-Form Expertise', text: 'Specialized in Reels, Shorts, and TikTok content that drives engagement and shares.' },
+        { icon: 'clock', title: 'Fast Turnaround', text: 'Most edits delivered within 24-48 hours so you can maintain a consistent posting schedule.' },
+        { icon: 'layers', title: 'Platform Optimized', text: 'Every video is formatted and optimized for each platform\'s unique requirements and algorithm.' },
+        { icon: 'users', title: 'Trend-Aware Editing', text: 'We stay on top of trending audio, effects, and formats to maximize your content\'s reach.' }
       ],
       process: [
-        { num: '01', title: 'Market Research', text: 'In-depth audience analysis, competitor benchmarking, and channel selection for maximum impact.' },
-        { num: '02', title: 'Campaign Strategy', text: 'Data-backed architecture with tailored messaging, budget allocation, and creative direction.' },
-        { num: '03', title: 'Execution & Testing', text: 'Rigorous A/B testing across audiences, creatives, and placements to find winning combinations.' },
-        { num: '04', title: 'Scale & Optimize', text: 'Continuous optimization and budget scaling based on real-time performance and ROAS targets.' }
+        { num: '01', title: 'Content Review', text: 'We review your raw footage, brand guidelines, and content goals to plan the edit.' },
+        { num: '02', title: 'Rough Cut', text: 'First draft with music, transitions, and basic effects aligned with your vision.' },
+        { num: '03', title: 'Refinement', text: 'Fine-tuning with captions, color grading, sound design, and platform-specific adjustments.' },
+        { num: '04', title: 'Final Delivery', text: 'Platform-ready exports delivered in all required formats and aspect ratios.' }
       ],
       faq: [
-        { question: 'Which advertising channels do you work with?', answer: 'Google Ads, Meta (Facebook/Instagram), LinkedIn, TikTok, Pinterest, and programmatic networks.' },
-        { question: 'What is the minimum ad budget required?', answer: 'A minimum monthly ad spend of $2,000 is recommended. Packages start at $2,499 for management fees; ad spend is billed separately.' },
-        { question: 'How do you track and attribute conversions?', answer: 'We use multi-touch attribution models with Google Tag Manager, server-side tracking, and CRM integration.' },
-        { question: 'What does your reporting cadence look like?', answer: 'Weekly performance snapshots and comprehensive monthly reports. Enterprise clients get real-time dashboard access and weekly strategy calls.' }
+        { question: 'What type of videos do you edit?', answer: 'We specialize in short-form content: Instagram Reels, YouTube Shorts, TikTok videos, and social media ads. We also edit longer content that can be repurposed into short clips.' },
+        { question: 'How long does a typical edit take?', answer: 'Standard edits are delivered within 24-48 hours. Rush orders can be completed in as little as 12 hours for an additional fee.' },
+        { question: 'Do you add captions and subtitles?', answer: 'Yes, every video includes professionally styled captions optimized for silent viewing \u2014 essential for social media engagement.' },
+        { question: 'Can you work with my existing brand style?', answer: 'Absolutely. We follow your brand guidelines for colors, fonts, and overall aesthetic to ensure consistency across all your content.' }
       ],
       results: [
-        { num: '300+', label: 'Campaigns Managed' },
-        { num: '6.2x', label: 'Avg. ROAS' },
-        { num: '95%', label: 'Client Retention' },
-        { num: '$10M+', label: 'Ad Spend Managed' }
+        { num: '500+', label: 'Videos Edited' },
+        { num: '4.8x', label: 'Avg. Engagement Boost' },
+        { num: '99%', label: 'Client Satisfaction' },
+        { num: '24hrs', label: 'Avg. Turnaround' }
       ],
       packages: [
-        { name: 'Starter Package', shortName: 'Starter', price: '2,499', delivery: '2-Week Delivery', revisions: '2 Revisions', features: ['Channel Strategy', 'Ad Creative', '1 Platform', 'Basic Tracking', 'Monthly Report', '2 Revisions'], popular: false },
-        { name: 'Growth Package', shortName: 'Growth', price: '4,999', delivery: '4-Week Delivery', revisions: 'Unlimited Revisions', features: ['Full Funnel Strategy', '3 Platforms', 'Audience Research', 'A/B Testing', 'Analytics Dashboard', 'Unlimited Revisions'], popular: true, featured: true },
-        { name: 'Scale Package', shortName: 'Scale', price: '9,999', delivery: '6-Week Delivery', revisions: 'Unlimited Revisions', features: ['Enterprise Growth', 'All Platforms', 'Custom Attribution', 'Dedicated Team', '24/7 Optimization', 'Priority Support'], popular: false }
+        { name: 'Starter Package', shortName: 'Starter', price: '499', delivery: '48-Hour Delivery', revisions: '2 Revisions', features: ['1 Short-Form Video Edit', 'Captions & Subtitles', 'Background Music', 'Color Grading', 'Platform Optimization'], popular: false },
+        { name: 'Growth Package', shortName: 'Growth', price: '1,299', delivery: '1-Week Delivery', revisions: 'Unlimited Revisions', features: ['5 Short-Form Videos', 'Unlimited Revisions', 'Custom Graphics', 'Sound Design', 'Trending Effects', 'Priority Support'], popular: true, featured: true },
+        { name: 'Scale Package', shortName: 'Scale', price: '2,999', delivery: '2-Week Delivery', revisions: 'Unlimited Revisions', features: ['15 Short-Form Videos', 'Bulk Content Strategy', 'Full Post-Production', 'Custom Animation', 'Dedicated Editor', 'Rush Delivery Available'], popular: false }
       ],
       trustItems: [
         { icon: 'lock', text: 'Secure Payment' },
-        { icon: 'star', text: '6.2x Avg. ROAS' },
-        { icon: 'clockMeta', text: 'On-Time Delivery' },
+        { icon: 'star', text: '99% Satisfaction' },
+        { icon: 'clockMeta', text: 'Fast Turnaround' },
         { icon: 'users', text: 'Dedicated Support' },
         { icon: 'shield', text: 'Money-Back Guarantee' }
       ]
@@ -427,7 +311,7 @@ window.ServicesAPI = (function () {
     if (!row) return null;
     return _applyServicePhotos({
       slug: row.slug || '',
-      pageTitle: row.meta_title || row.title + ' — NAGRIVA',
+      pageTitle: row.meta_title || row.title + ' — Nagriva',
       metaDescription: row.meta_description || row.short_description || '',
       breadcrumbCurrent: row.title || '',
       title: row.hero_title || row.title || '',
@@ -435,7 +319,7 @@ window.ServicesAPI = (function () {
       category: row.category || '',
       image: row.image || (Array.isArray(_parseJSON(row.gallery)) && _parseJSON(row.gallery)[0]) || '',
       highlights: _parseJSON(row.highlights),
-      sellerName: row.seller_name || 'NAGRIVA Agency',
+      sellerName: row.seller_name || 'Nagriva Agency',
       sellerLabel: _fixUnicode(row.seller_label) || 'Premium Digital Agency \u2022 Top 1% of Designers',
       rating: row.rating || 4.9,
       reviewCount: row.review_count || 128,
@@ -456,81 +340,18 @@ window.ServicesAPI = (function () {
      ════════════════════════════════════════════════════════ */
 
   function fetchService(slug) {
-    // Escape hatch: allow direct injection from server-side render
-    if (window.__SUPABASE_SERVICE_DATA) {
-      return Promise.resolve(window.__SUPABASE_SERVICE_DATA);
-    }
-
-    var now = Date.now();
-
-    // Check cache
-    if (_cache[slug] && now - _cache[slug].ts < CACHE_TTL) {
-      return Promise.resolve(_cache[slug].data);
-    }
-
-    // If Supabase client is not available, fall back immediately
-    if (!window.supabaseClient) {
-      return Promise.resolve(_applyServicePhotos(FALLBACK[slug] || FALLBACK['web-design']));
-    }
-
-    return window.supabaseClient
-      .from('services')
-      .select('*')
-      .eq('slug', slug)
-      .eq('status', 'published')
-      .maybeSingle()
-      .then(function (res) {
-        if (res.error || !res.data) {
-          return _applyServicePhotos(FALLBACK[slug] || FALLBACK['web-design']);
-        }
-        var transformed = _transformRow(res.data);
-        _cache[slug] = { data: transformed, ts: now };
-        return transformed;
-      })
-      .catch(function () {
-        return _applyServicePhotos(FALLBACK[slug] || FALLBACK['web-design']);
-      });
+    // Always use embedded fallback data for the 4 core services
+    return Promise.resolve(_applyServicePhotos(FALLBACK[slug] || FALLBACK['website-development']));
   }
 
   function getAllServices(options) {
     options = options || {};
-    var now = Date.now();
-
-    if (!options.featured && _allCache && now - _allCache.ts < CACHE_TTL) {
-      return Promise.resolve(_allCache.data);
-    }
-
-    if (!window.supabaseClient) {
-      var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
-      return Promise.resolve(all);
-    }
-
-    var query = window.supabaseClient
-      .from('services')
-      .select('*')
-      .eq('status', 'published');
-
+    // Always use embedded fallback data for the 4 core services
+    var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
     if (options.featured) {
-      query = query.eq('featured', true);
+      all = all.filter(function (s) { return s.featured; });
     }
-
-    return query
-      .order('created_at', { ascending: true })
-      .then(function (res) {
-        if (res.error || !res.data || !res.data.length) {
-          var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
-          return all;
-        }
-        var transformed = res.data.map(_transformRow);
-        if (!options.featured) {
-          _allCache = { data: transformed, ts: now };
-        }
-        return transformed;
-      })
-      .catch(function () {
-        var all = Object.keys(FALLBACK).map(function (k) { return _applyServicePhotos(FALLBACK[k]); });
-        return all;
-      });
+    return Promise.resolve(all);
   }
 
   return {
