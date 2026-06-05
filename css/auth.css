@@ -19,41 +19,26 @@
 .btn-auth {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--gray);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border2);
-  padding: 9px 24px;
+  background: transparent;
+  border: none;
+  padding: 6px 14px;
   border-radius: 99px;
-  transition: all var(--transition);
+  transition: color var(--transition), background var(--transition);
   letter-spacing: 0.01em;
   cursor: pointer;
   font-family: inherit;
-  position: relative;
-  overflow: hidden;
 }
-.btn-auth::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(59,130,246,0.08), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.btn-auth:hover::before { opacity: 1; }
 .btn-auth:hover {
   color: var(--white);
-  border-color: rgba(59,130,246,0.2);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(59,130,246,0.06);
+  background: rgba(255,255,255,0.04);
 }
 .btn-auth svg {
   flex-shrink: 0;
-  transition: transform var(--transition);
 }
-.btn-auth:hover svg { transform: translateX(2px); }
 
 /* ─── Logged-in Avatar Badge ─── */
 .nav-user-avatar {
