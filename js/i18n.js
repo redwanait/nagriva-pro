@@ -29,7 +29,7 @@
       'nav.orders': 'Orders',
       'nav.profile': 'Profile',
       'nav.signin': 'Sign In',
-      'nav.book-call': 'Get Started',
+      'nav.book-call': 'Book a Free Call',
 
       'hero.badge': 'Digital Growth Agency',
       'hero.title': 'Grow Your Brand.<br/><span class="hero-highlight">Scale Your Revenue.</span>',
