@@ -209,7 +209,11 @@ window.ServicesRenderer = (function () {
           featuresHtml += '<li class="fv-feature-item">' + ICONS.check + f + '</li>';
         });
 
-        var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=' + i;
+        var pkgName = encodeURIComponent(pkg.name);
+        var pkgPrice = encodeURIComponent(pkg.price.replace(/,/g, ''));
+        var pkgDelivery = encodeURIComponent(pkg.delivery);
+        var pkgRevisions = encodeURIComponent(pkg.revisions);
+        var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=' + i + '&package=' + pkgName + '&price=' + pkgPrice + '&delivery=' + pkgDelivery + '&revisions=' + pkgRevisions;
 
         div.innerHTML =
           '<div class="fv-pkg-name">' + (pkg.featured ? pkg.name + ' &bull; Most Popular' : pkg.name) + '</div>' +
@@ -242,9 +246,18 @@ window.ServicesRenderer = (function () {
   }
 
   function renderCTA(data) {
+    if (!data.packages || !data.packages.length) return;
+    var packagesContainer = qs('[data-service="packages-data"]');
     var primaryLinks = qsa('[data-service="cta-primary"]');
-    var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=1';
+    var mostPopular = data.packages.find(function (p) { return p.popular; }) || data.packages[0];
+    var pkgIndex = data.packages.indexOf(mostPopular);
+    var pkgName = encodeURIComponent(mostPopular.name);
+    var pkgPrice = encodeURIComponent(mostPopular.price.replace(/,/g, ''));
+    var pkgDelivery = encodeURIComponent(mostPopular.delivery);
+    var pkgRevisions = encodeURIComponent(mostPopular.revisions);
+    var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=' + pkgIndex + '&package=' + pkgName + '&price=' + pkgPrice + '&delivery=' + pkgDelivery + '&revisions=' + pkgRevisions;
     primaryLinks.forEach(function (link) {
+      if (packagesContainer && packagesContainer.contains(link)) return;
       link.href = orderHref;
     });
   }

@@ -98,9 +98,14 @@
 
   function getParams() {
     var params = new URLSearchParams(window.location.search);
+    var pkgVal = params.get('pkg');
     return {
       slug: params.get('service') || '',
-      pkg: parseInt(params.get('pkg'), 10) || 1
+      pkg: pkgVal !== null ? parseInt(pkgVal, 10) : null,
+      packageName: params.get('package') || '',
+      price: params.get('price') || '',
+      delivery: params.get('delivery') || '',
+      revisions: params.get('revisions') || ''
     };
   }
 
@@ -180,6 +185,25 @@
       return;
     }
 
+    if (params.packageName && params.price) {
+      selectedPackage = {
+        name: params.packageName,
+        shortName: params.packageName.split(' ')[0],
+        price: params.price,
+        delivery: params.delivery || 'Standard Delivery',
+        revisions: params.revisions || 'Standard Revisions',
+        features: [],
+        popular: false,
+        featured: false
+      };
+      serviceData = { slug: params.slug, title: params.slug, packages: [selectedPackage] };
+      renderAll();
+      renderAddons();
+      initPaymentMethods();
+      renderTestimonials();
+      return;
+    }
+
     pkgIndex = params.pkg;
 
     if (typeof ServicesAPI === 'undefined') {
@@ -201,7 +225,7 @@
         return;
       }
 
-      if (pkgIndex >= packages.length) pkgIndex = 0;
+      if (pkgIndex === null || pkgIndex >= packages.length) pkgIndex = 0;
 
       selectedPackage = packages[pkgIndex];
       renderAll();
