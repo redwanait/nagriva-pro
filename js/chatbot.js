@@ -49,6 +49,9 @@
   let fab, windowEl, glowEl, messagesEl, quickRepliesEl, inputEl, sendEl, closeEl;
 
   function init() {
+    var path = window.location.pathname;
+    if (path !== '/' && !path.endsWith('index.html')) return;
+
     if (document.getElementById('nagriva-chat')) return;
 
     document.body.insertAdjacentHTML('beforeend', HTML);

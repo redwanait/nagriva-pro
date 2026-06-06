@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="../css/mobile-optimizations.css" />
   <link rel="stylesheet" href="../css/performance.css" />
   <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
@@ -236,8 +234,6 @@
             </div>
 
           </div>
-
-
 
           <!-- ═══════════ ADD-ONS SECTION ═══════════ -->
           <div class="chk-card chk-addons-section chk-addons-collapsed">
@@ -467,7 +463,6 @@
         </div>
       </div>
 
-
     </div>
   </main>
 
@@ -485,18 +480,7 @@
   <script defer src="../js/performance-optimizer.js"></script>
   <script defer src="../js/lazy-loader.js"></script>
   <script defer src="../js/cookie-consent.js"></script>
-  <div id="cookie-consent-container"></div>
+<div id="cookie-consent-container"></div>
 
-  <script>
-  window.openNagrivaChat = window.openNagrivaChat || function() {
-    window.__chatRequested = true;
-    if (!document.querySelector('script[src$="chatbot.js"]')) {
-      var s = document.createElement('script');
-      s.src = '/js/chatbot.js';
-      s.async = true;
-      document.body.appendChild(s);
-    }
-  };
-  </script>
 </body>
 </html>

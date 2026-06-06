@@ -23,8 +23,6 @@
   <link rel="stylesheet" href="/css/service-detail.css" />
   <link rel="stylesheet" href="/css/mobile-optimizations.css" />
   <link rel="stylesheet" href="/css/performance.css" />
-  <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="/css/client-messages.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="/components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
@@ -35,17 +33,6 @@
   <style>.fv-main .fv-section:last-of-type { margin-bottom: 0; }</style>
 </head>
 <body data-page="services">
-<script>
-  window.openNagrivaChat = window.openNagrivaChat || function() {
-    window.__chatRequested = true;
-    if (!document.querySelector('script[src$="chatbot.js"]')) {
-      var s = document.createElement('script');
-      s.src = '/js/chatbot.js';
-      s.async = true;
-      document.body.appendChild(s);
-    }
-  };
-</script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJP8X4CBH2"></script>
@@ -586,7 +573,7 @@
   <script defer src="/js/performance-optimizer.js"></script>
   <script defer src="/js/lazy-loader.js"></script>
   <script defer src="/js/cookie-consent.js"></script>
-  <script defer src="/js/floating-elements.js"></script>
+
   <div id="cookie-consent-container"></div>
 </body>
 </html>
