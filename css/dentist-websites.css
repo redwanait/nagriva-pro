@@ -30,7 +30,7 @@
 .dw-hero {
   position: relative;
   z-index: 1;
-  padding: 160px 20px 80px;
+  padding: calc(var(--navbar-height) + 40px) 20px 40px;
   text-align: center;
 }
 
@@ -59,7 +59,7 @@
   color: var(--gray);
   line-height: 1.7;
   max-width: 620px;
-  margin: 0 auto 32px;
+  margin: 0 auto 24px;
 }
 
 .dw-hero-actions {
@@ -68,7 +68,7 @@
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 .dw-hero-trust {
@@ -331,7 +331,7 @@
 .dw-cta {
   position: relative;
   z-index: 1;
-  padding: 40px 20px 120px;
+  padding: 40px 20px 80px;
   text-align: center;
 }
 
@@ -499,7 +499,7 @@
 
 @media (max-width: 768px) {
   .dw-hero {
-    padding: 130px 20px 60px;
+    padding: calc(var(--navbar-height) + 30px) 20px 30px;
   }
 
   .dw-demos-grid,
@@ -524,7 +524,7 @@
   }
 
   .dw-cta {
-    padding: 20px 20px 80px;
+    padding: 20px 20px 60px;
   }
 }
 
