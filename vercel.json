@@ -10,6 +10,12 @@
     { "src": "^/services/(?<slug>[^/]+)$", "dest": "/pages/service.html?slug=$slug" },
     { "src": "^/checkout$", "dest": "/pages/checkout.html" },
     { "src": "^/order-success$", "dest": "/pages/order-success.html" },
+    { "src": "^/orders$", "dest": "/pages/orders.html" },
+    { "src": "^/projects$", "dest": "/pages/projects.html" },
+    { "src": "^/order-tracking$", "dest": "/pages/order-tracking.html" },
+    { "src": "^/dashboard$", "dest": "/pages/dashboard.html" },
+    { "src": "^/invoices$", "dest": "/pages/invoices.html" },
+    { "src": "^/profile$", "dest": "/pages/profile.html" },
     { "src": "/.*", "dest": "/pages/404.html", "status": 404 }
   ],
   "headers": [

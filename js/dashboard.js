@@ -42,16 +42,50 @@ window.NAGRIVA_Dashboard = (function () {
     return formatDate(dateStr);
   }
 
+  function normalizeStatus(s) {
+    if (!s) return 'pending';
+    var lower = s.toLowerCase().replace(/ /g, '_');
+    var map = {
+      'pending': 'pending',
+      'paid': 'paid',
+      'in_progress': 'in_progress',
+      'in progress': 'in_progress',
+      'review': 'review',
+      'completed': 'completed',
+      'delivered': 'completed',
+      'cancelled': 'cancelled'
+    };
+    return map[lower] || 'pending';
+  }
+
   function getStatusBadgeClass(status) {
-    return { pending: 'pending', approved: 'approved', in_progress: 'in_progress', review: 'review', delivered: 'completed', completed: 'completed', cancelled: 'cancelled' }[status] || 'pending';
+    var n = normalizeStatus(status);
+    return { pending: 'pending', paid: 'paid', approved: 'in_progress', in_progress: 'in_progress', review: 'review', delivered: 'completed', completed: 'completed', cancelled: 'cancelled' }[n] || 'pending';
   }
 
   function getStatusLabel(status) {
-    return { pending: 'Pending', approved: 'Approved', in_progress: 'In Progress', review: 'Review', delivered: 'Completed', completed: 'Completed', cancelled: 'Cancelled' }[status] || status;
+    var n = normalizeStatus(status);
+    return { pending: 'Pending', paid: 'Paid', approved: 'In Progress', in_progress: 'In Progress', review: 'Review', delivered: 'Completed', completed: 'Completed', cancelled: 'Cancelled' }[n] || status;
   }
+
+  var SERVICE_NAMES = {
+    "website-development": "Website Development",
+    "blog-creation": "Blog Creation",
+    "video-editing": "Video Editing",
+    "seo": "SEO Optimization",
+    "ecommerce-stores": "E-commerce Stores",
+    "social-media": "Social Media Growth",
+    "social-media-growth": "Social Media Growth",
+    "branding": "Brand Identity",
+    "brand-identity": "Brand Identity",
+    "ai-automation": "AI Automation",
+    "web-design": "Web Design",
+    "performance-marketing": "Performance Marketing"
+  };
 
   function safeServiceType(s) {
     if (!s) return 'Service';
+    if (SERVICE_NAMES[s]) return SERVICE_NAMES[s];
     return String(s).replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
   }
 
@@ -68,7 +102,7 @@ window.NAGRIVA_Dashboard = (function () {
      ════════════════════════════════════════════ */
   function skeletonStats() {
     var html = '';
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 4; i++) {
       html += '<div class="dash-stat-skel dash-fade-in">' +
         '<div class="dash-stat-skel-icon"></div>' +
         '<div class="dash-stat-skel-value"></div>' +
@@ -200,17 +234,17 @@ window.NAGRIVA_Dashboard = (function () {
     var el = document.getElementById('dashStats');
     if (!el) return;
 
-    var svg = window.NAGRIVA_EmptyState.icons;
+    var svg = window.NAGRIVA_EmptyState ? window.NAGRIVA_EmptyState.icons : {};
     var items = [
-      { icon: svg['folder-kanban'], value: stats.active, label: 'Active Projects', change: 'Currently in progress', id: 'statActive' },
-      { icon: svg['check-circle'], value: stats.completed, label: 'Completed Projects', change: 'Delivered orders', id: 'statCompleted' },
-      { icon: svg.package, value: stats.pending, label: 'Pending Orders', change: 'Awaiting processing', id: 'statPending' },
-      { icon: svg['message-square'], value: stats.messages, label: 'Messages', change: stats.messages === 1 ? 'Unread conversation' : 'Unread conversations', id: 'statMessages' },
-      { icon: svg.bell, value: stats.notifications, label: 'Notifications', change: stats.notifications === 1 ? 'Unread notification' : 'Unread notifications', id: 'statNotifications' }
+      { icon: svg['package'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>', value: stats.totalOrders, label: 'Total Orders', change: 'All time orders', id: 'statTotalOrders' },
+      { icon: svg['folder-kanban'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 7h12"/><path d="M8 12h12"/><path d="M8 17h8"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>', value: stats.activeProjects, label: 'Active Projects', change: 'Currently in progress', id: 'statActive' },
+      { icon: svg['check-circle'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', value: stats.completedProjects, label: 'Completed Projects', change: 'Delivered orders', id: 'statCompleted' },
+      { icon: svg['dollar-sign'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', value: stats.totalSpent, label: 'Total Spent', change: 'In MAD', id: 'statTotalSpent', isCurrency: true }
     ];
 
     var cardsHtml = '';
     items.forEach(function (item, i) {
+      var displayVal = item.isCurrency ? item.value.toLocaleString('en-US') + ' MAD' : item.value;
       cardsHtml += '<div class="dash-stat-card dash-fade-in">' +
         '<div class="dash-stat-icon">' + item.icon + '</div>' +
         '<div class="dash-stat-value"><span class="dash-counter" id="' + item.id + '">0</span></div>' +
@@ -227,9 +261,15 @@ window.NAGRIVA_Dashboard = (function () {
     var el2 = document.getElementById('dashStats');
     if (!el2) return;
     items.forEach(function (item) {
-      requestAnimationFrame(function () {
-        animateCounter(document.getElementById(item.id), item.value);
-      });
+      var target = document.getElementById(item.id);
+      if (!target) return;
+      if (item.isCurrency) {
+        target.textContent = item.value.toLocaleString('en-US') + ' MAD';
+      } else {
+        requestAnimationFrame(function () {
+          animateCounter(target, item.value);
+        });
+      }
     });
   }
 
@@ -245,10 +285,11 @@ window.NAGRIVA_Dashboard = (function () {
     var display = orders.slice(0, 4);
     var html = '';
     display.forEach(function (o) {
+      var svcName = safeServiceType(o.service || o.service_slug || o.service_type);
       html += '<div class="dash-order-item">' +
         '<div class="dash-order-info">' +
-        '<div class="dash-order-name">' + escapeHtml(o.project_title || 'Untitled') + '</div>' +
-        '<div class="dash-order-meta">' + safeServiceType(o.service_type) + ' \u00b7 ' + formatDate(o.created_at) + '</div>' +
+        '<div class="dash-order-name">' + escapeHtml(o.project_title || svcName || 'Untitled') + '</div>' +
+        '<div class="dash-order-meta">' + svcName + ' \u00b7 ' + formatDate(o.created_at) + '</div>' +
         '<div class="dash-order-progress"><div class="dash-order-progress-bar"><div class="dash-order-progress-fill" style="width:' + (o.progress || 0) + '%;"></div></div><span class="dash-order-progress-text">' + (o.progress || 0) + '%</span></div>' +
         '</div>' +
         '<div class="dash-order-right">' +
@@ -363,35 +404,32 @@ window.NAGRIVA_Dashboard = (function () {
      DATA FETCHING
      ════════════════════════════════════════════ */
   async function fetchStats() {
-    if (!_user) return { active: 0, completed: 0, pending: 0, messages: 0, notifications: 0 };
-    var orders = _data.orders || [];
-    var active = orders.filter(function (o) { return o.status === 'approved' || o.status === 'in_progress' || o.status === 'review'; }).length;
-    var completed = orders.filter(function (o) { return o.status === 'completed' || o.status === 'delivered'; }).length;
-    var pending = orders.filter(function (o) { return o.status === 'pending'; }).length;
+    if (!_user) return { totalOrders: 0, activeProjects: 0, completedProjects: 0, totalSpent: 0 };
 
-    var msgCount = 0;
-    var orderIds = orders.map(function (o) { return o.id; });
-    if (orderIds.length > 0) {
-      try {
-        var { count } = await window.supabaseClient
-          .from('messages')
-          .select('*', { count: 'exact', head: true })
-          .in('order_id', orderIds);
-        msgCount = count || 0;
-      } catch (e) { /* silent */ }
+    try {
+      if (typeof NAGRIVA_OrdersAPI !== 'undefined' && NAGRIVA_OrdersAPI.getClientDashboardFullStats) {
+        return await NAGRIVA_OrdersAPI.getClientDashboardFullStats(_user.id);
+      }
+    } catch (e) {
+      console.warn('[Dashboard] fetchStats from API failed, falling back:', e);
     }
 
-    var notifCount = 0;
-    try {
-      var { count: nc } = await window.supabaseClient
-        .from('notifications')
-        .select('*', { count: 'exact', head: true })
-        .eq('user_id', _user.id)
-        .eq('is_read', false);
-      notifCount = nc || 0;
-    } catch (e) { /* silent */ }
+    var orders = _data.orders || [];
+    var totalOrders = orders.length;
+    var activeProjects = orders.filter(function (o) {
+      var s = (o.status || '').toLowerCase();
+      return s === 'approved' || s === 'in_progress' || s === 'review' || s === 'in progress';
+    }).length;
+    var completedProjects = orders.filter(function (o) {
+      var s = (o.status || '').toLowerCase();
+      return s === 'completed' || s === 'delivered';
+    }).length;
+    var totalSpent = orders.reduce(function (sum, o) {
+      var amt = parseFloat(o.amount || o.budget || 0);
+      return sum + (isNaN(amt) ? 0 : amt);
+    }, 0);
 
-    return { active: active, completed: completed, pending: pending, messages: msgCount, notifications: notifCount };
+    return { totalOrders: totalOrders, activeProjects: activeProjects, completedProjects: completedProjects, totalSpent: totalSpent };
   }
 
   async function loadAll() {
@@ -583,6 +621,7 @@ window.NAGRIVA_Dashboard = (function () {
         .subscribe();
       _subscriptions.push(msgSub);
 
+      if (orderIds.length > 0) {
       var projectSub = window.supabaseClient
         .channel('dash-projects')
         .on('postgres_changes',
@@ -591,6 +630,7 @@ window.NAGRIVA_Dashboard = (function () {
         )
         .subscribe();
       _subscriptions.push(projectSub);
+    }
     }
 
     var notifSub = window.supabaseClient

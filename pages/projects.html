@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Nagriva</title>
+  <meta name="description" content="Track your Nagriva project milestones." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root {
+      --prj-bg: #050816;
+      --prj-card-bg: rgba(255,255,255,0.02);
+      --prj-card-border: rgba(255,255,255,0.06);
+      --prj-accent: #3B82F6;
+      --prj-text: #fff;
+      --prj-text-secondary: #a1a1aa;
+      --prj-text-muted: #71717a;
+      --prj-radius: 20px;
+      --prj-radius-sm: 14px;
+    }
+
+    .prj-page {
+      padding-top: calc(68px + 40px);
+      background: var(--prj-bg);
+      min-height: 100vh;
+    }
+
+    .prj-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px 64px;
+    }
+
+    .prj-header {
+      margin-bottom: 32px;
+    }
+
+    .prj-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 60%, rgba(59,130,246,0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .prj-header p { color: var(--prj-text-secondary); margin-top: 4px; }
+
+    .prj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .prj-card {
+      background: var(--prj-card-bg);
+      border: 1px solid var(--prj-card-border);
+      border-radius: var(--prj-radius);
+      padding: 28px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .prj-card:hover {
+      border-color: rgba(59,130,246,0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .prj-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .prj-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .prj-card-order {
+      font-size: 0.78rem;
+      color: var(--prj-text-muted);
+    }
+
+    .prj-progress-section {
+      margin-bottom: 24px;
+    }
+
+    .prj-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .prj-progress-label {
+      font-size: 0.82rem;
+      color: var(--prj-text-secondary);
+    }
+
+    .prj-progress-pct {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--prj-accent);
+    }
+
+    .prj-progress-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .prj-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--prj-accent), #60a5fa);
+      border-radius: 100px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .prj-timeline { position: relative; }
+
+    .prj-timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .prj-timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .prj-timeline-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.08);
+      background: var(--prj-bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    .prj-timeline-dot.completed {
+      background: #22c55e;
+      border-color: #22c55e;
+    }
+
+    .prj-timeline-dot.completed svg { width: 12px; height: 12px; color: #fff; }
+
+    .prj-timeline-dot.active {
+      border-color: var(--prj-accent);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    }
+
+    .prj-timeline-dot.active::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--prj-accent);
+      border-radius: 50%;
+    }
+
+    .prj-timeline-dot.pending { border-color: rgba(255,255,255,0.08); }
+
+    .prj-timeline-info { flex: 1; min-width: 0; padding-top: 2px; }
+
+    .prj-timeline-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .prj-timeline-status {
+      font-size: 0.75rem;
+      color: var(--prj-text-muted);
+    }
+
+    .prj-empty {
+      grid-column: 1 / -1;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .prj-empty-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.06);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .prj-empty-icon svg { width: 28px; height: 28px; color: var(--prj-accent); }
+    .prj-empty h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .prj-empty p { color: var(--prj-text-secondary); margin-bottom: 24px; }
+    .prj-empty-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--prj-accent), #2563EB);
+      color: #fff; border-radius: 100px;
+      font-weight: 600; font-size: 0.88rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .prj-empty-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,130,246,0.35); }
+
+    @media (max-width: 768px) {
+      .prj-container { padding: 0 16px 60px; }
+      .prj-header h1 { font-size: 1.5rem; }
+      .prj-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="projects">
+
+  <div id="navbar-container"></div>
+
+  <main class="prj-page">
+    <div class="prj-container">
+
+      <div class="prj-header">
+        <h1>My Projects</h1>
+        <p>Track milestones and progress for each of your orders.</p>
+      </div>
+
+      <div class="prj-grid" id="projectsGrid">
+        <div class="prj-empty" id="projectsLoading">
+          <div class="prj-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <h3>Loading your projects...</h3>
+          <p>Please wait while we fetch your project data.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    var grid = document.getElementById('projectsGrid');
+
+    var user = null;
+    try {
+      var session = await window.supabaseClient.auth.getSession();
+      if (session.data.session) user = session.data.session.user;
+    } catch(e) {}
+
+    if (!user) {
+      grid.innerHTML = '<div class="prj-empty"><div class="prj-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Sign in to view your projects</h3><p>Please sign in to access your project milestones.</p><a href="login.html" class="prj-empty-btn">Sign In</a></div>';
+      return;
+    }
+
+    try {
+      var { data: orders, error: ordErr } = await window.supabaseClient
+        .from('orders')
+        .select('id, order_number, service, service_slug, package_name, status, amount, budget, created_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (ordErr) throw ordErr;
+
+      if (!orders || orders.length === 0) {
+        grid.innerHTML = '<div class="prj-empty"><div class="prj-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7h12"/><path d="M8 12h12"/><path d="M8 17h8"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg></div><h3>No projects yet</h3><p>Your project milestones will appear here once you place an order.</p><a href="checkout.html" class="prj-empty-btn">Place Your First Order</a></div>';
+        return;
+      }
+
+      var orderIds = orders.map(function(o) { return o.id; });
+
+      var { data: projects, error: prjErr } = await window.supabaseClient
+        .from('projects')
+        .select('*')
+        .in('order_id', orderIds);
+
+      if (prjErr) throw prjErr;
+
+      var projectMap = {};
+      if (projects) {
+        projects.forEach(function(p) {
+          projectMap[p.order_id] = p;
+        });
+      }
+
+      var html = '';
+      var stages_default = [
+        { name: 'Discovery', status: 'pending', order: 0 },
+        { name: 'Design', status: 'pending', order: 1 },
+        { name: 'Development', status: 'pending', order: 2 },
+        { name: 'Testing', status: 'pending', order: 3 },
+        { name: 'Launch', status: 'pending', order: 4 }
+      ];
+
+      orders.forEach(function(order) {
+        var project = projectMap[order.id];
+        var stages = stages_default;
+        var progress = 0;
+        var currentStage = 'discovery';
+
+        if (project && project.stages) {
+          try {
+            stages = typeof project.stages === 'string' ? JSON.parse(project.stages) : project.stages;
+          } catch(e) {}
+          progress = project.progress || 0;
+          currentStage = project.current_stage || 'discovery';
+        } else {
+          var s = (order.status || '').toLowerCase();
+          if (s === 'in_progress' || s === 'in progress') { progress = 25; currentStage = 'design'; }
+          else if (s === 'review') { progress = 75; currentStage = 'testing'; }
+          else if (s === 'completed' || s === 'delivered') { progress = 100; currentStage = 'launch'; }
+          else { progress = 0; currentStage = 'discovery'; }
+        }
+
+        var stagesHtml = '';
+        stages.forEach(function(stage) {
+          var dotClass = 'pending';
+          if (stage.status === 'completed') dotClass = 'completed';
+          else if (stage.status === 'active' || stage.status === 'in_progress') dotClass = 'active';
+          else if ((stage.name || '').toLowerCase().replace(/ /g, '-') === currentStage) dotClass = 'active';
+
+          var dotContent = dotClass === 'completed'
+            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>'
+            : '';
+
+          var statusLabel = dotClass === 'completed' ? 'Completed' : dotClass === 'active' ? 'In Progress' : 'Pending';
+
+          stagesHtml += '<div class="prj-timeline-item">' +
+            '<div class="prj-timeline-dot ' + dotClass + '">' + dotContent + '</div>' +
+            '<div class="prj-timeline-info">' +
+              '<div class="prj-timeline-name">' + escapeHtml(stage.name || 'Stage') + '</div>' +
+              '<div class="prj-timeline-status">' + statusLabel + '</div>' +
+            '</div></div>';
+        });
+
+        var serviceName = (window.SERVICE_NAMES && SERVICE_NAMES[order.service || order.service_slug]) || order.service || order.service_slug || 'Service';
+        var orderNum = order.order_number || order.id.slice(0, 8).toUpperCase();
+
+        html += '<div class="prj-card" onclick="window.location=\'order-tracking.html?id=' + encodeURIComponent(order.id || '') + '\'" style="cursor:pointer;">' +
+          '<div class="prj-card-header">' +
+            '<div>' +
+              '<div class="prj-card-title">' + escapeHtml(serviceName) + '</div>' +
+              '<div class="prj-card-order">Order: ' + escapeHtml(orderNum) + ' · ' + escapeHtml(order.package_name || '') + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="prj-progress-section">' +
+            '<div class="prj-progress-header">' +
+              '<span class="prj-progress-label">Progress</span>' +
+              '<span class="prj-progress-pct">' + progress + '%</span>' +
+            '</div>' +
+            '<div class="prj-progress-bar"><div class="prj-progress-fill" style="width:' + progress + '%;"></div></div>' +
+          '</div>' +
+          '<div class="prj-timeline">' + stagesHtml + '</div>' +
+        '</div>';
+      });
+
+      grid.innerHTML = html;
+
+    } catch (e) {
+      console.error('[Projects] load error:', e);
+      grid.innerHTML = '<div class="prj-empty"><div class="prj-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Failed to load projects</h3><p>' + escapeHtml(e.message || 'Please try again later.') + '</p></div>';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  });
+  </script>
+  <div id="cookie-consent-container"></div>
+
+</body>
+</html>

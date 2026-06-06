@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoices — Nagriva</title>
+  <meta name="description" content="Your Nagriva invoices." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(59,130,246,0.1);border-top-color:#3b82f6;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+  <style>
+    :root {
+      --inv-bg: #050816;
+      --inv-card-bg: rgba(255,255,255,0.02);
+      --inv-card-border: rgba(255,255,255,0.06);
+      --inv-accent: #3B82F6;
+      --inv-text: #fff;
+      --inv-text-secondary: #a1a1aa;
+      --inv-text-muted: #71717a;
+      --inv-radius: 20px;
+      --inv-radius-sm: 14px;
+    }
+
+    .inv-page { padding-top: calc(68px + 40px); background: var(--inv-bg); min-height: 100vh; }
+    .inv-container { max-width: 1200px; margin: 0 auto; padding: 0 32px 64px; }
+
+    .inv-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+    .inv-header h1 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #fff 60%, rgba(59,130,246,0.5)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .inv-header p { color: var(--inv-text-secondary); margin-top: 4px; }
+
+    .inv-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .inv-stat-card { background: var(--inv-card-bg); border: 1px solid var(--inv-card-border); border-radius: var(--inv-radius-sm); padding: 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .inv-stat-label { font-size: 0.75rem; color: var(--inv-text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 6px; }
+    .inv-stat-value { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--inv-text); }
+    .inv-stat-value.accent { color: var(--inv-accent); }
+
+    .inv-table-wrap { background: var(--inv-card-bg); border: 1px solid var(--inv-card-border); border-radius: var(--inv-radius); overflow: hidden; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .inv-table { width: 100%; border-collapse: collapse; }
+    .inv-table thead th { padding: 16px 20px; text-align: left; font-size: 0.78rem; font-weight: 600; color: var(--inv-text-muted); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.01); }
+    .inv-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.2s ease; }
+    .inv-table tbody tr:last-child { border-bottom: none; }
+    .inv-table tbody tr:hover { background: rgba(59,130,246,0.03); }
+    .inv-table tbody td { padding: 16px 20px; font-size: 0.88rem; color: var(--inv-text); }
+    .inv-inv-num { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--inv-accent); font-size: 0.85rem; }
+    .inv-amount { font-weight: 700; font-family: 'Syne', sans-serif; font-size: 0.95rem; }
+    .inv-date { color: var(--inv-text-muted); font-size: 0.82rem; }
+
+    .inv-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.01em; }
+    .inv-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+    .inv-badge.pending { background: rgba(245,158,11,0.08); color: #f59e0b; border: 1px solid rgba(245,158,11,0.12); }
+    .inv-badge.pending::before { background: #f59e0b; }
+    .inv-badge.paid { background: rgba(34,197,94,0.08); color: #4ade80; border: 1px solid rgba(34,197,94,0.12); }
+    .inv-badge.paid::before { background: #4ade80; }
+    .inv-badge.overdue { background: rgba(239,68,68,0.08); color: #f87171; border: 1px solid rgba(239,68,68,0.12); }
+    .inv-badge.overdue::before { background: #f87171; }
+    .inv-badge.cancelled { background: rgba(113,113,122,0.08); color: #a1a1aa; border: 1px solid rgba(113,113,122,0.12); }
+    .inv-badge.cancelled::before { background: #a1a1aa; }
+    .inv-badge.refunded { background: rgba(129,140,248,0.08); color: #818cf8; border: 1px solid rgba(129,140,248,0.12); }
+    .inv-badge.refunded::before { background: #818cf8; }
+
+    .inv-actions { display: flex; gap: 8px; }
+    .inv-action-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); color: var(--inv-text-secondary); cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
+    .inv-action-btn:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: var(--inv-text); }
+    .inv-action-btn svg { width: 14px; height: 14px; }
+
+    .inv-table-footer { padding: 20px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.04); font-size: 0.82rem; color: var(--inv-text-muted); }
+
+    .inv-empty { padding: 80px 40px; text-align: center; }
+    .inv-empty-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(59,130,246,0.06); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .inv-empty-icon svg { width: 28px; height: 28px; color: var(--inv-accent); }
+    .inv-empty h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .inv-empty p { color: var(--inv-text-secondary); margin-bottom: 24px; }
+    .inv-empty-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, var(--inv-accent), #2563EB); color: #fff; border-radius: 100px; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: all 0.3s ease; }
+    .inv-empty-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,130,246,0.35); }
+
+    .inv-skeleton { padding: 16px 20px; display: flex; gap: 20px; align-items: center; }
+    .inv-skel-cell { height: 18px; background: rgba(255,255,255,0.04); border-radius: 6px; animation: invShimmer 1.5s ease-in-out infinite; }
+    .inv-skel-row + .inv-skel-row { border-top: 1px solid rgba(255,255,255,0.03); }
+    @keyframes invShimmer { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
+
+    @media (max-width: 768px) {
+      .inv-container { padding: 0 16px 60px; }
+      .inv-header h1 { font-size: 1.5rem; }
+      .inv-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .inv-stat-value { font-size: 1.2rem; }
+      .inv-table thead { display: none; }
+      .inv-table tbody tr { display: block; padding: 16px; }
+      .inv-table tbody td { display: flex; justify-content: space-between; padding: 8px 0; border: none; }
+      .inv-table tbody td::before { content: attr(data-label); font-size: 0.75rem; color: var(--inv-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+      .inv-actions { justify-content: flex-end; }
+    }
+  </style>
+</head>
+<body data-page="invoices">
+
+  <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>
+  <div id="navbar-container"></div>
+
+  <main class="inv-page">
+    <div class="inv-container">
+      <div class="inv-header">
+        <div>
+          <h1>Invoices</h1>
+          <p>View and download your invoices.</p>
+        </div>
+      </div>
+
+      <div class="inv-stats" id="invStats">
+        <div class="inv-stat-card"><div class="inv-stat-label">Total</div><div class="inv-stat-value" id="invStatTotal">—</div></div>
+        <div class="inv-stat-card"><div class="inv-stat-label">Paid</div><div class="inv-stat-value accent" id="invStatPaid">—</div></div>
+        <div class="inv-stat-card"><div class="inv-stat-label">Pending</div><div class="inv-stat-value" id="invStatPending">—</div></div>
+        <div class="inv-stat-card"><div class="inv-stat-label">Overdue</div><div class="inv-stat-value" id="invStatOverdue">—</div></div>
+      </div>
+
+      <div class="inv-table-wrap">
+        <table class="inv-table">
+          <thead>
+            <tr>
+              <th>Invoice #</th>
+              <th>Order</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Issued</th>
+              <th>Due</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="invBody">
+            <tr class="inv-skel-row"><td colspan="7"><div class="inv-skeleton" style="display:flex;"><div class="inv-skel-cell" style="width:120px;"></div><div class="inv-skel-cell" style="width:180px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:80px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:120px;"></div></div></td></tr>
+            <tr class="inv-skel-row"><td colspan="7"><div class="inv-skeleton" style="display:flex;"><div class="inv-skel-cell" style="width:120px;"></div><div class="inv-skel-cell" style="width:180px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:80px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:120px;"></div></div></td></tr>
+            <tr class="inv-skel-row"><td colspan="7"><div class="inv-skeleton" style="display:flex;"><div class="inv-skel-cell" style="width:120px;"></div><div class="inv-skel-cell" style="width:180px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:80px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:100px;"></div><div class="inv-skel-cell" style="width:120px;"></div></div></td></tr>
+          </tbody>
+        </table>
+        <div class="inv-table-footer" id="invFooter" style="display:none;">
+          <span id="invCount"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-guard.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../js/orders.js"></script>
+  <script defer src="../modules/invoices/invoices-api.js"></script>
+  <script defer src="../modules/invoices/invoice-pdf.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+  <div id="cookie-consent-container"></div>
+
+  <script>
+  (function() {
+    'use strict';
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function formatDate(d) {
+      if (!d) return '\u2014';
+      var dt = new Date(d);
+      if (isNaN(dt.getTime())) return '\u2014';
+      return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function formatCurrency(amount) {
+      var val = parseFloat(amount || 0);
+      return val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' MAD';
+    }
+
+    function getBadgeClass(status) {
+      var s = (status || '').toLowerCase();
+      var map = { pending: 'pending', paid: 'paid', overdue: 'overdue', cancelled: 'cancelled', refunded: 'refunded' };
+      return map[s] || 'pending';
+    }
+
+    function getBadgeLabel(status) {
+      var s = (status || '').toLowerCase();
+      var map = { pending: 'Pending', paid: 'Paid', overdue: 'Overdue', cancelled: 'Cancelled', refunded: 'Refunded' };
+      return map[s] || status || 'Pending';
+    }
+
+    async function loadInvoices() {
+      var tbody = document.getElementById('invBody');
+      var footer = document.getElementById('invFooter');
+      var countEl = document.getElementById('invCount');
+
+      try {
+        var user = await NagrivaOrders.getCurrentUser();
+        if (!user) {
+          tbody.innerHTML = '<tr><td colspan="7"><div class="inv-empty"><div class="inv-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Please sign in</h3><p>Sign in to view your invoices.</p></div></td></tr>';
+          return;
+        }
+
+        var result = await NAGRIVA_InvoicesAPI.fetchClientInvoices(user.id, { per_page: 100 });
+        var invoices = result.data || [];
+
+        var totalCount = invoices.length;
+        var paidCount = invoices.filter(function(i) { return i.status === 'paid'; }).length;
+        var pendingCount = invoices.filter(function(i) { return i.status === 'pending'; }).length;
+        var overdueCount = invoices.filter(function(i) { return i.status === 'overdue'; }).length;
+
+        document.getElementById('invStatTotal').textContent = totalCount;
+        document.getElementById('invStatPaid').textContent = paidCount;
+        document.getElementById('invStatPending').textContent = pendingCount;
+        document.getElementById('invStatOverdue').textContent = overdueCount;
+
+        if (invoices.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7"><div class="inv-empty"><div class="inv-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>No invoices yet</h3><p>Invoices will appear here once they are generated for your orders.</p><a href="orders.html" class="inv-empty-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>View Orders</a></div></td></tr>';
+          if (footer) footer.style.display = 'none';
+          return;
+        }
+
+        var rows = '';
+        invoices.forEach(function(inv) {
+          var invNum = inv.invoice_number || '#' + (inv.id || '').slice(0, 8).toUpperCase();
+          var orderRef = inv.order_number || (inv.order_id ? '#' + inv.order_id.slice(0, 8).toUpperCase() : '\u2014');
+          var badgeCls = getBadgeClass(inv.status);
+          var badgeLabel = getBadgeLabel(inv.status);
+
+          rows += '<tr>' +
+            '<td data-label="Invoice #"><span class="inv-inv-num">' + escapeHtml(invNum) + '</span></td>' +
+            '<td data-label="Order">' + escapeHtml(orderRef) + '</td>' +
+            '<td data-label="Amount"><span class="inv-amount">' + formatCurrency(inv.total || inv.amount) + '</span></td>' +
+            '<td data-label="Status"><span class="inv-badge ' + badgeCls + '">' + badgeLabel + '</span></td>' +
+            '<td data-label="Issued"><span class="inv-date">' + formatDate(inv.issued_date || inv.issuedDate) + '</span></td>' +
+            '<td data-label="Due"><span class="inv-date">' + formatDate(inv.due_date || inv.dueDate) + '</span></td>' +
+            '<td data-label="Actions"><div class="inv-actions">' +
+              '<button class="inv-action-btn" onclick="window.downloadInvoice(\'' + inv.id + '\')" title="Download PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</button>' +
+              '<button class="inv-action-btn" onclick="window.printInvoice(\'' + inv.id + '\')" title="Print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button>' +
+            '</div></td></tr>';
+        });
+
+        tbody.innerHTML = rows;
+        if (footer) { footer.style.display = 'flex'; }
+        if (countEl) countEl.textContent = totalCount + ' invoice' + (totalCount !== 1 ? 's' : '');
+
+        window._invoices = invoices;
+
+      } catch (e) {
+        console.error('[Invoices] load error:', e);
+        tbody.innerHTML = '<tr><td colspan="7"><div class="inv-empty"><div class="inv-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Failed to load invoices</h3><p>' + escapeHtml(e.message || 'Please try again later.') + '</p></div></td></tr>';
+      }
+    }
+
+    window.downloadInvoice = async function(invoiceId) {
+      var inv = (window._invoices || []).find(function(i) { return i.id === invoiceId; });
+      if (!inv) return;
+      try {
+        var user = await NagrivaOrders.getCurrentUser();
+        var profile = await NagrivaOrders.getProfile(user.id);
+        await NAGRIVA_InvoicePDF.downloadInvoice({
+          id: inv.id,
+          invoiceNumber: inv.invoice_number || '',
+          clientName: (profile && profile.full_name) || user.email || 'Client',
+          clientEmail: user.email || '',
+          orderNumber: inv.order_number || '',
+          orderService: '',
+          amount: parseFloat(inv.amount || 0),
+          tax: parseFloat(inv.tax || 0),
+          total: parseFloat(inv.total || inv.amount || 0),
+          status: inv.status || 'pending',
+          issuedDate: inv.issued_date || inv.created_at,
+          dueDate: inv.due_date || '',
+          paidDate: inv.paid_date || null,
+          notes: inv.notes || '',
+          createdAt: inv.created_at || new Date().toISOString()
+        });
+      } catch (err) {
+        if (typeof NAGRIVA_Toast !== 'undefined') {
+          NAGRIVA_Toast.error('Download Failed', err.message || 'Could not download invoice');
+        }
+      }
+    };
+
+    window.printInvoice = async function(invoiceId) {
+      var inv = (window._invoices || []).find(function(i) { return i.id === invoiceId; });
+      if (!inv) return;
+      try {
+        var user = await NagrivaOrders.getCurrentUser();
+        var profile = await NagrivaOrders.getProfile(user.id);
+        await NAGRIVA_InvoicePDF.printInvoice({
+          id: inv.id,
+          invoiceNumber: inv.invoice_number || '',
+          clientName: (profile && profile.full_name) || user.email || 'Client',
+          clientEmail: user.email || '',
+          orderNumber: inv.order_number || '',
+          orderService: '',
+          amount: parseFloat(inv.amount || 0),
+          tax: parseFloat(inv.tax || 0),
+          total: parseFloat(inv.total || inv.amount || 0),
+          status: inv.status || 'pending',
+          issuedDate: inv.issued_date || inv.created_at,
+          dueDate: inv.due_date || '',
+          paidDate: inv.paid_date || null,
+          notes: inv.notes || '',
+          createdAt: inv.created_at || new Date().toISOString()
+        });
+      } catch (err) {
+        if (typeof NAGRIVA_Toast !== 'undefined') {
+          NAGRIVA_Toast.error('Print Failed', err.message || 'Could not print invoice');
+        }
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadInvoices();
+    });
+  })();
+  </script>
+</body>
+</html>

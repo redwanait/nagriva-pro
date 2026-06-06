@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orders — Nagriva</title>
+  <meta name="description" content="Your Nagriva orders dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/chatbot.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/floating-elements.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root {
+      --ord-bg: #050816;
+      --ord-card-bg: rgba(255,255,255,0.02);
+      --ord-card-border: rgba(255,255,255,0.06);
+      --ord-accent: #3B82F6;
+      --ord-text: #fff;
+      --ord-text-secondary: #a1a1aa;
+      --ord-text-muted: #71717a;
+      --ord-radius: 20px;
+      --ord-radius-sm: 14px;
+    }
+
+    .ord-page {
+      padding-top: calc(68px + 40px);
+      background: var(--ord-bg);
+      min-height: 100vh;
+    }
+
+    .ord-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px 64px;
+    }
+
+    .ord-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .ord-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 60%, rgba(59,130,246,0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ord-header p { color: var(--ord-text-secondary); margin-top: 4px; }
+
+    .ord-table-wrap {
+      background: var(--ord-card-bg);
+      border: 1px solid var(--ord-card-border);
+      border-radius: var(--ord-radius);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .ord-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .ord-table thead th {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ord-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.01);
+    }
+
+    .ord-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .ord-table tbody tr:last-child { border-bottom: none; }
+    .ord-table tbody tr:hover { background: rgba(59,130,246,0.03); }
+
+    .ord-table tbody td {
+      padding: 16px 20px;
+      font-size: 0.88rem;
+      color: var(--ord-text);
+    }
+
+    .ord-order-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      color: var(--ord-accent);
+      font-size: 0.85rem;
+    }
+
+    .ord-service-name {
+      color: var(--ord-text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .ord-amount {
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .ord-date {
+      color: var(--ord-text-muted);
+      font-size: 0.82rem;
+    }
+
+    .ord-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .ord-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .ord-badge.pending { background: rgba(245,158,11,0.08); color: #f59e0b; border: 1px solid rgba(245,158,11,0.12); }
+    .ord-badge.pending::before { background: #f59e0b; }
+    .ord-badge.paid { background: rgba(59,130,246,0.08); color: #60a5fa; border: 1px solid rgba(59,130,246,0.12); }
+    .ord-badge.paid::before { background: #60a5fa; }
+    .ord-badge.in-progress { background: rgba(139,92,246,0.08); color: #a78bfa; border: 1px solid rgba(139,92,246,0.12); }
+    .ord-badge.in-progress::before { background: #a78bfa; }
+    .ord-badge.review { background: rgba(234,179,8,0.08); color: #facc15; border: 1px solid rgba(234,179,8,0.12); }
+    .ord-badge.review::before { background: #facc15; }
+    .ord-badge.completed { background: rgba(34,197,94,0.08); color: #4ade80; border: 1px solid rgba(34,197,94,0.12); }
+    .ord-badge.completed::before { background: #4ade80; }
+    .ord-badge.cancelled { background: rgba(239,68,68,0.08); color: #f87171; border: 1px solid rgba(239,68,68,0.12); }
+    .ord-badge.cancelled::before { background: #f87171; }
+
+    .ord-table-footer {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.82rem;
+      color: var(--ord-text-muted);
+    }
+
+    .ord-empty {
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .ord-empty-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.06);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .ord-empty-icon svg { width: 28px; height: 28px; color: var(--ord-accent); }
+    .ord-empty h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .ord-empty p { color: var(--ord-text-secondary); margin-bottom: 24px; }
+    .ord-empty-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--ord-accent), #2563EB);
+      color: #fff; border-radius: 100px;
+      font-weight: 600; font-size: 0.88rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .ord-empty-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,130,246,0.35); }
+
+    .ord-skeleton {
+      padding: 16px 20px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .ord-skel-cell {
+      height: 18px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      animation: ordShimmer 1.5s ease-in-out infinite;
+    }
+
+    .ord-skel-row + .ord-skel-row { border-top: 1px solid rgba(255,255,255,0.03); }
+
+    @keyframes ordShimmer {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    @media (max-width: 768px) {
+      .ord-container { padding: 0 16px 60px; }
+      .ord-header h1 { font-size: 1.5rem; }
+      .ord-table thead { display: none; }
+      .ord-table tbody tr { display: block; padding: 16px; }
+      .ord-table tbody td {
+        display: flex; justify-content: space-between;
+        padding: 8px 0; border: none;
+      }
+      .ord-table tbody td::before {
+        content: attr(data-label);
+        font-size: 0.75rem;
+        color: var(--ord-text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      .ord-table tbody tr + tr { border-top: 1px solid rgba(255,255,255,0.06); }
+    }
+  </style>
+</head>
+<body data-page="orders">
+
+  <div id="navbar-container"></div>
+
+  <main class="ord-page">
+    <div class="ord-container">
+
+      <div class="ord-header">
+        <div>
+          <h1>My Orders</h1>
+          <p>View and manage all your orders in one place.</p>
+        </div>
+        <a href="submit-order.html" class="ord-empty-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Order
+        </a>
+      </div>
+
+      <div class="ord-table-wrap">
+        <table class="ord-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Service</th>
+              <th>Package</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Payment Method</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr>
+              <td colspan="7">
+                <div id="ordersLoading">
+                  <div class="ord-skel-row"><div class="ord-skeleton"><div class="ord-skel-cell" style="width:120px;"></div><div class="ord-skel-cell" style="width:180px;"></div><div class="ord-skel-cell" style="width:100px;"></div><div class="ord-skel-cell" style="width:80px;"></div><div class="ord-skel-cell" style="width:90px;"></div><div class="ord-skel-cell" style="width:100px;"></div><div class="ord-skel-cell" style="width:110px;"></div></div></div>
+                  <div class="ord-skel-row"><div class="ord-skeleton"><div class="ord-skel-cell" style="width:120px;"></div><div class="ord-skel-cell" style="width:180px;"></div><div class="ord-skel-cell" style="width:100px;"></div><div class="ord-skel-cell" style="width:80px;"></div><div class="ord-skel-cell" style="width:90px;"></div><div class="ord-skel-cell" style="width:100px;"></div><div class="ord-skel-cell" style="width:110px;"></div></div></div>
+                  <div class="ord-skel-row"><div class="ord-skeleton"><div class="ord-skel-cell" style="width:120px;"></div><div class="ord-skel-cell" style="width:180px;"></div><div class="ord-skel-cell" style="width:100px;"></div><div class="ord-skel-cell" style="width:80px;"></div><div class="ord-skel-cell" style="width:90px;"></div><div class="ord-skel-cell" style="width:100px;"></div><div class="ord-skel-cell" style="width:110px;"></div></div></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ord-table-footer" id="ordersFooter" style="display:none;">
+          <span id="orderCount">0 orders</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../modules/orders/orders-api.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    var tbody = document.getElementById('ordersTableBody');
+    var footer = document.getElementById('ordersFooter');
+    var countEl = document.getElementById('orderCount');
+    var loadingEl = document.getElementById('ordersLoading');
+
+    var user = null;
+    try {
+      var session = await window.supabaseClient.auth.getSession();
+      if (session.data.session) user = session.data.session.user;
+    } catch(e) {}
+
+    if (!user) {
+      if (loadingEl) loadingEl.remove();
+      tbody.innerHTML = '<tr><td colspan="7"><div class="ord-empty"><div class="ord-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Sign in to view your orders</h3><p>Please sign in to access your order history.</p><a href="login.html" class="ord-empty-btn">Sign In</a></div></td></tr>';
+      return;
+    }
+
+    try {
+      var { data: orders, error } = await window.supabaseClient
+        .from('orders')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (loadingEl) loadingEl.remove();
+
+      if (!orders || orders.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7"><div class="ord-empty"><div class="ord-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>No orders yet</h3><p>When you purchase a service, your orders will appear here.</p><a href="checkout.html" class="ord-empty-btn">Place Your First Order</a></div></td></tr>';
+        if (footer) footer.style.display = 'none';
+        return;
+      }
+
+      var serviceNames = {
+        "website-development": "Website Development",
+        "blog-creation": "Blog Creation",
+        "video-editing": "Video Editing",
+        "seo": "SEO Optimization",
+        "ecommerce-stores": "E-commerce Stores",
+        "social-media": "Social Media Growth",
+        "branding": "Brand Identity",
+        "ai-automation": "AI Automation",
+        "web-design": "Web Design"
+      };
+
+      var methodLabels = {
+        'paypal': 'PayPal',
+        'payoneer': 'Payoneer',
+        'whatsapp': 'WhatsApp Order'
+      };
+
+      function getStatusBadge(s) {
+        var st = (s || '').toLowerCase().replace(/ /g, '-');
+        var label = s || 'Pending';
+        return '<span class="ord-badge ' + st + '">' + label + '</span>';
+      }
+
+      function getServiceName(svc) {
+        return serviceNames[svc] || svc || '—';
+      }
+
+      function getMethod(m) {
+        return methodLabels[m] || m || '—';
+      }
+
+      function formatDate(d) {
+        if (!d) return '—';
+        return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      function formatAmount(a, b) {
+        var val = parseFloat(a || b || 0);
+        return val.toLocaleString('en-US') + ' MAD';
+      }
+
+      var rows = '';
+      orders.forEach(function(o) {
+        var id = o.order_number || o.id.slice(0, 8).toUpperCase();
+        rows += '<tr onclick="window.location=\'order-tracking.html?id=' + encodeURIComponent(o.id || '') + '\'">' +
+          '<td data-label="Order ID"><span class="ord-order-num">' + escapeHtml(id) + '</span></td>' +
+          '<td data-label="Service"><span class="ord-service-name">' + escapeHtml(getServiceName(o.service || o.service_slug || o.service_type)) + '</span></td>' +
+          '<td data-label="Package">' + escapeHtml(o.package_name || o.package || '—') + '</td>' +
+          '<td data-label="Amount"><span class="ord-amount">' + formatAmount(o.amount, o.budget) + '</span></td>' +
+          '<td data-label="Status">' + getStatusBadge(o.status) + '</td>' +
+          '<td data-label="Payment Method">' + getMethod(o.payment_method) + '</td>' +
+          '<td data-label="Date"><span class="ord-date">' + formatDate(o.created_at) + '</span></td>' +
+        '</tr>';
+      });
+
+      tbody.innerHTML = rows;
+      if (footer) { footer.style.display = 'flex'; }
+      if (countEl) countEl.textContent = orders.length + ' order' + (orders.length !== 1 ? 's' : '');
+
+    } catch (e) {
+      console.error('[Orders] load error:', e);
+      if (loadingEl) loadingEl.remove();
+      tbody.innerHTML = '<tr><td colspan="7"><div class="ord-empty"><div class="ord-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Failed to load orders</h3><p>' + escapeHtml(e.message || 'Please try again later.') + '</p></div></td></tr>';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  });
+  </script>
+  <div id="cookie-consent-container"></div>
+
+</body>
+</html>

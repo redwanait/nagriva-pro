@@ -215,6 +215,133 @@ const NAGRIVA_OrdersAPI = (() => {
     return (data || []).map(o => o.id);
   }
 
+  /* ─── Generate order number from Supabase (no localStorage) ─── */
+  async function generateOrderNumber() {
+    const year = new Date().getFullYear();
+    const prefix = 'NAG-' + year + '-';
+
+    try {
+      const { data, error } = await window.supabaseClient
+        .from(TABLE)
+        .select('order_number')
+        .like('order_number', prefix + '%')
+        .order('order_number', { ascending: false })
+        .limit(1);
+
+      if (error) throw error;
+
+      let nextNum = 1;
+      if (data && data.length > 0) {
+        const lastNum = parseInt(data[0].order_number.replace(prefix, ''), 10);
+        if (!isNaN(lastNum)) nextNum = lastNum + 1;
+      }
+
+      return prefix + String(nextNum).padStart(3, '0');
+    } catch (e) {
+      console.warn('[OrdersAPI] generateOrderNumber fallback:', e);
+      const fallback = prefix + '001';
+      return fallback;
+    }
+  }
+
+  /* ─── Create a project linked to an order ─── */
+  async function createProjectForOrder(orderId, title, stages) {
+    const defaultStages = stages || [
+      { name: 'Discovery', status: 'pending', order: 0 },
+      { name: 'Design', status: 'pending', order: 1 },
+      { name: 'Development', status: 'pending', order: 2 },
+      { name: 'Testing', status: 'pending', order: 3 },
+      { name: 'Launch', status: 'pending', order: 4 }
+    ];
+
+    const { data, error } = await window.supabaseClient
+      .from('projects')
+      .insert({
+        order_id: orderId,
+        title: title || 'Project',
+        stages: JSON.stringify(defaultStages),
+        current_stage: 'discovery',
+        progress: 0,
+        status: 'pending'
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
+  /* ─── Get project for an order ─── */
+  async function getProjectForOrder(orderId) {
+    const { data, error } = await window.supabaseClient
+      .from('projects')
+      .select('*')
+      .eq('order_id', orderId)
+      .maybeSingle();
+
+    if (error) throw error;
+    return data;
+  }
+
+  /* ─── Client dashboard full stats ─── */
+  async function getClientDashboardFullStats(userId) {
+    try {
+      const { data: orders, error } = await window.supabaseClient
+        .from(TABLE)
+        .select('status, amount, budget')
+        .eq('user_id', userId);
+
+      if (error) throw error;
+
+      const list = orders || [];
+      const totalOrders = list.length;
+      const activeProjects = list.filter(o =>
+        o.status === 'approved' || o.status === 'in_progress' || o.status === 'In Progress' || o.status === 'review' || o.status === 'Review'
+      ).length;
+      const completedProjects = list.filter(o =>
+        o.status === 'completed' || o.status === 'Completed' || o.status === 'delivered'
+      ).length;
+      const totalSpent = list.reduce((sum, o) => {
+        const amt = parseFloat(o.amount || o.budget || 0);
+        return sum + amt;
+      }, 0);
+
+      return {
+        totalOrders,
+        activeProjects,
+        completedProjects,
+        totalSpent
+      };
+    } catch (e) {
+      console.warn('[OrdersAPI] getClientDashboardFullStats error:', e);
+      return { totalOrders: 0, activeProjects: 0, completedProjects: 0, totalSpent: 0 };
+    }
+  }
+
+  /* ─── Get user's total spent ─── */
+  async function getUserTotalSpent(userId, statusFilter) {
+    try {
+      let query = window.supabaseClient
+        .from(TABLE)
+        .select('amount, budget')
+        .eq('user_id', userId);
+
+      if (statusFilter) {
+        query = query.in('status', statusFilter);
+      }
+
+      const { data, error } = await query;
+      if (error) throw error;
+
+      return (data || []).reduce((sum, o) => {
+        const amt = parseFloat(o.amount || o.budget || 0);
+        return sum + amt;
+      }, 0);
+    } catch (e) {
+      return 0;
+    }
+  }
+
   return {
     fetchAllOrders,
     fetchOrdersList,
@@ -231,5 +358,10 @@ const NAGRIVA_OrdersAPI = (() => {
     getUserOrderIds,
     subscribeToOrder,
     updateOrderProgress,
+    generateOrderNumber,
+    createProjectForOrder,
+    getProjectForOrder,
+    getClientDashboardFullStats,
+    getUserTotalSpent,
   };
 })();

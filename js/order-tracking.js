@@ -19,6 +19,27 @@
     truck: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>'
   };
 
+  const SERVICE_NAMES = {
+    "website-development": "Website Development",
+    "blog-creation": "Blog Creation",
+    "video-editing": "Video Editing",
+    "seo": "SEO Optimization",
+    "ecommerce-stores": "E-commerce Stores",
+    "social-media": "Social Media Growth",
+    "social-media-growth": "Social Media Growth",
+    "branding": "Brand Identity",
+    "brand-identity": "Brand Identity",
+    "ai-automation": "AI Automation",
+    "web-design": "Web Design",
+    "performance-marketing": "Performance Marketing"
+  };
+
+  function safeServiceType(s) {
+    if (!s) return 'Service';
+    if (SERVICE_NAMES[s]) return SERVICE_NAMES[s];
+    return String(s).replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
   const ACTIVITY_ICONS = {
     status: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
     message: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
@@ -313,7 +334,7 @@
           });
         }
 
-        const serviceLabel = order.service_type ? order.service_type.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }) : 'Service';
+        const serviceLabel = safeServiceType(order.service || order.service_slug || order.service_type);
 
         const budgetFormatted = order.budget ? '$' + parseInt(order.budget).toLocaleString() : '\u2014';
 

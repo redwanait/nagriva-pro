@@ -88,7 +88,7 @@ const NAGRIVA_ClientMessages = (() => {
 
     const { data: orders, error: ordersError } = await window.supabaseClient
       .from('orders')
-      .select('id, order_number, project_title, service_type, status, created_at')
+      .select('id, order_number, project_title, service_type, service, service_slug, status, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
@@ -138,7 +138,7 @@ const NAGRIVA_ClientMessages = (() => {
         id: order.id,
         orderNumber: order.order_number || '#' + (order.id || '').slice(0, 8),
         projectTitle: order.project_title || 'Untitled',
-        serviceType: order.service_type,
+        serviceType: order.service || order.service_type,
         status: order.status,
         orderCreatedAt: order.created_at,
         lastMessage: lastMsg ? lastMsg.message : null,

@@ -5,6 +5,27 @@
 
 'use strict';
 
+const SERVICE_NAMES = {
+  "website-development": "Website Development",
+  "blog-creation": "Blog Creation",
+  "video-editing": "Video Editing",
+  "seo": "SEO Optimization",
+  "ecommerce-stores": "E-commerce Stores",
+  "social-media": "Social Media Growth",
+  "social-media-growth": "Social Media Growth",
+  "branding": "Brand Identity",
+  "brand-identity": "Brand Identity",
+  "ai-automation": "AI Automation",
+  "web-design": "Web Design",
+  "performance-marketing": "Performance Marketing"
+};
+
+function safeServiceType(s) {
+  if (!s) return 'Service';
+  if (SERVICE_NAMES[s]) return SERVICE_NAMES[s];
+  return String(s).replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+}
+
 const NagrivaOrders = (() => {
 
   /* ─── Helpers ─── */
@@ -40,9 +61,28 @@ const NagrivaOrders = (() => {
     return (bytes / 1048576).toFixed(1) + ' MB';
   }
 
+  function normalizeStatus(s) {
+    if (!s) return 'pending';
+    var lower = s.toLowerCase().replace(/ /g, '_');
+    var map = {
+      'pending': 'pending',
+      'paid': 'paid',
+      'approved': 'approved',
+      'in_progress': 'in_progress',
+      'in progress': 'in_progress',
+      'review': 'review',
+      'delivered': 'completed',
+      'completed': 'completed',
+      'cancelled': 'cancelled'
+    };
+    return map[lower] || 'pending';
+  }
+
   function getStatusBadgeClass(status) {
+    const n = normalizeStatus(status);
     const map = {
       pending: 'pending',
+      paid: 'paid',
       approved: 'approved',
       in_progress: 'in_progress',
       review: 'review',
@@ -50,12 +90,14 @@ const NagrivaOrders = (() => {
       completed: 'completed',
       cancelled: 'cancelled'
     };
-    return map[status] || 'pending';
+    return map[n] || 'pending';
   }
 
   function getStatusLabel(status) {
+    const n = normalizeStatus(status);
     const map = {
       pending: 'Pending',
+      paid: 'Paid',
       approved: 'Approved',
       in_progress: 'In Progress',
       review: 'Review',
@@ -63,7 +105,7 @@ const NagrivaOrders = (() => {
       completed: 'Completed',
       cancelled: 'Cancelled'
     };
-    return map[status] || status;
+    return map[n] || status;
   }
 
   function getStageLabel(stage) {
@@ -711,6 +753,7 @@ const NagrivaOrders = (() => {
     getStatusLabel,
     getStageLabel,
     getProgressForStage,
+    safeServiceType,
     createOrder,
     getUserOrders,
     getOrder,

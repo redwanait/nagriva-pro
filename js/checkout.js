@@ -8,11 +8,43 @@
   var WHATSAPP_NUMBER = '21261818403';
   var PAYPAL_CLIENT_ID = 'sb';
   var paypalLoaded = false;
+  var isProcessing = false;
 
   var els = {};
 
   var appliedCoupon = null;
   var selectedAddons = {};
+
+  var SERVICE_NAMES = {
+    "website-development": "Website Development",
+    "blog-creation": "Blog Creation",
+    "video-editing": "Video Editing",
+    "seo": "SEO Optimization",
+    "ecommerce-stores": "E-commerce Stores",
+    "social-media": "Social Media Growth",
+    "social-media-growth": "Social Media Growth",
+    "branding": "Brand Identity",
+    "brand-identity": "Brand Identity",
+    "ai-automation": "AI Automation",
+    "web-design": "Web Design",
+    "performance-marketing": "Performance Marketing"
+  };
+
+  var SERVICE_IMAGES = {
+    "website-development": "/assets/images/services/website-development.png",
+    "blog-creation": "/assets/images/services/blog-creation.png",
+    "ecommerce-stores": "/assets/images/services/ecommerce-stores.png",
+    "video-editing": "/assets/images/services/video-editing.png",
+    "seo": "/assets/images/services/seo-1.jpg",
+    "seo-optimization": "/assets/images/services/seo-1.jpg",
+    "social-media": "/assets/images/services/social-media-1.jpg",
+    "social-media-growth": "/assets/images/services/social-media-1.jpg",
+    "performance-marketing": "/assets/images/services/performance-marketing-1.jpg",
+    "brand-identity": "/assets/images/services/branding-1.jpg",
+    "branding": "/assets/images/services/branding-1.jpg",
+    "ai-automation": "/assets/images/services/ai-automation-1.jpg",
+    "web-design": "/assets/images/services/web-design-1.jpg"
+  };
 
   var ADDONS = [
     { id: 'seo', name: 'SEO Audit', price: 399 },
@@ -32,23 +64,23 @@
 
   var TESTIMONIALS = [
     {
-      name: 'Youssef Benali',
-      position: 'Founder, MedTech Solutions',
-      text: 'Nagriva delivered beyond our expectations. The website is stunning, fast, and our client inquiries have tripled since launch. The checkout process was just as smooth.',
+      name: 'Ahmed M.',
+      position: 'Business Owner',
+      text: 'Excellent communication and delivery.',
       rating: 5,
       avatarClass: ''
     },
     {
-      name: 'Sarah El Fassi',
-      position: 'CEO, Casa Digital Agency',
-      text: 'Working with Nagriva was the best decision we made this year. The attention to detail and the quality of their work is outstanding. Truly a premium experience.',
+      name: 'Sarah K.',
+      position: 'Startup Founder',
+      text: 'Professional work and amazing support.',
       rating: 5,
       avatarClass: 'chk-testimonial-avatar--2'
     },
     {
-      name: 'Karim Ouazzani',
-      position: 'Owner, AutoWeb Maroc',
-      text: 'From consultation to delivery, everything was seamless. Our car rental booking system went from concept to launch in just 2 weeks. Highly recommended.',
+      name: 'John D.',
+      position: 'Entrepreneur',
+      text: 'Highly recommended for business websites.',
       rating: 5,
       avatarClass: 'chk-testimonial-avatar--3'
     }
@@ -94,6 +126,12 @@
     els.savingsAmount = document.getElementById('savingsAmount');
     els.savingsReason = document.getElementById('savingsReason');
     els.savingsCode = document.getElementById('savingsCode');
+    els.breadcrumbService = document.getElementById('breadcrumbService');
+    els.addonsHeader = document.querySelector('.chk-addons-header');
+  }
+
+  function getServiceDisplayName(slug) {
+    return SERVICE_NAMES[slug] || slug;
   }
 
   function getParams() {
@@ -196,7 +234,7 @@
         popular: false,
         featured: false
       };
-      serviceData = { slug: params.slug, title: params.slug, packages: [selectedPackage] };
+      serviceData = { slug: params.slug, title: getServiceDisplayName(params.slug), packages: [selectedPackage] };
       renderAll();
       renderAddons();
       initPaymentMethods();
@@ -270,16 +308,26 @@
           : '');
     }
 
-    if (els.previewBanner && service.image) {
-      els.previewBanner.style.background = 'linear-gradient(135deg, #0a1628, #0d1f3c)';
-      var img = new Image();
-      img.onload = function () {
-        els.previewBanner.innerHTML = '<img src="' + escapeHtml(service.image) + '" alt="' + escapeHtml(cleanTitle) + '" />' + els.previewBanner.querySelector('.chk-preview-banner-overlay').outerHTML + els.previewBanner.querySelector('.chk-preview-category').outerHTML;
-      };
-      img.src = service.image;
+    if (els.previewBanner) {
+      var slug = service.slug || '';
+      var imagePath = SERVICE_IMAGES[slug] || service.image || '';
+      console.log("Service:", slug);
+      console.log("Image:", imagePath);
+
+      if (imagePath) {
+        els.previewBanner.style.background = 'linear-gradient(135deg, #0a1628, #0d1f3c)';
+        var img = new Image();
+        img.onload = function () {
+          els.previewBanner.innerHTML = '<img src="' + escapeHtml(imagePath) + '" alt="' + escapeHtml(cleanTitle) + '" />' + els.previewBanner.querySelector('.chk-preview-banner-overlay').outerHTML + els.previewBanner.querySelector('.chk-preview-category').outerHTML;
+        };
+        img.src = imagePath;
+      } else {
+        els.previewBanner.style.background = 'linear-gradient(135deg, #0a1628, #0d1f3c)';
+      }
     }
 
     if (els.summaryService) els.summaryService.textContent = cleanTitle;
+    if (els.breadcrumbService) els.breadcrumbService.textContent = cleanTitle;
     if (els.summaryPackage) els.summaryPackage.textContent = pkg.name || 'Package';
     if (els.summaryDelivery) els.summaryDelivery.textContent = pkg.delivery || '—';
 
@@ -558,16 +606,9 @@
   function updateWhatsAppLink() {
     if (!els.whatsappBtn || !serviceData || !selectedPackage) return;
 
-    var serviceName = serviceData.title ? serviceData.title.replace(/<[^>]*>/g, '') : serviceData.slug;
+    var serviceName = getServiceDisplayName(serviceData.slug) || (serviceData.title ? serviceData.title.replace(/<[^>]*>/g, '') : serviceData.slug);
     var packageName = selectedPackage.name || 'Package';
     var price = formatPrice(getFinalPrice());
-    var userName = 'Client';
-    var userEmail = '';
-
-    if (currentUser) {
-      userName = getDisplayName(currentUser);
-      userEmail = currentUser.email || '';
-    }
 
     var message =
       'Hello Nagriva,\n\n' +
@@ -575,9 +616,7 @@
       'Service: ' + serviceName + '\n' +
       'Package: ' + packageName + '\n' +
       'Price: ' + price + ' MAD\n\n' +
-      'My Account:\n' +
-      userName + '\n' +
-      userEmail;
+      'Please contact me regarding this project.';
 
     var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
     els.whatsappBtn.href = url;
@@ -649,44 +688,87 @@
       showMessage('error', 'You must be logged in to place an order.');
       return;
     }
-    createOrderInDB('paypal', 'paid', 'pending', function (order) {
+    setLoadingPlaceOrder(true);
+    isProcessing = true;
+    createOrderInDB('paypal', 'paid', 'Pending', function (order) {
+      setLoadingPlaceOrder(false);
+      isProcessing = false;
       if (order) {
-        saveOrderToLocalStorage(order, 'paid');
-        window.location.href = 'order-success.html?order_id=' + (order.id || '') + '&service=' + encodeURIComponent(order.service || '') + '&package=' + encodeURIComponent(order.package_name || '') + '&price=' + encodeURIComponent(order.budget || '') + '&method=paypal';
+        window.location.href = 'order-success.html?order_id=' + encodeURIComponent(order.id || '') + '&order_number=' + encodeURIComponent(order.order_number || '') + '&service=' + encodeURIComponent(order.service || order.service_slug || '') + '&package=' + encodeURIComponent(order.package_name || '') + '&price=' + encodeURIComponent(order.amount || order.budget || '') + '&method=paypal';
       }
     });
+  }
+
+  function selectedPaymentMethod() {
+    return document.querySelector('input[name="payment"]:checked');
   }
 
   function handleWhatsAppOrder() {
+    if (isProcessing) return;
     if (!currentUser) {
       showMessage('error', 'You must be logged in to place an order.');
       return;
     }
+    if (!selectedPaymentMethod()) {
+      showMessage('error', 'Please select a payment method.');
+      return;
+    }
+    isProcessing = true;
+    if (els.whatsappBtn) {
+      els.whatsappBtn.classList.add('loading');
+      els.whatsappBtn.disabled = true;
+      els.whatsappBtn.textContent = 'Processing...';
+    }
     updateWhatsAppLink();
-    createOrderInDB('whatsapp', 'pending', 'pending', function (order) {
+    createOrderInDB('whatsapp', 'pending', 'Pending', function (order) {
+      isProcessing = false;
+      if (els.whatsappBtn) {
+        els.whatsappBtn.classList.remove('loading');
+        els.whatsappBtn.disabled = false;
+        els.whatsappBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Order via WhatsApp';
+      }
       if (order) {
-        saveOrderToLocalStorage(order, 'pending');
+        setTimeout(function () {
+          if (els.whatsappBtn) els.whatsappBtn.click();
+        }, 300);
       }
     });
-    if (els.whatsappBtn) els.whatsappBtn.click();
   }
 
   function handlePayoneerInvoice() {
+    if (isProcessing) return;
     if (!currentUser) {
       showMessage('error', 'You must be logged in to place an order.');
       return;
     }
+    if (!selectedPaymentMethod()) {
+      showMessage('error', 'Please select a payment method.');
+      return;
+    }
+    isProcessing = true;
     setLoadingPayoneer(true);
-    createOrderInDB('payoneer', 'pending', 'pending', function (order) {
+    createOrderInDB('payoneer', 'pending', 'Pending', function (order) {
       setLoadingPayoneer(false);
+      isProcessing = false;
       if (order) {
-        saveOrderToLocalStorage(order, 'pending');
-        showMessage('success', 'Invoice request sent! Your order #' + order.id.slice(0, 8) + ' has been created. We will send the invoice to your email.');
+        showMessage('success', 'Invoice request sent! Your order #' + (order.order_number || order.id.slice(0, 8)) + ' has been created. We will send the invoice to your email.');
       }
     });
   }
 
-  function createOrderInDB(paymentMethod, paymentStatus, orderStatus, callback) {
+  async function generateOrderNumber() {
+    try {
+      if (typeof NAGRIVA_OrdersAPI !== 'undefined' && NAGRIVA_OrdersAPI.generateOrderNumber) {
+        return await NAGRIVA_OrdersAPI.generateOrderNumber();
+      }
+    } catch (e) {
+      console.warn('[Checkout] generateOrderNumber fallback:', e);
+    }
+    var year = new Date().getFullYear();
+    return 'NAG-' + year + '-001';
+  }
+
+  async function createOrderInDB(paymentMethod, paymentStatus, orderStatus, callback) {
     if (!currentUser) {
       showMessage('error', 'You must be logged in to place an order.');
       return;
@@ -696,6 +778,8 @@
     var packageName = selectedPackage.name || 'Package';
     var priceNum = getFinalPrice();
 
+    var orderNum = await generateOrderNumber();
+
     var payload = {
       user_id: currentUser.id,
       client_name: getDisplayName(currentUser),
@@ -704,12 +788,16 @@
       service_slug: serviceData.slug,
       package_name: packageName,
       package_index: pkgIndex,
+      amount: priceNum,
       budget: priceNum,
       currency: 'MAD',
       payment_method: paymentMethod,
       payment_status: paymentStatus,
       status: orderStatus,
-      project_title: serviceName + ' - ' + packageName
+      project_title: serviceName + ' - ' + packageName,
+      order_number: orderNum,
+      delivery_time: selectedPackage.delivery || '',
+      revisions: selectedPackage.revisions || ''
     };
 
     if (typeof NAGRIVA_OrdersAPI !== 'undefined') {
@@ -732,25 +820,21 @@
     }
   }
 
-  function saveOrderToLocalStorage(order, paymentStatus) {
-    try {
-      var orders = JSON.parse(localStorage.getItem('nagriva_orders') || '[]');
-      orders.push({
-        id: order.id,
-        service: order.service,
-        package_name: order.package_name,
-        budget: order.budget,
-        currency: order.currency || 'MAD',
-        payment_method: order.payment_method,
-        payment_status: paymentStatus,
-        status: order.status || 'pending',
-        client_name: order.client_name,
-        user_email: order.user_email,
-        created_at: order.created_at || new Date().toISOString()
-      });
-      localStorage.setItem('nagriva_orders', JSON.stringify(orders));
-    } catch (e) {
-      console.warn('[Checkout] localStorage save failed:', e);
+  function setLoadingPlaceOrder(loading) {
+    var btns = [els.placeOrderBtn, els.placeOrderBtnMobile];
+    for (var i = 0; i < btns.length; i++) {
+      if (!btns[i]) continue;
+      if (loading) {
+        btns[i].classList.add('loading');
+        btns[i].disabled = true;
+        var textEl = btns[i].querySelector('.chk-place-order-text');
+        if (textEl) textEl.textContent = 'Processing...';
+      } else {
+        btns[i].classList.remove('loading');
+        btns[i].disabled = false;
+        var textEl = btns[i].querySelector('.chk-place-order-text');
+        if (textEl) textEl.textContent = 'Complete Order';
+      }
     }
   }
 
@@ -816,15 +900,55 @@
         });
       }
     }
+
+    if (els.addonsHeader) {
+      els.addonsHeader.addEventListener('click', function () {
+        var section = document.querySelector('.chk-addons-section');
+        if (section) {
+          section.classList.toggle('chk-addons-collapsed');
+        }
+      });
+    }
+
+    var testimonialsTrack = els.testimonialsTrack;
+    if (testimonialsTrack) {
+      var prevBtn = document.querySelector('.chk-testimonials-arrow--prev');
+      var nextBtn = document.querySelector('.chk-testimonials-arrow--next');
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+          testimonialsTrack.scrollBy({ left: -testimonialsTrack.clientWidth * 0.8, behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+          testimonialsTrack.scrollBy({ left: testimonialsTrack.clientWidth * 0.8, behavior: 'smooth' });
+        });
+      }
+    }
   }
 
   function handleLegacyPlaceOrder() {
+    if (isProcessing) return;
+
     var selectedPayment = document.querySelector('input[name="payment"]:checked');
     if (!selectedPayment) {
       showMessage('error', 'Please select a payment method.');
       return;
     }
-    showMessage('error', 'Please use the button provided for your selected payment method.');
+    if (selectedPayment.value === 'paypal') {
+      if (els.paypalSection) els.paypalSection.style.display = 'block';
+      toggleOrderButtons(false);
+      loadPayPalSDK();
+    } else if (selectedPayment.value === 'payoneer') {
+      if (els.payoneerSection) els.payoneerSection.style.display = 'block';
+      toggleOrderButtons(false);
+    } else if (selectedPayment.value === 'whatsapp') {
+      if (els.whatsappSection) els.whatsappSection.style.display = 'block';
+      toggleOrderButtons(false);
+      updateWhatsAppLink();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {

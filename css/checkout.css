@@ -24,7 +24,6 @@
 .chk-page {
   padding-top: calc(68px + 40px);
   background: var(--chk-bg);
-  min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -45,7 +44,7 @@
 .chk-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px 100px;
+  padding: 0 32px 0;
   position: relative;
   z-index: 1;
 }
@@ -56,7 +55,7 @@
 
 .chk-header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   animation: chkFadeIn 0.6s ease-out;
 }
 
@@ -115,7 +114,7 @@
   grid-template-columns: 1fr 380px;
   gap: 32px;
   align-items: start;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .chk-left {
@@ -133,7 +132,59 @@
   top: 100px;
 }
 
-/* ─── Base Card ─── */
+/* ════════════════════════════════════════════════════════
+   BREADCRUMB
+   ════════════════════════════════════════════════════════ */
+
+.chk-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  font-size: 0.82rem;
+  color: var(--chk-text-muted);
+  flex-wrap: wrap;
+}
+
+.chk-breadcrumb a {
+  color: var(--chk-text-muted);
+  text-decoration: none;
+  transition: color var(--chk-transition);
+  position: relative;
+}
+
+.chk-breadcrumb a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--chk-accent);
+  transition: width var(--chk-transition);
+}
+
+.chk-breadcrumb a:hover {
+  color: var(--chk-accent);
+}
+
+.chk-breadcrumb a:hover::after {
+  width: 100%;
+}
+
+.chk-bc-sep {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.75rem;
+}
+
+.chk-bc-current {
+  color: var(--chk-text-secondary);
+  font-weight: 500;
+}
+
+/* ─── Base Card ───
+     No overflow hidden — only ONE page scrollbar.
+     Cards use height: fit-content naturally. */
 
 .chk-card {
   background: var(--chk-card-bg);
@@ -213,7 +264,7 @@
 }
 
 .chk-preview-body {
-  padding: 0 32px 32px;
+  padding: 0 24px 24px;
   margin-top: -8px;
   position: relative;
   z-index: 3;
@@ -317,11 +368,11 @@
    ════════════════════════════════════════════════════════ */
 
 .chk-payment-section {
-  padding: 32px;
+  padding: 24px;
 }
 
 .chk-section-header {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .chk-section-title {
@@ -362,7 +413,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 18px 20px;
+  padding: 14px 16px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--chk-radius-sm);
@@ -618,7 +669,7 @@
    ════════════════════════════════════════════════════════ */
 
 .chk-summary-card {
-  padding: 28px;
+  padding: 24px;
 }
 
 .chk-summary-header {
@@ -643,6 +694,9 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  overflow: visible;
+  max-height: none;
+  height: auto;
 }
 
 .chk-summary-row {
@@ -906,7 +960,7 @@
   align-items: center;
   gap: 14px;
   margin: 12px 0 8px;
-  padding: 16px 18px;
+  padding: 12px 14px;
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.02));
   border: 1px solid rgba(34, 197, 94, 0.2);
   border-radius: var(--chk-radius-sm);
@@ -981,7 +1035,7 @@
    ════════════════════════════════════════════════════════ */
 
 .chk-addons-section {
-  padding: 24px;
+  padding: 20px;
 }
 
 .chk-addons-header {
@@ -992,6 +1046,8 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 6px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .chk-addons-header svg {
@@ -1082,6 +1138,23 @@
   font-weight: 700;
   color: var(--chk-accent);
   flex-shrink: 0;
+}
+
+.chk-addons-chevron {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  width: 18px;
+  height: 18px;
+  color: var(--chk-text-muted);
+}
+
+.chk-addons-collapsed .chk-addons-chevron {
+  transform: rotate(-90deg);
+}
+
+.chk-addons-collapsed .chk-addons-list,
+.chk-addons-collapsed .chk-addons-subtitle {
+  display: none;
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1294,30 +1367,37 @@
   50% { opacity: 0.5; }
 }
 
-/* ─── Trust Indicators (below CTA) ─── */
+/* ─── Trust Badges (below CTA) ─── */
 
-.chk-trust-indicators {
+.chk-trust-badges {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px 16px;
+  gap: 8px 16px;
   margin-top: 18px;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.chk-trust-indicator {
+.chk-trust-badge {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-size: 0.75rem;
   color: var(--chk-text-secondary);
-  padding: 4px 0;
+  padding: 6px 0;
+  transition: all var(--chk-transition);
 }
 
-.chk-trust-indicator svg {
-  width: 13px;
-  height: 13px;
+.chk-trust-badge:hover {
+  color: var(--chk-text);
+  transform: translateX(3px);
+}
+
+.chk-trust-badge svg {
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.3));
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1440,6 +1520,28 @@
    SECTION 6 — TESTIMONIALS
    ════════════════════════════════════════════════════════ */
 
+.chk-testimonials-section {
+  padding: 24px;
+}
+
+.chk-testimonials-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chk-testimonials-header svg {
+  width: 18px;
+  height: 18px;
+  color: var(--chk-accent);
+}
+
 .chk-testimonials {
   margin-bottom: 48px;
 }
@@ -1454,19 +1556,29 @@
 }
 
 .chk-testimonials-track {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.chk-testimonials-track::-webkit-scrollbar {
+  display: none;
 }
 
 .chk-testimonial-card {
   background: var(--chk-card-bg);
   border: 1px solid var(--chk-card-border);
   border-radius: var(--chk-radius);
-  padding: 28px;
+  padding: 20px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: all var(--chk-transition);
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
 }
 
 .chk-testimonial-card:hover {
@@ -1537,6 +1649,39 @@
 .chk-testimonial-position {
   font-size: 0.75rem;
   color: var(--chk-text-muted);
+}
+
+.chk-testimonials-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.chk-testimonials-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--chk-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--chk-transition);
+}
+
+.chk-testimonials-arrow:hover {
+  border-color: var(--chk-accent);
+  color: var(--chk-accent);
+  background: rgba(59, 130, 246, 0.08);
+  transform: scale(1.05);
+}
+
+.chk-testimonials-arrow svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1885,6 +2030,172 @@
 }
 
 /* ════════════════════════════════════════════════════════
+   MICRO INTERACTIONS / SAAS PREMIUM EFFECTS
+   ════════════════════════════════════════════════════════ */
+
+/* Button Glow Effect */
+.chk-glow {
+  position: relative;
+}
+
+.chk-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--chk-accent), #60a5fa, var(--chk-accent));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--chk-transition);
+  animation: chkGlowRotate 3s linear infinite;
+}
+
+.chk-glow:hover::before {
+  opacity: 0.4;
+}
+
+@keyframes chkGlowRotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Card hover premium effect — no transform to avoid overflow */
+.chk-card {
+  transition: border-color var(--chk-transition),
+              box-shadow var(--chk-transition),
+              background var(--chk-transition);
+}
+
+.chk-card:hover {
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.05),
+              0 12px 48px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Smooth page load stagger */
+.chk-card {
+  animation: chkCardIn 0.5s ease backwards;
+}
+
+.chk-card:nth-child(1) { animation-delay: 0.05s; }
+.chk-card:nth-child(2) { animation-delay: 0.1s; }
+.chk-card:nth-child(3) { animation-delay: 0.15s; }
+.chk-card:nth-child(4) { animation-delay: 0.2s; }
+.chk-card:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes chkCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success animation for order button */
+.chk-place-order.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  pointer-events: none;
+}
+
+.chk-place-order.success .chk-place-order-text {
+  content: 'Order Placed!';
+}
+
+.chk-place-order.success .chk-place-order-arrow svg {
+  animation: chkCheckBounce 0.5s ease;
+}
+
+@keyframes chkCheckBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Price shimmer effect */
+.chk-summary-total-value {
+  position: relative;
+  display: inline-block;
+}
+
+.chk-summary-total-value::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  animation: chkShimmer 3s ease-in-out infinite;
+}
+
+@keyframes chkShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Input focus premium glow */
+.chk-coupon-input:focus,
+.chk-field input:focus {
+  box-shadow: 0 0 0 3px var(--chk-accent-glow),
+              0 0 30px rgba(59, 130, 246, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Payment method radio hover lift */
+.chk-payment-card {
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chk-payment-card:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* WhatsApp button loading state */
+.chk-whatsapp-btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.chk-whatsapp-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: chkSpin 0.7s linear infinite;
+}
+
+/* Breadcrumb entrance animation */
+.chk-breadcrumb {
+  animation: chkFadeIn 0.5s ease-out;
+}
+
+/* Sticky sidebar — no internal scrollbar */
+.chk-sidebar-sticky {
+  height: fit-content;
+}
+
+/* Radio input selection glow */
+.chk-payment-option input:checked + .chk-payment-card {
+  animation: chkSelectPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes chkSelectPop {
+  0% { transform: scale(0.98); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* ════════════════════════════════════════════════════════
    RESPONSIVE
    ════════════════════════════════════════════════════════ */
 
@@ -1990,7 +2301,7 @@
     padding: 12px 14px;
   }
 
-  .chk-trust-indicators {
+  .chk-trust-badges {
     grid-template-columns: 1fr;
     gap: 4px;
   }
@@ -2017,8 +2328,11 @@
   }
 
   .chk-testimonials-track {
-    grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .chk-testimonial-card {
+    flex: 0 0 calc(100% - 32px);
   }
 
   .chk-help {

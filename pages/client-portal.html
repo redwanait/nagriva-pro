@@ -434,9 +434,11 @@
           var progress = getStatusProgress(o.status);
           var label = getStatusLabel(o.status);
           var badgeClass = (o.status === 'delivered' || o.status === 'completed') ? 'delivered' : o.status === 'in_progress' ? 'in_progress' : o.status === 'review' ? 'review' : o.status === 'cancelled' ? 'cancelled' : 'pending';
-          var iconSvg = getServiceIconSvg(o.service_type);
+          var iconSvg = getServiceIconSvg(o.service_slug || o.service_type);
           var orderNum = o.order_number || '#' + (o.id || '').slice(0, 8);
           var stage = { order_received: 'Received', project_approved: 'Approved', work_started: 'In Progress', first_draft: 'Draft', client_review: 'Review', final_delivery: 'Final' }[o.current_stage] || o.current_stage || 'Received';
+
+          var svcName = safeServiceType(o.service || o.service_slug || o.service_type);
 
           var card = document.createElement('div');
           card.className = 'pv-order';
@@ -448,7 +450,7 @@
                 '<div class="pv-order-meta">' +
                   '<span>' + escapeHtml(orderNum) + '</span>' +
                   '<span class="dot"></span>' +
-                  '<span>' + escapeHtml(o.service_type || 'Service') + '</span>' +
+                  '<span>' + escapeHtml(svcName) + '</span>' +
                   '<span class="dot"></span>' +
                   '<span>Created ' + formatDate(o.created_at) + '</span>' +
                   (o.estimated_delivery ? '<span class="dot"></span><span>Due ' + formatDate(o.estimated_delivery) + '</span>' : '') +
