@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" rx="12" fill="#1a1d23"/>
+  <!-- Browser Chrome -->
+  <rect x="0" y="0" width="1200" height="44" rx="12" fill="#23262e"/>
+  <rect x="0" y="28" width="1200" height="16" fill="#23262e"/>
+  <circle cx="20" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="22" r="6" fill="#28c840"/>
+  <rect x="100" y="14" width="320" height="18" rx="9" fill="#2f323a"/>
+  <!-- Hero Section -->
+  <rect x="0" y="44" width="1200" height="340" fill="url(#dc-hero)"/>
+  <defs>
+    <linearGradient id="dc-hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="dc-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#7dd3fc"/>
+    </linearGradient>
+  </defs>
+  <!-- Nav bar inside hero -->
+  <rect x="40" y="64" width="1120" height="36" rx="6" fill="rgba(255,255,255,0.08)"/>
+  <rect x="60" y="74" width="100" height="16" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="180" y="74" width="60" height="16" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <rect x="260" y="74" width="80" height="16" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <rect x="360" y="74" width="70" height="16" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <rect x="450" y="74" width="90" height="16" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <rect x="1020" y="68" width="120" height="28" rx="14" fill="rgba(255,255,255,0.15)"/>
+  <!-- Hero content -->
+  <text x="80" y="160" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white">Welcome to DentalCare Pro</text>
+  <text x="80" y="188" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.65)">
+    Modern dentistry with a gentle touch. Book your appointment today.
+  </text>
+  <rect x="80" y="210" width="140" height="36" rx="18" fill="#38bdf8"/>
+  <text x="117" y="233" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0c4a6e">Book Appointment</text>
+  <rect x="230" y="210" width="120" height="36" rx="18" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="265" y="233" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.7)">Our Services</text>
+  <!-- Trust row -->
+  <rect x="80" y="270" width="160" height="40" rx="8" fill="rgba(255,255,255,0.06)"/>
+  <text x="100" y="285" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">EXPERIENCE</text>
+  <text x="100" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">15+ Years</text>
+  <rect x="260" y="270" width="160" height="40" rx="8" fill="rgba(255,255,255,0.06)"/>
+  <text x="280" y="285" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">PATIENTS</text>
+  <text x="280" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">5,000+</text>
+  <rect x="440" y="270" width="160" height="40" rx="8" fill="rgba(255,255,255,0.06)"/>
+  <text x="460" y="285" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">RATING</text>
+  <text x="460" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">4.9 ★</text>
+  <!-- Right side decoration -->
+  <circle cx="900" cy="200" r="100" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="900" cy="200" r="60" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="950" cy="180" r="30" fill="rgba(56,189,248,0.1)"/>
+  <path d="M940 170 Q950 155 960 170 Q965 180 955 185" stroke="#38bdf8" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M970 160 Q975 150 980 160" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <!-- Services Section -->
+  <rect x="0" y="384" width="1200" height="190" fill="#1a1d23"/>
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Our Services</text>
+  <rect x="40" y="440" width="250" height="110" rx="10" fill="#22252e" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="60" y="458" width="24" height="24" rx="6" fill="#38bdf8"/>
+  <text x="62" y="465" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">🦷</text>
+  <text x="95" y="475" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Teeth Cleaning</text>
+  <text x="60" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Professional cleaning for</text>
+  <text x="60" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">a brighter, healthier smile.</text>
+  <text x="60" y="536" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">From 300 MAD</text>
+  <rect x="315" y="440" width="250" height="110" rx="10" fill="#22252e" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="335" y="458" width="24" height="24" rx="6" fill="#38bdf8"/>
+  <text x="370" y="475" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Dental Implants</text>
+  <text x="335" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Permanent solutions for</text>
+  <text x="335" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">missing teeth.</text>
+  <text x="335" y="536" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">From 3,500 MAD</text>
+  <rect x="590" y="440" width="250" height="110" rx="10" fill="#22252e" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="610" y="458" width="24" height="24" rx="6" fill="#38bdf8"/>
+  <text x="645" y="475" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Orthodontics</text>
+  <text x="610" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Braces and Invisalign for</text>
+  <text x="610" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">perfectly aligned teeth.</text>
+  <text x="610" y="536" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">From 8,000 MAD</text>
+  <rect x="865" y="440" width="250" height="110" rx="10" fill="#22252e" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="885" y="458" width="24" height="24" rx="6" fill="#38bdf8"/>
+  <text x="920" y="475" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Cosmetic Dentistry</text>
+  <text x="885" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Veneers, whitening,</text>
+  <text x="885" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">and smile makeovers.</text>
+  <text x="885" y="536" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#38bdf8">From 1,500 MAD</text>
+  <!-- Footer -->
+  <rect x="0" y="574" width="1200" height="60" fill="#13151a"/>
+  <text x="600" y="600" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.25)" text-anchor="middle">DentalCare Pro — Casablanca, Morocco | contact@dentalcarepro.ma | +212 5XX-XXXXXX</text>
+  <!-- Browser URL bar -->
+  <rect x="40" y="656" width="1120" height="120" rx="10" fill="#13151a" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="80" y="686" font-family="monospace" font-size="11" fill="rgba(255,255,255,0.3)">Preview: DentalCare Pro — Modern Dental Clinic Website</text>
+  <rect x="80" y="706" width="80" height="20" rx="4" fill="rgba(56,189,248,0.1)"/>
+  <text x="93" y="720" font-family="Arial, sans-serif" font-size="8" fill="#38bdf8">DENTAL</text>
+  <rect x="172" y="706" width="90" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="186" y="720" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.4)">MODERN</text>
+  <rect x="274" y="706" width="100" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="288" y="720" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.4)">APPOINTMENT</text>
+</svg>

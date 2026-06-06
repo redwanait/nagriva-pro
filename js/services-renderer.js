@@ -225,7 +225,7 @@ window.ServicesRenderer = (function () {
           '<div class="fv-features-title">What\'s Included</div>' +
           '<ul class="fv-features">' + featuresHtml + '</ul>' +
           '<a href="' + orderHref + '" class="fv-cta fv-cta--primary" data-service="cta-primary">Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>' +
-          '<a href="/pages/contact.html" class="fv-cta fv-cta--secondary">Contact Us</a>' +
+          '<a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="fv-cta fv-cta--secondary">Book a Free Call</a>' +
           '<div class="fv-sidebar-trust">' + ICONS.lock + 'Secure checkout &bull; Money-back guarantee</div>';
 
         dataContainer.appendChild(div);

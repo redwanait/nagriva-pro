@@ -173,7 +173,7 @@ window.NAGRIVA_Dashboard = (function () {
       '<h3 class="dash-empty-title">No messages yet</h3>' +
       '<p class="dash-empty-desc">When you have conversations about your orders, they\'ll appear here.</p>' +
       '<div class="dash-empty-actions">' +
-      '<a href="../index.html#contact" class="dash-empty-btn dash-empty-btn-primary">' + window.NAGRIVA_EmptyState.icons['message-square'] + ' Contact Support</a>' +
+      '<a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dash-empty-btn dash-empty-btn-primary">' + window.NAGRIVA_EmptyState.icons['message-square'] + ' Book a Free Call</a>' +
       '</div></div>';
   }
 

@@ -20,10 +20,46 @@
     'onboarding-qa': '/pages/onboarding-qa.html'
   }
 
+  function processNavbar () {
+    var container = document.getElementById(CONTAINER_ID)
+    if (!container) return
+
+    /* ─── Active link system ─── */
+    var page = document.body.getAttribute('data-page')
+    if (page) {
+      var navLinks = container.querySelectorAll('.nav-link[data-page]')
+      navLinks.forEach(function (link) {
+        if (link.getAttribute('data-page') === page) {
+          link.classList.add('active')
+        }
+      })
+
+      var mobileLinks = container.querySelectorAll('.mobile-menu-link[data-page]')
+      mobileLinks.forEach(function (link) {
+        if (link.getAttribute('data-page') === page) {
+          link.classList.add('active')
+        }
+      })
+    }
+
+    /* ─── i18n re-init ─── */
+    if (window.NagrivaI18n) {
+      NagrivaI18n.translate()
+    }
+
+    /* ─── Notify other scripts that navbar is ready ─── */
+    document.dispatchEvent(new CustomEvent('navbar:loaded'))
+  }
+
   function init () {
     var container = document.getElementById(CONTAINER_ID)
     if (!container) return
-    if (container.children.length > 0) return
+
+    /* If container already has inline content, process it directly */
+    if (container.children.length > 0) {
+      processNavbar()
+      return
+    }
 
     fetch(PARTIAL_URL)
       .then(function (r) {
@@ -32,36 +68,11 @@
       })
       .then(function (html) {
         container.innerHTML = html
-
-        /* ─── Active link system ─── */
-        var page = document.body.getAttribute('data-page')
-        if (page) {
-          /* Desktop nav links */
-          var navLinks = container.querySelectorAll('.nav-link[data-page]')
-          navLinks.forEach(function (link) {
-            if (link.getAttribute('data-page') === page) {
-              link.classList.add('active')
-            }
-          })
-
-          /* Mobile menu links */
-          var mobileLinks = container.querySelectorAll('.mobile-menu-link[data-page]')
-          mobileLinks.forEach(function (link) {
-            if (link.getAttribute('data-page') === page) {
-              link.classList.add('active')
-            }
-          })
-        }
-
-        /* ─── i18n re-init ─── */
-        if (window.NagrivaI18n) {
-          NagrivaI18n.translate()
-        }
-
-        /* ─── Notify other scripts that navbar is ready ─── */
-        document.dispatchEvent(new CustomEvent('navbar:loaded'))
+        processNavbar()
       })
-      .catch(function () {})
+      .catch(function () {
+        console.error('[Navbar] Failed to load ' + PARTIAL_URL)
+      })
   }
 
   if (document.readyState === 'loading') {

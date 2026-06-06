@@ -84,6 +84,7 @@ const NAGRIVA_NotificationsDropdown = (() => {
     var existingBell = document.querySelector('.nav-notif');
     if (existingBell) {
       _bell = existingBell;
+      _bell.classList.add('notif-bell');
       _bell.setAttribute('aria-label', 'Notifications');
       _badge = document.createElement('span');
       _badge.className = 'notif-bell-badge';

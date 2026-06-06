@@ -10,7 +10,7 @@
     document.head.appendChild(link);
   })();
 
-  var bookCallLink = window.location.pathname === '/' || window.location.pathname === '/index.html' ? '#contact' : '../index.html#contact';
+  var bookCallLink = 'https://calendly.com/redwanaitlhadj16/30min';
 
   /* ─── State ─── */
   var popupOpen = false;

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" rx="12" fill="#141414"/>
+  <!-- Browser Chrome -->
+  <rect x="0" y="0" width="1200" height="44" rx="12" fill="#1c1c1c"/>
+  <rect x="0" y="28" width="1200" height="16" fill="#1c1c1c"/>
+  <circle cx="20" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="22" r="6" fill="#28c840"/>
+  <rect x="100" y="14" width="320" height="18" rx="9" fill="#282828"/>
+  <!-- Hero Section -->
+  <rect x="0" y="44" width="1200" height="340" fill="url(#ss-hero)"/>
+  <defs>
+    <linearGradient id="ss-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#2d1810"/>
+    </linearGradient>
+    <linearGradient id="ss-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c9a96e"/>
+      <stop offset="100%" stop-color="#e8cfa6"/>
+    </linearGradient>
+    <linearGradient id="ss-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(201,169,110,0.15)"/>
+      <stop offset="100%" stop-color="rgba(201,169,110,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Nav bar -->
+  <rect x="40" y="64" width="1120" height="36" rx="6" fill="rgba(255,255,255,0.04)"/>
+  <text x="75" y="88" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#c9a96e" letter-spacing="2">SMILE STUDIO</text>
+  <rect x="200" y="74" width="50" height="16" rx="3" fill="rgba(255,255,255,0.12)"/>
+  <rect x="270" y="74" width="60" height="16" rx="3" fill="rgba(255,255,255,0.12)"/>
+  <rect x="350" y="74" width="70" height="16" rx="3" fill="rgba(255,255,255,0.12)"/>
+  <rect x="440" y="74" width="80" height="16" rx="3" fill="rgba(255,255,255,0.12)"/>
+  <rect x="1020" y="68" width="120" height="28" rx="14" fill="#c9a96e"/>
+  <text x="1055" y="87" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#141414">Book Now</text>
+  <!-- Hero content -->
+  <text x="80" y="160" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#e8cfa6" letter-spacing="1">Your Smile, Our Passion</text>
+  <text x="80" y="190" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.5)">
+    Experience premium dental care in a warm, welcoming environment.
+  </text>
+  <rect x="80" y="215" width="160" height="40" rx="20" fill="#c9a96e"/>
+  <text x="120" y="241" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#141414">Schedule a Visit</text>
+  <rect x="255" y="215" width="140" height="40" rx="20" fill="rgba(255,255,255,0.04)" stroke="rgba(201,169,110,0.3)" stroke-width="1"/>
+  <text x="288" y="241" font-family="Arial, sans-serif" font-size="12" fill="#c9a96e">Treatments</text>
+  <!-- Hero stats -->
+  <rect x="80" y="280" width="140" height="50" rx="10" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.08)" stroke-width="1"/>
+  <text x="100" y="300" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#e8cfa6">200+</text>
+  <text x="100" y="318" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">5-Star Reviews</text>
+  <rect x="240" y="280" width="140" height="50" rx="10" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.08)" stroke-width="1"/>
+  <text x="260" y="300" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#e8cfa6">98%</text>
+  <text x="260" y="318" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">Satisfaction Rate</text>
+  <rect x="400" y="280" width="140" height="50" rx="10" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.08)" stroke-width="1"/>
+  <text x="420" y="300" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#e8cfa6">10+</text>
+  <text x="420" y="318" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">Years Experience</text>
+  <!-- Right decorative element -->
+  <ellipse cx="900" cy="200" rx="160" ry="160" fill="url(#ss-glow)"/>
+  <circle cx="920" cy="180" r="40" fill="rgba(201,169,110,0.06)"/>
+  <path d="M900 160 Q920 140 940 160 Q930 175 910 170" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M950 150 Q960 135 970 150" stroke="#c9a96e" stroke-width="1" fill="none" opacity="0.2"/>
+  <!-- Treatments Section -->
+  <rect x="0" y="384" width="1200" height="190" fill="#141414"/>
+  <text x="600" y="420" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#e8cfa6" text-anchor="middle">Premium Treatments</text>
+  <rect x="40" y="440" width="250" height="110" rx="10" fill="#1c1c1c" stroke="rgba(201,169,110,0.06)" stroke-width="1"/>
+  <circle cx="68" cy="468" r="16" fill="rgba(201,169,110,0.08)"/>
+  <text x="65" y="473" font-family="Arial, sans-serif" font-size="6" fill="#c9a96e">☀</text>
+  <text x="100" y="474" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Teeth Whitening</text>
+  <text x="60" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Professional whitening for</text>
+  <text x="60" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">a radiant, confident smile.</text>
+  <text x="60" y="536" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#c9a96e">From 2,000 MAD</text>
+  <rect x="315" y="440" width="250" height="110" rx="10" fill="#1c1c1c" stroke="rgba(201,169,110,0.06)" stroke-width="1"/>
+  <circle cx="343" cy="468" r="16" fill="rgba(201,169,110,0.08)"/>
+  <text x="375" y="474" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Veneers</text>
+  <text x="335" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Custom porcelain veneers</text>
+  <text x="335" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">for a flawless smile.</text>
+  <text x="335" y="536" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#c9a96e">From 4,500 MAD</text>
+  <rect x="590" y="440" width="250" height="110" rx="10" fill="#1c1c1c" stroke="rgba(201,169,110,0.06)" stroke-width="1"/>
+  <circle cx="618" cy="468" r="16" fill="rgba(201,169,110,0.08)"/>
+  <text x="650" y="474" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Root Canals</text>
+  <text x="610" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Pain-free root canal</text>
+  <text x="610" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">therapy by specialists.</text>
+  <text x="610" y="536" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#c9a96e">From 1,500 MAD</text>
+  <rect x="865" y="440" width="250" height="110" rx="10" fill="#1c1c1c" stroke="rgba(201,169,110,0.06)" stroke-width="1"/>
+  <circle cx="893" cy="468" r="16" fill="rgba(201,169,110,0.08)"/>
+  <text x="925" y="474" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Checkups</text>
+  <text x="885" y="498" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Regular checkups and</text>
+  <text x="885" y="513" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">preventive care.</text>
+  <text x="885" y="536" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#c9a96e">From 250 MAD</text>
+  <!-- Footer -->
+  <rect x="0" y="574" width="1200" height="60" fill="#0f0f0f"/>
+  <text x="600" y="600" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.2)" text-anchor="middle">Smile Studio Dental Clinic — Marrakech | hello@smilestudio.ma | +212 5XX-XXXXXX</text>
+  <!-- Preview label -->
+  <rect x="40" y="656" width="1120" height="120" rx="10" fill="#0f0f0f" stroke="rgba(201,169,110,0.06)" stroke-width="1"/>
+  <text x="80" y="686" font-family="monospace" font-size="11" fill="rgba(255,255,255,0.25)">Preview: Smile Studio — Premium Dental Clinic Website</text>
+  <rect x="80" y="706" width="80" height="20" rx="4" fill="rgba(201,169,110,0.1)"/>
+  <text x="89" y="720" font-family="Arial, sans-serif" font-size="8" fill="#c9a96e">ELEGANT</text>
+  <rect x="172" y="706" width="90" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="186" y="720" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.35)">PREMIUM</text>
+  <rect x="274" y="706" width="100" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="282" y="720" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.35)">BRANDING</text>
+</svg>

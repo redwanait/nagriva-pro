@@ -229,7 +229,7 @@
       return data.reply;
     } catch (err) {
 
-      return "Thanks for reaching out! I'm having a brief technical moment. Please try again, or <a href=\"#contact\" style=\"color:#3b82f6;text-decoration:underline\">book a free call</a> and we'll get right back to you.";
+      return "Thanks for reaching out! I'm having a brief technical moment. Please try again, or <a href=\"https://calendly.com/redwanaitlhadj16/30min\" target=\"_blank\" rel=\"noopener\" style=\"color:#3b82f6;text-decoration:underline\">book a free call</a> and we'll get right back to you.";
     }
   }
 
