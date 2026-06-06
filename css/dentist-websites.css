@@ -1,0 +1,546 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   NAGRIVA — Dentist Websites Landing Page
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.dw-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, #0a0c0e 50%, var(--bg) 100%);
+}
+
+.dw-page-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 20%, black 15%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 15%, transparent 70%);
+}
+
+/* ─── Hero ─── */
+
+.dw-hero {
+  position: relative;
+  z-index: 1;
+  padding: 160px 20px 80px;
+  text-align: center;
+}
+
+.dw-hero-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.dw-hero .hero-badge {
+  display: inline-flex;
+  margin-bottom: 24px;
+}
+
+.dw-hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.dw-hero-desc {
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto 32px;
+}
+
+.dw-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.dw-hero-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.dw-hero-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gray2);
+}
+
+.dw-hero-trust-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ─── Demo Showcase ─── */
+
+.dw-demos {
+  position: relative;
+  z-index: 1;
+}
+
+.dw-demos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.dw-demo-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.dw-demo-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59,130,246,0.2);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+
+.dw-demo-visual {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(0,0,0,0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dw-demo-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.dw-demo-card:hover .dw-demo-visual img {
+  transform: scale(1.04);
+}
+
+.dw-demo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.dw-demo-card:hover .dw-demo-overlay {
+  opacity: 1;
+}
+
+.dw-demo-overlay span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  padding: 11px 22px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+}
+
+.dw-demo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 26px 28px;
+  flex: 1;
+}
+
+.dw-demo-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.dw-demo-desc {
+  font-size: 0.84rem;
+  color: var(--gray2);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.dw-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 8px 0 0;
+  margin-top: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: gap 0.25s ease;
+}
+
+.dw-demo-btn:hover {
+  gap: 12px;
+}
+
+/* ─── Features Grid ─── */
+
+.dw-features {
+  position: relative;
+  z-index: 1;
+}
+
+.dw-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.dw-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--white);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.dw-feature-item:hover {
+  border-color: rgba(59,130,246,0.15);
+  background: rgba(59,130,246,0.03);
+}
+
+.dw-feature-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ─── Why Nagriva ─── */
+
+.dw-why {
+  position: relative;
+  z-index: 1;
+}
+
+.dw-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dw-why-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 36px 22px;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.dw-why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59,130,246,0.15);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+}
+
+.dw-why-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.dw-why-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+
+.dw-why-desc {
+  font-size: 0.82rem;
+  color: var(--gray2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ─── Final CTA ─── */
+
+.dw-cta {
+  position: relative;
+  z-index: 1;
+  padding: 40px 20px 120px;
+  text-align: center;
+}
+
+.dw-cta-glow {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.dw-cta-inner {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.dw-cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.dw-cta-text {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.dw-cta-note {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: var(--gray2);
+}
+
+/* ─── Demo Preview Modal ─── */
+
+.dw-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dw-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dw-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dw-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 100%);
+  max-height: 90vh;
+  border-radius: var(--r);
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.dw-modal.is-open .dw-modal-panel {
+  transform: translateY(0) scale(1);
+}
+
+.dw-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dw-modal-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+
+.dw-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--gray);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.dw-modal-close:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+  border-color: var(--border2);
+}
+
+.dw-modal-body {
+  overflow: auto;
+  max-height: calc(90vh - 130px);
+}
+
+.dw-modal-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dw-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 1024px) {
+  .dw-demos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dw-why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dw-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dw-hero {
+    padding: 130px 20px 60px;
+  }
+
+  .dw-demos-grid,
+  .dw-why-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .dw-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .dw-hero-actions .btn-primary,
+  .dw-hero-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dw-cta {
+    padding: 20px 20px 80px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .dw-demo-card:hover,
+  .dw-why-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+
+  .dw-demo-card:hover .dw-demo-visual img {
+    transform: none;
+  }
+
+  .dw-demo-overlay {
+    opacity: 0;
+  }
+}
