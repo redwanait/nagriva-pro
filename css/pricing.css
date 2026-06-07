@@ -241,26 +241,43 @@
   transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s ease, box-shadow 0.4s ease;
 }
 
+.np-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
 .np-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-8px);
+  border-color: rgba(59,130,246,0.15);
   box-shadow:
-    0 24px 60px rgba(0,0,0,0.4),
-    0 0 0 1px rgba(59,130,246,0.03);
+    0 32px 80px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(59,130,246,0.08),
+    0 0 40px rgba(59,130,246,0.06);
+}
+
+.np-card:hover::before {
+  opacity: 1;
 }
 
 /* ─── Card Header ─── */
 
 .np-card-header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .np-card-name {
   font-family: 'Syne', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--white);
   margin-bottom: 6px;
+  letter-spacing: -0.02em;
 }
 
 .np-card-desc {
@@ -273,33 +290,31 @@
 
 .np-card-price {
   margin-bottom: 28px;
-  padding-bottom: 24px;
+  padding-bottom: 26px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .np-card-amount {
   font-family: 'Syne', sans-serif;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--white);
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
+  display: block;
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .np-card-amount--custom {
   font-size: 1.8rem;
-  display: block;
   margin-bottom: 6px;
 }
 
-.np-period {
-  font-size: 0.9rem;
+.np-card-payment-label {
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--gray2);
+  letter-spacing: 0.04em;
 }
 
 .np-card-label {
@@ -315,8 +330,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 14px;
+  margin-bottom: 32px;
   list-style: none;
 }
 
@@ -324,8 +339,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.85rem;
-  color: var(--gray);
+  font-size: 0.88rem;
+  color: #c8c8d0;
   line-height: 1.4;
 }
 
@@ -341,6 +356,9 @@
 .np-card-btn {
   width: 100%;
   justify-content: center;
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 /* ─── Featured Card ─── */
@@ -357,11 +375,12 @@
 }
 
 .np-card--featured:hover {
-  border-color: rgba(59,130,246,0.16);
+  border-color: rgba(59,130,246,0.2);
   box-shadow:
-    0 0 0 1px rgba(59,130,246,0.06),
-    0 32px 80px rgba(0,0,0,0.4);
-  transform: scale(1.03) translateY(-6px);
+    0 0 0 1px rgba(59,130,246,0.1),
+    0 40px 100px rgba(0,0,0,0.5),
+    0 0 60px rgba(59,130,246,0.08);
+  transform: scale(1.03) translateY(-8px);
 }
 
 .np-card-badge {
@@ -388,10 +407,10 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 28px;
+  padding: 14px 28px;
   border-radius: 99px;
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
   font-family: 'DM Sans', sans-serif;
@@ -399,7 +418,6 @@
   border: none;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: var(--bg);
-  font-weight: 700;
 }
 
 .np-btn-accent:hover {
@@ -506,14 +524,14 @@
 }
 
 /* ════════════════════════════════════════
-   COMPARISON TABLE
+   COMPARISON TABLE — Service-Based Redesign
    ════════════════════════════════════════ */
 
 .np-compare {
   position: relative;
   z-index: 1;
   padding: 100px 20px;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -524,48 +542,91 @@
 .np-compare-table-wrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border-radius: var(--r);
+  border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.06);
   background: rgba(255,255,255,0.008);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   margin-top: 48px;
+  padding: 0;
   box-shadow:
     0 0 0 1px rgba(59,130,246,0.02),
-    0 24px 60px rgba(0,0,0,0.2);
+    0 32px 80px rgba(0,0,0,0.3);
 }
+
+/* ─── Table Base ─── */
 
 .np-compare-table {
   width: 100%;
-  min-width: 580px;
-  border-collapse: collapse;
+  min-width: 620px;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.88rem;
 }
 
+/* ─── Table Header ─── */
+
 .np-compare-table thead th {
-  padding: 18px 24px;
+  padding: 22px 24px;
   font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-align: center;
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
   color: var(--white);
-  letter-spacing: 0.01em;
+  background: rgba(255,255,255,0.015);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  letter-spacing: 0.02em;
+  position: relative;
 }
 
 .np-compare-table thead th:first-child {
   text-align: left;
   padding-left: 28px;
   background: transparent;
-  color: var(--gray2);
+  color: rgba(255,255,255,0.35);
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
 }
 
 .np-col-name {
   color: var(--white);
 }
+
+/* ─── Featured Column (Growth) — Subtle Blue Glow ─── */
+
+.np-col-featured {
+  position: relative;
+  background: rgba(59,130,246,0.025);
+  box-shadow:
+    inset 0 0 40px rgba(59,130,246,0.03),
+    0 0 0 1px rgba(59,130,246,0.04);
+}
+
+.np-col-featured::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.25), transparent);
+  pointer-events: none;
+}
+
+.np-col-featured::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0 0 20px 20px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ─── Table Body Rows ─── */
 
 .np-compare-table tbody tr {
   transition: background 0.3s ease;
@@ -575,61 +636,263 @@
   background: rgba(255,255,255,0.025);
 }
 
-.np-compare-table tbody tr:not(:last-child):hover td {
-  border-bottom-color: rgba(255,255,255,0.07);
+.np-compare-table tbody tr:hover .np-col-featured {
+  background: rgba(59,130,246,0.04);
 }
 
 .np-compare-table tbody td {
-  padding: 16px 24px;
+  padding: 18px 24px;
   text-align: center;
   border-bottom: 1px solid rgba(255,255,255,0.04);
-  color: var(--gray);
-  font-size: 0.85rem;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  color: #b0b0b8;
+  font-size: 0.88rem;
+  font-weight: 400;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.3s ease;
 }
 
 .np-compare-table tbody td:first-child {
   text-align: left;
   padding-left: 28px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--white);
-  font-size: 0.85rem;
-  white-space: nowrap;
+  font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: -0.01em;
 }
 
 .np-compare-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.np-col-featured {
-  background: rgba(59,130,246,0.02);
-  position: relative;
+.np-compare-table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 20px;
 }
 
-.np-col-featured::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), transparent);
-  pointer-events: none;
-}
-
-.np-compare-table tbody tr:hover .np-col-featured {
-  background: rgba(59,130,246,0.035);
-}
+/* ─── Checkmarks & Muted ─── */
 
 .np-check {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .np-muted {
-  color: var(--gray2);
-  opacity: 0.35;
+  color: rgba(255,255,255,0.15);
+  font-weight: 300;
+}
+
+/* ─── Text Descriptor (e.g. "Everything Included") ─── */
+
+.np-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #b0b0b8;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.np-text .np-check {
+  font-size: 0.85rem;
+}
+
+/* ════════════════════════════════════════
+   CTA BUTTONS
+   ════════════════════════════════════════ */
+
+.np-compare-cta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 32px 28px 28px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.np-compare-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: 99px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.np-compare-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.np-compare-btn--primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--bg);
+  border: none;
+  box-shadow: 0 0 30px rgba(59,130,246,0.15);
+}
+
+.np-compare-btn--primary:hover {
+  box-shadow: 0 0 50px rgba(59,130,246,0.3);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE STACKED CARDS (MOBILE)
+   ════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .np-compare-table-wrap {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow: visible;
+    margin-top: 36px;
+  }
+
+  .np-compare-table,
+  .np-compare-table thead,
+  .np-compare-table tbody,
+  .np-compare-table tr,
+  .np-compare-table th,
+  .np-compare-table td {
+    display: block;
+  }
+
+  .np-compare-table {
+    min-width: 0;
+  }
+
+  .np-compare-table thead {
+    display: none;
+  }
+
+  .np-compare-table tbody tr {
+    margin-bottom: 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.008);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .np-compare-table tbody tr:hover {
+    border-color: rgba(59,130,246,0.12);
+    background: rgba(255,255,255,0.012);
+  }
+
+  .np-compare-table tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    text-align: right;
+    font-size: 0.85rem;
+    gap: 12px;
+  }
+
+  .np-compare-table tbody td:first-child {
+    display: flex;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 16px 20px 12px;
+    text-align: left;
+    background: rgba(255,255,255,0.015);
+    letter-spacing: 0;
+  }
+
+  .np-compare-table tbody td:first-child::before {
+    display: none;
+  }
+
+  .np-compare-table tbody td::before {
+    content: attr(data-label);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--gray2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+
+  .np-compare-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .np-compare-table tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Reset featured column styles in card view */
+  .np-col-featured {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .np-col-featured::before,
+  .np-col-featured::after {
+    display: none !important;
+  }
+
+  .np-compare-table tbody tr:hover .np-col-featured {
+    background: transparent !important;
+  }
+
+  .np-compare-table tbody tr:last-child td:first-child {
+    border-radius: 0;
+  }
+
+  .np-text {
+    font-size: 0.8rem;
+  }
+
+  /* Stack CTA buttons vertically */
+  .np-compare-cta {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 28px 0 0;
+    max-width: 340px;
+  }
+
+  .np-compare-btn {
+    padding: 15px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .np-compare-table tbody td {
+    padding: 10px 16px;
+    font-size: 0.82rem;
+  }
+
+  .np-compare-table tbody td:first-child {
+    padding: 14px 16px 10px;
+    font-size: 0.88rem;
+  }
+
+  .np-compare-table tbody td::before {
+    font-size: 0.65rem;
+  }
 }
 
 /* ════════════════════════════════════════
@@ -854,6 +1117,21 @@
 }
 
 /* ════════════════════════════════════════
+   TRUST NOTE
+   ════════════════════════════════════════ */
+
+.np-trust-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--gray2);
+  margin-top: 40px;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════
    ANIMATIONS
    ════════════════════════════════════════ */
 
@@ -910,19 +1188,24 @@
   }
 
   .np-card {
-    padding: 28px 24px 24px;
+    padding: 32px 26px 26px;
   }
 
   .np-card--featured {
-    padding: 32px 24px 24px;
+    padding: 36px 26px 26px;
   }
 
   .np-card-amount {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .np-card-amount--custom {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .np-trust-note {
+    font-size: 0.8rem;
+    margin-top: 32px;
   }
 
   .np-toggle-wrap {
@@ -996,11 +1279,30 @@
   }
 
   .np-card-amount {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   .np-card-amount--custom {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+  }
+
+  .np-card-header {
+    margin-bottom: 22px;
+  }
+
+  .np-card-price {
+    margin-bottom: 22px;
+    padding-bottom: 20px;
+  }
+
+  .np-card-features {
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+
+  .np-trust-note {
+    font-size: 0.78rem;
+    margin-top: 28px;
   }
 
   .np-cta-actions {
@@ -1024,6 +1326,11 @@
   .np-card--featured:hover {
     transform: none;
     box-shadow: none;
+    border-color: rgba(255,255,255,0.06);
+  }
+
+  .np-card::before {
+    display: none;
   }
 
   .np-card--featured {
@@ -1038,6 +1345,20 @@
   .np-why-card:hover {
     transform: none;
     border-color: rgba(255,255,255,0.06);
+    box-shadow: none;
+  }
+
+  .np-compare-table tbody tr:hover {
+    background: transparent;
+  }
+
+  .np-compare-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .np-compare-btn--primary:hover {
+    transform: none;
     box-shadow: none;
   }
 }

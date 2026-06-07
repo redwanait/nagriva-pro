@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" rx="12" fill="#0a0a0f"/>
+  <rect x="0" y="0" width="1200" height="44" rx="12" fill="#12121a"/>
+  <rect x="0" y="28" width="1200" height="16" fill="#12121a"/>
+  <circle cx="20" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="22" r="6" fill="#28c840"/>
+  <rect x="100" y="14" width="320" height="18" rx="9" fill="#1a1a26"/>
+  <defs>
+    <linearGradient id="ag-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="50%" stop-color="#1a0a2e"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+    <linearGradient id="ag-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+    <linearGradient id="ag-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(168,85,247,0.12)"/>
+      <stop offset="100%" stop-color="rgba(168,85,247,0)"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="64" width="1120" height="36" rx="6" fill="rgba(255,255,255,0.03)"/>
+  <text x="75" y="88" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#a855f7" letter-spacing="3">CREATIVE HUB</text>
+  <rect x="190" y="74" width="55" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="262" y="74" width="65" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="342" y="74" width="75" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="432" y="74" width="85" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="1020" y="68" width="120" height="28" rx="14" fill="#a855f7"/>
+  <text x="1055" y="87" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Let's Talk</text>
+  <rect x="0" y="44" width="1200" height="380" fill="url(#ag-hero)"/>
+  <text x="80" y="155" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" letter-spacing="1">We Build Digital Excellence</text>
+  <text x="80" y="185" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.45)">
+    A full-service creative agency specializing in web design, branding, and digital strategy.
+  </text>
+  <rect x="80" y="215" width="170" height="42" rx="21" fill="#a855f7"/>
+  <text x="120" y="242" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">View Our Work</text>
+  <rect x="265" y="215" width="150" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
+  <text x="300" y="242" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.6)">Services</text>
+  <rect x="80" y="282" width="320" height="56" rx="10" fill="rgba(168,85,247,0.04)" stroke="rgba(168,85,247,0.08)" stroke-width="1"/>
+  <rect x="100" y="296" width="24" height="24" rx="8" fill="rgba(168,85,247,0.1)"/>
+  <text x="140" y="300" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">50+ Projects Delivered</text>
+  <text x="140" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Across 6 countries</text>
+  <rect x="420" y="282" width="320" height="56" rx="10" fill="rgba(168,85,247,0.04)" stroke="rgba(168,85,247,0.08)" stroke-width="1"/>
+  <rect x="440" y="296" width="24" height="24" rx="8" fill="rgba(168,85,247,0.1)"/>
+  <text x="480" y="300" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Award-Winning Team</text>
+  <text x="480" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Awwwards & CSSDA</text>
+  <ellipse cx="950" cy="220" rx="150" ry="150" fill="url(#ag-glow)"/>
+  <rect x="850" y="160" width="200" height="100" rx="16" fill="rgba(168,85,247,0.03)" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <rect x="880" y="178" width="40" height="40" rx="12" fill="rgba(168,85,247,0.08)"/>
+  <text x="885" y="204" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#a855f7">✦</text>
+  <text x="935" y="198" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Featured Agency</text>
+  <text x="935" y="216" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">Top 10 in Africa</text>
+  <rect x="880" y="234" width="100" height="16" rx="8" fill="rgba(168,85,247,0.08)"/>
+  <text x="900" y="246" font-family="Arial, sans-serif" font-size="8" fill="#a855f7">2024 Rising Star</text>
+  <rect x="0" y="424" width="1200" height="190" fill="#0a0a0f"/>
+  <text x="600" y="460" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c084fc" text-anchor="middle">Our Services</text>
+  <rect x="40" y="480" width="250" height="110" rx="10" fill="#12121a" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <rect x="60" y="498" width="28" height="28" rx="8" fill="rgba(168,85,247,0.08)"/>
+  <text x="100" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Web Design</text>
+  <text x="60" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Custom websites built</text>
+  <text x="60" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">for conversions & impact.</text>
+  <rect x="315" y="480" width="250" height="110" rx="10" fill="#12121a" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <rect x="335" y="498" width="28" height="28" rx="8" fill="rgba(168,85,247,0.08)"/>
+  <text x="375" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Brand Identity</text>
+  <text x="335" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Complete brand strategy</text>
+  <text x="335" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">and visual identity.</text>
+  <rect x="590" y="480" width="250" height="110" rx="10" fill="#12121a" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <rect x="610" y="498" width="28" height="28" rx="8" fill="rgba(168,85,247,0.08)"/>
+  <text x="650" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Digital Strategy</text>
+  <text x="610" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Data-driven marketing</text>
+  <text x="610" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">and growth planning.</text>
+  <rect x="865" y="480" width="250" height="110" rx="10" fill="#12121a" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <rect x="885" y="498" width="28" height="28" rx="8" fill="rgba(168,85,247,0.08)"/>
+  <text x="925" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">SEO & Growth</text>
+  <text x="885" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Search optimization and</text>
+  <text x="885" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">conversion optimization.</text>
+  <rect x="0" y="614" width="1200" height="60" fill="#06060f"/>
+  <text x="600" y="640" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.18)" text-anchor="middle">Creative Hub Agency — Rabat, Morocco | hello@creativehub.ma | +212 5XX-XXXXXX</text>
+  <rect x="40" y="696" width="1120" height="80" rx="10" fill="#06060f" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <text x="80" y="726" font-family="monospace" font-size="11" fill="rgba(255,255,255,0.22)">Preview: Creative Hub — Digital Agency Website</text>
+  <rect x="80" y="742" width="90" height="20" rx="4" fill="rgba(168,85,247,0.1)"/>
+  <text x="92" y="756" font-family="Arial, sans-serif" font-size="8" fill="#a855f7">CREATIVE</text>
+  <rect x="182" y="742" width="90" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="193" y="756" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">MODERN</text>
+</svg>

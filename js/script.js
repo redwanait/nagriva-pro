@@ -43,7 +43,7 @@ const projectData = {
   nagriva: {
     title: 'Nagriva — Brand Identity & Digital Presence',
     category: '✦ Brand Identity',
-    image: '/assets/images/projects/NAGRIVA — Brand Identity.svg',
+    image: '/assets/images/projects/Brand Identity & Digital Presence.png',
     desc: 'The complete Nagriva brand ecosystem — from visual identity and design system to a fully responsive web platform engineered for performance, clarity, and conversion.',
     services: ['Brand Identity', 'Web Design', 'Strategy'],
     results: []
@@ -51,7 +51,7 @@ const projectData = {
   growthos: {
     title: 'GrowthOS — AI Automation Platform',
     category: '✦ AI Automation',
-    image: '/assets/images/projects/GrowthOS — AI Automation Platform.svg',
+    image: '/assets/images/projects/GrowthOS — AI Automation Platform.png',
     desc: 'An internal platform connecting AI-powered content generation, SEO analysis, reporting, and integrations into a unified operating system for agency workflows.',
     services: ['AI Automation', 'Web Design', 'Strategy'],
     results: []
@@ -59,7 +59,7 @@ const projectData = {
   portal: {
     title: 'Client Portal — Dashboard Experience',
     category: '✦ Web Application',
-    image: '/assets/images/projects/Client Portal — Dashboard Experience.svg',
+    image: '/assets/images/projects/Client Portal — Dashboard Experience.png',
     desc: 'A secure real-time client portal featuring project tracking, file sharing, invoicing, task management, and direct messaging — designed for seamless collaboration.',
     services: ['Web Design', 'Brand Identity', 'UI/UX'],
     results: []
@@ -67,7 +67,7 @@ const projectData = {
   ecommerce: {
     title: 'Concept: E-Commerce Experience',
     category: '✦ E-Commerce',
-    image: '/assets/images/projects/Concept E-Commerce Experience.svg',
+    image: '/assets/images/projects/Concept E-Commerce Experience.png',
     desc: 'A luxury e-commerce concept showcasing premium product presentation, seamless checkout flows, and immersive brand storytelling for the modern shopper.',
     services: ['Web Design', 'UI/UX', 'Brand Identity'],
     results: []
@@ -75,7 +75,7 @@ const projectData = {
   fintech: {
     title: 'Concept: FinTech Dashboard',
     category: '✦ Financial Technology',
-    image: '/assets/images/projects/Concept FinTech Dashboard.svg',
+    image: '/assets/images/projects/Concept FinTech Dashboard.png',
     desc: 'A premium fintech dashboard concept with real-time portfolio tracking, intelligent analytics, asset allocation visualization, and bank-grade security design.',
     services: ['Web Design', 'UI/UX', 'Data Visualization'],
     results: []

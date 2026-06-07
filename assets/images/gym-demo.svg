@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" rx="12" fill="#050508"/>
+  <rect x="0" y="0" width="1200" height="44" rx="12" fill="#0a0a12"/>
+  <rect x="0" y="28" width="1200" height="16" fill="#0a0a12"/>
+  <circle cx="20" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="22" r="6" fill="#28c840"/>
+  <rect x="100" y="14" width="320" height="18" rx="9" fill="#14141e"/>
+  <defs>
+    <linearGradient id="gym-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#08080f"/>
+      <stop offset="50%" stop-color="#1a0a0f"/>
+      <stop offset="100%" stop-color="#08080f"/>
+    </linearGradient>
+    <linearGradient id="gym-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="gym-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(239,68,68,0.12)"/>
+      <stop offset="100%" stop-color="rgba(239,68,68,0)"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="64" width="1120" height="36" rx="6" fill="rgba(255,255,255,0.03)"/>
+  <text x="75" y="88" font-family="Arial, sans-serif" font-size="16" font-weight="900" fill="#ef4444" letter-spacing="4">IRON FORGE</text>
+  <rect x="1020" y="68" width="120" height="28" rx="14" fill="#ef4444"/>
+  <text x="1055" y="87" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Join Now</text>
+  <rect x="0" y="44" width="1200" height="380" fill="url(#gym-hero)"/>
+  <text x="80" y="155" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="white" letter-spacing="2">UNLEASH YOUR POTENTIAL</text>
+  <text x="80" y="190" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.45)">
+    State-of-the-art equipment, expert trainers, and a community that pushes you further.
+  </text>
+  <rect x="80" y="215" width="170" height="42" rx="21" fill="#ef4444"/>
+  <text x="120" y="242" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Start Free Trial</text>
+  <rect x="265" y="215" width="150" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+  <text x="300" y="242" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.6)">View Plans</text>
+  <rect x="80" y="282" width="220" height="56" rx="10" fill="rgba(239,68,68,0.04)" stroke="rgba(239,68,68,0.08)" stroke-width="1"/>
+  <text x="110" y="302" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">🏋️ Modern Equipment</text>
+  <text x="110" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">200+ machines & free weights</text>
+  <rect x="320" y="282" width="220" height="56" rx="10" fill="rgba(239,68,68,0.04)" stroke="rgba(239,68,68,0.08)" stroke-width="1"/>
+  <text x="350" y="302" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">👨‍🏫 Expert Trainers</text>
+  <text x="350" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Certified personal coaching</text>
+  <rect x="560" y="282" width="220" height="56" rx="10" fill="rgba(239,68,68,0.04)" stroke="rgba(239,68,68,0.08)" stroke-width="1"/>
+  <text x="590" y="302" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">🧘 Group Classes</text>
+  <text x="590" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Yoga, HIIT, boxing, spin</text>
+  <rect x="0" y="424" width="1200" height="190" fill="#050508"/>
+  <text x="600" y="460" font-family="Arial, sans-serif" font-size="16" font-weight="900" fill="#f87171" text-anchor="middle">Membership Plans</text>
+  <rect x="40" y="480" width="250" height="110" rx="10" fill="#0a0a12" stroke="rgba(239,68,68,0.06)" stroke-width="1"/>
+  <text x="165" y="515" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white" text-anchor="middle">Monthly Pass</text>
+  <text x="165" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#ef4444" text-anchor="middle">500 MAD</text>
+  <text x="165" y="558" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle">per month</text>
+  <text x="165" y="578" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">Full gym access | 2 classes</text>
+  <rect x="315" y="480" width="250" height="110" rx="10" fill="#0a0a12" stroke="rgba(239,68,68,0.06)" stroke-width="1"/>
+  <text x="440" y="515" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white" text-anchor="middle">Quarterly Pass</text>
+  <text x="440" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#ef4444" text-anchor="middle">1,200 MAD</text>
+  <text x="440" y="558" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle">3 months</text>
+  <text x="440" y="578" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">Full gym access | 8 classes</text>
+  <rect x="590" y="480" width="250" height="110" rx="10" fill="#0a0a12" stroke="rgba(239,68,68,0.06)" stroke-width="1"/>
+  <text x="715" y="515" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white" text-anchor="middle">Annual Pass</text>
+  <text x="715" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#ef4444" text-anchor="middle">3,600 MAD</text>
+  <text x="715" y="558" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle">12 months</text>
+  <text x="715" y="578" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">Everything included + PT</text>
+  <rect x="865" y="480" width="250" height="110" rx="10" fill="#0a0a12" stroke="rgba(239,68,68,0.06)" stroke-width="1"/>
+  <text x="990" y="515" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white" text-anchor="middle">Student Pass</text>
+  <text x="990" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#ef4444" text-anchor="middle">300 MAD</text>
+  <text x="990" y="558" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle">per month</text>
+  <text x="990" y="578" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">Off-peak access | 1 class</text>
+  <rect x="0" y="614" width="1200" height="60" fill="#040408"/>
+  <text x="600" y="640" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.18)" text-anchor="middle">Iron Forge Gym — Casablanca, Morocco | info@ironforge.ma | +212 5XX-XXXXXX</text>
+  <rect x="40" y="696" width="1120" height="80" rx="10" fill="#040408" stroke="rgba(239,68,68,0.06)" stroke-width="1"/>
+  <text x="80" y="726" font-family="monospace" font-size="11" fill="rgba(255,255,255,0.22)">Preview: Iron Forge Gym — Fitness Center Website</text>
+  <rect x="80" y="742" width="100" height="20" rx="4" fill="rgba(239,68,68,0.1)"/>
+  <text x="95" y="756" font-family="Arial, sans-serif" font-size="8" fill="#ef4444">DYNAMIC</text>
+  <rect x="192" y="742" width="90" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="203" y="756" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">MODERN</text>
+</svg>

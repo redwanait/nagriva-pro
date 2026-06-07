@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" rx="12" fill="#08080f"/>
+  <rect x="0" y="0" width="1200" height="44" rx="12" fill="#0f0f1a"/>
+  <rect x="0" y="28" width="1200" height="16" fill="#0f0f1a"/>
+  <circle cx="20" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="22" r="6" fill="#28c840"/>
+  <rect x="100" y="14" width="320" height="18" rx="9" fill="#1a1a2e"/>
+  <defs>
+    <linearGradient id="lw-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#08081a"/>
+      <stop offset="50%" stop-color="#0a0a2e"/>
+      <stop offset="100%" stop-color="#08081a"/>
+    </linearGradient>
+    <linearGradient id="lw-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c0841e"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <linearGradient id="lw-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(192,132,30,0.12)"/>
+      <stop offset="100%" stop-color="rgba(192,132,30,0)"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="64" width="1120" height="36" rx="6" fill="rgba(255,255,255,0.03)"/>
+  <text x="75" y="88" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#c0841e" letter-spacing="3">PREMIER LAW</text>
+  <rect x="200" y="74" width="55" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="272" y="74" width="65" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="352" y="74" width="75" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="442" y="74" width="85" height="16" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="1020" y="68" width="120" height="28" rx="14" fill="#c0841e"/>
+  <text x="1050" y="87" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#08081a">Free Consultation</text>
+  <rect x="0" y="44" width="1200" height="380" fill="url(#lw-hero)"/>
+  <text x="80" y="160" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="white" letter-spacing="1">Trusted Legal Counsel</text>
+  <text x="80" y="190" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.45)">
+    Premier Law Firm — dedicated to protecting your rights and delivering exceptional results.
+  </text>
+  <rect x="80" y="215" width="180" height="42" rx="21" fill="#c0841e"/>
+  <text x="120" y="242" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#08081a">Schedule a Consultation</text>
+  <rect x="275" y="215" width="150" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(192,132,30,0.3)" stroke-width="1"/>
+  <text x="310" y="242" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.6)">Practice Areas</text>
+  <rect x="80" y="282" width="320" height="56" rx="10" fill="rgba(192,132,30,0.04)" stroke="rgba(192,132,30,0.08)" stroke-width="1"/>
+  <circle cx="100" cy="310" r="10" fill="#c0841e"/>
+  <text x="124" y="300" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Award-Winning Firm</text>
+  <text x="124" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Recognized by Legal 500 & Chambers</text>
+  <rect x="420" y="282" width="320" height="56" rx="10" fill="rgba(192,132,30,0.04)" stroke="rgba(192,132,30,0.08)" stroke-width="1"/>
+  <circle cx="440" cy="310" r="10" fill="#c0841e"/>
+  <text x="464" y="300" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">25+ Years Experience</text>
+  <text x="464" y="320" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Corporate & civil litigation expertise</text>
+  <ellipse cx="950" cy="220" rx="150" ry="150" fill="url(#lw-glow)"/>
+  <rect x="850" y="160" width="200" height="100" rx="16" fill="rgba(192,132,30,0.03)" stroke="rgba(192,132,30,0.06)" stroke-width="1"/>
+  <text x="900" y="200" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#c0841e">4.9★</text>
+  <text x="885" y="222" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">Client Satisfaction Rating</text>
+  <rect x="880" y="238" width="90" height="16" rx="8" fill="rgba(192,132,30,0.08)"/>
+  <text x="900" y="250" font-family="Arial, sans-serif" font-size="8" fill="#c0841e">500+ cases won</text>
+  <rect x="0" y="424" width="1200" height="190" fill="#08080f"/>
+  <text x="600" y="460" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#eab308" text-anchor="middle">Practice Areas</text>
+  <rect x="40" y="480" width="250" height="110" rx="10" fill="#0f0f1a" stroke="rgba(192,132,30,0.06)" stroke-width="1"/>
+  <rect x="60" y="498" width="28" height="28" rx="8" fill="rgba(192,132,30,0.08)"/>
+  <text x="100" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Corporate Law</text>
+  <text x="60" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">M&A, contracts, corporate</text>
+  <text x="60" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">governance & compliance.</text>
+  <text x="60" y="578" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c0841e">From 5,000 MAD</text>
+  <rect x="315" y="480" width="250" height="110" rx="10" fill="#0f0f1a" stroke="rgba(192,132,30,0.06)" stroke-width="1"/>
+  <rect x="335" y="498" width="28" height="28" rx="8" fill="rgba(192,132,30,0.08)"/>
+  <text x="375" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Civil Litigation</text>
+  <text x="335" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Court representation and</text>
+  <text x="335" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">dispute resolution.</text>
+  <text x="335" y="578" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c0841e">From 3,000 MAD</text>
+  <rect x="590" y="480" width="250" height="110" rx="10" fill="#0f0f1a" stroke="rgba(192,132,30,0.06)" stroke-width="1"/>
+  <rect x="610" y="498" width="28" height="28" rx="8" fill="rgba(192,132,30,0.08)"/>
+  <text x="650" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Family Law</text>
+  <text x="610" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Divorce, custody, and</text>
+  <text x="610" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">family mediation.</text>
+  <text x="610" y="578" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c0841e">From 2,000 MAD</text>
+  <rect x="865" y="480" width="250" height="110" rx="10" fill="#0f0f1a" stroke="rgba(192,132,30,0.06)" stroke-width="1"/>
+  <rect x="885" y="498" width="28" height="28" rx="8" fill="rgba(192,132,30,0.08)"/>
+  <text x="925" y="516" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Real Estate Law</text>
+  <text x="885" y="540" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Property transactions and</text>
+  <text x="885" y="555" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">land disputes.</text>
+  <text x="885" y="578" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c0841e">From 1,500 MAD</text>
+  <rect x="0" y="614" width="1200" height="60" fill="#06060c"/>
+  <text x="600" y="640" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.18)" text-anchor="middle">Premier Law Firm — Casablanca, Morocco | info@premierlaw.ma | +212 5XX-XXXXXX</text>
+  <rect x="40" y="696" width="1120" height="80" rx="10" fill="#06060c" stroke="rgba(192,132,30,0.06)" stroke-width="1"/>
+  <text x="80" y="726" font-family="monospace" font-size="11" fill="rgba(255,255,255,0.22)">Preview: Premier Law Firm — Professional Legal Website</text>
+  <rect x="80" y="742" width="100" height="20" rx="4" fill="rgba(192,132,30,0.1)"/>
+  <text x="94" y="756" font-family="Arial, sans-serif" font-size="8" fill="#c0841e">AUTHORITY</text>
+  <rect x="192" y="742" width="90" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="205" y="756" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">TRUST</text>
+  <rect x="294" y="742" width="100" height="20" rx="4" fill="rgba(255,255,255,0.04)"/>
+  <text x="305" y="756" font-family="Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">PREMIUM</text>
+</svg>
