@@ -98,6 +98,16 @@ window.ServicesRenderer = (function () {
     if (textEl && data.satisfaction != null) textEl.textContent = data.satisfaction + '% Satisfaction';
   }
 
+  var FALLBACK_IMG = window.ServicesAPI ? window.ServicesAPI.FALLBACK_IMG : '';
+
+  function _imgFallback(img) {
+    img.onerror = function () {
+      if (this.src === FALLBACK_IMG) return;
+      this.onerror = null;
+      this.src = FALLBACK_IMG;
+    };
+  }
+
   function renderGallery(data) {
     var mainImg = qs('[data-service="gallery-main"]');
     var thumbsContainer = qs('[data-service="gallery-thumbs"]');
@@ -106,6 +116,7 @@ window.ServicesRenderer = (function () {
     if (mainImg) {
       mainImg.src = data.gallery[0];
       mainImg.alt = data.title ? data.title + ' showcase' : 'Gallery image 1';
+      _imgFallback(mainImg);
     }
 
     if (thumbsContainer) {
@@ -117,6 +128,7 @@ window.ServicesRenderer = (function () {
         img.src = src;
         img.alt = (data.title ? data.title + ' ' : '') + 'gallery image ' + (i + 1);
         img.setAttribute('data-src', src);
+        _imgFallback(img);
         div.appendChild(img);
         thumbsContainer.appendChild(div);
       });

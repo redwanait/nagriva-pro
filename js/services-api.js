@@ -11,40 +11,43 @@ window.ServicesAPI = (function () {
   var _cache = {};
   var _allCache = null;
 
-  var SERVICE_PHOTOS = {
+  var SERVICE_FOLDERS = {
     'website-development': {
-      image: '/assets/images/services/website-development.png',
-      gallery: [
-        '/assets/images/services/website-development.png',
-        '/assets/images/services/website-development.png',
-        '/assets/images/services/website-development.png'
-      ]
-    },
-    'ecommerce-stores': {
-      image: '/assets/images/services/ecommerce-stores.png',
-      gallery: [
-        '/assets/images/services/ecommerce-stores.png',
-        '/assets/images/services/ecommerce-stores.png',
-        '/assets/images/services/ecommerce-stores.png'
-      ]
+      folder: 'website development',
+      files: ['website-1.png', 'website-2.jpg', 'website-3.jpg']
     },
     'blog-creation': {
-      image: '/assets/images/services/blog-creation.png',
-      gallery: [
-        '/assets/images/services/blog-creation.png',
-        '/assets/images/services/blog-creation.png',
-        '/assets/images/services/blog-creation.png'
-      ]
+      folder: 'blog creation',
+      files: ['blog-creation-1.png', 'blog-creation-2.jpg', 'blog-creation-3.jpg']
+    },
+    'ecommerce-stores': {
+      folder: 'ecommerce stores',
+      files: ['ecommerce-stores-1.png', 'ecommerce-stores-2.jpg', 'ecommerce-stores-3.jpg']
     },
     'video-editing': {
-      image: '/assets/images/services/video-editing.png',
-      gallery: [
-        '/assets/images/services/video-editing.png',
-        '/assets/images/services/video-editing.png',
-        '/assets/images/services/video-editing.png'
-      ]
+      folder: 'video editing',
+      files: ['video-editing-1.png', 'video-editing-2.jpg', 'video-editing-3.jpg']
     }
   };
+
+  var FALLBACK_IMG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"><rect width="800" height="500" fill="#1a1a2e"/><text x="400" y="250" font-family="system-ui,sans-serif" font-size="18" fill="#555" text-anchor="middle" dominant-baseline="middle">Image not available</text></svg>');
+
+  function getGalleryImages(slug) {
+    var base = '/assets/images/services/';
+    var entry = SERVICE_FOLDERS[slug];
+
+    if (entry) {
+      return entry.files.map(function (f) {
+        return base + encodeURIComponent(entry.folder) + '/' + encodeURIComponent(f);
+      });
+    }
+
+    return [
+      base + slug + '-1.jpg',
+      base + slug + '-2.jpg',
+      base + slug + '-3.jpg'
+    ];
+  }
 
   /* ════════════════════════════════════════════════════════
      FALLBACK DATA — embedded so no blocking network request
@@ -67,8 +70,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS['website-development'].image,
-      gallery: SERVICE_PHOTOS['website-development'].gallery,
+      image: getGalleryImages('website-development')[0],
+      gallery: getGalleryImages('website-development'),
       description: '<p>We build high-converting professional websites tailored specifically for dentists, lawyers, and car rental companies. Your website is your most powerful marketing tool \u2014 we make sure it works as hard as you do.</p><p>From appointment-driven dental practices to client-seeking law firms and booking-focused car rental agencies, every site we build is strategically designed to attract your ideal clients and convert them into paying customers.</p>',
       benefits: [
         { icon: 'layers', title: 'Industry-Specific Design', text: 'Tailored layouts and messaging that resonate with your specific audience and drive conversions.' },
@@ -123,8 +126,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS['ecommerce-stores'].image,
-      gallery: SERVICE_PHOTOS['ecommerce-stores'].gallery,
+      image: getGalleryImages('ecommerce-stores')[0],
+      gallery: getGalleryImages('ecommerce-stores'),
       description: '<p>We build professional e-commerce stores using WordPress and WooCommerce that are ready to accept orders from day one. From product setup to payment gateway integration, we handle everything so you can focus on selling.</p><p>Our stores are designed to be intuitive for your customers and easy for you to manage. Every store is fully mobile responsive, SEO optimized, and built to convert browsers into buyers.</p>',
       benefits: [
         { icon: 'layers', title: 'WordPress + WooCommerce', text: 'The most powerful and flexible e-commerce platform with complete control over your store.' },
@@ -179,8 +182,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS['blog-creation'].image,
-      gallery: SERVICE_PHOTOS['blog-creation'].gallery,
+      image: getGalleryImages('blog-creation')[0],
+      gallery: getGalleryImages('blog-creation'),
       description: '<p>We create professional blogs on WordPress and Blogger that are designed to attract readers, rank on Google, and grow your audience. Whether you\'re a personal brand, a business, or a content creator, we set up everything for success.</p><p>From platform selection and hosting setup to professional design and SEO configuration, we handle the technical heavy lifting so you can focus on writing great content.</p>',
       benefits: [
         { icon: 'layers', title: 'Platform Flexibility', text: 'Choose between WordPress (self-hosted) or Blogger \u2014 we\'ll set up and optimize either platform.' },
@@ -235,8 +238,8 @@ window.ServicesAPI = (function () {
       rating: 4.9,
       reviewCount: 128,
       satisfaction: 98,
-      image: SERVICE_PHOTOS['video-editing'].image,
-      gallery: SERVICE_PHOTOS['video-editing'].gallery,
+      image: getGalleryImages('video-editing')[0],
+      gallery: getGalleryImages('video-editing'),
       description: '<p>We create scroll-stopping short-form videos optimized for social media platforms. From Instagram Reels to YouTube Shorts and TikTok, our edits are designed to capture attention, drive engagement, and grow your following.</p><p>Our video editing service includes professional cuts, transitions, captions, color grading, sound design, and platform-specific optimization so your content performs its best everywhere.</p>',
       benefits: [
         { icon: 'edit', title: 'Short-Form Expertise', text: 'Specialized in Reels, Shorts, and TikTok content that drives engagement and shares.' },
@@ -296,14 +299,14 @@ window.ServicesAPI = (function () {
   }
 
   function _applyServicePhotos(service) {
-    if (!service || !service.slug || !SERVICE_PHOTOS[service.slug]) return service;
-    var photos = SERVICE_PHOTOS[service.slug];
+    if (!service || !service.slug) return service;
     var normalized = {};
     Object.keys(service).forEach(function (key) {
       normalized[key] = service[key];
     });
-    normalized.image = photos.image;
-    normalized.gallery = photos.gallery.slice();
+    var images = getGalleryImages(service.slug);
+    normalized.image = images[0] || '';
+    normalized.gallery = images;
     return normalized;
   }
 
@@ -356,6 +359,8 @@ window.ServicesAPI = (function () {
 
   return {
     fetchService: fetchService,
-    getAllServices: getAllServices
+    getAllServices: getAllServices,
+    getGalleryImages: getGalleryImages,
+    FALLBACK_IMG: FALLBACK_IMG
   };
 })();

@@ -31,6 +31,15 @@
   var galleryImages = [];
   var totalGallery = 0;
 
+  function _imgFallback(img) {
+    if (!window.ServicesAPI) return;
+    img.onerror = function () {
+      if (this.src === window.ServicesAPI.FALLBACK_IMG) return;
+      this.onerror = null;
+      this.src = window.ServicesAPI.FALLBACK_IMG;
+    };
+  }
+
   function initGallery() {
     var main = document.querySelector('.fv-gallery-main img');
     var thumbs = document.querySelectorAll('.fv-gallery-thumb');
@@ -39,6 +48,7 @@
     var dotsContainer = document.querySelector('.fv-gallery-dots');
 
     if (!main || !thumbs.length) return;
+    _imgFallback(main);
 
     galleryImages = Array.from(thumbs).map(function (t) {
       return t.getAttribute('data-src') || t.querySelector('img').src;
@@ -70,6 +80,7 @@
       if (currentGallery >= totalGallery) currentGallery = 0;
 
       main.src = galleryImages[currentGallery];
+      _imgFallback(main);
       main.alt = (document.querySelector('[data-service="og-title"]')?.getAttribute('content') || 'Service') + ' gallery image ' + (currentGallery + 1);
 
       thumbs.forEach(function (t, i) {

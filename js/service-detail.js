@@ -10,6 +10,53 @@
   var galleryImages = [];
   var totalGallery = 0;
 
+  function getSlug() {
+    var pathParts = window.location.pathname.split('/').filter(Boolean);
+    var last = pathParts[pathParts.length - 1] || '';
+    return last.replace(/\.html$/, '');
+  }
+
+  function _imgFallback(img) {
+    if (!window.ServicesAPI) return;
+    img.onerror = function () {
+      if (this.src === window.ServicesAPI.FALLBACK_IMG) return;
+      this.onerror = null;
+      this.src = window.ServicesAPI.FALLBACK_IMG;
+    };
+  }
+
+  function loadGallery() {
+    var slug = getSlug();
+    if (!slug || !window.ServicesAPI) return;
+
+    var images = window.ServicesAPI.getGalleryImages(slug);
+    if (!images || !images.length) return;
+
+    var mainImg = document.querySelector('.fv-gallery-main img');
+    var thumbsContainer = document.querySelector('.fv-gallery-thumbs');
+
+    if (mainImg) {
+      mainImg.src = images[0];
+      mainImg.alt = slug.replace(/-/g, ' ') + ' showcase';
+      _imgFallback(mainImg);
+    }
+
+    if (thumbsContainer) {
+      thumbsContainer.innerHTML = '';
+      images.forEach(function (src, i) {
+        var div = document.createElement('div');
+        div.className = 'fv-gallery-thumb' + (i === 0 ? ' active' : '');
+        div.setAttribute('data-src', src);
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Gallery image ' + (i + 1);
+        _imgFallback(img);
+        div.appendChild(img);
+        thumbsContainer.appendChild(div);
+      });
+    }
+  }
+
   function initGallery() {
     var main = document.querySelector('.fv-gallery-main img');
     var thumbs = document.querySelectorAll('.fv-gallery-thumb');
@@ -259,6 +306,7 @@
 
   /* ─── INIT ─── */
   document.addEventListener('DOMContentLoaded', function () {
+    loadGallery();
     initGallery();
     initPackageTabs();
     initFAQ();
