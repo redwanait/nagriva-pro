@@ -142,9 +142,9 @@
 
       <div class="dw-demos-grid fade-up" style="--delay:0.1s">
 
-        <article class="dw-demo-card" data-url="https://nagriva-lawyer.netlify.app/" tabindex="0" role="link" aria-label="View Atlas Legal live demo">
+        <article class="dw-demo-card" data-demo-url="https://preview.themeforest.net/item/kaunsal-lawyer-attorney-wordpress-theme/full_screen_preview/63501027" tabindex="0" role="link" aria-label="View Atlas Legal live demo">
           <span class="dw-demo-visual" data-demo="/assets/images/lawyer-demo-atlas-legal.png" data-title="Atlas Legal" aria-label="Preview Atlas Legal demo">
-            <img src="/assets/images/lawyer-demo-atlas-legal.png" alt="Atlas Legal lawyer website demo" loading="lazy" width="1891" height="859" />
+            <img src="/assets/images/lawyer-demo-1.png" alt="Atlas Legal lawyer website demo" loading="lazy" width="1891" height="859" />
             <div class="dw-demo-overlay"><span>Preview Design</span></div>
           </span>
           <div class="dw-demo-body">
@@ -157,9 +157,9 @@
           </div>
         </article>
 
-        <article class="dw-demo-card" data-url="https://nagriva-lawyer.netlify.app/" tabindex="0" role="link" aria-label="View Premier Law Group live demo">
-          <span class="dw-demo-visual" data-demo="/assets/images/lawyer-demo-premier-law.png" data-title="Premier Law Group" aria-label="Preview Premier Law Group demo">
-            <img src="/assets/images/lawyer-demo-premier-law.png" alt="Premier Law Group website demo" loading="lazy" width="1891" height="859" />
+        <article class="dw-demo-card" data-demo-url="https://preview.themeforest.net/item/libero-a-theme-for-lawyers-and-law-firms/full_screen_preview/13933476" tabindex="0" role="link" aria-label="View Premier Law Group live demo">
+          <span class="dw-demo-visual" data-demo="/assets/images/lawyer-demo-2.png" data-title="Premier Law Group" aria-label="Preview Premier Law Group demo">
+            <img src="/assets/images/lawyer-demo-2.png" alt="Premier Law Group website demo" loading="lazy" width="1891" height="859" />
             <div class="dw-demo-overlay"><span>Preview Design</span></div>
           </span>
           <div class="dw-demo-body">
@@ -172,9 +172,9 @@
           </div>
         </article>
 
-        <article class="dw-demo-card" data-url="https://nagriva-lawyer.netlify.app/" tabindex="0" role="link" aria-label="View Elite Attorneys live demo">
-          <span class="dw-demo-visual" data-demo="/assets/images/lawyer-demo-elite-attorneys.png" data-title="Elite Attorneys" aria-label="Preview Elite Attorneys demo">
-            <img src="/assets/images/lawyer-demo-elite-attorneys.png" alt="Elite Attorneys website demo" loading="lazy" width="1891" height="859" />
+        <article class="dw-demo-card" data-demo-url="https://preview.themeforest.net/item/oconnor-lawyers-attorneys-and-law-firm-wordpress-theme/full_screen_preview/22089634" tabindex="0" role="link" aria-label="View Elite Attorneys live demo">
+          <span class="dw-demo-visual" data-demo="/assets/images/lawyer-demo-3.png" data-title="Elite Attorneys" aria-label="Preview Elite Attorneys demo">
+            <img src="/assets/images/lawyer-demo-3.png" alt="Elite Attorneys website demo" loading="lazy" width="1891" height="859" />
             <div class="dw-demo-overlay"><span>Preview Design</span></div>
           </span>
           <div class="dw-demo-body">
@@ -308,22 +308,30 @@
   <script defer src="../js/performance-optimizer.js"></script>
   <script defer src="../js/lazy-loader.js"></script>
   <script defer src="../js/cookie-consent.js"></script>
-
   <script>
     (function () {
-      var demoUrl = 'https://nagriva-lawyer.netlify.app/';
       document.querySelectorAll('.dw-demo-card').forEach(function (card) {
+    
+        const demoUrl = card.getAttribute('data-demo-url');
+    
+        card.style.cursor = 'pointer';
+        card.setAttribute('tabindex', '0');
+    
         card.addEventListener('click', function () {
-          window.open(demoUrl, '_blank');
-        });
-        card.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') {
+          if (demoUrl) {
             window.open(demoUrl, '_blank');
           }
         });
+    
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && demoUrl) {
+            window.open(demoUrl, '_blank');
+          }
+        });
+    
       });
     })();
-  </script>
+    </script>
 
   <div id="cookie-consent-container"></div>
 </body>
