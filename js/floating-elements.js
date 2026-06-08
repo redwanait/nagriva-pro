@@ -391,6 +391,8 @@
 
   /* ─── Setup Realtime for Support ─── */
   function setupSupportRealtime() {
+    console.log('[FloatingSupport] setupSupportRealtime() called');
+
     if (supportChannel) {
       window.supabaseClient.removeChannel(supportChannel);
     }
@@ -400,25 +402,41 @@
       .on('postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages' },
         function(payload) {
-          if (!supportAuthed || !supportUser || !payload.new) return;
+          console.log('[FloatingSupport] Realtime payload received:', JSON.stringify(payload, null, 2));
+
+          if (!supportAuthed) { console.log('[FloatingSupport] BLOCKED: supportAuthed is false'); return; }
+          if (!supportUser) { console.log('[FloatingSupport] BLOCKED: supportUser is null/undefined'); return; }
+          if (!payload.new) { console.log('[FloatingSupport] BLOCKED: payload.new is missing'); return; }
+
           var msg = payload.new;
-          if (!msg.conversation_id || msg.conversation_id !== supportConversationId) return;
-          if (msg.user_id === supportUser.id && msg.sender_role === 'client') return;
+          console.log('[FloatingSupport] msg.conversation_id:', msg.conversation_id, '| supportConversationId:', supportConversationId);
+          console.log('[FloatingSupport] msg.user_id:', msg.user_id, '| supportUser.id:', supportUser.id);
+          console.log('[FloatingSupport] msg.sender_role:', msg.sender_role);
+          console.log('[FloatingSupport] msg.order_id:', msg.order_id);
 
-          /* Avoid duplicates */
+          if (!msg.conversation_id) { console.log('[FloatingSupport] BLOCKED: msg has no conversation_id'); return; }
+          if (msg.conversation_id !== supportConversationId) { console.log('[FloatingSupport] BLOCKED: conversation_id mismatch'); return; }
+
+          if (msg.user_id === supportUser.id && msg.sender_role === 'client') { console.log('[FloatingSupport] BLOCKED: own client message'); return; }
+
           var exists = supportMessages.some(function(m) { return m.id === msg.id; });
-          if (exists) return;
+          if (exists) { console.log('[FloatingSupport] BLOCKED: duplicate message id'); return; }
 
+          console.log('[FloatingSupport] ALL CHECKS PASSED — rendering message');
           supportMessages.push(msg);
 
           if (supportOpen) {
             var list = document.getElementById('supportMsgList');
             if (list) {
               hideSupportTyping();
+              console.log('[FloatingSupport] Calling appendMsgBubble');
               appendMsgBubble(list, msg);
               scrollSupportMessages();
+            } else {
+              console.log('[FloatingSupport] supportMsgList element not found');
             }
           } else {
+            console.log('[FloatingSupport] supportOpen is false, incrementing unread');
             supportUnread++;
             updateSupportBadge();
           }
@@ -431,7 +449,9 @@
           }
         }
       )
-      .subscribe();
+      .subscribe(function(status) {
+        console.log('[FloatingSupport] Realtime subscription status:', status);
+      });
   }
 
   /* ─── Init ─── */

@@ -239,6 +239,7 @@ const NAGRIVA_ClientMessages = (() => {
       .on('postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages' },
         async (payload) => {
+          console.log('REALTIME MESSAGE:', payload);
           try {
             const { data: fullMsg, error } = await window.supabaseClient
               .from('messages')
@@ -247,7 +248,7 @@ const NAGRIVA_ClientMessages = (() => {
               .single();
             if (error || !fullMsg) return;
 
-            const oid = fullMsg.order_id;
+            const oid = fullMsg.order_id || fullMsg.conversation_id;
             if (!oid) return;
 
             const user = await ensureUser();
@@ -306,7 +307,9 @@ const NAGRIVA_ClientMessages = (() => {
           }
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log('SUBSCRIBE STATUS:', status);
+      });
 
     _realtimeChannels.push(channel);
     log('Realtime subscription established');
