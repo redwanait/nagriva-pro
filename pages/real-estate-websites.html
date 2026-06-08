@@ -291,6 +291,35 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════ SUCCESS METRICS ══════════════════════════ -->
+  <section class="section dw-metrics lazy-section lazy-section--small" id="metrics">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Data-Driven Results</div>
+        <h2 class="section-title">Designed to <span class="text-gradient">Drive Results</span></h2>
+        <p class="section-desc">Professional websites built to generate more leads, bookings, and revenue.</p>
+      </div>
+      <div class="dw-metrics-bar fade-up" style="--delay:0.1s">
+        <div class="dw-metrics-item">
+          <div class="dw-metrics-number" data-target="57" data-suffix="%+">0%+</div>
+          <div class="dw-metrics-label">More Property Inquiries</div>
+        </div>
+        <div class="dw-metrics-item">
+          <div class="dw-metrics-number" data-target="44" data-suffix="%+">0%+</div>
+          <div class="dw-metrics-label">More Buyer Leads</div>
+        </div>
+        <div class="dw-metrics-item">
+          <div class="dw-metrics-number" data-target="38" data-suffix="%+">0%+</div>
+          <div class="dw-metrics-label">More Viewing Requests</div>
+        </div>
+        <div class="dw-metrics-item">
+          <div class="dw-metrics-number" data-target="31" data-suffix="%+">0%+</div>
+          <div class="dw-metrics-label">Higher Lead Conversion</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════════════════ WHAT'S INCLUDED ══════════════════════════ -->
   <section class="section dw-features lazy-section" id="included">
     <div class="container">
@@ -414,6 +443,40 @@
       });
     })();
     </script>
+
+  <script>
+    (function () {
+      var bar = document.querySelector('.dw-metrics-bar');
+      if (!bar) return;
+      var nums = bar.querySelectorAll('.dw-metrics-number');
+      if (!nums.length) return;
+      var counted = false;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            obs.unobserve(bar);
+            nums.forEach(function (el) {
+              var target = parseInt(el.getAttribute('data-target'), 10);
+              var suffix = el.getAttribute('data-suffix') || '';
+              var duration = 1800;
+              var start = performance.now();
+              function tick(now) {
+                var t = Math.min((now - start) / duration, 1);
+                var eased = 1 - Math.pow(1 - t, 3);
+                var current = Math.round(eased * target);
+                el.textContent = current + suffix;
+                if (t < 1) requestAnimationFrame(tick);
+                else el.textContent = target + suffix;
+              }
+              requestAnimationFrame(tick);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(bar);
+    })();
+  </script>
 
   <div id="cookie-consent-container"></div>
 </body>

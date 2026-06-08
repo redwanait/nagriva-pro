@@ -482,6 +482,66 @@
   flex-wrap: wrap;
 }
 
+/* ─── Success Metrics Strip ─── */
+
+.dw-metrics {
+  position: relative;
+  z-index: 1;
+}
+
+.dw-metrics-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 56px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  text-align: center;
+}
+
+.dw-metrics-item {
+  position: relative;
+  padding: 20px 16px;
+  cursor: default;
+  transition: background 0.4s ease;
+}
+
+.dw-metrics-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 40%;
+  background: rgba(255,255,255,0.04);
+}
+
+.dw-metrics-number {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.dw-metrics-item:hover .dw-metrics-number {
+  color: var(--accent);
+  text-shadow: 0 0 40px rgba(59,130,246,0.25), 0 0 80px rgba(59,130,246,0.1);
+}
+
+.dw-metrics-label {
+  font-size: 0.82rem;
+  color: var(--gray);
+  line-height: 1.4;
+  font-weight: 500;
+  max-width: 180px;
+  margin: 0 auto;
+}
+
 /* ─── Responsive ─── */
 
 @media (max-width: 1024px) {
@@ -495,6 +555,10 @@
 
   .dw-features-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dw-metrics-number {
+    font-size: clamp(2rem, 5vw, 2.8rem);
   }
 }
 
@@ -511,6 +575,30 @@
 
   .dw-features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .dw-metrics-bar {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 40px 0;
+    gap: 0;
+  }
+
+  .dw-metrics-item {
+    padding: 24px 12px;
+  }
+
+  .dw-metrics-item:nth-child(2)::after {
+    display: none;
+  }
+
+  .dw-metrics-item:nth-child(2)::after,
+  .dw-metrics-item:nth-child(4)::after {
+    display: none;
+  }
+
+  .dw-metrics-label {
+    font-size: 0.75rem;
+    max-width: 140px;
   }
 
   .dw-hero-actions {
