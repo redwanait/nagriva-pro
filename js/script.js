@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initFAQ();
   initSmoothScroll();
-  initProjectModals();
+  initBeforeAfterSliders();
   initServiceCTA();
   /* Defer homepage services load to after paint */
   requestIdleCallback(function() { initHomepageServices(); }, { timeout: 3000 });
@@ -37,105 +37,72 @@ document.addEventListener('navbar:loaded', () => {
 });
 
 /* ════════════════════════════════════════════
-   PROJECT MODALS
+   BEFORE / AFTER SLIDERS
 ════════════════════════════════════════════ */
-const projectData = {
-  nagriva: {
-    title: 'Nagriva — Brand Identity & Digital Presence',
-    category: '✦ Brand Identity',
-    image: '/assets/images/projects/Brand Identity & Digital Presence.png',
-    desc: 'The complete Nagriva brand ecosystem — from visual identity and design system to a fully responsive web platform engineered for performance, clarity, and conversion.',
-    services: ['Brand Identity', 'Web Design', 'Strategy'],
-    results: []
-  },
-  growthos: {
-    title: 'GrowthOS — AI Automation Platform',
-    category: '✦ AI Automation',
-    image: '/assets/images/projects/GrowthOS — AI Automation Platform.png',
-    desc: 'An internal platform connecting AI-powered content generation, SEO analysis, reporting, and integrations into a unified operating system for agency workflows.',
-    services: ['AI Automation', 'Web Design', 'Strategy'],
-    results: []
-  },
-  portal: {
-    title: 'Client Portal — Dashboard Experience',
-    category: '✦ Web Application',
-    image: '/assets/images/projects/Client Portal — Dashboard Experience.png',
-    desc: 'A secure real-time client portal featuring project tracking, file sharing, invoicing, task management, and direct messaging — designed for seamless collaboration.',
-    services: ['Web Design', 'Brand Identity', 'UI/UX'],
-    results: []
-  },
-  ecommerce: {
-    title: 'Concept: E-Commerce Experience',
-    category: '✦ E-Commerce',
-    image: '/assets/images/projects/Concept E-Commerce Experience.png',
-    desc: 'A luxury e-commerce concept showcasing premium product presentation, seamless checkout flows, and immersive brand storytelling for the modern shopper.',
-    services: ['Web Design', 'UI/UX', 'Brand Identity'],
-    results: []
-  },
-  fintech: {
-    title: 'Concept: FinTech Dashboard',
-    category: '✦ Financial Technology',
-    image: '/assets/images/projects/Concept FinTech Dashboard.png',
-    desc: 'A premium fintech dashboard concept with real-time portfolio tracking, intelligent analytics, asset allocation visualization, and bank-grade security design.',
-    services: ['Web Design', 'UI/UX', 'Data Visualization'],
-    results: []
-  }
-};
+function initBeforeAfterSliders() {
+  var containers = document.querySelectorAll('.tf-ba-container');
+  if (!containers.length) return;
 
-function initProjectModals() {
-  const modal = document.getElementById('pjModal');
-  const cards = document.querySelectorAll('.pj-card');
-  if (!modal || !cards.length) return;
+  containers.forEach(function (container) {
+    var before = container.querySelector('.tf-ba-before');
+    var after = container.querySelector('.tf-ba-after');
+    var handle = container.querySelector('.tf-ba-handle');
+    var divider = container.querySelector('.tf-ba-divider');
+    if (!before || !after || !handle || !divider) return;
 
-  const closeBtn = modal.querySelector('.pj-modal-close');
-  const modalImg = modal.querySelector('.pj-modal-visual img');
-  const modalCategory = modal.querySelector('.pj-modal-category');
-  const modalTitle = modal.querySelector('.pj-modal-title');
-  const modalDesc = modal.querySelector('.pj-modal-desc');
-  const modalServices = modal.querySelector('.pj-modal-services ul');
-  const modalStats = modal.querySelector('.pj-modal-stats');
+    var isDragging = false;
+    var startX, startPercent;
 
-  function openModal(projectId) {
-    const data = projectData[projectId];
-    if (!data) return;
-    modalImg.src = data.image;
-    modalImg.alt = data.title;
-    modalCategory.textContent = data.category;
-    modalTitle.textContent = data.title;
-    modalDesc.textContent = data.desc;
-    modalServices.innerHTML = data.services.map(s => `<li>${s}</li>`).join('');
-    const resultsContainer = modal.querySelector('.pj-modal-results');
-    if (data.results && data.results.length) {
-      modalStats.innerHTML = data.results.map(r =>
-        `<div class="pj-modal-stat">
-          <span class="pj-modal-stat-value">${r.value}</span>
-          <span class="pj-modal-stat-label">${r.label}</span>
-        </div>`
-      ).join('');
-      if (resultsContainer) resultsContainer.style.display = '';
-    } else {
-      modalStats.innerHTML = '';
-      if (resultsContainer) resultsContainer.style.display = 'none';
+    function getContainerRect() {
+      return container.getBoundingClientRect();
     }
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
 
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+    function setPosition(clientX) {
+      var rect = getContainerRect();
+      if (rect.width === 0) return;
+      var x = clientX - rect.left;
+      var percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      before.style.clipPath = 'inset(0 ' + (100 - percent) + '% 0 0)';
+      after.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
+      divider.style.left = percent + '%';
+    }
 
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      const project = card.dataset.project;
-      if (project) openModal(project);
+    function onStart(e) {
+      e.preventDefault();
+      isDragging = true;
+      var point = e.touches ? e.touches[0] : e;
+      startX = point.clientX;
+      var rect = getContainerRect();
+      if (rect.width === 0) return;
+      startPercent = ((startX - rect.left) / rect.width) * 100;
+      container.classList.add('tf-ba-dragging');
+    }
+
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      var point = e.touches ? e.touches[0] : e;
+      setPosition(point.clientX);
+    }
+
+    function onEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      container.classList.remove('tf-ba-dragging');
+    }
+
+    handle.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    handle.addEventListener('touchstart', onStart, { passive: false });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+
+    container.addEventListener('click', function (e) {
+      if (e.target === handle || handle.contains(e.target)) return;
+      setPosition(e.clientX);
     });
   });
-
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 }
 
 /* ════════════════════════════════════════════
@@ -607,7 +574,7 @@ function initContactForm() {
 ════════════════════════════════════════════ */
 requestIdleCallback(function () {
   var isMobile = window.innerWidth < 768;
-  var grids = document.querySelectorAll('.sv-grid, .stats-grid, .pj-grid, .pj-grid-bottom, .process-cards, .svc-benefits, .svc-features, .svc-steps, .svc-stats-grid, .svc-results-grid, .svc-reviews-grid');
+  var grids = document.querySelectorAll('.sv-grid, .stats-grid, .pj-grid, .pj-grid-bottom, .tf-grid, .process-cards, .svc-benefits, .svc-features, .svc-steps, .svc-stats-grid, .svc-results-grid, .svc-reviews-grid');
   grids.forEach(function (grid) {
     var cards = grid.querySelectorAll('.fade-up');
     cards.forEach(function (card, i) {
