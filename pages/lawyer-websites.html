@@ -278,6 +278,189 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════ REAL SUCCESS STORY ══════════════════════════ -->
+  <section class="section lazy-section lazy-section--large" id="success-story" style="padding:60px 0;">
+    <div class="container">
+      <div class="lrs-card fade-up">
+        <div class="lrs-grid">
+          <div class="lrs-left">
+            <div class="hero-badge" style="display:inline-flex;margin-bottom:16px;">
+              <span class="badge-dot"></span>
+              <span>CASE STUDY</span>
+            </div>
+            <h2 class="lrs-title">Real Success Story</h2>
+            <p class="lrs-desc">
+              See how a modern law firm website can increase consultation requests, build trust, and improve online visibility.
+            </p>
+          </div>
+          <div class="lrs-right">
+            <div class="lrs-metrics">
+              <div class="lrs-metric-card">
+                <div class="lrs-metric-value">+72%</div>
+                <div class="lrs-metric-label">Consultation Requests</div>
+              </div>
+              <div class="lrs-metric-card">
+                <div class="lrs-metric-value">+55%</div>
+                <div class="lrs-metric-label">Mobile Engagement</div>
+              </div>
+              <div class="lrs-metric-card">
+                <div class="lrs-metric-value">+40%</div>
+                <div class="lrs-metric-label">Time on Site</div>
+              </div>
+              <div class="lrs-metric-card">
+                <div class="lrs-metric-value" style="font-size:clamp(1.1rem,2vw,1.5rem);margin-bottom:10px;">Improved</div>
+                <div class="lrs-metric-label">Client Trust</div>
+              </div>
+            </div>
+            <div class="lrs-actions">
+              <a href="/case-studies/law-firm-success-story.html" class="btn-primary" data-cta="primary" data-cta-action="read-case-study">
+                Read Full Case Study
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a href="https://drive.google.com/file/d/15EjxqKb7NKVNyTGhJoRQ7sbsB5AU0P1C/view?usp=sharing" target="_blank" class="btn-secondary lrs-btn-pdf" data-cta="secondary" data-cta-action="download-pdf">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .lrs-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--cs-border,rgba(255,255,255,0.07));
+      border-radius: var(--cs-radius,22px);
+      padding: 48px 52px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .lrs-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -25%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .lrs-card:hover {
+      border-color: rgba(59,130,246,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .lrs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .lrs-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .lrs-desc {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 420px;
+    }
+    .lrs-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .lrs-metric-card {
+      padding: 22px 18px;
+      border-radius: calc(var(--cs-radius,22px) - 4px);
+      border: 1px solid var(--cs-border,rgba(255,255,255,0.07));
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .lrs-metric-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(59,130,246,0.15);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+    }
+    .lrs-metric-value {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 800;
+      color: #3b82f6;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .lrs-metric-label {
+      font-size: 0.78rem;
+      color: var(--gray2);
+      line-height: 1.4;
+    }
+    .lrs-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .lrs-btn-pdf {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 8px;
+    }
+    @media (max-width: 1024px) {
+      .lrs-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .lrs-desc {
+        max-width: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .lrs-card {
+        padding: 32px 24px;
+      }
+      .lrs-metrics {
+        gap: 10px;
+      }
+      .lrs-actions {
+        flex-direction: column;
+      }
+      .lrs-actions .btn-primary,
+      .lrs-actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .lrs-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--cs-border,rgba(255,255,255,0.07));
+      }
+      .lrs-metric-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--cs-border,rgba(255,255,255,0.07));
+      }
+    }
+  </style>
+
   <!-- ══════════════════════════ FINAL CTA ══════════════════════════ -->
   <section class="dw-cta lazy-section lazy-section--small" id="cta">
     <div class="dw-cta-glow" aria-hidden="true"></div>

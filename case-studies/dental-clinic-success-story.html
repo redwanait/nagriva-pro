@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Clinic Case Study — Nagriva</title>
+  <meta name="description" content="Discover how Nagriva helped a dental clinic increase patient appointments by 65% with a modern website redesign." />
+  <meta property="og:title" content="Dental Clinic Website Redesign Case Study | Nagriva" />
+  <meta property="og:description" content="How a modern dental website helped increase patient bookings, improve trust, and strengthen online visibility." />
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png" />
+  <meta property="og:url" content="https://nagriva.com/case-studies/dental-clinic-success-story" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Nagriva" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dental Clinic Website Redesign Case Study | Nagriva" />
+  <meta name="twitter:description" content="How a modern dental website helped increase patient bookings, improve trust, and strengthen online visibility." />
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png" />
+  <link rel="canonical" href="https://nagriva.com/case-studies/dental-clinic-success-story" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" />
+  <link rel="preload" href="https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2" as="font" type="font/woff2" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    .lazy-section { content-visibility: auto; contain-intrinsic-size: 500px; contain: layout style paint; }
+    .lazy-section--small { contain-intrinsic-size: 300px; }
+    .lazy-section--large { contain-intrinsic-size: 800px; }
+    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1) var(--delay,0s), transform 0.5s cubic-bezier(0.4,0,0.2,1) var(--delay,0s); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .cs-hero .fade-up { opacity: 1 !important; transform: translateY(0) !important; }
+  </style>
+  <style>
+    @font-face {
+      font-family: 'Syne';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: local('Syne ExtraBold'), local('Syne-ExtraBold'),
+           url(https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Syne';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: local('Syne ExtraBold'), local('Syne-ExtraBold'),
+           url(https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm25L9Hz_.woff2) format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+  </style>
+  <style>
+    :root {
+      --cs-accent: #3b82f6;
+      --cs-accent-dim: rgba(59,130,246,0.06);
+      --cs-border: rgba(255,255,255,0.07);
+      --cs-border-hover: rgba(59,130,246,0.2);
+      --cs-radius: 22px;
+    }
+    .cs-page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, #0a0c0e 50%, var(--bg) 100%);
+    }
+    .cs-page-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at 50% 20%, black 15%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 15%, transparent 70%);
+    }
+    .cs-hero {
+      position: relative;
+      z-index: 1;
+      padding: calc(var(--navbar-height) + 60px) 20px 60px;
+      text-align: center;
+    }
+    .cs-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cs-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .cs-hero-desc {
+      font-size: clamp(1rem, 1.4vw, 1.08rem);
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+    .cs-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .cs-metric-card {
+      padding: 28px 20px;
+      border-radius: var(--cs-radius);
+      border: 1px solid var(--cs-border);
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cs-metric-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.15);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+    }
+    .cs-metric-value {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--cs-accent);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .cs-metric-label {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+    .cs-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 0;
+    }
+    .cs-section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .cs-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .cs-content-text h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .cs-content-text p {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .cs-content-text p:last-child {
+      margin-bottom: 0;
+    }
+    .cs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cs-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--white);
+      line-height: 1.5;
+    }
+    .cs-list-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--cs-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cs-visual-wrap {
+      position: relative;
+      border-radius: var(--cs-radius);
+      overflow: hidden;
+      border: 1px solid var(--cs-border);
+      background: rgba(255,255,255,0.02);
+    }
+    .cs-visual-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .cs-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .cs-showcase-card {
+      border-radius: var(--cs-radius);
+      border: 1px solid var(--cs-border);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cs-showcase-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.15);
+    }
+    .cs-showcase-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--cs-border);
+    }
+    .cs-showcase-label.before { color: var(--gray2); }
+    .cs-showcase-label.after { color: var(--cs-accent); }
+    .cs-showcase-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: rgba(0,0,0,0.3);
+    }
+    .cs-results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .cs-result-card {
+      padding: 40px 28px;
+      border-radius: var(--cs-radius);
+      border: 1px solid var(--cs-border);
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cs-result-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.15);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+    }
+    .cs-result-value {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--cs-accent);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .cs-result-label {
+      font-size: 0.95rem;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .cs-result-desc {
+      font-size: 0.82rem;
+      color: var(--gray2);
+      line-height: 1.5;
+    }
+    .cs-tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .cs-tech-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--cs-border);
+      background: rgba(255,255,255,0.02);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .cs-tech-item:hover {
+      border-color: rgba(59,130,246,0.15);
+      background: rgba(59,130,246,0.03);
+    }
+    .cs-tech-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--cs-accent);
+      flex-shrink: 0;
+    }
+    .cs-cta {
+      position: relative;
+      z-index: 1;
+      padding: 40px 20px 80px;
+      text-align: center;
+    }
+    .cs-cta-glow {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .cs-cta-inner {
+      position: relative;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .cs-cta-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .cs-cta-text {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .cs-cta-note {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: var(--gray2);
+    }
+    .cs-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray2);
+      margin-bottom: 24px;
+      transition: color 0.25s ease;
+    }
+    .cs-back-link:hover {
+      color: var(--white);
+    }
+    .cs-back-link svg {
+      width: 14px;
+      height: 14px;
+    }
+    @media (max-width: 1024px) {
+      .cs-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cs-content-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .cs-content-grid.reverse {
+        direction: ltr;
+      }
+      .cs-content-grid.reverse .cs-visual-wrap {
+        order: 0;
+      }
+      .cs-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cs-tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cs-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .cs-hero {
+        padding: calc(var(--navbar-height) + 30px) 20px 40px;
+      }
+      .cs-metrics {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .cs-section {
+        padding: 60px 0;
+      }
+      .cs-section-inner {
+        padding: 0 20px;
+      }
+      .cs-results-grid {
+        grid-template-columns: 1fr;
+      }
+      .cs-tech-grid {
+        grid-template-columns: 1fr;
+      }
+      .cs-showcase {
+        grid-template-columns: 1fr;
+      }
+      .cs-cta {
+        padding: 20px 20px 60px;
+      }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .cs-metric-card:hover,
+      .cs-result-card:hover,
+      .cs-showcase-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--cs-border);
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How We Helped a Dental Clinic Generate More Patient Appointments",
+    "description": "A modern website redesign helped a dental clinic increase appointment requests by 65%, improve mobile engagement, and build patient trust.",
+    "author": {
+      "@type": "Organization",
+      "name": "Nagriva",
+      "url": "https://nagriva.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nagriva",
+      "url": "https://nagriva.com"
+    },
+    "datePublished": "2026-01-15",
+    "image": "/assets/images/branding/nagriva-og.png"
+  }
+  </script>
+</head>
+<body data-page="case-study">
+
+  <div class="cs-page-bg" aria-hidden="true"></div>
+
+  <div id="navbar-container"></div>
+
+  <section class="cs-hero" id="hero">
+    <div class="cs-hero-inner">
+      <div class="fade-up">
+        <div class="hero-badge" style="display:inline-flex;margin-bottom:24px;">
+          <span class="badge-dot"></span>
+          <span>CASE STUDY</span>
+        </div>
+
+        <h1 class="cs-hero-title">
+          How We Helped a Dental Clinic Generate More Patient Appointments
+        </h1>
+
+        <p class="cs-hero-desc">
+          A complete website transformation that turned an outdated online presence into a patient-generating machine — with measurable results.
+        </p>
+
+        <div class="cs-metrics">
+          <div class="cs-metric-card">
+            <div class="cs-metric-value">+65%</div>
+            <div class="cs-metric-label">Appointment Requests</div>
+          </div>
+          <div class="cs-metric-card">
+            <div class="cs-metric-value">+48%</div>
+            <div class="cs-metric-label">Mobile Engagement</div>
+          </div>
+          <div class="cs-metric-card">
+            <div class="cs-metric-value">—</div>
+            <div class="cs-metric-label">Faster Website Performance</div>
+          </div>
+          <div class="cs-metric-card">
+            <div class="cs-metric-value">—</div>
+            <div class="cs-metric-label">Improved Patient Trust</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section lazy-section" id="overview">
+    <div class="cs-section-inner">
+      <div class="cs-content-grid">
+        <div class="cs-content-text fade-up">
+          <div class="section-tag" style="margin-bottom:16px;">Project Overview</div>
+          <h2>Modernizing a Dental Clinic's Digital Presence</h2>
+          <p>
+            A well-established dental clinic in Casablanca was struggling to attract new patients online. Their existing website was outdated, slow, and not optimized for mobile devices — resulting in missed opportunities and a declining appointment booking rate.
+          </p>
+          <p>
+            The clinic partnered with Nagriva to completely redesign their online presence. Our goal was to create a modern, trustworthy, and conversion-focused website that would make it easy for potential patients to find the clinic, learn about services, and book appointments.
+          </p>
+        </div>
+        <div class="cs-visual-wrap fade-up" style="--delay:0.1s">
+          <div style="padding:40px 32px;display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;">
+            <div style="width:64px;height:64px;border-radius:16px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.1);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);flex-shrink:0;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </div>
+            <div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:4px;">Full Website Redesign</div>
+              <div style="font-size:0.85rem;color:var(--gray2);">From outdated to award-worthy in 6 weeks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section lazy-section lazy-section--large" id="challenge">
+    <div class="cs-section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">The Challenge</div>
+        <h2 class="section-title">What Was Holding <span class="text-gradient">The Clinic Back</span></h2>
+        <p class="section-desc">The clinic was losing potential patients every day due to fundamental issues with their old website.</p>
+      </div>
+
+      <div class="cs-content-grid reverse" style="direction:rtl;">
+        <div class="cs-content-text fade-up" style="direction:ltr;">
+          <div class="cs-list">
+            <div class="cs-list-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <div>
+                <strong>Outdated Website</strong>
+                <p style="font-size:0.85rem;color:var(--gray2);margin-top:2px;">The old design looked unprofessional and failed to inspire trust in potential patients.</p>
+              </div>
+            </div>
+            <div class="cs-list-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <div>
+                <strong>Poor Mobile Experience</strong>
+                <p style="font-size:0.85rem;color:var(--gray2);margin-top:2px;">Over 60% of visitors accessed the site on mobile, but the experience was broken and frustrating.</p>
+              </div>
+            </div>
+            <div class="cs-list-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <div>
+                <strong>Difficult Appointment Booking</strong>
+                <p style="font-size:0.85rem;color:var(--gray2);margin-top:2px;">Patients had to call during office hours — there was no online booking or WhatsApp option available.</p>
+              </div>
+            </div>
+            <div class="cs-list-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <div>
+                <strong>Low Patient Trust</strong>
+                <p style="font-size:0.85rem;color:var(--gray2);margin-top:2px;">Missing testimonials, before/after galleries, and credentials made the clinic appear less credible.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-visual-wrap fade-up" style="direction:ltr;--delay:0.1s">
+          <div style="padding:40px 32px;display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;">
+            <div style="width:64px;height:64px;border-radius:16px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;color:#ef4444;flex-shrink:0;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:4px;">4 Critical Issues Identified</div>
+              <div style="font-size:0.85rem;color:var(--gray2);">Each one was costing the clinic real patients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section lazy-section lazy-section--large" id="solution">
+    <div class="cs-section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">Our Solution</div>
+        <h2 class="section-title">A Complete Digital <span class="text-gradient">Transformation</span></h2>
+        <p class="section-desc">We built a modern, fast, and conversion-optimized website tailored to the dental industry.</p>
+      </div>
+
+      <div class="cs-content-grid fade-up" style="--delay:0.1s">
+        <div class="cs-visual-wrap">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--cs-border);border-radius:var(--cs-radius);overflow:hidden;">
+            <div style="padding:32px 24px;background:rgba(255,255,255,0.02);text-align:center;">
+              <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.08);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);margin:0 auto 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--white);">Modern Premium Design</div>
+            </div>
+            <div style="padding:32px 24px;background:rgba(255,255,255,0.02);text-align:center;">
+              <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.08);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);margin:0 auto 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--white);">Mobile-First Development</div>
+            </div>
+            <div style="padding:32px 24px;background:rgba(255,255,255,0.02);text-align:center;">
+              <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.08);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);margin:0 auto 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--white);">Online Booking Integration</div>
+            </div>
+            <div style="padding:32px 24px;background:rgba(255,255,255,0.02);text-align:center;">
+              <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.08);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);margin:0 auto 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H8l-4 4V11.5a8.5 8.5 0 0 1 17 0z"/></svg>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--white);">WhatsApp Integration</div>
+            </div>
+            <div style="padding:32px 24px;background:rgba(255,255,255,0.02);text-align:center;">
+              <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.08);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);margin:0 auto 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--white);">SEO Optimization</div>
+            </div>
+            <div style="padding:32px 24px;background:rgba(255,255,255,0.02);text-align:center;">
+              <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.08);display:flex;align-items:center;justify-content:center;color:var(--cs-accent);margin:0 auto 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--white);">Performance Improvements</div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-content-text fade-up" style="--delay:0.1s">
+          <h2>Six-Pronged Approach to Growth</h2>
+          <p>
+            We designed a premium, patient-focused website that reflects the quality of care the clinic provides. Every element was crafted to build trust and encourage appointment bookings.
+          </p>
+          <p>
+            The site was built mobile-first, ensuring a seamless experience across all devices. We integrated an online booking system and WhatsApp chat so patients could schedule appointments instantly, 24/7.
+          </p>
+          <p>
+            Local SEO optimization and performance improvements ensured the clinic ranks higher in search results and loads in under 2 seconds.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section lazy-section lazy-section--large" id="showcase">
+    <div class="cs-section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">Before & After</div>
+        <h2 class="section-title">See The <span class="text-gradient">Transformation</span></h2>
+        <p class="section-desc">A side-by-side comparison of the old and new website design.</p>
+      </div>
+
+      <div class="cs-showcase fade-up" style="--delay:0.1s">
+        <div class="cs-showcase-card">
+          <div class="cs-showcase-label before">Before</div>
+          <div style="padding:48px 32px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+            <div style="font-size:0.85rem;color:var(--gray2);max-width:280px;">
+              Outdated layout, broken mobile experience, no booking system, poor visual hierarchy.
+            </div>
+          </div>
+        </div>
+        <div class="cs-showcase-card">
+          <div class="cs-showcase-label after">After</div>
+          <div style="padding:48px 32px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <div style="font-size:0.85rem;color:var(--gray2);max-width:280px;">
+              Modern premium design, mobile-first, instant booking, fast loading, trust-building elements.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section lazy-section" id="results">
+    <div class="cs-section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">Results</div>
+        <h2 class="section-title">Measurable <span class="text-gradient">Impact</span></h2>
+        <p class="section-desc">The numbers speak for themselves — here's what the clinic achieved after the redesign.</p>
+      </div>
+
+      <div class="cs-results-grid fade-up" style="--delay:0.1s">
+        <div class="cs-result-card">
+          <div class="cs-result-value">+65%</div>
+          <div class="cs-result-label">Appointment Requests</div>
+          <div class="cs-result-desc">More patients booking through the website and WhatsApp</div>
+        </div>
+        <div class="cs-result-card">
+          <div class="cs-result-value">+48%</div>
+          <div class="cs-result-label">Mobile Engagement</div>
+          <div class="cs-result-desc">Mobile visitors spending more time browsing services</div>
+        </div>
+        <div class="cs-result-card">
+          <div class="cs-result-value">-40%</div>
+          <div class="cs-result-label">Bounce Rate</div>
+          <div class="cs-result-desc">Visitors staying longer and exploring more pages</div>
+        </div>
+        <div class="cs-result-card">
+          <div class="cs-result-value">2.1s</div>
+          <div class="cs-result-label">Page Load Time</div>
+          <div class="cs-result-desc">Down from 6.8s — a 69% improvement in speed</div>
+        </div>
+        <div class="cs-result-card">
+          <div class="cs-result-value">3×</div>
+          <div class="cs-result-label">Organic Traffic</div>
+          <div class="cs-result-desc">Tripled within 90 days of launch</div>
+        </div>
+        <div class="cs-result-card">
+          <div class="cs-result-value">92</div>
+          <div class="cs-result-label">Google PageSpeed Score</div>
+          <div class="cs-result-desc">Up from 38 — excellent performance rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section lazy-section lazy-section--small" id="tech">
+    <div class="cs-section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">Technologies & Features</div>
+        <h2 class="section-title">Built With <span class="text-gradient">Modern Tools</span></h2>
+      </div>
+
+      <div class="cs-tech-grid fade-up" style="--delay:0.1s">
+        <div class="cs-tech-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Responsive Design
+        </div>
+        <div class="cs-tech-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          SEO Ready
+        </div>
+        <div class="cs-tech-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Appointment Booking
+        </div>
+        <div class="cs-tech-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          WhatsApp Integration
+        </div>
+        <div class="cs-tech-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Fast Loading
+        </div>
+        <div class="cs-tech-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Secure Hosting
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-cta lazy-section lazy-section--small" id="cta">
+    <div class="cs-cta-glow" aria-hidden="true"></div>
+    <div class="cs-cta-inner fade-up">
+      <h2 class="cs-cta-title">Ready To Transform Your Dental Clinic Website?</h2>
+      <p class="cs-cta-text">Let's build a website that attracts more patients and grows your practice.</p>
+      <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="btn-primary" data-cta="primary" data-cta-action="book-call">
+        Book a Free Strategy Call
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p class="cs-cta-note">Free discovery call. No commitment required.</p>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/footer.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+
+  <div id="cookie-consent-container"></div>
+</body>
+</html>
