@@ -867,6 +867,291 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════ FREE WEBSITE AUDIT TEASER ══════════════════════════ -->
+  <section class="section lazy-section" id="free-audit">
+    <style>
+      .ha-card {
+        position: relative;
+        background: rgba(11,15,15,0.5);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border: 1px solid rgba(59,130,246,0.12);
+        border-radius: 28px;
+        padding: 64px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+      }
+      .ha-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(59,130,246,0.04) 0%, transparent 50%, rgba(59,130,246,0.02) 100%);
+        pointer-events: none;
+      }
+      .ha-glow {
+        position: absolute;
+        top: -120px; right: -120px;
+        width: 500px; height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      .ha-left { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px; }
+      .ha-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        width: fit-content;
+        font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--accent);
+        background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+        padding: 6px 16px; border-radius: 99px;
+      }
+      .ha-badge-dot {
+        width: 5px; height: 5px; border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .ha-title {
+        font-family: 'Syne', sans-serif;
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+      }
+      .ha-title span { color: var(--accent); }
+      .ha-desc {
+        font-size: 0.92rem;
+        color: var(--gray);
+        line-height: 1.75;
+        max-width: 480px;
+      }
+      .ha-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 4px;
+      }
+      .ha-feat {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        color: var(--gray);
+        padding: 6px 14px;
+        border-radius: 99px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+      .ha-feat svg {
+        width: 13px; height: 13px;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .ha-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 14px 32px;
+        border-radius: 99px;
+        background: linear-gradient(135deg, #3b82f6, #2563EB);
+        color: #040404;
+        font-weight: 600;
+        font-size: 0.92rem;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-top: 8px;
+      }
+      .ha-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 36px rgba(59,130,246,0.25);
+      }
+      .ha-btn svg {
+        width: 15px; height: 15px;
+        transition: transform 0.3s ease;
+      }
+      .ha-btn:hover svg { transform: translateX(4px); }
+
+      /* ─── Right: Score Card ─── */
+      .ha-right { position: relative; z-index: 1; }
+      .ha-score-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 22px;
+        padding: 32px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .ha-score-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .ha-score-header h3 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .ha-score-big {
+        font-family: 'Syne', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .ha-score-big small {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--gray2);
+      }
+      .ha-score-divider {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      }
+      .ha-score-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .ha-score-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .ha-score-label {
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--gray2);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .ha-score-bar {
+        height: 4px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.06);
+        overflow: hidden;
+      }
+      .ha-score-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, var(--accent), #60a5fa);
+        transition: width 1s ease;
+      }
+      .ha-score-value {
+        font-family: 'Syne', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .ha-score-value span { color: var(--gray2); font-weight: 400; }
+
+      @media (max-width: 1024px) {
+        .ha-card { grid-template-columns: 1fr; gap: 40px; padding: 48px 36px; }
+        .ha-left { align-items: center; text-align: center; }
+        .ha-desc { max-width: 100%; }
+        .ha-features { justify-content: center; }
+        .ha-btn { align-self: center; }
+      }
+      @media (max-width: 768px) {
+        .ha-card { padding: 36px 24px; gap: 32px; border-radius: 22px; }
+        .ha-score-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+        .ha-score-card { padding: 24px 20px; }
+        .ha-score-big { font-size: 1.8rem; }
+      }
+      @media (max-width: 480px) {
+        .ha-card { padding: 28px 18px; gap: 28px; }
+        .ha-score-grid { grid-template-columns: 1fr; }
+        .ha-features { flex-direction: column; align-items: center; }
+      }
+    </style>
+
+    <div class="container">
+      <div class="ha-card fade-up">
+        <div class="ha-glow"></div>
+
+        <!-- ─── LEFT ─── -->
+        <div class="ha-left">
+          <div class="ha-badge">
+            <span class="ha-badge-dot"></span>
+            Free Tool
+          </div>
+
+          <h2 class="ha-title">
+            Get Your Free<br><span>Website Audit</span>
+          </h2>
+
+          <p class="ha-desc">
+            Discover SEO issues, speed bottlenecks, design weaknesses, and missed conversion opportunities holding your website back.
+          </p>
+
+          <div class="ha-features">
+            <span class="ha-feat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              SEO Analysis
+            </span>
+            <span class="ha-feat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Speed Test
+            </span>
+            <span class="ha-feat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              UX Review
+            </span>
+            <span class="ha-feat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Conversion Check
+            </span>
+          </div>
+
+          <a href="/pages/website-audit.html" class="ha-btn">
+            Get My Free Audit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- ─── RIGHT ─── -->
+        <div class="ha-right">
+          <div class="ha-score-card">
+            <div class="ha-score-header">
+              <h3>Audit Score</h3>
+              <div class="ha-score-big">82<small>/100</small></div>
+            </div>
+            <div class="ha-score-divider"></div>
+            <div class="ha-score-grid">
+              <div class="ha-score-item">
+                <div class="ha-score-label">SEO</div>
+                <div class="ha-score-bar"><div class="ha-score-bar-fill" style="width:78%"></div></div>
+                <div class="ha-score-value">78<span>/100</span></div>
+              </div>
+              <div class="ha-score-item">
+                <div class="ha-score-label">Speed</div>
+                <div class="ha-score-bar"><div class="ha-score-bar-fill" style="width:65%"></div></div>
+                <div class="ha-score-value">65<span>/100</span></div>
+              </div>
+              <div class="ha-score-item">
+                <div class="ha-score-label">Design</div>
+                <div class="ha-score-bar"><div class="ha-score-bar-fill" style="width:92%"></div></div>
+                <div class="ha-score-value">92<span>/100</span></div>
+              </div>
+              <div class="ha-score-item">
+                <div class="ha-score-label">Conversion</div>
+                <div class="ha-score-bar"><div class="ha-score-bar-fill" style="width:84%"></div></div>
+                <div class="ha-score-value">84<span>/100</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
   <!-- ══════════════════════════ BETA STATUS ══════════════════════════ -->

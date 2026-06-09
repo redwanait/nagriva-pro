@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Website Audit — Nagriva</title>
+  <meta name="description" content="Get a free website audit from Nagriva. Discover SEO issues, speed bottlenecks, design weaknesses, and conversion opportunities holding your website back." />
+  <meta property="og:title" content="Free Website Audit — Nagriva" />
+  <meta property="og:description" content="Get a free website audit from Nagriva. Discover SEO issues, speed bottlenecks, design weaknesses, and conversion opportunities holding your website back." />
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png" />
+  <meta property="og:url" content="https://nagriva.com/website-audit" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Nagriva" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Website Audit — Nagriva" />
+  <meta name="twitter:description" content="Get a free website audit from Nagriva. Discover SEO issues, speed bottlenecks, design weaknesses, and conversion opportunities holding your website back." />
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png" />
+  <link rel="canonical" href="https://nagriva.com/pages/website-audit.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+  <link rel="stylesheet" href="../css/performance.css" />
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root { --wa-gap: 100px; }
+
+    /* ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ */
+    .wa-hero {
+      position: relative; min-height: 85vh;
+      display: flex; align-items: center;
+      padding: 140px 0 60px; overflow: hidden;
+    }
+    .wa-hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .wa-hero-glow {
+      position: absolute;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
+      filter: blur(100px);
+      animation: waGlowPulse 8s ease-in-out infinite;
+    }
+    .wa-hero-glow-2 {
+      position: absolute;
+      bottom: -100px; right: -150px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: waGlowPulse2 12s ease-in-out infinite;
+    }
+    .wa-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 15%, transparent 65%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 15%, transparent 65%);
+    }
+    .wa-hero .container {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      width: 100%; max-width: 800px;
+    }
+    .wa-hero-left { display: flex; flex-direction: column; gap: 24px; align-items: center; text-align: center; }
+    .wa-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+      padding: 6px 16px; border-radius: 99px;
+      backdrop-filter: blur(12px);
+    }
+    .wa-hero-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .wa-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.06; letter-spacing: -0.03em;
+    }
+    .wa-hero h1 span { color: var(--accent); }
+    .wa-hero-sub {
+      font-size: 1rem; color: var(--gray);
+      line-height: 1.7; max-width: 600px;
+    }
+    .wa-hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .wa-hero-btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--bg);
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      padding: 14px 28px; border-radius: 99px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .wa-hero-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(59,130,246,0.25);
+    }
+    .wa-hero-btn-primary svg { transition: transform 0.3s ease; }
+    .wa-hero-btn-primary:hover svg { transform: translateX(3px); }
+    .wa-hero-btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--gray);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      padding: 12px 24px; border-radius: 99px;
+      text-decoration: none;
+      transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .wa-hero-btn-secondary:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+    .wa-hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      gap: 20px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .wa-hero-trust-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; color: var(--gray2);
+    }
+    .wa-hero-trust-item svg { width: 13px; height: 13px; color: var(--accent); flex-shrink: 0; }
+    .wa-hero-trust-divider { width: 3px; height: 3px; border-radius: 50%; background: var(--gray2); opacity: 0.3; }
+
+    @keyframes waGlowPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes waGlowPulse2 {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
+    }
+
+    /* ════════════════════════════════════════════
+       DASHBOARD PREVIEW
+       ════════════════════════════════════════════ */
+    .wa-dashboard {
+      padding: var(--wa-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-dashboard-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .wa-dashboard-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      filter: blur(120px);
+    }
+    .wa-dash-card {
+      position: relative; z-index: 1;
+      background: rgba(11,15,15,0.6);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(59,130,246,0.1);
+      border-radius: 28px;
+      padding: 48px 40px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .wa-dash-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 29px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 40%, transparent 60%, rgba(59,130,246,0.03) 100%);
+      pointer-events: none;
+    }
+    .wa-dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      position: relative; z-index: 1;
+    }
+    .wa-dash-header-left { display: flex; flex-direction: column; gap: 4px; }
+    .wa-dash-header-left h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .wa-dash-header-left p {
+      font-size: 0.82rem;
+      color: var(--gray2);
+    }
+    .wa-dash-overall {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .wa-dash-overall-score {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .wa-dash-overall-label {
+      font-size: 0.85rem;
+      color: var(--gray2);
+    }
+    .wa-dash-scores {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative; z-index: 1;
+    }
+    .wa-dash-score-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .wa-dash-score-item:hover {
+      border-color: rgba(59,130,246,0.18);
+      background: rgba(59,130,246,0.025);
+    }
+    .wa-dash-score-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wa-dash-score-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .wa-dash-score-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .wa-dash-score-num span { font-size: 0.75rem; color: var(--gray2); font-weight: 400; }
+    .wa-dash-bar {
+      height: 5px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    .wa-dash-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      transition: width 1.2s ease;
+    }
+    .wa-dash-bar-fill.speed { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .wa-dash-bar-fill.design { background: linear-gradient(90deg, #10b981, #34d399); }
+    .wa-dash-bar-fill.conversion { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+
+    /* ════════════════════════════════════════════
+       HOW IT WORKS
+       ════════════════════════════════════════════ */
+    .wa-how {
+      padding: var(--wa-gap) 0;
+      border-top: 1px solid var(--border);
+      background: rgba(59,130,246,0.005);
+    }
+    .wa-how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      position: relative;
+    }
+    .wa-how-grid::before {
+      content: '';
+      position: absolute;
+      top: 40px; left: 15%; right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), transparent);
+      pointer-events: none;
+    }
+    .wa-how-step {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 32px 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      text-align: center;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+    .wa-how-step:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(59,130,246,0.03);
+      background: rgba(255,255,255,0.02);
+    }
+    .wa-how-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .wa-how-step h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .wa-how-step p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════════
+       WHAT WE ANALYZE
+       ════════════════════════════════════════════ */
+    .wa-analyze {
+      padding: var(--wa-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-analyze-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .wa-analyze-glow {
+      position: absolute;
+      top: 20%; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      filter: blur(100px);
+    }
+    .wa-analyze-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+      position: relative; z-index: 1;
+    }
+    .wa-analyze-card {
+      display: flex;
+      gap: 18px;
+      padding: 28px 24px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .wa-analyze-card:hover {
+      border-color: rgba(59,130,246,0.18);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.02);
+      transform: translateY(-2px);
+    }
+    .wa-analyze-icon {
+      width: 48px; height: 48px;
+      min-width: 48px;
+      border-radius: 14px;
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .wa-analyze-icon svg { width: 22px; height: 22px; }
+    .wa-analyze-info { display: flex; flex-direction: column; gap: 6px; }
+    .wa-analyze-info h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .wa-analyze-info p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════════
+       AUDIT FORM
+       ════════════════════════════════════════════ */
+    .wa-form-section {
+      padding: var(--wa-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-form-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .wa-form-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      filter: blur(100px);
+    }
+    .wa-form-card {
+      position: relative; z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 40px 36px;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .wa-form-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .wa-form-header {
+      position: relative; z-index: 1;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .wa-form-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .wa-form-header p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .wa-form { position: relative; z-index: 1; }
+    .wa-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .wa-form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .wa-form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .wa-form-input,
+    .wa-form-select,
+    .wa-form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .wa-form-input::placeholder,
+    .wa-form-textarea::placeholder { color: rgba(255,255,255,0.15); }
+    .wa-form-input:focus,
+    .wa-form-select:focus,
+    .wa-form-textarea:focus {
+      border-color: rgba(59,130,246,0.3);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.04), 0 0 20px rgba(59,130,246,0.04);
+      background: rgba(255,255,255,0.035);
+    }
+    .wa-form-input:hover,
+    .wa-form-select:hover,
+    .wa-form-textarea:hover { border-color: rgba(255,255,255,0.15); }
+    .wa-form-input.error,
+    .wa-form-select.error,
+    .wa-form-textarea.error {
+      border-color: rgba(255,80,80,0.4);
+      box-shadow: 0 0 0 3px rgba(255,80,80,0.04);
+    }
+    .wa-form-select {
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+    .wa-form-select option { background: #0b0f0f; color: var(--white); }
+    .wa-form-textarea { min-height: 100px; resize: vertical; }
+    .wa-form-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--bg);
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      padding: 14px 28px;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-form-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(59,130,246,0.25);
+    }
+    .wa-form-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .wa-form-submit .spinner {
+      display: none;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(4,4,4,0.2);
+      border-top-color: var(--bg);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    .wa-form-submit.loading .spinner { display: inline-block; }
+    .wa-form-submit.loading .btn-text { display: none; }
+    .wa-form-submit.loading .btn-icon { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .wa-form-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      padding: 48px 24px;
+      position: relative; z-index: 1;
+    }
+    .wa-form-success.show { display: flex; }
+    .wa-form-success .success-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .wa-form-success h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .wa-form-success p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      max-width: 400px;
+      line-height: 1.6;
+    }
+    .wa-form-error {
+      display: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(255,80,80,0.08);
+      border: 1px solid rgba(255,80,80,0.2);
+      color: #ff6b6b;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+      position: relative; z-index: 1;
+    }
+    .wa-form-error.show { display: block; }
+
+    .wa-form-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+      position: relative; z-index: 1;
+    }
+    .wa-form-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .wa-form-trust-item svg { width: 12px; height: 12px; color: var(--accent); flex-shrink: 0; }
+
+    /* ════════════════════════════════════════════
+       FAQ
+       ════════════════════════════════════════════ */
+    .wa-faq {
+      padding: var(--wa-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-faq-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .wa-faq-glow {
+      position: absolute;
+      top: -100px; right: 0;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: faqGlowA 14s ease-in-out infinite;
+    }
+    .wa-faq .container { position: relative; z-index: 1; }
+    .wa-faq-list {
+      max-width: 720px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .wa-faq-item {
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .wa-faq-item:hover { border-color: rgba(59,130,246,0.15); }
+    .wa-faq-item.open {
+      border-color: rgba(59,130,246,0.25);
+      background: rgba(59,130,246,0.025);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.05),
+                  0 16px 40px rgba(0,0,0,0.3),
+                  0 0 40px rgba(59,130,246,0.04);
+    }
+    .wa-faq-item.open::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .wa-faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      position: relative;
+      z-index: 1;
+    }
+    .wa-faq-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(59,130,246,0.35);
+      min-width: 28px;
+      flex-shrink: 0;
+      transition: color 0.3s ease;
+    }
+    .wa-faq-item.open .wa-faq-num { color: var(--accent); }
+    .wa-faq-text {
+      flex: 1;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+      transition: color 0.3s ease;
+    }
+    .wa-faq-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray2);
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.3s ease,
+                  color 0.3s ease,
+                  background 0.3s ease;
+    }
+    .wa-faq-icon svg { width: 14px; height: 14px; }
+    .wa-faq-item.open .wa-faq-icon {
+      transform: rotate(180deg);
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      box-shadow: 0 0 16px rgba(59,130,246,0.08);
+    }
+    .wa-faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .wa-faq-answer-inner {
+      padding: 0 24px 22px 66px;
+    }
+    .wa-faq-answer-inner p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════════════════════
+       FINAL CTA
+       ════════════════════════════════════════════ */
+    .wa-final-cta {
+      padding: var(--wa-gap) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+    .wa-final-glow {
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .wa-final-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .wa-final-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .wa-final-inner p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .wa-final-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .wa-final-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #040404;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .wa-final-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+    }
+    .wa-final-btn-primary svg {
+      width: 16px; height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .wa-final-btn-primary:hover svg { transform: translateX(4px); }
+    .wa-final-trust {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .wa-final-trust svg {
+      width: 12px; height: 12px;
+      color: var(--accent);
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .wa-final-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      height: 46px;
+      padding: 0 28px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      color: var(--gray);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .wa-final-btn-secondary:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      :root { --wa-gap: 80px; }
+      .wa-dash-scores { grid-template-columns: repeat(2, 1fr); }
+      .wa-how-grid { grid-template-columns: 1fr; gap: 16px; }
+      .wa-how-grid::before { display: none; }
+      .wa-analyze-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      :root { --wa-gap: 72px; }
+      .wa-hero { min-height: auto; padding: 120px 0 40px; }
+      .wa-dash-card { padding: 32px 24px; }
+      .wa-dash-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .wa-dash-scores { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .wa-dash-score-item { padding: 20px 16px; }
+      .wa-analyze-grid { gap: 12px; }
+      .wa-analyze-card { padding: 24px 20px; }
+      .wa-form-card { padding: 28px 20px; }
+      .wa-form-row { grid-template-columns: 1fr; }
+      .wa-faq-q { padding: 18px 20px; gap: 10px; }
+      .wa-faq-text { font-size: 0.88rem; }
+      .wa-faq-num { font-size: 0.72rem; min-width: 24px; }
+      .wa-faq-answer-inner { padding: 0 20px 18px 54px; }
+      .wa-faq-answer-inner p { font-size: 0.84rem; }
+    }
+    @media (max-width: 480px) {
+      :root { --wa-gap: 56px; }
+      .wa-dash-scores { grid-template-columns: 1fr; }
+      .wa-hero-actions { flex-direction: column; width: 100%; }
+      .wa-hero-btn-primary,
+      .wa-hero-btn-secondary { width: 100%; justify-content: center; }
+      .wa-form-card { padding: 24px 16px; }
+      .wa-analyze-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body data-page="website-audit">
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ -->
+  <section class="wa-hero" id="wa-hero">
+    <div class="wa-hero-bg">
+      <div class="wa-hero-glow"></div>
+      <div class="wa-hero-glow-2"></div>
+      <div class="wa-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="wa-hero-left fade-up">
+        <div class="wa-hero-badge">
+          <span class="wa-hero-badge-dot"></span>
+          Free Website Audit
+        </div>
+        <h1>Find Out Exactly What's<br/>Holding Your <span>Website Back</span></h1>
+        <p class="wa-hero-sub">Get a comprehensive, data-driven audit covering SEO, speed, design, and conversion optimization — delivered to your inbox for free.</p>
+        <div class="wa-hero-actions">
+          <a href="#wa-form" class="wa-hero-btn-primary">
+            Start Your Free Audit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#wa-dashboard" class="wa-hero-btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            See Sample Score
+          </a>
+        </div>
+        <div class="wa-hero-trust">
+          <span class="wa-hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            No credit card required
+          </span>
+          <span class="wa-hero-trust-divider"></span>
+          <span class="wa-hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            Delivered in 48 hours
+          </span>
+          <span class="wa-hero-trust-divider"></span>
+          <span class="wa-hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Actionable insights
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       DASHBOARD PREVIEW
+       ════════════════════════════════════════════ -->
+  <section class="wa-dashboard lazy-section" id="wa-dashboard">
+    <div class="wa-dashboard-bg">
+      <div class="wa-dashboard-glow"></div>
+    </div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Sample Report</div>
+        <h2 class="section-title">What Your Audit <span class="text-gradient">Looks Like</span></h2>
+        <p class="section-desc">Here's a preview of the comprehensive scorecard you'll receive after your free audit.</p>
+      </div>
+
+      <div class="wa-dash-card fade-up">
+        <div class="wa-dash-header">
+          <div class="wa-dash-header-left">
+            <h2>Website Audit Report</h2>
+            <p>nagriva.com — Sample Preview</p>
+          </div>
+          <div class="wa-dash-overall">
+            <span class="wa-dash-overall-score">82</span>
+            <span class="wa-dash-overall-label">/100</span>
+          </div>
+        </div>
+
+        <div class="wa-dash-scores">
+          <div class="wa-dash-score-item">
+            <div class="wa-dash-score-top">
+              <span class="wa-dash-score-label">SEO</span>
+              <span class="wa-dash-score-num">78<span>/100</span></span>
+            </div>
+            <div class="wa-dash-bar"><div class="wa-dash-bar-fill" style="width:78%"></div></div>
+          </div>
+          <div class="wa-dash-score-item">
+            <div class="wa-dash-score-top">
+              <span class="wa-dash-score-label">Speed</span>
+              <span class="wa-dash-score-num">65<span>/100</span></span>
+            </div>
+            <div class="wa-dash-bar"><div class="wa-dash-bar-fill speed" style="width:65%"></div></div>
+          </div>
+          <div class="wa-dash-score-item">
+            <div class="wa-dash-score-top">
+              <span class="wa-dash-score-label">Design</span>
+              <span class="wa-dash-score-num">92<span>/100</span></span>
+            </div>
+            <div class="wa-dash-bar"><div class="wa-dash-bar-fill design" style="width:92%"></div></div>
+          </div>
+          <div class="wa-dash-score-item">
+            <div class="wa-dash-score-top">
+              <span class="wa-dash-score-label">Conversion</span>
+              <span class="wa-dash-score-num">84<span>/100</span></span>
+            </div>
+            <div class="wa-dash-bar"><div class="wa-dash-bar-fill conversion" style="width:84%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       HOW IT WORKS
+       ════════════════════════════════════════════ -->
+  <section class="wa-how lazy-section" id="wa-how">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ How It Works</div>
+        <h2 class="section-title">Your Audit in <span class="text-gradient">3 Simple Steps</span></h2>
+        <p class="section-desc">No fluff. Just a clear, actionable roadmap to improve your website's performance.</p>
+      </div>
+
+      <div class="wa-how-grid fade-up">
+        <div class="wa-how-step">
+          <div class="wa-how-num">01</div>
+          <h4>Submit Your Website</h4>
+          <p>Enter your website URL and email address. That's all we need to get started on your free audit.</p>
+        </div>
+        <div class="wa-how-step">
+          <div class="wa-how-num">02</div>
+          <h4>We Analyze Your Site</h4>
+          <p>Our team runs a comprehensive analysis across 50+ data points covering SEO, speed, design, and UX.</p>
+        </div>
+        <div class="wa-how-step">
+          <div class="wa-how-num">03</div>
+          <h4>Receive Your Report</h4>
+          <p>Get a detailed scorecard with prioritized recommendations delivered to your inbox within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       WHAT WE ANALYZE
+       ════════════════════════════════════════════ -->
+  <section class="wa-analyze lazy-section" id="wa-analyze">
+    <div class="wa-analyze-bg">
+      <div class="wa-analyze-glow"></div>
+    </div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ What We Analyze</div>
+        <h2 class="section-title">Every Angle <span class="text-gradient">Covered</span></h2>
+        <p class="section-desc">We leave no stone unturned. Here's exactly what goes into your audit report.</p>
+      </div>
+
+      <div class="wa-analyze-grid fade-up">
+        <div class="wa-analyze-card">
+          <div class="wa-analyze-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="wa-analyze-info">
+            <h4>SEO Analysis</h4>
+            <p>Meta tags, headings structure, keyword optimization, alt text, sitemap health, and search visibility.</p>
+          </div>
+        </div>
+        <div class="wa-analyze-card">
+          <div class="wa-analyze-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="wa-analyze-info">
+            <h4>Speed Performance</h4>
+            <p>Load times, Core Web Vitals, image optimization, render-blocking resources, and server response time.</p>
+          </div>
+        </div>
+        <div class="wa-analyze-card">
+          <div class="wa-analyze-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="wa-analyze-info">
+            <h4>Design & UX Review</h4>
+            <p>Visual hierarchy, mobile responsiveness, typography, color contrast, navigation flow, and accessibility.</p>
+          </div>
+        </div>
+        <div class="wa-analyze-card">
+          <div class="wa-analyze-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="wa-analyze-info">
+            <h4>Conversion Optimization</h4>
+            <p>CTA placement, form optimization, trust signals, social proof, checkout flow, and friction points.</p>
+          </div>
+        </div>
+        <div class="wa-analyze-card">
+          <div class="wa-analyze-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="wa-analyze-info">
+            <h4>Security Check</h4>
+            <p>SSL certificate validation, HTTPS enforcement, mixed content warnings, and security headers.</p>
+          </div>
+        </div>
+        <div class="wa-analyze-card">
+          <div class="wa-analyze-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="wa-analyze-info">
+            <h4>Content Quality</h4>
+            <p>Readability scores, content gaps, duplicate content, engagement signals, and copy effectiveness.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       AUDIT FORM
+       ════════════════════════════════════════════ -->
+  <section class="wa-form-section lazy-section" id="wa-form">
+    <div class="wa-form-bg">
+      <div class="wa-form-glow"></div>
+    </div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Get Started</div>
+        <h2 class="section-title">Run Your Free <span class="text-gradient">Website Audit</span></h2>
+        <p class="section-desc">Enter your details below and we'll send your comprehensive audit report within 48 hours.</p>
+      </div>
+
+      <div class="wa-form-card fade-up">
+        <div class="wa-form-header">
+          <h2>Start Your Audit</h2>
+          <p>No credit card required. No strings attached.</p>
+        </div>
+
+        <div class="wa-form-error" id="auditFormError"></div>
+
+        <form class="wa-form" id="auditForm" novalidate>
+          <div class="wa-form-group">
+            <label class="wa-form-label" for="auditWebsite">Website URL</label>
+            <input type="url" class="wa-form-input" id="auditWebsite" name="website" placeholder="https://yourwebsite.com" required autocomplete="url" />
+          </div>
+
+          <div class="wa-form-row">
+            <div class="wa-form-group">
+              <label class="wa-form-label" for="auditName">Full Name</label>
+              <input type="text" class="wa-form-input" id="auditName" name="full_name" placeholder="John Doe" required autocomplete="name" />
+            </div>
+            <div class="wa-form-group">
+              <label class="wa-form-label" for="auditEmail">Email Address</label>
+              <input type="email" class="wa-form-input" id="auditEmail" name="email" placeholder="you@example.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="wa-form-group">
+            <label class="wa-form-label" for="auditCompany">Company Name</label>
+            <input type="text" class="wa-form-input" id="auditCompany" name="company" placeholder="Your company (optional)" autocomplete="organization" />
+          </div>
+
+          <div class="wa-form-group">
+            <label class="wa-form-label" for="auditGoals">What are your main goals?</label>
+            <select class="wa-form-select" id="auditGoals" name="goals">
+              <option value="" disabled selected>Select primary goal</option>
+              <option value="Increase Traffic">Increase Traffic</option>
+              <option value="Improve Conversions">Improve Conversions</option>
+              <option value="Redesign Website">Redesign Website</option>
+              <option value="Improve Speed">Improve Speed</option>
+              <option value="General Audit">General Audit</option>
+            </select>
+          </div>
+
+          <div class="wa-form-group">
+            <label class="wa-form-label" for="auditNotes">Additional Notes (optional)</label>
+            <textarea class="wa-form-textarea" id="auditNotes" name="notes" placeholder="Any specific areas you'd like us to focus on..."></textarea>
+          </div>
+
+          <button type="submit" class="wa-form-submit" id="auditFormSubmit">
+            <span class="btn-text">Get My Free Audit Report</span>
+            <span class="spinner"></span>
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+
+        <div class="wa-form-trust">
+          <span class="wa-form-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            No credit card
+          </span>
+          <span class="wa-form-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            48h delivery
+          </span>
+          <span class="wa-form-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Secure & private
+          </span>
+        </div>
+
+        <!-- ─── Success State ─── -->
+        <div class="wa-form-success" id="auditFormSuccess">
+          <div class="success-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Audit Request Submitted!</h3>
+          <p>Thank you! We've received your website audit request. Our team will analyze your site and deliver your comprehensive report within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FAQ
+       ════════════════════════════════════════════ -->
+  <section class="wa-faq lazy-section" id="wa-faq">
+    <div class="wa-faq-bg">
+      <div class="wa-faq-glow"></div>
+    </div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ FAQ</div>
+        <h2 class="section-title">Audit <span class="text-gradient">Questions</span></h2>
+        <p class="section-desc">Everything you need to know about our free website audit.</p>
+      </div>
+
+      <div class="wa-faq-list fade-up">
+        <div class="wa-faq-item open">
+          <button class="wa-faq-q">
+            <span class="wa-faq-num">01</span>
+            <span class="wa-faq-text">What is included in the free website audit?</span>
+            <span class="wa-faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="wa-faq-answer">
+            <div class="wa-faq-answer-inner">
+              <p>Your audit covers five core areas: SEO (meta tags, headings, keyword optimization), Speed (load times, Core Web Vitals), Design & UX (responsiveness, accessibility, visual hierarchy), Conversion Optimization (CTA placement, trust signals), and Security (SSL, mixed content). You'll receive a detailed scorecard with prioritized recommendations.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wa-faq-item">
+          <button class="wa-faq-q">
+            <span class="wa-faq-num">02</span>
+            <span class="wa-faq-text">How long does it take to receive my audit?</span>
+            <span class="wa-faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="wa-faq-answer">
+            <div class="wa-faq-answer-inner">
+              <p>We deliver your comprehensive audit report within 48 hours of submission. If you have urgent needs, mention it in the notes and we'll do our best to prioritize your audit.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wa-faq-item">
+          <button class="wa-faq-q">
+            <span class="wa-faq-num">03</span>
+            <span class="wa-faq-text">Is there any commitment or credit card required?</span>
+            <span class="wa-faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="wa-faq-answer">
+            <div class="wa-faq-answer-inner">
+              <p>None at all. The audit is completely free with no strings attached. We'll provide your report and if you'd like help implementing the recommendations, we're here to help — but there's zero obligation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wa-faq-item">
+          <button class="wa-faq-q">
+            <span class="wa-faq-num">04</span>
+            <span class="wa-faq-text">What kind of websites can you audit?</span>
+            <span class="wa-faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="wa-faq-answer">
+            <div class="wa-faq-answer-inner">
+              <p>We audit all types of websites: small business sites, e-commerce stores, SaaS landing pages, portfolio sites, blogs, and more. As long as your site is publicly accessible, we can run a comprehensive audit on it.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wa-faq-item">
+          <button class="wa-faq-q">
+            <span class="wa-faq-num">05</span>
+            <span class="wa-faq-text">How is this different from automated audit tools?</span>
+            <span class="wa-faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="wa-faq-answer">
+            <div class="wa-faq-answer-inner">
+              <p>While automated tools give you raw data, our audit combines automated checks with human expertise. We analyze your specific business context, competition, and goals to provide actionable, prioritized recommendations that actually make sense for your business.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FINAL CTA
+       ════════════════════════════════════════════ -->
+  <section class="wa-final-cta lazy-section">
+    <div class="wa-final-glow"></div>
+    <div class="container">
+      <div class="wa-final-inner fade-up">
+        <h2>Ready to Improve Your<br/><span class="text-gradient">Website Score?</span></h2>
+        <p>Get your free audit report and discover exactly what's holding your website back from reaching its full potential.</p>
+        <div class="wa-final-actions">
+          <a href="/pages/website-audit.html#wa-form" class="wa-final-btn-primary">
+            Get My Free Audit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/pages/services.html" class="wa-final-btn-secondary">
+            Explore Our Services
+          </a>
+        </div>
+        <div class="wa-final-trust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Free audit. No credit card. No commitment.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/supabase.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/i18n.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/navbar.js"></script>
+  <script defer src="../js/footer.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <script defer src="../js/cookie-consent.js"></script>
+
+  <script>
+    (function() {
+      'use strict';
+
+      /* ─── FAQ Accordion ─── */
+      function initFAQ() {
+        var items = document.querySelectorAll('.wa-faq-item');
+        if (!items.length) return;
+
+        items.forEach(function(item) {
+          var question = item.querySelector('.wa-faq-q');
+          var answer = item.querySelector('.wa-faq-answer');
+
+          question.addEventListener('click', function() {
+            var isOpen = item.classList.contains('open');
+
+            items.forEach(function(i) {
+              i.classList.remove('open');
+              var a = i.querySelector('.wa-faq-answer');
+              a.style.maxHeight = '0';
+            });
+
+            if (!isOpen) {
+              item.classList.add('open');
+              var inner = answer.querySelector('.wa-faq-answer-inner');
+              answer.style.maxHeight = inner.scrollHeight + 'px';
+            }
+          });
+        });
+      }
+
+      /* ─── Audit Form (Supabase-ready) ─── */
+      function initAuditForm() {
+        var form = document.getElementById('auditForm');
+        if (!form) return;
+
+        var submitBtn = document.getElementById('auditFormSubmit');
+        var formError = document.getElementById('auditFormError');
+        var formSuccess = document.getElementById('auditFormSuccess');
+        var inputs = form.querySelectorAll('.wa-form-input, .wa-form-select, .wa-form-textarea');
+
+        function clearErrors() {
+          formError.classList.remove('show');
+          formError.textContent = '';
+          inputs.forEach(function(inp) { inp.classList.remove('error'); });
+        }
+
+        function showError(msg) {
+          formError.textContent = msg;
+          formError.classList.add('show');
+        }
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          clearErrors();
+
+          var website = document.getElementById('auditWebsite').value.trim();
+          var name = document.getElementById('auditName').value.trim();
+          var email = document.getElementById('auditEmail').value.trim();
+
+          if (!website) {
+            document.getElementById('auditWebsite').classList.add('error');
+            showError('Please enter your website URL.');
+            return;
+          }
+          if (!name) {
+            document.getElementById('auditName').classList.add('error');
+            showError('Please enter your full name.');
+            return;
+          }
+          if (!email || !email.includes('@')) {
+            document.getElementById('auditEmail').classList.add('error');
+            showError('Please enter a valid email address.');
+            return;
+          }
+
+          submitBtn.classList.add('loading');
+          submitBtn.disabled = true;
+
+          var formData = {
+            website_url: website,
+            full_name: name,
+            email: email,
+            company_name: document.getElementById('auditCompany').value.trim(),
+            primary_goal: document.getElementById('auditGoals').value,
+            notes: document.getElementById('auditNotes').value.trim(),
+            created_at: new Date().toISOString()
+          };
+
+          var supabase = window.supabaseClient || window.supabase;
+          if (supabase) {
+            supabase
+              .from('audit_submissions')
+              .insert([formData])
+              .then(function(response) {
+                if (response.error) throw response.error;
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                if (typeof NAGRIVA_Toast !== 'undefined') {
+                  NAGRIVA_Toast.success('Audit Requested', 'Your free audit has been submitted successfully.');
+                }
+                form.reset();
+                showSuccess();
+              })
+              .catch(function(err) {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                if (typeof NAGRIVA_Toast !== 'undefined') {
+                  NAGRIVA_Toast.error('Submission Failed', 'Something went wrong. Please try again or email us directly.');
+                } else {
+                  showError('Something went wrong. Please try again or email us directly.');
+                }
+              });
+          } else {
+            /* ─── Fallback: store in localStorage if Supabase is not available ─── */
+            var stored = JSON.parse(localStorage.getItem('nagriva_audit_requests') || '[]');
+            stored.push(formData);
+            localStorage.setItem('nagriva_audit_requests', JSON.stringify(stored));
+
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            form.reset();
+            showSuccess();
+
+            if (typeof NAGRIVA_Toast !== 'undefined') {
+              NAGRIVA_Toast.success('Audit Requested', 'Your free audit has been submitted successfully.');
+            }
+          }
+        });
+
+        function showSuccess() {
+          form.style.display = 'none';
+          formSuccess.classList.add('show');
+        }
+
+        inputs.forEach(function(inp) {
+          inp.addEventListener('input', function() {
+            this.classList.remove('error');
+            formError.classList.remove('show');
+          });
+          inp.addEventListener('change', function() {
+            this.classList.remove('error');
+          });
+        });
+      }
+
+      function onReady() {
+        initFAQ();
+        initAuditForm();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', onReady);
+      } else {
+        onReady();
+      }
+    })();
+  </script>
+<div id="cookie-consent-container"></div>
+</body>
+</html>

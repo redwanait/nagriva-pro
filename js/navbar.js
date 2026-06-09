@@ -17,7 +17,8 @@
     careers:  '/pages/careers.html',
     blog:     '/pages/blog.html',
     contact:  '/pages/contact.html',
-    'onboarding-qa': '/pages/onboarding-qa.html'
+    'onboarding-qa': '/pages/onboarding-qa.html',
+    'website-audit': '/website-audit'
   }
 
   function processNavbar () {
