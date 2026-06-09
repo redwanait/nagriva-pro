@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#1a2a3a"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" fill="url(#lg1)"/>
+  <rect width="800" height="500" fill="url(#lg2)"/>
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#fff" stroke-width="0.5"/>
+  </g>
+  <ellipse cx="400" cy="250" rx="250" ry="200" fill="#3b82f6" opacity="0.06" filter="url(#blur)"/>
+  <!-- House icon -->
+  <g transform="translate(400,195)" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <!-- Roof -->
+    <polyline points="-80,20 0,-55 80,20"/>
+    <!-- Chimney -->
+    <rect x="40" y="-45" width="18" height="25" rx="1"/>
+    <!-- Walls -->
+    <rect x="-65" y="20" width="130" height="90" rx="2"/>
+    <!-- Door -->
+    <rect x="-15" y="55" width="30" height="55" rx="2"/>
+    <!-- Door knob -->
+    <circle cx="8" cy="85" r="3"/>
+    <!-- Left window -->
+    <rect x="-50" y="35" width="25" height="25" rx="2"/>
+    <line x1="-37.5" y1="35" x2="-37.5" y2="60"/>
+    <line x1="-50" y1="47.5" x2="-25" y2="47.5"/>
+    <!-- Right window -->
+    <rect x="25" y="35" width="25" height="25" rx="2"/>
+    <line x1="37.5" y1="35" x2="37.5" y2="60"/>
+    <line x1="25" y1="47.5" x2="50" y2="47.5"/>
+  </g>
+  <!-- Growth arrow -->
+  <g transform="translate(400,360)" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.35">
+    <polyline points="-40,20 -15,5 10,15 40,-5"/>
+    <polyline points="40,-5 25,-15"/>
+    <line x1="40" y1="-5" x2="50" y2="-12"/>
+  </g>
+  <text x="400" y="430" font-family="System, sans-serif" font-size="11" fill="#3b82f6" text-anchor="middle" letter-spacing="3" opacity="0.6">REAL ESTATE</text>
+</svg>

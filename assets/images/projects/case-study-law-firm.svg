@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" fill="url(#lg1)"/>
+  <rect width="800" height="500" fill="url(#lg2)"/>
+  <!-- Grid pattern -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#fff" stroke-width="0.5"/>
+  </g>
+  <!-- Glow -->
+  <ellipse cx="400" cy="250" rx="250" ry="200" fill="#3b82f6" opacity="0.06" filter="url(#blur)"/>
+  <!-- Justice scales icon -->
+  <g transform="translate(400,210)" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <!-- Balance beam -->
+    <line x1="-140" y1="0" x2="140" y2="0" stroke-width="3"/>
+    <!-- Center post -->
+    <line x1="0" y1="0" x2="0" y2="60"/>
+    <!-- Base -->
+    <rect x="-20" y="60" width="40" height="8" rx="2"/>
+    <!-- Left pan strings -->
+    <line x1="-140" y1="0" x2="-140" y2="40"/>
+    <line x1="-140" y1="40" x2="-170" y2="40"/>
+    <line x1="-140" y1="40" x2="-110" y2="40"/>
+    <!-- Right pan strings -->
+    <line x1="140" y1="0" x2="140" y2="40"/>
+    <line x1="140" y1="40" x2="110" y2="40"/>
+    <line x1="140" y1="40" x2="170" y2="40"/>
+    <!-- Left pan -->
+    <path d="M-185,40 L-95,40 L-105,55 L-175,55 Z" fill="url(#accent)" fill-opacity="0.15"/>
+    <!-- Right pan -->
+    <path d="M95,40 L185,40 L175,55 L105,55 Z" fill="url(#accent)" fill-opacity="0.15"/>
+  </g>
+  <!-- Small decorative gavel -->
+  <g transform="translate(400,340)" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
+    <rect x="-8" y="0" width="16" height="6" rx="1"/>
+    <line x1="0" y1="6" x2="0" y2="30"/>
+    <rect x="-3" y="30" width="6" height="20" rx="1"/>
+  </g>
+  <text x="400" y="420" font-family="System, sans-serif" font-size="11" fill="#3b82f6" text-anchor="middle" letter-spacing="3" opacity="0.6">LAW FIRM</text>
+</svg>

@@ -578,6 +578,50 @@
       pointer-events: none;
       z-index: -1;
     }
+    .r2-featured-mockup-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.1));
+      pointer-events: none;
+      z-index: 1;
+    }
+    .r2-featured-mockup {
+      transition: border-color 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .r2-featured-mockup:hover img {
+      transform: scale(1.04);
+    }
+    .r2-founder-label {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 10px 14px;
+      background: rgba(5,5,5,0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(59,130,246,0.08);
+      pointer-events: none;
+    }
+    .r2-founder-label-name {
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: #d4d4d8;
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+    }
+    .r2-founder-label-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
 
     /* ════════════════════════════════════════════
        PROCESS TIMELINE
@@ -954,8 +998,8 @@
   "@type": "Organization",
   "name": "Nagriva",
   "url": "https://nagriva.com",
-  "logo": "/assets/images/branding/nagriva-logo.png",
-  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "description": "Nagriva is a digital growth agency offering web design, SEO, branding, AI automation, social media management, and performance marketing services."
 }
 </script>
 <script type="application/ld+json">
@@ -964,7 +1008,17 @@
   "@type": "WebSite",
   "name": "Nagriva",
   "url": "https://nagriva.com/pages/results",
-  "description": "Digital growth agency offering web design, SEO, branding, AI automation, social media, and performance marketing."
+  "description": "Nagriva is a digital growth agency offering web design, SEO, branding, AI automation, social media management, and performance marketing services."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nagriva.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Results" }
+  ]
 }
 </script>
 </head>
@@ -1009,9 +1063,9 @@
         </div>
         <div class="r2-hero-metric">
           <div class="r2-hero-metric-value">
-            <span class="r2-counter" data-target="12">0</span><span class="r2-hero-metric-suffix">+</span>
+            <span class="r2-counter" data-target="6">0</span><span class="r2-hero-metric-suffix">+</span>
           </div>
-          <div class="r2-hero-metric-label">Projects Delivered</div>
+          <div class="r2-hero-metric-label">Success Stories</div>
         </div>
       </div>
     </div>
@@ -1026,9 +1080,9 @@
         <button class="r2-filter-pill active" data-filter="all">All Projects</button>
         <button class="r2-filter-pill" data-filter="web-design">Web Design</button>
         <button class="r2-filter-pill" data-filter="seo">SEO</button>
-        <button class="r2-filter-pill" data-filter="branding">Branding</button>
-        <button class="r2-filter-pill" data-filter="automation">Automation</button>
-        <button class="r2-filter-pill" data-filter="marketing">Marketing</button>
+        <button class="r2-filter-pill" data-filter="lead-generation">Lead Generation</button>
+        <button class="r2-filter-pill" data-filter="local-seo">Local SEO</button>
+        <button class="r2-filter-pill" data-filter="conversion">Conversion</button>
       </div>
     </div>
   </div>
@@ -1041,132 +1095,132 @@
     <div class="container">
       <div class="r2-grid" id="r2-grid">
 
-        <!-- Card 1 — Nagriva Brand Identity -->
-        <div class="r2-card fade-up" data-categories="branding,web-design" style="--delay:0.04s">
+        <!-- Card 1 — Law Firm Website Growth -->
+        <div class="r2-card fade-up" data-categories="web-design,seo" style="--delay:0.04s">
           <div class="r2-card-visual">
-            <img src="/assets/images/projects/case-study-brand-identity.png" alt="Nagriva Brand Identity" loading="lazy" />
+            <img src="/assets/images/results images /Law Firm Website Growth.png" alt="Law Firm Website Growth" loading="lazy" />
             <div class="r2-card-visual-overlay"></div>
-            <span class="r2-card-category">Brand Identity</span>
+            <span class="r2-card-category">Law Firm</span>
           </div>
           <div class="r2-card-body">
-            <h3 class="r2-card-title">Nagriva — Brand Identity & Digital Presence</h3>
-            <p class="r2-card-desc">Complete brand ecosystem — visual identity, design system, and responsive web platform engineered for performance and conversion.</p>
+            <h3 class="r2-card-title">Law Firm Website Growth</h3>
+            <p class="r2-card-desc">Modern law firm website redesign focused on trust, lead generation, local SEO, and consultation bookings.</p>
             <div class="r2-card-tags">
-              <span class="r2-card-tag">Brand Identity</span>
+              <span class="r2-card-tag">Law Firm</span>
               <span class="r2-card-tag">Web Design</span>
-              <span class="r2-card-tag">Strategy</span>
-            </div>
-            <a href="#" class="r2-card-cta">
-              View Case Study
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 2 — GrowthOS AI Automation -->
-        <div class="r2-card fade-up" data-categories="automation,web-design" style="--delay:0.08s">
-          <div class="r2-card-visual">
-            <img src="/assets/images/projects/case-study-ai-automation.png" alt="GrowthOS AI Automation Platform" loading="lazy" />
-            <div class="r2-card-visual-overlay"></div>
-            <span class="r2-card-category">AI Automation</span>
-          </div>
-          <div class="r2-card-body">
-            <h3 class="r2-card-title">GrowthOS — AI Automation Platform</h3>
-            <p class="r2-card-desc">Unified operating system connecting AI content generation, SEO analysis, reporting, and automated agency workflows.</p>
-            <div class="r2-card-tags">
-              <span class="r2-card-tag">AI Automation</span>
-              <span class="r2-card-tag">Web Design</span>
-              <span class="r2-card-tag">Strategy</span>
-            </div>
-            <a href="#" class="r2-card-cta">
-              View Case Study
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 3 — Client Portal Dashboard -->
-        <div class="r2-card fade-up" data-categories="web-design,branding" style="--delay:0.12s">
-          <div class="r2-card-visual">
-            <img src="/assets/images/projects/case-study-website-redesign.png" alt="Client Portal Dashboard" loading="lazy" />
-            <div class="r2-card-visual-overlay"></div>
-            <span class="r2-card-category">Web Application</span>
-          </div>
-          <div class="r2-card-body">
-            <h3 class="r2-card-title">Client Portal — Dashboard Experience</h3>
-            <p class="r2-card-desc">Secure real-time portal with project tracking, file sharing, invoicing, task management, and direct messaging.</p>
-            <div class="r2-card-tags">
-              <span class="r2-card-tag">Web Design</span>
-              <span class="r2-card-tag">UI/UX</span>
-              <span class="r2-card-tag">Brand Identity</span>
-            </div>
-            <a href="#" class="r2-card-cta">
-              View Case Study
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 4 — SEO Growth Strategy -->
-        <div class="r2-card fade-up" data-categories="seo,marketing" style="--delay:0.16s">
-          <div class="r2-card-visual">
-            <img src="/assets/images/projects/case-study-seo-growth.png" alt="SEO Growth Strategy" loading="lazy" />
-            <div class="r2-card-visual-overlay"></div>
-            <span class="r2-card-category">SEO</span>
-          </div>
-          <div class="r2-card-body">
-            <h3 class="r2-card-title">SEO Growth Strategy — E-Commerce Brand</h3>
-            <p class="r2-card-desc">Comprehensive SEO overhaul driving 320% organic traffic increase through technical optimization, content strategy, and link building.</p>
-            <div class="r2-card-tags">
               <span class="r2-card-tag">SEO</span>
-              <span class="r2-card-tag">Marketing</span>
-              <span class="r2-card-tag">Content</span>
             </div>
-            <a href="#" class="r2-card-cta">
+            <a href="../case-studies/law-firm-success-story.html" class="r2-card-cta">
               View Case Study
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- Card 5 — FinTech Dashboard -->
-        <div class="r2-card fade-up" data-categories="web-design,branding" style="--delay:0.2s">
+        <!-- Card 2 — Dental Clinic Success Story -->
+        <div class="r2-card fade-up" data-categories="web-design,local-seo" style="--delay:0.08s">
           <div class="r2-card-visual">
-            <img src="/assets/images/projects/case-study-brand-strategy.png" alt="FinTech Dashboard Concept" loading="lazy" />
+            <img src="/assets/images/results images /Dental Clinic Success Story.png" alt="Dental Clinic Success Story" loading="lazy" />
             <div class="r2-card-visual-overlay"></div>
-            <span class="r2-card-category">Financial Technology</span>
+            <span class="r2-card-category">Dental</span>
           </div>
           <div class="r2-card-body">
-            <h3 class="r2-card-title">Concept: FinTech Dashboard</h3>
-            <p class="r2-card-desc">Premium fintech dashboard with real-time portfolio tracking, intelligent analytics, and asset allocation visualization.</p>
+            <h3 class="r2-card-title">Dental Clinic Success Story</h3>
+            <p class="r2-card-desc">Professional dental website designed to increase appointment requests and improve patient engagement.</p>
             <div class="r2-card-tags">
+              <span class="r2-card-tag">Dental</span>
               <span class="r2-card-tag">Web Design</span>
-              <span class="r2-card-tag">UI/UX</span>
-              <span class="r2-card-tag">Data Viz</span>
+              <span class="r2-card-tag">Local SEO</span>
             </div>
-            <a href="#" class="r2-card-cta">
+            <a href="../case-studies/dental-clinic-success-story.html" class="r2-card-cta">
               View Case Study
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- Card 6 — Social Media Marketing -->
-        <div class="r2-card fade-up" data-categories="marketing,seo" style="--delay:0.24s">
+        <!-- Card 3 — Real Estate Growth Story -->
+        <div class="r2-card fade-up" data-categories="web-design,lead-generation" style="--delay:0.12s">
           <div class="r2-card-visual">
-            <img src="/assets/images/projects/case-study-performance-marketing.png" alt="Social Media Marketing" loading="lazy" />
+            <img src="/assets/images/results images /Real Estate Growth Story.png" alt="Real Estate Growth Story" loading="lazy" />
             <div class="r2-card-visual-overlay"></div>
-            <span class="r2-card-category">Marketing</span>
+            <span class="r2-card-category">Real Estate</span>
           </div>
           <div class="r2-card-body">
-            <h3 class="r2-card-title">Social Media Growth — SaaS Brand</h3>
-            <p class="r2-card-desc">Data-driven social strategy delivering 180% lead generation increase across LinkedIn, Twitter, and paid campaigns.</p>
+            <h3 class="r2-card-title">Real Estate Growth Story</h3>
+            <p class="r2-card-desc">Real estate website optimized for property listings, lead generation, and buyer inquiries.</p>
             <div class="r2-card-tags">
-              <span class="r2-card-tag">Marketing</span>
-              <span class="r2-card-tag">Social Media</span>
-              <span class="r2-card-tag">Paid Ads</span>
+              <span class="r2-card-tag">Real Estate</span>
+              <span class="r2-card-tag">Lead Generation</span>
+              <span class="r2-card-tag">Web Design</span>
             </div>
-            <a href="#" class="r2-card-cta">
+            <a href="../case-studies/real-estate-success-story.html" class="r2-card-cta">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4 — Restaurant Success Story -->
+        <div class="r2-card fade-up" data-categories="web-design" style="--delay:0.16s">
+          <div class="r2-card-visual">
+            <img src="/assets/images/results images /Restaurant Success Story.png" alt="Restaurant Success Story" loading="lazy" />
+            <div class="r2-card-visual-overlay"></div>
+            <span class="r2-card-category">Restaurant</span>
+          </div>
+          <div class="r2-card-body">
+            <h3 class="r2-card-title">Restaurant Success Story</h3>
+            <p class="r2-card-desc">Restaurant website built to increase online reservations, menu engagement, and customer acquisition.</p>
+            <div class="r2-card-tags">
+              <span class="r2-card-tag">Restaurant</span>
+              <span class="r2-card-tag">Reservations</span>
+              <span class="r2-card-tag">Web Design</span>
+            </div>
+            <a href="../case-studies/restaurant-success-story.html" class="r2-card-cta">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5 — Fitness Business Growth Story -->
+        <div class="r2-card fade-up" data-categories="web-design" style="--delay:0.2s">
+          <div class="r2-card-visual">
+            <img src="/assets/images/results images /Fitness Business Growth Story.png" alt="Fitness Business Growth Story" loading="lazy" />
+            <div class="r2-card-visual-overlay"></div>
+            <span class="r2-card-category">Fitness</span>
+          </div>
+          <div class="r2-card-body">
+            <h3 class="r2-card-title">Fitness Business Growth Story</h3>
+            <p class="r2-card-desc">Gym website designed to attract new members, boost trial signups, and increase class bookings.</p>
+            <div class="r2-card-tags">
+              <span class="r2-card-tag">Gym</span>
+              <span class="r2-card-tag">Fitness</span>
+              <span class="r2-card-tag">Web Design</span>
+            </div>
+            <a href="../case-studies/gym-fitness-success-story.html" class="r2-card-cta">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 6 — Agency Growth Story -->
+        <div class="r2-card fade-up" data-categories="lead-generation,conversion" style="--delay:0.24s">
+          <div class="r2-card-visual">
+            <img src="/assets/images/results images /Agency Growth Story.png" alt="Agency Growth Story" loading="lazy" />
+            <div class="r2-card-visual-overlay"></div>
+            <span class="r2-card-category">Agency</span>
+          </div>
+          <div class="r2-card-body">
+            <h3 class="r2-card-title">Agency Growth Story</h3>
+            <p class="r2-card-desc">Conversion-focused agency website that increased qualified leads and proposal requests.</p>
+            <div class="r2-card-tags">
+              <span class="r2-card-tag">Agency</span>
+              <span class="r2-card-tag">Lead Generation</span>
+              <span class="r2-card-tag">Conversion</span>
+            </div>
+            <a href="../case-studies/agency-success-story.html" class="r2-card-cta">
               View Case Study
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -1187,44 +1241,53 @@
     <div class="container">
       <div class="r2-featured-layout">
         <div class="r2-featured-left">
-          <div class="r2-featured-badge">Featured Case Study</div>
+          <div class="r2-featured-badge">Founder Story</div>
           <h2 class="r2-featured-title">
-            Nagriva — Brand Identity<br>
-            <span>& Digital Presence</span>
+            Building Nagriva<br>
+            <span>From Zero</span>
           </h2>
           <p class="r2-featured-desc">
-            The complete Nagriva brand ecosystem — from visual identity and design system to a fully responsive web platform. Every element is engineered for performance, clarity, and conversion.
+            From a simple idea to a growing digital agency, Nagriva was built to help businesses generate more leads, improve their online presence, and grow through modern websites, SEO, automation, and AI-powered systems.
           </p>
           <div class="r2-featured-services">
-            <span class="r2-featured-service">Brand Identity</span>
             <span class="r2-featured-service">Web Design</span>
-            <span class="r2-featured-service">Strategy</span>
-            <span class="r2-featured-service">UI/UX</span>
+            <span class="r2-featured-service">SEO</span>
+            <span class="r2-featured-service">Automation</span>
+            <span class="r2-featured-service">Lead Generation</span>
           </div>
-          <div class="r2-featured-metrics">
+          <div class="r2-featured-metrics" style="grid-template-columns:repeat(4, 1fr);">
             <div class="r2-featured-metric">
-              <div class="r2-featured-metric-value">98%</div>
-              <div class="r2-featured-metric-label">Performance Score</div>
+              <div class="r2-featured-metric-value">6+</div>
+              <div class="r2-featured-metric-label">Industry Solutions</div>
             </div>
             <div class="r2-featured-metric">
-              <div class="r2-featured-metric-value">3.2x</div>
-              <div class="r2-featured-metric-label">Page Speed</div>
+              <div class="r2-featured-metric-value">30+</div>
+              <div class="r2-featured-metric-label">Website Concepts</div>
             </div>
             <div class="r2-featured-metric">
-              <div class="r2-featured-metric-value">0.8s</div>
-              <div class="r2-featured-metric-label">Load Time</div>
+              <div class="r2-featured-metric-value">100%</div>
+              <div class="r2-featured-metric-label">Custom Built</div>
+            </div>
+            <div class="r2-featured-metric">
+              <div class="r2-featured-metric-value">AI</div>
+              <div class="r2-featured-metric-label">Powered</div>
             </div>
           </div>
-          <a href="#" class="r2-cta-btn-primary">
-            View Full Case Study
+          <a href="../case-studies/nagriva-growth-story.html" class="r2-cta-btn-primary">
+            Read Founder Story
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
 
         <div class="r2-featured-visual">
+          <div class="r2-featured-mockup-glow"></div>
           <div class="r2-featured-mockup">
-            <div class="r2-featured-mockup-glow"></div>
-            <img src="../assets/images/projects/brand-identity-showcase.webp" alt="Nagriva Brand Identity Showcase" loading="lazy" />
+            <img src="/assets/images/founder/redouane-ait-lhadj-hero.webp" alt="Building Nagriva From Zero" loading="lazy" />
+            <div class="r2-featured-mockup-overlay"></div>
+            <div class="r2-founder-label">
+              <span class="r2-founder-label-name">Founder & Creative Director</span>
+              <span class="r2-founder-label-title">Nagriva</span>
+            </div>
           </div>
         </div>
       </div>

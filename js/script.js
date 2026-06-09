@@ -985,30 +985,52 @@ window.NAGRIVA_EmptyState = (function () {
   return { render: render, renderTo: renderTo };
 })();
 
-// ─── Dynamic JSON-LD: Service + FAQ ───
+// ─── Dynamic JSON-LD: Service + FAQ + Breadcrumb ───
 function injectServiceSchema(serviceData) {
-  var existing = document.querySelectorAll('.dynamic-schema');
+  var existing = document.querySelectorAll('.nagriva-schema');
   existing.forEach(function(el) { el.remove(); });
 
   if (!serviceData) return;
 
+  var name = serviceData.name || serviceData.pageTitle || serviceData.title || '';
+  var cleanName = String(name).replace(/<[^>]*>/g, '').replace(' — Nagriva', '').trim();
+  var desc = (serviceData.description || serviceData.metaDescription || '').replace(/<[^>]*>/g, '').trim();
+
+  /* BreadcrumbList */
+  var bcScript = document.createElement('script');
+  bcScript.type = 'application/ld+json';
+  bcScript.className = 'nagriva-schema';
+  bcScript.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://nagriva.com/' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Services', 'item': 'https://nagriva.com/pages/services.html' },
+      { '@type': 'ListItem', 'position': 3, 'name': cleanName || 'Service' }
+    ]
+  });
+  document.head.appendChild(bcScript);
+
+  /* Service */
   var serviceScript = document.createElement('script');
   serviceScript.type = 'application/ld+json';
-  serviceScript.className = 'dynamic-schema';
+  serviceScript.className = 'nagriva-schema';
   serviceScript.textContent = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Service',
-    'name': serviceData.name || serviceData.title,
+    'name': cleanName || desc,
     'provider': { '@type': 'Organization', 'name': 'Nagriva' },
-    'description': serviceData.description || serviceData.metaDescription,
-    'url': 'https://nagriva.com/pages/service'
+    'description': desc,
+    'url': window.location.href.split('?')[0].split('#')[0],
+    'areaServed': 'Worldwide'
   });
   document.head.appendChild(serviceScript);
 
+  /* FAQPage */
   if (serviceData.faq && serviceData.faq.length > 0) {
     var faqScript = document.createElement('script');
     faqScript.type = 'application/ld+json';
-    faqScript.className = 'dynamic-schema';
+    faqScript.className = 'nagriva-schema';
     faqScript.textContent = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -1026,14 +1048,14 @@ function injectServiceSchema(serviceData) {
 
 // ─── Dynamic JSON-LD: Article ───
 function injectArticleSchema(articleData) {
-  var existing = document.querySelectorAll('.dynamic-schema');
+  var existing = document.querySelectorAll('.nagriva-schema');
   existing.forEach(function(el) { el.remove(); });
 
   if (!articleData) return;
 
   var script = document.createElement('script');
   script.type = 'application/ld+json';
-  script.className = 'dynamic-schema';
+  script.className = 'nagriva-schema';
   script.textContent = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',

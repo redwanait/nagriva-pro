@@ -75,9 +75,20 @@
       })
   }
 
+  /* ─── Load Structured Data Engine ─── */
+  function loadStructuredData() {
+    if (document.querySelector('script[src="/js/structured-data.js"], script[src="../js/structured-data.js"]')) return;
+    var sd = document.createElement('script');
+    sd.src = '/js/structured-data.js';
+    sd.defer = true;
+    document.head.appendChild(sd);
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init)
   } else {
     init()
   }
+
+  loadStructuredData();
 })()

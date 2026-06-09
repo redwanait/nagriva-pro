@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="50%" style="stop-color:#14142a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" fill="url(#lg1)"/>
+  <rect width="800" height="500" fill="url(#lg2)"/>
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#fff" stroke-width="0.5"/>
+  </g>
+  <ellipse cx="400" cy="250" rx="250" ry="200" fill="#3b82f6" opacity="0.06" filter="url(#blur)"/>
+  <!-- Dumbbell icon -->
+  <g transform="translate(400,200)" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <!-- Bar -->
+    <line x1="-100" y1="0" x2="100" y2="0" stroke-width="3"/>
+    <!-- Left weights -->
+    <rect x="-100" y="-22" width="20" height="44" rx="3"/>
+    <rect x="-75" y="-16" width="15" height="32" rx="3"/>
+    <!-- Right weights -->
+    <rect x="80" y="-22" width="20" height="44" rx="3"/>
+    <rect x="60" y="-16" width="15" height="32" rx="3"/>
+    <!-- Handle grips -->
+    <line x1="-25" y1="-8" x2="-25" y2="8" stroke-width="2"/>
+    <line x1="25" y1="-8" x2="25" y2="8" stroke-width="2"/>
+  </g>
+  <!-- Pulse/heartbeat line -->
+  <g transform="translate(400,360)" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.35">
+    <polyline points="-60,0 -40,0 -30,-20 -15,20 0,-20 15,15 25,-15 40,0 60,0"/>
+  </g>
+  <text x="400" y="430" font-family="System, sans-serif" font-size="11" fill="#3b82f6" text-anchor="middle" letter-spacing="3" opacity="0.6">FITNESS</text>
+</svg>
