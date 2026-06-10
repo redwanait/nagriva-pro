@@ -783,9 +783,7 @@
           setTimeout(() => { nlInput.style.borderColor = ''; }, 1500);
           return;
         }
-        nlInput.value = '';
-        nlInput.placeholder = "✓ You're subscribed!";
-        setTimeout(() => { nlInput.placeholder = 'your@email.com'; }, 3000);
+        window.location.href = '/thank-you?source=newsletter&type=newsletter_subscription';
       });
       nlInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') nlBtn.click();
@@ -804,11 +802,7 @@
           setTimeout(() => { ctaInput.style.borderColor = ''; }, 1500);
           return;
         }
-        ctaInput.value = '';
-        ctaBtn.innerHTML = '<span>Subscribed ✓</span>';
-        setTimeout(() => {
-          ctaBtn.innerHTML = '<span>Subscribe</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
-        }, 2500);
+        window.location.href = '/thank-you?source=newsletter&type=newsletter_subscription';
       });
       ctaInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') ctaBtn.click();

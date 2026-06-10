@@ -504,6 +504,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // ─── Newsletter ───
+
+  const artCtaBtn = document.getElementById('ctaSubscribe');
+  const artCtaInput = document.getElementById('ctaEmail');
+  if (artCtaBtn && artCtaInput) {
+    artCtaBtn.addEventListener('click', function() {
+      const email = artCtaInput.value.trim();
+      if (!email || !email.includes('@')) {
+        artCtaInput.style.borderColor = 'rgba(255,80,80,0.4)';
+        setTimeout(function() { artCtaInput.style.borderColor = ''; }, 1500);
+        return;
+      }
+      window.location.href = '/thank-you?source=newsletter&type=newsletter_subscription';
+    });
+    artCtaInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') artCtaBtn.click();
+    });
+  }
+
   // ─── Events ───
 
   window.addEventListener('scroll', updateProgress, { passive: true });

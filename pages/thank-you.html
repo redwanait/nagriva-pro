@@ -1,0 +1,998 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You — Nagriva</title>
+  <meta name="description" content="Your submission has been received. Thank you for reaching out to Nagriva. We'll review your request and get back to you shortly." />
+  <meta property="og:title" content="Thank You — Nagriva">
+  <meta property="og:description" content="Your submission has been received. Thank you for reaching out to Nagriva.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/thank-you">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thank You — Nagriva">
+  <meta name="twitter:description" content="Your submission has been received. Thank you for reaching out to Nagriva.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/thank-you">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/mobile-optimizations.css">
+  <link rel="stylesheet" href="../css/performance.css">
+  <link rel="stylesheet" href="../css/auth.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root {
+      --ty-gap: 100px;
+      --ty-card-bg: rgba(255, 255, 255, 0.02);
+      --ty-card-border: rgba(255, 255, 255, 0.06);
+      --ty-card-hover-border: rgba(59, 130, 246, 0.2);
+      --ty-radius: 22px;
+      --ty-radius-sm: 14px;
+    }
+
+    /* ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ */
+    .ty-hero {
+      position: relative;
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 0 60px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .ty-hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .ty-hero-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      filter: blur(120px);
+      animation: tyGlowPulse 8s ease-in-out infinite;
+    }
+    .ty-hero-glow-2 {
+      position: absolute;
+      bottom: -100px; right: -150px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,197,94,0.03) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: tyGlowPulse2 12s ease-in-out infinite;
+    }
+    .ty-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 10%, transparent 60%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 10%, transparent 60%);
+    }
+    .ty-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 640px;
+      width: 100%;
+      padding: 0 24px;
+    }
+    @keyframes tyGlowPulse {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.8; transform: translateX(-50%) scale(1.15); }
+    }
+    @keyframes tyGlowPulse2 {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.1); }
+    }
+
+    /* Success Icon */
+    .ty-icon-wrap {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      position: relative;
+      animation: tyIconPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+    .ty-icon-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(34, 197, 94, 0.15);
+      animation: tyRipple 2s ease-out infinite;
+    }
+    .ty-icon-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 1px solid rgba(34, 197, 94, 0.08);
+      animation: tyRipple 2s ease-out 0.5s infinite;
+    }
+    @keyframes tyRipple {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+    @keyframes tyIconPop {
+      from { opacity: 0; transform: scale(0); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .ty-icon-wrap svg {
+      width: 40px; height: 40px;
+      color: #22c55e;
+    }
+
+    .ty-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      animation: tyFadeUp 0.6s ease 0.3s both;
+    }
+    .ty-hero-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      animation: tyFadeUp 0.6s ease 0.4s both;
+    }
+    .ty-hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: tyFadeUp 0.6s ease 0.5s both;
+    }
+    .ty-hero-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--bg);
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      padding: 14px 28px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ty-hero-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+    }
+    .ty-hero-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--gray);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      padding: 12px 24px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .ty-hero-btn-secondary:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+
+    @keyframes tyFadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════════════════
+       NEXT STEPS
+       ════════════════════════════════════════════ */
+    .ty-next {
+      padding: var(--ty-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-next-bg {
+      position: absolute; inset: 0;
+      background: rgba(59,130,246,0.005);
+      pointer-events: none;
+    }
+    .ty-next-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .ty-next-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 36px 28px;
+      border-radius: var(--ty-radius-sm);
+      border: 1px solid var(--ty-card-border);
+      background: var(--ty-card-bg);
+      text-align: center;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-next-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--ty-radius-sm);
+      background: linear-gradient(135deg, rgba(59,130,246,0.02) 0%, transparent 50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .ty-next-card:hover::before { opacity: 1; }
+    .ty-next-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--ty-card-hover-border);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(59,130,246,0.03);
+      background: rgba(255,255,255,0.025);
+    }
+    .ty-next-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ty-next-card:hover .ty-next-icon {
+      background: rgba(59,130,246,0.1);
+      box-shadow: 0 0 24px rgba(59,130,246,0.06);
+    }
+    .ty-next-icon svg { width: 24px; height: 24px; }
+    .ty-next-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .ty-next-card p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .ty-next-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: 1px solid rgba(59,130,246,0.15);
+      background: rgba(59,130,246,0.04);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .ty-next-btn:hover {
+      background: rgba(59,130,246,0.1);
+      border-color: rgba(59,130,246,0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(59,130,246,0.08);
+    }
+    .ty-next-btn svg {
+      width: 14px; height: 14px;
+      transition: transform 0.3s ease;
+    }
+    .ty-next-btn:hover svg { transform: translateX(3px); }
+
+    /* ════════════════════════════════════════════
+       FEATURED RESOURCES
+       ════════════════════════════════════════════ */
+    .ty-resources {
+      padding: var(--ty-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-resources-glow {
+      position: absolute;
+      top: -100px; left: 20%;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .ty-resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .ty-resource-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--ty-radius-sm);
+      border: 1px solid var(--ty-card-border);
+      background: var(--ty-card-bg);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .ty-resource-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.15);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 20px rgba(59,130,246,0.02);
+      background: rgba(255,255,255,0.025);
+    }
+    .ty-resource-thumb {
+      width: 100%;
+      height: 180px;
+      background: rgba(59,130,246,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-resource-thumb svg {
+      width: 40px; height: 40px;
+      color: rgba(59,130,246,0.15);
+    }
+    .ty-resource-tag {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.15);
+      padding: 3px 10px;
+      border-radius: 99px;
+      backdrop-filter: blur(8px);
+    }
+    .ty-resource-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .ty-resource-body h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    .ty-resource-body p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .ty-resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 4px;
+    }
+    .ty-resource-link svg {
+      width: 13px; height: 13px;
+      transition: transform 0.3s ease;
+    }
+    .ty-resource-link:hover svg { transform: translateX(3px); }
+
+    /* ════════════════════════════════════════════
+       CTA
+       ════════════════════════════════════════════ */
+    .ty-cta {
+      padding: var(--ty-gap) 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-cta-glow {
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .ty-cta-inner {
+      position: relative; z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .ty-cta-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .ty-cta-inner p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .ty-cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ty-cta-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #040404;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ty-cta-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+    }
+    .ty-cta-btn-primary svg {
+      width: 16px; height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .ty-cta-btn-primary:hover svg { transform: translateX(4px); }
+    .ty-cta-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gray);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      padding: 14px 28px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .ty-cta-btn-secondary:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ════════════════════════════════════════════
+       TRUST / STATISTICS
+       ════════════════════════════════════════════ */
+    .ty-trust {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      background: rgba(59,130,246,0.005);
+      position: relative;
+    }
+    .ty-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .ty-trust-card {
+      text-align: center;
+      padding: 32px 20px;
+      border-radius: var(--ty-radius-sm);
+      border: 1px solid var(--ty-card-border);
+      background: var(--ty-card-bg);
+      transition: all 0.4s ease;
+    }
+    .ty-trust-card:hover {
+      border-color: rgba(59,130,246,0.12);
+      background: rgba(255,255,255,0.02);
+      transform: translateY(-2px);
+    }
+    .ty-trust-number {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .ty-trust-label {
+      font-size: 0.85rem;
+      color: var(--gray2);
+      font-weight: 400;
+    }
+
+    /* ════════════════════════════════════════════
+       FOOTER CTA (Stay Connected)
+       ════════════════════════════════════════════ */
+    .ty-social {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-social-glow {
+      position: absolute;
+      bottom: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.03) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .ty-social-inner {
+      position: relative; z-index: 1;
+    }
+    .ty-social-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .ty-social-inner p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .ty-social-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ty-social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 99px;
+      border: 1px solid var(--border2);
+      background: rgba(255,255,255,0.02);
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .ty-social-link:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+    .ty-social-link svg {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      :root { --ty-gap: 80px; }
+      .ty-next-grid { grid-template-columns: repeat(2, 1fr); }
+      .ty-resource-grid { grid-template-columns: repeat(2, 1fr); }
+      .ty-trust-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --ty-gap: 72px; }
+      .ty-hero { min-height: auto; padding: 120px 0 40px; }
+      .ty-next-grid { gap: 12px; }
+      .ty-next-card { padding: 28px 20px; }
+      .ty-resource-grid { grid-template-columns: 1fr; }
+      .ty-resource-thumb { height: 160px; }
+      .ty-trust-grid { gap: 14px; }
+      .ty-trust-card { padding: 24px 16px; }
+      .ty-hero-actions { flex-direction: column; width: 100%; }
+      .ty-hero-btn-primary, .ty-hero-btn-secondary { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      :root { --ty-gap: 56px; }
+      .ty-next-grid { grid-template-columns: 1fr; }
+      .ty-trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .ty-icon-wrap { width: 72px; height: 72px; }
+      .ty-icon-wrap svg { width: 32px; height: 32px; }
+      .ty-cta-actions { flex-direction: column; width: 100%; }
+      .ty-cta-btn-primary, .ty-cta-btn-secondary { width: 100%; justify-content: center; }
+      .ty-social-link { padding: 10px 18px; font-size: 0.8rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Thank You - Nagriva",
+    "description": "Your submission has been received. Thank you for reaching out to Nagriva.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nagriva",
+      "url": "https://nagriva.com",
+      "logo": "/assets/images/branding/nagriva-logo.png"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nagriva.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Thank You" }
+    ]
+  }
+  </script>
+</head>
+<body data-page="thank-you">
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ -->
+  <section class="ty-hero">
+    <div class="ty-hero-bg">
+      <div class="ty-hero-glow"></div>
+      <div class="ty-hero-glow-2"></div>
+      <div class="ty-hero-grid"></div>
+    </div>
+    <div class="ty-hero-inner">
+      <div class="ty-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <h1>Thank You! Your Submission Has Been Received</h1>
+      <p class="ty-hero-sub">We've successfully received your request and will review it shortly. Our team typically responds within 24 hours.</p>
+      <div class="ty-hero-actions">
+        <a href="/" class="ty-hero-btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back to Home
+        </a>
+        <a href="/pages/services.html" class="ty-hero-btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Explore Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       NEXT STEPS
+       ════════════════════════════════════════════ -->
+  <section class="ty-next lazy-section" id="next-steps">
+    <div class="ty-next-bg"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Next Steps</div>
+        <h2 class="section-title">What Would You Like to <span class="text-gradient">Do Next</span>?</h2>
+        <p class="section-desc">Continue exploring the Nagriva ecosystem and discover tools, resources, and insights to help you grow.</p>
+      </div>
+      <div class="ty-next-grid fade-up">
+        <!-- Free Tools -->
+        <div class="ty-next-card">
+          <div class="ty-next-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h4>Free Tools</h4>
+          <p>Explore useful tools to improve productivity and website performance.</p>
+          <a href="/pages/tools.html" class="ty-next-btn">
+            Explore Tools
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <!-- Resources Hub -->
+        <div class="ty-next-card">
+          <div class="ty-next-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h4>Resources Hub</h4>
+          <p>Access guides, templates, and educational resources to accelerate your growth.</p>
+          <a href="/pages/resources.html" class="ty-next-btn">
+            Visit Resources
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <!-- Website Audit -->
+        <div class="ty-next-card">
+          <div class="ty-next-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Website Audit</h4>
+          <p>Get actionable recommendations to improve your website's performance and SEO.</p>
+          <a href="/pages/website-audit.html" class="ty-next-btn">
+            Get Audit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <!-- Blog -->
+        <div class="ty-next-card">
+          <div class="ty-next-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h4>Blog</h4>
+          <p>Read expert articles about SEO, AI, marketing, and career development.</p>
+          <a href="/pages/blog.html" class="ty-next-btn">
+            Read Articles
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FEATURED RESOURCES
+       ════════════════════════════════════════════ -->
+  <section class="ty-resources lazy-section" id="featured-resources">
+    <div class="ty-resources-glow"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Featured Resources</div>
+        <h2 class="section-title">Articles & Guides to <span class="text-gradient">Help You Grow</span></h2>
+        <p class="section-desc">Explore our curated collection of expert insights, guides, and resources.</p>
+      </div>
+      <div class="ty-resource-grid fade-up">
+        <a href="/resources/guides/index.html" class="ty-resource-card">
+          <div class="ty-resource-thumb">
+            <span class="ty-resource-tag">Guide</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="ty-resource-body">
+            <h4>Expert Guides & Tutorials</h4>
+            <p>Step-by-step guides covering web design, SEO, marketing automation, and digital growth strategies.</p>
+            <span class="ty-resource-link">
+              Read Guide
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/resources/statistics/index.html" class="ty-resource-card">
+          <div class="ty-resource-thumb">
+            <span class="ty-resource-tag">Statistics</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="ty-resource-body">
+            <h4>SEO Statistics & Data</h4>
+            <p>Up-to-date industry statistics, benchmarks, and data-driven insights to inform your strategy.</p>
+            <span class="ty-resource-link">
+              View Statistics
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/resources/glossary/index.html" class="ty-resource-card">
+          <div class="ty-resource-thumb">
+            <span class="ty-resource-tag">Glossary</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="ty-resource-body">
+            <h4>Digital Marketing Glossary</h4>
+            <p>Comprehensive glossary of digital marketing, SEO, and web development terms explained simply.</p>
+            <span class="ty-resource-link">
+              Browse Glossary
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/pages/blog.html" class="ty-resource-card">
+          <div class="ty-resource-thumb">
+            <span class="ty-resource-tag">Blog</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="ty-resource-body">
+            <h4>Growth & Marketing Blog</h4>
+            <p>Expert articles on SEO, AI automation, social media strategy, and digital marketing trends.</p>
+            <span class="ty-resource-link">
+              Read Articles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/pages/compare.html" class="ty-resource-card">
+          <div class="ty-resource-thumb">
+            <span class="ty-resource-tag">Comparisons</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="ty-resource-body">
+            <h4>Platform Comparisons</h4>
+            <p>Side-by-side analysis of popular tools and platforms to help you make informed decisions.</p>
+            <span class="ty-resource-link">
+              View Comparisons
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/case-studies/nagriva-growth-story.html" class="ty-resource-card">
+          <div class="ty-resource-thumb">
+            <span class="ty-resource-tag">Case Study</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="ty-resource-body">
+            <h4>Success Stories</h4>
+            <p>Real results from real businesses. See how Nagriva has helped companies achieve measurable growth.</p>
+            <span class="ty-resource-link">
+              Read Story
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       CTA
+       ════════════════════════════════════════════ -->
+  <section class="ty-cta lazy-section" id="cta">
+    <div class="ty-cta-glow"></div>
+    <div class="container">
+      <div class="ty-cta-inner fade-up">
+        <h2>Ready to Grow <span class="text-gradient">Faster</span>?</h2>
+        <p>Discover tools, resources, and strategies designed to help you succeed.</p>
+        <div class="ty-cta-actions">
+          <a href="/pages/tools.html" class="ty-cta-btn-primary">
+            Explore Free Tools
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/pages/resources.html" class="ty-cta-btn-secondary">
+            Visit Resources Hub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       TRUST / STATISTICS
+       ════════════════════════════════════════════ -->
+  <section class="ty-trust lazy-section" id="trust">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ By the Numbers</div>
+        <h2 class="section-title">Trusted by Businesses <span class="text-gradient">Worldwide</span></h2>
+        <p class="section-desc">Our growing library of resources helps thousands of businesses make smarter decisions.</p>
+      </div>
+      <div class="ty-trust-grid fade-up">
+        <div class="ty-trust-card">
+          <div class="ty-trust-number">150+</div>
+          <div class="ty-trust-label">Articles Published</div>
+        </div>
+        <div class="ty-trust-card">
+          <div class="ty-trust-number">25+</div>
+          <div class="ty-trust-label">Free Resources</div>
+        </div>
+        <div class="ty-trust-card">
+          <div class="ty-trust-number">500+</div>
+          <div class="ty-trust-label">Website Audits</div>
+        </div>
+        <div class="ty-trust-card">
+          <div class="ty-trust-number">50K+</div>
+          <div class="ty-trust-label">Monthly Visitors</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       STAY CONNECTED
+       ════════════════════════════════════════════ -->
+  <section class="ty-social lazy-section" id="stay-connected">
+    <div class="ty-social-glow"></div>
+    <div class="container">
+      <div class="ty-social-inner fade-up">
+        <h2>Stay Connected With Nagriva</h2>
+        <p>Follow us on social media for the latest insights, tips, and updates.</p>
+        <div class="ty-social-links">
+          <a href="https://www.linkedin.com/company/nagriva" target="_blank" rel="noopener" class="ty-social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://x.com/nag_riva" target="_blank" rel="noopener" class="ty-social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X (Twitter)
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575750526639" target="_blank" rel="noopener" class="ty-social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/nagriva.co/" target="_blank" rel="noopener" class="ty-social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.youtube.com/channel/UCTlY_icbUlIjdcuPZdtTeTQ" target="_blank" rel="noopener" class="ty-social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      function onReady() {
+        try {
+          var source = new URLSearchParams(window.location.search).get('source') || 'direct';
+          sessionStorage.setItem('nagriva_thank_you_visited', source);
+        } catch(e) {}
+        console.log('[Nagriva] Thank-you page loaded');
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', onReady);
+      } else {
+        onReady();
+      }
+    })();
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/supabase.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/user-avatar.js"></script>
+  <script defer src="../js/performance-optimizer.js"></script>
+  <script defer src="../js/lazy-loader.js"></script>
+  <div id="cookie-consent-container"></div>
+  <script defer src="../js/layout.js"></script>
+</body>
+</html>

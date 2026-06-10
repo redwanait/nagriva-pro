@@ -131,6 +131,22 @@
       'lang.ar': 'العربية',
 
       'currency.label': 'Currency',
+
+      'compare.hero.title': 'Compare the Best <span class="cp-gradient">Tools, Platforms</span> &amp; Services',
+      'compare.hero.desc': 'Side-by-side comparisons to help you make better decisions for your business. Expert insights, real data, and honest reviews.',
+      'compare.search.placeholder': 'Search comparisons...',
+      'compare.featured.title': 'Featured Comparisons',
+      'compare.featured.desc': 'Expert comparisons to help you choose the right platform for your business needs.',
+      'compare.newsletter.title': 'Stay Ahead of the Curve',
+      'compare.newsletter.desc': 'Get the latest comparisons, insights, and tips delivered to your inbox.',
+      'compare.newsletter.placeholder': 'Enter your email',
+      'compare.newsletter.cta': 'Subscribe',
+      'compare.faq.title': 'Frequently Asked Questions',
+      'compare.faq.desc': 'Everything you need to know about our comparison process.',
+      'compare.detail.cta.title': 'Ready to Grow Your Business?',
+      'compare.detail.cta.desc': 'Get a free consultation and discover how we can help you achieve better results.',
+      'compare.detail.cta.btn': 'Get a Free Quote',
+      'compare.detail.cta.btn2': 'View Pricing',
     },
     fr: {
       'nav.home': 'Accueil',
