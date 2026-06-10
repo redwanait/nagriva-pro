@@ -6,8 +6,8 @@
   },
   "routes": [
     { "handle": "filesystem" },
+
     { "src": "^/login$", "dest": "/pages/login.html" },
-    { "src": "^/services/(?<slug>[^/]+)$", "dest": "/pages/service.html?slug=$slug" },
     { "src": "^/checkout$", "dest": "/pages/checkout.html" },
     { "src": "^/order-success$", "dest": "/pages/order-success.html" },
     { "src": "^/orders$", "dest": "/pages/orders.html" },
@@ -16,8 +16,50 @@
     { "src": "^/dashboard$", "dest": "/pages/dashboard.html" },
     { "src": "^/invoices$", "dest": "/pages/invoices.html" },
     { "src": "^/profile$", "dest": "/pages/profile.html" },
-    { "src": "^/dentist-websites$", "dest": "/pages/dentist-websites.html" },
-    { "src": "^/website-audit$", "dest": "/pages/website-audit.html" },
+
+    { "src": "^/about$", "dest": "/pages/about.html" },
+    { "src": "^/contact$", "dest": "/pages/contact.html" },
+    { "src": "^/pricing$", "dest": "/pages/pricing.html" },
+    { "src": "^/blog$", "dest": "/pages/blog.html" },
+    { "src": "^/careers$", "dest": "/pages/careers.html" },
+    { "src": "^/portfolio$", "dest": "/pages/results.html" },
+    { "src": "^/resources$", "dest": "/pages/resources.html" },
+
+    { "src": "^/services/web-design$", "dest": "/pages/web-design.html" },
+    { "src": "^/services/seo$", "dest": "/pages/seo.html" },
+    { "src": "^/services/social-media$", "dest": "/pages/social-media.html" },
+    { "src": "^/services/strategy$", "dest": "/pages/strategy.html" },
+    { "src": "^/services/branding$", "dest": "/pages/branding.html" },
+    { "src": "^/services/ai-automation$", "dest": "/pages/ai-automation.html" },
+    { "src": "^/services/website-audit$", "dest": "/pages/website-audit.html" },
+    { "src": "^/services/website-development$", "dest": "/pages/services/website-development.html" },
+    { "src": "^/services/ecommerce-stores$", "dest": "/pages/services/ecommerce-stores.html" },
+    { "src": "^/services/blog-creation$", "dest": "/pages/services/blog-creation.html" },
+    { "src": "^/services/video-editing$", "dest": "/pages/services/video-editing.html" },
+    { "src": "^/services$", "dest": "/pages/services.html" },
+
+    { "src": "^/industries/dentist-websites$", "dest": "/pages/dentist-websites.html" },
+    { "src": "^/industries/lawyer-websites$", "dest": "/pages/lawyer-websites.html" },
+    { "src": "^/industries/real-estate-websites$", "dest": "/pages/real-estate-websites.html" },
+    { "src": "^/industries/restaurant-websites$", "dest": "/pages/restaurant-websites.html" },
+    { "src": "^/industries/gym-fitness-websites$", "dest": "/pages/gym-fitness-websites.html" },
+    { "src": "^/industries/agency-websites$", "dest": "/pages/agency-websites.html" },
+    { "src": "^/industries/car-rental-websites$", "dest": "/pages/car-rental-websites.html" },
+    { "src": "^/industries$", "dest": "/industries/index.html" },
+
+    { "src": "^/resources/statistics/seo-statistics$", "dest": "/pages/statistics/seo-statistics.html" },
+    { "src": "^/resources/statistics$", "dest": "/resources/statistics/index.html" },
+    { "src": "^/resources/glossary$", "dest": "/resources/glossary/index.html" },
+    { "src": "^/resources/guides$", "dest": "/resources/guides/index.html" },
+
+    { "src": "^/case-studies/dental-clinic$", "dest": "/case-studies/dental-clinic-success-story.html" },
+    { "src": "^/case-studies/law-firm$", "dest": "/case-studies/law-firm-success-story.html" },
+    { "src": "^/case-studies/real-estate$", "dest": "/case-studies/real-estate-success-story.html" },
+    { "src": "^/case-studies/restaurant$", "dest": "/case-studies/restaurant-success-story.html" },
+    { "src": "^/case-studies/gym-fitness$", "dest": "/case-studies/gym-fitness-success-story.html" },
+    { "src": "^/case-studies/agency$", "dest": "/case-studies/agency-success-story.html" },
+    { "src": "^/case-studies/nagriva-story$", "dest": "/case-studies/nagriva-growth-story.html" },
+
     { "src": "/.*", "dest": "/pages/404.html", "status": 404 }
   ],
   "headers": [

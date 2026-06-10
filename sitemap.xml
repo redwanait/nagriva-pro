@@ -4,42 +4,234 @@
     <loc>https://nagriva.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://nagriva.com/pages/services.html</loc>
+    <loc>https://nagriva.com/services</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <priority>0.9</priority>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://nagriva.com/pages/results.html</loc>
+    <loc>https://nagriva.com/services/web-design</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://nagriva.com/pages/pricing.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
-  </url>
-  <url>
-    <loc>https://nagriva.com/pages/about.html</loc>
+    <loc>https://nagriva.com/services/seo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://nagriva.com/pages/contact.html</loc>
+    <loc>https://nagriva.com/services/social-media</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/strategy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/branding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/ai-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://nagriva.com/pages/blog.html</loc>
+    <loc>https://nagriva.com/services/website-audit</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/website-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/ecommerce-stores</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/blog-creation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/services/video-editing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/dentist-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/lawyer-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/real-estate-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/restaurant-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/gym-fitness-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/agency-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/industries/car-rental-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/resources</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/resources/statistics/seo-statistics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/resources/statistics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/resources/guides</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/resources/glossary</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/portfolio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/pricing</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/careers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/dental-clinic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/law-firm</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/real-estate</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/restaurant</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/gym-fitness</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/agency</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://nagriva.com/case-studies/nagriva-story</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-10</lastmod>
   </url>
 </urlset>
