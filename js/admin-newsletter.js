@@ -23,10 +23,11 @@ const NAGRIVA_Newsletter = (() => {
         '<td><div class="dash-skeleton-line w70"></div></td>' +
         '<td><div class="dash-skeleton-line w50"></div></td>' +
         '<td><div class="dash-skeleton-line w40"></div></td>' +
+        '<td><div class="dash-skeleton-line w50"></div></td>' +
         '</tr>';
     }
     return '<div class="table-wrap" style="margin-top:0;"><table class="data-table"><thead><tr>' +
-      '<th>Email</th><th>Status</th><th>Subscribed</th>' +
+      '<th>Email</th><th>Status</th><th>Source</th><th>Subscribed</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
 
@@ -72,15 +73,17 @@ const NAGRIVA_Newsletter = (() => {
     }
 
     var html = '<div class="table-wrap" style="margin-top:0;"><table class="data-table"><thead><tr>' +
-      '<th>Email</th><th>Status</th><th>Subscribed</th><th style="width:100px;">Actions</th>' +
+      '<th>Email</th><th>Status</th><th>Source</th><th>Subscribed</th><th style="width:100px;">Actions</th>' +
       '</tr></thead><tbody>';
 
     filtered.forEach(function(sb) {
       var statusClass = sb.status === 'active' ? 'badge-success' : sb.status === 'unsubscribed' ? 'badge-warning' : 'badge-danger';
       var statusLabel = sb.status.charAt(0).toUpperCase() + sb.status.slice(1);
+      var sourceLabel = sb.source === 'newsletter-page' ? 'Newsletter Page' : sb.source === 'homepage' ? 'Homepage' : sb.source === 'footer' ? 'Footer' : sb.source || '\u2014';
       html += '<tr data-id="' + sb.id + '">' +
         '<td><strong>' + escapeHtml(sb.email) + '</strong></td>' +
         '<td><span class="badge ' + statusClass + '">' + statusLabel + '</span></td>' +
+        '<td style="color:var(--gray2);font-size:0.78rem;">' + escapeHtml(sourceLabel) + '</td>' +
         '<td style="color:var(--gray2);font-size:0.78rem;">' + formatDate(sb.subscribed_at) + '</td>' +
         '<td><div class="td-actions"><button class="td-action-btn danger" data-action="delete-subscriber" title="Delete"><i class="fas fa-trash"></i></button></div></td>' +
         '</tr>';

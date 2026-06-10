@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="../css/admin-services.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/admin-settings.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../components/client-drawer/client-drawer.css" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="../components/notifications-dropdown/notifications-dropdown.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../components/activity-feed/activity-feed.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/global-search.css" media="print" onload="this.media='all'" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
@@ -418,16 +417,13 @@
   <script defer src="../js/auth-guard.js"></script>
   <script defer src="../js/admin-auth.js"></script>
   <script defer src="../js/admin-navbar.js"></script>
-  <script defer src="../js/user-avatar.js"></script>
   <script defer src="../js/i18n.js"></script>
   <script defer src="../js/empty-state.js"></script>
   <script defer src="../js/admin-orders.js"></script>
   <script defer src="../modules/orders/orders-api.js"></script>
   <script defer src="../modules/invoices/invoices-api.js"></script>
-  <script defer src="../modules/notifications/notifications-api.js"></script>
   <script defer src="../js/admin-notifications.js"></script>
   <script defer src="../components/activity-feed/activity-feed.js"></script>
-  <script defer src="../components/notifications-dropdown/notifications-dropdown.js"></script>
   <script defer src="../modules/activity-logs/activity-logs-api.js"></script>
   <script defer src="../js/toast.js"></script>
 
@@ -1122,12 +1118,6 @@
         this.classList.remove('visible');
         NAGRIVA_Newsletter.setSearch('');
         NAGRIVA_Newsletter.renderTable(newsletterContainer);
-      });
-
-      // ─── Notifications ───
-      NAGRIVA_Notifications.init();
-      document.querySelector('.notif-list')?.parentElement?.querySelector('.card-link')?.addEventListener('click', function() {
-        NAGRIVA_Notifications.markAllAsRead();
       });
 
       // ─── Refresh dashboard widgets after modules load ───

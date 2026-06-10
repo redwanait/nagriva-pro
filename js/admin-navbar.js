@@ -5,7 +5,6 @@ const NAGRIVA_AdminNavbar = (() => {
     userId: null,
     profile: null,
     user: null,
-    unreadNotifications: 0,
     unreadMessages: 0,
     dropdownOpen: false
   };
@@ -108,30 +107,13 @@ const NAGRIVA_AdminNavbar = (() => {
 
       updateUIFromProfile(_state.profile, _state.user);
 
-      var [notifCount, msgCount] = await Promise.all([
-        _getUnreadNotificationsCount(user.id),
-        _getUnreadMessagesCount()
-      ]);
-
-      _state.unreadNotifications = notifCount;
+      var msgCount = await _getUnreadMessagesCount();
       _state.unreadMessages = msgCount;
-      updateNotifBadge(notifCount);
       updateMsgBadge(msgCount);
     } catch (err) {
       console.warn('[AdminNavbar] loadInitialData error:', err);
       setAvatar('adminAvatar', 'adminAvatarImg', 'adminAvatarInitials', null, 'Admin');
     }
-  }
-
-  async function _getUnreadNotificationsCount(userId) {
-    try {
-      var { count, error } = await window.supabaseClient
-        .from('notifications')
-        .select('*', { count: 'exact', head: true })
-        .eq('user_id', userId)
-        .eq('is_read', false);
-      return error ? 0 : (count || 0);
-    } catch (e) { return 0; }
   }
 
   async function _getUnreadMessagesCount() {
@@ -173,33 +155,6 @@ const NAGRIVA_AdminNavbar = (() => {
       )
       .subscribe();
     _unsubscribes.push(function() { window.supabaseClient.removeChannel(profileChan); });
-
-    /* ── Notification changes ── */
-    var notifChan = window.supabaseClient
-      .channel('admin-navbar-notifications')
-      .on('postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'notifications', filter: 'user_id=eq.' + _state.userId },
-        function(payload) {
-          var n = payload.new;
-          if (!n.is_read) {
-            _state.unreadNotifications++;
-            updateNotifBadge(_state.unreadNotifications);
-            showNotifToast(n);
-          }
-        }
-      )
-      .on('postgres_changes',
-        { event: 'UPDATE', schema: 'public', table: 'notifications', filter: 'user_id=eq.' + _state.userId },
-        function(payload) {
-          var n = payload.new;
-          if (n.is_read) {
-            _state.unreadNotifications = Math.max(0, _state.unreadNotifications - 1);
-            updateNotifBadge(_state.unreadNotifications);
-          }
-        }
-      )
-      .subscribe();
-    _unsubscribes.push(function() { window.supabaseClient.removeChannel(notifChan); });
 
     /* ── Order message changes ── */
     var msgChan = window.supabaseClient
@@ -246,30 +201,6 @@ const NAGRIVA_AdminNavbar = (() => {
     _unsubscribes.push(function() { window.supabaseClient.removeChannel(supportChan); });
   }
 
-  function showNotifToast(notif) {
-    var container = document.getElementById('toastContainer');
-    if (!container) return;
-    var toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML =
-      '<div class="toast-icon success"><i class="fas fa-bell"></i></div>' +
-      '<div class="toast-content">' +
-        '<div class="toast-title">' + escapeHtml(notif.title || 'Notification') + '</div>' +
-        '<div class="toast-message">' + escapeHtml(notif.message || '') + '</div>' +
-      '</div>' +
-      '<button class="toast-close"><i class="fas fa-times"></i></button>';
-    container.appendChild(toast);
-    requestAnimationFrame(function() { toast.classList.add('visible'); });
-    toast.querySelector('.toast-close').addEventListener('click', function() {
-      toast.classList.remove('visible');
-      setTimeout(function() { toast.remove(); }, 400);
-    });
-    setTimeout(function() {
-      toast.classList.remove('visible');
-      setTimeout(function() { toast.remove(); }, 400);
-    }, 4500);
-  }
-
   function escapeHtml(str) {
     if (!str) return '';
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -278,13 +209,6 @@ const NAGRIVA_AdminNavbar = (() => {
   /* ════════════════════════════════════
      BADGE UPDATES
      ════════════════════════════════════ */
-  function updateNotifBadge(count) {
-    var dot = document.getElementById('topbarNotifDot');
-    if (dot) {
-      dot.style.display = count > 0 ? '' : 'none';
-    }
-  }
-
   function updateMsgBadge(count) {
     var badge = document.getElementById('topbarMsgBadge');
     if (badge) {
@@ -374,33 +298,6 @@ const NAGRIVA_AdminNavbar = (() => {
   }
 
   /* ════════════════════════════════════
-     NOTIFICATION BELL CLICK
-     ════════════════════════════════════ */
-  function initNotificationBtn() {
-    var btn = document.getElementById('topbarNotifBtn');
-    if (!btn) return;
-
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-
-      if (typeof NAGRIVA_NotificationsDropdown !== 'undefined') {
-        NAGRIVA_NotificationsDropdown.toggle();
-        return;
-      }
-
-      var notifCard = document.querySelector('.notif-list');
-      if (notifCard) {
-        var card = notifCard.closest('.card');
-        if (card) {
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          card.style.borderColor = 'rgba(59,130,246,0.3)';
-          setTimeout(function() { card.style.borderColor = ''; }, 2000);
-        }
-      }
-    });
-  }
-
-  /* ════════════════════════════════════
      REFRESH ON TAB VISIBLE
      ════════════════════════════════════ */
   function initVisibilityRefresh() {
@@ -412,13 +309,8 @@ const NAGRIVA_AdminNavbar = (() => {
   }
 
   async function refreshCounts() {
-    var [notifCount, msgCount] = await Promise.all([
-      _getUnreadNotificationsCount(_state.userId),
-      _getUnreadMessagesCount()
-    ]);
-    _state.unreadNotifications = notifCount;
+    var msgCount = await _getUnreadMessagesCount();
     _state.unreadMessages = msgCount;
-    updateNotifBadge(notifCount);
     updateMsgBadge(msgCount);
   }
 
@@ -498,12 +390,6 @@ const NAGRIVA_AdminNavbar = (() => {
           return;
         }
 
-        if (action === 'notifications') {
-          var notifBtn = document.getElementById('topbarNotifBtn');
-          if (notifBtn) notifBtn.click();
-          return;
-        }
-
         if (action === 'logout') {
           e.preventDefault();
           this.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Signing out...</span>';
@@ -521,7 +407,6 @@ const NAGRIVA_AdminNavbar = (() => {
     subscribeAll();
     initDropdown();
     initSidebarDropdown();
-    initNotificationBtn();
     initVisibilityRefresh();
   }
 

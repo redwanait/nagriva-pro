@@ -9,10 +9,6 @@
     { src: '/js/floating-elements.js', delay: 4000, idle: true },
     { src: '/js/profile-avatar.js', delay: 3000, idle: true },
     { src: '/js/content-loader.js', delay: 2000, idle: true },
-    { src: '/modules/notifications/notifications-api.js', delay: 4000, idle: true },
-    { src: '/modules/notifications/notifications-realtime.js', delay: 5000, idle: true },
-    { src: '/modules/notifications/notifications-triggers.js', delay: 5000, idle: true },
-    { src: '/components/notifications-dropdown/notifications-dropdown.js', delay: 5000, idle: true },
     { src: '/modules/content/content-api.js', delay: 2000, idle: true },
     { src: '/modules/blog/blog-api.js', delay: 3000, idle: true }
   ];

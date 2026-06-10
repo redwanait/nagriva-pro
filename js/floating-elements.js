@@ -458,6 +458,7 @@
   function init() {
     var path = window.location.pathname;
     if (path !== '/' && !path.endsWith('index.html')) return;
+    if (path.includes('/industries/')) return;
 
     if (document.getElementById('nagriva-floating-elements')) return;
 

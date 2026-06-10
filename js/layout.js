@@ -73,6 +73,14 @@
     document.head.appendChild(sd);
   }
 
+  function loadNewsletterJS() {
+    if (window.NAGRIVA_Newsletter) return;
+    var nl = document.createElement('script');
+    nl.src = '/js/newsletter.js';
+    nl.defer = true;
+    document.head.appendChild(nl);
+  }
+
   /* ─── Footer post-processing ─── */
   function processFooter (container) {
     if (window.NagrivaI18n) {
@@ -102,6 +110,11 @@
         }
       })
     }
+
+    /* Re-init newsletter forms loaded dynamically */
+    if (window.NAGRIVA_Newsletter) {
+      NAGRIVA_Newsletter.init()
+    }
   }
 
   /* ─── Cookie consent post-processing ─── */
@@ -114,6 +127,7 @@
 
   /* ─── Init: load all components ─── */
   function init () {
+    loadNewsletterJS()
     COMPONENTS.forEach(fetchComponent)
   }
 

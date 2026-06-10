@@ -159,7 +159,6 @@ html {
   .btn-primary:hover { box-shadow: none !important; transform: none !important; }
   .btn-primary::after { display: none !important; }
   .btn-secondary:hover { transform: none !important; }
-  .btn-book:hover { box-shadow: none !important; transform: none !important; }
   .btn-order-now:hover { box-shadow: none !important; transform: none !important; }
   .btn-pricing:hover { border-color: var(--border2) !important; color: var(--gray) !important; background: none !important; }
   .services-cta-btn:hover { transform: none !important; box-shadow: none !important; }
@@ -257,10 +256,6 @@ html {
   .hero-glow { width: 160px !important; height: 160px !important; }
   .hero-glow-2 { display: none !important; }
   .logo-text img { height: 24px !important; width: auto !important; }
-  .nav-notif { width: 36px !important; height: 36px !important; }
-  .nav-user-avatar { width: 36px !important; height: 36px !important; }
-  .nav-user-img { width: 24px !important; height: 24px !important; }
-  .nav-notif svg { width: 16px !important; height: 16px !important; }
   .hamburger { width: 36px !important; height: 36px !important; }
   .hamburger span { width: 14px !important; }
 }
@@ -284,7 +279,6 @@ html {
   .process-card:hover { transform: none !important; box-shadow: none !important; }
   .btn-primary:hover { box-shadow: none !important; transform: none !important; }
   .btn-secondary:hover { transform: none !important; }
-  .btn-book:hover { box-shadow: none !important; transform: none !important; }
   .marquee-section:hover .marquee-inner { animation-play-state: running !important; }
   .sv-grid:has(.sv-card:hover) .sv-card:not(:hover) { filter: none !important; }
   .pj-grid:has(.pj-card:hover) .pj-card:not(:hover) { filter: none !important; }

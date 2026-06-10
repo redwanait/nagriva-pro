@@ -39,17 +39,6 @@ const NagrivaAuth = (() => {
     refs.forgotSuccess = document.getElementById('forgotSuccess');
     refs.forgotFormWrap = document.getElementById('forgotFormWrap');
 
-    refs.authBtn = document.getElementById('authBtn');
-    refs.userAvatar = document.getElementById('userAvatar');
-    refs.userImg = document.getElementById('userImg');
-
-    refs.dropdown = document.getElementById('userDropdown');
-    refs.dropdownName = document.getElementById('dropdownName');
-    refs.dropdownRole = document.getElementById('dropdownRole');
-    refs.dropdownAvatar = document.getElementById('dropdownAvatar');
-    refs.signoutBtn = document.getElementById('signoutBtn');
-
-    refs.bookBtn = document.getElementById('bookBtn');
     refs.mobileAuthBtn = document.getElementById('mobileAuthBtn');
     refs.mobileAuthText = document.getElementById('mobileAuthText');
 
@@ -236,57 +225,14 @@ const NagrivaAuth = (() => {
 
   /* ─── UI Update ─── */
   function updateUI() {
-    /* If user-avatar.js is loaded, it handles the avatar UI exclusively */
-    if (typeof NAGRIVA_UserAvatar !== 'undefined') {
-      if (currentSession && currentUser) {
-        if (refs.authBtn) refs.authBtn.style.display = 'none';
-        if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = 'none';
-        if (refs.bookBtn) refs.bookBtn.style.display = 'none';
-      } else {
-        if (refs.authBtn) refs.authBtn.style.display = '';
-        if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = '';
-        if (refs.bookBtn) refs.bookBtn.style.display = '';
-      }
-      return;
-    }
-
     if (currentSession && currentUser) {
-      const displayName = getDisplayName(currentUser);
-      const avatarUrl = currentUser.user_metadata?.avatar_url || currentUser.user_metadata?.picture || null;
-
-      if (refs.authBtn) refs.authBtn.style.display = 'none';
-      if (refs.userAvatar) refs.userAvatar.classList.add('visible');
-
-      if (typeof ProfileAvatar !== 'undefined') {
-        ProfileAvatar.setAvatarImage(refs.userImg, avatarUrl, displayName);
-      } else if (refs.userImg) {
-        refs.userImg.textContent = getInitials(displayName);
-      }
-
-      if (refs.dropdownName) refs.dropdownName.textContent = displayName;
-
-      if (typeof ProfileAvatar !== 'undefined') {
-        ProfileAvatar.setAvatarImage(refs.dropdownAvatar, avatarUrl, displayName);
-      } else if (refs.dropdownAvatar) {
-        refs.dropdownAvatar.textContent = getInitials(displayName);
-      }
-
       if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = 'none';
-
-      /* Ensure Book a Call CTA stays visible for authenticated users */
-      if (refs.bookBtn) refs.bookBtn.style.display = '';
-
-      /* Update admin link visibility */
       updateAdminLinkVisibility();
     } else {
-      if (refs.authBtn) refs.authBtn.style.display = '';
-      if (refs.userAvatar) refs.userAvatar.classList.remove('visible');
-      if (refs.bookBtn) refs.bookBtn.style.display = '';
       if (refs.mobileAuthBtn) {
         refs.mobileAuthBtn.style.display = '';
         if (refs.mobileAuthText) refs.mobileAuthText.textContent = 'Sign In';
       }
-      /* Hide admin link when logged out */
       var adminLink = document.getElementById('adminNavLink');
       if (adminLink) adminLink.style.display = 'none';
     }
@@ -541,8 +487,6 @@ const NagrivaAuth = (() => {
 
   /* ─── Sign Out ─── */
   async function handleSignOut() {
-    closeDropdown();
-
     try {
       await window.supabaseClient.auth.signOut();
     } catch (_) {
@@ -656,59 +600,11 @@ const NagrivaAuth = (() => {
     });
   }
 
-  function closeDropdown() {
-    if (refs.dropdown) refs.dropdown.classList.remove('open');
-    if (refs.userAvatar) refs.userAvatar.setAttribute('aria-expanded', 'false');
-  }
-
-  function openDropdown() {
-    if (refs.dropdown) refs.dropdown.classList.add('open');
-    if (refs.userAvatar) refs.userAvatar.setAttribute('aria-expanded', 'true');
-    /* Close notification dropdown if open */
-    if (typeof NAGRIVA_NotificationsDropdown !== 'undefined') {
-      NAGRIVA_NotificationsDropdown.close();
-    }
-  }
-
-  function _onDropdownKeydown(e) {
-    if (e.key === 'Escape') closeDropdown();
-  }
-
-  function _onDropdownOutsideClick(e) {
-    if (refs.userAvatar && !refs.userAvatar.contains(e.target) && refs.dropdown?.classList.contains('open')) {
-      closeDropdown();
-    }
-  }
-
   function initDropdown() {
-    if (refs.userAvatar) {
-      refs.userAvatar.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (refs.dropdown?.classList.contains('open')) {
-          closeDropdown();
-        } else {
-          openDropdown();
-        }
-      });
-      refs.userAvatar.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          e.stopPropagation();
-          if (refs.dropdown?.classList.contains('open')) {
-            closeDropdown();
-          } else {
-            openDropdown();
-          }
-        }
-      });
+    var signoutBtn = document.getElementById('signoutBtn');
+    if (signoutBtn) {
+      signoutBtn.addEventListener('click', handleSignOut);
     }
-
-    if (refs.signoutBtn) {
-      refs.signoutBtn.addEventListener('click', handleSignOut);
-    }
-
-    document.addEventListener('keydown', _onDropdownKeydown);
-    document.addEventListener('click', _onDropdownOutsideClick);
   }
 
   /* ════════════════════════════════════════════
@@ -816,33 +712,12 @@ const NagrivaAuth = (() => {
   }
 
   /* ─── Dropdown Navigation Links ─── */
-  function initDropdownNav() {
-    var NAV_MAP = {
-      'profile': '/pages/profile.html',
-      'dashboard': '/pages/dashboard.html',
-      'notifications': '/pages/notifications.html',
-      'settings': '/pages/settings.html',
-      'admin': '/pages/admin-dashboard.html',
-      'onboarding-qa': '/pages/onboarding-qa.html'
-    };
-    document.querySelectorAll('.user-dropdown-item[data-nav]').forEach(function(item) {
-      var nav = item.getAttribute('data-nav');
-      var href = NAV_MAP[nav];
-      if (href) {
-        item.addEventListener('click', function(e) {
-          e.stopPropagation();
-          closeDropdown();
-          window.location.href = href;
-        });
-      }
-    });
-  }
+
 
   /* ─── Show admin link only for admin users ─── */
   async function updateAdminLinkVisibility() {
     var adminLink = document.getElementById('adminNavLink');
     var mobileAdminLink = document.getElementById('mobileAdminNavLink');
-    var roleBadge = document.getElementById('dropdownRole');
     try {
       var session = currentSession || (await window.supabaseClient.auth.getSession()).data.session;
       if (!session) {
@@ -859,11 +734,6 @@ const NagrivaAuth = (() => {
       var isAdmin = role === 'admin';
       if (adminLink) adminLink.style.display = isAdmin ? '' : 'none';
       if (mobileAdminLink) mobileAdminLink.style.display = isAdmin ? '' : 'none';
-      if (roleBadge) {
-        var roleLabel = isAdmin ? 'Admin' : role.charAt(0).toUpperCase() + role.slice(1);
-        roleBadge.textContent = roleLabel;
-        roleBadge.style.display = 'inline-flex';
-      }
     } catch (_) {
       if (adminLink) adminLink.style.display = 'none';
       if (mobileAdminLink) mobileAdminLink.style.display = 'none';
@@ -878,15 +748,6 @@ const NagrivaAuth = (() => {
                 (function () { try { return localStorage.getItem('nagriva_dev_mode') === 'true' } catch (e) { return false } })();
     if (devLink) devLink.style.display = isDev ? '' : 'none';
     if (mobileDevLink) mobileDevLink.style.display = isDev ? '' : 'none';
-  }
-
-  /* ─── Re-bind navbar-specific events after navbar loads ─── */
-  function initNavbarUI() {
-    cacheRefs();
-    initDropdown();
-    initDropdownNav();
-    updateUI();
-    updateDevLinkVisibility();
   }
 
   /* ─── Init ─── */
@@ -915,9 +776,12 @@ const NagrivaAuth = (() => {
     handleRedirect();
   }
 
-  /* ─── Re-init navbar-dependent UI when the dynamic navbar loads ─── */
+  /* ─── Re-init UI when the dynamic navbar loads ─── */
   document.addEventListener('navbar:loaded', function onNavbarLoad() {
-    initNavbarUI();
+    cacheRefs();
+    initDropdown();
+    updateUI();
+    updateDevLinkVisibility();
   });
 
   /* ─── Public API ─── */

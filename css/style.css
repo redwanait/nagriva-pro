@@ -4371,8 +4371,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   /* Disable hover lift effects on mobile */
   .btn-primary:hover { box-shadow: none; transform: none; }
   .btn-secondary:hover { color: var(--gray); background: rgba(255,255,255,0.04); border-color: var(--border2); transform: none; }
-  .btn-book:hover { box-shadow: none; transform: none; }
-  .btn-primary::after, .btn-book::after { display: none; }
+  .btn-primary::after { display: none; }
   .featured-btn:hover { box-shadow: none; }
   .form-btn:hover { animation: none; box-shadow: none; transform: none; }
   .form-btn::before { display: none; }
@@ -4487,7 +4486,6 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .pj-cta-btn:hover { transform: none; box-shadow: none; color: var(--gray); border-color: rgba(255,255,255,0.12); }
   .btn-primary:hover { box-shadow: none; transform: none; }
   .btn-secondary:hover { color: var(--gray); background: rgba(255,255,255,0.04); border-color: var(--border2); transform: none; }
-  .btn-book:hover { box-shadow: none; transform: none; }
   .btn-pricing:hover { border-color: var(--border2); color: var(--gray); background: none; }
   .featured-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); box-shadow: none; }
   .form-btn:hover { animation: none; box-shadow: none; transform: none; }
@@ -5281,26 +5279,6 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 @keyframes btnGlowPulse {
   0%, 100% { opacity: 0.4; transform: scale(1); }
   50%      { opacity: 0.7; transform: scale(1.04); }
-}
-
-.btn-book {
-  position: relative;
-}
-.btn-book::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 99px;
-  background: radial-gradient(circle at center, rgba(59,130,246,0.25) 0%, transparent 70%);
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.4s ease;
-  filter: blur(10px);
-  pointer-events: none;
-}
-.btn-book:hover::after {
-  opacity: 1;
-  animation: btnGlowPulse 2.4s ease-in-out infinite;
 }
 
 /* ─── Counter Pop Animation ─── */

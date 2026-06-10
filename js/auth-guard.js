@@ -18,7 +18,6 @@ var NagrivaAuthGuard = (function() {
     'dashboard.html',
     'profile.html',
     'settings.html',
-    'notifications.html',
     'orders.html',
     'messages.html',
     'files.html',

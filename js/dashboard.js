@@ -12,7 +12,6 @@ window.NAGRIVA_Dashboard = (function () {
     orders: null,
     activity: null,
     messages: null,
-    notifications: null,
     projects: null
   };
 
@@ -174,16 +173,6 @@ window.NAGRIVA_Dashboard = (function () {
       '<p class="dash-empty-desc">When you have conversations about your orders, they\'ll appear here.</p>' +
       '<div class="dash-empty-actions">' +
       '<a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dash-empty-btn dash-empty-btn-primary">' + window.NAGRIVA_EmptyState.icons['message-square'] + ' Book a Free Call</a>' +
-      '</div></div>';
-  }
-
-  function emptyNotifications() {
-    return '<div class="dash-empty">' +
-      '<div class="dash-empty-icon">' + window.NAGRIVA_EmptyState.icons.bell + '</div>' +
-      '<h3 class="dash-empty-title">All caught up</h3>' +
-      '<p class="dash-empty-desc">No new notifications at the moment.</p>' +
-      '<div class="dash-empty-actions">' +
-      '<a href="services.html" class="dash-empty-btn dash-empty-btn-primary">' + window.NAGRIVA_EmptyState.icons.compass + ' Explore Platform</a>' +
       '</div></div>';
   }
 
@@ -355,31 +344,6 @@ window.NAGRIVA_Dashboard = (function () {
     else { container.innerHTML = html; }
   }
 
-  function renderNotifications(notifications) {
-    var container = document.getElementById('dashNotifications');
-    if (!container) return;
-    if (!notifications || notifications.length === 0) {
-      var emptyHtml = emptyNotifications();
-      if (window.NAGRIVA_Loading) { window.NAGRIVA_Loading.hide(container, emptyHtml); }
-      else { container.innerHTML = emptyHtml; }
-      return;
-    }
-    var html = '';
-    notifications.slice(0, 4).forEach(function (n) {
-      var typeIcon = n.type === 'message' ? 'message-square' : n.type === 'payment' ? 'check-circle' : 'bell';
-      html += '<div class="dash-notif-item' + (n.is_read ? '' : ' unread') + '">' +
-        (n.is_read ? '' : '<span class="dash-notif-dot"></span>') +
-        '<div class="dash-notif-icon">' + (window.NAGRIVA_EmptyState.icons[typeIcon] || window.NAGRIVA_EmptyState.icons.bell) + '</div>' +
-        '<div class="dash-notif-content">' +
-        '<div class="dash-notif-title">' + escapeHtml(n.title || 'Notification') + '</div>' +
-        '<div class="dash-notif-message">' + escapeHtml((n.message || '').substring(0, 80)) + '</div>' +
-        '</div>' +
-        '<span class="dash-notif-time">' + formatTimeAgo(n.created_at) + '</span></div>';
-    });
-    if (window.NAGRIVA_Loading) { window.NAGRIVA_Loading.hide(container, html); }
-    else { container.innerHTML = html; }
-  }
-
   function renderProjects(projects) {
     var container = document.getElementById('dashProjects');
     if (!container) return;
@@ -490,18 +454,6 @@ window.NAGRIVA_Dashboard = (function () {
       _data.projects = [];
     }
 
-    try {
-      var { data: notifs } = await window.supabaseClient
-        .from('notifications')
-        .select('*')
-        .eq('user_id', _user.id)
-        .order('created_at', { ascending: false })
-        .limit(10);
-      _data.notifications = notifs || [];
-    } catch (e) {
-      _data.notifications = [];
-    }
-
     _data.stats = await fetchStats();
   }
 
@@ -544,14 +496,6 @@ window.NAGRIVA_Dashboard = (function () {
         messagesEl.innerHTML = skeletonList(3);
       }
     }
-    var notifsEl = document.getElementById('dashNotifications');
-    if (notifsEl) {
-      if (lm) {
-        lm.show(notifsEl, (sk ? sk.notifications(3) : skeletonList(3)));
-      } else {
-        notifsEl.innerHTML = skeletonList(3);
-      }
-    }
     var projectsEl = document.getElementById('dashProjects');
     if (projectsEl) {
       if (lm) {
@@ -570,7 +514,6 @@ window.NAGRIVA_Dashboard = (function () {
     renderOrders(_data.orders);
     renderActivity(_data.activity);
     renderMessages(_data.messages);
-    renderNotifications(_data.notifications);
     renderProjects(_data.projects);
   }
 
@@ -633,14 +576,6 @@ window.NAGRIVA_Dashboard = (function () {
     }
     }
 
-    var notifSub = window.supabaseClient
-      .channel('dash-notifications')
-      .on('postgres_changes',
-        { event: '*', schema: 'public', table: 'notifications', filter: 'user_id=eq.' + _user.id },
-        function () { refresh(); }
-      )
-      .subscribe();
-    _subscriptions.push(notifSub);
   }
 
   /* ════════════════════════════════════════════
@@ -669,7 +604,7 @@ window.NAGRIVA_Dashboard = (function () {
     }
 
     if (!_user) {
-      var containers = ['dashStats', 'dashOrdersList', 'dashActivity', 'dashMessages', 'dashNotifications', 'dashProjects'];
+      var containers = ['dashStats', 'dashOrdersList', 'dashActivity', 'dashMessages', 'dashProjects'];
       containers.forEach(function (id) {
         var el = document.getElementById(id);
         if (el) el.innerHTML = errorState('Please sign in to view your dashboard.');
@@ -683,7 +618,7 @@ window.NAGRIVA_Dashboard = (function () {
       subscribeRealtime();
     } catch (err) {
       console.error('[Dashboard] Init error:', err);
-      var containers = ['dashStats', 'dashOrdersList', 'dashActivity', 'dashMessages', 'dashNotifications', 'dashProjects'];
+      var containers = ['dashStats', 'dashOrdersList', 'dashActivity', 'dashMessages', 'dashProjects'];
       containers.forEach(function (id) {
         var el = document.getElementById(id);
         if (el && (el.querySelector('.dash-skeleton') || el.querySelector('.dash-stat-skel') || el.querySelector('.sk-skeleton'))) {

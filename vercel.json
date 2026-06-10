@@ -40,6 +40,9 @@
     { "src": "^/services/video-editing$", "dest": "/pages/services/video-editing.html" },
     { "src": "^/services$", "dest": "/pages/services.html" },
 
+    { "src": "^/newsletter/thank-you$", "dest": "/pages/newsletter/thank-you.html" },
+    { "src": "^/newsletter$", "dest": "/pages/newsletter.html" },
+
     { "src": "^/industries/dentist-websites$", "dest": "/pages/dentist-websites.html" },
     { "src": "^/industries/lawyer-websites$", "dest": "/pages/lawyer-websites.html" },
     { "src": "^/industries/real-estate-websites$", "dest": "/pages/real-estate-websites.html" },
