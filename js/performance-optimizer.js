@@ -7,7 +7,6 @@
   var DEFERRABLE_SCRIPTS = [
     { src: '/js/chatbot.js', delay: 5000, idle: true },
     { src: '/js/floating-elements.js', delay: 4000, idle: true },
-    { src: '/js/footer.js', delay: 2000, idle: true },
     { src: '/js/profile-avatar.js', delay: 3000, idle: true },
     { src: '/js/content-loader.js', delay: 2000, idle: true },
     { src: '/modules/notifications/notifications-api.js', delay: 4000, idle: true },

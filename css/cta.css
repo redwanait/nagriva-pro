@@ -1,0 +1,41 @@
+/* ════════════════════════════════════════════
+   NAGRIVA — CTA Section Styles
+   Extracted from style.css (renamed .footer-cta-* → .cta-*)
+   ════════════════════════════════════════════ */
+
+.cta {
+  padding: 40px 0;
+}
+
+.cta-content {
+  text-align: center;
+}
+
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.cta-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.22);
+  max-width: 480px;
+  margin: 0 auto 14px;
+  line-height: 1.6;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .cta-title { font-size: 1.05rem; }
+  .cta-desc { font-size: 0.78rem; }
+}

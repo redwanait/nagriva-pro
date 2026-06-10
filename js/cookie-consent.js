@@ -247,12 +247,40 @@
     }
   }
 
+  /* ─── Wire up already-loaded HTML ─── */
+  function wireExisting () {
+    state.overlay = document.getElementById('cookieOverlay')
+    state.banner = document.getElementById('cookieBanner')
+    state.modalOverlay = document.getElementById('cookieModalOverlay')
+    state.modal = document.getElementById('cookieModal')
+
+    if (window.NagrivaI18n) {
+      NagrivaI18n.translate()
+    }
+
+    bindEvents()
+
+    var existing = loadConsent()
+    if (existing) {
+      if (state.overlay) state.overlay.style.display = 'none'
+      fireCallbacks(existing.categories)
+    } else {
+      showBanner()
+    }
+  }
+
   /* ─── Inject banner HTML ─── */
   function init () {
     var container = document.getElementById(CONTAINER_ID)
     if (!container) return
 
     state.container = container
+
+    /* If container already has content (loaded by layout.js), wire up directly */
+    if (container.children.length > 0) {
+      wireExisting()
+      return
+    }
 
     fetch(PARTIAL_URL)
       .then(function (r) {
@@ -261,34 +289,19 @@
       })
       .then(function (html) {
         container.innerHTML = html
-
-        // Cache elements
-        state.overlay = document.getElementById('cookieOverlay')
-        state.banner = document.getElementById('cookieBanner')
-        state.modalOverlay = document.getElementById('cookieModalOverlay')
-        state.modal = document.getElementById('cookieModal')
-
-        // i18n re-init
-        if (window.NagrivaI18n) {
-          NagrivaI18n.translate()
-        }
-
-        bindEvents()
-
-        // Check existing consent
-        var existing = loadConsent()
-        if (existing) {
-          // Consent exists — hide banner, fire callbacks
-          if (state.overlay) state.overlay.style.display = 'none'
-          fireCallbacks(existing.categories)
-        } else {
-          // First visit — show banner
-          showBanner()
-        }
+        wireExisting()
       })
       .catch(function (err) {
         console.error('[Nagriva] Cookie consent load error:', err)
       })
+  }
+
+  /* ─── Re-init (for layout.js compatibility) ─── */
+  function reinit () {
+    var container = document.getElementById(CONTAINER_ID)
+    if (!container) return
+    state.container = container
+    wireExisting()
   }
 
   /* ─── Expose public API ─── */
@@ -297,6 +310,7 @@
     onConsent: onConsent,
     openPreferences: openPreferences,
     getConsent: function () { return state.consent },
+    _reinit: reinit,
   }
 
   if (document.readyState === 'loading') {
