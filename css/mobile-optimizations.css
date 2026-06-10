@@ -163,7 +163,6 @@ html {
   .btn-order-now:hover { box-shadow: none !important; transform: none !important; }
   .btn-pricing:hover { border-color: var(--border2) !important; color: var(--gray) !important; background: none !important; }
   .services-cta-btn:hover { transform: none !important; box-shadow: none !important; }
-  .newsletter-btn:hover { transform: none !important; }
   .form-btn:hover { transform: none !important; box-shadow: none !important; animation: none !important; }
   .form-btn::before { display: none !important; }
 
@@ -185,7 +184,7 @@ html {
   .featured-btn:hover { box-shadow: none !important; }
   .card-btn:hover { transform: none !important; box-shadow: none !important; }
   .social-icon:hover { transform: none !important; }
-  .footer-links a:hover { color: rgba(255,255,255,0.3) !important; }
+  .footer-links a:hover { color: var(--accent) !important; }
   .marquee-section:hover .marquee-inner { animation-play-state: running !important; }
 
   /* ─── Content visibility for below-fold sections ─── */
@@ -207,10 +206,11 @@ html {
   .float-card, .float-pill { will-change: auto !important; }
 
   /* ─── Footer compact ─── */
-  .footer { padding: 32px 0 0 !important; }
-  .footer-grid { gap: 20px !important; }
-  .footer-desc { font-size: 0.8rem !important; max-width: 100% !important; }
-  .footer-bottom { padding-bottom: 20px !important; }
+  .footer { padding: 28px 0 0 !important; }
+  .footer-grid { gap: 16px !important; }
+  .footer-desc { font-size: 0.75rem !important; max-width: 100% !important; }
+  .footer-bottom { padding-bottom: 16px !important; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; gap: 6px; }
 
   /* ─── Marquee compact ─── */
   .marquee-section { padding: 20px 0 !important; }
