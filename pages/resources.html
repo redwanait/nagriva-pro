@@ -89,7 +89,6 @@
     .rh-hero {
       position: relative;
       padding: calc(var(--navbar-height) + 60px) 0 80px;
-      overflow: hidden;
     }
 
     .rh-hero-bg {
@@ -126,12 +125,15 @@
 
     .rh-hero-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      grid-template-columns: 1fr;
       align-items: center;
     }
 
-    .rh-hero-content { max-width: 600px; }
+    .rh-hero-content {
+      max-width: 750px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
     .rh-hero-tag {
       display: inline-block;
@@ -168,14 +170,14 @@
       font-size: 1.05rem;
       color: var(--gray);
       line-height: 1.7;
-      margin-bottom: 32px;
-      max-width: 500px;
+      margin: 0 auto 32px;
+      max-width: 560px;
     }
 
     /* ─── Search Bar ─── */
     .rh-search-wrap {
       position: relative;
-      margin-bottom: 24px;
+      margin: 0 auto 24px;
       max-width: 480px;
     }
 
@@ -221,6 +223,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      justify-content: center;
     }
 
     .rh-tag {
@@ -249,388 +252,6 @@
       height: 14px;
       color: var(--accent);
     }
-
-    /* ════════════════════════════════════════════
-       RESOURCES DASHBOARD — Premium Right Side
-    ════════════════════════════════════════════ */
-
-    .rh-hero-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .rh-hero-visual-inner {
-      position: relative;
-      width: 100%;
-      max-width: 480px;
-      aspect-ratio: 1;
-    }
-
-    /* ─── Ambient Glow Behind Dashboard ─── */
-    .rh-dash-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle at center, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0.06) 30%, transparent 65%);
-      animation: dashGlowPulse 5s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .rh-dash-glow--secondary {
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle at center, rgba(59,130,246,0.08) 0%, transparent 60%);
-      animation: dashGlowPulse 7s ease-in-out infinite reverse;
-      top: 65%;
-      left: 70%;
-    }
-
-    @keyframes dashGlowPulse {
-      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-      50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
-    }
-
-    /* ─── Connecting Lines ─── */
-    .rh-dash-lines {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.5;
-    }
-
-    .rh-dash-lines path {
-      stroke: rgba(59,130,246,0.15);
-      stroke-width: 1.5;
-      fill: none;
-      stroke-dasharray: 6 4;
-      animation: dashLineMove 20s linear infinite;
-    }
-
-    .rh-dash-lines path:nth-child(2) { animation-delay: -5s; }
-    .rh-dash-lines path:nth-child(3) { animation-delay: -10s; }
-    .rh-dash-lines path:nth-child(4) { animation-delay: -15s; }
-    .rh-dash-lines path:nth-child(5) { animation-delay: -8s; }
-
-    @keyframes dashLineMove {
-      to { stroke-dashoffset: -100; }
-    }
-
-    /* ─── Floating Animation ─── */
-    @keyframes dashFloat {
-      0%, 100% { transform: var(--dash-tf, translateY(0)) translateY(0px); }
-      50%      { transform: var(--dash-tf, translateY(0)) translateY(-5px); }
-    }
-
-    @keyframes dashFloatFeatured {
-      0%, 100% { transform: translateY(0px); }
-      50%      { transform: translateY(-6px); }
-    }
-
-    /* ─── Main Card: "250+ Resources Available" ─── */
-    .rh-dash-main {
-      position: absolute;
-      top: 32%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 220px;
-      padding: 28px 24px 24px;
-      text-align: center;
-      z-index: 4;
-      background: rgba(11,15,15,0.78);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--r);
-      box-shadow:
-        0 0 0 1px rgba(59,130,246,0.04),
-        0 24px 80px rgba(0,0,0,0.5),
-        0 0 60px rgba(59,130,246,0.06);
-      --dash-tf: translate(-50%, -50%);
-      animation: dashFloat 6s ease-in-out infinite;
-      cursor: default;
-      transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1),
-                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .rh-dash-main::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--r);
-      background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, transparent 40%, transparent 60%, rgba(59,130,246,0.04) 100%);
-      pointer-events: none;
-    }
-
-    .rh-dash-main:hover {
-      border-color: rgba(59,130,246,0.25);
-      box-shadow:
-        0 0 0 1px rgba(59,130,246,0.08),
-        0 32px 80px rgba(0,0,0,0.6),
-        0 0 80px rgba(59,130,246,0.12);
-    }
-
-    .rh-dash-main-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 800;
-      line-height: 1;
-      background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 2px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .rh-dash-main-num-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 140px;
-      height: 60px;
-      background: radial-gradient(ellipse at center, rgba(59,130,246,0.25) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .rh-dash-main-label {
-      font-size: 0.78rem;
-      color: var(--gray);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 500;
-      position: relative;
-      z-index: 1;
-    }
-
-    .rh-dash-main-divider {
-      width: 40px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
-      margin: 10px auto;
-      border-radius: 99px;
-    }
-
-    .rh-dash-main-sub {
-      font-size: 0.65rem;
-      color: var(--gray2);
-      letter-spacing: 0.03em;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ─── Supporting Stat Cards ─── */
-    .rh-dash-stat {
-      position: absolute;
-      z-index: 3;
-      background: rgba(11,15,15,0.72);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--r-sm);
-      padding: 12px 14px;
-      text-align: center;
-      min-width: 88px;
-      cursor: default;
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
-                  border-color 0.35s cubic-bezier(0.4,0,0.2,1),
-                  box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .rh-dash-stat:hover {
-      animation: none;
-      transform: translateY(-4px);
-      border-color: rgba(59,130,246,0.25);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 20px rgba(59,130,246,0.06);
-    }
-
-    .rh-dash-stat-value {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-    }
-
-    .rh-dash-stat-label {
-      font-size: 0.58rem;
-      color: var(--gray2);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 1px;
-    }
-
-    .rh-dash-stat-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 7px;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .rh-dash-stat-icon svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    /* ─── Stat Positions ─── */
-    .rh-dash-stat--templates {
-      top: 52%;
-      left: 4%;
-      animation: dashFloat 7s ease-in-out infinite;
-      animation-delay: -1s;
-    }
-
-    .rh-dash-stat--guides {
-      top: 52%;
-      left: 50%;
-      --dash-tf: translateX(-50%);
-      animation: dashFloat 7s ease-in-out infinite;
-      animation-delay: -2.5s;
-    }
-
-    .rh-dash-stat--guides:hover {
-      animation: none;
-      transform: translateX(-50%) translateY(-4px);
-    }
-
-    .rh-dash-stat--categories {
-      top: 52%;
-      right: 4%;
-      animation: dashFloat 7s ease-in-out infinite;
-      animation-delay: -0.5s;
-    }
-
-    .rh-dash-stat--casestudies {
-      bottom: 6%;
-      left: 5%;
-      animation: dashFloat 8s ease-in-out infinite;
-      animation-delay: -3s;
-    }
-
-    /* ─── Featured Resource Card ─── */
-    .rh-dash-featured {
-      position: absolute;
-      bottom: 4%;
-      right: 4%;
-      width: 160px;
-      z-index: 4;
-      cursor: pointer;
-      animation: dashFloatFeatured 8s ease-in-out infinite;
-      animation-delay: -1.5s;
-    }
-
-    .rh-dash-featured-body {
-      position: relative;
-      background: rgba(11,15,15,0.85);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(59,130,246,0.15);
-      border-radius: var(--r-sm);
-      padding: 16px 16px 14px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(59,130,246,0.05);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .rh-dash-featured-body::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--r-sm);
-      background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .rh-dash-featured:hover .rh-dash-featured-body {
-      border-color: rgba(59,130,246,0.35);
-      box-shadow: 0 20px 48px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.1);
-    }
-
-    .rh-dash-featured-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.5rem;
-      font-weight: 700;
-      color: #22c55e;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.2);
-      padding: 2px 7px;
-      border-radius: 99px;
-      letter-spacing: 0.03em;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .rh-dash-featured-badge svg {
-      width: 9px;
-      height: 9px;
-    }
-
-    .rh-dash-featured-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .rh-dash-featured-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--accent);
-      position: relative;
-      z-index: 1;
-    }
-
-    .rh-dash-featured-cta svg {
-      width: 12px;
-      height: 12px;
-      transition: transform 0.25s ease;
-    }
-
-    .rh-dash-featured:hover .rh-dash-featured-cta svg {
-      transform: translateX(3px);
-    }
-
-    /* ─── Small decorative dots ─── */
-    .rh-dash-dot {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: rgba(59,130,246,0.25);
-      pointer-events: none;
-      z-index: 1;
-      animation: dashFloat 6s ease-in-out infinite;
-    }
-    .rh-dash-dot:nth-child(3) { top: 8%; left: 20%; animation-delay: 0s; }
-    .rh-dash-dot:nth-child(4) { top: 12%; right: 25%; animation-delay: -2s; }
-    .rh-dash-dot:nth-child(5) { bottom: 30%; right: 10%; animation-delay: -4s; }
-    .rh-dash-dot:nth-child(6) { bottom: 45%; left: 12%; animation-delay: -1s; }
-    .rh-dash-dot:nth-child(7) { top: 45%; right: 0; animation-delay: -3s; }
 
     /* ─── Section Shared ─── */
     .rh-section {
@@ -991,24 +612,27 @@
 
     .rh-cs-media {
       position: relative;
-      height: 180px;
+      height: 220px;
       overflow: hidden;
       background: rgba(255,255,255,0.02);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .rh-cs-media svg {
-      width: 56px;
-      height: 56px;
-      color: rgba(59,130,246,0.1);
+    .rh-cs-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .rh-cs-card:hover .rh-cs-media-img {
+      transform: scale(1.05);
     }
 
     .rh-cs-media-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(4,4,4,0.9) 100%);
+      background: rgba(0,0,0,0.35);
       pointer-events: none;
     }
 
@@ -1168,9 +792,8 @@
 
     /* ─── Responsive ─── */
     @media (max-width: 1024px) {
-      .rh-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .rh-hero-inner { grid-template-columns: 1fr; }
       .rh-hero-content { max-width: 100%; }
-      .rh-hero-visual { display: none; }
       .rh-cat-grid { grid-template-columns: repeat(2, 1fr); }
       .rh-guides-grid { grid-template-columns: 1fr; }
       .rh-free-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1181,6 +804,7 @@
       .rh-section { padding: 64px 0; }
       .rh-hero { padding: calc(var(--navbar-height) + 40px) 0 48px; }
       .rh-hero-title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+      .rh-hero-content { max-width: 100%; }
       .rh-cat-grid { grid-template-columns: 1fr; }
       .rh-guide-card { flex-direction: column; }
       .rh-guide-media { width: 100%; min-height: 140px; }
@@ -1234,89 +858,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                 Lead Generation
               </span>
-            </div>
-          </div>
-          <div class="rh-hero-visual fade-up" style="--delay: 0.15s;">
-            <div class="rh-hero-visual-inner">
-
-              <!-- Glows -->
-              <div class="rh-dash-glow"></div>
-              <div class="rh-dash-glow rh-dash-glow--secondary"></div>
-
-              <!-- Decorative dots -->
-              <div class="rh-dash-dot"></div>
-              <div class="rh-dash-dot"></div>
-              <div class="rh-dash-dot"></div>
-              <div class="rh-dash-dot"></div>
-              <div class="rh-dash-dot"></div>
-
-              <!-- Connecting Lines -->
-              <svg class="rh-dash-lines" viewBox="0 0 480 480" preserveAspectRatio="none">
-                <path d="M240,130 Q180,200 90,250" />
-                <path d="M240,130 Q240,200 240,250" />
-                <path d="M240,130 Q300,200 390,250" />
-                <path d="M240,130 Q130,230 60,410" />
-                <path d="M240,130 Q330,230 400,400" />
-              </svg>
-
-              <!-- Main Card -->
-              <div class="rh-dash-main">
-                <div class="rh-dash-main-num-glow"></div>
-                <div class="rh-dash-main-num">250+</div>
-                <div class="rh-dash-main-label">Resources Available</div>
-                <div class="rh-dash-main-divider"></div>
-                <div class="rh-dash-main-sub">Curated knowledge base</div>
-              </div>
-
-              <!-- Stats Row -->
-              <div class="rh-dash-stat rh-dash-stat--templates">
-                <div class="rh-dash-stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                </div>
-                <div class="rh-dash-stat-value">50+</div>
-                <div class="rh-dash-stat-label">Templates</div>
-              </div>
-
-              <div class="rh-dash-stat rh-dash-stat--guides">
-                <div class="rh-dash-stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                </div>
-                <div class="rh-dash-stat-value">85+</div>
-                <div class="rh-dash-stat-label">Guides</div>
-              </div>
-
-              <div class="rh-dash-stat rh-dash-stat--categories">
-                <div class="rh-dash-stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                </div>
-                <div class="rh-dash-stat-value">12</div>
-                <div class="rh-dash-stat-label">Categories</div>
-              </div>
-
-              <!-- Case Studies stat -->
-              <div class="rh-dash-stat rh-dash-stat--casestudies">
-                <div class="rh-dash-stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                </div>
-                <div class="rh-dash-stat-value">20+</div>
-                <div class="rh-dash-stat-label">Case Studies</div>
-              </div>
-
-              <!-- Featured Resource Card -->
-              <div class="rh-dash-featured">
-                <div class="rh-dash-featured-body">
-                  <div class="rh-dash-featured-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Updated for 2026
-                  </div>
-                  <div class="rh-dash-featured-title">Ultimate SEO Checklist</div>
-                  <span class="rh-dash-featured-cta">
-                    Free Download
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                  </span>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -1618,10 +1159,10 @@
         </div>
         <div class="rh-cs-grid">
 
-          <!-- Case Study 1 -->
+          <!-- Case Study 1: Dentist Website Redesign -->
           <div class="rh-cs-card fade-up">
             <div class="rh-cs-media">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <img class="rh-cs-media-img" src="/assets/images/resources-images/Dentist%20Website%20Redesign.png" alt="Dentist Website Redesign" loading="lazy">
               <div class="rh-cs-media-overlay"></div>
               <div class="rh-cs-badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
@@ -1638,10 +1179,10 @@
             </div>
           </div>
 
-          <!-- Case Study 2 -->
+          <!-- Case Study 2: Law Firm Website Project -->
           <div class="rh-cs-card fade-up" style="--delay: 0.1s;">
             <div class="rh-cs-media">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <img class="rh-cs-media-img" src="/assets/images/resources-images/Law%20Firm%20Website%20Project.png" alt="Law Firm Website Project" loading="lazy">
               <div class="rh-cs-media-overlay"></div>
               <div class="rh-cs-badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
@@ -1658,10 +1199,10 @@
             </div>
           </div>
 
-          <!-- Case Study 3 -->
+          <!-- Case Study 3: Local SEO Growth -->
           <div class="rh-cs-card fade-up" style="--delay: 0.2s;">
             <div class="rh-cs-media">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <img class="rh-cs-media-img" src="/assets/images/resources-images/Local%20SEO%20Growth.png" alt="Local SEO Growth" loading="lazy">
               <div class="rh-cs-media-overlay"></div>
               <div class="rh-cs-badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>

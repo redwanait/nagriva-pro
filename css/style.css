@@ -353,6 +353,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .section-header {
   text-align: center;
   margin-bottom: 64px;
+  margin-top: 20px;
 }
 .section-tag {
   display: inline-block;

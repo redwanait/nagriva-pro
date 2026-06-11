@@ -70,9 +70,15 @@ window.CompareRenderer = (function () {
       card.innerHTML =
         '<span class="cp-card-category">' + escHtml(c.category) + '</span>' +
         '<div class="cp-card-logos">' +
-          '<div class="cp-card-logo cp-card-logo-a">' + getInitials(c.nameA) + '</div>' +
-          '<span class="cp-card-vs">VS</span>' +
-          '<div class="cp-card-logo cp-card-logo-b">' + getInitials(c.nameB) + '</div>' +
+          '<div class="cp-card-logos-glass">' +
+            '<div class="cp-card-logo">' +
+              '<img src="' + getLogoPath(c.nameA) + '" alt="' + escHtml(c.nameA) + '" class="cp-card-logo-img" loading="lazy">' +
+            '</div>' +
+            '<span class="cp-card-vs">VS</span>' +
+            '<div class="cp-card-logo">' +
+              '<img src="' + getLogoPath(c.nameB) + '" alt="' + escHtml(c.nameB) + '" class="cp-card-logo-img" loading="lazy">' +
+            '</div>' +
+          '</div>' +
         '</div>' +
         '<div class="cp-card-name">' + escHtml(c.nameA) + ' vs ' + escHtml(c.nameB) + '</div>' +
         '<p class="cp-card-desc">' + escHtml(c.shortDescription) + '</p>' +
@@ -336,9 +342,15 @@ window.CompareRenderer = (function () {
   function renderDetailHero (c) {
     return '<div class="cp-detail-hero fade-up">' +
       '<div class="cp-dh-logos">' +
-        '<div class="cp-dh-logo cp-dh-logo-a">' + getInitials(c.nameA) + '</div>' +
-        '<div class="cp-dh-vs">VS</div>' +
-        '<div class="cp-dh-logo cp-dh-logo-b">' + getInitials(c.nameB) + '</div>' +
+        '<div class="cp-dh-logos-glass">' +
+          '<div class="cp-dh-logo">' +
+            '<img src="' + getLogoPath(c.nameA) + '" alt="' + escHtml(c.nameA) + '" class="cp-dh-logo-img">' +
+          '</div>' +
+          '<div class="cp-dh-vs">VS</div>' +
+          '<div class="cp-dh-logo">' +
+            '<img src="' + getLogoPath(c.nameB) + '" alt="' + escHtml(c.nameB) + '" class="cp-dh-logo-img">' +
+          '</div>' +
+        '</div>' +
       '</div>' +
       '<h1 class="cp-dh-title">' + escHtml(c.hero.title) + '</h1>' +
       '<p class="cp-dh-subtitle">' + escHtml(c.hero.subtitle) + '</p>' +
@@ -512,13 +524,15 @@ window.CompareRenderer = (function () {
     var items = c.related.map(function (r) {
       var rc = findComparison(data, r.slug)
       if (!rc) return ''
-      var colorA = rc.colorA || 'var(--accent)'
-      var colorB = rc.colorB || 'var(--accent2)'
       return '<a href="/compare/' + escHtml(r.slug) + '" class="cp-related-card">' +
         '<div class="cp-related-logos">' +
-          '<div class="cp-related-logo cp-related-logo-a" style="background:' + colorA + '">' + getInitials(r.nameA) + '</div>' +
+          '<div class="cp-related-logo">' +
+            '<img src="' + getLogoPath(r.nameA) + '" alt="' + escHtml(r.nameA) + '" class="cp-related-logo-img">' +
+          '</div>' +
           '<span class="cp-related-vs">VS</span>' +
-          '<div class="cp-related-logo cp-related-logo-b" style="background:' + colorB + '">' + getInitials(r.nameB) + '</div>' +
+          '<div class="cp-related-logo">' +
+            '<img src="' + getLogoPath(r.nameB) + '" alt="' + escHtml(r.nameB) + '" class="cp-related-logo-img">' +
+          '</div>' +
         '</div>' +
         '<span class="cp-related-name">' + escHtml(r.nameA) + ' vs ' + escHtml(r.nameB) + '</span>' +
         '<span class="cp-related-arrow">' + ICONS.arrowRight + '</span>' +
@@ -594,13 +608,21 @@ window.CompareRenderer = (function () {
   }
 
   /* ─── HELPERS ─── */
-  function getInitials (name) {
-    if (!name) return '?'
-    var parts = name.split(' ')
-    if (parts.length >= 2) {
-      return (parts[0][0] + parts[1][0]).toUpperCase()
-    }
-    return name.substring(0, 2).toUpperCase()
+  var LOGO_MAP = {
+    'Nagriva': 'nagriva.png',
+    'Fiverr': 'fiverr.png',
+    'Upwork': 'upwork.webp',
+    'Toptal': 'toptal.webp',
+    'WordPress': 'wordpress.png',
+    'Webflow': 'webflow.png',
+    'Shopify': 'shopify.png',
+    'WooCommerce': 'woocommerce.png',
+    'ChatGPT': 'ChatGPT.png',
+    'Claude': 'Claude.png'
+  }
+
+  function getLogoPath (name) {
+    return '/assets/images/compare-images/' + (LOGO_MAP[name] || '')
   }
 
   function escHtml (str) {

@@ -87,42 +87,28 @@
       opacity: 1;
     }
     .ind-visual {
-      height: 180px;
+      height: 220px;
       overflow: hidden;
       background: rgba(255,255,255,0.02);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       border-radius: var(--r) var(--r) 0 0;
     }
-    .ind-visual svg {
-      position: relative;
-      z-index: 1;
+    .ind-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
       transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
     }
-    .ind-card:hover .ind-visual svg {
-      transform: scale(1.1);
+    .ind-card:hover .ind-visual img {
+      transform: scale(1.05);
     }
     .ind-visual-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(4,4,4,0.85) 100%);
+      background: linear-gradient(180deg, rgba(4,4,4,0.2) 0%, transparent 35%, transparent 60%, rgba(4,4,4,0.75) 100%);
       z-index: 2;
       pointer-events: none;
-    }
-    .ind-visual-glow {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
-      filter: blur(30px);
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .ind-card:hover .ind-visual-glow {
-      opacity: 0.6;
     }
     .ind-body {
       padding: 24px 24px 28px;
@@ -352,7 +338,7 @@
       .industries-hero { padding: calc(var(--navbar-height) + 60px) 0 20px; }
       .industries-hero .section-header { margin-bottom: 36px; }
       .ind-grid { grid-template-columns: 1fr; gap: 20px; }
-      .ind-visual { height: 160px; }
+      .ind-visual { height: 180px; }
       .ind-body { padding: 18px 20px 22px; }
       .ind-body h3 { font-size: 1rem; }
       .ind-body p { font-size: 0.82rem; }
@@ -370,8 +356,7 @@
       .ind-card:hover { transform: none; border-color: var(--border); box-shadow: none; }
       .ind-card:hover .ind-body h3 { color: var(--white); }
       .ind-card:hover::before { opacity: 0; }
-      .ind-card:hover .ind-visual svg { transform: none; }
-      .ind-card:hover .ind-visual-glow { opacity: 0; }
+      .ind-card:hover .ind-visual img { transform: none; }
       .ind-card:hover .ind-btn { box-shadow: none; }
       .ind-btn:hover { transform: none; }
       .ind-btn:hover svg { transform: none; }
@@ -442,8 +427,7 @@
 
         <a href="/pages/dentist-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9z"/><path d="M12 3v6"/><path d="M12 9l3-3"/><path d="M12 9l-3-3"/><path d="M9 21l.5-3.5"/><path d="M15 21l-.5-3.5"/></svg>
+            <img src="/assets/images/industries-images/Dentist Websites.png" alt="Dentist Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -455,8 +439,7 @@
 
         <a href="/pages/lawyer-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <img src="/assets/images/industries-images/Lawyer Websites.png" alt="Lawyer Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -468,8 +451,7 @@
 
         <a href="/pages/real-estate-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M3 21h18"/><path d="M9 21V9l6-4 6 4v12"/><path d="M9 21H5V9l4-3"/></svg>
+            <img src="/assets/images/industries-images/Real Estate Websites.png" alt="Real Estate Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -481,8 +463,7 @@
 
         <a href="/pages/restaurant-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            <img src="/assets/images/industries-images/Restaurant Websites.png" alt="Restaurant Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -494,8 +475,7 @@
 
         <a href="/pages/gym-fitness-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M6.5 6.5L17.5 17.5"/><path d="M17.5 6.5L6.5 17.5"/><rect x="2" y="8" width="4" height="8" rx="1"/><rect x="18" y="8" width="4" height="8" rx="1"/><rect x="8" y="5" width="8" height="14" rx="2"/></svg>
+            <img src="/assets/images/industries-images/Fitness Websites.png" alt="Fitness Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -507,8 +487,7 @@
 
         <a href="/pages/agency-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+            <img src="/assets/images/industries-images/Agency Websites.png" alt="Agency Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -520,8 +499,7 @@
 
         <a href="/pages/healthcare-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <img src="/assets/images/industries-images/Healthcare Websites.png" alt="Healthcare Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -533,8 +511,7 @@
 
         <a href="/pages/ecommerce-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <img src="/assets/images/industries-images/Ecommerce Websites.png" alt="Ecommerce Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
@@ -546,8 +523,7 @@
 
         <a href="/pages/saas-websites.html" class="ind-card fade-up">
           <div class="ind-visual">
-            <div class="ind-visual-glow"></div>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><path d="M6 6h.01M6 18h.01"/></svg>
+            <img src="/assets/images/industries-images/SaaS Websites.png" alt="SaaS Websites" loading="lazy">
             <div class="ind-visual-overlay"></div>
           </div>
           <div class="ind-body">
