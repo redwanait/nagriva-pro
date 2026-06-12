@@ -69,11 +69,10 @@
     { "src": "^/tools/seo-title-generator$", "dest": "/pages/tools/seo-title-generator.html" },
 
     {
-      "src": "^/api/audit$",
-      "dest": "/api/audit.js"
+      "src": "/.*",
+      "dest": "/pages/404.html",
+      "status": 404
     }
-
-    { "src": "/.*", "dest": "/pages/404.html", "status": 404 }
   ],
   "headers": [
     {
