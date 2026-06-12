@@ -69,6 +69,7 @@
     { "src": "^/tools/website-cost-calculator$", "dest": "/pages/tools/website-cost-calculator.html" },
     { "src": "^/tools/website-audit-tool$", "dest": "/pages/tools/website-audit-tool.html" },
     { "src": "^/tools/seo-title-generator$", "dest": "/pages/tools/seo-title-generator.html" },
+    { "src": "^/tools/competitor-comparison$", "dest": "/pages/tools/competitor-comparison.html" },
 
     {
       "src": "/.*",
