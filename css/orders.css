@@ -729,9 +729,6 @@
 
 /* ════════════════════════════════════════════════════════
    CHAT SYSTEM - Order Client Chat
-   WARNING: Class names .chat-messages, .chat-input, .chat-input-area
-   are ALSO used in chatbot.css. If both files load on the same page,
-   wrap one in a parent scope. Currently scoped under .chat-main.
    ════════════════════════════════════════════════════════ */
   border-radius: 20px;
   overflow: hidden;

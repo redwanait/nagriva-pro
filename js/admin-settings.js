@@ -48,8 +48,6 @@ const NAGRIVA_AdminSettings = (() => {
       keys: ['services.tag','services.title','services.subtitle','services.cta'] },
     { title: 'Results & FAQ', desc: 'Results and FAQ section headings.',
       keys: ['results.tag','results.title','results.subtitle','faq.tag','faq.title','faq.subtitle'] },
-    { title: 'Support Widget', desc: 'Chat widget messages and status text.',
-      keys: ['support.welcome','support.auto-reply','support.placeholder','support.online','support.offline'] },
     { title: 'Auth & Section Headings', desc: 'Auth modal and general section headings.',
       keys: ['auth.welcome','auth.subtitle','auth.signin','auth.signup','auth.create-account','section.projects','section.pricing'] },
     { title: 'Admin Sidebar', desc: 'Admin dashboard sidebar navigation labels.',
@@ -221,24 +219,20 @@ const NAGRIVA_AdminSettings = (() => {
   function populateAll() {
     populateGeneral();
     populateBranding();
-    populateSupportChat();
     populateOrders();
     populatePayments();
     populateNotifications();
     populateSEO();
-    populateAIAssistant();
   }
 
   function populateSection(sectionKey) {
     switch (sectionKey) {
       case 'general': populateGeneral(); break;
       case 'branding': populateBranding(); break;
-      case 'support_chat': populateSupportChat(); break;
       case 'orders': populateOrders(); break;
       case 'payments': populatePayments(); break;
       case 'notifications': populateNotifications(); break;
       case 'seo': populateSEO(); break;
-      case 'ai_assistant': populateAIAssistant(); break;
     }
   }
 
@@ -483,23 +477,6 @@ const NAGRIVA_AdminSettings = (() => {
     document.querySelectorAll('.cms-theme-card').forEach(el => el.classList.toggle('active', el.dataset.theme === id));
   }
 
-  /* ─── Populate Support Chat ─── */
-  function populateSupportChat() {
-    setChecked('set_chat_enabled', val('support_chat','chat_enabled') !== false);
-    setChecked('set_chat_online', val('support_chat','chat_online') !== false);
-    setChecked('set_chat_typing', val('support_chat','chat_typing_indicator') !== false);
-    setEl('set_chat_welcome', val('support_chat','chat_welcome_message'));
-    setEl('set_chat_auto_reply', val('support_chat','chat_auto_reply'));
-    setPreview('set_chat_avatar_preview', val('support_chat','chat_avatar_url'));
-    setUploadName('set_chat_avatar_name', val('support_chat','chat_avatar_url') ? 'Avatar uploaded' : '');
-    bindToggle('support_chat','chat_enabled','set_chat_enabled');
-    bindToggle('support_chat','chat_online','set_chat_online');
-    bindToggle('support_chat','chat_typing_indicator','set_chat_typing');
-    bindAutoSave('support_chat','chat_welcome_message','set_chat_welcome');
-    bindAutoSave('support_chat','chat_auto_reply','set_chat_auto_reply');
-    bindUpload('support_chat','chat_avatar_url','set_chat_avatar_input','set_chat_avatar_preview','set_chat_avatar_name','chat-avatars');
-  }
-
   /* ─── Populate Orders ─── */
   function populateOrders() {
     setEl('set_default_status', val('orders','default_order_status'));
@@ -570,28 +547,6 @@ const NAGRIVA_AdminSettings = (() => {
     }
   }
 
-  /* ─── Populate AI Assistant ─── */
-  function populateAIAssistant() {
-    setEl('set_ai_name', val('ai_assistant','ai_assistant_name'));
-    setEl('set_ai_welcome', val('ai_assistant','ai_welcome_message'));
-    setEl('set_ai_prompt', val('ai_assistant','ai_personality_prompt'));
-    setEl('set_ai_system_prompt', val('ai_assistant','ai_system_prompt'));
-    populateSelect('set_ai_tone', [{value:'professional',label:'Professional'},{value:'friendly',label:'Friendly'},{value:'casual',label:'Casual'},{value:'formal',label:'Formal'}], val('ai_assistant','ai_tone'));
-    populateSelect('set_ai_response_style', [{value:'concise',label:'Concise'},{value:'balanced',label:'Balanced'},{value:'detailed',label:'Detailed'}], val('ai_assistant','ai_response_style'));
-    setChecked('set_ai_suggestions', val('ai_assistant','ai_suggestions_enabled') !== false);
-    setChecked('set_smart_reply', val('ai_assistant','smart_reply_enabled') !== false);
-    bindAutoSave('ai_assistant','ai_assistant_name','set_ai_name');
-    bindAutoSave('ai_assistant','ai_welcome_message','set_ai_welcome');
-    bindAutoSave('ai_assistant','ai_personality_prompt','set_ai_prompt');
-    bindAutoSave('ai_assistant','ai_system_prompt','set_ai_system_prompt');
-    bindAutoSave('ai_assistant','ai_tone','set_ai_tone');
-    bindAutoSave('ai_assistant','ai_response_style','set_ai_response_style');
-    bindToggle('ai_assistant','ai_suggestions_enabled','set_ai_suggestions');
-    bindToggle('ai_assistant','smart_reply_enabled','set_smart_reply');
-    el('set_ai_name')?.addEventListener('input', queuePreviewUpdate);
-    el('set_ai_welcome')?.addEventListener('input', queuePreviewUpdate);
-  }
-
   /* ─── Content Management ─── */
   async function populateContent() {
     const defaults = NAGRIVA_ContentLoader ? NAGRIVA_ContentLoader.getDefaults() : {};
@@ -617,7 +572,7 @@ const NAGRIVA_AdminSettings = (() => {
         let html = '';
         group.keys.forEach(key => {
           const v = merged[key] || '';
-          const isLong = v.length > 80 || ['hero.title','hero.subtitle','cta.title','footer.desc','services.title','results.title','faq.title','contact.title','contact.desc','support.welcome','support.auto-reply','dash.subtitle','nav.book-call','hero.cta','footer.copyright','footer.newsletter','footer.newsletter-desc'].includes(key);
+          const isLong = v.length > 80 || ['hero.title','hero.subtitle','cta.title','footer.desc','services.title','results.title','faq.title','contact.title','contact.desc','dash.subtitle','nav.book-call','hero.cta','footer.copyright','footer.newsletter','footer.newsletter-desc'].includes(key);
           const label = key.split('.').pop().replace(/-/g,' ').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
           html += '<div class="cms-field" draggable="true" data-content-group="' + gi + '" data-content-key="' + key + '">' +
             '<div class="cms-field-header">' +

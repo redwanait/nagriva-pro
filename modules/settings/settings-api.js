@@ -25,14 +25,6 @@ const NAGRIVA_SettingsAPI = (() => {
       border_radius: 22,
       theme_preset: 'dark-blue'
     },
-    support_chat: {
-      chat_enabled: true,
-      chat_online: true,
-      chat_welcome_message: 'Hello! How can we help you today?',
-      chat_auto_reply: 'Thank you for your message. Our team will get back to you shortly.',
-      chat_typing_indicator: true,
-      chat_avatar_url: ''
-    },
     orders: {
       default_order_status: 'pending',
       auto_generate_order_ids: true,
@@ -61,16 +53,6 @@ const NAGRIVA_SettingsAPI = (() => {
       favicon_url: '',
       google_analytics_id: ''
     },
-    ai_assistant: {
-      ai_assistant_name: 'Nova',
-      ai_welcome_message: 'Hello! I am Nova, your Nagriva assistant. How can I help you today?',
-      ai_personality_prompt: 'You are a helpful, professional digital agency assistant. Be concise, friendly, and knowledgeable about Nagriva services.',
-      ai_system_prompt: 'You are Nova, an AI assistant for Nagriva — a premium digital agency. You help clients with inquiries about web design, SEO, branding, AI automation, and social media management. Be professional, concise, and helpful. Always represent Nagriva in a positive light.',
-      ai_tone: 'professional',
-      ai_response_style: 'concise',
-      ai_suggestions_enabled: true,
-      smart_reply_enabled: true
-    }
   };
 
   /* ─── Local Cache ─── */

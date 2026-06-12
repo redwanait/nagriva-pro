@@ -26,8 +26,6 @@
   <link rel="stylesheet" href="/css/newsletter.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="/css/mobile-optimizations.css">
   <link rel="stylesheet" href="/css/performance.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="/css/client-messages.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="/css/chatbot.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/admin-auth.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'">
@@ -167,18 +165,6 @@
 </script>
 </head>
 <body data-page="home">
-<script>
-  window.openNagrivaChat = window.openNagrivaChat || function() {
-    window.__chatRequested = true;
-    if (!document.querySelector('script[src$="chatbot.js"]')) {
-      var s = document.createElement('script');
-      s.src = '/js/chatbot.js';
-      s.async = true;
-      document.body.appendChild(s);
-    }
-  };
-</script>
-
 <!-- Google tag (gtag.js) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NJP8X4CBH2"></script>
 <script>
@@ -1186,43 +1172,6 @@
           <p class="faq-sub" data-i18n="faq.subtitle">
             Everything you need to know about working with us. Can't find what you're looking for? Our team is here to help.
           </p>
-
-          <!-- Premium Support Card -->
-          <div class="faq-support-card">
-            <div class="faq-support-glow"></div>
-            <div class="faq-support-inner">
-              <div class="faq-support-icon-row">
-                <div class="faq-support-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                </div>
-                <div class="faq-support-info">
-                  <div class="faq-support-name">Need Quick Help?</div>
-                  <div class="faq-support-desc">Our team typically replies within 2 hours</div>
-                </div>
-              </div>
-              <button class="faq-chat-btn" onclick="this.classList.add('pulse-glow');setTimeout(function(){this.classList.remove('pulse-glow')}.bind(this),600);openNagrivaChat()">
-                <span>Live Chat</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H10M10 7L7 4M10 7L7 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- Trust Strip -->
-          <div class="faq-trust-strip">
-            <div class="faq-trust-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>24/7 Support</span>
-            </div>
-            <div class="faq-trust-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-              <span>2h Response Time</span>
-            </div>
-            <div class="faq-trust-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"></polygon></svg>
-              <span>Modern Design Standards</span>
-            </div>
-          </div>
-
 
         </div>
 

@@ -92,6 +92,18 @@
     .dw-demo-btn--disabled:hover {
       gap: 8px !important;
     }
+
+    /* ─── Card wrapper fix: ensure <a> fills grid cell ─── */
+    .dw-demos-grid > a {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+    .dw-demos-grid > a .dw-demo-card {
+      height: 100%;
+    }
   </style>
   <style>
     @font-face {
@@ -289,7 +301,7 @@
           </span>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">my home Real Estate Agency</h3>
-            <p class="dw-demo-desc">Investment-focused real estate website showcasing portfolios and ROI <a href="/pages/website-audit.html">opportunities</a>.</p>
+            <p class="dw-demo-desc">Investment-focused real estate website showcasing portfolios and ROI opportunities.</p>
             <span class="dw-demo-btn">
               View Demo →
             </span>
@@ -305,7 +317,7 @@
           </span>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">homepress Real Estate Agency</h3>
-            <p class="dw-demo-desc">Modern real estate <a href="/pages/agency-websites.html">agency website</a> with property showcase and lead capture.</p>
+            <p class="dw-demo-desc">Modern real estate agency website with property showcase and lead capture.</p>
             <span class="dw-demo-btn">
               View Demo →
             </span>
@@ -321,7 +333,7 @@
           </span>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">findhouses Real Estate Agency</h3>
-            <p class="dw-demo-desc"><a href="/pages/web-design.html">Premium</a> property portal with detailed listings and virtual tour integration.</p>
+            <p class="dw-demo-desc">Premium property portal with detailed listings and virtual tour integration.</p>
             <span class="dw-demo-btn">
               View Demo →
             </span>

@@ -1,56 +1,1599 @@
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guides — Nagriva | In-Depth Digital Growth Resources</title>
-  <meta name="description" content="Comprehensive guides on web design, SEO, AI automation, branding, and social media strategy. Learn how to grow your digital presence.">
+  <title>Digital Growth Guides — Nagriva | In-Depth Resources</title>
+  <meta name="description" content="Master web design, SEO, AI automation, branding, and lead generation with 50+ expert guides. Learn from actionable, in-depth tutorials trusted by thousands.">
+  <meta name="keywords" content="SEO guides, web design tutorials, AI automation resources, digital marketing guides, lead generation, branding resources, Nagriva">
+  <meta property="og:title" content="Digital Growth Guides — Nagriva | In-Depth Resources">
+  <meta property="og:description" content="Master web design, SEO, AI automation, branding, and lead generation with 50+ expert guides.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/resources/guides">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Digital Growth Guides — Nagriva | In-Depth Resources">
+  <meta name="twitter:description" content="Master web design, SEO, AI automation, branding, and lead generation with 50+ expert guides.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
   <link rel="canonical" href="https://nagriva.com/resources/guides">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/footer.css">
   <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+  <link rel="stylesheet" href="../../css/performance.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Nagriva","url":"https://nagriva.com","logo":"https://nagriva.com/assets/images/branding/nagriva-logo.png","description":"Nagriva is a digital growth agency offering web design, SEO, branding, AI automation, social media management, and performance marketing services.","sameAs":["https://www.instagram.com/nagriva.co/","https://x.com/nag_riva","https://www.facebook.com/profile.php?id=61575750526639","https://www.youtube.com/channel/UCTlY_icbUlIjdcuPZdtTeTQ","https://wa.me/212728427278"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Nagriva","url":"https://nagriva.com/resources/guides","description":"Master digital growth with 50+ expert guides."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nagriva.com/"},{"@type":"ListItem","position":2,"name":"Resources","item":"https://nagriva.com/pages/resources"},{"@type":"ListItem","position":3,"name":"Guides"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Digital Growth Guides","description":"Master web design, SEO, AI automation, branding, and lead generation with 50+ expert guides.","url":"https://nagriva.com/resources/guides","about":{"@type":"Thing","name":"Digital Marketing Guides"}}</script>
+  <style>
+    /* ════════════════════════════════════════════
+       GUIDES PAGE — GD PREFIX
+    ════════════════════════════════════════════ */
+    .gd-page { background: var(--bg); }
+
+    /* ─── Keyframes ─── */
+    @keyframes gdGradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes gdFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes gdPulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    @keyframes gdShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes gdCountUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gdSlideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ─── Hero ─── */
+    .gd-hero {
+      position: relative;
+      padding: calc(var(--navbar-height) + 80px) 0 100px;
+      overflow: hidden;
+    }
+    .gd-hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .gd-hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(59,130,246,0.02) 30%, transparent 50%, rgba(59,130,246,0.04) 70%, rgba(59,130,246,0.1) 100%);
+      background-size: 400% 400%;
+      animation: gdGradientShift 12s ease infinite;
+    }
+    .gd-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+    .gd-hero-glow-1 {
+      position: absolute;
+      top: -100px;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+      animation: gdPulseGlow 6s ease-in-out infinite;
+    }
+    .gd-hero-glow-2 {
+      position: absolute;
+      bottom: -200px;
+      right: 5%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      animation: gdPulseGlow 8s ease-in-out infinite 2s;
+    }
+    .gd-hero .container { position: relative; z-index: 1; }
+
+    .gd-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    .gd-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .gd-hero-badge svg { width: 14px; height: 14px; }
+    .gd-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .gd-hero-title .gd-text-gradient {
+      background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 30%, #93bbfc 60%, #3b82f6 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gdShimmer 4s linear infinite;
+    }
+    .gd-hero-desc {
+      font-size: 1.1rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+    .gd-hero-desc a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ─── Search ─── */
+    .gd-search-wrap {
+      position: relative;
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+    .gd-search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--gray2);
+      pointer-events: none;
+    }
+    .gd-search-input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px 20px 16px 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    .gd-search-input::placeholder { color: var(--gray2); }
+    .gd-search-input:focus {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.08), 0 8px 32px rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.05);
+    }
+    .gd-search-shortcut {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--gray2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 3px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    /* ─── Hero Stats ─── */
+    .gd-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    .gd-hero-stat {
+      padding: 24px 16px;
+      text-align: center;
+      position: relative;
+    }
+    .gd-hero-stat + .gd-hero-stat { border-left: 1px solid rgba(255,255,255,0.05); }
+    .gd-hero-stat-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .gd-hero-stat-value .gd-accent { color: var(--accent); }
+    .gd-hero-stat-label {
+      font-size: 0.78rem;
+      color: var(--gray2);
+      font-weight: 500;
+    }
+
+    /* ─── Section Shared ─── */
+    .gd-section {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+    .gd-section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .gd-section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+    .gd-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .gd-section-desc {
+      font-size: 0.95rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── Featured Guide ─── */
+    .gd-featured {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: linear-gradient(135deg, rgba(59,130,246,0.04) 0%, rgba(255,255,255,0.01) 50%, rgba(59,130,246,0.02) 100%);
+      border: 1px solid rgba(59,130,246,0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color 0.4s, box-shadow 0.4s;
+    }
+    .gd-featured:hover {
+      border-color: rgba(59,130,246,0.25);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.06);
+    }
+    .gd-featured-media {
+      position: relative;
+      min-height: 380px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(0,0,0,0.3));
+    }
+    .gd-featured-media-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gd-featured-media-inner svg {
+      width: 80px;
+      height: 80px;
+      color: rgba(59,130,246,0.12);
+    }
+    .gd-featured-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(59,130,246,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(59,130,246,0.04) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 80%, rgba(59,130,246,0.05) 0%, transparent 50%);
+    }
+    .gd-featured-badge-wrap {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      gap: 8px;
+    }
+    .gd-featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(59,130,246,0.2);
+      padding: 4px 12px;
+      border-radius: 99px;
+      backdrop-filter: blur(8px);
+    }
+    .gd-featured-badge svg { width: 12px; height: 12px; }
+    .gd-featured-body {
+      padding: 44px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .gd-featured-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.15);
+      padding: 4px 12px;
+      border-radius: 99px;
+      width: fit-content;
+      margin-bottom: 16px;
+    }
+    .gd-featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-size: 0.78rem;
+      color: var(--gray2);
+    }
+    .gd-featured-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .gd-featured-meta svg { width: 14px; height: 14px; color: var(--accent); }
+    .gd-featured-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .gd-featured-desc {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .gd-featured-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .gd-featured-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 12px 24px;
+      border-radius: 99px;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .gd-featured-btn:hover {
+      box-shadow: 0 0 24px rgba(59,130,246,0.35);
+      transform: translateY(-1px);
+    }
+    .gd-featured-btn svg { width: 15px; height: 15px; }
+    .gd-featured-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray);
+      transition: color 0.3s;
+    }
+    .gd-featured-link:hover { color: var(--white); }
+
+    /* ─── Category Cards ─── */
+    .gd-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .gd-cat-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 28px 24px 24px;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.4s, box-shadow 0.4s;
+      cursor: pointer;
+    }
+    .gd-cat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(59,130,246,0.04), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .gd-cat-card:hover::before { opacity: 1; }
+    .gd-cat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.25);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 24px rgba(59,130,246,0.06);
+    }
+    .gd-cat-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(59,130,246,0.08);
+      color: var(--accent);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .gd-cat-icon svg { width: 20px; height: 20px; }
+    .gd-cat-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .gd-cat-count {
+      font-size: 0.75rem;
+      color: var(--gray2);
+      position: relative;
+      z-index: 1;
+    }
+    .gd-cat-arrow {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 20px;
+      height: 20px;
+      color: rgba(255,255,255,0.1);
+      transition: color 0.3s, transform 0.3s;
+    }
+    .gd-cat-card:hover .gd-cat-arrow {
+      color: var(--accent);
+      transform: translateX(2px) translateY(-2px);
+    }
+
+    /* ─── Guides Grid ─── */
+    .gd-guides-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .gd-guide-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.4s, box-shadow 0.4s;
+    }
+    .gd-guide-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(59,130,246,0.2);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.5), 0 0 32px rgba(59,130,246,0.05);
+    }
+    .gd-guide-thumb {
+      position: relative;
+      height: 180px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(59,130,246,0.04), rgba(0,0,0,0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gd-guide-thumb svg {
+      width: 44px;
+      height: 44px;
+      color: rgba(59,130,246,0.1);
+      transition: transform 0.6s, color 0.4s;
+    }
+    .gd-guide-card:hover .gd-guide-thumb svg {
+      transform: scale(1.1);
+      color: rgba(59,130,246,0.2);
+    }
+    .gd-guide-thumb-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 30% 40%, rgba(59,130,246,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(59,130,246,0.03) 0%, transparent 50%);
+    }
+    .gd-guide-thumb-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(59,130,246,0.15);
+      padding: 3px 10px;
+      border-radius: 99px;
+      backdrop-filter: blur(8px);
+    }
+    .gd-guide-thumb-diff {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 3px 10px;
+      border-radius: 99px;
+      backdrop-filter: blur(8px);
+    }
+    .gd-guide-thumb-diff svg { width: 11px; height: 11px; }
+    .gd-guide-card-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .gd-guide-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .gd-guide-meta span { display: inline-flex; align-items: center; gap: 4px; }
+    .gd-guide-meta svg { width: 12px; height: 12px; color: var(--accent); }
+    .gd-guide-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.3s;
+    }
+    .gd-guide-card:hover .gd-guide-title { color: var(--accent); }
+    .gd-guide-excerpt {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gd-guide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .gd-guide-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gd-guide-author-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .gd-guide-author-name {
+      font-size: 0.75rem;
+      color: var(--gray2);
+    }
+    .gd-guide-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: gap 0.3s;
+    }
+    .gd-guide-read svg { width: 13px; height: 13px; transition: transform 0.3s; }
+    .gd-guide-card:hover .gd-guide-read { gap: 8px; }
+    .gd-guide-card:hover .gd-guide-read svg { transform: translateX(2px); }
+
+    /* ─── Learning Paths ─── */
+    .gd-paths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .gd-path-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 32px 28px 28px;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+    .gd-path-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.2);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 24px rgba(59,130,246,0.05);
+    }
+    .gd-path-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .gd-path-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(59,130,246,0.08);
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .gd-path-icon svg { width: 22px; height: 22px; }
+    .gd-path-info { flex: 1; }
+    .gd-path-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .gd-path-count {
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .gd-path-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .gd-path-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 10px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .gd-path-step:hover {
+      border-color: rgba(59,130,246,0.15);
+      background: rgba(59,130,246,0.04);
+    }
+    .gd-path-step-num {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      flex-shrink: 0;
+    }
+    .gd-path-step-label { flex: 1; }
+    .gd-path-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: gap 0.3s;
+      width: fit-content;
+    }
+    .gd-path-cta svg { width: 14px; height: 14px; transition: transform 0.3s; }
+    .gd-path-card:hover .gd-path-cta { gap: 10px; }
+    .gd-path-card:hover .gd-path-cta svg { transform: translateX(2px); }
+
+    /* ─── Tabs / Popular Resources ─── */
+    .gd-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 4px;
+      width: fit-content;
+      margin: 0 auto 40px;
+    }
+    .gd-tab {
+      padding: 8px 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      border-radius: 9px;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+    }
+    .gd-tab:hover { color: var(--white); }
+    .gd-tab.active {
+      color: var(--white);
+      background: rgba(59,130,246,0.1);
+    }
+    .gd-popular-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .gd-popular-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+      padding: 18px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .gd-popular-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(59,130,246,0.2);
+    }
+    .gd-popular-rank {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: rgba(59,130,246,0.12);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 28px;
+    }
+    .gd-popular-body { flex: 1; min-width: 0; }
+    .gd-popular-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.1);
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+    .gd-popular-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gd-popular-meta {
+      font-size: 0.7rem;
+      color: var(--gray2);
+    }
+
+    /* ─── Newsletter ─── */
+    .gd-newsletter {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+    .gd-newsletter-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .gd-newsletter-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,0.08) 0%, transparent 70%);
+    }
+    .gd-newsletter-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+    }
+    .gd-newsletter .container { position: relative; z-index: 1; }
+    .gd-newsletter-box {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 56px 48px;
+      backdrop-filter: blur(16px);
+    }
+    .gd-newsletter-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(59,130,246,0.08);
+      color: var(--accent);
+      margin: 0 auto 20px;
+    }
+    .gd-newsletter-icon svg { width: 26px; height: 26px; }
+    .gd-newsletter-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .gd-newsletter-desc {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gd-newsletter-form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .gd-newsletter-input {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .gd-newsletter-input::placeholder { color: var(--gray2); }
+    .gd-newsletter-input:focus {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .gd-newsletter-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: none;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .gd-newsletter-submit:hover {
+      box-shadow: 0 0 24px rgba(59,130,246,0.3);
+      transform: translateY(-1px);
+    }
+    .gd-newsletter-submit svg { width: 16px; height: 16px; }
+    .gd-newsletter-note {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-top: 16px;
+    }
+
+    /* ─── Load More ─── */
+    .gd-load-more-wrap {
+      text-align: center;
+      margin-top: 36px;
+    }
+    .gd-load-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 12px 28px;
+      border-radius: 99px;
+      transition: all 0.3s;
+    }
+    .gd-load-more:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1200px) {
+      .gd-cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .gd-guides-grid { grid-template-columns: repeat(2, 1fr); }
+      .gd-paths-grid { grid-template-columns: repeat(2, 1fr); }
+      .gd-popular-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 1024px) {
+      .gd-featured { grid-template-columns: 1fr; }
+      .gd-featured-media { min-height: 220px; }
+      .gd-featured-body { padding: 32px 28px; }
+      .gd-cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .gd-section { padding: 64px 0; }
+      .gd-hero { padding: calc(var(--navbar-height) + 40px) 0 60px; }
+      .gd-hero-title { font-size: clamp(2rem, 8vw, 2.6rem); }
+      .gd-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 0; }
+      .gd-hero-stat:nth-child(2) { border-left: none; }
+      .gd-hero-stat:nth-child(3),
+      .gd-hero-stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.05); }
+      .gd-hero-stat:nth-child(3) { border-left: 1px solid rgba(255,255,255,0.05); }
+      .gd-cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .gd-guides-grid { grid-template-columns: 1fr; }
+      .gd-paths-grid { grid-template-columns: 1fr; }
+      .gd-popular-grid { grid-template-columns: 1fr; }
+      .gd-newsletter-box { padding: 40px 24px; border-radius: 16px; }
+      .gd-newsletter-form { flex-direction: column; }
+      .gd-newsletter-submit { width: 100%; justify-content: center; }
+      .gd-search-shortcut { display: none; }
+      .gd-featured-title { font-size: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .gd-cat-grid { grid-template-columns: 1fr; }
+      .gd-hero-stats { grid-template-columns: 1fr 1fr; }
+      .gd-tabs { flex-direction: column; width: 100%; }
+      .gd-tab { width: 100%; text-align: center; }
+    }
+  </style>
 </head>
 <body data-page="guides">
+
   <div id="navbar-container"></div>
-  <section class="section" style="padding-top:140px">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">✦ Guides</div>
-        <h1 class="section-title">Digital Growth <span class="text-gradient">Guides</span></h1>
-        <p class="section-desc">In-depth, actionable guides to help you master web design, SEO, AI automation, branding, and social media strategy.</p>
+
+  <main class="gd-page">
+
+    <!-- ════════════ HERO ════════════ -->
+    <section class="gd-hero">
+      <div class="gd-hero-bg">
+        <div class="gd-hero-gradient"></div>
+        <div class="gd-hero-grid"></div>
+        <div class="gd-hero-glow-1"></div>
+        <div class="gd-hero-glow-2"></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px">
-        <div style="background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px">
-          <div style="display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-weight:600;text-transform:uppercase;color:#3b82f6;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:99px;margin-bottom:12px">SEO</div>
-          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px">The Ultimate Guide to Local SEO</h3>
-          <p style="font-size:0.82rem;color:var(--gray);line-height:1.6;margin-bottom:16px">Dominate local search results with proven strategies for Google Business Profile, local citations, and review management.</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:#3b82f6">Coming Soon <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-        <div style="background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px">
-          <div style="display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-weight:600;text-transform:uppercase;color:#3b82f6;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:99px;margin-bottom:12px">Web Design</div>
-          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px">Law Firm Website Design Guide</h3>
-          <p style="font-size:0.82rem;color:var(--gray);line-height:1.6;margin-bottom:16px">Learn how to design a high-converting law firm website that builds trust, showcases expertise, and generates consultations.</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:#3b82f6">Coming Soon <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-        <div style="background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px">
-          <div style="display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-weight:600;text-transform:uppercase;color:#3b82f6;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:99px;margin-bottom:12px">AI Automation</div>
-          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px">How AI Automation Saves 10+ Hours Per Week</h3>
-          <p style="font-size:0.82rem;color:var(--gray);line-height:1.6;margin-bottom:16px">Discover practical AI automation workflows that eliminate repetitive tasks and free up your team to focus on growth.</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:#3b82f6">Coming Soon <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-        <div style="background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px">
-          <div style="display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-weight:600;text-transform:uppercase;color:#3b82f6;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:99px;margin-bottom:12px">Lead Gen</div>
-          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px">Lead Generation Guide for Small Businesses</h3>
-          <p style="font-size:0.82rem;color:var(--gray);line-height:1.6;margin-bottom:16px">A complete playbook for generating quality leads through organic, paid, and conversion optimization strategies.</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:#3b82f6">Coming Soon <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      <div class="container">
+        <div class="gd-hero-content fade-up">
+          <div class="gd-hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Resource Library
+          </div>
+          <h1 class="gd-hero-title">Digital Growth <span class="gd-text-gradient">Guides</span></h1>
+          <p class="gd-hero-desc">Master web design, SEO, AI automation, and lead generation with <a href="/pages/seo.html">expert</a> guides crafted by industry practitioners. Learn what actually works.</p>
+          <div class="gd-search-wrap">
+            <svg class="gd-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="gd-search-input" placeholder="Search 50+ guides..." aria-label="Search guides">
+            <span class="gd-search-shortcut">Ctrl+K</span>
+          </div>
+          <div class="gd-hero-stats">
+            <div class="gd-hero-stat">
+              <div class="gd-hero-stat-value"><span class="gd-accent">50</span>+</div>
+              <div class="gd-hero-stat-label">Guides</div>
+            </div>
+            <div class="gd-hero-stat">
+              <div class="gd-hero-stat-value"><span class="gd-accent">10</span></div>
+              <div class="gd-hero-stat-label">Categories</div>
+            </div>
+            <div class="gd-hero-stat">
+              <div class="gd-hero-stat-value"><span class="gd-accent">Weekly</span></div>
+              <div class="gd-hero-stat-label">Updates</div>
+            </div>
+            <div class="gd-hero-stat">
+              <div class="gd-hero-stat-value"><span class="gd-accent">Expert</span></div>
+              <div class="gd-hero-stat-label">Insights</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ════════════ FEATURED GUIDE ════════════ -->
+    <section class="gd-section" id="featured">
+      <div class="container">
+        <div class="gd-section-header fade-up">
+          <div class="gd-section-tag">FEATURED</div>
+          <h2 class="gd-section-title">Guide of the Week</h2>
+          <p class="gd-section-desc">Our most comprehensive resource, handpicked by the Nagriva editorial team.</p>
+        </div>
+        <div class="gd-featured fade-up">
+          <div class="gd-featured-media">
+            <div class="gd-featured-pattern"></div>
+            <div class="gd-featured-media-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="gd-featured-badge-wrap">
+              <span class="gd-featured-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Editor's Pick
+              </span>
+            </div>
+          </div>
+          <div class="gd-featured-body">
+            <div class="gd-featured-category">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              SEO
+            </div>
+            <div class="gd-featured-meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                18 min read
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                By Redwan Ait El Hadj
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                Updated Mar 2026
+              </span>
+            </div>
+            <h3 class="gd-featured-title">The Ultimate Guide to Local SEO: Rank #1 in 2026</h3>
+            <p class="gd-featured-desc">Dominate local search results with proven strategies for Google Business Profile optimization, local citation building, review management, and geo-targeted content. This comprehensive 5,000-word guide covers everything from GBP optimization to local link building.</p>
+            <div class="gd-featured-actions">
+              <a href="/resources/guides/index.html" class="gd-featured-btn">
+                Read the Guide
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a href="/resources/guides/index.html" class="gd-featured-link">
+                Save for later
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ CATEGORIES ════════════ -->
+    <section class="gd-section lazy-section" id="categories">
+      <div class="container">
+        <div class="gd-section-header fade-up">
+          <div class="gd-section-tag">CATEGORIES</div>
+          <h2 class="gd-section-title">Browse by Topic</h2>
+          <p class="gd-section-desc">Explore guides across 10 categories — from SEO and web design to AI automation and branding.</p>
+        </div>
+        <div class="gd-cat-grid">
+          <div class="gd-cat-card fade-up" data-category="seo">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div class="gd-cat-name">SEO</div>
+            <div class="gd-cat-count">12 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.05s" data-category="web-design">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="gd-cat-name">Web Design</div>
+            <div class="gd-cat-count">8 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.1s" data-category="ai-automation">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div class="gd-cat-name">AI Automation</div>
+            <div class="gd-cat-count">7 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.15s" data-category="digital-marketing">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div class="gd-cat-name">Digital Marketing</div>
+            <div class="gd-cat-count">9 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.2s" data-category="lead-generation">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="gd-cat-name">Lead Generation</div>
+            <div class="gd-cat-count">6 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.25s" data-category="branding">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+            <div class="gd-cat-name">Branding</div>
+            <div class="gd-cat-count">5 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.3s" data-category="analytics">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <div class="gd-cat-name">Analytics</div>
+            <div class="gd-cat-count">4 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="gd-cat-card fade-up" style="--delay:0.35s" data-category="local-seo">
+            <div class="gd-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="gd-cat-name">Local SEO</div>
+            <div class="gd-cat-count">6 guides</div>
+            <svg class="gd-cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ GUIDES GRID ════════════ -->
+    <section class="gd-section lazy-section" id="guides">
+      <div class="container">
+        <div class="gd-section-header fade-up">
+          <div class="gd-section-tag">ALL GUIDES</div>
+          <h2 class="gd-section-title">Explore In-Depth Resources</h2>
+          <p class="gd-section-desc">Actionable, expert-written guides designed to help you master digital growth.</p>
+        </div>
+        <div class="gd-guides-grid">
+          <!-- Guide 1 -->
+          <div class="gd-guide-card fade-up">
+            <div class="gd-guide-thumb">
+              <div class="gd-guide-thumb-pattern"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span class="gd-guide-thumb-badge">SEO</span>
+              <span class="gd-guide-thumb-diff">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Intermediate
+              </span>
+            </div>
+            <div class="gd-guide-card-body">
+              <div class="gd-guide-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>18 min</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Updated 2026</span>
+              </div>
+              <h3 class="gd-guide-title">The Ultimate Guide to Local SEO</h3>
+              <p class="gd-guide-excerpt">Dominate local search with GBP optimization, citation building, review management, and geo-targeted content strategies.</p>
+              <div class="gd-guide-footer">
+                <div class="gd-guide-author">
+                  <div class="gd-guide-author-avatar">RA</div>
+                  <span class="gd-guide-author-name">Redwan Ait El Hadj</span>
+                </div>
+                <a href="/resources/guides/index.html" class="gd-guide-read">
+                  Read
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide 2 -->
+          <div class="gd-guide-card fade-up" style="--delay:0.06s">
+            <div class="gd-guide-thumb">
+              <div class="gd-guide-thumb-pattern"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span class="gd-guide-thumb-badge">Web Design</span>
+              <span class="gd-guide-thumb-diff">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Beginner
+              </span>
+            </div>
+            <div class="gd-guide-card-body">
+              <div class="gd-guide-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12 min</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Updated 2026</span>
+              </div>
+              <h3 class="gd-guide-title">Law Firm Website Design Guide</h3>
+              <p class="gd-guide-excerpt">Design a high-converting law firm website that builds trust, showcases expertise, and generates consultations.</p>
+              <div class="gd-guide-footer">
+                <div class="gd-guide-author">
+                  <div class="gd-guide-author-avatar">RA</div>
+                  <span class="gd-guide-author-name">Redwan Ait El Hadj</span>
+                </div>
+                <a href="/resources/guides/index.html" class="gd-guide-read">
+                  Read
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide 3 -->
+          <div class="gd-guide-card fade-up" style="--delay:0.12s">
+            <div class="gd-guide-thumb">
+              <div class="gd-guide-thumb-pattern"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span class="gd-guide-thumb-badge">AI Automation</span>
+              <span class="gd-guide-thumb-diff">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Intermediate
+              </span>
+            </div>
+            <div class="gd-guide-card-body">
+              <div class="gd-guide-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>15 min</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Updated 2026</span>
+              </div>
+              <h3 class="gd-guide-title">How AI Automation Saves 10+ Hours Per Week</h3>
+              <p class="gd-guide-excerpt">Discover practical AI workflows that eliminate repetitive tasks and free your team to focus on growth.</p>
+              <div class="gd-guide-footer">
+                <div class="gd-guide-author">
+                  <div class="gd-guide-author-avatar">RA</div>
+                  <span class="gd-guide-author-name">Redwan Ait El Hadj</span>
+                </div>
+                <a href="/resources/guides/index.html" class="gd-guide-read">
+                  Read
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide 4 -->
+          <div class="gd-guide-card fade-up" style="--delay:0.18s">
+            <div class="gd-guide-thumb">
+              <div class="gd-guide-thumb-pattern"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span class="gd-guide-thumb-badge">Lead Gen</span>
+              <span class="gd-guide-thumb-diff">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Beginner
+              </span>
+            </div>
+            <div class="gd-guide-card-body">
+              <div class="gd-guide-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10 min</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Updated 2026</span>
+              </div>
+              <h3 class="gd-guide-title">Lead Generation Guide for Small Businesses</h3>
+              <p class="gd-guide-excerpt">A complete playbook for generating quality leads through organic, paid, and conversion optimization strategies.</p>
+              <div class="gd-guide-footer">
+                <div class="gd-guide-author">
+                  <div class="gd-guide-author-avatar">RA</div>
+                  <span class="gd-guide-author-name">Redwan Ait El Hadj</span>
+                </div>
+                <a href="/resources/guides/index.html" class="gd-guide-read">
+                  Read
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide 5 -->
+          <div class="gd-guide-card fade-up" style="--delay:0.24s">
+            <div class="gd-guide-thumb">
+              <div class="gd-guide-thumb-pattern"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <span class="gd-guide-thumb-badge">Marketing</span>
+              <span class="gd-guide-thumb-diff">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Advanced
+              </span>
+            </div>
+            <div class="gd-guide-card-body">
+              <div class="gd-guide-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>20 min</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Updated 2026</span>
+              </div>
+              <h3 class="gd-guide-title">Digital Marketing Strategy Framework</h3>
+              <p class="gd-guide-excerpt">Build a comprehensive digital marketing strategy that aligns channels, optimizes budgets, and maximizes ROI.</p>
+              <div class="gd-guide-footer">
+                <div class="gd-guide-author">
+                  <div class="gd-guide-author-avatar">RA</div>
+                  <span class="gd-guide-author-name">Redwan Ait El Hadj</span>
+                </div>
+                <a href="/resources/guides/index.html" class="gd-guide-read">
+                  Read
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide 6 -->
+          <div class="gd-guide-card fade-up" style="--delay:0.3s">
+            <div class="gd-guide-thumb">
+              <div class="gd-guide-thumb-pattern"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span class="gd-guide-thumb-badge">Branding</span>
+              <span class="gd-guide-thumb-diff">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Beginner
+              </span>
+            </div>
+            <div class="gd-guide-card-body">
+              <div class="gd-guide-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8 min</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Updated 2026</span>
+              </div>
+              <h3 class="gd-guide-title">Brand Identity Building Guide</h3>
+              <p class="gd-guide-excerpt">Create a memorable brand identity that resonates with your audience and differentiates you from competitors.</p>
+              <div class="gd-guide-footer">
+                <div class="gd-guide-author">
+                  <div class="gd-guide-author-avatar">RA</div>
+                  <span class="gd-guide-author-name">Redwan Ait El Hadj</span>
+                </div>
+                <a href="/resources/guides/index.html" class="gd-guide-read">
+                  Read
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gd-load-more-wrap fade-up">
+          <a href="/resources/guides/index.html" class="gd-load-more">
+            View All Guides
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ LEARNING PATHS ════════════ -->
+    <section class="gd-section lazy-section" id="paths">
+      <div class="container">
+        <div class="gd-section-header fade-up">
+          <div class="gd-section-tag">LEARNING PATHS</div>
+          <h2 class="gd-section-title">Structured Learning Journeys</h2>
+          <p class="gd-section-desc">Follow a curated roadmap from beginner to advanced. Master each discipline step by step.</p>
+        </div>
+        <div class="gd-paths-grid">
+          <!-- Path 1: SEO Roadmap -->
+          <div class="gd-path-card fade-up">
+            <div class="gd-path-header">
+              <div class="gd-path-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div class="gd-path-info">
+                <div class="gd-path-name">SEO Roadmap</div>
+                <div class="gd-path-count">6 guides · Beginner to Advanced</div>
+              </div>
+            </div>
+            <div class="gd-path-steps">
+              <div class="gd-path-step"><span class="gd-path-step-num">1</span><span class="gd-path-step-label">SEO Fundamentals & Keyword Research</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">2</span><span class="gd-path-step-label">On-Page SEO & Content Optimization</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">3</span><span class="gd-path-step-label">Technical SEO & Site Architecture</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">4</span><span class="gd-path-step-label">Local SEO & Google Business Profile</span></div>
+            </div>
+            <a href="/resources/guides/index.html" class="gd-path-cta">
+              Start Learning
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <!-- Path 2: AI Automation Roadmap -->
+          <div class="gd-path-card fade-up" style="--delay:0.08s">
+            <div class="gd-path-header">
+              <div class="gd-path-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="gd-path-info">
+                <div class="gd-path-name">AI Automation Roadmap</div>
+                <div class="gd-path-count">5 guides · Beginner to Advanced</div>
+              </div>
+            </div>
+            <div class="gd-path-steps">
+              <div class="gd-path-step"><span class="gd-path-step-num">1</span><span class="gd-path-step-label">AI Fundamentals for Business</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">2</span><span class="gd-path-step-label">Workflow Automation with AI Tools</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">3</span><span class="gd-path-step-label">AI-Powered Content Creation</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">4</span><span class="gd-path-step-label">Building Custom AI Assistants</span></div>
+            </div>
+            <a href="/resources/guides/index.html" class="gd-path-cta">
+              Start Learning
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <!-- Path 3: Digital Marketing Roadmap -->
+          <div class="gd-path-card fade-up" style="--delay:0.16s">
+            <div class="gd-path-header">
+              <div class="gd-path-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div class="gd-path-info">
+                <div class="gd-path-name">Digital Marketing Roadmap</div>
+                <div class="gd-path-count">7 guides · Beginner to Advanced</div>
+              </div>
+            </div>
+            <div class="gd-path-steps">
+              <div class="gd-path-step"><span class="gd-path-step-num">1</span><span class="gd-path-step-label">Marketing Strategy & Goal Setting</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">2</span><span class="gd-path-step-label">Content Marketing & SEO Alignment</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">3</span><span class="gd-path-step-label">Social Media & Paid Advertising</span></div>
+              <div class="gd-path-step"><span class="gd-path-step-num">4</span><span class="gd-path-step-label">Analytics, Reporting & Optimization</span></div>
+            </div>
+            <a href="/resources/guides/index.html" class="gd-path-cta">
+              Start Learning
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ POPULAR RESOURCES ════════════ -->
+    <section class="gd-section lazy-section" id="popular">
+      <div class="container">
+        <div class="gd-section-header fade-up">
+          <div class="gd-section-tag">TRENDING</div>
+          <h2 class="gd-section-title">Popular Resources</h2>
+          <p class="gd-section-desc">What the Nagriva community is reading right now.</p>
+        </div>
+        <div class="gd-tabs fade-up">
+          <button class="gd-tab active">Most Read</button>
+          <button class="gd-tab">Latest Guides</button>
+          <button class="gd-tab">Beginner Friendly</button>
+        </div>
+        <div class="gd-popular-grid">
+          <div class="gd-popular-card fade-up">
+            <span class="gd-popular-rank">01</span>
+            <div class="gd-popular-body">
+              <span class="gd-popular-badge">SEO</span>
+              <div class="gd-popular-title">The Ultimate Guide to Local SEO</div>
+              <div class="gd-popular-meta">18 min read · 12.4k views</div>
+            </div>
+          </div>
+          <div class="gd-popular-card fade-up" style="--delay:0.06s">
+            <span class="gd-popular-rank">02</span>
+            <div class="gd-popular-body">
+              <span class="gd-popular-badge">AI Automation</span>
+              <div class="gd-popular-title">How AI Automation Saves 10+ Hours Per Week</div>
+              <div class="gd-popular-meta">15 min read · 9.8k views</div>
+            </div>
+          </div>
+          <div class="gd-popular-card fade-up" style="--delay:0.12s">
+            <span class="gd-popular-rank">03</span>
+            <div class="gd-popular-body">
+              <span class="gd-popular-badge">Web Design</span>
+              <div class="gd-popular-title">Law Firm Website Design Guide</div>
+              <div class="gd-popular-meta">12 min read · 7.2k views</div>
+            </div>
+          </div>
+          <div class="gd-popular-card fade-up" style="--delay:0.18s">
+            <span class="gd-popular-rank">04</span>
+            <div class="gd-popular-body">
+              <span class="gd-popular-badge">Lead Gen</span>
+              <div class="gd-popular-title">Lead Generation Guide for Small Businesses</div>
+              <div class="gd-popular-meta">10 min read · 6.1k views</div>
+            </div>
+          </div>
+          <div class="gd-popular-card fade-up" style="--delay:0.24s">
+            <span class="gd-popular-rank">05</span>
+            <div class="gd-popular-body">
+              <span class="gd-popular-badge">Branding</span>
+              <div class="gd-popular-title">Brand Identity Building Guide</div>
+              <div class="gd-popular-meta">8 min read · 5.3k views</div>
+            </div>
+          </div>
+          <div class="gd-popular-card fade-up" style="--delay:0.3s">
+            <span class="gd-popular-rank">06</span>
+            <div class="gd-popular-body">
+              <span class="gd-popular-badge">Marketing</span>
+              <div class="gd-popular-title">Digital Marketing Strategy Framework</div>
+              <div class="gd-popular-meta">20 min read · 4.7k views</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ NEWSLETTER ════════════ -->
+    <section class="gd-newsletter lazy-section" id="newsletter">
+      <div class="gd-newsletter-bg">
+        <div class="gd-newsletter-glow"></div>
+        <div class="gd-newsletter-grid"></div>
+      </div>
+      <div class="container">
+        <div class="gd-newsletter-box fade-up">
+          <div class="gd-newsletter-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h2 class="gd-newsletter-title">Get Weekly Growth Insights</h2>
+          <p class="gd-newsletter-desc">Join 3,500+ subscribers. Every Saturday, we send one actionable guide to help you grow your digital presence.</p>
+          <form class="gd-newsletter-form" action="#" method="post">
+            <input type="email" class="gd-newsletter-input" placeholder="Enter your email" required aria-label="Email for newsletter">
+            <button type="submit" class="gd-newsletter-submit">
+              Subscribe
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </form>
+          <p class="gd-newsletter-note">No spam, ever. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <div id="footer-container"></div>
+
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/js/supabase-config.js"></script>
   <script defer src="/js/script.js"></script>
@@ -59,5 +1602,5 @@
   <script defer src="/js/performance-optimizer.js"></script>
   <script defer src="/js/lazy-loader.js"></script>
   <div id="cookie-consent-container"></div>
-<script defer src="../js/layout.js"></script>
+  <script defer src="/js/layout.js"></script>
 </body></html>

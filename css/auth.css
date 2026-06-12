@@ -1855,13 +1855,6 @@ body.auth-page .auth-switch {
   text-align: center;
 }
 
-/* ─── Hide chatbot & floating elements on auth pages ─── */
-body.auth-page #nagriva-chat,
-body.auth-page .chat-fab-wrapper,
-body.auth-page #nagriva-floating-elements {
-  display: none !important;
-}
-
 body.auth-page .auth-message {
   display: none;
   align-items: center;

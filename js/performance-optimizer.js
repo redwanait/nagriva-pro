@@ -5,8 +5,6 @@
 
   /* ─── Deferrable scripts with increased delays ─── */
   var DEFERRABLE_SCRIPTS = [
-    { src: '/js/chatbot.js', delay: 5000, idle: true },
-    { src: '/js/floating-elements.js', delay: 4000, idle: true },
     { src: '/js/profile-avatar.js', delay: 3000, idle: true },
     { src: '/js/content-loader.js', delay: 2000, idle: true },
     { src: '/modules/content/content-api.js', delay: 2000, idle: true },

@@ -98,13 +98,6 @@ const NAGRIVA_ContentLoader = (() => {
     'faq.title': 'Frequently Asked Questions',
     'faq.subtitle': 'Everything you need to know about working with us. Can\'t find what you\'re looking for? Our team is here to help.',
 
-    /* ─── Support Widget ─── */
-    'support.welcome': 'Hello! How can we help you today?',
-    'support.auto-reply': 'Thank you for your message. Our team will get back to you shortly.',
-    'support.placeholder': 'Type your message...',
-    'support.online': 'We\'re online',
-    'support.offline': 'We\'re away',
-
     /* ─── Auth ─── */
     'auth.welcome': 'Welcome Back',
     'auth.subtitle': 'Sign in to access your dashboard and manage your projects.',
