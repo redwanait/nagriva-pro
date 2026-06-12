@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/audit.js": {
-      "maxDuration": 30
-    }
-  },
   "routes": [
     { "handle": "filesystem" },
 
