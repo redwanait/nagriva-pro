@@ -1,0 +1,1690 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Cost Calculator — Nagriva</title>
+  <meta name="description" content="Get an instant AI-powered estimate for your website project. Estimate costs, timeline, and complexity in under 30 seconds.">
+  <meta property="og:title" content="Website Cost Calculator — Nagriva">
+  <meta property="og:description" content="Get an instant AI-powered estimate for your website project. Estimate costs, timeline, and complexity in under 30 seconds.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/tools/website-cost-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Website Cost Calculator — Nagriva">
+  <meta name="twitter:description" content="Get an instant AI-powered estimate for your website project.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/tools/website-cost-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+  <link rel="stylesheet" href="/css/performance.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    /* ════════════════════════════════════════════
+       CSS VARIABLES
+       ════════════════════════════════════════════ */
+    :root {
+      --calc-max-w: 900px;
+      --calc-card-bg: rgba(255,255,255,0.02);
+      --calc-glass: rgba(255,255,255,0.04);
+      --calc-glass-border: rgba(255,255,255,0.08);
+      --calc-glow: rgba(59,130,246,0.12);
+    }
+
+    /* ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ */
+    .cc-hero {
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--navbar-height) + 40px) 0 20px;
+    }
+    .cc-hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .cc-hero-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      filter: blur(120px);
+      animation: ccGlowPulse 8s ease-in-out infinite;
+    }
+    .cc-hero-glow-2 {
+      position: absolute;
+      bottom: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: ccGlowPulse2 12s ease-in-out infinite;
+    }
+    .cc-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%);
+    }
+    .cc-hero .container {
+      position: relative; z-index: 1;
+    }
+    .cc-hero-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cc-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .cc-hero-tag svg {
+      width: 12px; height: 12px;
+    }
+    .cc-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .cc-hero-title span {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cc-hero-desc {
+      font-size: 1.02rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .cc-hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .cc-hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--gray2);
+    }
+    .cc-hero-stat svg {
+      width: 14px; height: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .cc-hero-stat strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+    .cc-hero-stat-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--gray2);
+      opacity: 0.3;
+    }
+
+    /* ════════════════════════════════════════════
+       CALCULATOR SECTION
+       ════════════════════════════════════════════ */
+    .cc-calc {
+      padding: 40px 0 80px;
+    }
+    .cc-calc-inner {
+      max-width: var(--calc-max-w);
+      margin: 0 auto;
+    }
+
+    /* ─── Calculator Card ─── */
+    .cc-card {
+      position: relative;
+      background: var(--calc-card-bg);
+      border: 1px solid var(--calc-glass-border);
+      border-radius: 24px;
+      padding: 48px 56px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .cc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+    }
+    .cc-card-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cc-card-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .cc-card-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .cc-card-header p {
+      font-size: 0.88rem;
+      color: var(--gray);
+    }
+
+    /* ─── Form Grid ─── */
+    .cc-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .cc-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .cc-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cc-form-group.full {
+      grid-column: 1 / -1;
+    }
+    .cc-form-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.01em;
+    }
+    .cc-form-label svg {
+      width: 14px; height: 14px;
+      color: var(--accent);
+    }
+    .cc-select {
+      appearance: none;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--calc-glass-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--white);
+      cursor: pointer;
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+    .cc-select:hover {
+      border-color: rgba(59,130,246,0.25);
+      background: rgba(255,255,255,0.05);
+    }
+    .cc-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .cc-select option {
+      background: #0f0f0f;
+      color: var(--white);
+    }
+
+    /* ─── Radio Group ─── */
+    .cc-radio-group {
+      display: flex;
+      gap: 10px;
+    }
+    .cc-radio {
+      position: relative;
+      flex: 1;
+    }
+    .cc-radio input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .cc-radio label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--calc-glass-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      user-select: none;
+    }
+    .cc-radio label:hover {
+      border-color: rgba(59,130,246,0.2);
+      background: rgba(255,255,255,0.05);
+      color: var(--white);
+    }
+    .cc-radio input:checked + label {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.1);
+      color: var(--white);
+      box-shadow: 0 0 20px rgba(59,130,246,0.08);
+    }
+
+    /* ─── Submit Button ─── */
+    .cc-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 32px;
+      border: none;
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #040404;
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .cc-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .cc-submit:hover::before {
+      transform: translateX(100%);
+    }
+    .cc-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.3);
+    }
+    .cc-submit:active {
+      transform: translateY(0);
+    }
+    .cc-submit svg {
+      width: 16px; height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .cc-submit:hover svg {
+      transform: translateX(4px);
+    }
+    .cc-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ════════════════════════════════════════════
+       LOADING STATE
+       ════════════════════════════════════════════ */
+    .cc-loading {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+    .cc-loading.active {
+      display: block;
+      animation: ccFadeIn 0.3s ease;
+    }
+    .cc-loading-spinner {
+      width: 48px; height: 48px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .cc-loading-spinner-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--accent);
+      border-right-color: var(--accent);
+      animation: ccSpin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .cc-loading-spinner-ring:nth-child(2) {
+      inset: 6px;
+      border-top-color: rgba(59,130,246,0.4);
+      border-right-color: rgba(59,130,246,0.4);
+      animation-duration: 1.5s;
+      animation-direction: reverse;
+    }
+    .cc-loading-spinner-ring:nth-child(3) {
+      inset: 12px;
+      border-top-color: rgba(59,130,246,0.2);
+      border-right-color: rgba(59,130,246,0.2);
+      animation-duration: 2s;
+    }
+    .cc-loading-message {
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin-bottom: 20px;
+      min-height: 1.5em;
+      font-weight: 500;
+    }
+    .cc-loading-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .cc-loading-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: ccBounce 1.4s ease-in-out infinite;
+    }
+    .cc-loading-dot:nth-child(2) { animation-delay: 0.16s; }
+    .cc-loading-dot:nth-child(3) { animation-delay: 0.32s; }
+    .cc-loading-progress {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .cc-loading-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .cc-loading-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+    .cc-loading-percent {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--gray2);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ════════════════════════════════════════════
+       RESULTS CARD
+       ════════════════════════════════════════════ */
+    .cc-results {
+      display: none;
+    }
+    .cc-results.active {
+      display: block;
+      animation: ccFadeInUp 0.5s ease;
+    }
+
+    .cc-results-success {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #22c55e;
+      margin-bottom: 28px;
+      padding: 8px 16px;
+      border-radius: 99px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.15);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cc-results-success svg {
+      width: 14px; height: 14px;
+    }
+
+    .cc-results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .cc-result-item {
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--calc-glass-border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.3s ease;
+    }
+    .cc-result-item:hover {
+      border-color: rgba(59,130,246,0.15);
+    }
+    .cc-result-item-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .cc-result-item-icon svg {
+      width: 16px; height: 16px;
+    }
+    .cc-result-item-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .cc-result-item-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .cc-result-item-value span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+    .cc-result-item-desc {
+      font-size: 0.78rem;
+      color: var(--gray2);
+      margin-top: 4px;
+    }
+    .cc-result-item.full {
+      grid-column: 1 / -1;
+    }
+    .cc-result-item.full .cc-result-item-value {
+      font-size: 1.1rem;
+    }
+
+    .cc-results-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .cc-results-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cc-results-btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #040404;
+    }
+    .cc-results-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+    }
+    .cc-results-btn-primary svg {
+      width: 14px; height: 14px;
+      transition: transform 0.3s ease;
+    }
+    .cc-results-btn-primary:hover svg {
+      transform: translateX(4px);
+    }
+    .cc-results-btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--calc-glass-border);
+      color: var(--gray);
+    }
+    .cc-results-btn-secondary:hover {
+      border-color: rgba(59,130,246,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ════════════════════════════════════════════
+       LEAD GENERATION
+       ════════════════════════════════════════════ */
+    .cc-lead {
+      display: none;
+      padding: 40px 0 60px;
+    }
+    .cc-lead.active {
+      display: block;
+      animation: ccFadeInUp 0.5s ease;
+    }
+    .cc-lead-card {
+      position: relative;
+      background: var(--calc-card-bg);
+      border: 1px solid var(--calc-glass-border);
+      border-radius: 24px;
+      padding: 48px 56px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      text-align: center;
+    }
+    .cc-lead-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+    }
+    .cc-lead-card-glow {
+      position: absolute;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cc-lead-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .cc-lead-card > p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .cc-lead-form {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+    .cc-lead-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--calc-glass-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--white);
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+    .cc-lead-input::placeholder {
+      color: var(--gray2);
+    }
+    .cc-lead-input:hover {
+      border-color: rgba(59,130,246,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .cc-lead-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .cc-lead-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 16px 28px;
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #040404;
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 4px;
+    }
+    .cc-lead-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+    }
+    .cc-lead-btn svg {
+      width: 15px; height: 15px;
+      transition: transform 0.3s ease;
+    }
+    .cc-lead-btn:hover svg {
+      transform: translateX(4px);
+    }
+    .cc-lead-privacy {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-top: 8px;
+    }
+    .cc-lead-privacy a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .cc-lead-privacy a:hover {
+      text-decoration: underline;
+    }
+    .cc-lead-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0;
+    }
+    .cc-lead-success.active {
+      display: flex;
+    }
+    .cc-lead-success-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #22c55e;
+    }
+    .cc-lead-success-icon svg {
+      width: 24px; height: 24px;
+    }
+    .cc-lead-success h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .cc-lead-success p {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    /* ════════════════════════════════════════════
+       FAQ
+       ════════════════════════════════════════════ */
+    .cc-faq {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cc-faq-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cc-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .cc-faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      background: rgba(255,255,255,0.008);
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .cc-faq-item:hover {
+      border-color: rgba(59,130,246,0.12);
+    }
+    .cc-faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 18px 22px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 14px;
+      transition: color 0.3s ease;
+    }
+    .cc-faq-q:hover {
+      color: var(--accent);
+    }
+    .cc-faq-q svg {
+      width: 14px; height: 14px;
+      color: var(--gray2);
+      flex-shrink: 0;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .cc-faq-q:hover svg {
+      color: var(--accent);
+    }
+    .cc-faq-item.open .cc-faq-q svg {
+      transform: rotate(180deg);
+    }
+    .cc-faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cc-faq-a-inner {
+      padding: 0 22px 18px;
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .cc-faq-item.open .cc-faq-a {
+      max-height: 250px;
+    }
+
+    /* ════════════════════════════════════════════
+       FINAL CTA
+       ════════════════════════════════════════════ */
+    .cc-cta {
+      padding: 80px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+    .cc-cta-glow {
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .cc-cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cc-cta-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .cc-cta-inner h2 span {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cc-cta-inner p {
+      color: var(--gray);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .cc-cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cc-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 34px;
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cc-cta-btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #040404;
+    }
+    .cc-cta-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+    }
+    .cc-cta-btn-primary svg {
+      width: 15px; height: 15px;
+      transition: transform 0.3s ease;
+    }
+    .cc-cta-btn-primary:hover svg {
+      transform: translateX(4px);
+    }
+    .cc-cta-btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--calc-glass-border);
+      color: var(--gray);
+    }
+    .cc-cta-btn-secondary:hover {
+      border-color: rgba(59,130,246,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    /* ════════════════════════════════════════════
+       FORM VALIDATION
+       ════════════════════════════════════════════ */
+    .cc-input-error {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+    }
+    .cc-error-text {
+      font-size: 0.75rem;
+      color: #ef4444;
+      margin-top: 2px;
+      display: none;
+    }
+    .cc-error-text.active {
+      display: block;
+    }
+
+    /* ════════════════════════════════════════════
+       ANIMATIONS
+       ════════════════════════════════════════════ */
+    @keyframes ccGlowPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes ccGlowPulse2 {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    @keyframes ccSpin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes ccBounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes ccFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes ccFadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .cc-card { padding: 32px 24px; }
+      .cc-lead-card { padding: 32px 24px; }
+      .cc-form-row { grid-template-columns: 1fr; gap: 16px; }
+      .cc-radio-group { flex-wrap: wrap; }
+      .cc-radio { flex: 1 1 calc(50% - 6px); min-width: 0; }
+      .cc-results-grid { grid-template-columns: 1fr; gap: 12px; }
+      .cc-hero-stats { gap: 14px; flex-direction: column; }
+      .cc-hero-stat-dot { display: none; }
+      .cc-loading { padding: 28px 0; }
+      .cc-lead-card > p { font-size: 0.85rem; }
+      .cc-cta { padding: 60px 0 80px; }
+      .cc-faq { padding: 60px 0; }
+    }
+    @media (max-width: 480px) {
+      .cc-card { padding: 24px 18px; border-radius: 18px; }
+      .cc-lead-card { padding: 24px 18px; border-radius: 18px; }
+      .cc-select { padding: 12px 14px; font-size: 0.85rem; }
+      .cc-radio label { padding: 10px 12px; font-size: 0.82rem; }
+      .cc-submit { padding: 16px 24px; font-size: 0.92rem; }
+      .cc-result-item { padding: 18px; }
+      .cc-result-item-value { font-size: 1.15rem; }
+      .cc-lead-input { padding: 12px 16px; font-size: 0.85rem; }
+      .cc-lead-btn { padding: 14px 24px; }
+      .cc-faq-q { padding: 14px 18px; font-size: 0.85rem; }
+      .cc-faq-a-inner { padding: 0 18px 14px; }
+      .cc-cta-btn { padding: 14px 24px; font-size: 0.88rem; }
+      .cc-card-header h2 { font-size: 1.25rem; }
+      .cc-results-cta { flex-direction: column; }
+      .cc-results-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Website Cost Calculator",
+  "url": "https://nagriva.com/tools/website-cost-calculator",
+  "description": "Estimate the cost of your website project in under 30 seconds. AI-powered cost calculator for business, portfolio, e-commerce, and blog websites.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nagriva.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://nagriva.com/pages/tools" },
+    { "@type": "ListItem", "position": 3, "name": "Website Cost Calculator" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a professional website cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Professional website costs vary widely based on complexity, features, and design quality. A basic business website typically ranges from $1,500 to $5,000, while custom e-commerce or premium sites can cost $8,000 to $25,000 or more. Use our calculator above for a personalized estimate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is the website cost calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our calculator provides a reliable estimate based on industry standards and thousands of real projects. The estimate reflects current market rates for professional web development. For an exact quote tailored to your specific needs, contact our team."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What factors affect website pricing the most?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The main factors are: website type (e-commerce costs more than basic), number of pages, design quality, required features like blogging or e-commerce functionality, SEO requirements, and whether you need ongoing maintenance. Each factor adds to the development time and complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer payment plans or packages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we offer flexible payment plans and packaged solutions to suit different budgets. Our team can structure a payment schedule that works for you. Contact us to discuss options and get a customized proposal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to build a website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Timelines vary by project complexity. A simple landing page can be completed in 1-2 weeks, while a standard business website takes 3-5 weeks. More complex e-commerce or custom sites may require 6-12 weeks. The timeline depends on design revisions, content preparation, and feature requirements."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body data-page="website-cost-calculator">
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ -->
+  <section class="cc-hero">
+    <div class="cc-hero-bg">
+      <div class="cc-hero-glow"></div>
+      <div class="cc-hero-glow-2"></div>
+      <div class="cc-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="cc-hero-content fade-up">
+        <div class="cc-hero-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          AI-Powered Estimator
+        </div>
+        <h1 class="cc-hero-title">Website Cost <span>Calculator</span></h1>
+        <p class="cc-hero-desc">Estimate the cost of your website project in less than 30 seconds.</p>
+        <div class="cc-hero-stats">
+          <span class="cc-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            <strong>5,000+</strong> Estimates Generated
+          </span>
+          <span class="cc-hero-stat-dot"></span>
+          <span class="cc-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <strong>100%</strong> Free to Use
+          </span>
+          <span class="cc-hero-stat-dot"></span>
+          <span class="cc-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <strong>30s</strong> Instant Result
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       CALCULATOR
+       ════════════════════════════════════════════ -->
+  <section class="cc-calc" id="calculator">
+    <div class="container">
+      <div class="cc-calc-inner">
+
+        <!-- ─── Main Calculator Card ─── -->
+        <div class="cc-card fade-up" id="calculatorCard">
+          <div class="cc-card-glow"></div>
+
+          <div class="cc-card-header">
+            <h2>Tell Us About Your Project</h2>
+            <p>Answer a few questions and get your instant estimate.</p>
+          </div>
+
+          <!-- ─── Form View ─── -->
+          <div id="ccFormView">
+            <form class="cc-form" id="calcForm" novalidate>
+              <div class="cc-form-row">
+                <div class="cc-form-group">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+                    Website Type
+                  </label>
+                  <select class="cc-select" id="websiteType" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="business">Business Website</option>
+                    <option value="portfolio">Portfolio Website</option>
+                    <option value="blog">Blog Website</option>
+                    <option value="ecommerce">E-commerce Website</option>
+                    <option value="landing">Landing Page</option>
+                  </select>
+                </div>
+                <div class="cc-form-group">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    Number of Pages
+                  </label>
+                  <select class="cc-select" id="numPages" required>
+                    <option value="" disabled selected>Select range</option>
+                    <option value="1-5">1-5</option>
+                    <option value="5-10">5-10</option>
+                    <option value="10-20">10-20</option>
+                    <option value="20+">20+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="cc-form-row">
+                <div class="cc-form-group">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    Design Quality
+                  </label>
+                  <select class="cc-select" id="designQuality" required>
+                    <option value="" disabled selected>Select quality</option>
+                    <option value="basic">Basic</option>
+                    <option value="professional">Professional</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                </div>
+                <div class="cc-form-group">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    SEO Package
+                  </label>
+                  <select class="cc-select" id="seoPackage">
+                    <option value="none">None</option>
+                    <option value="basic">Basic SEO</option>
+                    <option value="advanced">Advanced SEO</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="cc-form-row">
+                <div class="cc-form-group">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                    Need a Blog?
+                  </label>
+                  <div class="cc-radio-group">
+                    <div class="cc-radio">
+                      <input type="radio" name="needBlog" id="blogYes" value="yes">
+                      <label for="blogYes">Yes</label>
+                    </div>
+                    <div class="cc-radio">
+                      <input type="radio" name="needBlog" id="blogNo" value="no" checked>
+                      <label for="blogNo">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="cc-form-group">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+                    Need E-commerce?
+                  </label>
+                  <div class="cc-radio-group">
+                    <div class="cc-radio">
+                      <input type="radio" name="needEcom" id="ecomYes" value="yes">
+                      <label for="ecomYes">Yes</label>
+                    </div>
+                    <div class="cc-radio">
+                      <input type="radio" name="needEcom" id="ecomNo" value="no" checked>
+                      <label for="ecomNo">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cc-form-row">
+                <div class="cc-form-group full">
+                  <label class="cc-form-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Need Maintenance?
+                  </label>
+                  <div class="cc-radio-group">
+                    <div class="cc-radio">
+                      <input type="radio" name="needMaint" id="maintYes" value="yes">
+                      <label for="maintYes">Yes</label>
+                    </div>
+                    <div class="cc-radio">
+                      <input type="radio" name="needMaint" id="maintNo" value="no" checked>
+                      <label for="maintNo">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="cc-submit" id="calcSubmit">
+                Calculate Estimate
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- ─── Loading View ─── -->
+          <div class="cc-loading" id="ccLoading">
+            <div class="cc-loading-spinner">
+              <div class="cc-loading-spinner-ring"></div>
+              <div class="cc-loading-spinner-ring"></div>
+              <div class="cc-loading-spinner-ring"></div>
+            </div>
+            <div class="cc-loading-message" id="ccLoadingMsg">Analyzing project requirements...</div>
+            <div class="cc-loading-dots">
+              <div class="cc-loading-dot"></div>
+              <div class="cc-loading-dot"></div>
+              <div class="cc-loading-dot"></div>
+            </div>
+            <div class="cc-loading-progress">
+              <div class="cc-loading-bar">
+                <div class="cc-loading-bar-fill" id="ccProgressFill"></div>
+              </div>
+              <div class="cc-loading-percent" id="ccProgressPercent">0%</div>
+            </div>
+          </div>
+
+          <!-- ─── Results View ─── -->
+          <div class="cc-results" id="ccResults">
+            <div class="cc-results-success">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Your estimate is ready.
+            </div>
+
+            <div class="cc-results-grid">
+              <div class="cc-result-item">
+                <div class="cc-result-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                </div>
+                <div class="cc-result-item-label">Estimated Cost</div>
+                <div class="cc-result-item-value" id="ccResultCost">$0</div>
+                <div class="cc-result-item-desc">One-time development cost</div>
+              </div>
+              <div class="cc-result-item">
+                <div class="cc-result-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div class="cc-result-item-label">Estimated Timeline</div>
+                <div class="cc-result-item-value" id="ccResultTimeline">—</div>
+                <div class="cc-result-item-desc">From kickoff to launch</div>
+              </div>
+              <div class="cc-result-item">
+                <div class="cc-result-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <div class="cc-result-item-label">Recommended Package</div>
+                <div class="cc-result-item-value" id="ccResultPackage">—</div>
+                <div class="cc-result-item-desc">Best fit for your needs</div>
+              </div>
+              <div class="cc-result-item">
+                <div class="cc-result-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+                </div>
+                <div class="cc-result-item-label">Project Complexity</div>
+                <div class="cc-result-item-value" id="ccResultComplexity">—</div>
+                <div class="cc-result-item-desc">Based on your requirements</div>
+              </div>
+            </div>
+
+            <div class="cc-results-cta">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="cc-results-btn cc-results-btn-primary" data-cta="primary" data-cta-action="get-exact-quote">
+                Get Exact Quote
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <button class="cc-results-btn cc-results-btn-secondary" id="ccRecalculate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                Recalculate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       LEAD GENERATION
+       ════════════════════════════════════════════ -->
+  <section class="cc-lead" id="leadSection">
+    <div class="container">
+      <div class="cc-lead-card fade-up">
+        <div class="cc-lead-card-glow"></div>
+        <h3>Want a Detailed Proposal?</h3>
+        <p>Get a comprehensive breakdown of costs, timeline, and deliverables tailored to your project.</p>
+
+        <div class="cc-lead-form" id="leadForm">
+          <input type="text" class="cc-lead-input" id="leadName" placeholder="Your full name *" required>
+          <input type="email" class="cc-lead-input" id="leadEmail" placeholder="Your email address *" required>
+          <input type="text" class="cc-lead-input" id="leadBusiness" placeholder="Your business name">
+          <button type="button" class="cc-lead-btn" id="leadSubmit">
+            Send My Detailed Estimate
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+          <p class="cc-lead-privacy">Your data is safe. We'll never share your information. <a href="/privacy-policy">Privacy Policy</a></p>
+        </div>
+
+        <div class="cc-lead-success" id="leadSuccess">
+          <div class="cc-lead-success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h4>Thank You!</h4>
+          <p>We've received your request and will send your detailed estimate within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FAQ
+       ════════════════════════════════════════════ -->
+  <section class="cc-faq section lazy-section" id="faq">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ FAQ</div>
+        <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+        <p class="section-desc">Everything you need to know about website pricing and our process.</p>
+      </div>
+      <div class="cc-faq-inner">
+        <div class="cc-faq-list fade-up" id="faqList">
+          <div class="cc-faq-item open">
+            <button class="cc-faq-q">
+              <span>How much does a professional website cost?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="cc-faq-a">
+              <div class="cc-faq-a-inner">Professional website costs vary widely based on complexity, features, and design quality. A basic business website typically ranges from $1,500 to $5,000, while custom e-commerce or premium sites can cost $8,000 to $25,000 or more. Use our calculator above for a personalized estimate based on your specific needs.</div>
+            </div>
+          </div>
+          <div class="cc-faq-item">
+            <button class="cc-faq-q">
+              <span>How accurate is the website cost calculator?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="cc-faq-a">
+              <div class="cc-faq-a-inner">Our calculator provides a reliable estimate based on industry standards and thousands of real projects. It factors in website type, pages, design quality, SEO, and features to give you a realistic market-range figure. For an exact quote tailored to your specific requirements, we recommend contacting our team.</div>
+            </div>
+          </div>
+          <div class="cc-faq-item">
+            <button class="cc-faq-q">
+              <span>What factors affect website pricing the most?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="cc-faq-a">
+              <div class="cc-faq-a-inner">The main pricing factors are: website type (e-commerce costs more than a simple landing page), number of pages, design quality level (basic vs premium), required features like blogging or e-commerce functionality, SEO requirements, and whether you need ongoing maintenance. Each factor adds to development time and complexity.</div>
+            </div>
+          </div>
+          <div class="cc-faq-item">
+            <button class="cc-faq-q">
+              <span>Do you offer payment plans or packages?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="cc-faq-a">
+              <div class="cc-faq-a-inner">Yes, we offer flexible payment plans and packaged solutions to suit different budgets. We can structure a payment schedule that works for you, whether you prefer a one-time payment or installments. Contact our team after receiving your estimate to discuss options and get a customized proposal.</div>
+            </div>
+          </div>
+          <div class="cc-faq-item">
+            <button class="cc-faq-q">
+              <span>How long does it take to build a website?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="cc-faq-a">
+              <div class="cc-faq-a-inner">Timelines vary by project complexity. A simple landing page can be completed in 1-2 weeks, a standard business website takes 3-5 weeks, and more complex e-commerce or custom sites may require 6-12 weeks. The exact timeline depends on design revisions, content preparation, and feature requirements.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FINAL CTA
+       ════════════════════════════════════════════ -->
+  <section class="cc-cta lazy-section">
+    <div class="cc-cta-glow"></div>
+    <div class="container">
+      <div class="cc-cta-inner fade-up">
+        <h2>Need a <span>Custom Website?</span></h2>
+        <p>Let's discuss your project and create the perfect solution for your business.</p>
+        <div class="cc-cta-actions">
+          <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="cc-cta-btn cc-cta-btn-primary" data-cta="primary" data-cta-action="book-consultation">
+            Book a Free Consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="https://wa.me/212616523110" target="_blank" rel="noopener" class="cc-cta-btn cc-cta-btn-secondary" data-cta="secondary" data-cta-action="contact-us">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <div id="cookie-consent-container"></div>
+
+  <script defer>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    /* ─── DOM refs ─── */
+    var form = document.getElementById('calcForm');
+    var formView = document.getElementById('ccFormView');
+    var loadingView = document.getElementById('ccLoading');
+    var resultsView = document.getElementById('ccResults');
+    var leadSection = document.getElementById('leadSection');
+    var loadingMsg = document.getElementById('ccLoadingMsg');
+    var progressFill = document.getElementById('ccProgressFill');
+    var progressPercent = document.getElementById('ccProgressPercent');
+
+    var resultCost = document.getElementById('ccResultCost');
+    var resultTimeline = document.getElementById('ccResultTimeline');
+    var resultPackage = document.getElementById('ccResultPackage');
+    var resultComplexity = document.getElementById('ccResultComplexity');
+
+    /* ─── Loading messages ─── */
+    var loadingMessages = [
+      'Analyzing project requirements...',
+      'Calculating development costs...',
+      'Estimating timeline...',
+      'Generating recommendation...'
+    ];
+
+    /* ─── FAQ Accordion ─── */
+    var faqItems = document.querySelectorAll('#faqList .cc-faq-item');
+    faqItems.forEach(function(item) {
+      var q = item.querySelector('.cc-faq-q');
+      q.addEventListener('click', function() {
+        var isOpen = item.classList.contains('open');
+        faqItems.forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+
+    /* ─── Calculator Logic ─── */
+    var calcTimeout = null;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var websiteType = document.getElementById('websiteType').value;
+      var numPages = document.getElementById('numPages').value;
+
+      if (!websiteType || !numPages) {
+        if (!websiteType) document.getElementById('websiteType').classList.add('cc-input-error');
+        if (!numPages) document.getElementById('numPages').classList.add('cc-input-error');
+        return;
+      }
+
+      document.querySelectorAll('.cc-input-error').forEach(function(el) {
+        el.classList.remove('cc-input-error');
+      });
+
+      /* ─── Show loading ─── */
+      formView.style.display = 'none';
+      loadingView.classList.add('active');
+      resultsView.classList.remove('active');
+
+      var msgIndex = 0;
+      var progress = 0;
+      var msgInterval = setInterval(function() {
+        msgIndex = (msgIndex + 1) % loadingMessages.length;
+        loadingMsg.textContent = loadingMessages[msgIndex];
+      }, 1200);
+
+      calcTimeout = setInterval(function() {
+        progress += Math.random() * 8 + 2;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(calcTimeout);
+          clearInterval(msgInterval);
+          loadingMsg.textContent = '✓ Estimate ready!';
+          progressFill.style.width = '100%';
+          progressPercent.textContent = '100%';
+
+          setTimeout(function() {
+            loadingView.classList.remove('active');
+            showResults();
+            showLeadSection();
+          }, 600);
+        }
+        progressFill.style.width = Math.min(progress, 100) + '%';
+        progressPercent.textContent = Math.min(Math.round(progress), 100) + '%';
+      }, 180);
+    });
+
+    /* ─── Calculate Results ─── */
+    function showResults() {
+      /* Gather inputs */
+      var type = document.getElementById('websiteType').value;
+      var pages = document.getElementById('numPages').value;
+      var design = document.getElementById('designQuality').value;
+      var seo = document.getElementById('seoPackage').value;
+      var blog = document.querySelector('input[name="needBlog"]:checked').value;
+      var ecom = document.querySelector('input[name="needEcom"]:checked').value;
+      var maint = document.querySelector('input[name="needMaint"]:checked').value;
+
+      /* ─── Base cost calculation ─── */
+      var baseCost = 0;
+      var typeLabels = { business: 'Business Website', portfolio: 'Portfolio Website', blog: 'Blog Website', ecommerce: 'E-commerce Website', landing: 'Landing Page' };
+      var pageMultiplier = { '1-5': 1, '5-10': 1.4, '10-20': 1.9, '20+': 2.5 };
+      var designMultiplier = { basic: 1, professional: 1.5, premium: 2.3 };
+      var seoCost = { none: 0, basic: 300, advanced: 800 };
+      var blogCost = blog === 'yes' ? 400 : 0;
+      var ecomCost = ecom === 'yes' ? 1500 : 0;
+      var maintCost = maint === 'yes' ? 200 : 0;
+      var typeCost = { business: 2000, portfolio: 1500, blog: 1200, ecommerce: 4000, landing: 800 };
+
+      baseCost = typeCost[type] || 2000;
+      baseCost = baseCost * (pageMultiplier[pages] || 1);
+      baseCost = baseCost * (designMultiplier[design] || 1);
+      baseCost = baseCost + (seoCost[seo] || 0) + blogCost + ecomCost;
+
+      /* ─── Timeline ─── */
+      var timelineMap = {
+        landing: { 'basic': '1-2 weeks', 'professional': '2-3 weeks', 'premium': '3-4 weeks' },
+        portfolio: { 'basic': '1-2 weeks', 'professional': '2-4 weeks', 'premium': '4-6 weeks' },
+        blog: { 'basic': '2-3 weeks', 'professional': '3-5 weeks', 'premium': '5-7 weeks' },
+        business: { 'basic': '2-4 weeks', 'professional': '3-6 weeks', 'premium': '6-10 weeks' },
+        ecommerce: { 'basic': '4-6 weeks', 'professional': '6-10 weeks', 'premium': '10-16 weeks' }
+      };
+      var timeline = (timelineMap[type] && timelineMap[type][design]) || '3-6 weeks';
+      if (ecom === 'yes' && type !== 'ecommerce') {
+        timeline = timeline.replace(/(\d+)/, function(m) { return parseInt(m) + 2; });
+      }
+
+      /* ─── Package ─── */
+      var packageMap = {
+        basic: 'Starter Package',
+        professional: 'Growth Package',
+        premium: 'Premium Package'
+      };
+      var pkg = packageMap[design] || 'Custom Package';
+
+      /* ─── Complexity ─── */
+      var complexityScore = 0;
+      var typeComplexity = { landing: 1, portfolio: 2, blog: 2, business: 3, ecommerce: 5 };
+      complexityScore += typeComplexity[type] || 2;
+      var pageScore = { '1-5': 1, '5-10': 2, '10-20': 3, '20+': 4 };
+      complexityScore += pageScore[pages] || 1;
+      var designScore = { basic: 1, professional: 2, premium: 3 };
+      complexityScore += designScore[design] || 1;
+      if (blog === 'yes') complexityScore += 1;
+      if (ecom === 'yes') complexityScore += 2;
+      if (seo === 'advanced') complexityScore += 1;
+
+      var complexityLabel = 'Simple';
+      if (complexityScore >= 8) complexityLabel = 'High';
+      else if (complexityScore >= 5) complexityLabel = 'Medium';
+
+      /* ─── Display results ─── */
+      resultCost.textContent = '$' + Math.round(baseCost).toLocaleString();
+      resultTimeline.textContent = timeline;
+
+      var monthlyNote = maint === 'yes' ? ' (+$' + maintCost + '/mo maintenance)' : '';
+      var packageNote = ecom === 'yes' ? ' + E-commerce' : '';
+      resultPackage.textContent = pkg + packageNote;
+      resultComplexity.textContent = complexityLabel;
+
+      resultsView.classList.add('active');
+    }
+
+    /* ─── Show Lead Section ─── */
+    function showLeadSection() {
+      leadSection.classList.add('active');
+      leadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    /* ─── Recalculate ─── */
+    document.getElementById('ccRecalculate').addEventListener('click', function() {
+      loadingView.classList.remove('active');
+      resultsView.classList.remove('active');
+      leadSection.classList.remove('active');
+      formView.style.display = 'block';
+      if (calcTimeout) clearInterval(calcTimeout);
+    });
+
+    /* ─── Lead Form ─── */
+    document.getElementById('leadSubmit').addEventListener('click', function() {
+      var name = document.getElementById('leadName').value.trim();
+      var email = document.getElementById('leadEmail').value.trim();
+      var business = document.getElementById('leadBusiness').value.trim();
+
+      document.querySelectorAll('.cc-input-error').forEach(function(el) {
+        el.classList.remove('cc-input-error');
+      });
+
+      var valid = true;
+      if (!name) {
+        document.getElementById('leadName').classList.add('cc-input-error');
+        valid = false;
+      }
+      if (!email || !email.includes('@')) {
+        document.getElementById('leadEmail').classList.add('cc-input-error');
+        valid = false;
+      }
+      if (!valid) return;
+
+      document.getElementById('leadForm').style.display = 'none';
+      document.getElementById('leadSuccess').classList.add('active');
+    });
+
+    /* ─── Remove error state on input ─── */
+    document.querySelectorAll('.cc-select, .cc-lead-input').forEach(function(el) {
+      el.addEventListener('change', function() {
+        this.classList.remove('cc-input-error');
+      });
+      el.addEventListener('input', function() {
+        this.classList.remove('cc-input-error');
+      });
+    });
+
+  });
+  </script>
+<script defer src="../../js/layout.js"></script>
+</body></html>

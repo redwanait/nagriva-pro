@@ -115,7 +115,6 @@
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.02);
   overflow: hidden;
-  cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
               border-color 0.4s cubic-bezier(0.4,0,0.2,1),
               box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
@@ -202,7 +201,14 @@
   color: var(--gray2);
   line-height: 1.6;
   margin: 0;
-  flex: 1;
+}
+
+.dw-demo-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
 }
 
 .dw-demo-btn {
@@ -213,8 +219,7 @@
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
-  padding: 8px 0 0;
-  margin-top: auto;
+  padding: 8px 0;
   background: none;
   border: none;
   cursor: pointer;
@@ -223,6 +228,27 @@
 
 .dw-demo-btn:hover {
   gap: 12px;
+}
+
+.dw-demo-btn--primary {
+  background: var(--accent);
+  color: var(--white) !important;
+  padding: 10px 20px;
+  border-radius: 99px;
+  justify-content: center;
+  font-weight: 700;
+  transition: gap 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dw-demo-btn--primary:hover {
+  gap: 12px;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+}
+
+.dw-demo-btn--secondary {
+  justify-content: center;
+  background: none;
 }
 
 /* ─── Features Grid ─── */

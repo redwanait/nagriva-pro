@@ -1,22 +1,22 @@
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Tools — Nagriva</title>
-  <meta name="description" content="Free online tools for businesses, marketers, and creators. SEO tools, content tools, and business calculators to help you grow.">
-  <meta property="og:title" content="Free Tools — Nagriva">
-  <meta property="og:description" content="Free online tools for businesses, marketers, and creators. SEO tools, content tools, and business calculators to help you grow.">
+  <title>Free Marketing & SEO Tools — Nagriva</title>
+  <meta name="description" content="Free marketing and SEO tools: Website Cost Calculator, Website Audit Tool, SEO Title Generator, and more coming soon. Analyze, optimize, and grow online.">
+  <meta property="og:title" content="Free Marketing & SEO Tools — Nagriva">
+  <meta property="og:description" content="Free marketing and SEO tools: Website Cost Calculator, Website Audit Tool, SEO Title Generator, and more.">
   <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
   <meta property="og:url" content="https://nagriva.com/pages/tools">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nagriva">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Tools — Nagriva">
-  <meta name="twitter:description" content="Free online tools for businesses, marketers, and creators. SEO tools, content tools, and business calculators to help you grow.">
+  <meta name="twitter:title" content="Free Marketing & SEO Tools — Nagriva">
+  <meta name="twitter:description" content="Free marketing and SEO tools: Website Cost Calculator, Website Audit Tool, SEO Title Generator, and more.">
   <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
   <link rel="canonical" href="https://nagriva.com/pages/tools.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="../css/navbar.css" />
   <link rel="stylesheet" href="../css/footer.css" />
@@ -27,17 +27,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
   <style>
-    :root { --tl-gap: 100px; }
-
     /* ════════════════════════════════════════════
        HERO
        ════════════════════════════════════════════ */
     .tools-hero {
       position: relative;
       overflow: hidden;
-      padding: calc(var(--navbar-height) + 80px) 0 80px;
-      display: flex;
-      align-items: center;
+      padding: calc(var(--navbar-height) + 60px) 0 60px;
     }
     .tl-hero-bg {
       position: absolute; inset: 0;
@@ -45,34 +41,67 @@
     }
     .tl-hero-glow {
       position: absolute;
-      top: -200px; left: 50%;
+      top: -180px; left: 50%;
       transform: translateX(-50%);
-      width: 800px; height: 800px;
+      width: 900px; height: 900px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
       filter: blur(120px);
       animation: tlGlowPulse 8s ease-in-out infinite;
     }
     .tl-hero-glow-2 {
       position: absolute;
-      bottom: -120px; right: -120px;
-      width: 400px; height: 400px;
+      bottom: -160px; right: -160px;
+      width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
-      filter: blur(80px);
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(100px);
       animation: tlGlowPulse2 12s ease-in-out infinite;
     }
     .tl-hero-grid {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
       background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%);
+      mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%);
     }
-    .tools-hero .container {
+    .tl-hero .container {
       position: relative; z-index: 1;
+    }
+    .tl-hero-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .tl-hero-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .tl-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+    .tl-hero-title span {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .tl-hero-desc {
       font-size: 1.05rem;
@@ -92,183 +121,176 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 28px;
-      margin-top: 32px;
+      gap: 32px;
+      margin-top: 36px;
       flex-wrap: wrap;
     }
     .tl-hero-stat {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
+      gap: 10px;
+      font-size: 0.85rem;
       color: var(--gray2);
     }
     .tl-hero-stat svg {
-      width: 14px; height: 14px;
+      width: 16px; height: 16px;
       color: var(--accent);
       flex-shrink: 0;
     }
+    .tl-hero-stat strong {
+      color: var(--white);
+      font-weight: 600;
+    }
     .tl-hero-stat-divider {
-      width: 3px; height: 3px;
+      width: 4px; height: 4px;
       border-radius: 50%;
       background: var(--gray2);
-      opacity: 0.3;
+      opacity: 0.25;
     }
 
     /* ════════════════════════════════════════════
-       CATEGORY FILTERS
+       ACTIVE TOOLS SECTION
        ════════════════════════════════════════════ */
-    .tl-filters {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 40px;
-      flex-wrap: wrap;
+    .tl-active {
+      padding: 20px 0 100px;
     }
-    .tl-filter-btn {
-      position: relative;
-      overflow: hidden;
-      padding: 10px 24px;
-      border-radius: 99px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--gray);
-      background: rgba(255,255,255,0.025);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-    }
-    .tl-filter-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 99px;
-      background: radial-gradient(circle at center, rgba(59,130,246,0.12), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-    .tl-filter-btn:hover {
-      color: var(--white);
-      border-color: rgba(59,130,246,0.2);
-      transform: translateY(-1px);
-    }
-    .tl-filter-btn.active {
-      color: var(--bg);
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-    .tl-filter-btn.active::after {
-      opacity: 1;
-    }
-
-    /* ════════════════════════════════════════════
-       TOOLS GRID
-       ════════════════════════════════════════════ */
-    .tl-grid-section {
-      padding: 0 0 var(--tl-gap);
-    }
-    .tl-grid {
+    .tl-active-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 24px;
       margin-top: 48px;
     }
-    .tl-card {
+    .tl-active-card {
       position: relative;
       display: flex;
       flex-direction: column;
-      background: rgba(255,255,255,0.018);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(59,130,246,0.12);
       border-radius: var(--r);
-      padding: 32px 28px 28px;
-      cursor: pointer;
+      padding: 40px 32px 32px;
       transition: transform 0.5s cubic-bezier(0.4,0,0.2,1),
                   border-color 0.5s cubic-bezier(0.4,0,0.2,1),
                   box-shadow 0.5s cubic-bezier(0.4,0,0.2,1);
       will-change: transform;
+      overflow: hidden;
     }
-    .tl-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(59,130,246,0.25);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5),
-                  0 0 40px rgba(59,130,246,0.06);
-    }
-    .tl-card-glow {
+    .tl-active-card::before {
+      content: '';
       position: absolute;
-      top: 50%; left: 50%;
-      width: 200px; height: 200px;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
-      pointer-events: none;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
       opacity: 0;
       transition: opacity 0.5s ease;
-      border-radius: 50%;
     }
-    .tl-card:hover .tl-card-glow {
+    .tl-active-card:hover::before {
       opacity: 1;
     }
-    .tl-card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.15);
+    .tl-active-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(59,130,246,0.3);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5),
+                  0 0 60px rgba(59,130,246,0.08);
+    }
+    .tl-active-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 300px; height: 300px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      border-radius: 50%;
+    }
+    .tl-active-card:hover .tl-active-glow {
+      opacity: 1;
+    }
+    .tl-active-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #22c55e;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      padding: 4px 10px;
+      border-radius: 99px;
+      z-index: 2;
+    }
+    .tl-active-badge svg {
+      width: 9px; height: 9px;
+    }
+    .tl-active-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.18);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
       flex-shrink: 0;
-      margin-bottom: 18px;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 20px;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
-    .tl-card:hover .tl-card-icon {
-      background: rgba(59,130,246,0.12);
-      box-shadow: 0 0 20px rgba(59,130,246,0.08);
+    .tl-active-card:hover .tl-active-icon {
+      background: rgba(59,130,246,0.15);
+      box-shadow: 0 0 24px rgba(59,130,246,0.1);
+      transform: scale(1.04);
     }
-    .tl-card-icon svg {
-      width: 20px; height: 20px;
+    .tl-active-icon svg {
+      width: 24px; height: 24px;
     }
-    .tl-card-category {
-      display: inline-block;
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(59,130,246,0.06);
-      border: 1px solid rgba(59,130,246,0.1);
-      padding: 3px 10px;
-      border-radius: 99px;
-      margin-bottom: 10px;
-      width: fit-content;
-    }
-    .tl-card-title {
+    .tl-active-card-title {
       font-family: 'Syne', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--white);
       letter-spacing: -0.01em;
       line-height: 1.3;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-    .tl-card-desc {
-      font-size: 0.82rem;
+    .tl-active-card-desc {
+      font-size: 0.85rem;
       color: var(--gray);
-      line-height: 1.6;
-      flex: 1;
+      line-height: 1.65;
       margin-bottom: 18px;
     }
-    .tl-card-btn {
-      display: inline-flex;
+    .tl-active-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+    .tl-active-benefit {
+      display: flex;
       align-items: center;
       gap: 8px;
-      width: fit-content;
-      padding: 10px 22px;
+      font-size: 0.8rem;
+      color: var(--gray2);
+    }
+    .tl-active-benefit svg {
+      width: 12px; height: 12px;
+      color: #22c55e;
+      flex-shrink: 0;
+    }
+    .tl-active-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 24px;
       border-radius: 99px;
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 600;
       font-family: 'DM Sans', sans-serif;
       text-decoration: none;
@@ -277,259 +299,127 @@
       background: linear-gradient(135deg, #3b82f6, #2563EB);
       color: #040404;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      pointer-events: none;
     }
-    .tl-card-btn:hover {
+    .tl-active-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(59,130,246,0.25);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
     }
-    .tl-card-btn svg {
+    .tl-active-btn svg {
       width: 14px; height: 14px;
       transition: transform 0.3s ease;
     }
-    .tl-card-btn:hover svg {
-      transform: translateX(3px);
-    }
-
-    /* tl-card hidden state for filtering */
-    .tl-card.hidden {
-      display: none;
-    }
-
-    /* ════════════════════════════════════════════
-       FEATURED TOOL — Website Audit
-       ════════════════════════════════════════════ */
-    .tl-featured {
-      padding: 0 0 var(--tl-gap);
-    }
-    .tl-featured-card {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-      padding: 56px 48px;
-      border-radius: var(--r);
-      border: 1px solid rgba(59,130,246,0.15);
-      background: linear-gradient(135deg, rgba(59,130,246,0.04) 0%, rgba(59,130,246,0.01) 100%);
-      overflow: hidden;
-    }
-    .tl-featured-glow {
-      position: absolute;
-      top: -120px; right: -120px;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
-      filter: blur(80px);
-      pointer-events: none;
-    }
-    .tl-featured-content {
-      flex: 1;
-      position: relative;
-      z-index: 1;
-    }
-    .tl-featured-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #22c55e;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.2);
-      padding: 4px 12px;
-      border-radius: 99px;
-      margin-bottom: 16px;
-    }
-    .tl-featured-badge svg {
-      width: 10px; height: 10px;
-    }
-    .tl-featured-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
-    }
-    .tl-featured-desc {
-      font-size: 0.92rem;
-      color: var(--gray);
-      line-height: 1.7;
-      max-width: 480px;
-      margin-bottom: 28px;
-    }
-    .tl-featured-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      border-radius: 99px;
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
-      color: #040404;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .tl-featured-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
-    }
-    .tl-featured-btn svg {
-      width: 16px; height: 16px;
-      transition: transform 0.3s ease;
-    }
-    .tl-featured-btn:hover svg {
+    .tl-active-btn:hover svg {
       transform: translateX(4px);
     }
-    .tl-featured-visual {
-      flex-shrink: 0;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 40%, rgba(59,130,246,0.12), rgba(59,130,246,0.02) 60%);
-      border: 1px solid rgba(59,130,246,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-    .tl-featured-visual svg {
-      width: 80px;
-      height: 80px;
-      color: var(--accent);
-      opacity: 0.8;
-    }
-    .tl-featured-visual-pulse {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 1px solid rgba(59,130,246,0.08);
-      animation: tlPing 3s cubic-bezier(0.4,0,0.2,1) infinite;
-    }
 
     /* ════════════════════════════════════════════
-       WHY USE OUR TOOLS
+       COMING SOON SECTION
        ════════════════════════════════════════════ */
-    .tl-why {
-      padding: 0 0 var(--tl-gap);
-      border-top: 1px solid var(--border);
+    .tl-coming {
+      padding: 0 0 100px;
     }
-    .tl-why-grid {
+    .tl-coming-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
       margin-top: 48px;
     }
-    .tl-why-card {
-      background: rgba(255,255,255,0.025);
+    .tl-coming-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255,255,255,0.015);
       border: 1px solid var(--border);
       border-radius: var(--r);
-      padding: 40px 32px 36px;
-      text-align: center;
-      transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1),
-                  transform 0.4s cubic-bezier(0.4,0,0.2,1),
-                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
-    }
-    .tl-why-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(59,130,246,0.15);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-    }
-    .tl-why-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: rgba(59,130,246,0.06);
-      border: 1px solid rgba(59,130,246,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: var(--accent);
-      transition: background 0.4s ease, border-color 0.4s ease;
-    }
-    .tl-why-card:hover .tl-why-icon {
-      background: rgba(59,130,246,0.08);
-      border-color: rgba(59,130,246,0.2);
-    }
-    .tl-why-icon svg {
-      width: 24px; height: 24px;
-    }
-    .tl-why-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-    .tl-why-desc {
-      font-size: 0.85rem;
-      color: var(--gray);
-      line-height: 1.7;
-      max-width: 260px;
-      margin: 0 auto;
-    }
-
-    /* ════════════════════════════════════════════
-       CTA
-       ════════════════════════════════════════════ */
-    .tl-cta {
-      padding: 0 0 var(--tl-gap);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .tl-cta-glow {
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
-      filter: blur(100px);
+      padding: 28px 24px 24px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease, border-color 0.3s ease;
       pointer-events: none;
     }
-    .tl-cta-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 600px;
-      margin: 0 auto;
+    .tl-coming-card:hover {
+      border-color: rgba(59,130,246,0.12);
     }
-    .tl-cta-inner h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 4.5vw, 3rem);
+    .tl-coming-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.55rem;
       font-weight: 700;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 99px;
+      z-index: 2;
     }
-    .tl-cta-inner p {
-      color: var(--gray);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 32px;
+    .tl-coming-badge svg {
+      width: 8px; height: 8px;
     }
-    .tl-cta-actions {
+    .tl-coming-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      color: var(--gray2);
+      flex-shrink: 0;
+      margin-bottom: 16px;
+    }
+    .tl-coming-icon svg {
+      width: 18px; height: 18px;
+    }
+    .tl-coming-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .tl-coming-card-desc {
+      font-size: 0.8rem;
+      color: var(--gray2);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .tl-coming-eta {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      font-style: italic;
+    }
+    .tl-coming-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      color: var(--gray2);
+      cursor: not-allowed;
+      opacity: 0.6;
     }
 
     /* ════════════════════════════════════════════
        FAQ
        ════════════════════════════════════════════ */
     .tl-faq {
-      padding: 0 0 var(--tl-gap);
+      padding: 0 0 100px;
       border-top: 1px solid var(--border);
     }
     .tl-faq-list {
@@ -607,44 +497,28 @@
       0%, 100% { opacity: 0.4; transform: scale(1); }
       50% { opacity: 0.8; transform: scale(1.15); }
     }
-    @keyframes tlPing {
-      0% { transform: scale(1); opacity: 0.4; }
-      50% { transform: scale(1.08); opacity: 0.1; }
-      100% { transform: scale(1); opacity: 0.4; }
-    }
 
     /* ════════════════════════════════════════════
        RESPONSIVE
        ════════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      :root { --tl-gap: 80px; }
-      .tl-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-      .tl-featured-card { flex-direction: column; text-align: center; padding: 40px 32px; gap: 32px; }
-      .tl-featured-desc { max-width: 100%; }
-      .tl-featured-content { display: flex; flex-direction: column; align-items: center; }
-      .tl-featured-visual { width: 160px; height: 160px; }
-      .tl-featured-visual svg { width: 60px; height: 60px; }
+      .tl-active-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .tl-coming-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
     }
     @media (max-width: 768px) {
-      :root { --tl-gap: 72px; }
-      .tl-grid { grid-template-columns: 1fr; gap: 16px; }
-      .tl-card { padding: 28px 24px 24px; }
-      .tl-why-grid { grid-template-columns: 1fr; gap: 20px; }
-      .tl-why-card { padding: 32px 24px 28px; }
+      .tl-active-grid { grid-template-columns: 1fr; gap: 18px; }
+      .tl-coming-grid { grid-template-columns: 1fr; gap: 16px; }
+      .tl-active-card { padding: 32px 24px 24px; }
       .tl-hero-stats { gap: 16px; }
+      .tl-hero-stat-divider { display: none; }
+      .tl-hero-stats { flex-direction: column; gap: 8px; }
       .tl-faq-question { padding: 16px 20px; font-size: 0.85rem; }
       .tl-faq-answer-inner { padding: 0 20px 16px; }
-      .tl-featured-card { padding: 32px 24px; }
-      .tl-featured-visual { display: none; }
     }
     @media (max-width: 480px) {
-      :root { --tl-gap: 56px; }
-      .tl-card-icon { width: 38px; height: 38px; }
-      .tl-card-icon svg { width: 17px; height: 17px; }
-      .tl-filter-btn { padding: 8px 18px; font-size: 0.75rem; }
-      .tl-hero-stats { flex-direction: column; gap: 8px; }
-      .tl-hero-stat-divider { display: none; }
-      .tl-filters { gap: 6px; }
+      .tl-active-card { padding: 28px 20px 20px; }
+      .tl-active-icon { width: 44px; height: 44px; }
+      .tl-active-icon svg { width: 20px; height: 20px; }
     }
   </style>
 <script type="application/ld+json">
@@ -654,7 +528,7 @@
   "name": "Nagriva",
   "url": "https://nagriva.com/pages/tools",
   "logo": "/assets/images/branding/nagriva-logo.png",
-  "description": "Nagriva offers free online tools for businesses, marketers, and creators including SEO tools, content tools, and business calculators."
+  "description": "Nagriva offers free marketing and SEO tools including Website Cost Calculator, Website Audit Tool, and SEO Title Generator."
  }
 </script>
 <script type="application/ld+json">
@@ -663,7 +537,7 @@
   "@type": "WebSite",
   "name": "Nagriva",
   "url": "https://nagriva.com/pages/tools",
-  "description": "Free online tools for businesses, marketers, and creators."
+  "description": "Free marketing and SEO tools for businesses."
  }
  </script>
 <script type="application/ld+json">
@@ -731,278 +605,242 @@
       <div class="tl-hero-grid"></div>
     </div>
     <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">✦ Free Tools</div>
-        <h1 class="section-title">Free Online Tools for <span style="color:#3b82f6">Businesses, Marketers &amp; Creators</span></h1>
-        <p class="tl-hero-desc">Save time, improve productivity, and grow your business with our collection of free professional tools.</p>
+      <div class="tl-hero-content fade-up">
+        <div class="tl-hero-tag">✦ Free Tools</div>
+        <h1 class="tl-hero-title">Free Marketing &amp; <span>SEO Tools</span></h1>
+        <p class="tl-hero-desc">Powerful free tools to analyze, optimize, and grow your business online.</p>
         <div class="tl-hero-actions">
-          <a href="#tools-grid" class="btn-primary">
+          <a href="#active-tools" class="btn-primary">
             Explore Tools
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
           <a href="#" class="btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            Get Free Website Audit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Get Free Audit
           </a>
         </div>
         <div class="tl-hero-stats">
           <span class="tl-hero-stat">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            9 Free Tools
-          </span>
-          <span class="tl-hero-stat-divider"></span>
-          <span class="tl-hero-stat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            No Account Required
+            <strong>10,000+</strong> Audits Generated
           </span>
           <span class="tl-hero-stat-divider"></span>
           <span class="tl-hero-stat">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-            Instant Results
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <strong>5,000+</strong> Websites Estimated
+          </span>
+          <span class="tl-hero-stat-divider"></span>
+          <span class="tl-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+            <strong>50,000+</strong> SEO Titles Created
           </span>
         </div>
       </div>
-
-      <!-- ─── Category Filters ─── -->
-  
     </div>
   </section>
 
   <!-- ════════════════════════════════════════════
-       TOOLS GRID
+       ACTIVE TOOLS
        ════════════════════════════════════════════ -->
-  <section class="tl-grid-section section lazy-section" id="tools-grid">
+  <section class="tl-active section lazy-section" id="active-tools">
     <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ Active Tools</div>
+        <h2 class="section-title">Our <span class="text-gradient">Featured Tools</span></h2>
+        <p class="section-desc">Professional-grade tools to help you analyze, estimate, and optimize your online presence.</p>
+      </div>
 
-      <div class="tl-grid fade-up" id="toolsGrid">
-
-        <!-- ─── SEO TOOLS ─── -->
-
-        <!-- SEO Title Generator -->
-        <article class="tl-card" data-category="seo">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
-          </div>
-          <span class="tl-card-category">SEO</span>
-          <h3 class="tl-card-title">SEO Title Generator</h3>
-          <p class="tl-card-desc">Generate click-worthy, SEO-optimized title tags that rank higher and drive more traffic.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- Meta Description Generator -->
-        <article class="tl-card" data-category="seo">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-          </div>
-          <span class="tl-card-category">SEO</span>
-          <h3 class="tl-card-title">Meta Description Generator</h3>
-          <p class="tl-card-desc">Craft compelling meta descriptions that improve click-through rates from search results.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- Keyword Research Tool -->
-        <article class="tl-card" data-category="seo">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </div>
-          <span class="tl-card-category">SEO</span>
-          <h3 class="tl-card-title">Keyword Research Tool</h3>
-          <p class="tl-card-desc">Discover high-value keywords with search volume data to optimize your content strategy.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- ─── CONTENT TOOLS ─── -->
-
-        <!-- Blog Title Generator -->
-        <article class="tl-card" data-category="content">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-          </div>
-          <span class="tl-card-category">Content</span>
-          <h3 class="tl-card-title">Blog Title Generator</h3>
-          <p class="tl-card-desc">Generate engaging, high-CTR blog post titles that capture attention and drive reads.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- Word Counter -->
-        <article class="tl-card" data-category="content">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-          </div>
-          <span class="tl-card-category">Content</span>
-          <h3 class="tl-card-title">Word Counter</h3>
-          <p class="tl-card-desc">Count words, characters, sentences, and paragraphs in your content instantly.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- Reading Time Calculator -->
-        <article class="tl-card" data-category="content">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          </div>
-          <span class="tl-card-category">Content</span>
-          <h3 class="tl-card-title">Reading Time Calculator</h3>
-          <p class="tl-card-desc">Calculate estimated reading time for any piece of content to optimize reader engagement.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- ─── BUSINESS TOOLS ─── -->
+      <div class="tl-active-grid fade-up">
 
         <!-- Website Cost Calculator -->
-        <article class="tl-card" data-category="business">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
+        <div class="tl-active-card">
+          <div class="tl-active-glow"></div>
+          <div class="tl-active-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
           </div>
-          <span class="tl-card-category">Business</span>
-          <h3 class="tl-card-title">Website Cost Calculator</h3>
-          <p class="tl-card-desc">Get an instant estimate of how much your dream website would cost based on your needs.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-        <!-- ROI Calculator -->
-        <article class="tl-card" data-category="business">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          <h3 class="tl-active-card-title">Website Cost Calculator</h3>
+          <p class="tl-active-card-desc">Get an instant estimate for your dream website based on your specific needs and requirements.</p>
+          <div class="tl-active-benefits">
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Get instant pricing estimates
+            </span>
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Compare feature packages
+            </span>
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Plan your budget confidently
+            </span>
           </div>
-          <span class="tl-card-category">Business</span>
-          <h3 class="tl-card-title">ROI Calculator</h3>
-          <p class="tl-card-desc">Calculate your return on investment for marketing campaigns and business initiatives.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
+          <a href="/tools/website-cost-calculator" class="tl-active-btn">
+            Calculate Cost
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
-        </article>
+        </div>
 
-        <!-- Website Audit Tool -->
-        <article class="tl-card" data-category="business">
-          <div class="tl-card-glow"></div>
-          <div class="tl-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          </div>
-          <span class="tl-card-category">Business</span>
-          <h3 class="tl-card-title">Website Audit Tool</h3>
-          <p class="tl-card-desc">Analyze your website's SEO, speed, UX, and identify opportunities for improvement.</p>
-          <a href="#" class="tl-card-btn">
-            Use Tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════
-       FEATURED TOOL — Website Audit
-       ════════════════════════════════════════════ -->
-  <section class="tl-featured section lazy-section" id="featured-tool">
-    <div class="container">
-      <div class="tl-featured-card fade-up">
-        <div class="tl-featured-glow"></div>
-        <div class="tl-featured-content">
-          <span class="tl-featured-badge">
+        <!-- Website Audit Tool (Most Popular) -->
+        <div class="tl-active-card">
+          <div class="tl-active-glow"></div>
+          <div class="tl-active-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
             Most Popular
-          </span>
-          <h2 class="tl-featured-title">Get a Free <span style="color:#3b82f6">Website Audit</span></h2>
-          <p class="tl-featured-desc">Analyze your website and discover opportunities to improve SEO, speed, user experience, and conversions.</p>
-          <a href="#" class="tl-featured-btn">
+          </div>
+          <div class="tl-active-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 class="tl-active-card-title">Website Audit Tool</h3>
+          <p class="tl-active-card-desc">Analyze your website's SEO, speed, UX, and security. Get actionable recommendations to improve performance.</p>
+          <div class="tl-active-benefits">
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Comprehensive SEO analysis
+            </span>
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Speed &amp; performance insights
+            </span>
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Actionable recommendations
+            </span>
+          </div>
+          <a href="/tools/website-audit-tool" class="tl-active-btn">
             Start Free Audit
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
-        <div class="tl-featured-visual">
-          <div class="tl-featured-visual-pulse"></div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+
+        <!-- SEO Title Generator -->
+        <div class="tl-active-card">
+          <div class="tl-active-glow"></div>
+          <div class="tl-active-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+          </div>
+          <h3 class="tl-active-card-title">SEO Title Generator</h3>
+          <p class="tl-active-card-desc">Generate click-worthy, SEO-optimized title tags that rank higher and drive more organic traffic.</p>
+          <div class="tl-active-benefits">
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Optimized for CTR
+            </span>
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Keyword-rich suggestions
+            </span>
+            <span class="tl-active-benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Preview in search results
+            </span>
+          </div>
+          <a href="/tools/seo-title-generator" class="tl-active-btn">
+            Generate Titles
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- ════════════════════════════════════════════
-       WHY USE OUR TOOLS
+       COMING SOON
        ════════════════════════════════════════════ -->
-  <section class="tl-why section lazy-section" id="why-tools">
+  <section class="tl-coming section lazy-section" id="coming-soon">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-tag">✦ Why Our Tools</div>
-        <h2 class="section-title">Built for <span class="text-gradient">Results</span></h2>
-        <p class="section-desc">Every tool is designed with one goal in mind — helping you grow your business.</p>
+        <div class="section-tag">✦ Coming Soon</div>
+        <h2 class="section-title">More Free Tools <span class="text-gradient">Coming Soon</span></h2>
+        <p class="section-desc">We're building more tools to help you grow. Here's what's on the way.</p>
       </div>
-      <div class="tl-why-grid fade-up">
-        <div class="tl-why-card">
-          <div class="tl-why-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-          </div>
-          <h3 class="tl-why-title">Fast Results</h3>
-          <p class="tl-why-desc">Get insights instantly. No waiting, no complicated setup — just real-time results at your fingertips.</p>
-        </div>
-        <div class="tl-why-card">
-          <div class="tl-why-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          </div>
-          <h3 class="tl-why-title">100% Free</h3>
-          <p class="tl-why-desc">No hidden fees, no credit card required, and no subscriptions. Just free tools that actually work.</p>
-        </div>
-        <div class="tl-why-card">
-          <div class="tl-why-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          </div>
-          <h3 class="tl-why-title">Built for Growth</h3>
-          <p class="tl-why-desc">Designed for businesses, freelancers, and creators who want to make data-driven decisions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ════════════════════════════════════════════
-       CTA
-       ════════════════════════════════════════════ -->
-  <section class="tl-cta section lazy-section" id="tools-cta">
-    <div class="tl-cta-glow"></div>
-    <div class="container">
-      <div class="tl-cta-inner fade-up">
-        <h2>Need More Than a <span class="text-gradient">Tool?</span></h2>
-        <p>Get a professional website audit and personalized recommendations for your business.</p>
-        <div class="tl-cta-actions">
-          <a href="#" class="btn-primary">
-            Get Free Audit
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-          <a href="#" class="btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            Contact Us
-          </a>
+      <div class="tl-coming-grid fade-up">
+
+        <!-- Meta Description Generator -->
+        <div class="tl-coming-card">
+          <div class="tl-coming-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Coming Soon
+          </div>
+          <div class="tl-coming-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h3 class="tl-coming-card-title">Meta Description Generator</h3>
+          <p class="tl-coming-card-desc">Craft compelling meta descriptions that improve click-through rates from search results.</p>
+          <span class="tl-coming-eta">Currently in development. Available soon.</span>
         </div>
+
+        <!-- Keyword Research Tool -->
+        <div class="tl-coming-card">
+          <div class="tl-coming-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Coming Soon
+          </div>
+          <div class="tl-coming-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <h3 class="tl-coming-card-title">Keyword Research Tool</h3>
+          <p class="tl-coming-card-desc">Discover high-value keywords with search volume data to optimize your content strategy.</p>
+          <span class="tl-coming-eta">Currently in development. Available soon.</span>
+        </div>
+
+        <!-- Blog Title Generator -->
+        <div class="tl-coming-card">
+          <div class="tl-coming-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Coming Soon
+          </div>
+          <div class="tl-coming-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          </div>
+          <h3 class="tl-coming-card-title">Blog Title Generator</h3>
+          <p class="tl-coming-card-desc">Generate engaging, high-CTR blog post titles that capture attention and drive reads.</p>
+          <span class="tl-coming-eta">Currently in development. Available soon.</span>
+        </div>
+
+        <!-- Word Counter -->
+        <div class="tl-coming-card">
+          <div class="tl-coming-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Coming Soon
+          </div>
+          <div class="tl-coming-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          </div>
+          <h3 class="tl-coming-card-title">Word Counter</h3>
+          <p class="tl-coming-card-desc">Count words, characters, sentences, and paragraphs in your content instantly.</p>
+          <span class="tl-coming-eta">Currently in development. Available soon.</span>
+        </div>
+
+        <!-- Reading Time Calculator -->
+        <div class="tl-coming-card">
+          <div class="tl-coming-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Coming Soon
+          </div>
+          <div class="tl-coming-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <h3 class="tl-coming-card-title">Reading Time Calculator</h3>
+          <p class="tl-coming-card-desc">Calculate estimated reading time for any piece of content to optimize reader engagement.</p>
+          <span class="tl-coming-eta">Currently in development. Available soon.</span>
+        </div>
+
+        <!-- ROI Calculator -->
+        <div class="tl-coming-card">
+          <div class="tl-coming-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Coming Soon
+          </div>
+          <div class="tl-coming-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </div>
+          <h3 class="tl-coming-card-title">ROI Calculator</h3>
+          <p class="tl-coming-card-desc">Calculate your return on investment for marketing campaigns and business initiatives.</p>
+          <span class="tl-coming-eta">Currently in development. Available soon.</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1069,30 +907,8 @@
   <script defer src="/js/lazy-loader.js"></script>
   <div id="cookie-consent-container"></div>
 
-  <!-- ════════════════════════════════════════════
-       PAGE-SPECIFIC JS
-       ════════════════════════════════════════════ -->
   <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-
-      /* ─── Category Filtering ─── */
-      const filterBtns = document.querySelectorAll('.tl-filter-btn');
-      const cards = document.querySelectorAll('.tl-card');
-
-      filterBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          filterBtns.forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          var filter = btn.getAttribute('data-filter');
-          cards.forEach(function(card) {
-            if (filter === 'all' || card.getAttribute('data-category') === filter) {
-              card.classList.remove('hidden');
-            } else {
-              card.classList.add('hidden');
-            }
-          });
-        });
-      });
 
       /* ─── FAQ Accordion ─── */
       var faqItems = document.querySelectorAll('.tl-faq-item');
@@ -1108,13 +924,16 @@
       });
 
       /* ─── Smooth scroll for "Explore Tools" ─── */
-      document.querySelector('a[href="#tools-grid"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        var target = document.querySelector('#tools-grid');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
+      var exploreLink = document.querySelector('a[href="#active-tools"]');
+      if (exploreLink) {
+        exploreLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = document.querySelector('#active-tools');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
 
     });
   </script>

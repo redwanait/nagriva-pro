@@ -37,61 +37,6 @@
     .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1) var(--delay,0s), transform 0.5s cubic-bezier(0.4,0,0.2,1) var(--delay,0s); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .dw-hero .fade-up { opacity: 1 !important; transform: translateY(0) !important; }
-
-    /* ─── Coming Soon State ─── */
-    .dw-demo-card--coming .dw-demo-visual::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(4,4,4,0.35);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      z-index: 2;
-    }
-    .dw-demo-card--coming .dw-demo-visual img {
-      filter: grayscale(0.5) brightness(0.6);
-    }
-    .dw-demo-card--coming {
-      cursor: default;
-    }
-    .dw-demo-card--coming:hover {
-      transform: none;
-      border-color: var(--border);
-      box-shadow: none;
-    }
-    .dw-demo-card--coming .dw-demo-title {
-      color: rgba(255,255,255,0.5);
-    }
-    .dw-demo-card--coming .dw-demo-desc {
-      color: rgba(255,255,255,0.3);
-    }
-    .dw-demo-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--gray2);
-      backdrop-filter: blur(6px);
-    }
-    .dw-demo-btn--disabled {
-      color: var(--gray2) !important;
-      cursor: default !important;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-    .dw-demo-btn--disabled:hover {
-      gap: 8px !important;
-    }
   </style>
   <style>
     @font-face {
@@ -228,100 +173,130 @@
       <div class="section-header fade-up">
         <div class="section-tag">✦ Choose Your Style</div>
         <h2 class="section-title">Choose Your <span class="text-gradient">Agency Website</span></h2>
-        <p class="section-desc">New Agency Website Templates Coming Soon</p>
+        <p class="section-desc">Choose a ready-made design and customize it for your agency</p>
       </div>
 
       <div class="dw-demos-grid fade-up" style="--delay:0.1s">
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Digital Marketing Agency — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/agency-demo-digital.png" data-title="Digital Marketing Agency" aria-label="Preview Digital Marketing Agency demo">
-            <img src="/assets/images/agency-demo-digital.png" alt="Digital Marketing Agency website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/ogie-digital-agency-portfolio-wordpress-theme/full_screen_preview/63574646" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Digital Marketing Agency demo">
+            <img src="/assets/images/agency-websites%20images/image1.png" alt="Digital Marketing Agency website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Digital Marketing Agency</h3>
             <p class="dw-demo-desc">Modern marketing agency website with service showcases and <a href="/case-studies/agency-success-story.html">lead generation</a> forms.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/ogie-digital-agency-portfolio-wordpress-theme/full_screen_preview/63574646" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Creative Design Agency — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/agency-demo-creative.png" data-title="Creative Design Agency" aria-label="Preview Creative Design Agency demo">
-            <img src="/assets/images/agency-demo-creative.png" alt="Creative Design Agency website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/pine-elementor-creative-agency-portfolio-wordpress-theme/full_screen_preview/63458854" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Creative Design Agency demo">
+            <img src="/assets/images/agency-websites%20images/image2.png" alt="Creative Design Agency website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Creative Design Agency</h3>
             <p class="dw-demo-desc">Stunning <a href="/pages/services/video-editing.html">portfolio</a>-focused website for creative studios and design agencies.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/pine-elementor-creative-agency-portfolio-wordpress-theme/full_screen_preview/63458854" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Web Development Agency — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/agency-demo-dev.png" data-title="Web Development Agency" aria-label="Preview Web Development Agency demo">
-            <img src="/assets/images/agency-demo-dev.png" alt="Web Development Agency website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/agenio-ai-agency-wordpress-theme/full_screen_preview/63360541" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Web Development Agency demo">
+            <img src="/assets/images/agency-websites%20images/image3.png" alt="Web Development Agency website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Web Development Agency</h3>
             <p class="dw-demo-desc">Tech-forward website for dev agencies featuring <a href="/pages/results.html">case studies</a> and project portfolios.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/agenio-ai-agency-wordpress-theme/full_screen_preview/63360541" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Full-Service Growth Agency — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/agency-demo-growth.png" data-title="Full-Service Growth Agency" aria-label="Preview Full-Service Growth Agency demo">
-            <img src="/assets/images/agency-demo-growth.png" alt="Full-Service Growth Agency website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/pixora-creative-agency-portfolio-wordpress-theme/full_screen_preview/60513666" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Full-Service Growth Agency demo">
+            <img src="/assets/images/agency-websites%20images/image4.png" alt="Full-Service Growth Agency website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Full-Service Growth Agency</h3>
             <p class="dw-demo-desc">Comprehensive agency website with multi-service offering and client <a href="/pages/dentist-websites.html">success</a> stories.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/pixora-creative-agency-portfolio-wordpress-theme/full_screen_preview/60513666" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="PR &amp; Communications Agency — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/agency-demo-pr.png" data-title="PR &amp; Communications Agency" aria-label="Preview PR &amp; Communications Agency demo">
-            <img src="/assets/images/agency-demo-pr.png" alt="PR &amp; Communications Agency website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/startify-business-consulting-agency-elementor-wordpress-theme/full_screen_preview/63540093" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View PR &amp; Communications Agency demo">
+            <img src="/assets/images/agency-websites%20images/image5.png" alt="PR &amp; Communications Agency website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">PR &amp; Communications Agency</h3>
             <p class="dw-demo-desc">Professional agency website built for reputation management and media relations.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/startify-business-consulting-agency-elementor-wordpress-theme/full_screen_preview/63540093" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Business Consulting Agency — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/agency-demo-consulting.png" data-title="Business Consulting Agency" aria-label="Preview Business Consulting Agency demo">
-            <img src="/assets/images/agency-demo-consulting.png" alt="Business Consulting Agency website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/adon-creative-agency-portfolio-wordpress-theme/full_screen_preview/63003419" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Business Consulting Agency demo">
+            <img src="/assets/images/agency-websites%20images/image6.png" alt="Business Consulting Agency website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Business Consulting Agency</h3>
             <p class="dw-demo-desc">Trust-building website for consulting firms with thought leadership and case studies.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/adon-creative-agency-portfolio-wordpress-theme/full_screen_preview/63003419" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
       </div>
     </div>
@@ -696,13 +671,7 @@
   <script defer="" src="../js/auth.js"></script>
   <script defer="" src="../js/performance-optimizer.js"></script>
   <script defer="" src="../js/lazy-loader.js"></script>
-  <script>
-    (function () {
-      document.querySelectorAll('.dw-demo-card').forEach(function (card) {
-        card.style.cursor = 'default';
-      });
-    })();
-    </script>
+
 
   <script>
     (function () {

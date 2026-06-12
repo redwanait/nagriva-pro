@@ -1,0 +1,1658 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Title Generator — Nagriva</title>
+  <meta name="description" content="Generate click-worthy, SEO-optimized titles with AI. Get 10 high-converting titles for your keyword in seconds.">
+  <meta property="og:title" content="SEO Title Generator — Nagriva">
+  <meta property="og:description" content="Generate click-worthy, SEO-optimized titles with AI. Get 10 high-converting titles for your keyword in seconds.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/tools/seo-title-generator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SEO Title Generator — Nagriva">
+  <meta name="twitter:description" content="Generate click-worthy, SEO-optimized titles with AI.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/tools/seo-title-generator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+  <link rel="stylesheet" href="/css/performance.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root {
+      --seo-max-w: 900px;
+      --seo-card-bg: rgba(255,255,255,0.02);
+      --seo-glass: rgba(255,255,255,0.04);
+      --seo-border: rgba(255,255,255,0.08);
+    }
+
+    /* ═══════════ HERO ═══════════ */
+    .seo-hero {
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--navbar-height) + 40px) 0 20px;
+    }
+    .seo-hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .seo-hero-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      filter: blur(120px);
+      animation: seoGlowPulse 8s ease-in-out infinite;
+    }
+    .seo-hero-glow-2 {
+      position: absolute;
+      bottom: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: seoGlowPulse2 12s ease-in-out infinite;
+    }
+    .seo-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%);
+    }
+    .seo-hero .container { position: relative; z-index: 1; }
+    .seo-hero-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .seo-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .seo-hero-tag svg { width: 12px; height: 12px; }
+    .seo-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .seo-hero-title span {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .seo-hero-desc {
+      font-size: 1.02rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .seo-hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .seo-hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--gray2);
+    }
+    .seo-hero-stat svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+    .seo-hero-stat strong { color: var(--white); font-weight: 600; }
+    .seo-hero-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--gray2);
+      opacity: 0.3;
+    }
+
+    /* ═══════════ GENERATOR SECTION ═══════════ */
+    .seo-section {
+      padding: 40px 0 60px;
+    }
+    .seo-inner { max-width: var(--seo-max-w); margin: 0 auto; }
+
+    .seo-card {
+      position: relative;
+      background: var(--seo-card-bg);
+      border: 1px solid var(--seo-border);
+      border-radius: 24px;
+      padding: 48px 56px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .seo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+    }
+    .seo-card-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .seo-card-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .seo-card-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .seo-card-header p {
+      font-size: 0.88rem;
+      color: var(--gray);
+    }
+
+    /* ─── Form ─── */
+    .seo-form {
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .seo-input-wrap { position: relative; }
+    .seo-input-icon {
+      position: absolute;
+      left: 16px; top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      color: var(--gray2);
+      pointer-events: none;
+    }
+    .seo-input-icon svg { width: 16px; height: 16px; }
+    .seo-input {
+      width: 100%;
+      padding: 16px 16px 16px 46px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--white);
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+    .seo-input::placeholder { color: var(--gray2); }
+    .seo-input:hover {
+      border-color: rgba(59,130,246,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .seo-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .seo-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .seo-select {
+      appearance: none;
+      width: 100%;
+      padding: 14px 40px 14px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--white);
+      cursor: pointer;
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      box-sizing: border-box;
+    }
+    .seo-select:hover {
+      border-color: rgba(59,130,246,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .seo-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .seo-select option { background: #0f0f0f; color: var(--white); }
+    .seo-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 32px;
+      border: none;
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #040404;
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .seo-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .seo-submit:hover::before { transform: translateX(100%); }
+    .seo-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.3);
+    }
+    .seo-submit:active { transform: translateY(0); }
+    .seo-submit svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+    .seo-submit:hover svg { transform: translateX(4px); }
+    .seo-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ═══════════ LOADING ═══════════ */
+    .seo-loading {
+      display: none;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .seo-loading.active { display: block; animation: seoFadeIn 0.3s ease; }
+    .seo-loading-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .seo-loading-header svg { width: 18px; height: 18px; color: var(--accent); }
+    .seo-loading-header span { font-size: 0.85rem; font-weight: 500; color: var(--gray); }
+    .seo-loading-spinner {
+      width: 56px; height: 56px;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+    .seo-loading-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--accent);
+      animation: seoSpin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .seo-loading-ring:nth-child(2) {
+      inset: 7px;
+      border-top-color: rgba(59,130,246,0.4);
+      animation-duration: 1.5s;
+      animation-direction: reverse;
+    }
+    .seo-loading-ring:nth-child(3) {
+      inset: 14px;
+      border-top-color: rgba(59,130,246,0.2);
+      animation-duration: 2s;
+    }
+    .seo-loading-keyword {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--gray2);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+    }
+    .seo-loading-keyword svg { width: 12px; height: 12px; color: var(--accent); }
+    .seo-loading-msgs {
+      min-height: 2em;
+      margin-bottom: 24px;
+    }
+    .seo-loading-msg {
+      font-size: 0.95rem;
+      color: var(--white);
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    .seo-loading-msg.active {
+      opacity: 1;
+      position: relative;
+      left: auto;
+      transform: none;
+    }
+    .seo-loading-bar {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    .seo-loading-track {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .seo-loading-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+    .seo-loading-pct {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--gray2);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ═══════════ TITLES RESULTS ═══════════ */
+    .seo-titles { display: none; }
+    .seo-titles.active { display: block; animation: seoFadeInUp 0.5s ease; }
+
+    .seo-titles-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-top: 8px;
+    }
+    .seo-titles-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .seo-titles-count {
+      font-size: 0.78rem;
+      color: var(--gray2);
+    }
+    .seo-titles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .seo-title-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--seo-border);
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+      animation: seoSlideIn 0.4s ease backwards;
+    }
+    .seo-title-item:hover {
+      border-color: rgba(59,130,246,0.15);
+      background: rgba(255,255,255,0.025);
+      transform: translateX(4px);
+    }
+    .seo-title-num {
+      width: 26px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gray2);
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .seo-title-text {
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    .seo-title-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .seo-title-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--seo-border);
+      background: rgba(255,255,255,0.02);
+      color: var(--gray2);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .seo-title-btn:hover {
+      border-color: rgba(59,130,246,0.3);
+      color: var(--accent);
+      background: rgba(59,130,246,0.08);
+    }
+    .seo-title-btn.copied {
+      border-color: rgba(34,197,94,0.3);
+      color: #22c55e;
+      background: rgba(34,197,94,0.08);
+    }
+    .seo-title-btn.faved {
+      border-color: rgba(239,68,68,0.3);
+      color: #ef4444;
+      background: rgba(239,68,68,0.08);
+    }
+    .seo-title-btn svg { width: 14px; height: 14px; }
+
+    .seo-titles-actions-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .seo-titles-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .seo-titles-btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #040404;
+    }
+    .seo-titles-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+    }
+    .seo-titles-btn-primary svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
+    .seo-titles-btn-primary:hover svg { transform: translateX(4px); }
+    .seo-titles-btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--seo-border);
+      color: var(--gray);
+    }
+    .seo-titles-btn-secondary:hover {
+      border-color: rgba(59,130,246,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ═══════════ SEO INSIGHTS ═══════════ */
+    .seo-insights {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 0;
+      margin-top: 8px;
+    }
+    .seo-insights h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .seo-insights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .seo-insight-item {
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--seo-border);
+    }
+    .seo-insight-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray2);
+      margin-bottom: 4px;
+    }
+    .seo-insight-value {
+      font-size: 0.92rem;
+      color: var(--white);
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    /* ═══════════ AI RECOMMENDATIONS ═══════════ */
+    .seo-recs {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 0;
+    }
+    .seo-recs h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .seo-recs-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .seo-rec-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--seo-border);
+      transition: border-color 0.3s ease;
+    }
+    .seo-rec-item:hover {
+      border-color: rgba(59,130,246,0.12);
+    }
+    .seo-rec-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .seo-rec-icon--green {
+      background: rgba(34,197,94,0.1);
+      color: #22c55e;
+    }
+    .seo-rec-icon--blue {
+      background: rgba(59,130,246,0.1);
+      color: var(--accent);
+    }
+    .seo-rec-icon--yellow {
+      background: rgba(234,179,8,0.1);
+      color: #eab308;
+    }
+    .seo-rec-icon--purple {
+      background: rgba(168,85,247,0.1);
+      color: #a855f7;
+    }
+    .seo-rec-icon svg { width: 14px; height: 14px; }
+    .seo-rec-text {
+      font-size: 0.84rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+
+    /* ═══════════ LEAD GENERATION ═══════════ */
+    .seo-lead-section {
+      display: none;
+      padding: 60px 0;
+    }
+    .seo-lead-section.active { display: block; animation: seoFadeInUp 0.5s ease; }
+    .seo-lead-card {
+      position: relative;
+      background: var(--seo-card-bg);
+      border: 1px solid var(--seo-border);
+      border-radius: 24px;
+      padding: 48px 56px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      text-align: center;
+    }
+    .seo-lead-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+    }
+    .seo-lead-glow {
+      position: absolute;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .seo-lead-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .seo-lead-card > p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      margin-bottom: 28px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .seo-lead-form {
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+    .seo-lead-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--white);
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+    .seo-lead-input::placeholder { color: var(--gray2); }
+    .seo-lead-input:hover {
+      border-color: rgba(59,130,246,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .seo-lead-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .seo-lead-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 16px 28px;
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #040404;
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .seo-lead-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+    }
+    .seo-lead-btn svg { width: 15px; height: 15px; transition: transform 0.3s ease; }
+    .seo-lead-btn:hover svg { transform: translateX(4px); }
+    .seo-lead-privacy {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-top: 8px;
+    }
+    .seo-lead-privacy a { color: var(--accent); text-decoration: none; }
+    .seo-lead-privacy a:hover { text-decoration: underline; }
+    .seo-lead-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0;
+    }
+    .seo-lead-success.active { display: flex; }
+    .seo-lead-success-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #22c55e;
+    }
+    .seo-lead-success-icon svg { width: 24px; height: 24px; }
+    .seo-lead-success h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .seo-lead-success p {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    /* ═══════════ FAQ ═══════════ */
+    .seo-faq {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .seo-faq-inner { max-width: 700px; margin: 0 auto; }
+    .seo-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .seo-faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      background: rgba(255,255,255,0.008);
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .seo-faq-item:hover { border-color: rgba(59,130,246,0.12); }
+    .seo-faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 18px 22px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 14px;
+      transition: color 0.3s ease;
+    }
+    .seo-faq-q:hover { color: var(--accent); }
+    .seo-faq-q svg {
+      width: 14px; height: 14px;
+      color: var(--gray2);
+      flex-shrink: 0;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .seo-faq-q:hover svg { color: var(--accent); }
+    .seo-faq-item.open .seo-faq-q svg { transform: rotate(180deg); }
+    .seo-faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .seo-faq-a-inner {
+      padding: 0 22px 18px;
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .seo-faq-item.open .seo-faq-a { max-height: 250px; }
+
+    /* ═══════════ FINAL CTA ═══════════ */
+    .seo-cta {
+      padding: 80px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+    .seo-cta-glow {
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .seo-cta-inner {
+      position: relative; z-index: 1;
+      max-width: 600px; margin: 0 auto;
+    }
+    .seo-cta-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .seo-cta-inner h2 span {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .seo-cta-inner p {
+      color: var(--gray);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .seo-cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .seo-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 34px;
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .seo-cta-btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #040404;
+    }
+    .seo-cta-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+    }
+    .seo-cta-btn-primary svg { width: 15px; height: 15px; transition: transform 0.3s ease; }
+    .seo-cta-btn-primary:hover svg { transform: translateX(4px); }
+    .seo-cta-btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--seo-border);
+      color: var(--gray);
+    }
+    .seo-cta-btn-secondary:hover {
+      border-color: rgba(59,130,246,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    /* ═══════════ TOAST ═══════════ */
+    .seo-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      padding: 10px 22px;
+      border-radius: 99px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.25);
+      color: #22c55e;
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+      z-index: 999;
+      backdrop-filter: blur(12px);
+    }
+    .seo-toast.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ═══════════ ANIMATIONS ═══════════ */
+    @keyframes seoGlowPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+    }
+    @keyframes seoGlowPulse2 {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    @keyframes seoSpin { to { transform: rotate(360deg); } }
+    @keyframes seoFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes seoFadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes seoSlideIn {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 768px) {
+      .seo-card { padding: 32px 24px; }
+      .seo-lead-card { padding: 32px 24px; }
+      .seo-form-row { grid-template-columns: 1fr; gap: 14px; }
+      .seo-insights-grid { grid-template-columns: 1fr; }
+      .seo-recs-list { grid-template-columns: 1fr; }
+      .seo-hero-stats { gap: 14px; flex-direction: column; }
+      .seo-hero-dot { display: none; }
+      .seo-loading { padding: 28px 0; }
+      .seo-cta { padding: 60px 0 80px; }
+      .seo-faq { padding: 60px 0; }
+      .seo-title-item { padding: 14px 16px; flex-wrap: wrap; }
+      .seo-title-actions { margin-left: auto; }
+    }
+    @media (max-width: 480px) {
+      .seo-card { padding: 24px 18px; border-radius: 18px; }
+      .seo-lead-card { padding: 24px 18px; border-radius: 18px; }
+      .seo-input { padding: 14px 14px 14px 42px; font-size: 0.88rem; }
+      .seo-select { padding: 12px 38px 12px 14px; font-size: 0.85rem; }
+      .seo-submit { padding: 16px 24px; font-size: 0.92rem; }
+      .seo-lead-input { padding: 12px 16px; font-size: 0.85rem; }
+      .seo-lead-btn { padding: 14px 24px; }
+      .seo-faq-q { padding: 14px 18px; font-size: 0.85rem; }
+      .seo-faq-a-inner { padding: 0 18px 14px; }
+      .seo-cta-btn { padding: 14px 24px; font-size: 0.88rem; }
+      .seo-card-header h2 { font-size: 1.2rem; }
+      .seo-title-text { font-size: 0.85rem; }
+      .seo-titles-actions-bottom { flex-direction: column; }
+      .seo-titles-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SEO Title Generator",
+  "url": "https://nagriva.com/tools/seo-title-generator",
+  "description": "Generate click-worthy, SEO-optimized titles with AI. Get 10 high-converting titles for your keyword in seconds.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nagriva.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://nagriva.com/pages/tools" },
+    { "@type": "ListItem", "position": 3, "name": "SEO Title Generator" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question", "name": "What is an SEO title?",
+      "acceptedAnswer": { "@type": "Answer", "text": "An SEO title (or title tag) is the clickable headline that appears in search engine results. It's one of the most important on-page SEO factors, helping search engines understand your content and users decide whether to click." }
+    },
+    {
+      "@type": "Question", "name": "How long should an SEO title be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The ideal title length is 50-60 characters to ensure it displays fully in search results. Google typically truncates titles longer than 60 characters. Our generator optimizes length automatically." }
+    },
+    {
+      "@type": "Question", "name": "Are these titles guaranteed to rank #1?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No tool can guarantee #1 rankings. Our generator creates SEO-optimized titles based on proven best practices to maximize your click-through rate and relevance. Rankings depend on many factors including content quality, backlinks, and competition." }
+    },
+    {
+      "@type": "Question", "name": "Can I use these titles for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, the SEO Title Generator is completely free. You can generate, copy, and save as many titles as you need with no limits or hidden charges." }
+    },
+    {
+      "@type": "Question", "name": "How does the AI generate titles?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Our AI analyzes your target keyword, content type, and audience to generate relevant, high-converting titles. It applies SEO best practices including keyword placement, emotional triggers, numbers, and search intent matching." }
+    }
+  ]
+}
+</script>
+</head>
+<body data-page="seo-title-generator">
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ -->
+  <section class="seo-hero">
+    <div class="seo-hero-bg">
+      <div class="seo-hero-glow"></div>
+      <div class="seo-hero-glow-2"></div>
+      <div class="seo-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="seo-hero-content fade-up">
+        <div class="seo-hero-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          AI Title Generator
+        </div>
+        <h1 class="seo-hero-title">SEO Title <span>Generator</span></h1>
+        <p class="seo-hero-desc">Generate click-worthy, SEO-optimized titles that rank higher and attract more traffic.</p>
+        <div class="seo-hero-stats">
+          <span class="seo-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            <strong>50,000+</strong> Titles Generated
+          </span>
+          <span class="seo-hero-dot"></span>
+          <span class="seo-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            <strong>AI</strong> Powered
+          </span>
+          <span class="seo-hero-dot"></span>
+          <span class="seo-hero-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <strong>Instant</strong> Results
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       GENERATOR
+       ════════════════════════════════════════════ -->
+  <section class="seo-section" id="generator">
+    <div class="container">
+      <div class="seo-inner">
+
+        <div class="seo-card fade-up" id="genCard">
+          <div class="seo-card-glow"></div>
+
+          <div class="seo-card-header">
+            <h2>Generate High-Converting Titles</h2>
+            <p>Enter your keyword and preferences — our AI does the rest.</p>
+          </div>
+
+          <!-- Form -->
+          <div id="seoFormView">
+            <form class="seo-form" id="seoForm" novalidate>
+              <div class="seo-input-wrap">
+                <span class="seo-input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span>
+                <input type="text" class="seo-input" id="seoKeyword" placeholder="digital marketing" required autocomplete="off">
+              </div>
+              <div class="seo-form-row">
+                <select class="seo-select" id="seoContentType">
+                  <option value="blog">Blog Post</option>
+                  <option value="landing">Landing Page</option>
+                  <option value="product">Product Page</option>
+                  <option value="service">Service Page</option>
+                  <option value="case-study">Case Study</option>
+                </select>
+                <select class="seo-select" id="seoAudience">
+                  <option value="beginners">Beginners</option>
+                  <option value="professionals">Professionals</option>
+                  <option value="small-business">Small Businesses</option>
+                  <option value="agencies">Agencies</option>
+                  <option value="general">General Audience</option>
+                </select>
+              </div>
+              <button type="submit" class="seo-submit" id="seoSubmit">
+                Generate SEO Titles
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- Loading -->
+          <div class="seo-loading" id="seoLoading">
+            <div class="seo-loading-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              <span>AI is Generating Titles</span>
+            </div>
+            <div class="seo-loading-spinner">
+              <div class="seo-loading-ring"></div>
+              <div class="seo-loading-ring"></div>
+              <div class="seo-loading-ring"></div>
+            </div>
+            <div class="seo-loading-keyword">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <span id="seoLoadingKeyword">Analyzing...</span>
+            </div>
+            <div class="seo-loading-msgs" id="seoLoadingMsgs">
+              <div class="seo-loading-msg active" data-idx="0">Analyzing keyword...</div>
+              <div class="seo-loading-msg" data-idx="1">Finding ranking opportunities...</div>
+              <div class="seo-loading-msg" data-idx="2">Generating click-worthy headlines...</div>
+              <div class="seo-loading-msg" data-idx="3">Optimizing for search intent...</div>
+              <div class="seo-loading-msg" data-idx="4">Finalizing SEO titles...</div>
+            </div>
+            <div class="seo-loading-bar">
+              <div class="seo-loading-track">
+                <div class="seo-loading-fill" id="seoProgressFill"></div>
+              </div>
+              <div class="seo-loading-pct" id="seoProgressPct">0%</div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="seo-titles" id="seoTitles">
+
+            <div class="seo-titles-header">
+              <h3>Generated Titles</h3>
+              <span class="seo-titles-count" id="titlesCount">10 titles for your keyword</span>
+            </div>
+
+            <div class="seo-titles-list" id="titlesList"></div>
+
+            <div class="seo-titles-actions-bottom">
+              <button class="seo-titles-btn seo-titles-btn-primary" id="regenerateBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                Regenerate
+              </button>
+              <button class="seo-titles-btn seo-titles-btn-secondary" id="copyAllBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy All
+              </button>
+            </div>
+
+            <!-- SEO Insights -->
+            <div class="seo-insights">
+              <h3>SEO Insights</h3>
+              <div class="seo-insights-grid">
+                <div class="seo-insight-item">
+                  <div class="seo-insight-label">Primary Keyword</div>
+                  <div class="seo-insight-value" id="insightKeyword">—</div>
+                </div>
+                <div class="seo-insight-item">
+                  <div class="seo-insight-label">Search Intent</div>
+                  <div class="seo-insight-value" id="insightIntent">Informational / Commercial</div>
+                </div>
+                <div class="seo-insight-item">
+                  <div class="seo-insight-label">Suggested Meta Description</div>
+                  <div class="seo-insight-value" id="insightMeta">—</div>
+                </div>
+                <div class="seo-insight-item">
+                  <div class="seo-insight-label">Recommended Title Length</div>
+                  <div class="seo-insight-value" id="insightLength">50–60 characters</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Recommendations -->
+            <div class="seo-recs">
+              <h3>AI Recommendations</h3>
+              <div class="seo-recs-list">
+                <div class="seo-rec-item">
+                  <div class="seo-rec-icon seo-rec-icon--blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
+                  </div>
+                  <span class="seo-rec-text">Use numbers in titles to boost CTR by up to 36%</span>
+                </div>
+                <div class="seo-rec-item">
+                  <div class="seo-rec-icon seo-rec-icon--green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  </div>
+                  <span class="seo-rec-text">Include emotional triggers for higher engagement</span>
+                </div>
+                <div class="seo-rec-item">
+                  <div class="seo-rec-icon seo-rec-icon--yellow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  </div>
+                  <span class="seo-rec-text">Match search intent for better ranking potential</span>
+                </div>
+                <div class="seo-rec-item">
+                  <div class="seo-rec-icon seo-rec-icon--purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+                  </div>
+                  <span class="seo-rec-text">Keep title under 60 characters for full SERP display</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       LEAD GENERATION
+       ════════════════════════════════════════════ -->
+  <section class="seo-lead-section" id="leadSection">
+    <div class="container">
+      <div class="seo-lead-card fade-up">
+        <div class="seo-lead-glow"></div>
+        <h3>Need Full SEO Content?</h3>
+        <p>Let our team create optimized content that ranks and drives organic traffic.</p>
+
+        <div class="seo-lead-form" id="leadForm">
+          <input type="text" class="seo-lead-input" id="leadName" placeholder="Your full name *" required>
+          <input type="email" class="seo-lead-input" id="leadEmail" placeholder="Your email address *" required>
+          <button type="button" class="seo-lead-btn" id="leadSubmit">
+            Request SEO Consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+          <p class="seo-lead-privacy">Your data is safe. We'll never share your information. <a href="/privacy-policy">Privacy Policy</a></p>
+        </div>
+
+        <div class="seo-lead-success" id="leadSuccess">
+          <div class="seo-lead-success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h4>Thank You!</h4>
+          <p>We've received your request. Our SEO team will reach out within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FAQ
+       ════════════════════════════════════════════ -->
+  <section class="seo-faq section lazy-section" id="faq">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">✦ FAQ</div>
+        <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+        <p class="section-desc">Everything you need to know about SEO titles and our generator.</p>
+      </div>
+      <div class="seo-faq-inner">
+        <div class="seo-faq-list fade-up" id="faqList">
+          <div class="seo-faq-item open">
+            <button class="seo-faq-q">
+              <span>What is an SEO title?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="seo-faq-a">
+              <div class="seo-faq-a-inner">An SEO title (also called a title tag) is the clickable headline that appears in search engine results. It's one of the most important on-page SEO factors — helping search engines understand your content and users decide whether to click through to your page.</div>
+            </div>
+          </div>
+          <div class="seo-faq-item">
+            <button class="seo-faq-q">
+              <span>How long should an SEO title be?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="seo-faq-a">
+              <div class="seo-faq-a-inner">The ideal title length is 50–60 characters. Google typically truncates titles longer than 60 characters in search results. Our generator automatically optimizes for the perfect length to ensure your titles display fully.</div>
+            </div>
+          </div>
+          <div class="seo-faq-item">
+            <button class="seo-faq-q">
+              <span>Are these titles guaranteed to rank #1?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="seo-faq-a">
+              <div class="seo-faq-a-inner">No tool can guarantee #1 rankings. Our generator creates SEO-optimized titles based on proven best practices to maximize your click-through rate and relevance. Actual rankings depend on content quality, backlinks, competition, and many other factors.</div>
+            </div>
+          </div>
+          <div class="seo-faq-item">
+            <button class="seo-faq-q">
+              <span>Can I use these titles for free?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="seo-faq-a">
+              <div class="seo-faq-a-inner">Yes, our SEO Title Generator is completely free to use. You can generate, copy, and save as many titles as you need with no limits, registration, or hidden charges.</div>
+            </div>
+          </div>
+          <div class="seo-faq-item">
+            <button class="seo-faq-q">
+              <span>How does the AI generate titles?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="seo-faq-a">
+              <div class="seo-faq-a-inner">Our AI analyzes your target keyword, content type, and target audience to generate relevant, high-converting titles. It applies SEO best practices including strategic keyword placement, emotional triggers, number inclusion, and search intent matching.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FINAL CTA
+       ════════════════════════════════════════════ -->
+  <section class="seo-cta lazy-section">
+    <div class="seo-cta-glow"></div>
+    <div class="container">
+      <div class="seo-cta-inner fade-up">
+        <h2>Ready to Grow Your <span>Organic Traffic?</span></h2>
+        <p>Get expert SEO services from Nagriva. Let's build a strategy that drives results.</p>
+        <div class="seo-cta-actions">
+          <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="seo-cta-btn seo-cta-btn-primary" data-cta="primary" data-cta-action="book-consultation">
+            Book Free Consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="/services/seo" class="seo-cta-btn seo-cta-btn-secondary" data-cta="secondary" data-cta-action="explore-seo">
+            Explore SEO Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="seo-toast" id="seoToast"></div>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <div id="cookie-consent-container"></div>
+
+  <script defer>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    /* ─── DOM refs ─── */
+    var form = document.getElementById('seoForm');
+    var formView = document.getElementById('seoFormView');
+    var loadingView = document.getElementById('seoLoading');
+    var resultsView = document.getElementById('seoTitles');
+    var leadSection = document.getElementById('leadSection');
+    var titlesList = document.getElementById('titlesList');
+    var loadingKeyword = document.getElementById('seoLoadingKeyword');
+    var loadingMsgs = document.querySelectorAll('#seoLoadingMsgs .seo-loading-msg');
+
+    /* ─── Toast ─── */
+    var toast = document.getElementById('seoToast');
+    var toastTimer = null;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('active');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() { toast.classList.remove('active'); }, 2200);
+    }
+
+    /* ─── Title templates by content type / audience ─── */
+    function generateTitles(keyword, contentType, audience) {
+      var k = keyword.charAt(0).toUpperCase() + keyword.slice(1);
+      var templates = [];
+
+      var templatesByType = {
+        blog: [
+          k + ': The Ultimate Guide for ' + audienceLabel(audience),
+          '10 Proven ' + k + ' Strategies That Actually Work',
+          'Why ' + k + ' Matters More Than Ever in 2026',
+          'How to Master ' + k + ' in 5 Simple Steps',
+          'The Complete ' + k + ' Checklist for ' + audienceLabel(audience),
+          k + ' 101: Everything ' + audienceLabel(audience) + ' Need to Know',
+          'Top 15 ' + k + ' Trends to Watch in 2026',
+          'The Beginner\'s Guide to ' + k + ': Tips & Tricks',
+          k + ' vs. Traditional Methods: Which Is Better?',
+          'How ' + k + ' Can Transform Your ' + audienceLabel(audience) + ' Strategy'
+        ],
+        landing: [
+          k + ' – ' + audienceLabel(audience) + ' Solutions That Deliver Results',
+          'Supercharge Your Growth with ' + k,
+          'The Smart ' + audienceLabel(audience) + '\'s Guide to ' + k,
+          'Unlock the Power of ' + k + ' for Your Business',
+          k + ': The #1 Solution for ' + audienceLabel(audience),
+          'Transform Your Results with ' + k + ' Today',
+          'Why Leading ' + audienceLabelPlural(audience) + ' Choose ' + k,
+          'Get Started with ' + k + ' – No Experience Required',
+          k + ' Done Right: A Better Approach for ' + audienceLabelPlural(audience),
+          'Experience the Future of ' + k
+        ],
+        product: [
+          'Top 10 ' + k + ' Products You Need in 2026',
+          'The Best ' + k + ' Tools for ' + audienceLabelPlural(audience),
+          k + ' Product Review: What Actually Works?',
+          'Compare the Best ' + k + ' Solutions for ' + audienceLabelPlural(audience),
+          'Which ' + k + ' Product Is Right for You?',
+          'Affordable ' + k + ' Products That Deliver Results',
+          'The Ultimate ' + k + ' Buying Guide',
+          'Top-Rated ' + k + ' Products Recommended by Experts',
+          k + ' vs. Competitors: An Honest Comparison',
+          'Why This ' + k + ' Product Is Going Viral'
+        ],
+        service: [
+          'Professional ' + k + ' Services for ' + audienceLabelPlural(audience),
+          'Expert ' + k + ' Services Tailored to Your Needs',
+          'Why Choose Our ' + k + ' Services?',
+          'Comprehensive ' + k + ' Solutions for ' + audienceLabelPlural(audience),
+          'Affordable ' + k + ' Services That Drive Real Results',
+          'Trusted ' + k + ' Services for Growing Businesses',
+          'End-to-End ' + k + ' Services for ' + audienceLabelPlural(audience),
+          'How Our ' + k + ' Services Helped 500+ Clients',
+          'Premium ' + k + ' Services – Book a Consultation Today',
+          'Results-Driven ' + k + ' Services for ' + audienceLabelPlural(audience)
+        ],
+        'case-study': [
+          'How We Used ' + k + ' to Increase Revenue by 300%',
+          k + ' Success Story: From Zero to Hero',
+          'Case Study: How ' + audienceLabel(audience) + ' Scaled with ' + k,
+          'The ' + k + ' Strategy That Generated 10,000+ Leads',
+          'Real Results: ' + k + ' Case Study for ' + audienceLabel(audience),
+          'How ' + audienceLabel(audience) + ' Achieved 5x Growth with ' + k,
+          k + ' Case Study: Lessons Learned & Key Takeaways',
+          'Before & After: Transforming a Business with ' + k,
+          'The ' + k + ' Playbook That Delivered a 200% ROI',
+          'Case Study: Implementing ' + k + ' for ' + audienceLabel(audience)
+        ]
+      };
+
+      return templatesByType[contentType] || templatesByType.blog;
+    }
+
+    function audienceLabel(aud) {
+      var map = { beginners: 'Beginners', professionals: 'Professionals', 'small-business': 'Small Businesses', agencies: 'Agencies', general: 'Everyone' };
+      return map[aud] || 'Everyone';
+    }
+    function audienceLabelPlural(aud) {
+      var map = { beginners: 'Beginners', professionals: 'Professionals', 'small-business': 'Small Businesses', agencies: 'Agencies', general: 'Businesses' };
+      return map[aud] || 'Businesses';
+    }
+
+    /* ─── Render titles ─── */
+    function renderTitles(titles, keyword) {
+      var favs = JSON.parse(localStorage.getItem('seoFavTitles') || '{}');
+      titlesList.innerHTML = '';
+      titles.forEach(function(title, idx) {
+        var isFaved = favs[title] === true;
+        var item = document.createElement('div');
+        item.className = 'seo-title-item';
+        item.style.animationDelay = (idx * 0.05) + 's';
+        item.innerHTML =
+          '<span class="seo-title-num">' + (idx + 1) + '</span>' +
+          '<span class="seo-title-text">' + title + '</span>' +
+          '<div class="seo-title-actions">' +
+            '<button class="seo-title-btn' + (isFaved ? ' faved' : '') + '" data-action="fav" title="Save">' +
+              '<svg viewBox="0 0 24 24" fill="' + (isFaved ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>' +
+            '</button>' +
+            '<button class="seo-title-btn" data-action="copy" title="Copy">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+            '</button>' +
+          '</div>';
+        titlesList.appendChild(item);
+      });
+
+      /* ─── Title action handlers ─── */
+      titlesList.querySelectorAll('[data-action="copy"]').forEach(function(btn, i) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var text = titles[i];
+          navigator.clipboard.writeText(text).then(function() {
+            btn.classList.add('copied');
+            setTimeout(function() { btn.classList.remove('copied'); }, 1200);
+            showToast('Copied to clipboard!');
+          });
+        });
+      });
+
+      titlesList.querySelectorAll('[data-action="fav"]').forEach(function(btn, i) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var text = titles[i];
+          var favs = JSON.parse(localStorage.getItem('seoFavTitles') || '{}');
+          if (favs[text]) {
+            delete favs[text];
+            btn.classList.remove('faved');
+            btn.querySelector('svg').setAttribute('fill', 'none');
+            showToast('Removed from favorites');
+          } else {
+            favs[text] = true;
+            btn.classList.add('faved');
+            btn.querySelector('svg').setAttribute('fill', 'currentColor');
+            showToast('Saved to favorites!');
+          }
+          localStorage.setItem('seoFavTitles', JSON.stringify(favs));
+        });
+      });
+    }
+
+    /* ─── Generate insights ─── */
+    function updateInsights(keyword, contentType) {
+      document.getElementById('insightKeyword').textContent = keyword;
+      var intentMap = { blog: 'Informational', landing: 'Commercial', product: 'Transactional', service: 'Commercial', 'case-study': 'Informational / Commercial' };
+      document.getElementById('insightIntent').textContent = intentMap[contentType] || 'Informational';
+      document.getElementById('insightMeta').textContent = 'Learn about ' + keyword + ' with our comprehensive guide covering tips, strategies, and best practices for beginners and professionals.';
+      document.getElementById('insightLength').textContent = '50–60 characters';
+    }
+
+    /* ─── Form submit ─── */
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var keyword = document.getElementById('seoKeyword').value.trim();
+      if (!keyword) {
+        document.getElementById('seoKeyword').classList.add('aud-input-error');
+        return;
+      }
+      document.querySelectorAll('.aud-input-error').forEach(function(el) { el.classList.remove('aud-input-error'); });
+
+      loadingKeyword.textContent = 'Analyzing "' + keyword + '"...';
+
+      formView.style.display = 'none';
+      loadingView.classList.add('active');
+      resultsView.classList.remove('active');
+
+      var msgIdx = 0;
+      var progress = 0;
+      var msgInterval = setInterval(function() {
+        loadingMsgs.forEach(function(m) { m.classList.remove('active'); });
+        msgIdx = (msgIdx + 1) % loadingMsgs.length;
+        loadingMsgs[msgIdx].classList.add('active');
+      }, 1100);
+
+      var progressInterval = setInterval(function() {
+        progress += Math.random() * 8 + 3;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(progressInterval);
+          clearInterval(msgInterval);
+          document.getElementById('seoProgressFill').style.width = '100%';
+          document.getElementById('seoProgressPct').textContent = '100%';
+
+          setTimeout(function() {
+            loadingView.classList.remove('active');
+
+            var contentType = document.getElementById('seoContentType').value;
+            var audience = document.getElementById('seoAudience').value;
+            var titles = generateTitles(keyword, contentType, audience);
+
+            renderTitles(titles, keyword);
+            updateInsights(keyword, contentType);
+            document.getElementById('titlesCount').textContent = titles.length + ' titles for "' + keyword + '"';
+
+            resultsView.classList.add('active');
+            leadSection.classList.add('active');
+            leadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 500);
+        }
+        document.getElementById('seoProgressFill').style.width = Math.min(progress, 100) + '%';
+        document.getElementById('seoProgressPct').textContent = Math.min(Math.round(progress), 100) + '%';
+      }, 180);
+    });
+
+    /* ─── Remove error on input ─── */
+    document.getElementById('seoKeyword').addEventListener('input', function() {
+      this.classList.remove('aud-input-error');
+    });
+
+    /* ─── Regenerate ─── */
+    document.getElementById('regenerateBtn').addEventListener('click', function() {
+      var keyword = document.getElementById('seoKeyword').value.trim();
+      if (!keyword) { document.getElementById('seoKeyword').classList.add('aud-input-error'); return; }
+      var contentType = document.getElementById('seoContentType').value;
+      var audience = document.getElementById('seoAudience').value;
+      var titles = generateTitles(keyword, contentType, audience);
+      renderTitles(titles, keyword);
+      resultsView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    /* ─── Copy All ─── */
+    document.getElementById('copyAllBtn').addEventListener('click', function() {
+      var items = titlesList.querySelectorAll('.seo-title-text');
+      var texts = Array.from(items).map(function(el) { return el.textContent; }).join('\n');
+      navigator.clipboard.writeText(texts).then(function() {
+        showToast('All titles copied to clipboard!');
+      });
+    });
+
+    /* ─── Lead Form ─── */
+    document.getElementById('leadSubmit').addEventListener('click', function() {
+      var name = document.getElementById('leadName').value.trim();
+      var email = document.getElementById('leadEmail').value.trim();
+      document.querySelectorAll('.aud-input-error').forEach(function(el) { el.classList.remove('aud-input-error'); });
+      var valid = true;
+      if (!name) { document.getElementById('leadName').classList.add('aud-input-error'); valid = false; }
+      if (!email || !email.includes('@')) { document.getElementById('leadEmail').classList.add('aud-input-error'); valid = false; }
+      if (!valid) return;
+      document.getElementById('leadForm').style.display = 'none';
+      document.getElementById('leadSuccess').classList.add('active');
+    });
+
+    document.querySelectorAll('.seo-lead-input').forEach(function(el) {
+      el.addEventListener('input', function() { this.classList.remove('aud-input-error'); });
+    });
+
+    /* ─── FAQ Accordion ─── */
+    var faqItems = document.querySelectorAll('#faqList .seo-faq-item');
+    faqItems.forEach(function(item) {
+      var q = item.querySelector('.seo-faq-q');
+      q.addEventListener('click', function() {
+        var isOpen = item.classList.contains('open');
+        faqItems.forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+  });
+  </script>
+<script defer src="../../js/layout.js"></script>
+</body></html>

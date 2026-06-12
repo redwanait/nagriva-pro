@@ -38,60 +38,7 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .dw-hero .fade-up { opacity: 1 !important; transform: translateY(0) !important; }
 
-    /* ─── Coming Soon State ─── */
-    .dw-demo-card--coming .dw-demo-visual::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(4,4,4,0.35);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      z-index: 2;
-    }
-    .dw-demo-card--coming .dw-demo-visual img {
-      filter: grayscale(0.5) brightness(0.6);
-    }
-    .dw-demo-card--coming {
-      cursor: default;
-    }
-    .dw-demo-card--coming:hover {
-      transform: none;
-      border-color: var(--border);
-      box-shadow: none;
-    }
-    .dw-demo-card--coming .dw-demo-title {
-      color: rgba(255,255,255,0.5);
-    }
-    .dw-demo-card--coming .dw-demo-desc {
-      color: rgba(255,255,255,0.3);
-    }
-    .dw-demo-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--gray2);
-      backdrop-filter: blur(6px);
-    }
-    .dw-demo-btn--disabled {
-      color: var(--gray2) !important;
-      cursor: default !important;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-    .dw-demo-btn--disabled:hover {
-      gap: 8px !important;
-    }
+
   </style>
   <style>
     @font-face {
@@ -228,100 +175,130 @@
       <div class="section-header fade-up">
         <div class="section-tag">✦ Choose Your Style</div>
         <h2 class="section-title">Choose Your <span class="text-gradient">Restaurant Website</span></h2>
-        <p class="section-desc">New <a href="/">Restaurant</a> Website Templates Coming Soon</p>
+        <p class="section-desc">Browse our <a href="/">restaurant</a> website templates and choose the perfect design for your business.</p>
       </div>
 
       <div class="dw-demos-grid fade-up" style="--delay:0.1s">
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Fine Dining Restaurant — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/restaurant-demo-fine-dining.png" data-title="Fine Dining Restaurant" aria-label="Preview Fine Dining Restaurant demo">
-            <img src="/assets/images/restaurant-demo-fine-dining.png" alt="Fine Dining Restaurant website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://themes.themegoods.com/grandrestaurantv6/demo9/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Fine Dining Restaurant demo">
+            <img src="/assets/images/restaurant%20websites%20images%20/image1.png" alt="Fine Dining Restaurant website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Fine Dining Restaurant</h3>
             <p class="dw-demo-desc">Elegant restaurant website with menu showcase and online reservation system.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://themes.themegoods.com/grandrestaurantv6/demo9/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Modern Café &amp; Coffee Shop — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/restaurant-demo-cafe.png" data-title="Modern Café &amp; Coffee Shop" aria-label="Preview Modern Café &amp; Coffee Shop demo">
-            <img src="/assets/images/restaurant-demo-cafe.png" alt="Modern Café &amp; Coffee Shop website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://grandrestaurantv7-0.themegoods.com/bistro/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Modern Café &amp; Coffee Shop demo">
+            <img src="/assets/images/restaurant%20websites%20images%20/image2.png" alt="Modern Café &amp; Coffee Shop website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Modern Café &amp; Coffee Shop</h3>
             <p class="dw-demo-desc">Stylish café website designed to showcase ambiance, menu items, and location.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://grandrestaurantv7-0.themegoods.com/bistro/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Fast Food Restaurant — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/restaurant-demo-fast-food.png" data-title="Fast Food Restaurant" aria-label="Preview Fast Food Restaurant demo">
-            <img src="/assets/images/restaurant-demo-fast-food.png" alt="Fast Food Restaurant website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://grandrestaurantv7-0.themegoods.com/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Fast Food Restaurant demo">
+            <img src="/assets/images/restaurant%20websites%20images%20/image3.png" alt="Fast Food Restaurant website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Fast Food Restaurant</h3>
             <p class="dw-demo-desc">Dynamic fast food website built for quick orders and digital menu browsing.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://grandrestaurantv7-0.themegoods.com/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Family Restaurant — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/restaurant-demo-family.png" data-title="Family Restaurant" aria-label="Preview Family Restaurant demo">
-            <img src="/assets/images/restaurant-demo-family.png" alt="Family Restaurant website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://grandrestaurantv7-0.themegoods.com/bar/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Family Restaurant demo">
+            <img src="/assets/images/restaurant%20websites%20images%20/image4.png" alt="Family Restaurant website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Family Restaurant</h3>
             <p class="dw-demo-desc">Warm and welcoming website for family-friendly dining with online reservations.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://grandrestaurantv7-0.themegoods.com/bar/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Bistro &amp; Grill — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/restaurant-demo-bistro.png" data-title="Bistro &amp; Grill" aria-label="Preview Bistro &amp; Grill demo">
-            <img src="/assets/images/restaurant-demo-bistro.png" alt="Bistro &amp; Grill website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://grandrestaurantv6-7.themegoods.com/clean/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Bistro &amp; Grill demo">
+            <img src="/assets/images/restaurant%20websites%20images%20/image5.png" alt="Bistro &amp; Grill website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Bistro &amp; Grill</h3>
             <p class="dw-demo-desc">Modern bistro website with food gallery, reviews, and table booking system.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://grandrestaurantv6-7.themegoods.com/clean/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Food Truck &amp; Street Food — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/restaurant-demo-foodtruck.png" data-title="Food Truck &amp; Street Food" aria-label="Preview Food Truck &amp; Street Food demo">
-            <img src="/assets/images/restaurant-demo-foodtruck.png" alt="Food Truck &amp; Street Food website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://grandrestaurantv6-8.themegoods.com/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Food Truck &amp; Street Food demo">
+            <img src="/assets/images/restaurant%20websites%20images%20/image6.png" alt="Food Truck &amp; Street Food website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Food Truck &amp; Street Food</h3>
             <p class="dw-demo-desc">Bold mobile-friendly website for food trucks with location tracking and menus.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://grandrestaurantv6-8.themegoods.com/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
       </div>
     </div>
@@ -696,14 +673,6 @@
   <script defer="" src="../js/auth.js"></script>
   <script defer="" src="../js/performance-optimizer.js"></script>
   <script defer="" src="../js/lazy-loader.js"></script>
-  <script>
-    (function () {
-      document.querySelectorAll('.dw-demo-card').forEach(function (card) {
-        card.style.cursor = 'default';
-      });
-    })();
-    </script>
-
   <script>
     (function () {
       var bar = document.querySelector('.dw-metrics-bar');

@@ -38,60 +38,7 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .dw-hero .fade-up { opacity: 1 !important; transform: translateY(0) !important; }
 
-    /* ─── Coming Soon State ─── */
-    .dw-demo-card--coming .dw-demo-visual::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(4,4,4,0.35);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      z-index: 2;
-    }
-    .dw-demo-card--coming .dw-demo-visual img {
-      filter: grayscale(0.5) brightness(0.6);
-    }
-    .dw-demo-card--coming {
-      cursor: default;
-    }
-    .dw-demo-card--coming:hover {
-      transform: none;
-      border-color: var(--border);
-      box-shadow: none;
-    }
-    .dw-demo-card--coming .dw-demo-title {
-      color: rgba(255,255,255,0.5);
-    }
-    .dw-demo-card--coming .dw-demo-desc {
-      color: rgba(255,255,255,0.3);
-    }
-    .dw-demo-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--gray2);
-      backdrop-filter: blur(6px);
-    }
-    .dw-demo-btn--disabled {
-      color: var(--gray2) !important;
-      cursor: default !important;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-    .dw-demo-btn--disabled:hover {
-      gap: 8px !important;
-    }
+
   </style>
   <style>
     @font-face {
@@ -228,100 +175,130 @@
       <div class="section-header fade-up">
         <div class="section-tag">✦ Choose Your Style</div>
         <h2 class="section-title">Choose Your <span class="text-gradient">Fitness Website</span></h2>
-        <p class="section-desc">New Gym &amp; <a href="/case-studies/gym-fitness-success-story.html">Fitness</a> Website Templates Coming Soon</p>
+        <p class="section-desc">Browse our gym &amp; <a href="/case-studies/gym-fitness-success-story.html">fitness</a> website templates and choose the perfect design for your business.</p>
       </div>
 
       <div class="dw-demos-grid fade-up" style="--delay:0.1s">
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Premium Fitness Club — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/gym-demo-premium.png" data-title="Premium Fitness Club" aria-label="Preview Premium Fitness Club demo">
-            <img src="/assets/images/gym-demo-premium.png" alt="Premium Fitness Club website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://gym-store.axiomthemes.com/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Premium Fitness Club demo">
+            <img src="/assets/images/gym-fitness%20images%20/image1.png" alt="Premium Fitness Club website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Premium Fitness Club</h3>
             <p class="dw-demo-desc">High-end fitness club website with membership plans and class scheduling.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://gym-store.axiomthemes.com/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Modern Gym Center — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/gym-demo-modern.png" data-title="Modern Gym Center" aria-label="Preview Modern Gym Center demo">
-            <img src="/assets/images/gym-demo-modern.png" alt="Modern Gym Center website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://gym-store.axiomthemes.com/fitness-studio/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Modern Gym Center demo">
+            <img src="/assets/images/gym-fitness%20images%20/image2.png" alt="Modern Gym Center website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Modern Gym Center</h3>
             <p class="dw-demo-desc">Contemporary gym website designed to showcase equipment, classes, and trainers.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://gym-store.axiomthemes.com/fitness-studio/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Personal Trainer Website — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/gym-demo-trainer.png" data-title="Personal Trainer Website" aria-label="Preview Personal Trainer Website demo">
-            <img src="/assets/images/gym-demo-trainer.png" alt="Personal Trainer Website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://gym-store.axiomthemes.com/sports-shop/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Personal Trainer Website demo">
+            <img src="/assets/images/gym-fitness%20images%20/image3.png" alt="Personal Trainer Website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Personal Trainer Website</h3>
             <p class="dw-demo-desc">Professional website for <a href="/pages/careers.html">personal</a> trainers with program showcases and booking.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://gym-store.axiomthemes.com/sports-shop/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="CrossFit &amp; Functional Training — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/gym-demo-crossfit.png" data-title="CrossFit &amp; Functional Training" aria-label="Preview CrossFit &amp; Functional Training demo">
-            <img src="/assets/images/gym-demo-crossfit.png" alt="CrossFit &amp; Functional Training website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://gym-store.axiomthemes.com/sports-complex/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View CrossFit &amp; Functional Training demo">
+            <img src="/assets/images/gym-fitness%20images%20/image4.png" alt="CrossFit &amp; Functional Training website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">CrossFit &amp; Functional Training</h3>
             <p class="dw-demo-desc">High-energy CrossFit website with workout schedules and <a href="/pages/results.html">challenge</a> signups.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://gym-store.axiomthemes.com/sports-complex/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Yoga &amp; Wellness Studio — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/gym-demo-yoga.png" data-title="Yoga &amp; Wellness Studio" aria-label="Preview Yoga &amp; Wellness Studio demo">
-            <img src="/assets/images/gym-demo-yoga.png" alt="Yoga &amp; Wellness Studio website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://gym-store.axiomthemes.com/yoga-studio/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Yoga &amp; Wellness Studio demo">
+            <img src="/assets/images/gym-fitness%20images%20/image5.png" alt="Yoga &amp; Wellness Studio website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Yoga &amp; Wellness Studio</h3>
             <p class="dw-demo-desc">Serene wellness studio website with class schedules and instructor profiles.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://gym-store.axiomthemes.com/yoga-studio/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="dw-demo-card dw-demo-card--coming" aria-label="Martial Arts &amp; Combat Sports — Coming Soon">
-          <span class="dw-demo-visual" data-demo="/assets/images/gym-demo-mma.png" data-title="Martial Arts &amp; Combat Sports" aria-label="Preview Martial Arts &amp; Combat Sports demo">
-            <img src="/assets/images/gym-demo-mma.png" alt="Martial Arts &amp; Combat Sports website demo" loading="lazy" width="1891" height="859">
-            <span class="dw-demo-badge">Coming Soon</span>
-            <div class="dw-demo-overlay"><span>Preview Design</span></div>
-          </span>
+        <div class="dw-demo-card">
+          <a href="https://gym-store.axiomthemes.com/solarium/" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View Martial Arts &amp; Combat Sports demo">
+            <img src="/assets/images/gym-fitness%20images%20/image6.png" alt="Martial Arts &amp; Combat Sports website demo" loading="lazy" width="1891" height="859">
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">Martial Arts &amp; Combat Sports</h3>
             <p class="dw-demo-desc">Bold combat sports website with class tiers, events, and membership options.</p>
-            <span class="dw-demo-btn dw-demo-btn--disabled">
-              Coming Soon
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://gym-store.axiomthemes.com/solarium/" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
+        </div>
 
       </div>
     </div>
@@ -696,14 +673,6 @@
   <script defer="" src="../js/auth.js"></script>
   <script defer="" src="../js/performance-optimizer.js"></script>
   <script defer="" src="../js/lazy-loader.js"></script>
-  <script>
-    (function () {
-      document.querySelectorAll('.dw-demo-card').forEach(function (card) {
-        card.style.cursor = 'default';
-      });
-    })();
-    </script>
-
   <script>
     (function () {
       var bar = document.querySelector('.dw-metrics-bar');

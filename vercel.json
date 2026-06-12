@@ -2,6 +2,9 @@
   "functions": {
     "api/chat.js": {
       "maxDuration": 30
+    },
+    "api/audit.js": {
+      "maxDuration": 30
     }
   },
   "routes": [
@@ -68,6 +71,10 @@
     { "src": "^/compare$", "dest": "/pages/compare.html" },
     { "src": "^/compare/([^/]+)$", "dest": "/pages/compare-detail.html" },
     { "src": "^/data/(.*)", "dest": "/data/$1" },
+
+    { "src": "^/tools/website-cost-calculator$", "dest": "/pages/tools/website-cost-calculator.html" },
+    { "src": "^/tools/website-audit-tool$", "dest": "/pages/tools/website-audit-tool.html" },
+    { "src": "^/tools/seo-title-generator$", "dest": "/pages/tools/seo-title-generator.html" },
 
     { "src": "/.*", "dest": "/pages/404.html", "status": 404 }
   ],

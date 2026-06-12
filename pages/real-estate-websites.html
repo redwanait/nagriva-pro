@@ -38,72 +38,7 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .dw-hero .fade-up { opacity: 1 !important; transform: translateY(0) !important; }
 
-    /* ─── Coming Soon State ─── */
-    .dw-demo-card--coming .dw-demo-visual::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(4,4,4,0.35);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      z-index: 2;
-    }
-    .dw-demo-card--coming .dw-demo-visual img {
-      filter: grayscale(0.5) brightness(0.6);
-    }
-    .dw-demo-card--coming {
-      cursor: default;
-    }
-    .dw-demo-card--coming:hover {
-      transform: none;
-      border-color: var(--border);
-      box-shadow: none;
-    }
-    .dw-demo-card--coming .dw-demo-title {
-      color: rgba(255,255,255,0.5);
-    }
-    .dw-demo-card--coming .dw-demo-desc {
-      color: rgba(255,255,255,0.3);
-    }
-    .dw-demo-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--gray2);
-      backdrop-filter: blur(6px);
-    }
-    .dw-demo-btn--disabled {
-      color: var(--gray2) !important;
-      cursor: default !important;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-    .dw-demo-btn--disabled:hover {
-      gap: 8px !important;
-    }
 
-    /* ─── Card wrapper fix: ensure <a> fills grid cell ─── */
-    .dw-demos-grid > a {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      text-decoration: none;
-      color: inherit;
-    }
-    .dw-demos-grid > a .dw-demo-card {
-      height: 100%;
-    }
   </style>
   <style>
     @font-face {
@@ -240,106 +175,130 @@
       <div class="section-header fade-up">
         <div class="section-tag">✦ Choose Your Style</div>
         <h2 class="section-title">Choose Your <span class="text-gradient">Real Estate Website</span></h2>
-        <p class="section-desc">New Real Estate Website Templates Coming Soon</p>
+        <p class="section-desc">Browse our real estate website templates and choose the perfect design for your agency.</p>
       </div>
 
       <div class="dw-demos-grid fade-up" style="--delay:0.1s">
 
-        <a href="https://preview.themeforest.net/item/houzez-real-estate-wordpress-theme/full_screen_preview/15752549" target="_blank">
-        <article class="dw-demo-card" aria-label="Luxury Real Estate Agency">
-          <span class="dw-demo-visual" data-demo="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.04.png" data-title="Luxury Real Estate Agency" aria-label="Preview Luxury Real Estate Agency demo">
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/houzez-real-estate-wordpress-theme/full_screen_preview/15752549" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View houzez Real Estate Agency demo">
             <img src="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.04.png" alt="Luxury Real Estate Agency website demo" loading="lazy" width="1891" height="859">
-            <div class="dw-demo-overlay"><span>View Demo</span></div>
-          </span>
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">houzez Real Estate Agency</h3>
             <p class="dw-demo-desc">High-end real estate website built for luxury property agencies and exclusive listings.</p>
-            <span class="dw-demo-btn">
-              View Demo →
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/houzez-real-estate-wordpress-theme/full_screen_preview/15752549" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
-        </a>
+        </div>
 
-        <a href="https://preview.themeforest.net/item/wp-residence-real-estate-wordpress-theme/full_screen_preview/7896392" target="_blank">
-        <article class="dw-demo-card" aria-label="Modern Property Listings">
-          <span class="dw-demo-visual" data-demo="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.20.png" data-title="Modern Property Listings" aria-label="Preview Modern Property Listings demo">
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/wp-residence-real-estate-wordpress-theme/full_screen_preview/7896392" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View wp residence Property Listings demo">
             <img src="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.20.png" alt="Modern Property Listings website demo" loading="lazy" width="1891" height="859">
-            <div class="dw-demo-overlay"><span>View Demo</span></div>
-          </span>
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">wp residence Property Listings</h3>
             <p class="dw-demo-desc">Clean property listings website with advanced search and filter functionality.</p>
-            <span class="dw-demo-btn">
-              View Demo →
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/wp-residence-real-estate-wordpress-theme/full_screen_preview/7896392" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
-        </a>
+        </div>
 
-        <a href="https://preview.themeforest.net/item/real-homes-wordpress-real-estate-theme/full_screen_preview/5373914" target="_blank">
-        <article class="dw-demo-card" aria-label="Real Estate Consultant">
-          <span class="dw-demo-visual" data-demo="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.29.png" data-title="Real Estate Consultant" aria-label="Preview Real Estate Consultant demo">
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/real-homes-wordpress-real-estate-theme/full_screen_preview/5373914" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View real homes Real Estate Consultant demo">
             <img src="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.29.png" alt="Real Estate Consultant website demo" loading="lazy" width="1891" height="859">
-            <div class="dw-demo-overlay"><span>View Demo</span></div>
-          </span>
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">real homes Real Estate Consultant</h3>
             <p class="dw-demo-desc">Professional website for independent real estate consultants and agents.</p>
-            <span class="dw-demo-btn">
-              View Demo →
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/real-homes-wordpress-real-estate-theme/full_screen_preview/5373914" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
-        </a>
+        </div>
 
-        <a href="https://preview.themeforest.net/item/myhome-real-estate-wordpress-theme/full_screen_preview/19508653" target="_blank">
-        <article class="dw-demo-card" aria-label="Property Investment Agency">
-          <span class="dw-demo-visual" data-demo="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.57.png" data-title="Property Investment Agency" aria-label="Preview Property Investment Agency demo">
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/myhome-real-estate-wordpress-theme/full_screen_preview/19508653" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View my home Real Estate Agency demo">
             <img src="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.58.57.png" alt="Property Investment Agency website demo" loading="lazy" width="1891" height="859">
-            <div class="dw-demo-overlay"><span>View Demo</span></div>
-          </span>
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">my home Real Estate Agency</h3>
             <p class="dw-demo-desc">Investment-focused real estate website showcasing portfolios and ROI opportunities.</p>
-            <span class="dw-demo-btn">
-              View Demo →
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/myhome-real-estate-wordpress-theme/full_screen_preview/19508653" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
-        </a>
+        </div>
 
-        <a href="https://preview.themeforest.net/item/homepress-real-estate-wordpress-theme/full_screen_preview/23980909" target="_blank">
-        <article class="dw-demo-card" aria-label="Prime Realty">
-          <span class="dw-demo-visual" data-demo="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.59.04.png" data-title="Prime Realty" aria-label="Preview Prime Realty demo">
+        <div class="dw-demo-card">
+          <a href="https://preview.themeforest.net/item/homepress-real-estate-wordpress-theme/full_screen_preview/23980909" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View homepress Real Estate Agency demo">
             <img src="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2014.59.04.png" alt="Prime Realty website demo" loading="lazy" width="1891" height="859">
-            <div class="dw-demo-overlay"><span>View Demo</span></div>
-          </span>
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">homepress Real Estate Agency</h3>
             <p class="dw-demo-desc">Modern real estate agency website with property showcase and lead capture.</p>
-            <span class="dw-demo-btn">
-              View Demo →
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://preview.themeforest.net/item/homepress-real-estate-wordpress-theme/full_screen_preview/23980909" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
-        </a>
+        </div>
 
-        <a href="https://code-theme.com/html/findhouses/index.html" target="_blank">
-        <article class="dw-demo-card" aria-label="Elite Properties">
-          <span class="dw-demo-visual" data-demo="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2015.00.04.png" data-title="Elite Properties" aria-label="Preview Elite Properties demo">
+        <div class="dw-demo-card">
+          <a href="https://code-theme.com/html/findhouses/index.html" target="_blank" rel="noopener" class="dw-demo-visual" aria-label="View findhouses Real Estate Agency demo">
             <img src="/assets/images/Real%20Estate%20demos%20images%20/Screenshot%202026-06-09%20at%2015.00.04.png" alt="Elite Properties website demo" loading="lazy" width="1891" height="859">
-            <div class="dw-demo-overlay"><span>View Demo</span></div>
-          </span>
+          </a>
           <div class="dw-demo-body">
             <h3 class="dw-demo-title">findhouses Real Estate Agency</h3>
             <p class="dw-demo-desc">Premium property portal with detailed listings and virtual tour integration.</p>
-            <span class="dw-demo-btn">
-              View Demo →
-            </span>
+            <div class="dw-demo-actions">
+              <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--primary">
+                Get This Website
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://code-theme.com/html/findhouses/index.html" target="_blank" rel="noopener" class="dw-demo-btn dw-demo-btn--secondary">
+                View Demo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
           </div>
-        </article>
-        </a>
+        </div>
 
       </div>
     </div>
