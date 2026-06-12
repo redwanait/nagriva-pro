@@ -24,10 +24,10 @@ const NAGRIVA_AdminSettings = (() => {
     { value: 'de', label: 'Deutsch' }, { value: 'pt', label: 'Português' }
   ];
   const THEME_PRESETS = [
-    { id: 'dark-blue', name: 'Blue', colors: ['#3b82f6', '#2563EB'] },
-    { id: 'dark-ocean', name: 'Ocean', colors: ['#2563EB', '#1d4ed8'] },
-    { id: 'dark-purple', name: 'Royal', colors: ['#a78bfa', '#7c3aed'] },
-    { id: 'dark-gold', name: 'Gold', colors: ['#fbbf24', '#d97706'] },
+    { id: 'dark-blue', name: 'Blue', colors: ['#FACC15', '#F59E0B'] },
+    { id: 'dark-ocean', name: 'Ocean', colors: ['#F59E0B', '#F59E0B'] },
+    { id: 'dark-purple', name: 'Royal', colors: ['#FCD34D', '#F59E0B'] },
+    { id: 'dark-gold', name: 'Gold', colors: ['#FACC15', '#F59E0B'] },
     { id: 'dark-rose', name: 'Rose', colors: ['#fb7185', '#e11d48'] }
   ];
 
@@ -389,8 +389,8 @@ const NAGRIVA_AdminSettings = (() => {
 
   /* ─── Branding preview ─── */
   function applyBrandingPreview() {
-    const primary = val('branding','primary_color') || '#3b82f6';
-    const secondary = val('branding','secondary_color') || '#2563EB';
+    const primary = val('branding','primary_color') || '#FACC15';
+    const secondary = val('branding','secondary_color') || '#F59E0B';
     document.documentElement.style.setProperty('--accent-preview', primary);
     document.documentElement.style.setProperty('--accent2-preview', secondary);
   }
@@ -415,8 +415,8 @@ const NAGRIVA_AdminSettings = (() => {
 
   /* ─── Populate Branding ─── */
   function populateBranding() {
-    const primary = val('branding','primary_color') || '#3b82f6';
-    const secondary = val('branding','secondary_color') || '#2563EB';
+    const primary = val('branding','primary_color') || '#FACC15';
+    const secondary = val('branding','secondary_color') || '#F59E0B';
     if (el('set_primary_color')) {
       el('set_primary_color').value = primary;
       el('set_secondary_color').value = secondary;

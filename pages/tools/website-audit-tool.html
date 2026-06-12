@@ -38,8 +38,8 @@
       --aud-card-bg: rgba(255,255,255,0.02);
       --aud-glass: rgba(255,255,255,0.04);
       --aud-glass-border: rgba(255,255,255,0.08);
-      --aud-green: #22c55e;
-      --aud-yellow: #eab308;
+      --aud-green: #10B981;
+      --aud-yellow: #FACC15;
       --aud-red: #ef4444;
     }
 
@@ -61,7 +61,7 @@
       transform: translateX(-50%);
       width: 900px; height: 900px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.08) 0%, transparent 70%);
       filter: blur(120px);
       animation: audGlowPulse 8s ease-in-out infinite;
     }
@@ -70,7 +70,7 @@
       bottom: -120px; right: -120px;
       width: 400px; height: 400px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%);
       filter: blur(80px);
       animation: audGlowPulse2 12s ease-in-out infinite;
     }
@@ -100,8 +100,8 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.2);
+      background: rgba(250,204,21,0.08);
+      border: 1px solid rgba(250,204,21,0.2);
       padding: 5px 14px;
       border-radius: 99px;
       margin-bottom: 20px;
@@ -119,7 +119,7 @@
       margin-bottom: 14px;
     }
     .aud-hero-title span {
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      background: linear-gradient(135deg, #FACC15, #FCD34D);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -188,7 +188,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(250,204,21,0.3), transparent);
     }
     .aud-card-glow {
       position: absolute;
@@ -196,7 +196,7 @@
       transform: translateX(-50%);
       width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -256,14 +256,14 @@
       color: var(--gray2);
     }
     .aud-input:hover {
-      border-color: rgba(59,130,246,0.2);
+      border-color: rgba(250,204,21,0.2);
       background: rgba(255,255,255,0.05);
     }
     .aud-input:focus {
       outline: none;
       border-color: var(--accent);
-      background: rgba(59,130,246,0.06);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+      background: rgba(250,204,21,0.06);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.1);
     }
     .aud-select {
       appearance: none;
@@ -283,14 +283,14 @@
       box-sizing: border-box;
     }
     .aud-select:hover {
-      border-color: rgba(59,130,246,0.2);
+      border-color: rgba(250,204,21,0.2);
       background: rgba(255,255,255,0.05);
     }
     .aud-select:focus {
       outline: none;
       border-color: var(--accent);
-      background: rgba(59,130,246,0.06);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+      background: rgba(250,204,21,0.06);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.1);
     }
     .aud-select option {
       background: #0f0f0f;
@@ -308,8 +308,8 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 1rem;
       font-weight: 600;
-      color: #040404;
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #050505;
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
@@ -328,7 +328,7 @@
     }
     .aud-submit:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(59,130,246,0.3);
+      box-shadow: 0 12px 40px rgba(250,204,21,0.3);
     }
     .aud-submit:active {
       transform: translateY(0);
@@ -390,13 +390,13 @@
     }
     .aud-loading-ring:nth-child(2) {
       inset: 7px;
-      border-top-color: rgba(59,130,246,0.4);
+      border-top-color: rgba(250,204,21,0.4);
       animation-duration: 1.5s;
       animation-direction: reverse;
     }
     .aud-loading-ring:nth-child(3) {
       inset: 14px;
-      border-top-color: rgba(59,130,246,0.2);
+      border-top-color: rgba(250,204,21,0.2);
       animation-duration: 2s;
     }
     .aud-loading-url {
@@ -449,7 +449,7 @@
     .aud-loading-bar-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      background: linear-gradient(90deg, var(--accent), #FCD34D);
       border-radius: 99px;
       transition: width 0.3s ease;
     }
@@ -550,7 +550,7 @@
       transition: border-color 0.3s ease;
     }
     .aud-score-item:hover {
-      border-color: rgba(59,130,246,0.12);
+      border-color: rgba(250,204,21,0.12);
     }
     .aud-score-ring {
       position: relative;
@@ -635,7 +635,7 @@
       transition: border-color 0.3s ease, background 0.3s ease;
     }
     .aud-rec-item:hover {
-      border-color: rgba(59,130,246,0.1);
+      border-color: rgba(250,204,21,0.1);
       background: rgba(255,255,255,0.025);
     }
     .aud-rec-status {
@@ -644,7 +644,7 @@
       flex-shrink: 0;
     }
     .aud-rec-status--red { background: var(--aud-red); box-shadow: 0 0 8px rgba(239,68,68,0.3); }
-    .aud-rec-status--yellow { background: var(--aud-yellow); box-shadow: 0 0 8px rgba(234,179,8,0.3); }
+    .aud-rec-status--yellow { background: var(--aud-yellow); box-shadow: 0 0 8px rgba(250,204,21,0.3); }
     .aud-rec-status--green { background: var(--aud-green); box-shadow: 0 0 8px rgba(34,197,94,0.3); }
     .aud-rec-text {
       flex: 1;
@@ -668,8 +668,8 @@
     }
     .aud-rec-tag--yellow {
       color: var(--aud-yellow);
-      background: rgba(234,179,8,0.1);
-      border: 1px solid rgba(234,179,8,0.15);
+      background: rgba(250,204,21,0.1);
+      border: 1px solid rgba(250,204,21,0.15);
     }
     .aud-rec-tag--green {
       color: var(--aud-green);
@@ -707,8 +707,8 @@
       letter-spacing: 0.06em;
       padding: 3px 10px;
       border-radius: 99px;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.2);
+      background: rgba(250,204,21,0.1);
+      border: 1px solid rgba(250,204,21,0.2);
       color: var(--accent);
     }
     .aud-summary-text {
@@ -748,7 +748,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(250,204,21,0.3), transparent);
     }
     .aud-lead-glow {
       position: absolute;
@@ -756,7 +756,7 @@
       transform: translateX(-50%);
       width: 400px; height: 400px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
       pointer-events: none;
     }
     .aud-lead-card h3 {
@@ -801,14 +801,14 @@
       color: var(--gray2);
     }
     .aud-lead-input:hover {
-      border-color: rgba(59,130,246,0.2);
+      border-color: rgba(250,204,21,0.2);
       background: rgba(255,255,255,0.05);
     }
     .aud-lead-input:focus {
       outline: none;
       border-color: var(--accent);
-      background: rgba(59,130,246,0.06);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+      background: rgba(250,204,21,0.06);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.1);
     }
     .aud-lead-btn {
       display: flex;
@@ -822,14 +822,14 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
-      color: #040404;
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      color: #050505;
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .aud-lead-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+      box-shadow: 0 8px 32px rgba(250,204,21,0.3);
     }
     .aud-lead-btn svg {
       width: 15px; height: 15px;
@@ -932,8 +932,8 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 1rem;
       font-weight: 600;
-      color: #040404;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+      color: #050505;
+      background: linear-gradient(135deg, #FACC15, #f59e0b, #F59E0B);
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
@@ -976,7 +976,7 @@
       width: 18px;
       height: 18px;
       border: 2px solid rgba(4,4,4,0.15);
-      border-top-color: #040404;
+      border-top-color: #050505;
       border-radius: 50%;
       animation: audSpin 0.6s linear infinite;
     }
@@ -1006,7 +1006,7 @@
     .lf-trust-item svg {
       width: 13px;
       height: 13px;
-      color: #22c55e;
+      color: #10B981;
       flex-shrink: 0;
     }
     .aud-lead-card {
@@ -1058,7 +1058,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #22c55e;
+      color: #10B981;
     }
     .lf-success-icon svg {
       width: 28px;
@@ -1097,8 +1097,8 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .lf-success-btn-primary {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
-      color: #040404;
+      background: linear-gradient(135deg, #FACC15, #f59e0b, #F59E0B);
+      color: #050505;
     }
     .lf-success-btn-primary:hover {
       transform: translateY(-2px);
@@ -1114,7 +1114,7 @@
       color: var(--gray);
     }
     .lf-success-btn-secondary:hover {
-      border-color: rgba(59,130,246,0.2);
+      border-color: rgba(250,204,21,0.2);
       color: var(--white);
       background: rgba(255,255,255,0.08);
       transform: translateY(-2px);
@@ -1136,7 +1136,7 @@
       transform: translateX(-50%);
       width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%);
       filter: blur(100px);
       pointer-events: none;
     }
@@ -1156,7 +1156,7 @@
       margin-bottom: 12px;
     }
     .aud-cta-inner h2 span {
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      background: linear-gradient(135deg, #FACC15, #FCD34D);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1187,12 +1187,12 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .aud-cta-btn-primary {
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
-      color: #040404;
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #050505;
     }
     .aud-cta-btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+      box-shadow: 0 12px 40px rgba(250,204,21,0.25);
     }
     .aud-cta-btn-primary svg {
       width: 15px; height: 15px;
@@ -1207,7 +1207,7 @@
       color: var(--gray);
     }
     .aud-cta-btn-secondary:hover {
-      border-color: rgba(59,130,246,0.2);
+      border-color: rgba(250,204,21,0.2);
       color: var(--white);
       background: rgba(255,255,255,0.06);
       transform: translateY(-2px);
@@ -1238,7 +1238,7 @@
       transition: border-color 0.3s ease;
     }
     .aud-faq-item:hover {
-      border-color: rgba(59,130,246,0.12);
+      border-color: rgba(250,204,21,0.12);
     }
     .aud-faq-q {
       display: flex;
@@ -1389,7 +1389,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
     .aud-download-btn:hover {
-      border-color: rgba(59,130,246,0.2);
+      border-color: rgba(250,204,21,0.2);
       color: var(--white);
       background: rgba(255,255,255,0.08);
       transform: translateY(-2px);
@@ -1444,7 +1444,7 @@
       transition: border-color 0.3s ease;
     }
     .aud-history-item:hover {
-      border-color: rgba(59,130,246,0.12);
+      border-color: rgba(250,204,21,0.12);
     }
     .aud-history-item-info {
       display: flex;
@@ -1829,8 +1829,8 @@
               <div class="rec-filters" id="recFilters">
                 <button class="rec-filter-btn active" data-filter="all">All</button>
                 <button class="rec-filter-btn" data-filter="high" style="--filter-color:#ef4444;">High Priority</button>
-                <button class="rec-filter-btn" data-filter="medium" style="--filter-color:#eab308;">Medium Priority</button>
-                <button class="rec-filter-btn" data-filter="low" style="--filter-color:#3b82f6;">Low Priority</button>
+                <button class="rec-filter-btn" data-filter="medium" style="--filter-color:#FACC15;">Medium Priority</button>
+                <button class="rec-filter-btn" data-filter="low" style="--filter-color:#10B981;">Low Priority</button>
               </div>
 
               <!-- Cards -->
@@ -2155,8 +2155,8 @@
 
     /* ─── Helper: determine color based on score ─── */
     function getScoreColor(score) {
-      if (score >= 80) return '#22c55e';
-      if (score >= 60) return '#eab308';
+      if (score >= 80) return '#10B981';
+      if (score >= 60) return '#FACC15';
       return '#ef4444';
     }
 
@@ -2249,7 +2249,7 @@
                         '<p class="rec-card-detail-text">' + rec.fix + '</p>' +
                       '</div>' +
                     '</div>' +
-                    '<span class="rec-card-impact" style="background:' + (rec.impact === 'High' ? 'rgba(239,68,68,0.08);color:#ef4444;border:1px solid rgba(239,68,68,0.15)' : rec.impact === 'Medium' ? 'rgba(234,179,8,0.08);color:#eab308;border:1px solid rgba(234,179,8,0.15)' : 'rgba(59,130,246,0.08);color:#3b82f6;border:1px solid rgba(59,130,246,0.15)') + ';">' +
+                    '<span class="rec-card-impact" style="background:' + (rec.impact === 'High' ? 'rgba(239,68,68,0.08);color:#ef4444;border:1px solid rgba(239,68,68,0.15)' : rec.impact === 'Medium' ? 'rgba(250,204,21,0.08);color:#FACC15;border:1px solid rgba(250,204,21,0.15)' : 'rgba(16,185,129,0.08);color:#10B981;border:1px solid rgba(16,185,129,0.15)') + ';">' +
                       '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>' +
                       'SEO Impact: ' + rec.impact +
                     '</span>' +
@@ -2321,7 +2321,7 @@
       overallScore.textContent = scores.overall;
 
       var gradeText = scores.overall >= 85 ? 'Excellent' : scores.overall >= 70 ? 'Good' : scores.overall >= 55 ? 'Fair' : 'Needs Work';
-      var gradeColor = scores.overall >= 85 ? '#22c55e' : scores.overall >= 70 ? '#eab308' : '#ef4444';
+      var gradeColor = scores.overall >= 85 ? '#10B981' : scores.overall >= 70 ? '#FACC15' : '#ef4444';
       overallGrade.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ' + gradeText;
       overallGrade.style.color = gradeColor;
       overallGrade.style.borderColor = gradeColor + '33';
@@ -2557,7 +2557,7 @@
           var item = document.createElement('div');
           item.className = 'aud-history-item';
 
-          var scoreColor = r.audit_score >= 80 ? '#22c55e' : r.audit_score >= 60 ? '#eab308' : '#ef4444';
+          var scoreColor = r.audit_score >= 80 ? '#10B981' : r.audit_score >= 60 ? '#FACC15' : '#ef4444';
           var displaySite = r.website.replace(/^https?:\/\//, '').split('/')[0];
           var dateStr = new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 

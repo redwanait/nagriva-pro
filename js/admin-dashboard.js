@@ -199,7 +199,7 @@ const NAGRIVA_Dashboard = (() => {
     }
 
     if (donutChart) {
-      var COLORS = ['#3b82f6', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444', '#ec4899', '#3b82f6', '#8b5cf6'];
+      var COLORS = ['#FACC15', '#FACC15', '#f59e0b', '#FACC15', '#ef4444', '#10B981', '#FACC15', '#FACC15'];
       donutChart.data.labels = serviceDist.labels;
       donutChart.data.datasets[0].data = serviceDist.data;
       donutChart.data.datasets[0].backgroundColor = serviceDist.labels.map(function(_, i) {

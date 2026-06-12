@@ -12,7 +12,7 @@
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(250,204,21,0.04) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, #0a0c0e 50%, var(--bg) 100%);
 }
 
@@ -32,7 +32,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 65%);
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
@@ -44,7 +44,7 @@
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.025) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(250,204,21,0.025) 0%, transparent 65%);
   bottom: 5%;
   right: 5%;
   filter: blur(100px);
@@ -184,8 +184,8 @@
 }
 
 .np-toggle.active {
-  background: rgba(59,130,246,0.15);
-  border-color: rgba(59,130,246,0.2);
+  background: rgba(250,204,21,0.15);
+  border-color: rgba(250,204,21,0.2);
 }
 
 .np-toggle-knob {
@@ -197,12 +197,12 @@
   border-radius: 50%;
   background: var(--accent);
   transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
-  box-shadow: 0 0 8px rgba(59,130,246,0.15);
+  box-shadow: 0 0 8px rgba(250,204,21,0.15);
 }
 
 .np-toggle.active .np-toggle-knob {
   transform: translateX(22px);
-  box-shadow: 0 0 12px rgba(59,130,246,0.25);
+  box-shadow: 0 0 12px rgba(250,204,21,0.25);
 }
 
 .np-toggle-save {
@@ -213,8 +213,8 @@
   color: var(--accent);
   padding: 3px 10px;
   border-radius: 99px;
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.15);
+  background: rgba(250,204,21,0.1);
+  border: 1px solid rgba(250,204,21,0.15);
 }
 
 /* ─── Cards Grid ─── */
@@ -246,7 +246,7 @@
   position: absolute;
   inset: 0;
   border-radius: 20px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.06) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(250,204,21,0.06) 0%, transparent 60%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -254,11 +254,11 @@
 
 .np-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(59,130,246,0.15);
+  border-color: rgba(250,204,21,0.15);
   box-shadow:
     0 32px 80px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(59,130,246,0.08),
-    0 0 40px rgba(59,130,246,0.06);
+    0 0 0 1px rgba(250,204,21,0.08),
+    0 0 40px rgba(250,204,21,0.06);
 }
 
 .np-card:hover::before {
@@ -364,10 +364,10 @@
 /* ─── Featured Card ─── */
 
 .np-card--featured {
-  background: rgba(59,130,246,0.02);
-  border-color: rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.02);
+  border-color: rgba(250,204,21,0.08);
   box-shadow:
-    0 0 0 1px rgba(59,130,246,0.04),
+    0 0 0 1px rgba(250,204,21,0.04),
     0 24px 60px rgba(0,0,0,0.3);
   transform: scale(1.03);
   z-index: 2;
@@ -375,11 +375,11 @@
 }
 
 .np-card--featured:hover {
-  border-color: rgba(59,130,246,0.2);
+  border-color: rgba(250,204,21,0.2);
   box-shadow:
-    0 0 0 1px rgba(59,130,246,0.1),
+    0 0 0 1px rgba(250,204,21,0.1),
     0 40px 100px rgba(0,0,0,0.5),
-    0 0 60px rgba(59,130,246,0.08);
+    0 0 60px rgba(250,204,21,0.08);
   transform: scale(1.03) translateY(-8px);
 }
 
@@ -398,7 +398,7 @@
   border-radius: 99px;
   white-space: nowrap;
   z-index: 3;
-  box-shadow: 0 0 20px rgba(59,130,246,0.2);
+  box-shadow: 0 0 20px rgba(250,204,21,0.2);
 }
 
 /* ─── Accent Button (for featured card) ─── */
@@ -421,7 +421,7 @@
 }
 
 .np-btn-accent:hover {
-  box-shadow: 0 0 40px rgba(59,130,246,0.35);
+  box-shadow: 0 0 40px rgba(250,204,21,0.35);
   transform: translateY(-2px);
 }
 
@@ -463,7 +463,7 @@
   position: absolute;
   inset: 0;
   border-radius: var(--r);
-  background: radial-gradient(ellipse at 20% 20%, rgba(59,130,246,0.04) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 20% 20%, rgba(250,204,21,0.04) 0%, transparent 60%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -474,11 +474,11 @@
 }
 
 .np-why-card:hover {
-  border-color: rgba(59,130,246,0.18);
+  border-color: rgba(250,204,21,0.18);
   transform: translateY(-6px);
   box-shadow:
-    0 20px 60px rgba(59,130,246,0.06),
-    0 0 0 1px rgba(59,130,246,0.03);
+    0 20px 60px rgba(250,204,21,0.06),
+    0 0 0 1px rgba(250,204,21,0.03);
 }
 
 .np-why-icon {
@@ -488,8 +488,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(59,130,246,0.08);
-  border: 1px solid rgba(59,130,246,0.12);
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.12);
   flex-shrink: 0;
   transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
@@ -502,9 +502,9 @@
 }
 
 .np-why-card:hover .np-why-icon {
-  background: rgba(59,130,246,0.14);
-  border-color: rgba(59,130,246,0.25);
-  box-shadow: 0 0 20px rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.14);
+  border-color: rgba(250,204,21,0.25);
+  box-shadow: 0 0 20px rgba(250,204,21,0.08);
 }
 
 .np-why-title {
@@ -550,7 +550,7 @@
   margin-top: 48px;
   padding: 0;
   box-shadow:
-    0 0 0 1px rgba(59,130,246,0.02),
+    0 0 0 1px rgba(250,204,21,0.02),
     0 32px 80px rgba(0,0,0,0.3);
 }
 
@@ -598,10 +598,10 @@
 
 .np-col-featured {
   position: relative;
-  background: rgba(59,130,246,0.025);
+  background: rgba(250,204,21,0.025);
   box-shadow:
-    inset 0 0 40px rgba(59,130,246,0.03),
-    0 0 0 1px rgba(59,130,246,0.04);
+    inset 0 0 40px rgba(250,204,21,0.03),
+    0 0 0 1px rgba(250,204,21,0.04);
 }
 
 .np-col-featured::before {
@@ -612,7 +612,7 @@
   right: -1px;
   height: 3px;
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(250,204,21,0.25), transparent);
   pointer-events: none;
 }
 
@@ -621,7 +621,7 @@
   position: absolute;
   inset: 0;
   border-radius: 0 0 20px 20px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.06) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(250,204,21,0.06) 0%, transparent 60%);
   pointer-events: none;
   opacity: 0.5;
 }
@@ -637,7 +637,7 @@
 }
 
 .np-compare-table tbody tr:hover .np-col-featured {
-  background: rgba(59,130,246,0.04);
+  background: rgba(250,204,21,0.04);
 }
 
 .np-compare-table tbody td {
@@ -740,11 +740,11 @@
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: var(--bg);
   border: none;
-  box-shadow: 0 0 30px rgba(59,130,246,0.15);
+  box-shadow: 0 0 30px rgba(250,204,21,0.15);
 }
 
 .np-compare-btn--primary:hover {
-  box-shadow: 0 0 50px rgba(59,130,246,0.3);
+  box-shadow: 0 0 50px rgba(250,204,21,0.3);
   transform: translateY(-2px);
   background: linear-gradient(135deg, var(--accent), var(--accent2));
 }
@@ -793,7 +793,7 @@
   }
 
   .np-compare-table tbody tr:hover {
-    border-color: rgba(59,130,246,0.12);
+    border-color: rgba(250,204,21,0.12);
     background: rgba(255,255,255,0.012);
   }
 
@@ -931,8 +931,8 @@
 }
 
 .np-faq-item.active {
-  border-color: rgba(59,130,246,0.08);
-  background: rgba(59,130,246,0.01);
+  border-color: rgba(250,204,21,0.08);
+  background: rgba(250,204,21,0.01);
 }
 
 .np-faq-q {
@@ -1009,7 +1009,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
   filter: blur(100px);
   pointer-events: none;
 }
@@ -1078,8 +1078,8 @@
   position: relative;
   max-width: 580px;
   margin: 0 auto;
-  background: rgba(59,130,246,0.015);
-  border: 1px solid rgba(59,130,246,0.06);
+  background: rgba(250,204,21,0.015);
+  border: 1px solid rgba(250,204,21,0.06);
   border-radius: 14px;
   padding: 22px 28px;
   text-align: center;

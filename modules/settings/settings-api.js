@@ -19,8 +19,8 @@ const NAGRIVA_SettingsAPI = (() => {
       language: 'en'
     },
     branding: {
-      primary_color: '#3b82f6',
-      secondary_color: '#2563EB',
+      primary_color: '#FACC15',
+      secondary_color: '#F59E0B',
       glow_intensity: 100,
       border_radius: 22,
       theme_preset: 'dark-blue'

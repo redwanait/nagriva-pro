@@ -9,7 +9,7 @@
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(250,204,21,0.04) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, #0a0c0e 50%, var(--bg) 100%);
 }
 
@@ -122,7 +122,7 @@
 
 .dw-demo-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(59,130,246,0.2);
+  border-color: rgba(250,204,21,0.2);
   box-shadow: 0 24px 64px rgba(0,0,0,0.4);
 }
 
@@ -243,7 +243,7 @@
 .dw-demo-btn--primary:hover {
   gap: 12px;
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+  box-shadow: 0 4px 20px rgba(250,204,21,0.3);
 }
 
 .dw-demo-btn--secondary {
@@ -281,8 +281,8 @@
 }
 
 .dw-feature-item:hover {
-  border-color: rgba(59,130,246,0.15);
-  background: rgba(59,130,246,0.03);
+  border-color: rgba(250,204,21,0.15);
+  background: rgba(250,204,21,0.03);
 }
 
 .dw-feature-item svg {
@@ -322,7 +322,7 @@
 
 .dw-why-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59,130,246,0.15);
+  border-color: rgba(250,204,21,0.15);
   box-shadow: 0 16px 48px rgba(0,0,0,0.35);
 }
 
@@ -330,8 +330,8 @@
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.06);
+  border: 1px solid rgba(250,204,21,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -370,7 +370,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%);
   filter: blur(100px);
   pointer-events: none;
 }
@@ -556,7 +556,7 @@
 
 .dw-metrics-item:hover .dw-metrics-number {
   color: var(--accent);
-  text-shadow: 0 0 40px rgba(59,130,246,0.25), 0 0 80px rgba(59,130,246,0.1);
+  text-shadow: 0 0 40px rgba(250,204,21,0.25), 0 0 80px rgba(250,204,21,0.1);
 }
 
 .dw-metrics-label {

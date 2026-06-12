@@ -48,7 +48,7 @@
       transform: translateX(-50%);
       width: 700px; height: 700px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.07) 0%, transparent 70%);
       filter: blur(100px);
       animation: waGlowPulse 8s ease-in-out infinite;
     }
@@ -57,7 +57,7 @@
       bottom: -100px; right: -150px;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
       filter: blur(80px);
       animation: waGlowPulse2 12s ease-in-out infinite;
     }
@@ -81,7 +81,7 @@
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--accent);
-      background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+      background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.15);
       padding: 6px 16px; border-radius: 99px;
       backdrop-filter: blur(12px);
     }
@@ -106,14 +106,14 @@
       display: inline-flex; align-items: center; gap: 10px;
       font-size: 0.92rem; font-weight: 600;
       color: var(--bg);
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
       padding: 14px 28px; border-radius: 99px;
       text-decoration: none;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .wa-hero-btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 28px rgba(59,130,246,0.25);
+      box-shadow: 0 8px 28px rgba(250,204,21,0.25);
     }
     .wa-hero-btn-primary svg { transition: transform 0.3s ease; }
     .wa-hero-btn-primary:hover svg { transform: translateX(3px); }
@@ -172,7 +172,7 @@
       transform: translate(-50%, -50%);
       width: 800px; height: 800px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
       filter: blur(120px);
     }
     .wa-dash-card {
@@ -180,7 +180,7 @@
       background: rgba(11,15,15,0.6);
       backdrop-filter: blur(20px) saturate(160%);
       -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(59,130,246,0.1);
+      border: 1px solid rgba(250,204,21,0.1);
       border-radius: 28px;
       padding: 48px 40px;
       overflow: hidden;
@@ -191,7 +191,7 @@
       position: absolute;
       inset: -1px;
       border-radius: 29px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 40%, transparent 60%, rgba(59,130,246,0.03) 100%);
+      background: linear-gradient(135deg, rgba(250,204,21,0.06) 0%, transparent 40%, transparent 60%, rgba(250,204,21,0.03) 100%);
       pointer-events: none;
     }
     .wa-dash-header {
@@ -245,8 +245,8 @@
       transition: border-color 0.3s ease, background 0.3s ease;
     }
     .wa-dash-score-item:hover {
-      border-color: rgba(59,130,246,0.18);
-      background: rgba(59,130,246,0.025);
+      border-color: rgba(250,204,21,0.18);
+      background: rgba(250,204,21,0.025);
     }
     .wa-dash-score-top {
       display: flex;
@@ -276,12 +276,13 @@
     .wa-dash-bar-fill {
       height: 100%;
       border-radius: 5px;
-      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      background: linear-gradient(90deg, #10B981, #6EE7B7);
       transition: width 1.2s ease;
     }
-    .wa-dash-bar-fill.speed { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
-    .wa-dash-bar-fill.design { background: linear-gradient(90deg, #10b981, #34d399); }
-    .wa-dash-bar-fill.conversion { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .wa-dash-bar-fill.seo { background: linear-gradient(90deg, #10B981, #6EE7B7); }
+    .wa-dash-bar-fill.speed { background: linear-gradient(90deg, #FACC15, #FCD34D); }
+    .wa-dash-bar-fill.design { background: linear-gradient(90deg, #10b981, #6EE7B7); }
+    .wa-dash-bar-fill.conversion { background: linear-gradient(90deg, #FACC15, #FCD34D); }
 
     /* ════════════════════════════════════════════
        HOW IT WORKS
@@ -289,7 +290,7 @@
     .wa-how {
       padding: var(--wa-gap) 0;
       border-top: 1px solid var(--border);
-      background: rgba(59,130,246,0.005);
+      background: rgba(250,204,21,0.005);
     }
     .wa-how-grid {
       display: grid;
@@ -303,7 +304,7 @@
       position: absolute;
       top: 40px; left: 15%; right: 15%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(250,204,21,0.15), transparent);
       pointer-events: none;
     }
     .wa-how-step {
@@ -321,15 +322,15 @@
     }
     .wa-how-step:hover {
       transform: translateY(-4px);
-      border-color: rgba(59,130,246,0.18);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(59,130,246,0.03);
+      border-color: rgba(250,204,21,0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(250,204,21,0.03);
       background: rgba(255,255,255,0.02);
     }
     .wa-how-num {
       width: 48px; height: 48px;
       border-radius: 50%;
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.12);
+      background: rgba(250,204,21,0.08);
+      border: 1px solid rgba(250,204,21,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -368,7 +369,7 @@
       top: 20%; right: -100px;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
       filter: blur(100px);
     }
     .wa-analyze-grid {
@@ -388,7 +389,7 @@
       transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
     }
     .wa-analyze-card:hover {
-      border-color: rgba(59,130,246,0.18);
+      border-color: rgba(250,204,21,0.18);
       box-shadow: 0 8px 30px rgba(0,0,0,0.2);
       background: rgba(255,255,255,0.02);
       transform: translateY(-2px);
@@ -397,8 +398,8 @@
       width: 48px; height: 48px;
       min-width: 48px;
       border-radius: 14px;
-      background: rgba(59,130,246,0.06);
-      border: 1px solid rgba(59,130,246,0.1);
+      background: rgba(250,204,21,0.06);
+      border: 1px solid rgba(250,204,21,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -437,7 +438,7 @@
       transform: translate(-50%, -50%);
       width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
       filter: blur(100px);
     }
     .wa-form-card {
@@ -456,7 +457,7 @@
       position: absolute;
       inset: 0;
       border-radius: 22px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, transparent 50%);
+      background: linear-gradient(135deg, rgba(250,204,21,0.03) 0%, transparent 50%);
       pointer-events: none;
     }
     .wa-form-header {
@@ -514,8 +515,8 @@
     .wa-form-input:focus,
     .wa-form-select:focus,
     .wa-form-textarea:focus {
-      border-color: rgba(59,130,246,0.3);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.04), 0 0 20px rgba(59,130,246,0.04);
+      border-color: rgba(250,204,21,0.3);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.04), 0 0 20px rgba(250,204,21,0.04);
       background: rgba(255,255,255,0.035);
     }
     .wa-form-input:hover,
@@ -536,7 +537,7 @@
       background-position: right 14px center;
       padding-right: 38px;
     }
-    .wa-form-select option { background: #0b0f0f; color: var(--white); }
+    .wa-form-select option { background: #0A0A0A; color: var(--white); }
     .wa-form-textarea { min-height: 100px; resize: vertical; }
     .wa-form-submit {
       display: inline-flex;
@@ -548,7 +549,7 @@
       font-weight: 600;
       font-family: inherit;
       color: var(--bg);
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
       padding: 14px 28px;
       border: none;
       border-radius: 99px;
@@ -559,7 +560,7 @@
     }
     .wa-form-submit:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 28px rgba(59,130,246,0.25);
+      box-shadow: 0 8px 28px rgba(250,204,21,0.25);
     }
     .wa-form-submit:disabled {
       opacity: 0.5;
@@ -593,8 +594,8 @@
     .wa-form-success .success-icon {
       width: 64px; height: 64px;
       border-radius: 50%;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.2);
+      background: rgba(250,204,21,0.1);
+      border: 1px solid rgba(250,204,21,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -660,7 +661,7 @@
       top: -100px; right: 0;
       width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.06) 0%, transparent 70%);
       filter: blur(80px);
       animation: faqGlowA 14s ease-in-out infinite;
     }
@@ -681,20 +682,20 @@
       transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1),
                   box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
     }
-    .wa-faq-item:hover { border-color: rgba(59,130,246,0.15); }
+    .wa-faq-item:hover { border-color: rgba(250,204,21,0.15); }
     .wa-faq-item.open {
-      border-color: rgba(59,130,246,0.25);
-      background: rgba(59,130,246,0.025);
-      box-shadow: 0 0 0 1px rgba(59,130,246,0.05),
+      border-color: rgba(250,204,21,0.25);
+      background: rgba(250,204,21,0.025);
+      box-shadow: 0 0 0 1px rgba(250,204,21,0.05),
                   0 16px 40px rgba(0,0,0,0.3),
-                  0 0 40px rgba(59,130,246,0.04);
+                  0 0 40px rgba(250,204,21,0.04);
     }
     .wa-faq-item.open::before {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: 18px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.04) 0%, transparent 50%);
+      background: linear-gradient(135deg, rgba(250,204,21,0.04) 0%, transparent 50%);
       pointer-events: none;
     }
     .wa-faq-q {
@@ -716,7 +717,7 @@
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: rgba(59,130,246,0.35);
+      color: rgba(250,204,21,0.35);
       min-width: 28px;
       flex-shrink: 0;
       transition: color 0.3s ease;
@@ -749,8 +750,8 @@
       transform: rotate(180deg);
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(59,130,246,0.08);
-      box-shadow: 0 0 16px rgba(59,130,246,0.08);
+      background: rgba(250,204,21,0.08);
+      box-shadow: 0 0 16px rgba(250,204,21,0.08);
     }
     .wa-faq-answer {
       max-height: 0;
@@ -782,7 +783,7 @@
       transform: translateX(-50%);
       width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%);
       filter: blur(100px);
       pointer-events: none;
     }
@@ -820,8 +821,8 @@
       gap: 10px;
       padding: 16px 36px;
       border-radius: 99px;
-      background: linear-gradient(135deg, #3b82f6, #2563EB);
-      color: #040404;
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #050505;
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
@@ -829,7 +830,7 @@
     }
     .wa-final-btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+      box-shadow: 0 12px 40px rgba(250,204,21,0.25);
     }
     .wa-final-btn-primary svg {
       width: 16px; height: 16px;
@@ -988,9 +989,9 @@
           <div class="wa-dash-score-item">
             <div class="wa-dash-score-top">
               <span class="wa-dash-score-label">SEO</span>
-              <span class="wa-dash-score-num">78<span>/100</span></span>
+              <span class="wa-dash-score-num" style="color:#10B981">78<span style="color:var(--gray2)">/100</span></span>
             </div>
-            <div class="wa-dash-bar"><div class="wa-dash-bar-fill" style="width:78%"></div></div>
+            <div class="wa-dash-bar"><div class="wa-dash-bar-fill seo" style="width:78%"></div></div>
           </div>
           <div class="wa-dash-score-item">
             <div class="wa-dash-score-top">

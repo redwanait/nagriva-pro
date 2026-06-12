@@ -4,13 +4,13 @@
    ════════════════════════════════════════════════════════ */
 
 :root {
-  --gold: #FFD700;
-  --gold2: #F4B400;
-  --gold3: #C99700;
+  --gold: #FACC15;
+  --gold2: #F59E0B;
+  --gold3: #F59E0B;
   --gold-dim: rgba(255, 215, 0, 0.08);
   --gold-glow: rgba(255, 215, 0, 0.15);
   --gold-glow-strong: rgba(255, 215, 0, 0.25);
-  --score-excellent: #22c55e;
+  --score-excellent: #10B981;
   --score-good: #f59e0b;
   --score-poor: #ef4444;
   --ah-radius: 16px;
@@ -87,7 +87,7 @@
 }
 .ah-btn-primary {
   background: linear-gradient(135deg, var(--gold), var(--gold2));
-  color: #040404;
+  color: #050505;
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
 }
 .ah-btn-primary:hover {
@@ -319,7 +319,7 @@
   color: var(--white);
 }
 .ah-filters select option {
-  background: #040404;
+  background: #050505;
   color: var(--white);
 }
 
@@ -600,7 +600,7 @@
 }
 .ah-page-btn.active {
   background: linear-gradient(135deg, var(--gold), var(--gold2));
-  color: #040404;
+  color: #050505;
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
 }
@@ -688,7 +688,7 @@
   max-width: 520px;
   max-height: 85vh;
   overflow-y: auto;
-  background: #0b0f0f;
+  background: #0A0A0A;
   border: 1px solid rgba(255, 215, 0, 0.12);
   border-radius: 20px;
   padding: 32px;

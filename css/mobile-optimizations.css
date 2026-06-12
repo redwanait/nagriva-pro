@@ -96,7 +96,7 @@ html {
 
   /* ─── Pricing card backdrop ─── */
   .pricing-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-  .pricing-card.featured { box-shadow: 0 0 0 1px rgba(59,130,246,0.08) !important; }
+  .pricing-card.featured { box-shadow: 0 0 0 1px rgba(250,204,21,0.08) !important; }
   .pricing-service-icon { box-shadow: none !important; }
 
   /* ─── Presentation (sp-*) overrides ─── */
@@ -153,7 +153,7 @@ html {
   .ct-info-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
   .ct-form-card .ct-form-input, .ct-form-card .ct-form-select, .ct-form-card .ct-form-textarea { font-size: 16px !important; }
   .ct-why-card:hover { transform: none !important; box-shadow: none !important; }
-  .ct-why-card:hover .ct-why-icon { background: rgba(59,130,246,0.06) !important; box-shadow: none !important; }
+  .ct-why-card:hover .ct-why-icon { background: rgba(250,204,21,0.06) !important; box-shadow: none !important; }
 
   /* ─── Buttons: disable expensive hover effects ─── */
   .btn-primary:hover { box-shadow: none !important; transform: none !important; }
@@ -175,10 +175,10 @@ html {
   .pj-badge { box-shadow: none !important; }
   .stat-card:hover { transform: none !important; box-shadow: none !important; }
   .pricing-card:hover:not(.featured) { transform: none !important; border-color: var(--border) !important; box-shadow: none !important; }
-  .pricing-card.featured:hover { transform: none !important; box-shadow: 0 0 0 1px rgba(59,130,246,0.08) !important; }
+  .pricing-card.featured:hover { transform: none !important; box-shadow: 0 0 0 1px rgba(250,204,21,0.08) !important; }
   .pricing-card:hover .pricing-service-icon { transform: none !important; box-shadow: none !important; }
   .process-card:hover { transform: none !important; box-shadow: none !important; }
-  .process-card:hover .card-icon { background: rgba(59,130,246,0.06) !important; border-color: rgba(59,130,246,0.15) !important; box-shadow: none !important; }
+  .process-card:hover .card-icon { background: rgba(250,204,21,0.06) !important; border-color: rgba(250,204,21,0.15) !important; box-shadow: none !important; }
   .process-card:hover .card-icon svg { transform: none !important; }
   .featured-btn:hover { box-shadow: none !important; }
   .card-btn:hover { transform: none !important; box-shadow: none !important; }
@@ -228,7 +228,7 @@ html {
   /* ─── Presentation page extras ─── */
   .sp-benefit-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
   .sp-pricing-card:hover { transform: none !important; }
-  .sp-pricing-card--featured:hover { box-shadow: 0 0 0 1px rgba(59,130,246,0.04) !important; }
+  .sp-pricing-card--featured:hover { box-shadow: 0 0 0 1px rgba(250,204,21,0.04) !important; }
   .sp-showcase-card:hover { transform: none !important; }
   .sp-cta-btn:hover { box-shadow: none !important; transform: none !important; }
   .sp-pricing-btn:hover { transform: none !important; }
@@ -286,10 +286,10 @@ html {
 
   .sp-benefit-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
   .sp-pricing-card:hover { transform: none !important; border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
-  .sp-pricing-card--featured:hover { border-color: rgba(59,130,246,0.18) !important; box-shadow: 0 0 0 1px rgba(59,130,246,0.04) !important; }
+  .sp-pricing-card--featured:hover { border-color: rgba(250,204,21,0.18) !important; box-shadow: 0 0 0 1px rgba(250,204,21,0.04) !important; }
   .sp-testimonial-card:hover { transform: none !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
   .sp-testimonial-card:hover::before { opacity: 0 !important; }
-  .sp-testimonial-card:hover .sp-testimonial-avatar { box-shadow: 0 0 0 2px rgba(59,130,246,0.1), 0 4px 16px rgba(0,0,0,0.25) !important; }
+  .sp-testimonial-card:hover .sp-testimonial-avatar { box-shadow: 0 0 0 2px rgba(250,204,21,0.1), 0 4px 16px rgba(0,0,0,0.25) !important; }
   .sp-showcase-card:hover { transform: none !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
   .sp-showcase-card:hover .sp-showcase-image img { transform: none !important; }
   .sp-cta-btn:hover { box-shadow: none !important; transform: none !important; }

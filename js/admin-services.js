@@ -6,8 +6,8 @@
 const NAGRIVA_AdminServices = (() => {
   const STATUS_CONFIG = {
     draft:     { label: 'Draft',     cls: 'pending',   color: '#f59e0b' },
-    published: { label: 'Published', cls: 'completed', color: '#2563EB' },
-    archived:  { label: 'Archived',  cls: 'revision',  color: '#a855f7' }
+    published: { label: 'Published', cls: 'completed', color: '#F59E0B' },
+    archived:  { label: 'Archived',  cls: 'revision',  color: '#FACC15' }
   };
 
   let services = [];

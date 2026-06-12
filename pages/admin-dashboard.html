@@ -427,9 +427,9 @@
       const revCtx = document.getElementById('revenueChart').getContext('2d');
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
       const gradient = revCtx.createLinearGradient(0, 0, 0, 260);
-      gradient.addColorStop(0, 'rgba(59,130,246,0.25)');
-      gradient.addColorStop(0.5, 'rgba(59,130,246,0.08)');
-      gradient.addColorStop(1, 'rgba(59,130,246,0)');
+      gradient.addColorStop(0, 'rgba(250,204,21,0.25)');
+      gradient.addColorStop(0.5, 'rgba(250,204,21,0.08)');
+      gradient.addColorStop(1, 'rgba(250,204,21,0)');
 
       new Chart(revCtx, {
         type: 'line',
@@ -438,13 +438,13 @@
           datasets: [{
             label: 'Revenue',
             data: [28500, 32000, 29800, 35600, 41200, 45300],
-            borderColor: '#3b82f6',
+            borderColor: '#FACC15',
             backgroundColor: gradient,
             borderWidth: 2,
             fill: true,
             tension: 0.4,
-            pointBackgroundColor: '#040404',
-            pointBorderColor: '#3b82f6',
+            pointBackgroundColor: '#050505',
+            pointBorderColor: '#FACC15',
             pointBorderWidth: 2,
             pointRadius: 4,
             pointHoverRadius: 6
@@ -493,8 +493,8 @@
           labels: ['Web Design', 'SEO', 'Branding', 'AI Automation', 'Social Media'],
           datasets: [{
             data: [35, 22, 18, 15, 10],
-            backgroundColor: ['#3b82f6', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444'],
-            borderColor: '#040404',
+            backgroundColor: ['#FACC15', '#FACC15', '#f59e0b', '#FACC15', '#ef4444'],
+            borderColor: '#050505',
             borderWidth: 3,
             hoverOffset: 8
           }]

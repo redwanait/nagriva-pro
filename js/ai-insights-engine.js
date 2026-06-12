@@ -19,8 +19,8 @@ window.NAGRIVA_AIInsights = (function () {
   }
 
   function getScoreColor(score) {
-    if (score >= 80) return '#22c55e';
-    if (score >= 60) return '#eab308';
+    if (score >= 80) return '#10B981';
+    if (score >= 60) return '#FACC15';
     return '#ef4444';
   }
 

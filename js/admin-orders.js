@@ -1,10 +1,10 @@
 const NAGRIVA_AdminOrders = (() => {
   const STATUS = {
     pending:     { label: 'Pending',     color: '#f59e0b', cls: 'pending',   progress: 10  },
-    approved:    { label: 'Approved',    color: '#3b82f6', cls: 'approved',  progress: 25  },
-    in_progress: { label: 'In Progress', color: '#3b82f6', cls: 'active',    progress: 45  },
-    review:      { label: 'Review',      color: '#a855f7', cls: 'revision',  progress: 70  },
-    completed:   { label: 'Completed',   color: '#2563EB', cls: 'completed', progress: 100 },
+    approved:    { label: 'Approved',    color: '#FACC15', cls: 'approved',  progress: 25  },
+    in_progress: { label: 'In Progress', color: '#FACC15', cls: 'active',    progress: 45  },
+    review:      { label: 'Review',      color: '#FACC15', cls: 'revision',  progress: 70  },
+    completed:   { label: 'Completed',   color: '#F59E0B', cls: 'completed', progress: 100 },
     cancelled:   { label: 'Cancelled',   color: '#ef4444', cls: 'cancelled', progress: 0   },
   };
 
@@ -549,7 +549,7 @@ const NAGRIVA_AdminOrders = (() => {
         </div>
         <div class="order-progress">
           <div class="progress-track">
-            <div class="progress-bar" style="width:${cfg.progress}%;${order.status === 'in_progress' ? 'background:linear-gradient(90deg,#3b82f6,#6366f1)' : ''}${order.status === 'revision' ? 'background:linear-gradient(90deg,#a855f7,#d946ef)' : ''}${order.status === 'pending' ? 'background:linear-gradient(90deg,#f59e0b,#f97316)' : ''}"></div>
+            <div class="progress-bar" style="width:${cfg.progress}%;${order.status === 'in_progress' ? 'background:linear-gradient(90deg,#FACC15,#FACC15)' : ''}${order.status === 'revision' ? 'background:linear-gradient(90deg,#FACC15,#F59E0B)' : ''}${order.status === 'pending' ? 'background:linear-gradient(90deg,#f59e0b,#F59E0B)' : ''}"></div>
           </div>
           <div style="display:flex;justify-content:space-between;">
             <span class="progress-name">Progress</span>

@@ -32,9 +32,9 @@
 .pay-status.paid::before { background: var(--success); }
 .pay-status.refunded {
   background: rgba(99, 102, 241, 0.1);
-  color: #818cf8;
+  color: #F59E0B;
 }
-.pay-status.refunded::before { background: #818cf8; }
+.pay-status.refunded::before { background: #F59E0B; }
 .pay-status.failed {
   background: rgba(239, 68, 68, 0.1);
   color: var(--danger);
@@ -81,7 +81,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.04), transparent 70%);
+  background: radial-gradient(circle, rgba(250,204,21,0.04), transparent 70%);
   pointer-events: none;
 }
 .pay-stat-card .pay-stat-icon {
@@ -96,9 +96,9 @@
   border: 1px solid var(--border);
 }
 .pay-stat-card .pay-stat-icon.teal {
-  background: rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.08);
   color: var(--accent);
-  border-color: rgba(59,130,246,0.15);
+  border-color: rgba(250,204,21,0.15);
 }
 .pay-stat-card .pay-stat-icon.orange {
   background: rgba(245,158,11,0.08);
@@ -106,9 +106,9 @@
   border-color: rgba(245,158,11,0.15);
 }
 .pay-stat-card .pay-stat-icon.blue {
-  background: rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.08);
   color: var(--info);
-  border-color: rgba(59,130,246,0.15);
+  border-color: rgba(250,204,21,0.15);
 }
 .pay-stat-card .pay-stat-icon.red {
   background: rgba(239,68,68,0.08);
@@ -116,9 +116,9 @@
   border-color: rgba(239,68,68,0.15);
 }
 .pay-stat-card .pay-stat-icon.purple {
-  background: rgba(168,85,247,0.08);
-  color: #a855f7;
-  border-color: rgba(168,85,247,0.15);
+  background: rgba(250,204,21,0.08);
+  color: #FACC15;
+  border-color: rgba(250,204,21,0.15);
 }
 .pay-stat-value {
   font-family: 'Syne', sans-serif;
@@ -145,7 +145,7 @@
 }
 .pay-stat-change.up {
   color: var(--success);
-  background: rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.1);
 }
 .pay-stat-change.down {
   color: var(--danger);
@@ -195,7 +195,7 @@
 .payments-search-wrap input:focus {
   border-color: var(--accent-dim);
   background: var(--surface-hover);
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.06);
+  box-shadow: 0 0 0 1px rgba(250,204,21,0.06);
 }
 .payments-search-clear {
   position: absolute;
@@ -306,12 +306,12 @@
   color: var(--bg);
   flex-shrink: 0;
 }
-.pay-td-avatar.pa1 { background: #3b82f6; }
+.pay-td-avatar.pa1 { background: #FACC15; }
 .pay-td-avatar.pa2 { background: #f59e0b; }
-.pay-td-avatar.pa3 { background: #3b82f6; }
+.pay-td-avatar.pa3 { background: #FACC15; }
 .pay-td-avatar.pa4 { background: #ef4444; }
-.pay-td-avatar.pa5 { background: #a855f7; }
-.pay-td-avatar.pa6 { background: #ec4899; }
+.pay-td-avatar.pa5 { background: #FACC15; }
+.pay-td-avatar.pa6 { background: #10B981; }
 .pay-td-name {
   color: var(--white);
   font-weight: 500;
@@ -416,7 +416,7 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.06), transparent 70%);
+  background: radial-gradient(circle, rgba(250,204,21,0.06), transparent 70%);
   pointer-events: none;
 }
 .pay-modal-header {
@@ -505,7 +505,7 @@
 .pay-form-field textarea:focus {
   border-color: var(--accent-dim);
   background: var(--surface-hover);
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.06);
+  box-shadow: 0 0 0 1px rgba(250,204,21,0.06);
 }
 .pay-form-field input::placeholder {
   color: var(--gray3);
@@ -626,10 +626,10 @@
 }
 .pay-h-dot.paid {
   border-color: var(--success);
-  background: rgba(59,130,246,0.15);
+  background: rgba(250,204,21,0.15);
 }
 .pay-h-dot.refunded {
-  border-color: #818cf8;
+  border-color: #F59E0B;
   background: rgba(99,102,241,0.15);
 }
 .pay-h-dot.failed {
@@ -702,8 +702,8 @@
   50% { transform: translateY(-3px); }
 }
 @keyframes pay-glow-pulse {
-  0%, 100% { box-shadow: 0 0 10px rgba(59,130,246,0); }
-  50% { box-shadow: 0 0 15px rgba(59,130,246,0.05); }
+  0%, 100% { box-shadow: 0 0 10px rgba(250,204,21,0); }
+  50% { box-shadow: 0 0 15px rgba(250,204,21,0.05); }
 }
 .pay-empty-state {
   display: flex;
@@ -721,8 +721,8 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: rgba(59,130,246,0.05);
-  border: 1px solid rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.05);
+  border: 1px solid rgba(250,204,21,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -733,8 +733,8 @@
   transition: all var(--transition);
 }
 .pay-empty-state:hover .pay-empty-icon {
-  background: rgba(59,130,246,0.08);
-  border-color: rgba(59,130,246,0.2);
+  background: rgba(250,204,21,0.08);
+  border-color: rgba(250,204,21,0.2);
   transform: scale(1.05);
 }
 .pay-empty-state h3 {
@@ -793,7 +793,7 @@
   width: 3px;
 }
 .pay-history-list-compact::-webkit-scrollbar-thumb {
-  background: rgba(59,130,246,0.15);
+  background: rgba(250,204,21,0.15);
   border-radius: 99px;
 }
 

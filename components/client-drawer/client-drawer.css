@@ -301,7 +301,7 @@
 }
 .cd-order-status.pending { background: rgba(245, 158, 11, 0.12); color: var(--warning); }
 .cd-order-status.in_progress { background: rgba(59, 130, 246, 0.12); color: var(--info); }
-.cd-order-status.revision { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+.cd-order-status.revision { background: rgba(168, 85, 247, 0.12); color: #FACC15; }
 .cd-order-status.completed { background: rgba(59, 130, 246, 0.12); color: var(--success); }
 
 /* ─── Activity Feed ─── */
@@ -423,8 +423,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(59,130,246,0.04);
-  border: 1px solid rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.04);
+  border: 1px solid rgba(250,204,21,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,8 +435,8 @@
   transition: all var(--transition);
 }
 .cd-empty:hover .cd-empty-icon {
-  background: rgba(59,130,246,0.07);
-  border-color: rgba(59,130,246,0.15);
+  background: rgba(250,204,21,0.07);
+  border-color: rgba(250,204,21,0.15);
   transform: scale(1.05);
 }
 .cd-empty .cd-empty-label {

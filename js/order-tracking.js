@@ -201,7 +201,7 @@
       const circumference = 2 * Math.PI * 24;
       const offset = circumference * (1 - Math.min(progress, 100) / 100);
       return '<svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52">' +
-        '<defs><linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563EB"/></linearGradient></defs>' +
+        '<defs><linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FACC15"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient></defs>' +
         '<circle class="progress-ring-bg" cx="26" cy="26" r="24"/>' +
         '<circle class="progress-ring-fill" cx="26" cy="26" r="24" stroke="url(#pg)" stroke-dasharray="' + circumference + '" stroke-dashoffset="' + offset + '"/>' +
         '</svg><span class="progress-ring-text">' + Math.round(progress) + '%</span>';

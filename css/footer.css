@@ -27,7 +27,7 @@
   transform: translateX(-50%);
   width: 180px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(250,204,21,0.15), transparent);
   pointer-events: none;
 }
 
@@ -103,10 +103,11 @@
 }
 
 .social-icon:hover {
-  color: var(--accent);
-  border-color: rgba(59,130,246,0.2);
-  background: rgba(59,130,246,0.04);
-  transform: translateY(-1px);
+  color: #FACC15;
+  border-color: rgba(250,204,21,0.3);
+  background: rgba(250,204,21,0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(250,204,21,0.08);
 }
 
 /* ─── Link Columns ─── */
@@ -136,7 +137,7 @@
 }
 
 .footer-links a:hover {
-  color: var(--accent);
+  color: #FACC15;
 }
 
 /* ─── Bottom Bar ─── */
@@ -223,12 +224,12 @@
   outline: none;
 }
 .selector-wrapper select:hover {
-  border-color: rgba(59,130,246,0.12);
+  border-color: rgba(250,204,21,0.12);
   color: rgba(255,255,255,0.35);
 }
 .selector-wrapper select:focus-visible {
-  border-color: rgba(59,130,246,0.15);
-  box-shadow: 0 0 0 2px rgba(59,130,246,0.03);
+  border-color: rgba(250,204,21,0.15);
+  box-shadow: 0 0 0 2px rgba(250,204,21,0.03);
 }
 .selector-wrapper select option {
   background: #0c0c0e;
@@ -248,7 +249,7 @@
   transition: border-color 0.25s ease;
 }
 .selector-wrapper:hover::after {
-  border-color: rgba(59,130,246,0.25);
+  border-color: rgba(250,204,21,0.25);
 }
 
 /* RTL override for selectors */

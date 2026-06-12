@@ -127,7 +127,7 @@
   background: radial-gradient(circle, rgba(245, 158, 11, 0.25), transparent 70%);
 }
 .af-dot.purple {
-  background: #a855f7;
+  background: #FACC15;
 }
 .af-dot.purple::after {
   background: radial-gradient(circle, rgba(168, 85, 247, 0.25), transparent 70%);
@@ -180,7 +180,7 @@
 }
 .af-icon-wrap.purple {
   background: rgba(168, 85, 247, 0.08);
-  color: #a855f7;
+  color: #FACC15;
   border-color: rgba(168, 85, 247, 0.15);
 }
 .af-icon-wrap.red {
@@ -251,7 +251,7 @@
   background: rgba(245, 158, 11, 0.08);
 }
 .af-action-label.purple {
-  color: #a855f7;
+  color: #FACC15;
   background: rgba(168, 85, 247, 0.08);
 }
 .af-action-label.red {
@@ -285,15 +285,15 @@
   justify-content: center;
   font-size: 1.2rem;
   margin-bottom: 16px;
-  background: rgba(59,130,246,0.05);
-  border: 1px solid rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.05);
+  border: 1px solid rgba(250,204,21,0.1);
   color: var(--accent);
   animation: af-float-icon 3s ease-in-out infinite;
   transition: all var(--transition);
 }
 .af-empty:hover .af-empty-icon {
-  background: rgba(59,130,246,0.08);
-  border-color: rgba(59,130,246,0.2);
+  background: rgba(250,204,21,0.08);
+  border-color: rgba(250,204,21,0.2);
   transform: scale(1.05);
 }
 .af-empty-title {

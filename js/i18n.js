@@ -43,7 +43,7 @@
       'hero.trust-conversion': 'Conversion Focused',
 
       'services.tag': 'What we do',
-      'services.title': 'Everything You Need to <span style="color:#3b82f6">Grow</span>',
+      'services.title': 'Everything You Need to <span style="color:#FACC15">Grow</span>',
       'services.subtitle': 'End-to-end digital solutions crafted to position your brand ahead of the competition.',
       'services.web-design': 'Website Development',
       'services.web-design-desc': 'Professional websites for dentists, lawyers, and car rental companies.',

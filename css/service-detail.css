@@ -6,8 +6,8 @@
 
 /* ─── PAGE LAYOUT ─── */
 .fv-page {
-  --fv-accent: #3b82f6;
-  --fv-accent2: #2563eb;
+  --fv-accent: #FACC15;
+  --fv-accent2: #F59E0B;
   padding-top: 68px;
   background: var(--bg);
   min-height: 100vh;
@@ -43,13 +43,13 @@
   padding: 28px 24px 24px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.02), 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 1px rgba(250,204,21,0.02), 0 8px 32px rgba(0,0,0,0.3);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .fv-sidebar-inner:hover {
-  border-color: rgba(59,130,246,0.1);
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.04), 0 12px 48px rgba(0,0,0,0.4);
+  border-color: rgba(250,204,21,0.1);
+  box-shadow: 0 0 0 1px rgba(250,204,21,0.04), 0 12px 48px rgba(0,0,0,0.4);
 }
 
 /* ─── BREADCRUMB ─── */
@@ -111,8 +111,8 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--fv-accent);
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.12);
+  background: rgba(250,204,21,0.06);
+  border: 1px solid rgba(250,204,21,0.12);
   padding: 4px 12px;
   border-radius: 99px;
 }
@@ -133,7 +133,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--fv-accent), #007aff);
+  background: linear-gradient(135deg, var(--fv-accent), #FACC15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,7 +141,7 @@
   font-weight: 700;
   color: var(--bg);
   flex-shrink: 0;
-  box-shadow: 0 0 0 2px rgba(59,130,246,0.1), 0 4px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 0 0 2px rgba(250,204,21,0.1), 0 4px 16px rgba(0,0,0,0.25);
 }
 
 .fv-seller-info {
@@ -168,8 +168,8 @@
   font-size: 0.68rem;
   font-weight: 600;
   color: var(--fv-accent);
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.06);
+  border: 1px solid rgba(250,204,21,0.1);
   padding: 3px 10px;
   border-radius: 99px;
   margin-left: auto;
@@ -304,8 +304,8 @@
 }
 
 .fv-gallery-nav:hover {
-  background: rgba(59,130,246,0.2);
-  border-color: rgba(59,130,246,0.2);
+  background: rgba(250,204,21,0.2);
+  border-color: rgba(250,204,21,0.2);
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -340,7 +340,7 @@
 
 .fv-gallery-dot.active {
   background: var(--fv-accent);
-  box-shadow: 0 0 8px rgba(59,130,246,0.4);
+  box-shadow: 0 0 8px rgba(250,204,21,0.4);
   width: 24px;
   border-radius: 4px;
 }
@@ -443,8 +443,8 @@
 }
 
 .fv-benefit-item:hover {
-  border-color: rgba(59,130,246,0.1);
-  background: rgba(59,130,246,0.015);
+  border-color: rgba(250,204,21,0.1);
+  background: rgba(250,204,21,0.015);
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
@@ -453,8 +453,8 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.06);
+  border: 1px solid rgba(250,204,21,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -495,7 +495,7 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background: linear-gradient(180deg, rgba(59,130,246,0.2), rgba(59,130,246,0.02));
+  background: linear-gradient(180deg, rgba(250,204,21,0.2), rgba(250,204,21,0.02));
 }
 
 .fv-process-step {
@@ -513,8 +513,8 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.12);
+  background: rgba(250,204,21,0.06);
+  border: 1px solid rgba(250,204,21,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,7 +624,7 @@
 }
 
 .fv-result-item:hover {
-  border-color: rgba(59,130,246,0.1);
+  border-color: rgba(250,204,21,0.1);
   transform: translateY(-2px);
 }
 
@@ -674,9 +674,9 @@
 }
 
 .fv-pkg-tab.active {
-  background: rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.08);
   color: var(--fv-accent);
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.08);
+  box-shadow: 0 0 0 1px rgba(250,204,21,0.08);
 }
 
 /* ─── PRICE ─── */
@@ -797,7 +797,7 @@
 }
 
 .fv-cta--primary:hover {
-  box-shadow: 0 0 30px rgba(59,130,246,0.35);
+  box-shadow: 0 0 30px rgba(250,204,21,0.35);
   transform: translateY(-2px);
 }
 
@@ -1004,7 +1004,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid rgba(255,255,255,0.08);
-  border-top-color: var(--fv-accent, #3b82f6);
+  border-top-color: var(--fv-accent, #FACC15);
   border-radius: 50%;
   animation: fv-spin 0.8s linear infinite;
 }
@@ -1037,8 +1037,8 @@
 
 .fv-related-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(59,130,246,0.2);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.3), 0 0 16px rgba(59,130,246,0.04);
+  border-color: rgba(250,204,21,0.2);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3), 0 0 16px rgba(250,204,21,0.04);
 }
 
 .fv-related-card-img {

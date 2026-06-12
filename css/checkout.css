@@ -5,7 +5,7 @@
 
 :root {
   --chk-bg: #050816;
-  --chk-accent: #3B82F6;
+  --chk-accent: #FACC15;
   --chk-accent-glow: rgba(59, 130, 246, 0.3);
   --chk-card-bg: rgba(255, 255, 255, 0.02);
   --chk-card-border: rgba(255, 255, 255, 0.06);
@@ -309,7 +309,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: linear-gradient(135deg, var(--chk-accent), #2563EB);
+  background: linear-gradient(135deg, var(--chk-accent), #F59E0B);
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
@@ -746,7 +746,7 @@
   font-family: 'Syne', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--chk-accent), #60a5fa);
+  background: linear-gradient(135deg, var(--chk-accent), #FCD34D);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -808,7 +808,7 @@
 
 .chk-coupon-btn {
   padding: 10px 20px;
-  background: linear-gradient(135deg, var(--chk-accent), #2563EB);
+  background: linear-gradient(135deg, var(--chk-accent), #F59E0B);
   color: #fff;
   border: none;
   border-radius: var(--chk-radius-sm);
@@ -862,7 +862,7 @@
 }
 
 .chk-coupon-feedback.success {
-  color: #22c55e;
+  color: #10B981;
 }
 
 .chk-coupon-feedback.error {
@@ -895,7 +895,7 @@
   gap: 6px;
   font-size: 0.82rem;
   font-weight: 600;
-  color: #22c55e;
+  color: #10B981;
   margin-bottom: 6px;
 }
 
@@ -949,7 +949,7 @@
 }
 
 .chk-summary-row--discount .chk-summary-value--discount {
-  color: #22c55e;
+  color: #10B981;
   font-weight: 600;
 }
 
@@ -993,7 +993,7 @@
 .chk-savings-icon svg {
   width: 20px;
   height: 20px;
-  color: #22c55e;
+  color: #10B981;
 }
 
 .chk-savings-info {
@@ -1005,7 +1005,7 @@
   font-family: 'Syne', sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  color: #22c55e;
+  color: #10B981;
   margin-bottom: 2px;
 }
 
@@ -1240,7 +1240,7 @@
   width: 100%;
   padding: 18px 24px;
   margin-top: 24px;
-  background: linear-gradient(135deg, var(--chk-accent), #2563EB);
+  background: linear-gradient(135deg, var(--chk-accent), #F59E0B);
   color: #fff;
   border: none;
   border-radius: var(--chk-radius-sm);
@@ -1625,11 +1625,11 @@
   font-weight: 700;
   color: #fff;
   flex-shrink: 0;
-  background: linear-gradient(135deg, var(--chk-accent), #2563EB);
+  background: linear-gradient(135deg, var(--chk-accent), #F59E0B);
 }
 
 .chk-testimonial-avatar--2 {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  background: linear-gradient(135deg, #FACC15, #F59E0B);
 }
 
 .chk-testimonial-avatar--3 {
@@ -1786,7 +1786,7 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #f59e0b, #F59E0B);
   color: #000;
   font-size: 0.65rem;
   font-weight: 700;
@@ -1898,7 +1898,7 @@
   align-items: center;
   gap: 10px;
   padding: 14px 32px;
-  background: linear-gradient(135deg, var(--chk-accent), #2563EB);
+  background: linear-gradient(135deg, var(--chk-accent), #F59E0B);
   color: #fff;
   border: none;
   border-radius: 100px;
@@ -2043,7 +2043,7 @@
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--chk-accent), #60a5fa, var(--chk-accent));
+  background: linear-gradient(135deg, var(--chk-accent), #FCD34D, var(--chk-accent));
   opacity: 0;
   z-index: -1;
   transition: opacity var(--chk-transition);
@@ -2096,7 +2096,7 @@
 
 /* Success animation for order button */
 .chk-place-order.success {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, #10B981, #059669);
   pointer-events: none;
 }
 

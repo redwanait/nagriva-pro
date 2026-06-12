@@ -4,20 +4,20 @@
    ═══════════════════════════════════════════════ */
 
 :root {
-  --ai-gold: #FFD700;
-  --ai-gold2: #F4B400;
-  --ai-gold3: #C99700;
-  --ai-gold-dim: rgba(255, 215, 0, 0.08);
-  --ai-gold-glow: rgba(255, 215, 0, 0.15);
-  --ai-gold-soft: rgba(255, 215, 0, 0.05);
-  --ai-green: #22c55e;
-  --ai-green-dim: rgba(34, 197, 94, 0.08);
-  --ai-red: #ef4444;
+  --ai-gold: #FACC15;
+  --ai-gold2: #F59E0B;
+  --ai-gold3: #F59E0B;
+  --ai-gold-dim: rgba(250, 204, 21, 0.08);
+  --ai-gold-glow: rgba(250, 204, 21, 0.15);
+  --ai-gold-soft: rgba(250, 204, 21, 0.05);
+  --ai-green: #10B981;
+  --ai-green-dim: rgba(16, 185, 129, 0.08);
+  --ai-red: #EF4444;
   --ai-red-dim: rgba(239, 68, 68, 0.08);
-  --ai-amber: #f59e0b;
+  --ai-amber: #F59E0B;
   --ai-amber-dim: rgba(245, 158, 11, 0.08);
-  --ai-blue: #3b82f6;
-  --ai-blue-dim: rgba(59, 130, 246, 0.08);
+  --ai-blue: #FACC15;
+  --ai-blue-dim: rgba(250, 204, 21, 0.08);
   --ai-card-bg: rgba(255, 255, 255, 0.015);
   --ai-card-border: rgba(255, 255, 255, 0.07);
   --ai-card-hover: rgba(255, 255, 255, 0.025);
@@ -826,11 +826,11 @@
 }
 
 .ai-rating-bar-fill.medium {
-  background: linear-gradient(90deg, var(--ai-amber), #fbbf24);
+  background: linear-gradient(90deg, var(--ai-amber), #FACC15);
 }
 
 .ai-rating-bar-fill.low {
-  background: linear-gradient(90deg, var(--ai-blue), #60a5fa);
+  background: linear-gradient(90deg, var(--ai-blue), #FCD34D);
 }
 
 .ai-rating-bar-count {

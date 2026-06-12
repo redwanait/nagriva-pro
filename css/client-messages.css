@@ -60,7 +60,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(59,130,246,0.5);
+  background: rgba(250,204,21,0.5);
   animation: cmTypingDot 1.2s ease-in-out infinite;
 }
 
@@ -114,7 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: radial-gradient(ellipse at top, rgba(59,130,246,0.01) 0%, transparent 60%);
+  background: radial-gradient(ellipse at top, rgba(250,204,21,0.01) 0%, transparent 60%);
 }
 
 .track-chat-messages::-webkit-scrollbar { width: 4px; }
@@ -149,7 +149,7 @@
 }
 
 .track-chat-message.admin .chat-message-avatar {
-  background: linear-gradient(135deg, #3b82f6, #007aff);
+  background: linear-gradient(135deg, #FACC15, #FACC15);
 }
 
 .track-chat-message .chat-message-bubble {
@@ -165,8 +165,8 @@
 }
 
 .track-chat-message.client .chat-message-bubble {
-  background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(59,130,246,0.03));
-  border-color: rgba(59,130,246,0.12);
+  background: linear-gradient(135deg, rgba(250,204,21,0.08), rgba(250,204,21,0.03));
+  border-color: rgba(250,204,21,0.12);
   color: var(--white);
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 4px;
@@ -211,9 +211,9 @@
 }
 
 .track-chat-input:focus {
-  border-color: rgba(59,130,246,0.3);
-  box-shadow: 0 0 0 1px rgba(59,130,246,0.06);
-  background: rgba(59,130,246,0.02);
+  border-color: rgba(250,204,21,0.3);
+  box-shadow: 0 0 0 1px rgba(250,204,21,0.06);
+  background: rgba(250,204,21,0.02);
 }
 
 .track-chat-input::placeholder { color: var(--gray2); }
@@ -234,7 +234,7 @@
 }
 
 .track-chat-send:hover {
-  box-shadow: 0 0 30px rgba(59,130,246,0.3);
+  box-shadow: 0 0 30px rgba(250,204,21,0.3);
   transform: translateY(-1px);
 }
 

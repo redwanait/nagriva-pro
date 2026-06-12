@@ -4,38 +4,39 @@
    ════════════════════════════════════════════ */
 
 .cta {
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 .cta-content {
   text-align: center;
+  position: relative;
 }
 
 .cta-title {
   font-family: 'Syne', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   letter-spacing: -0.02em;
 }
 
 .cta-desc {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.22);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.25);
   max-width: 480px;
-  margin: 0 auto 14px;
+  margin: 0 auto 18px;
   line-height: 1.6;
 }
 
 .cta-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
-  .cta-title { font-size: 1.05rem; }
+  .cta-title { font-size: 1.15rem; }
   .cta-desc { font-size: 0.78rem; }
 }

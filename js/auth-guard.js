@@ -71,8 +71,8 @@ var NagrivaAuthGuard = (function() {
     if (window.NAGRIVA_Skeleton && window.NAGRIVA_Skeleton.pageShell) {
       el.innerHTML = window.NAGRIVA_Skeleton.pageShell();
     } else {
-      el.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;';
-      el.innerHTML = '<div style="width:40px;height:40px;border:2px solid rgba(59,130,246,0.1);border-top-color:#3b82f6;border-radius:50%;animation:nagGuardSpin .8s linear infinite;"></div><span style="color:#a1a1aa;font-size:.85rem;font-family:\'DM Sans\',sans-serif;">Checking access...</span><style>@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>';
+      el.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#050505;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;';
+      el.innerHTML = '<div style="width:40px;height:40px;border:2px solid rgba(250,204,21,0.1);border-top-color:#FACC15;border-radius:50%;animation:nagGuardSpin .8s linear infinite;"></div><span style="color:#a1a1aa;font-size:.85rem;font-family:\'DM Sans\',sans-serif;">Checking access...</span><style>@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>';
     }
     return el;
   }

@@ -32,8 +32,8 @@
   letter-spacing: 0.06em;
   padding: 4px 12px;
   border-radius: 99px;
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.2);
+  background: rgba(250,204,21,0.1);
+  border: 1px solid rgba(250,204,21,0.2);
   color: var(--accent);
 }
 
@@ -65,14 +65,14 @@
 }
 
 .rec-filter-btn:hover {
-  border-color: rgba(59,130,246,0.2);
+  border-color: rgba(250,204,21,0.2);
   color: var(--white);
   background: rgba(255,255,255,0.06);
 }
 
 .rec-filter-btn.active {
-  background: rgba(59,130,246,0.12);
-  border-color: rgba(59,130,246,0.3);
+  background: rgba(250,204,21,0.12);
+  border-color: rgba(250,204,21,0.3);
   color: var(--accent);
 }
 
@@ -94,7 +94,7 @@
 }
 
 .rec-card:hover {
-  border-color: rgba(59,130,246,0.12);
+  border-color: rgba(250,204,21,0.12);
   background: rgba(255,255,255,0.02);
 }
 
@@ -190,7 +190,7 @@
 }
 
 .rec-card-toggle:hover {
-  color: #60a5fa;
+  color: #FCD34D;
 }
 
 .rec-card-toggle svg {
@@ -336,8 +336,8 @@
   letter-spacing: 0.06em;
   padding: 3px 10px;
   border-radius: 99px;
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.2);
+  background: rgba(250,204,21,0.1);
+  border: 1px solid rgba(250,204,21,0.2);
   color: var(--accent);
 }
 
@@ -346,8 +346,8 @@
   color: var(--gray);
   line-height: 1.75;
   padding: 18px 20px;
-  background: rgba(59,130,246,0.03);
-  border: 1px solid rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.03);
+  border: 1px solid rgba(250,204,21,0.08);
   border-radius: 14px;
   position: relative;
 }
@@ -387,7 +387,7 @@
 .rec-quickwins-header svg {
   width: 18px;
   height: 18px;
-  color: #22c55e;
+  color: #10B981;
 }
 
 .rec-quickwins-header h3 {
@@ -430,7 +430,7 @@
   height: 22px;
   border-radius: 50%;
   background: rgba(34,197,94,0.12);
-  color: #22c55e;
+  color: #10B981;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -500,11 +500,11 @@
 }
 
 .rec-potential-score.potential {
-  color: #22c55e;
+  color: #10B981;
 }
 
 .rec-potential-score.gain {
-  color: #eab308;
+  color: #FACC15;
 }
 
 .rec-potential-sub {
@@ -595,7 +595,7 @@
 
 /* ─── PDF — Primary CTA (Gold) ─── */
 .rec-export-btn--pdf {
-  background: linear-gradient(135deg, #FACC15, #EAB308);
+  background: linear-gradient(135deg, #FACC15, #FACC15);
   color: #0a0a0a;
   border: none;
   box-shadow: 0 4px 24px rgba(250,204,21,0.25), 0 1px 4px rgba(250,204,21,0.15);

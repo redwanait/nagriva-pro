@@ -16,22 +16,22 @@ window.CompetitorComparison = (function () {
   }
 
   var COLORS = {
-    gold: '#FFD700',
-    gold2: '#F4B400',
-    gold3: '#C99700',
-    blue: '#3b82f6',
-    blue2: '#2563EB',
-    green: '#22c55e',
+    gold: '#FACC15',
+    gold2: '#F59E0B',
+    gold3: '#F59E0B',
+    blue: '#FACC15',
+    blue2: '#F59E0B',
+    green: '#10B981',
     red: '#ef4444',
-    yellow: '#eab308',
+    yellow: '#FACC15',
     gray: '#71717a',
     white: '#ffffff'
   }
 
   var COMPETITOR_COLORS = [
-    '#3b82f6',
-    '#FFD700',
-    '#22c55e',
+    '#FACC15',
+    '#FACC15',
+    '#10B981',
     '#ef4444'
   ]
 
@@ -801,7 +801,7 @@ window.CompetitorComparison = (function () {
     })
 
     var bgColors = scores.map(function (s, i) {
-      return COMPETITOR_COLORS[i] || '#3b82f6'
+      return COMPETITOR_COLORS[i] || '#FACC15'
     })
 
     chartKeys.forEach(function (key, idx) {
@@ -902,8 +902,8 @@ window.CompetitorComparison = (function () {
     var contentW = pageW - margin * 2
     var y = margin
 
-    var gold = '#FFD700'
-    var bgDark = '#0b0f0f'
+    var gold = '#FACC15'
+    var bgDark = '#0A0A0A'
     var textGray = '#a1a1aa'
 
     function setColor (hex) {

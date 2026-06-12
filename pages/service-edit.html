@@ -28,14 +28,14 @@
       padding: 0;
     }
     :root {
-      --bg: #040404;
+      --bg: #050505;
       --bg2: #090c0c;
       --surface: rgba(255, 255, 255, 0.025);
       --surface-hover: rgba(255, 255, 255, 0.04);
-      --accent: #3b82f6;
-      --accent2: #2563EB;
-      --accent-glow: rgba(59, 130, 246, 0.08);
-      --accent-dim: rgba(59, 130, 246, 0.15);
+      --accent: #FACC15;
+      --accent2: #F59E0B;
+      --accent-glow: rgba(250, 204, 21, 0.08);
+      --accent-dim: rgba(250, 204, 21, 0.15);
       --border: rgba(255, 255, 255, 0.06);
       --border-light: rgba(255, 255, 255, 0.12);
       --white: #ffffff;
@@ -44,8 +44,8 @@
       --gray3: #52525b;
       --danger: #ef4444;
       --warning: #f59e0b;
-      --success: #2563EB;
-      --info: #3b82f6;
+      --success: #F59E0B;
+      --info: #FACC15;
       --r: 22px;
       --r-sm: 14px;
       --r-xs: 10px;
@@ -122,7 +122,7 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity var(--transition);
-      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(250, 204, 21, 0.08) 0%, transparent 70%);
     }
     .sidebar-brand:hover::after {
       opacity: 1;
@@ -235,7 +235,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #3b82f6;
+      background: #FACC15;
       border: 2px solid var(--bg);
       z-index: 2;
       box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
@@ -404,7 +404,7 @@
     .btn:active { transform: scale(0.97); }
     .btn-primary { background: var(--accent); color: var(--bg); }
     .btn-primary:hover {
-      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(59, 130, 246, 0.15);
+      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(250, 204, 21, 0.15);
       transform: translateY(-1px);
     }
     .btn-secondary {
@@ -435,10 +435,10 @@
     }
     .status-badge.draft { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
     .status-badge.draft::before { background: var(--warning); }
-    .status-badge.published { background: rgba(59, 130, 246, 0.1); color: var(--success); }
+    .status-badge.published { background: rgba(250, 204, 21, 0.1); color: var(--success); }
     .status-badge.published::before { background: var(--success); }
-    .status-badge.archived { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
-    .status-badge.archived::before { background: #a855f7; }
+    .status-badge.archived { background: rgba(168, 85, 247, 0.1); color: #FACC15; }
+    .status-badge.archived::before { background: #FACC15; }
 
     .meta-bar {
       display: flex;
@@ -677,7 +677,7 @@
       line-height: 1.3;
     }
     .btn-save:hover {
-      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(59, 130, 246, 0.15);
+      box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(250, 204, 21, 0.15);
       transform: translateY(-1px);
     }
     .btn-save:active { transform: scale(0.97); }
@@ -770,7 +770,7 @@
       .btn-save { flex: 1; justify-content: center; }
     }
   </style>
-  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#040404;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(59,130,246,0.1);border-top-color:#3b82f6;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
+  <style>.nag-guard-overlay{position:fixed;inset:0;z-index:999999;background:#050505;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}.nag-guard-spinner{width:40px;height:40px;border:2px solid rgba(250,204,21,0.1);border-top-color:#FACC15;border-radius:50%;animation:nagGuardSpin .8s linear infinite}.nag-guard-text{color:#a1a1aa;font-size:.85rem;font-family:'DM Sans',sans-serif}@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>
 </head>
 <body>
   <div class="nag-guard-overlay" id="nagGuardOverlay"><div class="nag-guard-spinner"></div><span class="nag-guard-text">Checking access...</span></div>

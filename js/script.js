@@ -407,7 +407,7 @@ requestIdleCallback(function () {
 
   requestIdleCallback(function () {
     var glow = document.createElement('div');
-    glow.style.cssText = 'position:fixed;width:250px;height:250px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(59,130,246,0.03) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity 0.3s ease;border-radius:50%;top:0;left:0;opacity:0;';
+    glow.style.cssText = 'position:fixed;width:250px;height:250px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(250,204,21,0.03) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity 0.3s ease;border-radius:50%;top:0;left:0;opacity:0;';
     document.body.appendChild(glow);
 
     var mouseX = 0, mouseY = 0, glowX = 0, glowY = 0, frame;
@@ -626,7 +626,7 @@ requestIdleCallback(function () {
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(59,130,246,' + p.a + ')'; ctx.fill();
+      ctx.fillStyle = 'rgba(250,204,21,' + p.a + ')'; ctx.fill();
     }
     for (i = 0; i < particles.length; i++) {
       for (var j = i + 1; j < particles.length; j++) {
@@ -636,7 +636,7 @@ requestIdleCallback(function () {
         if (dist < 120) {
           ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(59,130,246,' + (0.04 * (1 - dist / 120)) + ')';
+          ctx.strokeStyle = 'rgba(250,204,21,' + (0.04 * (1 - dist / 120)) + ')';
           ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
@@ -700,7 +700,7 @@ requestIdleCallback(function () {
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(59,130,246,' + p.a + ')'; ctx.fill();
+      ctx.fillStyle = 'rgba(250,204,21,' + p.a + ')'; ctx.fill();
     }
     for (i = 0; i < particles.length; i++) {
       for (var j = i + 1; j < particles.length; j++) {
@@ -710,7 +710,7 @@ requestIdleCallback(function () {
         if (dist < 100) {
           ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(59,130,246,' + (0.03 * (1 - dist / 100)) + ')';
+          ctx.strokeStyle = 'rgba(250,204,21,' + (0.03 * (1 - dist / 100)) + ')';
           ctx.lineWidth = 0.5; ctx.stroke();
         }
       }

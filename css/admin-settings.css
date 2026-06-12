@@ -27,7 +27,7 @@
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,9 +90,9 @@
 }
 
 .cms-search-input:focus {
-  border-color: rgba(59,130,246,0.25);
-  background: rgba(59,130,246,0.03);
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.04);
+  border-color: rgba(250,204,21,0.25);
+  background: rgba(250,204,21,0.03);
+  box-shadow: 0 0 0 3px rgba(250,204,21,0.04);
 }
 
 .cms-search-input::placeholder {
@@ -185,9 +185,9 @@
 }
 
 .cms-tab.active {
-  background: rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.1);
   color: var(--accent);
-  box-shadow: 0 0 16px rgba(59,130,246,0.04);
+  box-shadow: 0 0 16px rgba(250,204,21,0.04);
 }
 
 .cms-tab i {
@@ -210,7 +210,7 @@
 }
 
 .cms-tab.active .tab-count {
-  background: rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.1);
   color: var(--accent);
 }
 
@@ -236,8 +236,8 @@
 }
 
 .cms-section.active {
-  border-color: rgba(59,130,246,0.12);
-  box-shadow: 0 0 24px rgba(59,130,246,0.03);
+  border-color: rgba(250,204,21,0.12);
+  box-shadow: 0 0 24px rgba(250,204,21,0.03);
 }
 
 .cms-section-header {
@@ -268,14 +268,14 @@
   justify-content: center;
   font-size: 0.78rem;
   color: var(--accent);
-  background: rgba(59,130,246,0.06);
+  background: rgba(250,204,21,0.06);
   flex-shrink: 0;
   transition: all 0.25s ease;
 }
 
 .cms-section.active .cms-section-icon {
-  background: rgba(59,130,246,0.12);
-  box-shadow: 0 0 14px rgba(59,130,246,0.06);
+  background: rgba(250,204,21,0.12);
+  box-shadow: 0 0 14px rgba(250,204,21,0.06);
 }
 
 .cms-section-info {
@@ -327,7 +327,7 @@
 }
 
 .cms-section-badge.is-saved {
-  background: rgba(59,130,246,0.08);
+  background: rgba(250,204,21,0.08);
   color: var(--accent);
 }
 
@@ -395,8 +395,8 @@
 }
 
 .cms-field.is-editing {
-  border-color: rgba(59,130,246,0.12);
-  background: rgba(59,130,246,0.015);
+  border-color: rgba(250,204,21,0.12);
+  background: rgba(250,204,21,0.015);
 }
 
 .cms-field-header {
@@ -478,7 +478,7 @@
 
 .cms-field-status.saved {
   color: var(--accent);
-  background: rgba(59,130,246,0.05);
+  background: rgba(250,204,21,0.05);
 }
 
 .cms-field-status i {
@@ -507,7 +507,7 @@
 
 .cms-field-edit-btn:hover {
   color: var(--accent) !important;
-  background: rgba(59,130,246,0.06) !important;
+  background: rgba(250,204,21,0.06) !important;
 }
 
 .cms-field-input {
@@ -525,9 +525,9 @@
 }
 
 .cms-field-input:focus {
-  border-color: rgba(59,130,246,0.25);
-  background: rgba(59,130,246,0.02);
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.03);
+  border-color: rgba(250,204,21,0.25);
+  background: rgba(250,204,21,0.02);
+  box-shadow: 0 0 0 3px rgba(250,204,21,0.03);
 }
 
 .cms-field-input::placeholder { color: var(--gray3); }
@@ -601,7 +601,7 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
 
 .cms-toggle-switch.active {
   background: var(--accent);
-  box-shadow: 0 0 8px rgba(59,130,246,0.2);
+  box-shadow: 0 0 8px rgba(250,204,21,0.2);
 }
 
 .cms-toggle-switch::after {
@@ -772,7 +772,7 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
   background: var(--accent);
   cursor: pointer;
   border: 2px solid var(--bg);
-  box-shadow: 0 0 0 2px rgba(59,130,246,0.25);
+  box-shadow: 0 0 0 2px rgba(250,204,21,0.25);
   transition: transform 0.15s;
 }
 
@@ -820,8 +820,8 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
 
 .cms-theme-card.active {
   border-color: var(--accent);
-  background: rgba(59,130,246,0.04);
-  box-shadow: 0 0 12px rgba(59,130,246,0.05);
+  background: rgba(250,204,21,0.04);
+  box-shadow: 0 0 12px rgba(250,204,21,0.05);
 }
 
 .cms-theme-swatches {
@@ -906,8 +906,8 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
 
 .autosave-indicator.saved {
   color: var(--accent);
-  border-color: rgba(59,130,246,0.08);
-  background: rgba(59,130,246,0.02);
+  border-color: rgba(250,204,21,0.08);
+  background: rgba(250,204,21,0.02);
 }
 
 .autosave-indicator i { font-size: 0.6rem; }
@@ -1060,7 +1060,7 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
 .preview-hero-badge {
   font-size: 0.48rem;
   color: var(--accent);
-  background: rgba(59,130,246,0.06);
+  background: rgba(250,204,21,0.06);
   padding: 2px 8px;
   border-radius: 99px;
   display: inline-block;
@@ -1153,11 +1153,11 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
 
 .cms-float-btn.primary {
   color: var(--accent);
-  background: rgba(59,130,246,0.06);
+  background: rgba(250,204,21,0.06);
 }
 
 .cms-float-btn.primary:hover {
-  background: rgba(59,130,246,0.1);
+  background: rgba(250,204,21,0.1);
 }
 
 .cms-float-btn i { font-size: 0.65rem; }
@@ -1165,8 +1165,8 @@ select.cms-field-input option { background: var(--bg2); color: var(--white); }
 
 /* ─── Search Highlight ─── */
 .cms-field.highlight {
-  border-color: rgba(59,130,246,0.15);
-  background: rgba(59,130,246,0.02);
+  border-color: rgba(250,204,21,0.15);
+  background: rgba(250,204,21,0.02);
 }
 
 .cms-field.hidden-field {

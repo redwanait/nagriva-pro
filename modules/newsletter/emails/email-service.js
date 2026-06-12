@@ -41,11 +41,11 @@ const NAGRIVA_EmailService = (() => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome to Nagriva</title>
 </head>
-<body style="margin:0;padding:0;background:#040404;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#040404;">
+<body style="margin:0;padding:0;background:#050505;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#050505;">
     <tr>
       <td align="center" style="padding:40px 16px;">
-        <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="background:#0b0f0f;border:1px solid rgba(255,255,255,0.06);border-radius:16px;">
+        <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.06);border-radius:16px;">
           <tr>
             <td style="padding:40px 32px;">
               <h1 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#ffffff;margin:0 0 8px;">Welcome to Nagriva</h1>
@@ -70,7 +70,7 @@ const NAGRIVA_EmailService = (() => {
               <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;">
                 <p style="font-size:12px;color:#52525b;margin:0;">
                   If you didn't sign up for this newsletter, you can
-                  <a href="{{unsubscribe_url}}" style="color:#3b82f6;text-decoration:underline;">unsubscribe here</a>.
+                  <a href="{{unsubscribe_url}}" style="color:#FACC15;text-decoration:underline;">unsubscribe here</a>.
                 </p>
               </div>
             </td>

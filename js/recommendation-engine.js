@@ -514,8 +514,8 @@
     var map = {
       critical: { label: 'Critical', color: '#ef4444', bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.2)' },
       high: { label: 'High Priority', color: '#ef4444', bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.15)' },
-      medium: { label: 'Medium Priority', color: '#eab308', bg: 'rgba(234,179,8,0.08)', border: 'rgba(234,179,8,0.15)' },
-      low: { label: 'Low Priority', color: '#3b82f6', bg: 'rgba(59,130,246,0.08)', border: 'rgba(59,130,246,0.15)' }
+      medium: { label: 'Medium Priority', color: '#FACC15', bg: 'rgba(250,204,21,0.08)', border: 'rgba(250,204,21,0.15)' },
+      low: { label: 'Low Priority', color: '#10B981', bg: 'rgba(16,185,129,0.08)', border: 'rgba(16,185,129,0.15)' }
     };
     return map[priority] || map.low;
   };
@@ -605,9 +605,9 @@
     html.push('<!DOCTYPE html><html><head><meta charset="UTF-8">');
     html.push('<title>SEO Recommendation Report - Nagriva</title>');
     html.push('<style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;padding:20px;color:#1a1a2e;background:#fff;}');
-    html.push('h1{font-size:28px;color:#3b82f6;}h2{font-size:20px;margin-top:30px;border-bottom:2px solid #eee;padding-bottom:8px;}');
+    html.push('h1{font-size:28px;color:#FACC15;}h2{font-size:20px;margin-top:30px;border-bottom:2px solid #eee;padding-bottom:8px;}');
     html.push('.score{font-size:18px;margin:5px 0;}.rec{margin:16px 0;padding:16px;border-radius:12px;border:1px solid #e5e7eb;}');
-    html.push('.rec-high{border-left:4px solid #ef4444;}.rec-medium{border-left:4px solid #eab308;}.rec-low{border-left:4px solid #3b82f6;}');
+    html.push('.rec-high{border-left:4px solid #ef4444;}.rec-medium{border-left:4px solid #FACC15;}.rec-low{border-left:4px solid #FACC15;}');
     html.push('.rec h3{margin:0 0 6px;font-size:16px;}.rec p{margin:4px 0;font-size:14px;color:#4b5563;}.quick{margin:8px 0;font-size:14px;color:#059669;}');
     html.push('.summary{background:#f0f9ff;padding:16px;border-radius:12px;margin:20px 0;border:1px solid #bae6fd;}');
     html.push('.footer{margin-top:40px;font-size:12px;color:#9ca3af;text-align:center;}</style></head><body>');
