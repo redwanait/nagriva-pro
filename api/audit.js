@@ -164,6 +164,10 @@ module.exports = async function handler(req, res) {
       return sendJson(502, { success: false, failedStep: 'Parse PageSpeed Data', error: 'Invalid PageSpeed API Response', detail: 'Response missing categories' });
     }
     console.log("Categories found: " + Object.keys(categories).join(', '));
+    Object.keys(categories).forEach(function (key) {
+      var cat = categories[key];
+      console.log('Category "' + key + '": ' + JSON.stringify({ id: cat.id, title: cat.title, score: cat.score }));
+    });
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Extract Categories', error: e.message, stack: e.stack });
   }
@@ -180,7 +184,8 @@ module.exports = async function handler(req, res) {
     seo = toScore(categories.seo);
     accessibility = toScore(categories.accessibility);
     bestPractices = toScore(categories['best-practices']);
-    console.log("Scores — perf: " + performance + " seo: " + seo + " acc: " + accessibility + " bp: " + bestPractices);
+    console.log("Scores (0-100) — perf: " + performance + " seo: " + seo + " acc: " + accessibility + " bp: " + bestPractices);
+    console.log("Raw PageSpeed scores (0-1) — perf: " + (categories.performance ? categories.performance.score : 'missing') + " seo: " + (categories.seo ? categories.seo.score : 'missing') + " acc: " + (categories.accessibility ? categories.accessibility.score : 'missing') + " bp: " + (categories['best-practices'] ? categories['best-practices'].score : 'missing'));
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Calculate Scores', error: e.message, stack: e.stack });
   }
