@@ -163,13 +163,8 @@ module.exports = async function handler(req, res) {
     if (!categories) {
       return sendJson(502, { success: false, failedStep: 'Parse PageSpeed Data', error: 'Invalid PageSpeed API Response', detail: 'Response missing categories' });
     }
-    console.log("=== RAW LIGHTHOUSE CATEGORIES ===");
-    console.log(JSON.stringify(data.lighthouseResult.categories, null, 2));
-    console.log("performance.score:", categories.performance && categories.performance.score);
-    console.log("seo.score:", categories.seo && categories.seo.score);
-    console.log("accessibility.score:", categories.accessibility && categories.accessibility.score);
-    console.log("best-practices.score:", categories['best-practices'] && categories['best-practices'].score);
-    console.log("================================");
+    console.log('RAW CATEGORIES', JSON.stringify(data.lighthouseResult.categories, null, 2));
+    console.log('CATEGORY KEYS', Object.keys(data.lighthouseResult.categories));
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Extract Categories', error: e.message, stack: e.stack });
   }
