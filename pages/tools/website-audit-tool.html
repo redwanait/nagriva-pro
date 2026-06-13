@@ -1506,228 +1506,189 @@
   </style>
 <style>
   /* ═══════════════════════════════════════════════════════
-     UX CLEANUP — Dashboard Layout Overrides
+     SAAS DASHBOARD — Compact Professional Layout
      ═══════════════════════════════════════════════════════ */
 
-  /* ─── Reduce overall vertical spacing by 50% ─── */
-  #audResults .aud-overall { padding: 12px 0 16px; }
-  #audResults .aud-scores { margin-bottom: 12px; gap: 10px; }
-  #audResults .aud-score-item { padding: 14px 8px 12px; }
-  #audResults .aud-score-ring { width: 60px; height: 60px; margin-bottom: 6px; }
-  #audResults .aud-score-ring circle { cx: 30; cy: 30; r: 26; }
-  #audResults .aud-score-fill { stroke-dasharray: 163.36; stroke-dashoffset: 163.36; }
-  #audResults .aud-score-num { font-size: 0.85rem; }
-  #audResults .aud-score-label { font-size: 0.62rem; }
-  #audResults .aud-overall-score { width: 100px; height: 100px; margin-bottom: 8px; }
-  #audResults .aud-overall-score circle { cx: 50; cy: 50; r: 44; }
-  #audResults .aud-overall-fill { stroke-dasharray: 276.46; stroke-dashoffset: 276.46; }
-  #audResults .aud-overall-num strong { font-size: 1.6rem; }
-  #audResults .aud-overall-num span { font-size: 0.6rem; }
-  #audResults .aud-overall-grade { font-size: 0.72rem; padding: 3px 10px; }
-  #audResults .aud-card { padding: 24px 28px; }
-  #audResults .rec-section { padding: 0; border-top: none; }
-  #audResults .rec-section-header { margin-bottom: 4px; }
-  #audResults .rec-section-header h3 { font-size: 0.95rem; }
-  #audResults .rec-section-sub { font-size: 0.75rem; margin-bottom: 10px; }
-  #audResults .rec-filters { margin-bottom: 10px; gap: 4px; }
-  #audResults .rec-filter-btn { padding: 4px 12px; font-size: 0.7rem; }
-  #audResults .rec-cards { gap: 6px; }
-  #audResults .rec-card-inner { padding: 10px 14px 10px 18px; }
-  #audResults .rec-card-icon { width: 30px; height: 30px; }
-  #audResults .rec-card-icon svg { width: 15px; height: 15px; }
-  #audResults .rec-card-title { font-size: 0.82rem; }
-  #audResults .rec-card-desc { font-size: 0.76rem; margin-top: 2px; }
-  #audResults .rec-card-toggle { margin-top: 4px; font-size: 0.7rem; }
-  #audResults .rec-export { padding: 16px 0 0; margin-top: 0; border-top: none; }
-  #audResults .rec-export-header { margin-bottom: 14px; }
-  #audResults .rec-export-header h3 { font-size: 1rem; }
-  #audResults .rec-export-header p { font-size: 0.78rem; }
-  #audResults .rec-export-btn { padding: 10px 22px; font-size: 0.82rem; min-width: 160px; }
-  #audResults .rec-quickwins { padding: 0; border-top: none; }
+  /* ─── Wider results container ─── */
+  #audResults { max-width: 1400px; margin: 0 auto; width: 100%; }
 
-  /* ─── Dashboard layout ─── */
-  .aud-dashboard { display: flex; flex-direction: column; gap: 0; }
+  /* ─── Dashboard wrapper ─── */
+  .aud-dashboard { display: flex; flex-direction: column; gap: 20px; }
 
-  /* ─── Top row: overall + scores side by side ─── */
-  .aud-dash-top {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
+  /* ═══ SECTION 1: Executive Dashboard Header ═══ */
+  .aud-dash-header {
+    display: flex; align-items: center; gap: 24px;
+    padding: 16px 24px;
+    background: var(--aud-card-bg);
+    border: 1px solid var(--aud-glass-border);
+    border-radius: 12px;
   }
-  .aud-dash-top .aud-overall {
-    padding: 0;
-    flex-shrink: 0;
-  }
-  .aud-dash-top .aud-scores {
-    flex: 1;
-    margin-bottom: 0;
-  }
+  .aud-dash-header-score { flex-shrink: 0; }
+  .aud-dash-header-scores { flex: 1; display: flex; justify-content: space-around; gap: 6px; }
 
-  /* ─── Executive Summary bar ─── */
-  .aud-dash-exec {
-    margin-bottom: 10px;
-    padding: 10px 14px;
-    background: rgba(250,204,21,0.03);
-    border: 1px solid rgba(250,204,21,0.08);
+  #audResults .aud-dash-header .aud-overall { padding: 0; }
+  #audResults .aud-dash-header .aud-overall-score { width: 76px; height: 76px; margin-bottom: 4px; }
+  #audResults .aud-dash-header .aud-overall-score circle { cx: 38; cy: 38; r: 32; }
+  #audResults .aud-dash-header .aud-overall-fill { stroke-dasharray: 201.06; stroke-dashoffset: 201.06; }
+  #audResults .aud-dash-header .aud-overall-num strong { font-size: 1.3rem; }
+  #audResults .aud-dash-header .aud-overall-num span { font-size: 0.5rem; }
+  #audResults .aud-dash-header .aud-overall-grade { font-size: 0.62rem; padding: 2px 8px; }
+
+  #audResults .aud-dash-header-scores .aud-score-item { padding: 8px 4px 6px; flex: 1; max-width: 80px; }
+  #audResults .aud-dash-header-scores .aud-score-ring { width: 42px; height: 42px; margin-bottom: 3px; }
+  #audResults .aud-dash-header-scores .aud-score-ring circle { cx: 21; cy: 21; r: 17; }
+  #audResults .aud-dash-header-scores .aud-score-fill { stroke-dasharray: 106.81; stroke-dashoffset: 106.81; }
+  #audResults .aud-dash-header-scores .aud-score-num { font-size: 0.7rem; }
+  #audResults .aud-dash-header-scores .aud-score-label { font-size: 0.5rem; }
+
+  /* ═══ SECTION 2: Executive Summary ═══ */
+  .aud-dash-summary {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding: 12px 20px;
+    background: rgba(250,204,21,0.02);
+    border: 1px solid rgba(250,204,21,0.07);
     border-radius: 10px;
     border-left: 3px solid var(--accent);
   }
-  .aud-dash-exec p {
-    font-size: 0.82rem;
-    color: var(--gray);
-    line-height: 1.55;
-    margin: 0;
+  .aud-dash-summary-label {
+    font-size: 0.58rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--gray2); margin-bottom: 2px;
   }
-  .aud-dash-exec p strong { color: var(--white); }
-  .aud-dash-exec-header {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 4px;
+  .aud-dash-summary-value {
+    font-size: 0.8rem; color: var(--gray); line-height: 1.35;
   }
-  .aud-dash-exec-header svg { width: 14px; height: 14px; color: var(--accent); }
-  .aud-dash-exec-header span { font-size: 0.68rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+  .aud-dash-summary-value strong { color: var(--white); }
 
-  /* ─── Issues + Quick Wins 2-column grid ─── */
-  .aud-dash-issues-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 10px;
+  /* ═══ SECTION 3: Issues Overview ═══ */
+  .aud-dash-issues-overview {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
   }
-  .aud-dash-issues-col,
-  .aud-dash-quickwins-col {
-    display: flex;
-    flex-direction: column;
+  .aud-dash-issues-card {
+    padding: 12px 18px; border-radius: 10px;
+    border: 1px solid var(--aud-glass-border);
+    background: var(--aud-card-bg); text-align: center;
   }
-  .aud-dash-issues-col-title,
-  .aud-dash-quickwins-col-title {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
+  .aud-dash-issues-card.critical { border-left: 3px solid #ef4444; }
+  .aud-dash-issues-card.warning { border-left: 3px solid #FACC15; }
+  .aud-dash-issues-card.passed { border-left: 3px solid #10B981; }
+  .aud-dash-issues-num {
+    font-size: 1.6rem; font-weight: 800; font-family: 'Syne', sans-serif;
+    line-height: 1; margin-bottom: 1px;
   }
-  .aud-dash-issues-col-title svg,
-  .aud-dash-quickwins-col-title svg { width: 14px; height: 14px; }
-  .aud-dash-issues-col-title { color: #ef4444; }
-  .aud-dash-quickwins-col-title { color: #10B981; }
+  .aud-dash-issues-card.critical .aud-dash-issues-num { color: #ef4444; }
+  .aud-dash-issues-card.warning .aud-dash-issues-num { color: #FACC15; }
+  .aud-dash-issues-card.passed .aud-dash-issues-num { color: #10B981; }
+  .aud-dash-issues-label {
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--gray2);
+  }
 
-  .aud-dash-issue-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    margin-bottom: 4px;
-    border-radius: 8px;
+  /* ═══ SECTION 4: Top Issues & Quick Wins ═══ */
+  .aud-dash-grid-2col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .aud-dash-col { display: flex; flex-direction: column; }
+  .aud-dash-col-title {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Syne', sans-serif; font-size: 0.75rem;
+    font-weight: 700; color: var(--white); margin-bottom: 6px;
+  }
+  .aud-dash-col-title svg { width: 13px; height: 13px; }
+  .aud-dash-col-title.issues { color: #ef4444; }
+  .aud-dash-col-title.wins { color: #10B981; }
+  .aud-dash-col-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 10px; margin-bottom: 3px; border-radius: 6px;
     background: rgba(255,255,255,0.012);
     border: 1px solid var(--aud-glass-border);
-    font-size: 0.78rem;
-    color: var(--gray);
-    line-height: 1.3;
-    transition: border-color 0.2s;
+    font-size: 0.74rem; color: var(--gray); line-height: 1.25;
   }
-  .aud-dash-issue-item:hover { border-color: rgba(250,204,21,0.1); }
-  .aud-dash-issue-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
+  .aud-dash-col-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .aud-dash-col-dot.high { background: #ef4444; }
+  .aud-dash-col-dot.medium { background: #FACC15; }
+  .aud-dash-col-check {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: rgba(16,185,129,0.1); color: #10B981;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .aud-dash-issue-dot.high { background: #ef4444; }
-  .aud-dash-issue-dot.medium { background: #FACC15; }
+  .aud-dash-col-check svg { width: 9px; height: 9px; }
 
-  .aud-dash-qw-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    background: rgba(16,185,129,0.03);
-    border: 1px solid rgba(16,185,129,0.08);
-    font-size: 0.78rem;
-    color: var(--gray);
-    line-height: 1.3;
+  /* ═══ SECTION 5: Detailed Analysis Accordions ═══ */
+  .aud-dash-detailed { display: flex; flex-direction: column; gap: 5px; }
+  .aud-dash-cat-accordion {
+    border: 1px solid var(--aud-glass-border); border-radius: 8px; overflow: hidden;
   }
-  .aud-dash-qw-check {
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: rgba(16,185,129,0.1);
-    color: #10B981;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .aud-dash-cat-header {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 8px 14px;
+    background: rgba(255,255,255,0.012); border: none;
+    cursor: pointer; font-family: 'Syne', sans-serif; font-size: 0.78rem;
+    font-weight: 600; color: var(--white); text-align: left; gap: 8px;
+    transition: background 0.15s;
   }
-  .aud-dash-qw-check svg { width: 10px; height: 10px; }
+  .aud-dash-cat-header:hover { background: rgba(255,255,255,0.025); }
+  .aud-dash-cat-header-left { display: flex; align-items: center; gap: 8px; }
+  .aud-dash-cat-header-left svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .aud-dash-cat-header-score {
+    font-size: 0.65rem; font-weight: 700; padding: 1px 7px; border-radius: 4px;
+  }
+  .aud-dash-cat-header-arrow {
+    width: 12px; height: 12px; color: var(--gray2);
+    flex-shrink: 0; transition: transform 0.25s ease;
+  }
+  .aud-dash-cat-header.open .aud-dash-cat-header-arrow { transform: rotate(180deg); }
+  .aud-dash-cat-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .aud-dash-cat-body.open { max-height: 6000px; }
+  .aud-dash-cat-body-inner { padding: 6px 14px 10px; }
+  .aud-dash-cat-body-inner .rec-card { margin-bottom: 4px; }
+  .aud-dash-cat-body-inner .rec-card:last-child { margin-bottom: 0; }
 
-  .aud-dash-issues-col .aud-quickwins-header,
-  .aud-dash-quickwins-col .rec-quickwins-header {
-    display: none;
-  }
+  /* ─── Compact recommendation cards inside accordions ─── */
+  #audResults .aud-dash-cat-body-inner .rec-card-inner { padding: 8px 12px 8px 16px; }
+  #audResults .aud-dash-cat-body-inner .rec-card-icon { width: 26px; height: 26px; }
+  #audResults .aud-dash-cat-body-inner .rec-card-icon svg { width: 13px; height: 13px; }
+  #audResults .aud-dash-cat-body-inner .rec-card-title { font-size: 0.78rem; }
+  #audResults .aud-dash-cat-body-inner .rec-card-desc { font-size: 0.72rem; margin-top: 1px; }
+  #audResults .aud-dash-cat-body-inner .rec-card-toggle { font-size: 0.65rem; margin-top: 2px; }
+  #audResults .aud-dash-cat-body-inner .rec-card-badge { font-size: 0.55rem; padding: 1px 6px; }
 
-  /* ─── Detailed Breakdown Accordion ─── */
-  .aud-dash-accordion {
-    margin-bottom: 10px;
+  /* ═══ SECTION 6: Download Report CTA ═══ */
+  .aud-dash-cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, rgba(250,204,21,0.04), rgba(250,204,21,0.01));
+    border: 1px solid rgba(250,204,21,0.1); border-radius: 10px;
+  }
+  .aud-dash-cta-text h3 {
+    font-family: 'Syne', sans-serif; font-size: 0.9rem;
+    font-weight: 700; color: var(--white); margin: 0 0 1px;
+  }
+  .aud-dash-cta-text p { font-size: 0.72rem; color: var(--gray); margin: 0; }
+  .aud-dash-cta-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .aud-dash-cta-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 8px; font-size: 0.75rem;
+    font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; border: none; text-decoration: none; transition: all 0.2s;
+  }
+  .aud-dash-cta-btn svg { width: 13px; height: 13px; }
+  .aud-dash-cta-btn--primary { background: var(--accent); color: var(--dark); }
+  .aud-dash-cta-btn--primary:hover { background: #fbbf24; }
+  .aud-dash-cta-btn--secondary {
+    background: rgba(255,255,255,0.05); color: var(--white);
     border: 1px solid var(--aud-glass-border);
-    border-radius: 12px;
-    overflow: hidden;
   }
-  .aud-dash-accordion-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.015);
-    border: none;
-    cursor: pointer;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--white);
-    text-align: left;
-    gap: 10px;
-    transition: background 0.2s;
-  }
-  .aud-dash-accordion-header:hover { background: rgba(255,255,255,0.025); }
-  .aud-dash-accordion-header svg {
-    width: 14px; height: 14px;
-    color: var(--gray2);
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-  }
-  .aud-dash-accordion-header.open svg { transform: rotate(180deg); }
-  .aud-dash-accordion-badge {
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 8px;
-    border-radius: 99px;
-    background: rgba(250,204,21,0.1);
-    border: 1px solid rgba(250,204,21,0.15);
-    color: var(--accent);
-    margin-left: auto;
-  }
-  .aud-dash-accordion-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
-  }
-  .aud-dash-accordion-body.open { max-height: 8000px; }
-  .aud-dash-accordion-body-inner { padding: 10px 14px 14px; }
+  .aud-dash-cta-btn--secondary:hover { background: rgba(255,255,255,0.08); }
 
-  /* ─── Hide removed sections ─── */
-  .rec-potential { display: none !important; }
+  /* ─── Hide JS-rendered source elements (keep for compatibility) ─── */
   .rec-ai-summary { display: none !important; }
-  .ai-section { display: block; }
+  .rec-quickwins { display: none !important; }
+  .rec-filters { display: none; }
+  #recEmptyContainer { display: none !important; }
+  .ai-section { display: none; }
   .ai-section-header { display: none; }
   .ai-sw-grid { display: none; }
   .ai-opp-section { display: none; }
@@ -1738,42 +1699,23 @@
   .ai-rating { display: none; }
   .ai-report-summary { display: none; }
   .ai-future-badges { display: none; }
+  .rec-potential { display: none !important; }
 
-  /* ─── Keep only executive summary from AI insights ─── */
-  .ai-exec {
-    margin-bottom: 0;
-    border-top: none;
-  }
-  .ai-exec-card {
-    padding: 0;
-    background: none;
-    border: none;
-    border-radius: 0;
-  }
-  .ai-exec-card::before { display: none; }
-  .ai-exec-glow { display: none; }
-  .ai-exec-header { display: none; }
-  .ai-exec-text {
-    font-size: 0.82rem;
-    padding-left: 0;
-    border-left: none;
-    color: var(--gray);
-    line-height: 1.55;
-  }
-  .ai-exec-text strong { color: var(--white); }
-
-  .ai-section {
-    border-top: none;
-    padding: 0;
-  }
+  /* ─── Less card padding when results are active ─── */
+  #auditCard.aud-card { padding: 24px 28px; }
 
   /* ─── Responsive ─── */
+  @media (max-width: 1024px) {
+    .aud-dash-summary { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  }
   @media (max-width: 768px) {
-    .aud-dash-top { flex-direction: column; gap: 12px; }
-    .aud-dash-top .aud-overall { }
-    .aud-dash-issues-grid { grid-template-columns: 1fr; gap: 14px; }
-    .aud-card { padding: 16px 14px; }
-    #audResults .aud-score-item { padding: 10px 6px 8px; }
+    .aud-dash-header { flex-direction: column; gap: 14px; padding: 14px; }
+    .aud-dash-header-scores { flex-wrap: wrap; justify-content: center; }
+    #audResults .aud-dash-header-scores .aud-score-item { max-width: 65px; }
+    .aud-dash-summary { grid-template-columns: 1fr; }
+    .aud-dash-issues-overview { grid-template-columns: 1fr; }
+    .aud-dash-grid-2col { grid-template-columns: 1fr; }
+    .aud-dash-cta { flex-direction: column; text-align: center; }
   }
 </style>
 <script type="application/ld+json">
@@ -1977,156 +1919,241 @@
             <!-- Audit Results Empty State (shown when no audit data) -->
             <div id="audResultsEmpty" style="padding:40px 0;"></div>
 
-            <!-- Overall Score -->
-            <div class="aud-overall">
-              <div class="aud-overall-score">
-                <svg viewBox="0 0 140 140">
-                  <circle class="aud-overall-bg" cx="70" cy="70" r="62"/>
-                  <circle class="aud-overall-fill" id="overallCircle" cx="70" cy="70" r="62"/>
-                </svg>
-                <div class="aud-overall-num">
-                  <strong id="overallScore">0</strong>
-                  <span>Overall Score</span>
-                </div>
-              </div>
-              <div class="aud-overall-grade" id="overallGrade">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                Excellent
-              </div>
-            </div>
+            <!-- Dashboard Container -->
+            <div class="aud-dashboard">
 
-            <!-- Score Grid -->
-            <div class="aud-scores" id="scoreGrid">
-              <div class="aud-score-item">
-                <div class="aud-score-ring">
-                  <svg viewBox="0 0 72 72">
-                    <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                    <circle class="aud-score-fill" id="scoreSEO" cx="36" cy="36" r="31"/>
-                  </svg>
-                  <span class="aud-score-num" id="scoreSEONum">0</span>
-                </div>
-                <div class="aud-score-label">SEO</div>
-              </div>
-              <div class="aud-score-item">
-                <div class="aud-score-ring">
-                  <svg viewBox="0 0 72 72">
-                    <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                    <circle class="aud-score-fill" id="scorePerf" cx="36" cy="36" r="31"/>
-                  </svg>
-                  <span class="aud-score-num" id="scorePerfNum">0</span>
-                </div>
-                <div class="aud-score-label">Performance</div>
-              </div>
-              <div class="aud-score-item">
-                <div class="aud-score-ring">
-                  <svg viewBox="0 0 72 72">
-                    <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                    <circle class="aud-score-fill" id="scoreMobile" cx="36" cy="36" r="31"/>
-                  </svg>
-                  <span class="aud-score-num" id="scoreMobileNum">0</span>
-                </div>
-                <div class="aud-score-label">Mobile</div>
-              </div>
-              <div class="aud-score-item">
-                <div class="aud-score-ring">
-                  <svg viewBox="0 0 72 72">
-                    <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                    <circle class="aud-score-fill" id="scoreSecurity" cx="36" cy="36" r="31"/>
-                  </svg>
-                  <span class="aud-score-num" id="scoreSecurityNum">0</span>
-                </div>
-                <div class="aud-score-label">Security</div>
-              </div>
-              <div class="aud-score-item">
-                <div class="aud-score-ring">
-                  <svg viewBox="0 0 72 72">
-                    <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                    <circle class="aud-score-fill" id="scoreUX" cx="36" cy="36" r="31"/>
-                  </svg>
-                  <span class="aud-score-num" id="scoreUXNum">0</span>
-                </div>
-                <div class="aud-score-label">UX</div>
-              </div>
-            </div>
-
-            <!-- ═══ AI Insights Summary (hidden, kept for JS refs) ═══ -->
-            <div class="rec-ai-summary" id="recAiSummary" style="display:none;">
-              <p class="rec-ai-summary-text" id="recAiSummaryText">Processing your results...</p>
-            </div>
-
-            <!-- ═══ Quick Wins ═══ -->
-            <div class="rec-quickwins" id="recQuickWins" style="display:none;">
-              <div class="rec-quickwins-header">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                <h3>Quick Wins</h3>
-                <span class="rec-quickwins-sub">Complete in under 30 minutes</span>
-              </div>
-              <div class="rec-quickwins-grid" id="recQuickWinsGrid"></div>
-            </div>
-
-            <!-- ═══ Detailed Breakdown (Accordion) ═══ -->
-            <div class="aud-dash-accordion" id="recAccordion" style="display:none;">
-              <button class="aud-dash-accordion-header" id="recAccordionToggle" type="button">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                <span>Detailed Breakdown</span>
-                <span class="aud-dash-accordion-badge" id="recTotalBadge">0 issues</span>
-              </button>
-              <div class="aud-dash-accordion-body" id="recAccordionBody">
-                <div class="aud-dash-accordion-body-inner">
-                  <!-- Filters -->
-                  <div class="rec-filters" id="recFilters">
-                    <button class="rec-filter-btn active" data-filter="all">All</button>
-                    <button class="rec-filter-btn" data-filter="high" style="--filter-color:#ef4444;">High Priority</button>
-                    <button class="rec-filter-btn" data-filter="medium" style="--filter-color:#FACC15;">Medium Priority</button>
-                    <button class="rec-filter-btn" data-filter="low" style="--filter-color:#10B981;">Low Priority</button>
+              <!-- ═══ SECTION 1: Executive Dashboard Header ═══ -->
+              <div class="aud-dash-header">
+                <div class="aud-dash-header-score">
+                  <div class="aud-overall">
+                    <div class="aud-overall-score">
+                      <svg viewBox="0 0 140 140">
+                        <circle class="aud-overall-bg" cx="70" cy="70" r="62"/>
+                        <circle class="aud-overall-fill" id="overallCircle" cx="70" cy="70" r="62"/>
+                      </svg>
+                      <div class="aud-overall-num">
+                        <strong id="overallScore">0</strong>
+                        <span>Overall Score</span>
+                      </div>
+                    </div>
+                    <div class="aud-overall-grade" id="overallGrade">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      Excellent
+                    </div>
                   </div>
-                  <!-- Cards -->
-                  <div class="rec-cards" id="recCards"></div>
-                  <!-- Empty State -->
-                  <div id="recEmptyContainer" style="display:none;padding:12px 0;"></div>
+                </div>
+                <div class="aud-dash-header-scores" id="scoreGrid">
+                  <div class="aud-score-item">
+                    <div class="aud-score-ring">
+                      <svg viewBox="0 0 72 72">
+                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
+                        <circle class="aud-score-fill" id="scoreSEO" cx="36" cy="36" r="31"/>
+                      </svg>
+                      <span class="aud-score-num" id="scoreSEONum">0</span>
+                    </div>
+                    <div class="aud-score-label">SEO</div>
+                  </div>
+                  <div class="aud-score-item">
+                    <div class="aud-score-ring">
+                      <svg viewBox="0 0 72 72">
+                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
+                        <circle class="aud-score-fill" id="scorePerf" cx="36" cy="36" r="31"/>
+                      </svg>
+                      <span class="aud-score-num" id="scorePerfNum">0</span>
+                    </div>
+                    <div class="aud-score-label">Performance</div>
+                  </div>
+                  <div class="aud-score-item">
+                    <div class="aud-score-ring">
+                      <svg viewBox="0 0 72 72">
+                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
+                        <circle class="aud-score-fill" id="scoreMobile" cx="36" cy="36" r="31"/>
+                      </svg>
+                      <span class="aud-score-num" id="scoreMobileNum">0</span>
+                    </div>
+                    <div class="aud-score-label">Mobile</div>
+                  </div>
+                  <div class="aud-score-item">
+                    <div class="aud-score-ring">
+                      <svg viewBox="0 0 72 72">
+                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
+                        <circle class="aud-score-fill" id="scoreSecurity" cx="36" cy="36" r="31"/>
+                      </svg>
+                      <span class="aud-score-num" id="scoreSecurityNum">0</span>
+                    </div>
+                    <div class="aud-score-label">Security</div>
+                  </div>
+                  <div class="aud-score-item">
+                    <div class="aud-score-ring">
+                      <svg viewBox="0 0 72 72">
+                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
+                        <circle class="aud-score-fill" id="scoreUX" cx="36" cy="36" r="31"/>
+                      </svg>
+                      <span class="aud-score-num" id="scoreUXNum">0</span>
+                    </div>
+                    <div class="aud-score-label">UX</div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- ═══ Export ═══ -->
-            <div class="rec-export" id="recExport" style="display:none;">
-              <div class="rec-export-header">
-                <h3>Export Your Audit Report</h3>
-                <p>Download, email, or share your website audit results with your team or clients.</p>
+              <!-- ═══ SECTION 2: Executive Summary ═══ -->
+              <div class="aud-dash-summary" id="dashSummary">
+                <div class="aud-dash-summary-item">
+                  <div class="aud-dash-summary-label">Overall Health</div>
+                  <div class="aud-dash-summary-value" id="dashHealth">—</div>
+                </div>
+                <div class="aud-dash-summary-item">
+                  <div class="aud-dash-summary-label">Main Strength</div>
+                  <div class="aud-dash-summary-value" id="dashStrength">—</div>
+                </div>
+                <div class="aud-dash-summary-item">
+                  <div class="aud-dash-summary-label">Main Weakness</div>
+                  <div class="aud-dash-summary-value" id="dashWeakness">—</div>
+                </div>
+                <div class="aud-dash-summary-item">
+                  <div class="aud-dash-summary-label">Priority Action</div>
+                  <div class="aud-dash-summary-value" id="dashPriority">—</div>
+                </div>
               </div>
 
-              <div class="rec-export-actions">
-                <button class="rec-export-btn rec-export-btn--pdf" id="recExportPDF" title="Download as PDF">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                  Download PDF Report
-                </button>
-                <button class="rec-export-btn rec-export-btn--email" id="recExportEmail" title="Send via Email">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  Send Report by Email
-                </button>
-                <button class="rec-export-btn rec-export-btn--share" id="recExportShare" title="Copy report link">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                  Share Report
-                </button>
+              <!-- ═══ SECTION 3: Issues Overview ═══ -->
+              <div class="aud-dash-issues-overview" id="dashIssuesOverview"></div>
+
+              <!-- ═══ SECTION 4: Top Issues & Quick Wins ═══ -->
+              <div class="aud-dash-grid-2col" id="dashIssuesGrid">
+                <div class="aud-dash-col issues-col">
+                  <div class="aud-dash-col-title issues">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Top Issues
+                  </div>
+                  <div id="dashTopIssuesList"></div>
+                </div>
+                <div class="aud-dash-col wins-col">
+                  <div class="aud-dash-col-title wins">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    Quick Wins
+                  </div>
+                  <div id="dashQuickWinsList"></div>
+                </div>
               </div>
 
-              <div class="rec-export-trust">
-
+              <!-- ═══ SECTION 5: Detailed Analysis Accordions ═══ -->
+              <div class="aud-dash-detailed" id="dashDetailed">
+                <div class="aud-dash-cat-accordion" data-category="seo">
+                  <button class="aud-dash-cat-header" type="button">
+                    <span class="aud-dash-cat-header-left">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      SEO Analysis
+                      <span class="aud-dash-cat-header-score" id="catScoreSeo">0</span>
+                    </span>
+                    <svg class="aud-dash-cat-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="aud-dash-cat-body" id="catBodySeo">
+                    <div class="aud-dash-cat-body-inner"><div id="catRecsSeo"></div></div>
+                  </div>
+                </div>
+                <div class="aud-dash-cat-accordion" data-category="perf">
+                  <button class="aud-dash-cat-header" type="button">
+                    <span class="aud-dash-cat-header-left">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                      Performance Analysis
+                      <span class="aud-dash-cat-header-score" id="catScorePerf">0</span>
+                    </span>
+                    <svg class="aud-dash-cat-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="aud-dash-cat-body" id="catBodyPerf">
+                    <div class="aud-dash-cat-body-inner"><div id="catRecsPerf"></div></div>
+                  </div>
+                </div>
+                <div class="aud-dash-cat-accordion" data-category="mobile">
+                  <button class="aud-dash-cat-header" type="button">
+                    <span class="aud-dash-cat-header-left">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                      Mobile Analysis
+                      <span class="aud-dash-cat-header-score" id="catScoreMobile">0</span>
+                    </span>
+                    <svg class="aud-dash-cat-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="aud-dash-cat-body" id="catBodyMobile">
+                    <div class="aud-dash-cat-body-inner"><div id="catRecsMobile"></div></div>
+                  </div>
+                </div>
+                <div class="aud-dash-cat-accordion" data-category="security">
+                  <button class="aud-dash-cat-header" type="button">
+                    <span class="aud-dash-cat-header-left">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      Security Analysis
+                      <span class="aud-dash-cat-header-score" id="catScoreSecurity">0</span>
+                    </span>
+                    <svg class="aud-dash-cat-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="aud-dash-cat-body" id="catBodySecurity">
+                    <div class="aud-dash-cat-body-inner"><div id="catRecsSecurity"></div></div>
+                  </div>
+                </div>
+                <div class="aud-dash-cat-accordion" data-category="ux">
+                  <button class="aud-dash-cat-header" type="button">
+                    <span class="aud-dash-cat-header-left">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      UX Analysis
+                      <span class="aud-dash-cat-header-score" id="catScoreUX">0</span>
+                    </span>
+                    <svg class="aud-dash-cat-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="aud-dash-cat-body" id="catBodyUX">
+                    <div class="aud-dash-cat-body-inner"><div id="catRecsUX"></div></div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <!-- ════════════════════════════════════════════
-                 SEO SCORE BREAKDOWN
-                 ════════════════════════════════════════════ -->
-            <div id="seoScoreBreakdown" style="display:none;">
-              <div id="sbEmpty" style="padding:20px 0;"></div>
-            </div>
+              <!-- ═══ SECTION 6: Download Report CTA ═══ -->
+              <div class="aud-dash-cta" id="recExport" style="display:none;">
+                <div class="aud-dash-cta-text">
+                  <h3>Export Your Audit Report</h3>
+                  <p>Download a complete PDF report or share with your team.</p>
+                </div>
+                <div class="aud-dash-cta-actions">
+                  <button class="aud-dash-cta-btn aud-dash-cta-btn--primary" id="recExportPDF">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    Download PDF
+                  </button>
+                  <button class="aud-dash-cta-btn aud-dash-cta-btn--secondary" id="recExportEmail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email Report
+                  </button>
+                  <button class="aud-dash-cta-btn aud-dash-cta-btn--secondary" id="recExportShare">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    Share
+                  </button>
+                </div>
+              </div>
 
-            <!-- ════════════════════════════════════════════
-                 AI-POWERED INSIGHTS ENGINE
-                 ════════════════════════════════════════════ -->
-            <div class="ai-section" id="aiInsightsContainer">
-              <div id="aiInsightsEmpty" style="padding:20px 0;"></div>
+              <!-- Hidden — kept for JS/PDF rendering compatibility -->
+              <div class="rec-ai-summary" id="recAiSummary" style="display:none;">
+                <p class="rec-ai-summary-text" id="recAiSummaryText">Processing your results...</p>
+              </div>
+              <div class="rec-quickwins" id="recQuickWins" style="display:none;">
+                <div class="rec-quickwins-header">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                  <h3>Quick Wins</h3>
+                  <span class="rec-quickwins-sub">Complete in under 30 minutes</span>
+                </div>
+                <div class="rec-quickwins-grid" id="recQuickWinsGrid"></div>
+              </div>
+              <div class="rec-filters" id="recFilters" style="display:none;">
+                <button class="rec-filter-btn active" data-filter="all">All</button>
+                <button class="rec-filter-btn" data-filter="high" style="--filter-color:#ef4444;">High Priority</button>
+                <button class="rec-filter-btn" data-filter="medium" style="--filter-color:#FACC15;">Medium Priority</button>
+                <button class="rec-filter-btn" data-filter="low" style="--filter-color:#10B981;">Low Priority</button>
+              </div>
+              <div class="rec-cards" id="recCards" style="display:none;"></div>
+              <div id="recEmptyContainer" style="display:none;"></div>
+              <div id="seoScoreBreakdown" style="display:none;">
+                <div id="sbEmpty" style="padding:20px 0;"></div>
+              </div>
+              <div class="ai-section" id="aiInsightsContainer" style="display:none;">
+                <div id="aiInsightsEmpty" style="padding:20px 0;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -2501,7 +2528,7 @@
 
       var allCount = recommendations.length;
       section.style.display = allCount > 0 ? 'block' : 'none';
-      totalBadge.textContent = allCount + ' issue' + (allCount !== 1 ? 's' : '');
+      if (totalBadge) totalBadge.textContent = allCount + ' issue' + (allCount !== 1 ? 's' : '');
 
       container.innerHTML = '';
 
@@ -2625,7 +2652,8 @@
       if (!engine) return;
 
       var summary = engine.generateSummary(scores, recommendations);
-      document.getElementById('recAiSummaryText').innerHTML = summary;
+      var el = document.getElementById('recAiSummaryText');
+      if (el) el.innerHTML = summary;
     }
 
     /* ─── Animate scores ─── */
@@ -2681,6 +2709,7 @@
         return;
       }
       recState.recommendations = recommendations;
+      window.__auditRecState = recState;
 
       /* Render AI summary (kept for JS refs, element hidden) */
       logStep('Render AI Summary', 'info', '');
@@ -2699,16 +2728,9 @@
       setupFilters();
       logStep('Setup Filters', 'ok', 'Done');
 
-      /* Show accordion + export section */
-      var accordion = document.getElementById('recAccordion');
-      var exportSection = document.getElementById('recExport');
-      if (recommendations.length > 0) {
-        if (accordion) accordion.style.display = 'block';
-        if (exportSection) exportSection.style.display = 'block';
-      }
       logStep('Recommendation Engine', 'ok', 'Complete');
 
-      /* ─── SEO Score Breakdown (inside accordion) ─── */
+      /* ─── SEO Score Breakdown ─── */
       logStep('SEO Score Breakdown', 'info', '');
       var sbSection = document.getElementById('seoScoreBreakdown');
       var sbEmpty = document.getElementById('sbEmpty');
@@ -2716,7 +2738,6 @@
       if (sbEngine && sbSection) {
         try {
           sbEngine.render('seoScoreBreakdown', scores, recommendations);
-          sbSection.style.display = 'block';
           if (sbEmpty) sbEmpty.style.display = 'none';
           logStep('SEO Score Breakdown', 'ok', 'Rendered');
         } catch (e) {
@@ -2744,202 +2765,213 @@
         }
       }
 
-      /* ─── AI Insights Engine (executive summary only) ─── */
+      /* ─── AI Insights Engine ─── */
       logStep('AI Insights Engine', 'info', '');
       var aiEngine = window.NAGRIVA_AIInsights;
-      var aiContainer = document.getElementById('aiInsightsContainer');
-      var aiEmpty = document.getElementById('aiInsightsEmpty');
       if (aiEngine) {
         try {
           var insights = aiEngine.generateAll(scores, recommendations);
           if (insights) {
             aiEngine.renderAll(insights, 'aiInsightsContainer');
-            if (aiEmpty) aiEmpty.style.display = 'none';
-            logStep('AI Insights Engine', 'ok', 'Generated and rendered');
-          } else {
-            throw new Error('No insights generated');
+            logStep('AI Insights Engine', 'ok', 'Generated');
           }
         } catch (e) {
           logStep('AI Insights Engine', 'warn', e.message);
-          if (aiEmpty && window.NAGRIVA_EmptyState) {
-            aiEmpty.innerHTML = NAGRIVA_EmptyState.render({
-              icon: 'sparkles',
-              title: 'AI Insights Not Available',
-              description: 'We\'re unable to generate insights at the moment. Please try again later.',
-              variant: 'search',
-              primaryCta: { label: 'Retry Analysis', onclick: 'document.getElementById(\'auditFormEl\').dispatchEvent(new Event(\'submit\'))' }
-            });
-            aiEmpty.style.display = 'block';
-          }
-        }
-      } else {
-        logStep('AI Insights Engine', 'warn', 'Module not loaded');
-        if (aiEmpty && window.NAGRIVA_EmptyState) {
-          aiEmpty.innerHTML = NAGRIVA_EmptyState.render({
-            icon: 'sparkles',
-            title: 'AI Insights Not Available',
-            description: 'We\'re unable to generate insights at the moment. Please try again later.',
-            variant: 'search',
-            primaryCta: { label: 'Retry Analysis', onclick: 'document.getElementById(\'auditFormEl\').dispatchEvent(new Event(\'submit\'))' }
-          });
-          aiEmpty.style.display = 'block';
         }
       }
 
-      /* ─── DOM restructure: create dashboard layout ─── */
+      /* ─── DOM restructure: build compact dashboard ─── */
       buildDashboardLayout();
     }
 
     function buildDashboardLayout() {
-      var results = document.getElementById('audResults');
-      if (!results) return;
+      var engine = window.RecommendationEngine;
+      var recState = window.__auditRecState || { recommendations: [], scores: null };
+      var recommendations = recState.recommendations || [];
+      var scores = recState.scores || {};
+      var aiEngine = window.NAGRIVA_AIInsights;
 
-      var overall = results.querySelector('.aud-overall');
-      var scores = results.querySelector('.aud-scores');
-      var quickWins = document.getElementById('recQuickWins');
-      var accordion = document.getElementById('recAccordion');
-      var exportSection = document.getElementById('recExport');
-      var aiContainer = document.getElementById('aiInsightsContainer');
-      var execSummary = aiContainer ? aiContainer.querySelector('.ai-exec') : null;
-      var sbSection = document.getElementById('seoScoreBreakdown');
+      /* ─── SECTION 2: Populate Executive Summary ─── */
+      var dashHealth = document.getElementById('dashHealth');
+      var dashStrength = document.getElementById('dashStrength');
+      var dashWeakness = document.getElementById('dashWeakness');
+      var dashPriority = document.getElementById('dashPriority');
+      var insights = aiEngine ? aiEngine.generateAll(scores, recommendations) : null;
+
+      if (dashHealth) {
+        var healthLabel = scores.overall >= 85 ? 'Excellent' : scores.overall >= 70 ? 'Good' : scores.overall >= 55 ? 'Fair' : 'Poor';
+        var healthColor = scores.overall >= 85 ? '#10B981' : scores.overall >= 70 ? '#FACC15' : '#ef4444';
+        dashHealth.innerHTML = '<strong style="color:' + healthColor + '">' + healthLabel + '</strong> (' + scores.overall + '/100)';
+      }
+      if (dashStrength && insights && insights.strengths.length > 0) {
+        dashStrength.textContent = insights.strengths[0].text;
+      } else if (dashStrength) {
+        dashStrength.textContent = 'No significant strengths detected';
+      }
+      if (dashWeakness && insights && insights.weaknesses.length > 0) {
+        var weakText = insights.weaknesses[0].text;
+        if (weakText === 'No critical issues detected' || weakText.indexOf('No critical') !== -1) {
+          dashWeakness.innerHTML = '<strong style="color:#10B981">No critical issues</strong>';
+        } else {
+          dashWeakness.textContent = weakText;
+        }
+      } else if (dashWeakness) {
+        dashWeakness.textContent = 'No issues detected';
+      }
+      if (dashPriority && recommendations.length > 0) {
+        var topRec = recommendations[0];
+        var priorityColor = topRec.priority === 'critical' || topRec.priority === 'high' ? '#ef4444' : '#FACC15';
+        dashPriority.innerHTML = '<span style="color:' + priorityColor + '">' + topRec.title + '</span>';
+      } else if (dashPriority) {
+        dashPriority.innerHTML = '<strong style="color:#10B981">No priority actions needed</strong>';
+      }
+
+      /* ─── SECTION 3: Issues Overview ─── */
+      var overviewEl = document.getElementById('dashIssuesOverview');
+      if (overviewEl) {
+        var criticalCount = recommendations.filter(function(r) { return r.priority === 'critical' || r.priority === 'high'; }).length;
+        var warningCount = recommendations.filter(function(r) { return r.priority === 'medium'; }).length;
+        var passedCount = Math.max(0, 31 - recommendations.length);
+        overviewEl.innerHTML =
+          '<div class="aud-dash-issues-card critical">' +
+            '<div class="aud-dash-issues-num">' + criticalCount + '</div>' +
+            '<div class="aud-dash-issues-label">Critical</div>' +
+          '</div>' +
+          '<div class="aud-dash-issues-card warning">' +
+            '<div class="aud-dash-issues-num">' + warningCount + '</div>' +
+            '<div class="aud-dash-issues-label">Warnings</div>' +
+          '</div>' +
+          '<div class="aud-dash-issues-card passed">' +
+            '<div class="aud-dash-issues-num">' + passedCount + '</div>' +
+            '<div class="aud-dash-issues-label">Passed Checks</div>' +
+          '</div>';
+      }
+
+      /* ─── SECTION 4: Top Issues & Quick Wins ─── */
+      var issuesList = document.getElementById('dashTopIssuesList');
+      var qwList = document.getElementById('dashQuickWinsList');
       var recCards = document.getElementById('recCards');
 
-      /* Create dashboard wrapper */
-      var dash = document.createElement('div');
-      dash.className = 'aud-dashboard';
-      while (results.firstChild) dash.appendChild(results.firstChild);
-      results.appendChild(dash);
-
-      /* Wrap overall + scores in top row */
-      var topRow = document.createElement('div');
-      topRow.className = 'aud-dash-top';
-      var newOverall = dash.querySelector('.aud-overall');
-      var newScores = dash.querySelector('.aud-scores');
-      if (newOverall && newScores) {
-        dash.insertBefore(topRow, newOverall);
-        topRow.appendChild(newOverall);
-        topRow.appendChild(newScores);
-      }
-
-      /* Build exec summary bar from AI exec card */
-      var execBar = document.createElement('div');
-      execBar.className = 'aud-dash-exec';
-      if (execSummary) {
-        var execText = execSummary.querySelector('.ai-exec-text');
-        if (execText) {
-          execBar.innerHTML =
-            '<div class="aud-dash-exec-header">' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
-              '<span>Executive Summary</span>' +
-            '</div>' +
-            '<p>' + execText.innerHTML + '</p>';
-        }
-      }
-      if (topRow && topRow.nextSibling) {
-        dash.insertBefore(execBar, topRow.nextSibling);
-      } else {
-        dash.appendChild(execBar);
-      }
-
-      /* Build 2-column grid: Issues (from top rec cards) + Quick Wins */
-      var issuesGrid = document.createElement('div');
-      issuesGrid.className = 'aud-dash-issues-grid';
-
-      /* Issues column */
-      var issuesCol = document.createElement('div');
-      issuesCol.className = 'aud-dash-issues-col';
-      issuesCol.innerHTML =
-        '<div class="aud-dash-issues-col-title">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' +
-          'Top Issues' +
-        '</div>' +
-        '<div class="aud-dash-issues-list" id="dashIssuesList"></div>';
-
-      /* Quick Wins column */
-      var qwCol = document.createElement('div');
-      qwCol.className = 'aud-dash-quickwins-col';
-      if (quickWins) {
-        qwCol.innerHTML =
-          '<div class="aud-dash-quickwins-col-title">' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>' +
-            'Quick Wins' +
-          '</div>';
-        var qwGrid = quickWins.querySelector('.rec-quickwins-grid');
-        if (qwGrid) {
-          var qwItems = qwGrid.querySelectorAll('.rec-quickwin-item');
-          qwItems.forEach(function(item) {
-            var clone = item.cloneNode(true);
-            var qwText = clone.querySelector('.rec-quickwin-text');
-            var qwTime = clone.querySelector('.rec-quickwin-time');
-            var newItem = document.createElement('div');
-            newItem.className = 'aud-dash-qw-item';
-            newItem.innerHTML =
-              '<span class="aud-dash-qw-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>' +
-              '<span>' + (qwText ? qwText.textContent : '') + '</span>';
-            qwCol.appendChild(newItem);
-          });
-        }
-      }
-
-      issuesGrid.appendChild(issuesCol);
-      issuesGrid.appendChild(qwCol);
-      dash.insertBefore(issuesGrid, execBar.nextSibling);
-
-      /* Populate top issues from rec cards (high priority first, max 4) */
-      var issuesList = document.getElementById('dashIssuesList');
-      if (issuesList && recCards) {
-        var recCardEls = recCards.querySelectorAll('.rec-card');
-        var highCount = 0;
-        recCardEls.forEach(function(card) {
-          if (highCount >= 4) return;
-          var badge = card.querySelector('.rec-card-badge');
-          var title = card.querySelector('.rec-card-title');
-          if (badge && title) {
-            var priorityText = badge.textContent.trim().toLowerCase();
-            if (priorityText.indexOf('high') !== -1 || priorityText.indexOf('critical') !== -1) {
-              var dotColor = priorityText.indexOf('critical') !== -1 ? '#ef4444' : '#ef4444';
+      if (issuesList) {
+        issuesList.innerHTML = '';
+        if (recCards) {
+          var recCardEls = recCards.querySelectorAll('.rec-card');
+          var count = 0;
+          recCardEls.forEach(function(card) {
+            if (count >= 5) return;
+            var badge = card.querySelector('.rec-card-badge');
+            var title = card.querySelector('.rec-card-title');
+            if (badge && title) {
+              var pText = badge.textContent.trim().toLowerCase();
+              var isHigh = pText.indexOf('high') !== -1 || pText.indexOf('critical') !== -1;
+              count++;
               var item = document.createElement('div');
-              item.className = 'aud-dash-issue-item';
+              item.className = 'aud-dash-col-item';
               item.innerHTML =
-                '<span class="aud-dash-issue-dot high"></span>' +
+                '<span class="aud-dash-col-dot ' + (isHigh ? 'high' : 'medium') + '"></span>' +
                 '<span>' + title.textContent + '</span>';
               issuesList.appendChild(item);
-              highCount++;
             }
+          });
+          if (count === 0) {
+            issuesList.innerHTML = '<div style="color:var(--gray2);font-size:0.72rem;padding:6px 0;">No issues found — your website is in great shape!</div>';
+          }
+        }
+      }
+
+      if (qwList) {
+        qwList.innerHTML = '';
+        var quickWins = engine ? engine.generateQuickWins(recommendations) : [];
+        if (quickWins.length > 0) {
+          var qwDisplay = quickWins.slice(0, 5);
+          qwDisplay.forEach(function(rec) {
+            var item = document.createElement('div');
+            item.className = 'aud-dash-col-item';
+            item.innerHTML =
+              '<span class="aud-dash-col-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>' +
+              '<span>' + rec.title + '</span>';
+            qwList.appendChild(item);
+          });
+        } else {
+          qwList.innerHTML = '<div style="color:var(--gray2);font-size:0.72rem;padding:6px 0;">No quick wins available.</div>';
+        }
+      }
+
+      /* ─── SECTION 5: Populate category accordions ─── */
+      var catMap = {
+        seo: { id: 'seo', label: 'SEO', score: scores.seo },
+        perf: { id: 'perf', label: 'Performance', score: scores.perf },
+        mobile: { id: 'mobile', label: 'Mobile', score: scores.mobile },
+        security: { id: 'security', label: 'Security', score: scores.security },
+        ux: { id: 'ux', label: 'UX', score: scores.ux }
+      };
+
+      Object.keys(catMap).forEach(function(key) {
+        var cat = catMap[key];
+        var scoreEl = document.getElementById('catScore' + cat.label);
+        var bodyEl = document.getElementById('catBody' + cat.label);
+        var recsEl = document.getElementById('catRecs' + cat.label);
+        if (scoreEl) {
+          scoreEl.textContent = cat.score || 0;
+          var sc = cat.score || 0;
+          scoreEl.style.background = sc >= 80 ? 'rgba(16,185,129,0.12)' : sc >= 60 ? 'rgba(250,204,21,0.12)' : 'rgba(239,68,68,0.12)';
+          scoreEl.style.color = sc >= 80 ? '#10B981' : sc >= 60 ? '#FACC15' : '#ef4444';
+        }
+        /* Move matching recommendations into this category */
+        if (recsEl && recCards) {
+          var catRecs = recCards.querySelectorAll('.rec-card[data-category="' + cat.id + '"]');
+          /* If no data-category attributes, filter by badge/description matching */
+          if (catRecs.length === 0) {
+            var allCards = recCards.querySelectorAll('.rec-card');
+            allCards.forEach(function(card) {
+              var desc = card.querySelector('.rec-card-desc');
+              var title = card.querySelector('.rec-card-title');
+              var text = (desc ? desc.textContent : '') + ' ' + (title ? title.textContent : '');
+              var inCategory = false;
+              if (cat.id === 'seo') inCategory = /seo|meta|sitemap|canonical|heading|structured data|schema|open graph/i.test(text);
+              else if (cat.id === 'perf') inCategory = /perf|speed|lcp|ttfb|compress|minif|cach|load|image.optim/i.test(text);
+              else if (cat.id === 'mobile') inCategory = /mobile|tap.target|viewport|responsive/i.test(text);
+              else if (cat.id === 'security') inCategory = /https|ssl|security|safe/i.test(text);
+              else if (cat.id === 'ux') inCategory = /ux|accessib|core.web.vital|cls|fid|fcp/i.test(text);
+              if (inCategory) {
+                var clone = card.cloneNode(true);
+                recsEl.appendChild(clone);
+              }
+            });
+          } else {
+            catRecs.forEach(function(c) { recsEl.appendChild(c.cloneNode(true)); });
+          }
+        }
+        /* If no recs in category, show empty message */
+        if (recsEl && recsEl.children.length === 0) {
+          recsEl.innerHTML = '<div style="color:var(--gray2);font-size:0.72rem;padding:8px 0;">No issues found in this category.</div>';
+        }
+      });
+
+      /* Move SEO breakdown into SEO accordion body if present */
+      var sbSection = document.getElementById('seoScoreBreakdown');
+      var seoBodyInner = document.querySelector('#catBodySeo .aud-dash-cat-body-inner');
+      if (sbSection && seoBodyInner) {
+        sbSection.style.display = 'block';
+        seoBodyInner.appendChild(sbSection);
+      }
+
+      /* ─── Show export section ─── */
+      var exportSection = document.getElementById('recExport');
+      if (exportSection && recommendations.length > 0) {
+        exportSection.style.display = 'flex';
+      }
+
+      /* ─── Set up category accordion toggle handlers ─── */
+      document.querySelectorAll('.aud-dash-cat-header').forEach(function(header) {
+        header.addEventListener('click', function() {
+          var body = this.nextElementSibling;
+          if (body) {
+            body.classList.toggle('open');
+            this.classList.toggle('open');
           }
         });
-        /* If no high priority issues, show first 3 any */
-        if (highCount === 0) {
-          recCardEls.forEach(function(card, idx) {
-            if (idx >= 3) return;
-            var title = card.querySelector('.rec-card-title');
-            if (title) {
-              var item = document.createElement('div');
-              item.className = 'aud-dash-issue-item';
-              item.innerHTML =
-                '<span class="aud-dash-issue-dot medium"></span>' +
-                '<span>' + title.textContent + '</span>';
-              issuesList.appendChild(item);
-            }
-          });
-        }
-      }
-
-      /* Move accordion before export */
-      if (accordion && exportSection) {
-        dash.insertBefore(accordion, exportSection);
-      }
-
-      /* Move SEO breakdown into accordion body if present */
-      if (sbSection && accordion) {
-        var bodyInner = accordion.querySelector('.aud-dash-accordion-body-inner');
-        if (bodyInner) {
-          bodyInner.appendChild(sbSection);
-        }
-      }
-
-      /* Hide quick wins original */
-      if (quickWins) quickWins.style.display = 'none';
+      });
     }
 
     /* ─── Audit state (shared between steps) ─── */
@@ -3633,20 +3665,6 @@
       this.classList.toggle('open');
       document.getElementById('audHistoryBody').classList.toggle('open');
     });
-
-    /* ─── Detailed Breakdown Accordion Toggle ─── */
-    var accordionToggle = document.getElementById('recAccordionToggle');
-    var accordionBody = document.getElementById('recAccordionBody');
-    if (accordionToggle && accordionBody) {
-      accordionToggle.addEventListener('click', function() {
-        var isOpen = accordionBody.classList.contains('open');
-        accordionBody.classList.toggle('open');
-        accordionToggle.classList.toggle('open');
-      });
-      /* Open by default */
-      accordionBody.classList.add('open');
-      accordionToggle.classList.add('open');
-    }
 
     /* ─── Export: PDF ─── */
 
