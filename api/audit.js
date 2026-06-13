@@ -273,7 +273,9 @@ module.exports = async function handler(req, res) {
         accessibility: accessibility,
         bestPractices: bestPractices
       },
-      categories: rawCategories
+      categories: rawCategories,
+      googleConfigSettings: data.lighthouseResult?.configSettings,
+      googleCategoriesKeys: Object.keys(data.lighthouseResult?.categories || {})
     });
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Send Response', error: e.message, stack: e.stack });
