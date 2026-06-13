@@ -1,4 +1,6 @@
+console.log("PAGESPEED:", process.env.PAGESPEED_API_KEY);
 console.log("FILE LOADED");
+
 
 module.exports = async function handler(req, res) {
   console.log("HANDLER STARTED");
