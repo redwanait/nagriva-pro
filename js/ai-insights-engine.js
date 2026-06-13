@@ -416,25 +416,33 @@ window.NAGRIVA_AIInsights = (function () {
 
   function generateAll(scores, recommendations) {
     if (!scores) return null;
+    try {
+      var engine = window.RecommendationEngine;
+      var recs = recommendations || (engine ? engine.generate(scores) : []);
 
-    var engine = window.RecommendationEngine;
-    var recs = recommendations || (engine ? engine.generate(scores) : []);
+      var potential = generatePotentialScore(scores, recs);
 
-    var potential = generatePotentialScore(scores, recs);
-
-    return {
-      executiveSummary: generateExecutiveSummary(scores, recs),
-      strengths: generateStrengths(scores),
-      weaknesses: generateWeaknesses(scores, recs),
-      growthOpportunities: generateGrowthOpportunities(scores, recs),
-      potentialScore: potential,
-      roadmap: generateRoadmap(recs),
-      competitorInsights: generateCompetitorInsights(scores),
-      businessImpacts: generateBusinessImpact(scores, recs),
-      recommendationScore: generateRecommendationScore(recs),
-      reportSummary: generateReportSummary(scores, recs, potential),
-      rawScore: scores.overall
-    };
+      return {
+        executiveSummary: generateExecutiveSummary(scores, recs),
+        strengths: generateStrengths(scores),
+        weaknesses: generateWeaknesses(scores, recs),
+        growthOpportunities: generateGrowthOpportunities(scores, recs),
+        potentialScore: potential,
+        roadmap: generateRoadmap(recs),
+        competitorInsights: generateCompetitorInsights(scores),
+        businessImpacts: generateBusinessImpact(scores, recs),
+        recommendationScore: generateRecommendationScore(recs),
+        reportSummary: generateReportSummary(scores, recs, potential),
+        rawScore: scores.overall
+      };
+    } catch (err) {
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.AI_INSIGHTS_FAILED, err, 'ai_insights_generate');
+      } else {
+        console.error('[AIInsights] Generation error:', err);
+      }
+      return null;
+    }
   }
 
   /* ───────────────────────────────────────────────
@@ -469,6 +477,7 @@ window.NAGRIVA_AIInsights = (function () {
     var container = document.getElementById(containerId || 'aiInsightsContainer');
     if (!container || !insights) return;
 
+    try {
     container.innerHTML = '';
 
     /* ─── Section Header ─── */
@@ -705,6 +714,13 @@ window.NAGRIVA_AIInsights = (function () {
       future.appendChild(badge);
     });
     container.appendChild(future);
+    } catch (err) {
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.AI_INSIGHTS_FAILED, err, 'ai_insights_render');
+      } else {
+        console.error('[AIInsights] Render error:', err);
+      }
+    }
   }
 
   /* ─── Roadmap Column Helper ─── */

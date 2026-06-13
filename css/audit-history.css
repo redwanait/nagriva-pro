@@ -631,6 +631,16 @@
   border: 1px dashed rgba(255, 215, 0, 0.12);
   background: rgba(255, 215, 0, 0.01);
 }
+.ah-empty .ne {
+  border: none;
+  background: transparent;
+  padding: 0;
+  animation: none;
+}
+.ah-empty .ne:hover {
+  border: none;
+  background: transparent;
+}
 .ah-empty-icon {
   width: 56px;
   height: 56px;

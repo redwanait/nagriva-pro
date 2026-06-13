@@ -263,8 +263,33 @@ window.NAGRIVA_AuditHistory = (function () {
       tbody.innerHTML = '';
       if (cards) cards.innerHTML = '';
       if (container) container.style.display = 'none';
-      if (empty) empty.style.display = 'flex';
       if (pagination) pagination.innerHTML = '';
+      var hasSearchOrFilter = _filters.search || _filters.period !== 'all';
+      if (empty) {
+        if (hasSearchOrFilter && window.NAGRIVA_EmptyState) {
+          empty.style.display = '';
+          empty.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'search',
+            title: 'No Results Found',
+            description: 'Try a different search term or remove filters.',
+            variant: 'search',
+            primaryCta: {
+              label: 'Clear Filters',
+              onclick: 'var si=document.getElementById(\'ahSearchInput\');if(si){si.value=\'\';si.dispatchEvent(new Event(\'input\'))}'
+            }
+          });
+        } else if (!_allReports.length && window.NAGRIVA_EmptyState) {
+          empty.style.display = '';
+          empty.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'clock',
+            title: 'No Audits Yet',
+            description: 'You haven\'t generated any audit reports yet.',
+            primaryCta: { label: 'Run Your First Audit', url: '/tools/website-audit-tool' }
+          });
+        } else {
+          empty.style.display = 'flex';
+        }
+      }
       return;
     }
 

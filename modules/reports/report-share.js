@@ -45,7 +45,12 @@ window.NAGRIVA_ReportShare = (function() {
           .select()
           .single()
           .then(function(ir) {
-            if (ir.error) throw ir.error;
+            if (ir.error) {
+              if (window.NAGRIVA_ErrorHandler) {
+                NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.SUPABASE_DB, ir.error, 'report_share_ensure_link');
+              }
+              throw ir.error;
+            }
             return ir.data;
           });
       });
@@ -68,7 +73,40 @@ window.NAGRIVA_ReportShare = (function() {
     var urlEl = document.getElementById('rsReportUrl');
     if (urlEl) urlEl.textContent = website;
 
+    /* ─── Show share loading state ─── */
+    var linkSection = document.querySelector('.rs-link-section');
+    var qrSection = document.querySelector('.rs-qr-section');
+    var socialSection = document.querySelector('.rs-social-section');
+    var shareEmptyEl = document.getElementById('rsShareEmpty');
+    if (shareEmptyEl) shareEmptyEl.style.display = 'none';
+    var shareLoadingEl = document.getElementById('rsShareLoading');
+    if (!shareLoadingEl) {
+      shareLoadingEl = document.createElement('div');
+      shareLoadingEl.id = 'rsShareLoading';
+      shareLoadingEl.style.cssText = 'text-align:center;padding:24px 0;';
+      if (linkSection && linkSection.parentNode) {
+        linkSection.parentNode.insertBefore(shareLoadingEl, linkSection);
+      }
+    }
+    shareLoadingEl.style.display = 'block';
+    if (linkSection) linkSection.style.display = 'none';
+    if (qrSection) qrSection.style.display = 'none';
+    if (socialSection) socialSection.style.display = 'none';
+
+    if (window.NAGRIVA_AuditLoading) {
+      shareLoadingEl.innerHTML = window.NAGRIVA_AuditLoading.aiInsightsLoadingHTML().replace('AI is analyzing your website...', 'Creating share link...').replace('Generating personalized insights', 'Generating secure access URL...');
+    } else {
+      shareLoadingEl.innerHTML = '<div style="color:var(--gray2);font-size:0.85rem;padding:20px 0;"><div style="width:24px;height:24px;border:2px solid rgba(250,204,21,0.1);border-top-color:#FACC15;border-radius:50%;animation:audSpin 0.8s linear infinite;margin:0 auto 12px;"></div>Creating share link...</div>';
+    }
+
     ensureShareLink(reportId, website).then(function(shareRecord) {
+      if (shareLoadingEl) shareLoadingEl.style.display = 'none';
+      if (linkSection) linkSection.style.display = '';
+      if (qrSection) qrSection.style.display = '';
+      if (socialSection) socialSection.style.display = '';
+      if (typeof NAGRIVA_AuditLoading !== 'undefined' && NAGRIVA_AuditLoading) {
+        NAGRIVA_AuditLoading.showSuccessToast('Share Link Created', 'Your report is ready to share.');
+      }
       var shareCode = shareRecord.share_code;
       var shareUrl = getShareUrl(shareCode);
 
@@ -81,7 +119,7 @@ window.NAGRIVA_ReportShare = (function() {
       if (qrContainer) {
         qrContainer.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='
           + encodeURIComponent(shareUrl)
-          + '" alt="QR Code" class="rs-qr-img" loading="lazy" width="160" height="160">';
+          + '" alt="QR Code" class="rs-qr-img" loading="lazy" width="160" height="160" onerror="this.onerror=null;this.parentNode.innerHTML=\'<div style=padding:20px;text-align:center;color:var(--gray2);font-size:0.8rem;>QR code unavailable</div>\'">';
       }
 
       if (copyBtn) {
@@ -99,9 +137,13 @@ window.NAGRIVA_ReportShare = (function() {
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }).catch(function(err) {
-      console.error('[ReportShare] Create share link error:', err);
-      if (typeof NAGRIVA_Toast !== 'undefined') {
-        NAGRIVA_Toast.error('Share Error', 'Could not create share link. Please try again.');
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.SHARE_FAILED, err, 'report_share_open_modal');
+      } else {
+        console.error('[ReportShare] Create share link error:', err);
+        if (typeof NAGRIVA_Toast !== 'undefined') {
+          NAGRIVA_Toast.error('Share Error', 'Could not create share link. Please try again.');
+        }
       }
     });
   }
@@ -176,9 +218,9 @@ window.NAGRIVA_ReportShare = (function() {
     [linkedinBtn, twitterBtn, facebookBtn, whatsappBtn].forEach(function(btn) {
       if (btn) {
         var platform = btn.id.replace('rsShare', '').toLowerCase();
-        btn.addEventListener('click', function() {
+        btn.onclick = function() {
           trackShare(report, shareCode, platform);
-        });
+        };
       }
     });
   }
@@ -215,9 +257,13 @@ window.NAGRIVA_ReportShare = (function() {
       var shareUrl = getShareUrl(shareRecord.share_code);
       copyToClipboard(shareUrl);
     }).catch(function(err) {
-      console.error('[ReportShare] Copy link error:', err);
-      if (typeof NAGRIVA_Toast !== 'undefined') {
-        NAGRIVA_Toast.error('Copy Error', 'Could not generate share link.');
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.SHARE_FAILED, err, 'report_share_copy_link');
+      } else {
+        console.error('[ReportShare] Copy link error:', err);
+        if (typeof NAGRIVA_Toast !== 'undefined') {
+          NAGRIVA_Toast.error('Copy Error', 'Could not generate share link.');
+        }
       }
     });
   }
@@ -230,7 +276,11 @@ window.NAGRIVA_ReportShare = (function() {
       var client = getClient();
       var reportId = report.id || report.report_id;
       if (client && reportId) {
-        client.rpc('increment_report_downloads', { p_report_id: reportId }).catch(function() {});
+        client.rpc('increment_report_downloads', { p_report_id: reportId }).catch(function(err) {
+          if (window.NAGRIVA_ErrorHandler) {
+            NAGRIVA_ErrorHandler.logError(NAGRIVA_ErrorHandler.ERROR_TYPES.SUPABASE_DB, err, 'report_share_track_download');
+          }
+        });
       }
     } else {
       var errMsg = 'No report file available for download.';

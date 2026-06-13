@@ -1,0 +1,575 @@
+/* ════════════════════════════════════════════════════════
+   NAGRIVA — SEO Score Breakdown
+   Interactive score breakdown with expandable categories,
+   status checks, and improvement opportunities.
+   ════════════════════════════════════════════════════════ */
+
+/* ─── Section ─── */
+.sb-section {
+  border-top: 1px solid var(--border);
+  padding: 36px 0 12px;
+  margin-top: 8px;
+}
+.sb-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.sb-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.sb-header-icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-top: 2px;
+}
+.sb-header-icon svg {
+  width: 18px; height: 18px;
+}
+.sb-header-text h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.sb-header-text p {
+  font-size: 0.82rem;
+  color: var(--gray2);
+  line-height: 1.5;
+}
+.sb-header-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  color: var(--success);
+  white-space: nowrap;
+}
+
+/* ─── AI Explanation ─── */
+.sb-ai-box {
+  background: rgba(250,204,21,0.04);
+  border: 1px solid rgba(250,204,21,0.1);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: sbFadeIn 0.5s ease;
+}
+.sb-ai-box-icon {
+  width: 32px; height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: rgba(250,204,21,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-top: 1px;
+}
+.sb-ai-box-icon svg {
+  width: 16px; height: 16px;
+}
+.sb-ai-box-text {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.7;
+  flex: 1;
+}
+.sb-ai-box-text strong {
+  color: var(--white);
+  font-weight: 600;
+}
+.sb-ai-box-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(250,204,21,0.1);
+  color: var(--accent);
+  margin-left: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── Overall Score Card ─── */
+.sb-overall-card {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--aud-glass-border);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  transition: border-color 0.3s ease;
+}
+.sb-overall-card:hover {
+  border-color: rgba(250,204,21,0.1);
+}
+.sb-overall-ring {
+  position: relative;
+  width: 120px; height: 120px;
+  flex-shrink: 0;
+}
+.sb-overall-ring svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.sb-overall-ring circle {
+  fill: none;
+  stroke-width: 8;
+}
+.sb-overall-ring-bg {
+  stroke: rgba(255,255,255,0.05);
+}
+.sb-overall-ring-fill {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sb-overall-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sb-overall-ring-score {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.sb-overall-ring-label {
+  font-size: 0.65rem;
+  color: var(--gray2);
+  margin-top: 1px;
+}
+.sb-overall-info {
+  flex: 1;
+  min-width: 0;
+}
+.sb-overall-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.sb-overall-desc {
+  font-size: 0.82rem;
+  color: var(--gray2);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.sb-overall-grade-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.sb-overall-grade {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 99px;
+}
+.sb-overall-grade svg {
+  width: 12px; height: 12px;
+}
+.sb-overall-points {
+  font-size: 0.72rem;
+  color: var(--gray2);
+}
+.sb-overall-points strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ─── Score Breakdown Grid ─── */
+.sb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+/* ─── Category Card ─── */
+.sb-card {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--aud-glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.sb-card:hover {
+  border-color: rgba(250,204,21,0.1);
+}
+.sb-card.open {
+  border-color: rgba(250,204,21,0.15);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+
+/* ─── Card Top (always visible) ─── */
+.sb-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  user-select: none;
+}
+.sb-card-icon {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--white);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.sb-card-icon svg {
+  width: 18px; height: 18px;
+}
+.sb-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.sb-card-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.sb-card-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sb-card-progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.sb-card-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sb-card-score {
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.sb-card-score-denom {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--gray2);
+}
+.sb-card-chevron {
+  width: 20px; height: 20px;
+  flex-shrink: 0;
+  color: var(--gray2);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sb-card.open .sb-card-chevron {
+  transform: rotate(180deg);
+}
+
+/* ─── Card Expandable ─── */
+.sb-card-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sb-card.open .sb-card-details {
+  max-height: 1000px;
+}
+.sb-card-details-inner {
+  padding: 0 18px 18px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Check Groups ─── */
+.sb-checks-group {
+  padding-top: 14px;
+}
+.sb-checks-group + .sb-checks-group {
+  margin-top: 12px;
+}
+.sb-checks-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sb-checks-label svg {
+  width: 12px; height: 12px;
+}
+.sb-checks-label--pass { color: var(--success); }
+.sb-checks-label--warn { color: var(--accent); }
+.sb-checks-label--fail { color: var(--danger); }
+
+.sb-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 0.8rem;
+  color: var(--gray);
+  line-height: 1.4;
+}
+.sb-check-item svg {
+  width: 14px; height: 14px;
+  flex-shrink: 0;
+}
+.sb-check-item--pass { color: var(--gray); }
+.sb-check-item--pass svg { color: var(--success); }
+.sb-check-item--warn { color: var(--gray); }
+.sb-check-item--warn svg { color: var(--accent); }
+.sb-check-item--fail { color: var(--gray); }
+.sb-check-item--fail svg { color: var(--danger); }
+
+/* ─── Improvement Opportunity ─── */
+.sb-improve {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: rgba(16,185,129,0.04);
+  border: 1px solid rgba(16,185,129,0.12);
+  border-radius: 12px;
+}
+.sb-improve-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.sb-improve-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--success);
+}
+.sb-improve-gain {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--success);
+  background: rgba(16,185,129,0.1);
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+.sb-improve-scores {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.sb-improve-score-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.sb-improve-score-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.sb-improve-score-label {
+  font-size: 0.62rem;
+  color: var(--gray2);
+}
+.sb-improve-arrow {
+  color: var(--success);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.sb-improve-actions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sb-improve-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--gray);
+  line-height: 1.4;
+}
+.sb-improve-action::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* ─── Status Badge ─── */
+.sb-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sb-status-badge--pass {
+  color: var(--success);
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.15);
+}
+.sb-status-badge--warn {
+  color: var(--accent);
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.15);
+}
+.sb-status-badge--fail {
+  color: var(--danger);
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.15);
+}
+
+/* ─── Empty State ─── */
+.sb-empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+.sb-empty-icon {
+  width: 48px; height: 48px;
+  margin: 0 auto 12px;
+  color: var(--gray2);
+}
+.sb-empty-icon svg {
+  width: 100%; height: 100%;
+}
+.sb-empty-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.sb-empty-desc {
+  font-size: 0.82rem;
+  color: var(--gray2);
+}
+
+/* ─── Animations ─── */
+@keyframes sbFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sb-card {
+  animation: sbCardIn 0.5s ease both;
+}
+.sb-card:nth-child(1) { animation-delay: 0.05s; }
+.sb-card:nth-child(2) { animation-delay: 0.1s; }
+.sb-card:nth-child(3) { animation-delay: 0.15s; }
+.sb-card:nth-child(4) { animation-delay: 0.2s; }
+.sb-card:nth-child(5) { animation-delay: 0.25s; }
+.sb-card:nth-child(6) { animation-delay: 0.3s; }
+.sb-card:nth-child(7) { animation-delay: 0.35s; }
+
+@keyframes sbCardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .sb-overall-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+  .sb-overall-info {
+    text-align: center;
+  }
+  .sb-overall-grade-row {
+    justify-content: center;
+  }
+  .sb-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .sb-ai-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sb-ai-box-label {
+    margin-left: 0;
+  }
+  .sb-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .sb-card-top {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .sb-card-icon {
+    width: 34px; height: 34px;
+  }
+  .sb-card-icon svg {
+    width: 15px; height: 15px;
+  }
+  .sb-card-details-inner {
+    padding: 0 14px 14px;
+  }
+  .sb-overall-ring {
+    width: 100px; height: 100px;
+  }
+  .sb-overall-ring-score {
+    font-size: 1.6rem;
+  }
+}

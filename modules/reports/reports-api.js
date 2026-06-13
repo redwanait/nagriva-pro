@@ -8,6 +8,15 @@ window.NAGRIVA_ReportsAPI = (function() {
   var TABLE = 'audit_reports';
   var BUCKET = 'audit-reports';
 
+  var ET = window.NAGRIVA_ErrorHandler ? NAGRIVA_ErrorHandler.ERROR_TYPES : {};
+
+  function handleApiError(error, errorType, context) {
+    if (window.NAGRIVA_ErrorHandler) {
+      NAGRIVA_ErrorHandler.handleError(errorType, error, context);
+    }
+    return Promise.reject(error);
+  }
+
   function getDatePath() {
     var d = new Date();
     return d.getFullYear() + '-' +
@@ -38,7 +47,9 @@ window.NAGRIVA_ReportsAPI = (function() {
         upsert: true
       })
       .then(function(uploadResult) {
-        if (uploadResult.error) throw uploadResult.error;
+        if (uploadResult.error) {
+          return handleApiError(uploadResult.error, ET.SUPABASE_UPLOAD, 'reports_api_upload_pdf');
+        }
 
         return window.supabaseClient
           .from(TABLE)
@@ -50,7 +61,9 @@ window.NAGRIVA_ReportsAPI = (function() {
           }])
           .select()
           .then(function(dbResult) {
-            if (dbResult.error) throw dbResult.error;
+            if (dbResult.error) {
+              return handleApiError(dbResult.error, ET.SUPABASE_DB, 'reports_api_db_insert');
+            }
             return {
               storagePath: storagePath,
               report: dbResult.data[0]
@@ -65,7 +78,9 @@ window.NAGRIVA_ReportsAPI = (function() {
       .from(BUCKET)
       .createSignedUrl(storagePath, 3600)
       .then(function(result) {
-        if (result.error) throw result.error;
+        if (result.error) {
+          return handleApiError(result.error, ET.SUPABASE_DB, 'reports_api_get_signed_url');
+        }
         return result.data.signedUrl;
       });
   }
@@ -79,6 +94,8 @@ window.NAGRIVA_ReportsAPI = (function() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+    }).catch(function(err) {
+      return handleApiError(err, ET.SUPABASE_DB, 'reports_api_download_pdf');
     });
   }
 
@@ -87,16 +104,27 @@ window.NAGRIVA_ReportsAPI = (function() {
       .from(TABLE)
       .select('*')
       .eq('lead_id', leadId)
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .then(function(result) {
+        if (result.error) {
+          return handleApiError(result.error, ET.SUPABASE_DB, 'reports_api_get_by_lead');
+        }
+        return result;
+      });
   }
 
   function getReportsByEmail(email) {
     if (!window.NAGRIVA_LeadsAPI) {
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.AUDIT_MISSING_DATA, new Error('LeadsAPI not available'), 'reports_api_get_by_email');
+      }
       return Promise.reject(new Error('LeadsAPI not available'));
     }
     return window.NAGRIVA_LeadsAPI.getLeadsByEmail(email)
       .then(function(result) {
-        if (result.error) throw result.error;
+        if (result.error) {
+          return handleApiError(result.error, ET.SUPABASE_DB, 'reports_api_get_leads_by_email');
+        }
         var leads = result.data;
         if (!leads || leads.length === 0) return [];
 
@@ -108,7 +136,9 @@ window.NAGRIVA_ReportsAPI = (function() {
           .order('created_at', { ascending: false });
       })
       .then(function(result) {
-        if (result.error) throw result.error;
+        if (result.error) {
+          return handleApiError(result.error, ET.SUPABASE_DB, 'reports_api_get_reports_by_email');
+        }
         return result.data || [];
       });
   }
@@ -117,7 +147,13 @@ window.NAGRIVA_ReportsAPI = (function() {
     return window.supabaseClient
       .from(TABLE)
       .select('*, audit_leads(*)')
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .then(function(result) {
+        if (result.error) {
+          return handleApiError(result.error, ET.SUPABASE_DB, 'reports_api_get_all');
+        }
+        return result;
+      });
   }
 
   return {

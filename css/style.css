@@ -8112,6 +8112,36 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 .ne-error .ne-title { color: var(--danger); }
 
+/* ─── Success variant (emerald green) ─── */
+.ne-success { border-color: rgba(16,185,129,0.15); }
+.ne-success .ne-icon {
+  border-color: rgba(16,185,129,0.15);
+  background: rgba(16,185,129,0.04);
+  color: #10B981;
+}
+.ne-success:hover { border-color: rgba(16,185,129,0.2); }
+.ne-success:hover .ne-icon {
+  border-color: rgba(16,185,129,0.25);
+  background: rgba(16,185,129,0.08);
+}
+.ne-success .ne-title { color: #10B981; }
+
+/* ─── Badge (inside empty state) ─── */
+.ne-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 14px;
+  border-radius: 99px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.2);
+  color: #10B981;
+  margin-bottom: 10px;
+}
+
 /* ─── Small variant (widgets, drawers) ─── */
 .ne-sm { padding: 48px 20px; }
 .ne-sm .ne-icon {

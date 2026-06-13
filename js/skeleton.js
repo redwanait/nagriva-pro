@@ -327,6 +327,87 @@ window.NAGRIVA_Skeleton = (function () {
     if (content) content.classList.add('sk-visible');
   }
 
+  /* ─── Audit Score Card Skeletons ─── */
+  function auditScoreCards() {
+    var labels = ['SEO', 'Performance', 'Accessibility', 'Best Practices', 'UX'];
+    var html = '';
+
+    html += '<div class="ask-overall">' +
+      '<div class="ask-overall-ring sk-shimmer"></div>' +
+      '<div class="ask-overall-label sk-shimmer"></div>' +
+    '</div>';
+
+    html += '<div class="ask-score-grid">';
+    for (var i = 0; i < labels.length; i++) {
+      html += '<div class="ask-score-card">' +
+        '<div class="ask-score-ring sk-shimmer"></div>' +
+        '<div class="ask-score-label sk-shimmer"></div>' +
+        '<div class="ask-score-label-short sk-shimmer"></div>' +
+      '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  /* ─── Audit Recommendation Card Skeletons ─── */
+  function auditRecommendationCards(count) {
+    count = count || 5;
+    var html = '<div class="ask-recs-section">' +
+      '<div class="ask-recs-header">' +
+        '<div class="ask-recs-title sk-shimmer"></div>' +
+        '<div class="ask-recs-count sk-shimmer"></div>' +
+      '</div>' +
+      '<div class="ask-recs-list">';
+    for (var i = 0; i < count; i++) {
+      html += '<div class="ask-rec-card">' +
+        '<div class="ask-rec-icon sk-shimmer"></div>' +
+        '<div class="ask-rec-body">' +
+          '<div class="ask-rec-title sk-shimmer"></div>' +
+          '<div class="ask-rec-desc sk-shimmer"></div>' +
+        '</div>' +
+        '<div class="ask-rec-badge sk-shimmer"></div>' +
+      '</div>';
+    }
+    html += '</div></div>';
+    return html;
+  }
+
+  /* ─── Audit History Table Row Skeletons ─── */
+  function auditHistoryRows(count) {
+    count = count || 4;
+    var items = '';
+    for (var i = 0; i < count; i++) {
+      items += '<div class="ask-history-item">' +
+        '<div class="ask-history-info">' +
+          '<div class="ask-history-site sk-shimmer"></div>' +
+          '<div class="ask-history-date sk-shimmer"></div>' +
+        '</div>' +
+        '<div class="ask-history-score sk-shimmer"></div>' +
+      '</div>';
+    }
+    return '<div class="ask-history-section">' +
+      '<div class="ask-history-header">' +
+        '<div class="ask-history-title sk-shimmer"></div>' +
+        '<div class="ask-history-toggle sk-shimmer"></div>' +
+      '</div>' +
+      '<div class="ask-history-list">' + items + '</div>' +
+    '</div>';
+  }
+
+  /* ─── Audit Dashboard Stat Skeletons ─── */
+  function auditDashboardStats(count) {
+    count = count || 4;
+    var html = '<div class="ask-dash-grid">';
+    for (var i = 0; i < count; i++) {
+      html += '<div class="ask-dash-card">' +
+        '<div class="ask-dash-stat sk-shimmer"></div>' +
+        '<div class="ask-dash-label sk-shimmer"></div>' +
+      '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
   return {
     shimmer: shimmer,
     stats: stats,
@@ -348,6 +429,10 @@ window.NAGRIVA_Skeleton = (function () {
     inject: inject,
     remove: remove,
     wrapContent: wrapContent,
-    showContent: showContent
+    showContent: showContent,
+    auditScoreCards: auditScoreCards,
+    auditRecommendationCards: auditRecommendationCards,
+    auditHistoryRows: auditHistoryRows,
+    auditDashboardStats: auditDashboardStats
   };
 })();

@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="/css/performance.css">
   <link rel="stylesheet" href="/css/report-share.css">
   <link rel="stylesheet" href="/css/ai-insights.css">
+  <link rel="stylesheet" href="/css/error-handler.css">
+  <link rel="stylesheet" href="/css/audit-loading.css">
+  <link rel="stylesheet" href="/css/seo-score-breakdown.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -1699,6 +1702,9 @@
           <!-- ─── Results ─── -->
           <div class="aud-results" id="audResults">
 
+            <!-- Audit Results Empty State (shown when no audit data) -->
+            <div id="audResultsEmpty" style="padding:40px 0;"></div>
+
             <!-- Overall Score -->
             <div class="aud-overall">
               <div class="aud-overall-score">
@@ -1836,12 +1842,8 @@
               <!-- Cards -->
               <div class="rec-cards" id="recCards"></div>
 
-              <!-- Empty state (hidden by default) -->
-              <div class="rec-empty" id="recEmpty" style="display:none;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                <h4>No Issues Found</h4>
-                <p>Your website passes all checks in this category.</p>
-              </div>
+              <!-- Recommendations Empty State (hidden by default) -->
+              <div id="recEmptyContainer" style="display:none;padding:20px 0;"></div>
             </div>
 
             <!-- ═══ Export ═══ -->
@@ -1872,9 +1874,18 @@
             </div>
 
             <!-- ════════════════════════════════════════════
+                 SEO SCORE BREAKDOWN
+                 ════════════════════════════════════════════ -->
+            <div id="seoScoreBreakdown" style="display:none;">
+              <div id="sbEmpty" style="padding:20px 0;"></div>
+            </div>
+
+            <!-- ════════════════════════════════════════════
                  AI-POWERED INSIGHTS ENGINE
                  ════════════════════════════════════════════ -->
-            <div class="ai-section" id="aiInsightsContainer"></div>
+            <div class="ai-section" id="aiInsightsContainer">
+              <div id="aiInsightsEmpty" style="padding:20px 0;"></div>
+            </div>
           </div>
         </div>
             </div>
@@ -1975,7 +1986,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
             <div class="aud-history-body" id="audHistoryBody">
-              <div class="aud-history-empty">No previous reports found.</div>
+              <div id="audHistoryEmptyContainer"></div>
             </div>
           </div>
         </div>
@@ -2069,6 +2080,10 @@
 
   <div id="footer-container"></div>
 
+  <script defer src="/js/error-handler.js"></script>
+  <script defer src="/js/ui-alerts.js"></script>
+  <script defer src="/js/loading-states.js"></script>
+  <script defer src="/js/empty-state.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/js/supabase-config.js"></script>
   <script defer src="/modules/leads/leads-api.js"></script>
@@ -2080,11 +2095,18 @@
   <script defer src="/js/lazy-loader.js"></script>
   <script defer src="/js/recommendation-engine.js"></script>
   <script defer src="/js/ai-insights-engine.js"></script>
+  <script defer src="/js/seo-score-breakdown.js"></script>
   <script defer src="/modules/reports/report-share.js"></script>
+  <script defer src="/js/audit-loading.js"></script>
   <div id="cookie-consent-container"></div>
 
   <script defer>
   document.addEventListener('DOMContentLoaded', function() {
+
+    /* ─── Init Error Handler ─── */
+    if (window.NAGRIVA_ErrorHandler) {
+      NAGRIVA_ErrorHandler.init();
+    }
 
     /* ─── DOM refs ─── */
     var form = document.getElementById('auditFormEl');
@@ -2129,23 +2151,79 @@
       });
     });
 
+    /* ─── Render initial empty states ─── */
+    function renderInitialEmptyStates() {
+      /* SEO Score Breakdown Empty State */
+      var sbContainer = document.getElementById('seoScoreBreakdown');
+      var sbEmpty = document.getElementById('sbEmpty');
+      if (sbContainer && sbEmpty && window.NAGRIVA_EmptyState) {
+        sbEmpty.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'compass',
+          title: 'SEO Score Breakdown',
+          description: 'Run a website audit to see your detailed SEO score breakdown across all categories.',
+          variant: 'search'
+        });
+        sbEmpty.style.display = 'block';
+      }
+
+      /* Audit Results Empty State */
+      var resultsEmpty = document.getElementById('audResultsEmpty');
+      if (resultsEmpty && window.NAGRIVA_EmptyState) {
+        resultsEmpty.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'compass',
+          title: 'Ready to Analyze Your Website?',
+          description: 'Enter your website URL above and get a complete SEO, performance, and technical audit in seconds.',
+          primaryCta: { label: 'Start Website Audit', onclick: 'document.getElementById(\'auditUrl\').focus()' }
+        });
+      }
+
+      /* Share Reports Empty State */
+      var shareEmpty = document.getElementById('rsShareEmpty');
+      if (shareEmpty && window.NAGRIVA_EmptyState) {
+        shareEmpty.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'share-2',
+          title: 'No Shared Reports',
+          description: 'Create a shareable audit report link for clients and team members.',
+          variant: 'sm',
+          primaryCta: { label: 'Share Report', onclick: 'NAGRIVA_ReportShare.closeShareModal()' }
+        });
+      }
+
+    }
+    renderInitialEmptyStates();
+
     /* ─── Circle circumference helpers ─── */
     function getCircumference(r) {
       return 2 * Math.PI * r;
     }
 
-    var overallR = 62;
-    var scoreR = 31;
-    var overallCirc = getCircumference(overallR);
-    var scoreCirc = getCircumference(scoreR);
-
-    /* Set initial dash offsets */
-    overallCircle.style.strokeDasharray = overallCirc;
-    overallCircle.style.strokeDashoffset = overallCirc;
-    for (var key in scoreCircles) {
-      scoreCircles[key].style.strokeDasharray = scoreCirc;
-      scoreCircles[key].style.strokeDashoffset = scoreCirc;
+    function getCircleR(el) {
+      return parseFloat(el.getAttribute('r')) || 62;
     }
+
+    function recalcCircleDimensions() {
+      var or = getCircleR(overallCircle);
+      var sr = getCircleR(scoreCircles.seo);
+      var oCirc = getCircumference(or);
+      var sCirc = getCircumference(sr);
+      overallCircle.style.strokeDasharray = oCirc;
+      overallCircle.style.strokeDashoffset = oCirc;
+      for (var key in scoreCircles) {
+        scoreCircles[key].style.strokeDasharray = sCirc;
+        scoreCircles[key].style.strokeDashoffset = sCirc;
+      }
+      return { overallCirc: oCirc, scoreCirc: sCirc };
+    }
+
+    var dims = recalcCircleDimensions();
+    var overallCirc = dims.overallCirc;
+    var scoreCirc = dims.scoreCirc;
+
+    window.addEventListener('resize', function() {
+      var d = recalcCircleDimensions();
+      overallCirc = d.overallCirc;
+      scoreCirc = d.scoreCirc;
+    });
 
     /* ─── Helper: set circle value ─── */
     function setCircle(el, value, max, circ) {
@@ -2160,23 +2238,6 @@
       return '#ef4444';
     }
 
-    /* ─── Generate realistic scores ─── */
-    function generateScores(url) {
-      var seed = url.length + url.charCodeAt(0) + (url.indexOf('.') || 0);
-      function rand(min, max) {
-        var x = Math.sin(seed++) * 10000;
-        return Math.floor(min + (x - Math.floor(x)) * (max - min + 1));
-      }
-      return {
-        overall: rand(55, 95),
-        seo: rand(45, 95),
-        perf: rand(40, 92),
-        mobile: rand(50, 90),
-        security: rand(55, 98),
-        ux: rand(50, 92)
-      };
-    }
-
     /* ─── Recommendation Engine Integration ─── */
 
     /* ─── Render recommendation cards ─── */
@@ -2185,7 +2246,7 @@
     function renderRecommendationCards(recommendations, filter) {
       filter = filter || 'all';
       var container = document.getElementById('recCards');
-      var empty = document.getElementById('recEmpty');
+      var emptyContainer = document.getElementById('recEmptyContainer');
       var section = document.getElementById('recSection');
       var totalBadge = document.getElementById('recTotalBadge');
 
@@ -2203,10 +2264,21 @@
       container.innerHTML = '';
 
       if (filtered.length === 0) {
-        empty.style.display = 'block';
+        if (window.NAGRIVA_EmptyState) {
+          emptyContainer.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'check-circle',
+            title: filter === 'high' ? 'No High Priority Issues' : filter === 'medium' ? 'No Medium Priority Issues' : filter === 'low' ? 'No Low Priority Issues' : 'Great Job!',
+            description: filter === 'all'
+              ? 'No major issues were found. Your website is performing well.'
+              : 'Your website passes all checks in this category.',
+            badge: filter === 'all' ? 'Excellent Website Health' : null,
+            variant: 'success'
+          });
+        }
+        emptyContainer.style.display = 'block';
         return;
       }
-      empty.style.display = 'none';
+      emptyContainer.style.display = 'none';
 
       filtered.forEach(function(rec, idx) {
         var priorityInfo = engine.getPriorityInfo(rec.priority);
@@ -2350,15 +2422,32 @@
 
     /* ─── Initialise engine and render ─── */
     function runRecommendationEngine(scores) {
+      console.log('[Audit]  Recommendation Engine — starting');
       var engine = window.RecommendationEngine;
-      if (!engine) return;
+      if (!engine) {
+        console.warn('[Audit]  RecommendationEngine not loaded — skipping recommendations');
+        return;
+      }
 
-      var recommendations = engine.generate(scores);
+      console.log('[Audit]  Generating recommendations from scores:', JSON.stringify(scores));
+      var recommendations;
+      try {
+        recommendations = engine.generate(scores);
+        console.log('[Audit]  Generated ' + recommendations.length + ' recommendations');
+      } catch (genErr) {
+        console.error('[Audit]  FAILED: engine.generate threw:', genErr.message, genErr.stack);
+        return;
+      }
       recState.recommendations = recommendations;
+      console.log('[Audit]  Rendering AI summary');
       renderAISummary(scores, recommendations);
+      console.log('[Audit]  Rendering potential score');
       renderPotentialScore(scores, recommendations);
+      console.log('[Audit]  Rendering quick wins');
       renderQuickWins(recommendations);
+      console.log('[Audit]  Rendering recommendation cards');
       renderRecommendationCards(recommendations, 'all');
+      console.log('[Audit]  Setting up filters');
       setupFilters();
 
       /* Show export section */
@@ -2366,24 +2455,152 @@
       if (exportSection && recommendations.length > 0) {
         exportSection.style.display = 'block';
       }
+      console.log('[Audit]  Recommendation Engine — complete');
+
+      /* ─── SEO Score Breakdown ─── */
+      var sbSection = document.getElementById('seoScoreBreakdown');
+      var sbEmpty = document.getElementById('sbEmpty');
+      var sbEngine = window.NAGRIVA_SEOScoreBreakdown;
+      if (sbEngine && sbSection) {
+        try {
+          sbEngine.render('seoScoreBreakdown', scores, recommendations);
+          sbSection.style.display = 'block';
+          if (sbEmpty) sbEmpty.style.display = 'none';
+        } catch (e) {
+          console.warn('[SEO Breakdown] Render error:', e);
+          if (sbEmpty && window.NAGRIVA_EmptyState) {
+            sbEmpty.innerHTML = NAGRIVA_EmptyState.render({
+              icon: 'compass',
+              title: 'Score Breakdown Not Available',
+              description: 'We\'re unable to generate the score breakdown at this moment.',
+              variant: 'search'
+            });
+            sbEmpty.style.display = 'block';
+          }
+        }
+      } else {
+        if (sbEmpty && window.NAGRIVA_EmptyState) {
+          sbEmpty.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'compass',
+            title: 'Score Breakdown Not Available',
+            description: 'The breakdown module is not loaded. Please refresh the page.',
+            variant: 'search'
+          });
+          sbEmpty.style.display = 'block';
+        }
+      }
 
       /* ─── AI Insights Engine ─── */
       var aiEngine = window.NAGRIVA_AIInsights;
+      var aiContainer = document.getElementById('aiInsightsContainer');
+      var aiEmpty = document.getElementById('aiInsightsEmpty');
       if (aiEngine) {
-        var insights = aiEngine.generateAll(scores, recommendations);
-        aiEngine.renderAll(insights, 'aiInsightsContainer');
+        try {
+          var insights = aiEngine.generateAll(scores, recommendations);
+          if (insights) {
+            aiEngine.renderAll(insights, 'aiInsightsContainer');
+            if (aiEmpty) aiEmpty.style.display = 'none';
+          } else {
+            throw new Error('No insights generated');
+          }
+        } catch (e) {
+          if (aiEmpty && window.NAGRIVA_EmptyState) {
+            aiEmpty.innerHTML = NAGRIVA_EmptyState.render({
+              icon: 'sparkles',
+              title: 'AI Insights Not Available',
+              description: 'We\'re unable to generate insights at the moment. Please try again later.',
+              variant: 'search',
+              primaryCta: { label: 'Retry Analysis', onclick: 'document.getElementById(\'auditFormEl\').dispatchEvent(new Event(\'submit\'))' }
+            });
+            aiEmpty.style.display = 'block';
+          }
+        }
+      } else {
+        if (aiEmpty && window.NAGRIVA_EmptyState) {
+          aiEmpty.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'sparkles',
+            title: 'AI Insights Not Available',
+            description: 'We\'re unable to generate insights at the moment. Please try again later.',
+            variant: 'search',
+            primaryCta: { label: 'Retry Analysis', onclick: 'document.getElementById(\'auditFormEl\').dispatchEvent(new Event(\'submit\'))' }
+          });
+          aiEmpty.style.display = 'block';
+        }
       }
     }
 
     /* ─── Form submit ─── */
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      var url = document.getElementById('auditUrl').value.trim();
 
-      if (!url) {
-        document.getElementById('auditUrl').classList.add('aud-input-error');
+      /* ════════════════════════════════════════════
+         AUDIT FLOW LOGGING
+         ════════════════════════════════════════════ */
+      console.log('[Audit] ════════════════════════════════════════════');
+      console.log('[Audit]  🚀 AUDIT STARTED');
+      console.log('[Audit]  Timestamp:', new Date().toISOString());
+      console.log('[Audit]  User Agent:', navigator.userAgent);
+      console.log('[Audit]  Online:', navigator.onLine);
+      console.log('[Audit] ════════════════════════════════════════════');
+
+      /* ─── STEP 1: Prevent duplicate submissions ─── */
+      if (window.__auditBusy) {
+        console.log('[Audit]  STEP 1: Busy — ignoring duplicate submit');
         return;
       }
+      window.__auditBusy = true;
+      console.log('[Audit]  STEP 1: Busy lock acquired');
+
+      /* ─── STEP 2: Offline check ─── */
+      if (window.NAGRIVA_ErrorHandler && NAGRIVA_ErrorHandler.detectOffline()) {
+        console.log('[Audit]  STEP 2: User is OFFLINE — aborting');
+        window.__auditBusy = false;
+        return;
+      }
+      console.log('[Audit]  STEP 2: Online check passed');
+
+      /* ─── STEP 3: URL Validation ─── */
+      var url = document.getElementById('auditUrl').value.trim();
+      console.log('[Audit]  STEP 3: Validating URL — input:', JSON.stringify(url));
+
+      if (!url) {
+        console.error('[Audit]  STEP 3: FAILED — URL is empty');
+        document.getElementById('auditUrl').classList.add('aud-input-error');
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(
+            NAGRIVA_ErrorHandler.ERROR_TYPES.INVALID_URL,
+            null,
+            'audit_form_submit'
+          );
+        }
+        window.__auditBusy = false;
+        return;
+      }
+
+      try {
+        var parsedUrl = new URL(url);
+        console.log('[Audit]  STEP 3: URL validated — protocol:', parsedUrl.protocol, 'host:', parsedUrl.host);
+        if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+          console.warn('[Audit]  STEP 3: URL protocol is not http/https:', parsedUrl.protocol);
+        }
+      } catch (e) {
+        console.error('[Audit]  STEP 3: FAILED — Invalid URL format');
+        console.error('[Audit]  URL:', url);
+        console.error('[Audit]  Error:', e.message);
+        document.getElementById('auditUrl').classList.add('aud-input-error');
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(
+            NAGRIVA_ErrorHandler.ERROR_TYPES.INVALID_URL,
+            e,
+            'audit_form_submit',
+            function () { form.dispatchEvent(new Event('submit')); }
+          );
+        }
+        window.__auditBusy = false;
+        return;
+      }
+
+      console.log('[Audit]  STEP 3: ✅ URL Validated');
 
       document.querySelectorAll('.aud-input-error').forEach(function(el) {
         el.classList.remove('aud-input-error');
@@ -2392,43 +2609,206 @@
       var displayUrl = url.replace(/^https?:\/\//, '').split('/')[0];
       loadingUrlDisplay.textContent = 'Scanning ' + displayUrl + '...';
 
-      /* ─── Show loading ─── */
+      /* ─── Premium Loading: Show overlay + skeletons ─── */
+      console.log('[Audit]  Loading overlay — showing for URL:', url);
+      console.log('[Audit]  DOM check — overallScore:', !!document.getElementById('overallScore'), 'recCards:', !!document.getElementById('recCards'), 'aiInsightsContainer:', !!document.getElementById('aiInsightsContainer'));
       formView.style.display = 'none';
       loadingView.classList.add('active');
       resultsView.classList.remove('active');
 
+      var loadHandle = null;
+      if (window.NAGRIVA_AuditLoading) {
+        loadHandle = NAGRIVA_AuditLoading.startAuditLoad(url, {
+          scoreContainer: 'audResults',
+          recContainer: document.getElementById('recCards'),
+          aiContainer: document.getElementById('aiInsightsContainer'),
+          showScoreSkeleton: false,
+          showRecSkeleton: true,
+          showAiSkeleton: true,
+          recCount: 5
+        });
+      }
+
       var msgIdx = 0;
       var progress = 0;
+      var loadFailed = false;
       var msgInterval = setInterval(function() {
+        if (loadFailed) return;
         loadingMsgs.forEach(function(m) { m.classList.remove('active'); });
         msgIdx = (msgIdx + 1) % loadingMsgs.length;
         loadingMsgs[msgIdx].classList.add('active');
       }, 1300);
 
       var progressInterval = setInterval(function() {
-        progress += Math.random() * 7 + 2;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(progressInterval);
-          clearInterval(msgInterval);
-          document.getElementById('audProgressFill').style.width = '100%';
-          document.getElementById('audProgressPct').textContent = '100%';
-
-          setTimeout(function() {
-            loadingView.classList.remove('active');
-
-            var scores = generateScores(url);
-            animateScores(scores);
-            runRecommendationEngine(scores);
-
-            resultsView.classList.add('active');
-            leadSection.classList.add('active');
-            leadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 500);
+        if (loadFailed) return;
+        progress += Math.random() * 6 + 2;
+        if (progress >= 95) {
+          progress = 95;
         }
         document.getElementById('audProgressFill').style.width = Math.min(progress, 100) + '%';
         document.getElementById('audProgressPct').textContent = Math.min(Math.round(progress), 100) + '%';
-      }, 200);
+      }, 300);
+
+      /* ════════════════════════════════════════════
+         STEP 4 — SEND API REQUEST
+         ════════════════════════════════════════════ */
+      console.log('[Audit] ════════════════════════════════════════════');
+      console.log('[Audit]  STEP 4: Sending API request to /api/audit');
+      console.log('[Audit]  URL:', url);
+      console.log('[Audit]  Timestamp:', new Date().toISOString());
+      console.log('[Audit] ════════════════════════════════════════════');
+
+      var apiUrl = '/api/audit';
+      var requestBody = JSON.stringify({ url: url });
+      console.log('[Audit]  Request payload:', requestBody);
+
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: requestBody
+      })
+      .then(function(response) {
+        console.log('[Audit] ════════════════════════════════════════════');
+        console.log('[Audit]  STEP 5: API Response Received');
+        console.log('[Audit]  Status:', response.status, response.statusText);
+        console.log('[Audit]  Headers:', response.headers.get('content-type'));
+        console.log('[Audit] ════════════════════════════════════════════');
+
+        return response.text().then(function(text) {
+          console.log('[Audit]  Raw response body:', text.substring(0, 500));
+          var data;
+          try {
+            data = JSON.parse(text);
+          } catch (parseErr) {
+            console.error('[Audit]  FAILED: Response is not valid JSON');
+            console.error('[Audit]  Parse error:', parseErr.message);
+            console.error('[Audit]  Response preview:', text.substring(0, 200));
+            throw new Error('Invalid response from audit server (not JSON). Status: ' + response.status);
+          }
+          if (!response.ok) {
+            console.error('[Audit]  FAILED: API returned error status');
+            console.error('[Audit]  Error payload:', JSON.stringify(data));
+            throw new Error(data.error || 'Audit request failed with status ' + response.status);
+          }
+          console.log('[Audit]  STEP 5: API Response Parsed Successfully');
+          console.log('[Audit]  Data:', JSON.stringify(data));
+          return data;
+        });
+      })
+      .then(function(data) {
+        console.log('[Audit] ════════════════════════════════════════════');
+        console.log('[Audit]  STEP 6: Calculating Scores');
+        console.log('[Audit]  Raw data from API:', JSON.stringify(data));
+
+        clearInterval(progressInterval);
+        clearInterval(msgInterval);
+        progress = 100;
+        document.getElementById('audProgressFill').style.width = '100%';
+        document.getElementById('audProgressPct').textContent = '100%';
+
+        setTimeout(function() {
+          try {
+            loadingView.classList.remove('active');
+
+            if (loadHandle) {
+              loadHandle.complete();
+            }
+
+            var scores = {
+              overall: data.overallScore || Math.round((data.performance + data.seo + data.accessibility + data.bestPractices) / 4),
+              seo: data.seo || 0,
+              perf: data.performance || 0,
+              mobile: data.performance || 0,
+              security: data.bestPractices || 0,
+              ux: data.accessibility || 0
+            };
+            console.log('[Audit]  STEP 6: Scores Calculated:', JSON.stringify(scores));
+            console.log('[Audit]  overall=' + scores.overall + ' seo=' + scores.seo + ' perf=' + scores.perf + ' mobile=' + scores.mobile + ' security=' + scores.security + ' ux=' + scores.ux);
+
+            console.log('[Audit] ════════════════════════════════════════════');
+            console.log('[Audit]  STEP 7: Animating Scores');
+            animateScores(scores);
+            console.log('[Audit]  STEP 7: Scores Animated');
+
+            console.log('[Audit] ════════════════════════════════════════════');
+            console.log('[Audit]  STEP 8: Generating Recommendations');
+            runRecommendationEngine(scores);
+            console.log('[Audit]  STEP 8: Recommendations Generated');
+
+            if (loadHandle) {
+              loadHandle.showResults();
+            }
+
+            resultsView.classList.add('active');
+            leadSection.classList.add('active');
+
+            window.__auditBusy = false;
+
+            console.log('[Audit] ════════════════════════════════════════════');
+            console.log('[Audit]  ✅ AUDIT COMPLETE — All steps passed');
+            console.log('[Audit] ════════════════════════════════════════════');
+
+            if (window.NAGRIVA_AuditLoading) {
+              NAGRIVA_AuditLoading.showSuccessToast('Audit Completed Successfully', 'Your website has been analyzed. View your scores and recommendations below.');
+            }
+
+            setTimeout(function() {
+              leadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+          } catch (err) {
+            console.error('[Audit] ❌ FAILED at STEP 7-8 (rendering):', err.message);
+            console.error('[Audit]  Stack:', err.stack);
+            loadFailed = true;
+            clearInterval(progressInterval);
+            clearInterval(msgInterval);
+            loadingView.classList.remove('active');
+            formView.style.display = 'block';
+            if (loadHandle) loadHandle.hideOverlay();
+            window.__auditBusy = false;
+            var errorType = window.NAGRIVA_ErrorHandler
+              ? NAGRIVA_ErrorHandler.classifyError(err)
+              : 'AUDIT_FAILED';
+            if (window.NAGRIVA_ErrorHandler) {
+              NAGRIVA_ErrorHandler.handleError(
+                errorType,
+                err,
+                'audit_results_generation',
+                function () {
+                  window.__auditBusy = false;
+                  form.dispatchEvent(new Event('submit'));
+                }
+              );
+            }
+          }
+        }, 500);
+      })
+      .catch(function(err) {
+        console.error('[Audit] ❌ FAILED at STEP 4-6 (API call):', err.message);
+        console.error('[Audit]  Stack:', err.stack);
+        console.error('[Audit]  Full error object:', err);
+        loadFailed = true;
+        clearInterval(progressInterval);
+        clearInterval(msgInterval);
+        loadingView.classList.remove('active');
+        formView.style.display = 'block';
+        if (loadHandle) loadHandle.hideOverlay();
+        window.__auditBusy = false;
+        var errorType = window.NAGRIVA_ErrorHandler
+          ? NAGRIVA_ErrorHandler.classifyError(err)
+          : 'AUDIT_FAILED';
+        console.log('[Audit]  Classified error type:', errorType);
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(
+            errorType,
+            err,
+            'audit_api_call',
+            function () {
+              window.__auditBusy = false;
+              form.dispatchEvent(new Event('submit'));
+            }
+          );
+        }
+      });
     });
 
     /* ─── Remove error on input ─── */
@@ -2545,10 +2925,27 @@
     function loadAuditHistory(email) {
       if (!window.NAGRIVA_ReportsAPI) return;
 
+      /* ─── Show history skeleton while loading ─── */
+      var body = document.getElementById('audHistoryBody');
+      if (window.NAGRIVA_AuditLoading) {
+        body.innerHTML = NAGRIVA_AuditLoading.historySkeleton(3);
+      } else {
+        body.innerHTML = '<div class="aud-history-empty">Loading history...</div>';
+      }
+
       NAGRIVA_ReportsAPI.getReportsByEmail(email).then(function(reports) {
-        var body = document.getElementById('audHistoryBody');
         if (!reports || reports.length === 0) {
-          body.innerHTML = '<div class="aud-history-empty">No previous reports found.</div>';
+          if (window.NAGRIVA_EmptyState) {
+            body.innerHTML = NAGRIVA_EmptyState.render({
+              icon: 'clock',
+              title: 'No Audits Yet',
+              description: 'You haven\'t generated any audit reports yet.',
+              variant: 'inline',
+              primaryCta: { label: 'Run Your First Audit', onclick: 'document.getElementById(\'auditUrl\').focus();document.getElementById(\'auditFormEl\').scrollIntoView({behavior:\'smooth\'})' }
+            });
+          } else {
+            body.innerHTML = '<div class="aud-history-empty">No previous reports found.</div>';
+          }
           return;
         }
 
@@ -2580,12 +2977,27 @@
         });
       }).catch(function(err) {
         console.error('[Audit] History load failed:', err);
+        if (window.NAGRIVA_EmptyState) {
+          body.innerHTML = NAGRIVA_EmptyState.render({
+            icon: 'alert-circle',
+            title: 'Could Not Load History',
+            description: 'We encountered an error loading your audit history. Please try again later.',
+            variant: 'error',
+            primaryCta: { label: 'Retry', onclick: 'location.reload()' }
+          });
+        } else {
+          body.innerHTML = '<div class="aud-history-empty">Could not load history.</div>';
+        }
       });
     }
 
     document.getElementById('leadFormEl').addEventListener('submit', function(e) {
       e.preventDefault();
       if (!leadFormValidate()) return;
+
+      if (window.NAGRIVA_ErrorHandler && NAGRIVA_ErrorHandler.detectOffline()) {
+        return;
+      }
 
       var name = document.getElementById('leadName').value.trim();
       var email = document.getElementById('leadEmail').value.trim();
@@ -2601,9 +3013,41 @@
       var currentStoragePath = null;
 
       var statusEl = document.getElementById('audStorageStatus');
-      statusEl.style.display = 'flex';
-      statusEl.className = 'aud-storage-status';
-      statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Preparing your report...';
+      if (window.NAGRIVA_AuditLoading) {
+        NAGRIVA_AuditLoading.showUploadLoading(statusEl, 'Preparing your report...');
+      } else {
+        statusEl.style.display = 'flex';
+        statusEl.className = 'aud-storage-status';
+        statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Preparing your report...';
+      }
+
+      function handleUploadError(err) {
+        console.error('[Audit] Upload failed:', err);
+        if (window.NAGRIVA_AuditLoading) {
+          var msg = 'Upload failed — report saved locally';
+          var errMsg = err && err.message ? err.message : '';
+          if (errMsg.indexOf('Failed to fetch') !== -1 || errMsg.indexOf('NetworkError') !== -1) {
+            msg = 'Network error — report saved locally';
+          } else if (errMsg === 'Storage unavailable') {
+            msg = 'Storage unavailable — report saved locally';
+          }
+          NAGRIVA_AuditLoading.showUploadError(statusEl, msg);
+        } else {
+          statusEl.className = 'aud-storage-status error';
+          statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Upload failed — report saved locally';
+        }
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(
+            NAGRIVA_ErrorHandler.ERROR_TYPES.SUPABASE_UPLOAD,
+            err,
+            'lead_form_upload',
+            function () { document.getElementById('leadFormEl').dispatchEvent(new Event('submit')); }
+          );
+        }
+        showLeadSuccess(null, null, leadData.email);
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
 
       function saveLead() {
         if (window.NAGRIVA_LeadsAPI && window.supabaseClient) {
@@ -2618,7 +3062,11 @@
       function generateAndUpload(lead) {
         currentLeadId = lead.id;
 
-        statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Generating PDF report...';
+        if (window.NAGRIVA_AuditLoading) {
+          NAGRIVA_AuditLoading.showUploadLoading(statusEl, 'Generating PDF report...');
+        } else {
+          statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Generating PDF report...';
+        }
 
         return loadRecPdfLibs().then(function() {
           var url = leadData.website;
@@ -2631,31 +3079,29 @@
             throw new Error('Storage unavailable');
           }
 
-          statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Uploading to secure storage...';
+          if (window.NAGRIVA_AuditLoading) {
+            NAGRIVA_AuditLoading.showUploadLoading(statusEl, 'Uploading to secure storage...');
+          } else {
+            statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Uploading to secure storage...';
+          }
 
           return NAGRIVA_ReportsAPI.uploadPdf(currentLeadId, leadData.website, blob, recState.scores.overall);
         }).then(function(uploadResult) {
           currentStoragePath = uploadResult.storagePath;
 
-          statusEl.className = 'aud-storage-status success';
-          statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Report saved to cloud storage';
-
-          showLeadSuccess(currentLeadId, currentStoragePath, leadData.email);
-        }).catch(function(err) {
-          console.error('[Audit] Upload failed:', err);
-
-          statusEl.className = 'aud-storage-status error';
-
-          var errMsg = err.message || '';
-          if (errMsg.indexOf('Failed to fetch') !== -1 || errMsg.indexOf('NetworkError') !== -1) {
-            statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Network error — report saved locally';
-          } else if (errMsg === 'Storage unavailable') {
-            statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Storage unavailable — report saved locally';
+          if (window.NAGRIVA_AuditLoading) {
+            NAGRIVA_AuditLoading.showUploadSuccess(statusEl, 'Report Saved Successfully');
+            NAGRIVA_AuditLoading.showSuccessToast('Report Saved Successfully', 'Your audit report has been saved to cloud storage.');
           } else {
-            statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Upload failed — report saved locally';
+            statusEl.className = 'aud-storage-status success';
+            statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Report saved to cloud storage';
           }
 
-          showLeadSuccess(null, null, leadData.email);
+          showLeadSuccess(currentLeadId, currentStoragePath, leadData.email);
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
+        }).catch(function(err) {
+          handleUploadError(err);
         });
       }
 
@@ -2663,7 +3109,16 @@
         console.error('[Leads] Save error:', err);
         statusEl.className = 'aud-storage-status error';
         statusEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Lead save failed';
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(
+            NAGRIVA_ErrorHandler.ERROR_TYPES.SUPABASE_DB,
+            err,
+            'lead_form_save'
+          );
+        }
         showLeadSuccess(null, null, leadData.email);
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
       });
     });
 
@@ -2680,7 +3135,7 @@
       var val = this.value.trim();
       var leadWebsite = document.getElementById('leadWebsite');
       if (leadWebsite && !leadWebsite.value.trim()) {
-        leadWebsite.value = val;
+        try { new URL(val); leadWebsite.value = val; } catch(e) { /* skip invalid URLs */ }
       }
     });
 
@@ -2741,6 +3196,10 @@
 
     /* ─── Generate structured PDF report ─── */
     function generateStructuredPDF(pdf, scores, recommendations, url) {
+      if (!pdf) throw new Error('PDF instance required');
+      scores = scores || { overall: 0, seo: 0, perf: 0, mobile: 0, security: 0, ux: 0 };
+      recommendations = recommendations || [];
+      url = url || 'website';
       var pw = pdf.internal.pageSize.getWidth();
       var ph = pdf.internal.pageSize.getHeight();
       var ml = 15, mr = 15, mt = 22, mb = 22;
@@ -3060,7 +3519,8 @@
 
       cy = addSectionTitle('AI INSIGHTS SUMMARY', cy);
 
-      var summaryText = document.getElementById('recAiSummaryText').textContent;
+      var summaryEl = document.getElementById('recAiSummaryText');
+      var summaryText = summaryEl ? summaryEl.textContent || summaryEl.innerText || 'AI-powered insights available in the full report.' : 'AI-powered insights available in the full report.';
       var summaryLines = wrapText(summaryText, cw, 3.5);
       pdf.setFontSize(3.5);
       pdf.setFont('helvetica', 'normal');
@@ -3082,8 +3542,8 @@
       pdf.text('Tasks you can complete in under 30 minutes to improve your score.', ml, cy);
       cy += 7;
 
-      var quickWins = RecommendationEngine.generateQuickWins(recommendations);
-      if (quickWins.length === 0) {
+      var quickWins = window.RecommendationEngine ? window.RecommendationEngine.generateQuickWins(recommendations) : [];
+      if (!quickWins || quickWins.length === 0) {
         pdf.setFontSize(3.2);
         pdf.setTextColor(100, 100, 110);
         pdf.text('No quick wins available for the current audit results.', ml, cy);
@@ -3114,7 +3574,7 @@
       // Potential Score Block
       cy += 2;
       checkPageBreak(16);
-      var potentialData = RecommendationEngine.calculatePotential(scores, recommendations);
+      var potentialData = window.RecommendationEngine ? window.RecommendationEngine.calculatePotential(scores, recommendations) : { potential: 0, gain: 0 };
       pdf.setFillColor(20, 25, 28);
       pdf.rect(ml, cy, cw, 14, 'F');
 
@@ -3367,28 +3827,56 @@
       var engine = window.RecommendationEngine;
       if (!engine || !recState.recommendations || !recState.scores) return;
 
+      if (window.NAGRIVA_ErrorHandler && NAGRIVA_ErrorHandler.detectOffline()) return;
+
+      /* ─── Premium PDF generation modal ─── */
+      var pdfModal = null;
+      if (window.NAGRIVA_AuditLoading) {
+        pdfModal = NAGRIVA_AuditLoading.showPdfModal();
+      }
+
       var btn = this;
       var originalText = btn.innerHTML;
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="animation:audSpin 1s linear infinite;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Generating...';
       btn.disabled = true;
 
-      loadRecPdfLibs().then(function() {
-        console.log('PDF generation started');
+      var pdfErrorHandler = function(err) {
+        if (pdfModal && window.NAGRIVA_AuditLoading) {
+          NAGRIVA_AuditLoading.hidePdfModal();
+        }
+        if (window.NAGRIVA_ErrorHandler) {
+          var errorType = NAGRIVA_ErrorHandler.classifyError(err);
+          NAGRIVA_ErrorHandler.handleError(errorType, err, 'pdf_export', function () {
+            document.getElementById('recExportPDF').click();
+          });
+        } else {
+          alert('Failed to generate PDF: ' + (err.message || 'Unknown error') + '\n\nPlease try again.');
+        }
+      };
 
+      loadRecPdfLibs().then(function() {
         if (!window.jspdf || typeof window.jspdf.jsPDF !== 'function') {
-          throw new Error('jsPDF is not available');
+          throw new Error('jsPDF failed to load');
         }
 
         var url = document.getElementById('auditUrl').value.trim() || 'website';
         var jsPDF = window.jspdf.jsPDF;
         var pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
-        var result = generateStructuredPDF(pdf, recState.scores, recState.recommendations, url);
-        result.save('Website-Audit.pdf');
+        try {
+          var result = generateStructuredPDF(pdf, recState.scores, recState.recommendations, url);
+          result.save('Website-Audit.pdf');
 
+          /* Hide modal on success */
+          if (pdfModal && window.NAGRIVA_AuditLoading) {
+            NAGRIVA_AuditLoading.hidePdfModal();
+            NAGRIVA_AuditLoading.showSuccessToast('PDF Report Ready', 'Your audit report has been generated and downloaded.');
+          }
+        } catch (pdfErr) {
+          pdfErrorHandler(pdfErr);
+        }
       }).catch(function(err) {
-        console.error('PDF generation failed:', err);
-        alert('Failed to generate PDF: ' + err.message + '\n\nPlease check your internet connection and try again.');
+        pdfErrorHandler(err);
       }).finally(function() {
         btn.innerHTML = originalText;
         btn.disabled = false;
@@ -3399,7 +3887,8 @@
       var engine = window.RecommendationEngine;
       if (!engine || !recState.recommendations || !recState.scores) return;
       var scoresData = engine.getScoresData(recState.scores);
-      var summary = document.getElementById('recAiSummaryText').textContent;
+      var summaryEl = document.getElementById('recAiSummaryText');
+      var summary = summaryEl ? summaryEl.textContent || summaryEl.innerText || '' : '';
       var pot = engine.calculatePotential(recState.scores, recState.recommendations);
       var text = engine.exportText(recState.recommendations, scoresData, summary, pot);
 
@@ -3422,7 +3911,9 @@
       }
 
       var subject = encodeURIComponent('Nagriva SEO Audit Report');
-      var body = encodeURIComponent(text.substring(0, 2000) + '\n\n... Full report available at Nagriva.');
+      var reportUrl = window.location.href;
+      var fullText = text + '\n\nView full report: ' + reportUrl + '\n\nGenerated by Nagriva Website Audit Tool';
+      var body = encodeURIComponent(fullText.substring(0, 5000));
       window.open('mailto:?subject=' + subject + '&body=' + body);
     });
 
@@ -3430,7 +3921,8 @@
       var engine = window.RecommendationEngine;
       if (!engine || !recState.recommendations || !recState.scores) return;
       var scoresData = engine.getScoresData(recState.scores);
-      var summary = document.getElementById('recAiSummaryText').textContent;
+      var summaryEl = document.getElementById('recAiSummaryText');
+      var summary = summaryEl ? summaryEl.textContent || summaryEl.innerText || '' : '';
       var pot = engine.calculatePotential(recState.scores, recState.recommendations);
       var text = engine.exportText(recState.recommendations, scoresData, summary, pot);
 
@@ -3439,18 +3931,37 @@
           title: 'Nagriva SEO Audit Report',
           text: summary,
           url: window.location.href
-        }).catch(function() {});
+        }).catch(function(err) {
+          if (window.NAGRIVA_ErrorHandler) {
+            NAGRIVA_ErrorHandler.logError(
+              NAGRIVA_ErrorHandler.ERROR_TYPES.SHARE_FAILED,
+              err,
+              'share_report'
+            );
+          }
+        });
       } else {
-        /* Fallback: copy text to clipboard */
-        var ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
         try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
           document.execCommand('copy');
-          alert('Report summary copied to clipboard!');
-        } catch (e) {}
-        document.body.removeChild(ta);
+          if (window.NAGRIVA_Toast) {
+            NAGRIVA_Toast.success('Copied', 'Report summary copied to clipboard!');
+          } else {
+            alert('Report summary copied to clipboard!');
+          }
+          document.body.removeChild(ta);
+        } catch (e) {
+          if (window.NAGRIVA_ErrorHandler) {
+            NAGRIVA_ErrorHandler.handleError(
+              NAGRIVA_ErrorHandler.ERROR_TYPES.SHARE_FAILED,
+              e,
+              'share_report_copy'
+            );
+          }
+        }
       }
     });
 
@@ -3475,7 +3986,7 @@
     btn.classList.toggle('open');
     btn.innerHTML = isOpen
       ? 'View Details<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
-      : 'Hide Details<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+      : 'Hide Details<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"></polyline></svg>';
   }
 </script>
 <script defer src="../../js/layout.js"></script>
@@ -3498,6 +4009,9 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span id="rsReportUrl"></span>
     </div>
+
+    <!-- Share Reports Empty State (shown before a report is loaded) -->
+    <div id="rsShareEmpty" style="display:block;"></div>
 
     <div class="rs-link-section">
       <div class="rs-link-label">Share Link</div>

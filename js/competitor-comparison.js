@@ -878,12 +878,22 @@ window.CompetitorComparison = (function () {
   /* ─── Export functions ─── */
 
   function exportPDF (scores, urls, scorecard, gaps, opportunities, summary) {
-    if (typeof window.jspdf === 'undefined') {
-      loadPDFLibrary(function () {
+    function doGenerate () {
+      try {
         generatePDF(scores, urls, scorecard, gaps, opportunities, summary)
-      })
+      } catch (err) {
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.PDF_FAILED, err, 'competitor_pdf_generation')
+        } else {
+          console.error('[CompetitorComparison] PDF generation error:', err)
+        }
+      }
+    }
+
+    if (typeof window.jspdf === 'undefined') {
+      loadPDFLibrary(doGenerate)
     } else {
-      generatePDF(scores, urls, scorecard, gaps, opportunities, summary)
+      doGenerate()
     }
   }
 
@@ -891,7 +901,13 @@ window.CompetitorComparison = (function () {
     var script = document.createElement('script')
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
     script.onload = callback
-    script.onerror = function () { alert('Failed to load PDF library. Please try again.') }
+    script.onerror = function () {
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.PDF_FAILED, new Error('Failed to load PDF library'), 'competitor_pdf_load')
+      } else {
+        alert('Failed to load PDF library. Please try again.')
+      }
+    }
     document.head.appendChild(script)
   }
 
@@ -1107,7 +1123,13 @@ window.CompetitorComparison = (function () {
         title: 'Competitor Comparison Report',
         text: text,
         url: window.location.href
-      }).catch(function () {})
+      }).catch(function (err) {
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.SHARE_FAILED, err, 'competitor_share_export')
+        } else {
+          console.error('[CompetitorComparison] Share failed:', err)
+        }
+      })
     } else {
       var ta = document.createElement('textarea')
       ta.value = text
@@ -1115,8 +1137,16 @@ window.CompetitorComparison = (function () {
       ta.select()
       try {
         document.execCommand('copy')
-        alert('Report summary copied to clipboard!')
-      } catch (e) {}
+        if (typeof NAGRIVA_Toast !== 'undefined') {
+          NAGRIVA_Toast.success('Copied', 'Report summary copied to clipboard!')
+        } else {
+          alert('Report summary copied to clipboard!')
+        }
+      } catch (e) {
+        if (window.NAGRIVA_ErrorHandler) {
+          NAGRIVA_ErrorHandler.handleError(NAGRIVA_ErrorHandler.ERROR_TYPES.SHARE_FAILED, e, 'competitor_clipboard_copy')
+        }
+      }
       document.body.removeChild(ta)
     }
   }
@@ -1194,6 +1224,9 @@ window.CompetitorComparison = (function () {
   function handleSubmit (e) {
     e.preventDefault()
 
+    /* Offline check */
+    if (window.NAGRIVA_ErrorHandler && NAGRIVA_ErrorHandler.detectOffline()) return
+
     var yourUrl = document.getElementById('ccYourUrl').value.trim()
     var comp1 = document.getElementById('ccComp1').value.trim()
     var comp2 = document.getElementById('ccComp2').value.trim()
@@ -1201,6 +1234,13 @@ window.CompetitorComparison = (function () {
 
     if (!yourUrl) {
       document.getElementById('ccYourUrl').classList.add('cc-input-error')
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(
+          NAGRIVA_ErrorHandler.ERROR_TYPES.COMPETITOR_INVALID_URL,
+          null,
+          'competitor_form_submit'
+        )
+      }
       return
     }
 
@@ -1215,7 +1255,15 @@ window.CompetitorComparison = (function () {
 
     var validUrls = urls.filter(function (u) { return isValidUrl(u) })
     if (validUrls.length < 2) {
-      alert('Please enter at least one competitor URL.')
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(
+          NAGRIVA_ErrorHandler.ERROR_TYPES.COMPETITOR_INVALID_URL,
+          new Error('Need at least 2 valid URLs'),
+          'competitor_form_submit'
+        )
+      } else {
+        alert('Please enter at least one competitor URL.')
+      }
       return
     }
 
@@ -1241,14 +1289,17 @@ window.CompetitorComparison = (function () {
     var loadingMsgs = document.querySelectorAll('#ccLoadingView .cc-loading-msg')
     var msgIdx = 0
     var progress = 0
+    var loadFailed = false
 
     var msgInterval = setInterval(function () {
+      if (loadFailed) return
       loadingMsgs.forEach(function (m) { m.classList.remove('active') })
       msgIdx = (msgIdx + 1) % loadingMsgs.length
       loadingMsgs[msgIdx].classList.add('active')
     }, 1300)
 
     var progressInterval = setInterval(function () {
+      if (loadFailed) return
       progress += Math.random() * 7 + 2
       if (progress >= 100) {
         progress = 100
@@ -1261,10 +1312,26 @@ window.CompetitorComparison = (function () {
         if (pct) pct.textContent = '100%'
 
         setTimeout(function () {
-          if (loadingView) loadingView.classList.remove('active')
+          try {
+            if (loadingView) loadingView.classList.remove('active')
 
-          var scores = generateAllScores(urls)
-          showResults(urls, scores)
+            var scores = generateAllScores(urls)
+            showResults(urls, scores)
+          } catch (err) {
+            loadFailed = true
+            clearInterval(progressInterval)
+            clearInterval(msgInterval)
+            if (loadingView) loadingView.classList.remove('active')
+            if (formView) formView.style.display = 'block'
+            if (window.NAGRIVA_ErrorHandler) {
+              NAGRIVA_ErrorHandler.handleError(
+                NAGRIVA_ErrorHandler.ERROR_TYPES.COMPETITOR_API_FAILURE,
+                err,
+                'competitor_results_generation',
+                function () { handleSubmit(e) }
+              )
+            }
+          }
         }, 500)
       }
       var fill = document.getElementById('ccProgressFill')
@@ -1284,6 +1351,30 @@ window.CompetitorComparison = (function () {
     document.getElementById('ccYourUrl').addEventListener('input', function () {
       this.classList.remove('cc-input-error')
     })
+
+    /* Show empty state in results section if no data loaded */
+    var resultsSection = document.getElementById('ccResultsSection')
+    if (resultsSection && !resultsSection.classList.contains('active')) {
+      if (window.NAGRIVA_EmptyState) {
+        resultsSection.innerHTML = NAGRIVA_EmptyState.render({
+          icon: 'bar-chart-3',
+          title: 'No Competitors Added',
+          description: 'Add competitor websites to compare performance, SEO, and growth opportunities.',
+          primaryCta: {
+            label: 'Add Competitor',
+            onclick: 'var f=document.getElementById(\'ccFormView\');if(f)f.scrollIntoView({behavior:\'smooth\',block:\'start\'})'
+          }
+        })
+        resultsSection.style.display = ''
+      } else if (window.NAGRIVA_EmptyStates) {
+        NAGRIVA_EmptyStates.render('competitorComparison', 'ccResultsSection', function () {
+          var formView = document.getElementById('ccFormView')
+          if (formView) {
+            formView.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        })
+      }
+    }
   }
 
   /* ─── Public API ─── */
