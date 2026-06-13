@@ -2471,6 +2471,10 @@
     }
 
     function recalcCircleDimensions() {
+      if (!overallCircle || !scoreCircles || !scoreCircles.seo) {
+        console.warn('[Audit] Missing circle elements — cannot recalc dimensions');
+        return { overallCirc: 0, scoreCirc: 0 };
+      }
       var or = getCircleR(overallCircle);
       var sr = getCircleR(scoreCircles.seo);
       var oCirc = getCircumference(or);
@@ -2478,8 +2482,10 @@
       overallCircle.style.strokeDasharray = oCirc;
       overallCircle.style.strokeDashoffset = oCirc;
       for (var key in scoreCircles) {
-        scoreCircles[key].style.strokeDasharray = sCirc;
-        scoreCircles[key].style.strokeDashoffset = sCirc;
+        if (scoreCircles[key]) {
+          scoreCircles[key].style.strokeDasharray = sCirc;
+          scoreCircles[key].style.strokeDashoffset = sCirc;
+        }
       }
       return { overallCirc: oCirc, scoreCirc: sCirc };
     }
@@ -2516,8 +2522,14 @@
       filter = filter || 'all';
       var container = document.getElementById('recCards');
       var emptyContainer = document.getElementById('recEmptyContainer');
-      var section = document.getElementById('recSection');
-      var totalBadge = document.getElementById('recTotalBadge');
+
+      if (!container) {
+        console.warn('[Audit] Missing element: #recCards — cannot render recommendation cards');
+        return;
+      }
+      if (!emptyContainer) {
+        console.warn('[Audit] Missing element: #recEmptyContainer');
+      }
 
       var engine = window.RecommendationEngine;
       if (!engine) return;
@@ -2526,14 +2538,10 @@
       recState.recommendations = recommendations;
       recState.filtered = filtered;
 
-      var allCount = recommendations.length;
-      section.style.display = allCount > 0 ? 'block' : 'none';
-      if (totalBadge) totalBadge.textContent = allCount + ' issue' + (allCount !== 1 ? 's' : '');
-
       container.innerHTML = '';
 
       if (filtered.length === 0) {
-        if (window.NAGRIVA_EmptyState) {
+        if (window.NAGRIVA_EmptyState && emptyContainer) {
           emptyContainer.innerHTML = NAGRIVA_EmptyState.render({
             icon: 'check-circle',
             title: filter === 'high' ? 'No High Priority Issues' : filter === 'medium' ? 'No Medium Priority Issues' : filter === 'low' ? 'No Low Priority Issues' : 'Great Job!',
@@ -2544,10 +2552,10 @@
             variant: 'success'
           });
         }
-        emptyContainer.style.display = 'block';
+        if (emptyContainer) emptyContainer.style.display = 'block';
         return;
       }
-      emptyContainer.style.display = 'none';
+      if (emptyContainer) emptyContainer.style.display = 'none';
 
       filtered.forEach(function(rec, idx) {
         var priorityInfo = engine.getPriorityInfo(rec.priority);
@@ -2610,6 +2618,14 @@
       var section = document.getElementById('recQuickWins');
       var engine = window.RecommendationEngine;
       if (!engine) return;
+      if (!container) {
+        console.warn('[Audit] Missing element: #recQuickWinsGrid');
+        return;
+      }
+      if (!section) {
+        console.warn('[Audit] Missing element: #recQuickWins');
+        return;
+      }
 
       var quickWins = engine.generateQuickWins(recommendations);
       if (quickWins.length === 0) {
@@ -2637,13 +2653,20 @@
       var section = document.getElementById('recPotential');
       var engine = window.RecommendationEngine;
       if (!engine) return;
+      if (!section) {
+        console.warn('[Audit] Missing element: #recPotential — skipping renderPotentialScore');
+        return;
+      }
 
       var potential = engine.calculatePotential(scores, recommendations);
       section.style.display = 'block';
 
-      document.getElementById('recCurrScore').textContent = scores.overall;
-      document.getElementById('recPotentialScore').textContent = potential.potential;
-      document.getElementById('recGainScore').textContent = '+' + potential.gain;
+      var currEl = document.getElementById('recCurrScore');
+      var potEl = document.getElementById('recPotentialScore');
+      var gainEl = document.getElementById('recGainScore');
+      if (currEl) currEl.textContent = scores.overall;
+      if (potEl) potEl.textContent = potential.potential;
+      if (gainEl) gainEl.textContent = '+' + potential.gain;
     }
 
     /* ─── Render AI summary ─── */
@@ -2658,6 +2681,10 @@
 
     /* ─── Animate scores ─── */
     function animateScores(scores) {
+      if (!overallCircle || !overallScore || !overallGrade) {
+        console.warn('[Audit] Missing score display elements — cannot animate scores');
+        return;
+      }
       setCircle(overallCircle, scores.overall, 100, overallCirc);
       overallCircle.style.stroke = getScoreColor(scores.overall);
       overallScore.textContent = scores.overall;
@@ -2672,9 +2699,11 @@
       var map = { seo: scores.seo, perf: scores.perf, mobile: scores.mobile, security: scores.security, ux: scores.ux };
 
       for (var key in map) {
-        setCircle(scoreCircles[key], map[key], 100, scoreCirc);
-        scoreCircles[key].style.stroke = getScoreColor(map[key]);
-        scoreNums[key].textContent = map[key];
+        if (scoreCircles && scoreCircles[key] && scoreNums && scoreNums[key]) {
+          setCircle(scoreCircles[key], map[key], 100, scoreCirc);
+          scoreCircles[key].style.stroke = getScoreColor(map[key]);
+          scoreNums[key].textContent = map[key];
+        }
       }
     }
 
@@ -3003,8 +3032,8 @@
       auditState.loadFailed = true;
       clearInterval(auditState.progressInterval);
       clearInterval(auditState.msgInterval);
-      loadingView.classList.remove('active');
-      formView.style.display = 'block';
+      if (loadingView) loadingView.classList.remove('active');
+      if (formView) formView.style.display = 'block';
       if (auditState.loadHandle) auditState.loadHandle.hideOverlay();
       window.__auditBusy = false;
       var errorType = window.NAGRIVA_ErrorHandler
