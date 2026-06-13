@@ -203,7 +203,22 @@ module.exports = async function handler(req, res) {
     return sendJson(500, { success: false, failedStep: 'Compute Overall Score', error: e.message, stack: e.stack });
   }
 
-  /* ─── Step 13: return response ─── */
+  /* ─── Step 13: build raw categories map for debugging ─── */
+  var rawCategories = {};
+  try {
+    Object.keys(categories).forEach(function (key) {
+      rawCategories[key] = {
+        id: categories[key].id,
+        title: categories[key].title,
+        score: categories[key].score
+      };
+    });
+    console.log("Raw categories for debug:", JSON.stringify(rawCategories));
+  } catch (e) {
+    console.log("Could not build rawCategories:", e.message);
+  }
+
+  /* ─── Step 14: return response ─── */
   console.log("Returning response — 200 OK");
   try {
     return sendJson(200, {
@@ -212,7 +227,14 @@ module.exports = async function handler(req, res) {
       performance: performance,
       seo: seo,
       accessibility: accessibility,
-      bestPractices: bestPractices
+      bestPractices: bestPractices,
+      scores: {
+        performance: performance,
+        seo: seo,
+        accessibility: accessibility,
+        bestPractices: bestPractices
+      },
+      categories: rawCategories
     });
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Send Response', error: e.message, stack: e.stack });

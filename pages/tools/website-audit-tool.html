@@ -2770,8 +2770,23 @@
         document.getElementById('audProgressFill').style.width = '100%';
         document.getElementById('audProgressPct').textContent = '100%';
 
-        console.log('[Audit]  Raw API response:', JSON.stringify(data, null, 2));
-        console.log('[Audit]  API scores — overall:', data.overallScore, 'perf:', data.performance, 'seo:', data.seo, 'acc:', data.accessibility, 'bp:', data.bestPractices);
+        console.log('[Audit]  ═══════════════════════ RAW API RESPONSE ═══════════════════════');
+        console.log('[Audit]  Full response:', JSON.stringify(data, null, 2));
+        console.log('[Audit]  All top-level keys:', Object.keys(data));
+        if (data) {
+          Object.keys(data).forEach(function(k) {
+            console.log('[Audit]  data.' + k + ' =', JSON.stringify(data[k]));
+          });
+        }
+        console.log('[Audit]  data.scores:', data.scores);
+        console.log('[Audit]  data.categories:', data.categories);
+        console.log('[Audit]  data.lighthouseResult:', data.lighthouseResult ? 'EXISTS' : 'MISSING');
+        console.log('[Audit]  data.overallScore:', data.overallScore);
+        console.log('[Audit]  data.performance:', data.performance);
+        console.log('[Audit]  data.seo:', data.seo);
+        console.log('[Audit]  data.accessibility:', data.accessibility);
+        console.log('[Audit]  data.bestPractices:', data.bestPractices);
+        console.log('[Audit]  ════════════════════════════════════════════════════════════');
 
         setTimeout(function() {
           try {
@@ -2781,20 +2796,43 @@
               auditState.loadHandle.complete();
             }
 
-            function safeScore(val) { return val != null ? val : 0; }
+            function safeScore(val, label) {
+              if (val == null) {
+                console.warn('[Audit]  ⚠️  ' + label + ' is null/undefined — using 0');
+                return 0;
+              }
+              return val;
+            }
+
+            var seoScore = safeScore(data.seo, 'SEO');
+            var perfScore = safeScore(data.performance, 'Performance');
+            var accScore = safeScore(data.accessibility, 'Accessibility');
+            var bpScore = safeScore(data.bestPractices, 'BestPractices');
+
+            console.log('[Audit]  Individual scores — SEO:', seoScore, 'PERF:', perfScore, 'ACCESS:', accScore, 'BP:', bpScore);
 
             var scores = {
               overall: data.overallScore != null
                 ? data.overallScore
-                : Math.round((safeScore(data.performance) + safeScore(data.seo) + safeScore(data.accessibility) + safeScore(data.bestPractices)) / 4),
-              seo: safeScore(data.seo),
-              perf: safeScore(data.performance),
-              mobile: safeScore(data.performance),
-              security: safeScore(data.bestPractices),
-              ux: safeScore(data.accessibility)
+                : Math.round((perfScore + seoScore + accScore + bpScore) / 4),
+              seo: seoScore,
+              perf: perfScore,
+              mobile: perfScore,
+              security: bpScore,
+              ux: accScore
             };
             recState.scores = scores;
-            console.log('[Audit]  Final mapped scores:', JSON.stringify(scores));
+            console.log('[Audit]  SEO SCORE:', scores.seo);
+            console.log('[Audit]  SECURITY SCORE:', scores.security);
+            console.log('[Audit]  UX SCORE:', scores.ux);
+            console.log('[Audit]  Final mapped object:', JSON.stringify({
+              seo: scores.seo,
+              performance: scores.perf,
+              accessibility: scores.ux,
+              security: scores.security,
+              mobile: scores.mobile,
+              overall: scores.overall
+            }, null, 2));
             logStep('Calculate Scores', 'ok', JSON.stringify(scores));
 
             logStep('Animate Scores', 'info', 'Starting animation');
