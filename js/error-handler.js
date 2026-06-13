@@ -1,7 +1,3 @@
-/* ════════════════════════════════════════════════════════
-   NAGRIVA — Centralized Error Handling System
-   Error types · User messages · Logger · Recovery
-   ════════════════════════════════════════════════════════ */
 window.NAGRIVA_ErrorHandler = (function () {
   'use strict';
 
@@ -11,6 +7,8 @@ window.NAGRIVA_ErrorHandler = (function () {
     API_TIMEOUT: 'API_TIMEOUT',
     API_QUOTA_EXCEEDED: 'API_QUOTA_EXCEEDED',
     API_UNAVAILABLE: 'API_UNAVAILABLE',
+    API_KEY_MISSING: 'API_KEY_MISSING',
+    API_REQUEST_FAILED: 'API_REQUEST_FAILED',
     NETWORK_ERROR: 'NETWORK_ERROR',
     AUDIT_FAILED: 'AUDIT_FAILED',
     AUDIT_MISSING_DATA: 'AUDIT_MISSING_DATA',
@@ -34,11 +32,13 @@ window.NAGRIVA_ErrorHandler = (function () {
   };
 
   var USER_MESSAGES = {};
-  USER_MESSAGES[ERROR_TYPES.INVALID_URL] = { title: 'Invalid URL', message: 'Please enter a valid website URL.', type: 'error', icon: 'error' };
+  USER_MESSAGES[ERROR_TYPES.INVALID_URL] = { title: 'Invalid URL', message: 'Please enter a valid website URL starting with http:// or https://', type: 'error', icon: 'error' };
   USER_MESSAGES[ERROR_TYPES.WEBSITE_UNREACHABLE] = { title: 'Website Unreachable', message: "We couldn't connect to this website. Please check the URL and try again.", type: 'error', icon: 'error' };
   USER_MESSAGES[ERROR_TYPES.API_TIMEOUT] = { title: 'Request Timed Out', message: 'The analysis took too long. Please try again.', type: 'error', icon: 'error' };
   USER_MESSAGES[ERROR_TYPES.API_QUOTA_EXCEEDED] = { title: 'API Limit Reached', message: 'Daily analysis limit reached. Please try again tomorrow.', type: 'warning', icon: 'warning' };
   USER_MESSAGES[ERROR_TYPES.API_UNAVAILABLE] = { title: 'API Busy', message: 'Google PageSpeed is temporarily unavailable. Please try again later.', type: 'warning', icon: 'warning' };
+  USER_MESSAGES[ERROR_TYPES.API_KEY_MISSING] = { title: 'Server Configuration Error', message: 'The audit service is not properly configured. Please contact support.', type: 'error', icon: 'error' };
+  USER_MESSAGES[ERROR_TYPES.API_REQUEST_FAILED] = { title: 'Audit Service Error', message: 'The audit request could not be completed. Please try again.', type: 'error', icon: 'error' };
   USER_MESSAGES[ERROR_TYPES.NETWORK_ERROR] = { title: 'Network Error', message: 'You appear to be offline. Please check your internet connection.', type: 'error', icon: 'error' };
   USER_MESSAGES[ERROR_TYPES.AUDIT_FAILED] = { title: 'Audit Failed', message: 'Unable to complete the audit. Please try again.', type: 'error', icon: 'error' };
   USER_MESSAGES[ERROR_TYPES.AUDIT_MISSING_DATA] = { title: 'Incomplete Audit', message: 'Unable to complete the audit. Please try again.', type: 'error', icon: 'error' };
@@ -131,13 +131,48 @@ window.NAGRIVA_ErrorHandler = (function () {
     return false;
   }
 
-  function handleError(errorType, error, userAction, retryFn) {
+  function generateDebugReport(errorType, error, stepName, responseStatus, responsePayload) {
+    var report = {
+      timestamp: getTimestamp(),
+      failedStep: stepName || 'unknown',
+      errorType: errorType || ERROR_TYPES.UNKNOWN,
+      errorMessage: error && error.message ? error.message : (typeof error === 'string' ? error : ''),
+      stackTrace: error && error.stack ? error.stack : '',
+      requestStatusCode: responseStatus || null,
+      responsePayload: responsePayload || null,
+      url: window.location.href,
+      userAgent: navigator.userAgent
+    };
+    console.error('%c[Nagriva Debug Report]', 'font-size:14px;font-weight:bold;color:#ef4444;');
+    console.error('  Failed Function:', stepName || 'unknown');
+    console.error('  Error Type:', report.errorType);
+    console.error('  Error Message:', report.errorMessage);
+    console.error('  Stack Trace:', report.stackTrace || '(none)');
+    console.error('  Request Status Code:', report.requestStatusCode);
+    console.error('  Response Payload:', report.responsePayload);
+    console.error('  Timestamp:', report.timestamp);
+    console.error('  URL:', report.url);
+    console.error('  User Agent:', report.userAgent);
+    console.error('  Full error object:', error);
+    return report;
+  }
+
+  function handleError(errorType, error, userAction, retryFn, debugInfo) {
     var errMsg = error && error.message ? error.message : (typeof error === 'string' ? error : '');
     if (isDuplicateError(errorType, errMsg)) {
       console.warn('[Nagriva Error] Suppressed duplicate error:', errorType, errMsg);
       return null;
     }
     var logEntry = logError(errorType, error, userAction);
+
+    generateDebugReport(
+      errorType,
+      error,
+      (debugInfo && debugInfo.step) || userAction || 'unknown',
+      debugInfo && debugInfo.statusCode ? debugInfo.statusCode : null,
+      debugInfo && debugInfo.payload ? debugInfo.payload : null
+    );
+
     var msg = getMessage(errorType);
     if (window.NAGRIVA_Alerts) {
       window.NAGRIVA_Alerts.show(msg.type, msg.title, msg.message, { retry: retryFn, action: userAction });
@@ -183,20 +218,36 @@ window.NAGRIVA_ErrorHandler = (function () {
   function classifyError(err) {
     if (!err) return ERROR_TYPES.UNKNOWN;
     var msg = (err.message || err || '').toLowerCase();
+
+    if (msg.indexOf('api key missing') !== -1 || msg.indexOf('api_key_missing') !== -1) {
+      return ERROR_TYPES.API_KEY_MISSING;
+    }
+    if (msg.indexOf('quota') !== -1 || msg.indexOf('limit') !== -1 || msg.indexOf('exceeded') !== -1) {
+      return ERROR_TYPES.API_QUOTA_EXCEEDED;
+    }
     if (msg.indexOf('fetch') !== -1 || msg.indexOf('network') !== -1 || msg.indexOf('offline') !== -1) {
       return ERROR_TYPES.NETWORK_ERROR;
     }
     if (msg.indexOf('timeout') !== -1 || msg.indexOf('timed out') !== -1) {
       return ERROR_TYPES.API_TIMEOUT;
     }
-    if (msg.indexOf('quota') !== -1 || msg.indexOf('limit') !== -1) {
-      return ERROR_TYPES.API_QUOTA_EXCEEDED;
-    }
-    if (msg.indexOf('unreachable') !== -1 || msg.indexOf('dns') !== -1) {
+    if (msg.indexOf('unreachable') !== -1 || msg.indexOf('dns') !== -1 || msg.indexOf('enotfound') !== -1) {
       return ERROR_TYPES.WEBSITE_UNREACHABLE;
     }
-    if (msg.indexOf('invalid url') !== -1 || msg.indexOf('url') !== -1) {
+    if (msg.indexOf('invalid url') !== -1 || msg.indexOf('url') !== -1 && msg.indexOf('invalid') !== -1) {
       return ERROR_TYPES.INVALID_URL;
+    }
+    if (msg.indexOf('pagespeed api request failed') !== -1 || msg.indexOf('api request failed') !== -1) {
+      return ERROR_TYPES.API_REQUEST_FAILED;
+    }
+    if (msg.indexOf('pagespeed api quota') !== -1) {
+      return ERROR_TYPES.API_QUOTA_EXCEEDED;
+    }
+    if (msg.indexOf('invalid pagespeed api response') !== -1 || msg.indexOf('invalid response from pagespeed') !== -1) {
+      return ERROR_TYPES.API_UNAVAILABLE;
+    }
+    if (msg.indexOf('server configuration error') !== -1) {
+      return ERROR_TYPES.API_KEY_MISSING;
     }
     if (msg.indexOf('pdf') !== -1 && (msg.indexOf('memory') !== -1 || msg.indexOf('size') !== -1)) {
       return ERROR_TYPES.PDF_MEMORY;
@@ -224,6 +275,9 @@ window.NAGRIVA_ErrorHandler = (function () {
     }
     if (msg.indexOf('insight') !== -1 || msg.indexOf('ai') !== -1) {
       return ERROR_TYPES.AI_INSIGHTS_FAILED;
+    }
+    if (msg.indexOf('audit') !== -1) {
+      return ERROR_TYPES.AUDIT_FAILED;
     }
     return ERROR_TYPES.UNKNOWN;
   }
@@ -264,6 +318,7 @@ window.NAGRIVA_ErrorHandler = (function () {
     detectOffline: detectOffline,
     wrapAsync: wrapAsync,
     classifyError: classifyError,
+    generateDebugReport: generateDebugReport,
     clearLogs: clearLogs,
     getErrorLogs: getErrorLogs,
     init: init

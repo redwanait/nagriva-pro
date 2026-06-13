@@ -2422,42 +2422,48 @@
 
     /* ─── Initialise engine and render ─── */
     function runRecommendationEngine(scores) {
-      console.log('[Audit]  Recommendation Engine — starting');
+      logStep('Recommendation Engine', 'info', 'Starting');
       var engine = window.RecommendationEngine;
       if (!engine) {
-        console.warn('[Audit]  RecommendationEngine not loaded — skipping recommendations');
+        logStep('Recommendation Engine', 'warn', 'RecommendationEngine not loaded — skipping');
         return;
       }
 
-      console.log('[Audit]  Generating recommendations from scores:', JSON.stringify(scores));
       var recommendations;
       try {
         recommendations = engine.generate(scores);
-        console.log('[Audit]  Generated ' + recommendations.length + ' recommendations');
+        logStep('Recommendation Engine', 'ok', 'Generated ' + recommendations.length + ' recommendations');
       } catch (genErr) {
+        logStep('Recommendation Engine', 'fail', 'engine.generate threw: ' + genErr.message);
         console.error('[Audit]  FAILED: engine.generate threw:', genErr.message, genErr.stack);
         return;
       }
       recState.recommendations = recommendations;
-      console.log('[Audit]  Rendering AI summary');
+      logStep('Render AI Summary', 'info', '');
       renderAISummary(scores, recommendations);
-      console.log('[Audit]  Rendering potential score');
+      logStep('Render AI Summary', 'ok', 'Done');
+      logStep('Render Potential Score', 'info', '');
       renderPotentialScore(scores, recommendations);
-      console.log('[Audit]  Rendering quick wins');
+      logStep('Render Potential Score', 'ok', 'Done');
+      logStep('Render Quick Wins', 'info', '');
       renderQuickWins(recommendations);
-      console.log('[Audit]  Rendering recommendation cards');
+      logStep('Render Quick Wins', 'ok', 'Done');
+      logStep('Render Recommendation Cards', 'info', '');
       renderRecommendationCards(recommendations, 'all');
-      console.log('[Audit]  Setting up filters');
+      logStep('Render Recommendation Cards', 'ok', 'Done');
+      logStep('Setup Filters', 'info', '');
       setupFilters();
+      logStep('Setup Filters', 'ok', 'Done');
 
       /* Show export section */
       var exportSection = document.getElementById('recExport');
       if (exportSection && recommendations.length > 0) {
         exportSection.style.display = 'block';
       }
-      console.log('[Audit]  Recommendation Engine — complete');
+      logStep('Recommendation Engine', 'ok', 'Complete');
 
       /* ─── SEO Score Breakdown ─── */
+      logStep('SEO Score Breakdown', 'info', '');
       var sbSection = document.getElementById('seoScoreBreakdown');
       var sbEmpty = document.getElementById('sbEmpty');
       var sbEngine = window.NAGRIVA_SEOScoreBreakdown;
@@ -2466,8 +2472,9 @@
           sbEngine.render('seoScoreBreakdown', scores, recommendations);
           sbSection.style.display = 'block';
           if (sbEmpty) sbEmpty.style.display = 'none';
+          logStep('SEO Score Breakdown', 'ok', 'Rendered');
         } catch (e) {
-          console.warn('[SEO Breakdown] Render error:', e);
+          logStep('SEO Score Breakdown', 'warn', 'Render error: ' + e.message);
           if (sbEmpty && window.NAGRIVA_EmptyState) {
             sbEmpty.innerHTML = NAGRIVA_EmptyState.render({
               icon: 'compass',
@@ -2479,6 +2486,7 @@
           }
         }
       } else {
+        logStep('SEO Score Breakdown', 'warn', 'Module not loaded');
         if (sbEmpty && window.NAGRIVA_EmptyState) {
           sbEmpty.innerHTML = NAGRIVA_EmptyState.render({
             icon: 'compass',
@@ -2491,6 +2499,7 @@
       }
 
       /* ─── AI Insights Engine ─── */
+      logStep('AI Insights Engine', 'info', '');
       var aiEngine = window.NAGRIVA_AIInsights;
       var aiContainer = document.getElementById('aiInsightsContainer');
       var aiEmpty = document.getElementById('aiInsightsEmpty');
@@ -2500,10 +2509,12 @@
           if (insights) {
             aiEngine.renderAll(insights, 'aiInsightsContainer');
             if (aiEmpty) aiEmpty.style.display = 'none';
+            logStep('AI Insights Engine', 'ok', 'Generated and rendered');
           } else {
             throw new Error('No insights generated');
           }
         } catch (e) {
+          logStep('AI Insights Engine', 'warn', e.message);
           if (aiEmpty && window.NAGRIVA_EmptyState) {
             aiEmpty.innerHTML = NAGRIVA_EmptyState.render({
               icon: 'sparkles',
@@ -2516,6 +2527,7 @@
           }
         }
       } else {
+        logStep('AI Insights Engine', 'warn', 'Module not loaded');
         if (aiEmpty && window.NAGRIVA_EmptyState) {
           aiEmpty.innerHTML = NAGRIVA_EmptyState.render({
             icon: 'sparkles',
@@ -2529,47 +2541,97 @@
       }
     }
 
+    /* ─── Audit state (shared between steps) ─── */
+    var auditStep = { current: '', history: [] };
+    var auditState = {
+      loadFailed: false,
+      progressInterval: null,
+      msgInterval: null,
+      loadHandle: null
+    };
+
+    function logStep(name, status, extra) {
+      auditStep.current = name;
+      auditStep.history.push({ step: name, status: status, timestamp: new Date().toISOString(), extra: extra || '' });
+      var icon = status === 'ok' ? '✅' : status === 'fail' ? '❌' : status === 'warn' ? '⚠️' : '➡️';
+      console.log('[Audit]  ' + icon + ' [' + name + ']' + (extra ? ' — ' + extra : ''));
+      if (status === 'fail') {
+        console.error('[Audit]  ❌ FAILED at step "' + name + '"');
+        if (extra && typeof extra === 'object') {
+          try { console.error('[Audit]  Error details:', JSON.stringify(extra, null, 2)); } catch (e) {}
+        }
+      }
+    }
+
+    function failStep(name, err, debugInfo, retryFn) {
+      logStep(name, 'fail', err && err.message ? err.message : (typeof err === 'string' ? err : ''));
+      console.error('[Audit]  Full error object:', err);
+      if (err && err.stack) console.error('[Audit]  Stack:', err.stack);
+      auditState.loadFailed = true;
+      clearInterval(auditState.progressInterval);
+      clearInterval(auditState.msgInterval);
+      loadingView.classList.remove('active');
+      formView.style.display = 'block';
+      if (auditState.loadHandle) auditState.loadHandle.hideOverlay();
+      window.__auditBusy = false;
+      var errorType = window.NAGRIVA_ErrorHandler
+        ? NAGRIVA_ErrorHandler.classifyError(err)
+        : 'AUDIT_FAILED';
+      var stepName = name || debugInfo && debugInfo.step || 'unknown';
+      logStep('Error Classification', 'info', 'Classified as: ' + errorType);
+      if (window.NAGRIVA_ErrorHandler) {
+        NAGRIVA_ErrorHandler.handleError(
+          errorType,
+          err,
+          stepName,
+          retryFn || function () {
+            window.__auditBusy = false;
+            form.dispatchEvent(new Event('submit'));
+          },
+          debugInfo || { step: stepName }
+        );
+      }
+    }
+
     /* ─── Form submit ─── */
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      /* ════════════════════════════════════════════
-         AUDIT FLOW LOGGING
-         ════════════════════════════════════════════ */
       console.log('[Audit] ════════════════════════════════════════════');
       console.log('[Audit]  🚀 AUDIT STARTED');
       console.log('[Audit]  Timestamp:', new Date().toISOString());
       console.log('[Audit]  User Agent:', navigator.userAgent);
       console.log('[Audit]  Online:', navigator.onLine);
       console.log('[Audit] ════════════════════════════════════════════');
+      auditStep = { current: '', history: [] };
 
       /* ─── STEP 1: Prevent duplicate submissions ─── */
       if (window.__auditBusy) {
-        console.log('[Audit]  STEP 1: Busy — ignoring duplicate submit');
+        logStep('Duplicate Check', 'warn', 'Ignoring duplicate submit');
         return;
       }
       window.__auditBusy = true;
-      console.log('[Audit]  STEP 1: Busy lock acquired');
+      logStep('Busy Lock', 'ok', 'Acquired');
 
       /* ─── STEP 2: Offline check ─── */
       if (window.NAGRIVA_ErrorHandler && NAGRIVA_ErrorHandler.detectOffline()) {
-        console.log('[Audit]  STEP 2: User is OFFLINE — aborting');
+        logStep('Offline Check', 'fail', 'User is offline');
         window.__auditBusy = false;
         return;
       }
-      console.log('[Audit]  STEP 2: Online check passed');
+      logStep('Offline Check', 'ok', 'Online');
 
       /* ─── STEP 3: URL Validation ─── */
       var url = document.getElementById('auditUrl').value.trim();
-      console.log('[Audit]  STEP 3: Validating URL — input:', JSON.stringify(url));
+      logStep('URL Validation', 'info', 'Input: ' + JSON.stringify(url));
 
       if (!url) {
-        console.error('[Audit]  STEP 3: FAILED — URL is empty');
+        logStep('URL Validation', 'fail', 'URL is empty');
         document.getElementById('auditUrl').classList.add('aud-input-error');
         if (window.NAGRIVA_ErrorHandler) {
           NAGRIVA_ErrorHandler.handleError(
             NAGRIVA_ErrorHandler.ERROR_TYPES.INVALID_URL,
-            null,
+            new Error('URL is empty'),
             'audit_form_submit'
           );
         }
@@ -2579,14 +2641,13 @@
 
       try {
         var parsedUrl = new URL(url);
-        console.log('[Audit]  STEP 3: URL validated — protocol:', parsedUrl.protocol, 'host:', parsedUrl.host);
+        logStep('URL Validation', 'ok', 'Protocol: ' + parsedUrl.protocol + ', Host: ' + parsedUrl.host);
         if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
-          console.warn('[Audit]  STEP 3: URL protocol is not http/https:', parsedUrl.protocol);
+          logStep('URL Validation', 'warn', 'Protocol is not http/https: ' + parsedUrl.protocol);
         }
       } catch (e) {
-        console.error('[Audit]  STEP 3: FAILED — Invalid URL format');
+        logStep('URL Validation', 'fail', 'Invalid URL: ' + e.message);
         console.error('[Audit]  URL:', url);
-        console.error('[Audit]  Error:', e.message);
         document.getElementById('auditUrl').classList.add('aud-input-error');
         if (window.NAGRIVA_ErrorHandler) {
           NAGRIVA_ErrorHandler.handleError(
@@ -2600,7 +2661,7 @@
         return;
       }
 
-      console.log('[Audit]  STEP 3: ✅ URL Validated');
+      logStep('URL Validation', 'ok', 'Valid');
 
       document.querySelectorAll('.aud-input-error').forEach(function(el) {
         el.classList.remove('aud-input-error');
@@ -2610,15 +2671,15 @@
       loadingUrlDisplay.textContent = 'Scanning ' + displayUrl + '...';
 
       /* ─── Premium Loading: Show overlay + skeletons ─── */
-      console.log('[Audit]  Loading overlay — showing for URL:', url);
+      logStep('Loading UI', 'info', 'Showing overlay and skeletons');
       console.log('[Audit]  DOM check — overallScore:', !!document.getElementById('overallScore'), 'recCards:', !!document.getElementById('recCards'), 'aiInsightsContainer:', !!document.getElementById('aiInsightsContainer'));
       formView.style.display = 'none';
       loadingView.classList.add('active');
       resultsView.classList.remove('active');
 
-      var loadHandle = null;
+      auditState.loadHandle = null;
       if (window.NAGRIVA_AuditLoading) {
-        loadHandle = NAGRIVA_AuditLoading.startAuditLoad(url, {
+        auditState.loadHandle = NAGRIVA_AuditLoading.startAuditLoad(url, {
           scoreContainer: 'audResults',
           recContainer: document.getElementById('recCards'),
           aiContainer: document.getElementById('aiInsightsContainer'),
@@ -2631,16 +2692,16 @@
 
       var msgIdx = 0;
       var progress = 0;
-      var loadFailed = false;
-      var msgInterval = setInterval(function() {
-        if (loadFailed) return;
+      auditState.loadFailed = false;
+      auditState.msgInterval = setInterval(function() {
+        if (auditState.loadFailed) return;
         loadingMsgs.forEach(function(m) { m.classList.remove('active'); });
         msgIdx = (msgIdx + 1) % loadingMsgs.length;
         loadingMsgs[msgIdx].classList.add('active');
       }, 1300);
 
-      var progressInterval = setInterval(function() {
-        if (loadFailed) return;
+      auditState.progressInterval = setInterval(function() {
+        if (auditState.loadFailed) return;
         progress += Math.random() * 6 + 2;
         if (progress >= 95) {
           progress = 95;
@@ -2652,15 +2713,12 @@
       /* ════════════════════════════════════════════
          STEP 4 — SEND API REQUEST
          ════════════════════════════════════════════ */
-      console.log('[Audit] ════════════════════════════════════════════');
-      console.log('[Audit]  STEP 4: Sending API request to /api/audit');
-      console.log('[Audit]  URL:', url);
-      console.log('[Audit]  Timestamp:', new Date().toISOString());
-      console.log('[Audit] ════════════════════════════════════════════');
+      logStep('API Request', 'info', 'Sending POST to /api/audit');
 
       var apiUrl = '/api/audit';
       var requestBody = JSON.stringify({ url: url });
       console.log('[Audit]  Request payload:', requestBody);
+      console.log('[Audit]  Request URL:', apiUrl);
 
       fetch(apiUrl, {
         method: 'POST',
@@ -2668,40 +2726,46 @@
         body: requestBody
       })
       .then(function(response) {
-        console.log('[Audit] ════════════════════════════════════════════');
-        console.log('[Audit]  STEP 5: API Response Received');
-        console.log('[Audit]  Status:', response.status, response.statusText);
-        console.log('[Audit]  Headers:', response.headers.get('content-type'));
-        console.log('[Audit] ════════════════════════════════════════════');
+        logStep('API Response', 'info', 'Status: ' + response.status + ' ' + response.statusText);
 
         return response.text().then(function(text) {
-          console.log('[Audit]  Raw response body:', text.substring(0, 500));
+          console.log('[Audit]  Raw response body:', text.substring(0, 1000));
           var data;
           try {
             data = JSON.parse(text);
           } catch (parseErr) {
-            console.error('[Audit]  FAILED: Response is not valid JSON');
+            console.error('[Audit]  Response is not valid JSON');
             console.error('[Audit]  Parse error:', parseErr.message);
             console.error('[Audit]  Response preview:', text.substring(0, 200));
-            throw new Error('Invalid response from audit server (not JSON). Status: ' + response.status);
+            failStep('Parse Response', new Error('Invalid response from audit server (not JSON). Status: ' + response.status), {
+              step: 'Parse Response',
+              statusCode: response.status,
+              payload: text.substring(0, 500)
+            });
+            return;
           }
           if (!response.ok) {
-            console.error('[Audit]  FAILED: API returned error status');
+            var apiErr = new Error(data.error || data.detail || 'Audit request failed with status ' + response.status);
+            console.error('[Audit]  API returned error status:', response.status);
             console.error('[Audit]  Error payload:', JSON.stringify(data));
-            throw new Error(data.error || 'Audit request failed with status ' + response.status);
+            failStep('API Request Failed', apiErr, {
+              step: 'API Request Failed',
+              statusCode: response.status,
+              payload: JSON.stringify(data)
+            });
+            return;
           }
-          console.log('[Audit]  STEP 5: API Response Parsed Successfully');
-          console.log('[Audit]  Data:', JSON.stringify(data));
+          logStep('API Response', 'ok', 'Data received: ' + JSON.stringify(data).substring(0, 200));
           return data;
         });
       })
       .then(function(data) {
-        console.log('[Audit] ════════════════════════════════════════════');
-        console.log('[Audit]  STEP 6: Calculating Scores');
-        console.log('[Audit]  Raw data from API:', JSON.stringify(data));
+        if (!data) return;
 
-        clearInterval(progressInterval);
-        clearInterval(msgInterval);
+        logStep('Calculate Scores', 'info', 'Processing API data');
+
+        clearInterval(auditState.progressInterval);
+        clearInterval(auditState.msgInterval);
         progress = 100;
         document.getElementById('audProgressFill').style.width = '100%';
         document.getElementById('audProgressPct').textContent = '100%';
@@ -2710,8 +2774,8 @@
           try {
             loadingView.classList.remove('active');
 
-            if (loadHandle) {
-              loadHandle.complete();
+            if (auditState.loadHandle) {
+              auditState.loadHandle.complete();
             }
 
             var scores = {
@@ -2722,21 +2786,18 @@
               security: data.bestPractices || 0,
               ux: data.accessibility || 0
             };
-            console.log('[Audit]  STEP 6: Scores Calculated:', JSON.stringify(scores));
-            console.log('[Audit]  overall=' + scores.overall + ' seo=' + scores.seo + ' perf=' + scores.perf + ' mobile=' + scores.mobile + ' security=' + scores.security + ' ux=' + scores.ux);
+            logStep('Calculate Scores', 'ok', JSON.stringify(scores));
 
-            console.log('[Audit] ════════════════════════════════════════════');
-            console.log('[Audit]  STEP 7: Animating Scores');
+            logStep('Animate Scores', 'info', 'Starting animation');
             animateScores(scores);
-            console.log('[Audit]  STEP 7: Scores Animated');
+            logStep('Animate Scores', 'ok', 'Done');
 
-            console.log('[Audit] ════════════════════════════════════════════');
-            console.log('[Audit]  STEP 8: Generating Recommendations');
+            logStep('Generate Recommendations', 'info', 'Starting recommendation engine');
             runRecommendationEngine(scores);
-            console.log('[Audit]  STEP 8: Recommendations Generated');
+            logStep('Generate Recommendations', 'ok', 'Done');
 
-            if (loadHandle) {
-              loadHandle.showResults();
+            if (auditState.loadHandle) {
+              auditState.loadHandle.showResults();
             }
 
             resultsView.classList.add('active');
@@ -2744,6 +2805,7 @@
 
             window.__auditBusy = false;
 
+            logStep('Audit Complete', 'ok', 'All steps passed successfully');
             console.log('[Audit] ════════════════════════════════════════════');
             console.log('[Audit]  ✅ AUDIT COMPLETE — All steps passed');
             console.log('[Audit] ════════════════════════════════════════════');
@@ -2756,58 +2818,18 @@
               leadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 200);
           } catch (err) {
-            console.error('[Audit] ❌ FAILED at STEP 7-8 (rendering):', err.message);
-            console.error('[Audit]  Stack:', err.stack);
-            loadFailed = true;
-            clearInterval(progressInterval);
-            clearInterval(msgInterval);
-            loadingView.classList.remove('active');
-            formView.style.display = 'block';
-            if (loadHandle) loadHandle.hideOverlay();
-            window.__auditBusy = false;
-            var errorType = window.NAGRIVA_ErrorHandler
-              ? NAGRIVA_ErrorHandler.classifyError(err)
-              : 'AUDIT_FAILED';
-            if (window.NAGRIVA_ErrorHandler) {
-              NAGRIVA_ErrorHandler.handleError(
-                errorType,
-                err,
-                'audit_results_generation',
-                function () {
-                  window.__auditBusy = false;
-                  form.dispatchEvent(new Event('submit'));
-                }
-              );
-            }
+            failStep('Render Results', err, {
+              step: 'Render Results',
+              payload: 'scores=' + JSON.stringify(typeof scores !== 'undefined' ? scores : {})
+            });
           }
         }, 500);
       })
       .catch(function(err) {
-        console.error('[Audit] ❌ FAILED at STEP 4-6 (API call):', err.message);
-        console.error('[Audit]  Stack:', err.stack);
-        console.error('[Audit]  Full error object:', err);
-        loadFailed = true;
-        clearInterval(progressInterval);
-        clearInterval(msgInterval);
-        loadingView.classList.remove('active');
-        formView.style.display = 'block';
-        if (loadHandle) loadHandle.hideOverlay();
-        window.__auditBusy = false;
-        var errorType = window.NAGRIVA_ErrorHandler
-          ? NAGRIVA_ErrorHandler.classifyError(err)
-          : 'AUDIT_FAILED';
-        console.log('[Audit]  Classified error type:', errorType);
-        if (window.NAGRIVA_ErrorHandler) {
-          NAGRIVA_ErrorHandler.handleError(
-            errorType,
-            err,
-            'audit_api_call',
-            function () {
-              window.__auditBusy = false;
-              form.dispatchEvent(new Event('submit'));
-            }
-          );
-        }
+        failStep('API Request', err, {
+          step: 'API Request (network error)',
+          payload: 'url=' + url + ', method=POST'
+        });
       });
     });
 
@@ -3841,11 +3863,15 @@
       btn.disabled = true;
 
       var pdfErrorHandler = function(err) {
+        console.error('[Audit] ❌ PDF Export Failed');
+        console.error('[Audit]  Full error object:', err);
+        if (err && err.stack) console.error('[Audit]  Stack:', err.stack);
         if (pdfModal && window.NAGRIVA_AuditLoading) {
           NAGRIVA_AuditLoading.hidePdfModal();
         }
         if (window.NAGRIVA_ErrorHandler) {
           var errorType = NAGRIVA_ErrorHandler.classifyError(err);
+          NAGRIVA_ErrorHandler.generateDebugReport(errorType, err, 'PDF Export');
           NAGRIVA_ErrorHandler.handleError(errorType, err, 'pdf_export', function () {
             document.getElementById('recExportPDF').click();
           });
