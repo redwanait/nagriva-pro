@@ -174,11 +174,12 @@ window.NAGRIVA_ErrorHandler = (function () {
     );
 
     var msg = getMessage(errorType);
+    var displayMsg = errMsg || msg.message;
     if (window.NAGRIVA_Alerts) {
-      window.NAGRIVA_Alerts.show(msg.type, msg.title, msg.message, { retry: retryFn, action: userAction });
+      window.NAGRIVA_Alerts.show(msg.type, msg.title, displayMsg, { retry: retryFn, action: userAction });
     } else {
       if (window.NAGRIVA_Toast) {
-        window.NAGRIVA_Toast[msg.type](msg.title, msg.message);
+        window.NAGRIVA_Toast[msg.type](msg.title, displayMsg);
       }
     }
     return logEntry;
