@@ -163,11 +163,13 @@ module.exports = async function handler(req, res) {
     if (!categories) {
       return sendJson(502, { success: false, failedStep: 'Parse PageSpeed Data', error: 'Invalid PageSpeed API Response', detail: 'Response missing categories' });
     }
-    console.log("Categories found: " + Object.keys(categories).join(', '));
-    Object.keys(categories).forEach(function (key) {
-      var cat = categories[key];
-      console.log('Category "' + key + '": ' + JSON.stringify({ id: cat.id, title: cat.title, score: cat.score }));
-    });
+    console.log("=== RAW LIGHTHOUSE CATEGORIES ===");
+    console.log(JSON.stringify(data.lighthouseResult.categories, null, 2));
+    console.log("performance.score:", categories.performance && categories.performance.score);
+    console.log("seo.score:", categories.seo && categories.seo.score);
+    console.log("accessibility.score:", categories.accessibility && categories.accessibility.score);
+    console.log("best-practices.score:", categories['best-practices'] && categories['best-practices'].score);
+    console.log("================================");
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Extract Categories', error: e.message, stack: e.stack });
   }
@@ -176,16 +178,23 @@ module.exports = async function handler(req, res) {
   console.log("Calculating scores");
   let performance, seo, accessibility, bestPractices;
   try {
-    const toScore = (cat) => {
-      if (!cat || typeof cat.score !== 'number') return null;
-      return Math.round(cat.score * 100);
+    const toScore = function(cat, label) {
+      if (!cat) {
+        console.log("toScore(" + label + "): cat is", cat, "→ returning null");
+        return null;
+      }
+      if (typeof cat.score !== 'number') {
+        console.log("toScore(" + label + "): cat.score is", cat.score, "(type " + typeof cat.score + ") → returning null");
+        return null;
+      }
+      var result = Math.round(cat.score * 100);
+      console.log("toScore(" + label + "): cat.score =", cat.score, "→", result);
+      return result;
     };
-    performance = toScore(categories.performance);
-    seo = toScore(categories.seo);
-    accessibility = toScore(categories.accessibility);
-    bestPractices = toScore(categories['best-practices']);
-    console.log("Scores (0-100) — perf: " + performance + " seo: " + seo + " acc: " + accessibility + " bp: " + bestPractices);
-    console.log("Raw PageSpeed scores (0-1) — perf: " + (categories.performance ? categories.performance.score : 'missing') + " seo: " + (categories.seo ? categories.seo.score : 'missing') + " acc: " + (categories.accessibility ? categories.accessibility.score : 'missing') + " bp: " + (categories['best-practices'] ? categories['best-practices'].score : 'missing'));
+    performance = toScore(categories.performance, 'performance');
+    seo = toScore(categories.seo, 'seo');
+    accessibility = toScore(categories.accessibility, 'accessibility');
+    bestPractices = toScore(categories['best-practices'], 'best-practices');
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Calculate Scores', error: e.message, stack: e.stack });
   }
@@ -194,9 +203,9 @@ module.exports = async function handler(req, res) {
   console.log("Computing overall score");
   let overallScore;
   try {
-    const scores = [performance, seo, accessibility, bestPractices].filter(function (s) { return s !== null; });
-    overallScore = scores.length > 0
-      ? Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length)
+    const scoreVals = [performance, seo, accessibility, bestPractices].filter(function (s) { return s !== null; });
+    overallScore = scoreVals.length > 0
+      ? Math.round(scoreVals.reduce(function (a, b) { return a + b; }, 0) / scoreVals.length)
       : null;
     console.log("Overall score: " + overallScore);
   } catch (e) {
@@ -219,6 +228,16 @@ module.exports = async function handler(req, res) {
   }
 
   /* ─── Step 14: return response ─── */
+  console.log("=== FINAL SCORES OBJECT ===");
+  console.log(JSON.stringify({
+    seo: seo,
+    performance: performance,
+    accessibility: accessibility,
+    bestPractices: bestPractices,
+    overall: overallScore
+  }, null, 2));
+  console.log("===========================");
+
   console.log("Returning response — 200 OK");
   try {
     return sendJson(200, {
