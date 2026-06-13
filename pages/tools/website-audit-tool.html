@@ -474,128 +474,138 @@
       animation: audFadeInUp 0.5s ease;
     }
 
-    /* ─── Overall Score ─── */
-    .aud-overall {
-      text-align: center;
-      padding: 32px 0 40px;
+    /* ═══════════════════════════════════════════════════════
+       SCORE DASHBOARD — Premium SaaS Score Cards
+       ═══════════════════════════════════════════════════════ */
+
+    /* ─── Dashboard Header (Score Row) ─── */
+    .aud-dash-header {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--aud-card-bg);
+      border: 1px solid var(--aud-glass-border);
+      border-radius: 14px;
     }
-    .aud-overall-score {
-      position: relative;
-      width: 140px; height: 140px;
-      margin: 0 auto 16px;
-    }
-    .aud-overall-score svg {
-      width: 100%; height: 100%;
-      transform: rotate(-90deg);
-    }
-    .aud-overall-score circle {
-      fill: none;
-      stroke-width: 6;
-      cx: 70; cy: 70; r: 62;
-    }
-    .aud-overall-bg {
-      stroke: rgba(255,255,255,0.06);
-    }
-    .aud-overall-fill {
-      stroke: var(--accent);
-      stroke-linecap: round;
-      stroke-dasharray: 389.56;
-      stroke-dashoffset: 389.56;
-      transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .aud-overall-num {
-      position: absolute;
-      inset: 0;
+
+    /* ─── Individual Score Card ─── */
+    .aud-score-card {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 4px;
+      padding: 8px 6px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      min-height: 104px;
+      transition: box-shadow 0.5s ease, border-color 0.3s ease;
+      position: relative;
     }
-    .aud-overall-num strong {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1;
-      letter-spacing: -0.03em;
-    }
-    .aud-overall-num span {
-      font-size: 0.72rem;
-      color: var(--gray2);
-      margin-top: 2px;
-    }
-    .aud-overall-grade {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 5px 14px;
-      border-radius: 99px;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.2);
-      color: var(--aud-green);
+    .aud-score-card:hover {
+      border-color: rgba(255,255,255,0.12);
     }
 
-    /* ─── Score Grid ─── */
-    .aud-scores {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-bottom: 24px;
+    /* ─── Overall Card ─── */
+    .aud-score-card--overall {
+      flex: 1.3;
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.09);
     }
-    .aud-score-item {
-      text-align: center;
-      background: rgba(255,255,255,0.015);
-      border: 1px solid var(--aud-glass-border);
-      border-radius: 16px;
-      padding: 24px 12px 20px;
-      transition: border-color 0.3s ease;
-    }
-    .aud-score-item:hover {
-      border-color: rgba(250,204,21,0.12);
-    }
-    .aud-score-ring {
+
+    /* ─── Circle Container ─── */
+    .aud-score-card-circle {
       position: relative;
-      width: 72px; height: 72px;
-      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
     }
-    .aud-score-ring svg {
-      width: 100%; height: 100%;
+    .aud-score-card-circle svg {
+      width: 100%;
+      height: 100%;
       transform: rotate(-90deg);
     }
-    .aud-score-ring circle {
+    .aud-score-card-circle circle {
       fill: none;
-      stroke-width: 5;
-      cx: 36; cy: 36; r: 31;
-    }
-    .aud-score-bg {
-      stroke: rgba(255,255,255,0.06);
-    }
-    .aud-score-fill {
-      stroke: var(--accent);
       stroke-linecap: round;
-      stroke-dasharray: 194.78;
-      stroke-dashoffset: 194.78;
-      transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+      stroke-width: 6;
     }
-    .aud-score-num {
+
+    /* Overall circle override */
+    .aud-score-card--overall .aud-score-card-circle {
+      width: 84px;
+      height: 84px;
+    }
+    .aud-score-card--overall .aud-score-card-circle circle {
+      stroke-width: 8;
+    }
+
+    /* Background ring */
+    .aud-score-card-bg {
+      stroke: rgba(255,255,255,0.07);
+    }
+
+    /* Fill ring */
+    .aud-score-card-fill {
+      stroke: var(--accent);
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ─── Number Overlay ─── */
+    .aud-score-card-num {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--white);
+      line-height: 1;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
-    .aud-score-label {
-      font-size: 0.72rem;
-      font-weight: 500;
+
+    .aud-score-card--overall .aud-score-card-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    /* ─── Grade Badge (Overall only) ─── */
+    .aud-score-card-grade {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.2);
+      color: #10B981;
+      line-height: 1.2;
+    }
+    .aud-score-card-grade svg {
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Category Label ─── */
+    .aud-score-card-label {
+      font-size: 10px;
+      font-weight: 600;
       color: var(--gray2);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
+      line-height: 1;
     }
 
     /* ════════════════════════════════════════════
@@ -1328,22 +1338,14 @@
     /* ════════════════════════════════════════════
        RESPONSIVE
        ════════════════════════════════════════════ */
-    @media (max-width: 900px) {
-      .aud-scores { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    }
     @media (max-width: 768px) {
       .aud-card { padding: 24px 20px; }
       .aud-lead-card { padding: 24px 20px; }
-      .aud-scores { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .aud-hero-stats { gap: 14px; flex-direction: column; }
       .aud-hero-stat-dot { display: none; }
       .aud-loading { padding: 20px 0; }
       .aud-cta { padding: 40px 0 56px; }
       .aud-faq { padding: 40px 0; }
-      .aud-overall-score { width: 120px; height: 120px; }
-      .aud-overall-score circle { cx: 60; cy: 60; r: 53; }
-      .aud-overall-fill { stroke-dasharray: 333.01; stroke-dashoffset: 333.01; }
-      .aud-overall-num strong { font-size: 2rem; }
       .lf-grid { grid-template-columns: 1fr; gap: 14px; }
       .lf-trust { gap: 12px; flex-direction: column; }
     }
@@ -1483,12 +1485,6 @@
     @media (max-width: 480px) {
       .aud-card { padding: 20px 16px; border-radius: 16px; }
       .aud-lead-card { padding: 20px 16px; border-radius: 16px; }
-      .aud-scores { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .aud-score-item { padding: 18px 8px 16px; }
-      .aud-score-ring { width: 60px; height: 60px; }
-      .aud-score-ring circle { cx: 30; cy: 30; r: 26; }
-      .aud-score-fill { stroke-dasharray: 163.36; stroke-dashoffset: 163.36; }
-      .aud-score-num { font-size: 0.85rem; }
       .aud-input { padding: 14px 14px 14px 42px; font-size: 0.88rem; }
       .aud-select { padding: 14px 40px 14px 14px; font-size: 0.88rem; }
       .aud-submit { padding: 16px 24px; font-size: 0.92rem; }
@@ -1498,10 +1494,6 @@
       .aud-faq-a-inner { padding: 0 18px 14px; }
       .aud-cta-btn { padding: 14px 24px; font-size: 0.88rem; }
       .aud-card-header h2 { font-size: 1.2rem; }
-      .aud-overall-score { width: 100px; height: 100px; }
-      .aud-overall-score circle { cx: 50; cy: 50; r: 44; }
-      .aud-overall-fill { stroke-dasharray: 276.46; stroke-dashoffset: 276.46; }
-      .aud-overall-num strong { font-size: 1.8rem; }
     }
   </style>
 <style>
@@ -1515,32 +1507,7 @@
   /* ─── Dashboard wrapper ─── */
   .aud-dashboard { display: flex; flex-direction: column; gap: 12px; }
 
-  /* ═══ SECTION 1: Executive Dashboard Header ═══ */
-  .aud-dash-header {
-    display: flex; align-items: center; gap: 16px;
-    padding: 12px 20px;
-    background: var(--aud-card-bg);
-    border: 1px solid var(--aud-glass-border);
-    border-radius: 12px;
-  }
-  .aud-dash-header-score { flex-shrink: 0; }
-  .aud-dash-header-scores { flex: 1; display: flex; justify-content: space-around; gap: 6px; }
-
-  #audResults .aud-dash-header .aud-overall { padding: 0; }
-  #audResults .aud-dash-header .aud-overall-score { width: 96px; height: 96px; margin-bottom: 4px; }
-  #audResults .aud-dash-header .aud-overall-score circle { cx: 48; cy: 48; r: 40; }
-  #audResults .aud-dash-header .aud-overall-fill { stroke-dasharray: 251.33; stroke-dashoffset: 251.33; stroke-width: 8; }
-  #audResults .aud-dash-header .aud-overall-num strong { font-size: 1.8rem; }
-  #audResults .aud-dash-header .aud-overall-num span { font-size: 0.55rem; }
-  #audResults .aud-dash-header .aud-overall-grade { font-size: 0.65rem; padding: 3px 10px; }
-
-  #audResults .aud-dash-header-scores { gap: 10px; }
-  #audResults .aud-dash-header-scores .aud-score-item { padding: 14px 8px 10px; flex: 1; max-width: 120px; min-width: 90px; }
-  #audResults .aud-dash-header-scores .aud-score-ring { width: 56px; height: 56px; margin-bottom: 6px; }
-  #audResults .aud-dash-header-scores .aud-score-ring circle { cx: 28; cy: 28; r: 23; }
-  #audResults .aud-dash-header-scores .aud-score-fill { stroke-dasharray: 144.51; stroke-dashoffset: 144.51; stroke-width: 5; }
-  #audResults .aud-dash-header-scores .aud-score-num { font-size: 0.85rem; }
-  #audResults .aud-dash-header-scores .aud-score-label { font-size: 0.6rem; }
+  /* ═══ SECTION 1: Score Dashboard (defined in base styles) ═══ */
 
   /* ═══ SECTION 2: Executive Summary ═══ */
   .aud-dash-summary {
@@ -1709,19 +1676,43 @@
   #auditCard.aud-card { padding: 16px 24px; }
 
   /* ─── Responsive ─── */
+  @media (max-width: 1100px) {
+    .aud-score-card--overall .aud-score-card-circle { width: 74px; height: 74px; }
+    .aud-score-card:not(.aud-score-card--overall) .aud-score-card-circle { width: 56px; height: 56px; }
+    .aud-score-card--overall .aud-score-card-num { font-size: 26px; }
+    .aud-score-card:not(.aud-score-card--overall) .aud-score-card-num { font-size: 18px; }
+    .aud-score-card { min-height: 92px; }
+  }
   @media (max-width: 1024px) {
     .aud-dash-summary { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    #audResults .aud-dash-header-scores .aud-score-item { max-width: 100px; min-width: 80px; }
   }
   @media (max-width: 768px) {
-    .aud-dash-header { flex-direction: column; gap: 10px; padding: 12px; }
-    .aud-dash-header-scores { flex-wrap: wrap; justify-content: center; }
-    #audResults .aud-dash-header-scores .aud-score-item { max-width: 90px; min-width: 70px; }
+    .aud-dash-header { flex-wrap: wrap; gap: 8px; padding: 12px; }
+    .aud-score-card { min-height: 84px; padding: 6px 4px; }
+    .aud-score-card--overall { flex: 0 0 auto; }
+    .aud-score-card:not(.aud-score-card--overall) .aud-score-card-circle { width: 48px; height: 48px; }
+    .aud-score-card:not(.aud-score-card--overall) .aud-score-card-num { font-size: 16px; }
+    .aud-score-card--overall .aud-score-card-circle { width: 64px; height: 64px; }
+    .aud-score-card--overall .aud-score-card-num { font-size: 22px; }
+    .aud-score-card-label { font-size: 8px; }
+    .aud-score-card-grade { font-size: 9px; padding: 2px 7px; }
     .aud-dash-summary { grid-template-columns: 1fr; }
     .aud-dash-issues-overview { grid-template-columns: 1fr; }
     .aud-dash-grid-2col { grid-template-columns: 1fr; }
     .aud-dash-cta { flex-direction: column; text-align: center; }
     #auditCard.aud-card { padding: 12px 16px; }
+  }
+  @media (max-width: 480px) {
+    .aud-dash-header { gap: 6px; padding: 10px; }
+    .aud-score-card--overall { flex: 1 1 100%; }
+    .aud-score-card:not(.aud-score-card--overall) { flex: 1 1 calc(33% - 6px); min-width: 64px; }
+    .aud-score-card--overall .aud-score-card-circle { width: 56px; height: 56px; }
+    .aud-score-card--overall .aud-score-card-num { font-size: 20px; }
+    .aud-score-card:not(.aud-score-card--overall) .aud-score-card-circle { width: 40px; height: 40px; }
+    .aud-score-card:not(.aud-score-card--overall) .aud-score-card-num { font-size: 14px; }
+    .aud-score-card { min-height: 72px; padding: 4px 2px; gap: 2px; }
+    .aud-score-card-label { font-size: 7px; }
+    .aud-score-card-grade { font-size: 8px; padding: 1px 6px; }
   }
 </style>
 <script type="application/ld+json">
@@ -1928,77 +1919,78 @@
             <!-- Dashboard Container -->
             <div class="aud-dashboard">
 
-              <!-- ═══ SECTION 1: Executive Dashboard Header ═══ -->
-              <div class="aud-dash-header">
-                <div class="aud-dash-header-score">
-                  <div class="aud-overall">
-                    <div class="aud-overall-score">
-                      <svg viewBox="0 0 140 140">
-                        <circle class="aud-overall-bg" cx="70" cy="70" r="62"/>
-                        <circle class="aud-overall-fill" id="overallCircle" cx="70" cy="70" r="62"/>
-                      </svg>
-                      <div class="aud-overall-num">
-                        <strong id="overallScore">0</strong>
-                        <span>Overall Score</span>
-                      </div>
-                    </div>
-                    <div class="aud-overall-grade" id="overallGrade">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                      Excellent
-                    </div>
+              <!-- ═══ SECTION 1: Score Dashboard ═══ -->
+              <div class="aud-dash-header" id="scoreDashboard">
+                <!-- Overall Score -->
+                <div class="aud-score-card aud-score-card--overall" id="overallCard">
+                  <div class="aud-score-card-circle">
+                    <svg viewBox="0 0 120 120">
+                      <circle class="aud-score-card-bg" cx="60" cy="60" r="52"/>
+                      <circle class="aud-score-card-fill" id="overallCircle" cx="60" cy="60" r="52"/>
+                    </svg>
+                    <span class="aud-score-card-num">
+                      <strong id="overallScore">0</strong>
+                    </span>
+                  </div>
+                  <div class="aud-score-card-grade" id="overallGrade">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Excellent
                   </div>
                 </div>
-                <div class="aud-dash-header-scores" id="scoreGrid">
-                  <div class="aud-score-item">
-                    <div class="aud-score-ring">
-                      <svg viewBox="0 0 72 72">
-                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                        <circle class="aud-score-fill" id="scoreSEO" cx="36" cy="36" r="31"/>
-                      </svg>
-                      <span class="aud-score-num" id="scoreSEONum">0</span>
-                    </div>
-                    <div class="aud-score-label">SEO</div>
+                <!-- SEO -->
+                <div class="aud-score-card" id="cardSEO">
+                  <div class="aud-score-card-circle">
+                    <svg viewBox="0 0 96 96">
+                      <circle class="aud-score-card-bg" cx="48" cy="48" r="40"/>
+                      <circle class="aud-score-card-fill" id="scoreSEO" cx="48" cy="48" r="40"/>
+                    </svg>
+                    <span class="aud-score-card-num" id="scoreSEONum">0</span>
                   </div>
-                  <div class="aud-score-item">
-                    <div class="aud-score-ring">
-                      <svg viewBox="0 0 72 72">
-                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                        <circle class="aud-score-fill" id="scorePerf" cx="36" cy="36" r="31"/>
-                      </svg>
-                      <span class="aud-score-num" id="scorePerfNum">0</span>
-                    </div>
-                    <div class="aud-score-label">Performance</div>
+                  <div class="aud-score-card-label">SEO</div>
+                </div>
+                <!-- Performance -->
+                <div class="aud-score-card" id="cardPerf">
+                  <div class="aud-score-card-circle">
+                    <svg viewBox="0 0 96 96">
+                      <circle class="aud-score-card-bg" cx="48" cy="48" r="40"/>
+                      <circle class="aud-score-card-fill" id="scorePerf" cx="48" cy="48" r="40"/>
+                    </svg>
+                    <span class="aud-score-card-num" id="scorePerfNum">0</span>
                   </div>
-                  <div class="aud-score-item">
-                    <div class="aud-score-ring">
-                      <svg viewBox="0 0 72 72">
-                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                        <circle class="aud-score-fill" id="scoreMobile" cx="36" cy="36" r="31"/>
-                      </svg>
-                      <span class="aud-score-num" id="scoreMobileNum">0</span>
-                    </div>
-                    <div class="aud-score-label">Mobile</div>
+                  <div class="aud-score-card-label">Performance</div>
+                </div>
+                <!-- Mobile -->
+                <div class="aud-score-card" id="cardMobile">
+                  <div class="aud-score-card-circle">
+                    <svg viewBox="0 0 96 96">
+                      <circle class="aud-score-card-bg" cx="48" cy="48" r="40"/>
+                      <circle class="aud-score-card-fill" id="scoreMobile" cx="48" cy="48" r="40"/>
+                    </svg>
+                    <span class="aud-score-card-num" id="scoreMobileNum">0</span>
                   </div>
-                  <div class="aud-score-item">
-                    <div class="aud-score-ring">
-                      <svg viewBox="0 0 72 72">
-                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                        <circle class="aud-score-fill" id="scoreSecurity" cx="36" cy="36" r="31"/>
-                      </svg>
-                      <span class="aud-score-num" id="scoreSecurityNum">0</span>
-                    </div>
-                    <div class="aud-score-label">Security</div>
+                  <div class="aud-score-card-label">Mobile</div>
+                </div>
+                <!-- Security -->
+                <div class="aud-score-card" id="cardSecurity">
+                  <div class="aud-score-card-circle">
+                    <svg viewBox="0 0 96 96">
+                      <circle class="aud-score-card-bg" cx="48" cy="48" r="40"/>
+                      <circle class="aud-score-card-fill" id="scoreSecurity" cx="48" cy="48" r="40"/>
+                    </svg>
+                    <span class="aud-score-card-num" id="scoreSecurityNum">0</span>
                   </div>
-                  <div class="aud-score-item">
-                    <div class="aud-score-ring">
-                      <svg viewBox="0 0 72 72">
-                        <circle class="aud-score-bg" cx="36" cy="36" r="31"/>
-                        <circle class="aud-score-fill" id="scoreUX" cx="36" cy="36" r="31"/>
-                      </svg>
-                      <span class="aud-score-num" id="scoreUXNum">0</span>
-                    </div>
-                    <div class="aud-score-label">UX</div>
+                  <div class="aud-score-card-label">Security</div>
+                </div>
+                <!-- UX -->
+                <div class="aud-score-card" id="cardUX">
+                  <div class="aud-score-card-circle">
+                    <svg viewBox="0 0 96 96">
+                      <circle class="aud-score-card-bg" cx="48" cy="48" r="40"/>
+                      <circle class="aud-score-card-fill" id="scoreUX" cx="48" cy="48" r="40"/>
+                    </svg>
+                    <span class="aud-score-card-num" id="scoreUXNum">0</span>
                   </div>
+                  <div class="aud-score-card-label">UX</div>
                 </div>
               </div>
 
@@ -2685,6 +2677,15 @@
       if (el) el.innerHTML = summary;
     }
 
+    /* ─── Helper: set card glow based on score ─── */
+    function setCardGlow(cardId, score) {
+      var card = document.getElementById(cardId);
+      if (!card) return;
+      var color = getScoreColor(score);
+      card.style.setProperty('--card-glow', color + '40');
+      card.dataset.glow = '';
+    }
+
     /* ─── Animate scores ─── */
     function animateScores(scores) {
       if (!overallCircle || !overallScore || !overallGrade) {
@@ -2702,13 +2703,17 @@
       overallGrade.style.borderColor = gradeColor + '33';
       overallGrade.style.background = gradeColor + '15';
 
+      setCardGlow('overallCard', scores.overall);
+
       var map = { seo: scores.seo, perf: scores.perf, mobile: scores.mobile, security: scores.security, ux: scores.ux };
+      var cardMap = { seo: 'cardSEO', perf: 'cardPerf', mobile: 'cardMobile', security: 'cardSecurity', ux: 'cardUX' };
 
       for (var key in map) {
         if (scoreCircles && scoreCircles[key] && scoreNums && scoreNums[key]) {
           setCircle(scoreCircles[key], map[key], 100, scoreCirc);
           scoreCircles[key].style.stroke = getScoreColor(map[key]);
           scoreNums[key].textContent = map[key];
+          setCardGlow(cardMap[key], map[key]);
         }
       }
     }
