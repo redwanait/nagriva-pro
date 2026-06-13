@@ -78,7 +78,7 @@ module.exports = async function handler(req, res) {
   console.log("Building PageSpeed request URL");
   let apiUrl;
   try {
-    apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(url) + '&key=' + apiKey + '&strategy=mobile';
+    apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(url) + '&key=' + apiKey + '&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices';
     console.log("PageSpeed URL built");
   } catch (e) {
     return sendJson(500, { success: false, failedStep: 'Build PageSpeed URL', error: e.message, stack: e.stack });
