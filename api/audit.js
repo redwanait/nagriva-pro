@@ -113,6 +113,20 @@ module.exports = async function handler(req, res) {
   try {
     data = await response.json();
     console.log("Response parsed as JSON successfully");
+    console.log(
+      'GOOGLE RAW CATEGORIES',
+      JSON.stringify(
+        data?.lighthouseResult?.categories,
+        null,
+        2
+      )
+    );
+    console.log(
+      'GOOGLE CATEGORY KEYS',
+      Object.keys(
+        data?.lighthouseResult?.categories || {}
+      )
+    );
   } catch (e) {
     let text = '';
     try { text = await response.text(); } catch (e2) {}
