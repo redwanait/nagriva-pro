@@ -1,106 +1,215 @@
+console.log("FILE LOADED");
+
 module.exports = async function handler(req, res) {
-  const step = (label) => console.log(`[AuditAPI] ${label}`);
-  const fail = (code, label, detail) => {
-    console.error(`[AuditAPI] FAILED — ${label}`, detail || '');
-    return res.status(code).json({ success: false, error: label, detail: detail || null });
-  };
+  console.log("HANDLER STARTED");
 
-  step('Handler invoked');
-
-  if (req.method !== 'POST') {
-    return fail(405, 'Method not allowed', `Received ${req.method}`);
+  function sendJson(statusCode, body) {
+    const payload = JSON.stringify(body);
+    try {
+      res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+      res.end(payload);
+    } catch (e) {
+      try {
+        res.statusCode = statusCode;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(payload);
+      } catch (e2) {
+        console.error('[AuditAPI] CRITICAL: cannot send response:', e2.message);
+      }
+    }
   }
 
-  const { url } = req.body || {};
-
-  if (!url || typeof url !== 'string') {
-    return fail(400, 'URL is required');
-  }
-
-  let parsed;
+  /* ─── Step 0: method check ─── */
+  console.log("Request received — method: " + req.method);
   try {
-    parsed = new URL(url);
-    step(`URL parsed: ${parsed.href}`);
-  } catch {
-    return fail(400, 'Invalid URL format', `Cannot parse: "${url}"`);
+    if (req.method !== 'POST') {
+      return sendJson(405, { success: false, failedStep: 'Method Check', error: 'Method not allowed', detail: 'Only POST is accepted, got: ' + req.method });
+    }
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Method Check', error: e.message, stack: e.stack });
   }
 
-  if (!['http:', 'https:'].includes(parsed.protocol)) {
-    return fail(400, 'Invalid URL protocol', `Protocol must be http or https, got "${parsed.protocol}"`);
+  /* ─── Step 1: parse body ─── */
+  console.log("Parsing request body");
+  let url;
+  try {
+    url = (req.body && req.body.url) || '';
+    console.log("URL from body: \"" + url + "\"");
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Parse Body', error: e.message, stack: e.stack });
+  }
+
+  if (!url || typeof url !== 'string' || !url.trim()) {
+    return sendJson(400, { success: false, failedStep: 'URL Validation', error: 'URL is required', detail: 'No url field in request body' });
+  }
+
+  /* ─── Step 2: validate URL ─── */
+  console.log("Validating URL");
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(url);
+    console.log("URL validated — protocol: " + parsedUrl.protocol + " host: " + parsedUrl.host);
+  } catch (e) {
+    return sendJson(400, { success: false, failedStep: 'URL Validation', error: 'Invalid URL format', detail: e.message });
+  }
+
+  if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+    return sendJson(400, { success: false, failedStep: 'URL Validation', error: 'Invalid URL protocol', detail: 'Must be http or https, got: ' + parsedUrl.protocol });
+  }
+
+  /* ─── Step 3: check environment ─── */
+  console.log("Checking environment variables");
+  try {
+    console.log("process.env.PAGESPEED_API_KEY exists: " + (!!process.env.PAGESPEED_API_KEY));
+    console.log("process.env.PAGESPEED_API_KEY length: " + (process.env.PAGESPEED_API_KEY ? process.env.PAGESPEED_API_KEY.length : 0));
+    console.log("All process.env keys: " + Object.keys(process.env).join(', '));
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Environment Check', error: e.message, stack: e.stack });
   }
 
   const apiKey = process.env.PAGESPEED_API_KEY;
   if (!apiKey) {
-    return fail(500, 'API Key Missing', 'PAGESPEED_API_KEY environment variable is not set');
+    console.log("API key found: false");
+    return sendJson(500, { success: false, failedStep: 'Environment Check', error: 'API Key Missing', detail: 'PAGESPEED_API_KEY environment variable is not set' });
+  }
+  console.log("API key found: true (first 4 chars: " + apiKey.substring(0, 4) + ")");
+
+  /* ─── Step 4: build PageSpeed URL ─── */
+  console.log("Building PageSpeed request URL");
+  let apiUrl;
+  try {
+    apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(url) + '&key=' + apiKey + '&strategy=mobile';
+    console.log("PageSpeed URL built");
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Build PageSpeed URL', error: e.message, stack: e.stack });
   }
 
-  step(`API key present: ${apiKey.substring(0, 4)}...`);
-
-  const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${apiKey}&strategy=mobile`;
-
-  step(`Sending request to Google PageSpeed API`);
-
+  /* ─── Step 5: check fetch availability ─── */
+  console.log("Checking fetch availability");
   try {
-    const response = await fetch(apiUrl);
-    step(`PageSpeed API responded with status ${response.status}`);
-
-    const data = await response.json();
-    step(`Response body parsed (${JSON.stringify(data).length} bytes)`);
-
-    if (!response.ok) {
-      const googleMsg = data.error?.message || data.error?.status || 'Unknown Google API error';
-      const googleCode = data.error?.code || response.status;
-      console.error('[AuditAPI] Google API error:', JSON.stringify(data.error || data));
-
-      if (response.status === 403 || googleCode === 403) {
-        return fail(502, 'PageSpeed API Quota Exceeded', `Google returned 403: ${googleMsg}`);
-      }
-      if (response.status === 429) {
-        return fail(502, 'PageSpeed API Quota Exceeded', `Google returned 429: ${googleMsg}`);
-      }
-      return fail(502, `PageSpeed API Request Failed`, `HTTP ${response.status}: ${googleMsg}`);
+    console.log("typeof fetch: " + (typeof fetch));
+    console.log("typeof globalThis.fetch: " + (typeof globalThis.fetch));
+    if (typeof fetch === 'undefined') {
+      return sendJson(500, { success: false, failedStep: 'Fetch Check', error: 'fetch() is not available', detail: 'Node.js version does not support global fetch. Check Vercel runtime version.' });
     }
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Fetch Check', error: e.message, stack: e.stack });
+  }
 
-    const lighthouseResult = data.lighthouseResult;
+  /* ─── Step 6: send request to Google PageSpeed API ─── */
+  console.log("Sending request to Google PageSpeed API");
+  let response;
+  try {
+    response = await fetch(apiUrl);
+    console.log("Google response received — status: " + response.status + " " + response.statusText);
+  } catch (e) {
+    console.log("fetch() threw: " + e.message);
+    return sendJson(502, { success: false, failedStep: 'PageSpeed Request', error: 'PageSpeed API Unreachable', detail: e.message, stack: e.stack });
+  }
+
+  /* ─── Step 7: parse response ─── */
+  console.log("Parsing PageSpeed response");
+  let data;
+  try {
+    data = await response.json();
+    console.log("Response parsed as JSON successfully");
+  } catch (e) {
+    let text = '';
+    try { text = await response.text(); } catch (e2) {}
+    console.log("Failed to parse JSON. Status: " + response.status + " Body: " + text.substring(0, 500));
+    return sendJson(502, {
+      success: false,
+      failedStep: 'Parse PageSpeed Response',
+      error: 'Invalid JSON from PageSpeed API',
+      detail: 'HTTP ' + response.status + ' — Body preview: ' + text.substring(0, 200)
+    });
+  }
+
+  /* ─── Step 8: check response status ─── */
+  console.log("Checking response status");
+  if (!response.ok) {
+    const googleMsg = (data && data.error && (data.error.message || data.error.status)) || 'HTTP ' + response.status;
+    const googleCode = (data && data.error && data.error.code) || response.status;
+    console.log("PageSpeed API error: " + googleMsg + " (code: " + googleCode + ")");
+
+    if (response.status === 403 || googleCode === 403) {
+      return sendJson(502, { success: false, failedStep: 'PageSpeed API Error', error: 'PageSpeed API Quota Exceeded', detail: 'Google returned 403: ' + googleMsg });
+    }
+    if (response.status === 429) {
+      return sendJson(502, { success: false, failedStep: 'PageSpeed API Error', error: 'PageSpeed API Quota Exceeded', detail: 'Google returned 429: ' + googleMsg });
+    }
+    return sendJson(502, { success: false, failedStep: 'PageSpeed API Error', error: 'PageSpeed API Request Failed', detail: 'HTTP ' + response.status + ': ' + googleMsg });
+  }
+  console.log("PageSpeed API response is OK");
+
+  /* ─── Step 9: extract lighthouse data ─── */
+  console.log("Generating audit — extracting lighthouseResult");
+  let lighthouseResult;
+  try {
+    lighthouseResult = data.lighthouseResult;
     if (!lighthouseResult) {
-      console.error('[AuditAPI] Missing lighthouseResult in response:', JSON.stringify(data).substring(0, 500));
-      return fail(502, 'Invalid PageSpeed API Response', 'Response missing lighthouseResult');
+      return sendJson(502, { success: false, failedStep: 'Parse PageSpeed Data', error: 'Invalid PageSpeed API Response', detail: 'Response missing lighthouseResult' });
     }
+    console.log("lighthouseResult found");
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Parse Lighthouse Result', error: e.message, stack: e.stack });
+  }
 
-    const categories = lighthouseResult.categories;
+  /* ─── Step 10: extract categories ─── */
+  console.log("Extracting categories");
+  let categories;
+  try {
+    categories = lighthouseResult.categories;
     if (!categories) {
-      return fail(502, 'Invalid PageSpeed API Response', 'Response missing categories');
+      return sendJson(502, { success: false, failedStep: 'Parse PageSpeed Data', error: 'Invalid PageSpeed API Response', detail: 'Response missing categories' });
     }
+    console.log("Categories found: " + Object.keys(categories).join(', '));
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Extract Categories', error: e.message, stack: e.stack });
+  }
 
+  /* ─── Step 11: calculate scores ─── */
+  console.log("Calculating scores");
+  let performance, seo, accessibility, bestPractices;
+  try {
     const toScore = (cat) => {
       if (!cat || typeof cat.score !== 'number') return null;
       return Math.round(cat.score * 100);
     };
-
-    const performance = toScore(categories.performance);
-    const seo = toScore(categories.seo);
-    const accessibility = toScore(categories.accessibility);
-    const bestPractices = toScore(categories['best-practices']);
-
-    step(`Scores: perf=${performance} seo=${seo} acc=${accessibility} bp=${bestPractices}`);
-
-    const scores = [performance, seo, accessibility, bestPractices].filter(s => s !== null);
-    const overallScore = scores.length > 0
-      ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
-      : null;
-
-    step(`Overall score: ${overallScore}`);
-
-    return res.status(200).json({
-      success: true,
-      overallScore,
-      performance,
-      seo,
-      accessibility,
-      bestPractices,
-    });
-  } catch (err) {
-    console.error('[AuditAPI] Unhandled exception:', err.message, err.stack);
-    return fail(500, 'API Request Failed', `${err.name}: ${err.message}`);
+    performance = toScore(categories.performance);
+    seo = toScore(categories.seo);
+    accessibility = toScore(categories.accessibility);
+    bestPractices = toScore(categories['best-practices']);
+    console.log("Scores — perf: " + performance + " seo: " + seo + " acc: " + accessibility + " bp: " + bestPractices);
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Calculate Scores', error: e.message, stack: e.stack });
   }
-}
+
+  /* ─── Step 12: compute overall ─── */
+  console.log("Computing overall score");
+  let overallScore;
+  try {
+    const scores = [performance, seo, accessibility, bestPractices].filter(function (s) { return s !== null; });
+    overallScore = scores.length > 0
+      ? Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length)
+      : null;
+    console.log("Overall score: " + overallScore);
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Compute Overall Score', error: e.message, stack: e.stack });
+  }
+
+  /* ─── Step 13: return response ─── */
+  console.log("Returning response — 200 OK");
+  try {
+    return sendJson(200, {
+      success: true,
+      overallScore: overallScore,
+      performance: performance,
+      seo: seo,
+      accessibility: accessibility,
+      bestPractices: bestPractices
+    });
+  } catch (e) {
+    return sendJson(500, { success: false, failedStep: 'Send Response', error: e.message, stack: e.stack });
+  }
+};
