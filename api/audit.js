@@ -178,16 +178,27 @@ module.exports = async function handler(req, res) {
   console.log("Calculating scores");
   let performance, seo, accessibility, bestPractices;
   try {
+    console.log("ALL CATEGORIES", categories);
+    console.log("PERFORMANCE CATEGORY", categories.performance);
+    console.log("SEO CATEGORY", categories.seo);
+    console.log("ACCESSIBILITY CATEGORY", categories.accessibility);
+    console.log("BEST PRACTICES CATEGORY", categories['best-practices']);
     const toScore = function(cat, label) {
       if (!cat) {
-        console.log("toScore(" + label + "): cat is", cat, "→ returning null");
+        console.log("toScore(" + label + "): cat is", cat, "→ returning null", "(full cat was:", JSON.stringify(cat) + ")");
         return null;
       }
-      if (typeof cat.score !== 'number') {
-        console.log("toScore(" + label + "): cat.score is", cat.score, "(type " + typeof cat.score + ") → returning null");
+      var rawScore = cat.score;
+      console.log("toScore(" + label + "): full object =", JSON.stringify(cat));
+      if (typeof rawScore === 'string') {
+        console.log("toScore(" + label + "): score is a string, converting via Number()");
+        rawScore = Number(rawScore);
+      }
+      if (typeof rawScore !== 'number' || isNaN(rawScore)) {
+        console.log("toScore(" + label + "): cat.score is", cat.score, "(type " + typeof cat.score + ", rawScore=" + rawScore + ") → returning null");
         return null;
       }
-      var result = Math.round(cat.score * 100);
+      var result = Math.round(rawScore * 100);
       console.log("toScore(" + label + "): cat.score =", cat.score, "→", result);
       return result;
     };
