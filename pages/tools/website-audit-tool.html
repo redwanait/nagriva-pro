@@ -1527,19 +1527,20 @@
   .aud-dash-header-scores { flex: 1; display: flex; justify-content: space-around; gap: 6px; }
 
   #audResults .aud-dash-header .aud-overall { padding: 0; }
-  #audResults .aud-dash-header .aud-overall-score { width: 64px; height: 64px; margin-bottom: 2px; }
-  #audResults .aud-dash-header .aud-overall-score circle { cx: 32; cy: 32; r: 27; }
-  #audResults .aud-dash-header .aud-overall-fill { stroke-dasharray: 169.65; stroke-dashoffset: 169.65; }
-  #audResults .aud-dash-header .aud-overall-num strong { font-size: 1.1rem; }
-  #audResults .aud-dash-header .aud-overall-num span { font-size: 0.45rem; }
-  #audResults .aud-dash-header .aud-overall-grade { font-size: 0.55rem; padding: 1px 6px; }
+  #audResults .aud-dash-header .aud-overall-score { width: 96px; height: 96px; margin-bottom: 4px; }
+  #audResults .aud-dash-header .aud-overall-score circle { cx: 48; cy: 48; r: 40; }
+  #audResults .aud-dash-header .aud-overall-fill { stroke-dasharray: 251.33; stroke-dashoffset: 251.33; stroke-width: 8; }
+  #audResults .aud-dash-header .aud-overall-num strong { font-size: 1.8rem; }
+  #audResults .aud-dash-header .aud-overall-num span { font-size: 0.55rem; }
+  #audResults .aud-dash-header .aud-overall-grade { font-size: 0.65rem; padding: 3px 10px; }
 
-  #audResults .aud-dash-header-scores .aud-score-item { padding: 6px 4px 4px; flex: 1; max-width: 72px; }
-  #audResults .aud-dash-header-scores .aud-score-ring { width: 36px; height: 36px; margin-bottom: 2px; }
-  #audResults .aud-dash-header-scores .aud-score-ring circle { cx: 18; cy: 18; r: 14; }
-  #audResults .aud-dash-header-scores .aud-score-fill { stroke-dasharray: 87.96; stroke-dashoffset: 87.96; }
-  #audResults .aud-dash-header-scores .aud-score-num { font-size: 0.6rem; }
-  #audResults .aud-dash-header-scores .aud-score-label { font-size: 0.45rem; }
+  #audResults .aud-dash-header-scores { gap: 10px; }
+  #audResults .aud-dash-header-scores .aud-score-item { padding: 14px 8px 10px; flex: 1; max-width: 120px; min-width: 90px; }
+  #audResults .aud-dash-header-scores .aud-score-ring { width: 56px; height: 56px; margin-bottom: 6px; }
+  #audResults .aud-dash-header-scores .aud-score-ring circle { cx: 28; cy: 28; r: 23; }
+  #audResults .aud-dash-header-scores .aud-score-fill { stroke-dasharray: 144.51; stroke-dashoffset: 144.51; stroke-width: 5; }
+  #audResults .aud-dash-header-scores .aud-score-num { font-size: 0.85rem; }
+  #audResults .aud-dash-header-scores .aud-score-label { font-size: 0.6rem; }
 
   /* ═══ SECTION 2: Executive Summary ═══ */
   .aud-dash-summary {
@@ -1683,6 +1684,9 @@
   }
   .aud-dash-cta-btn--secondary:hover { background: rgba(255,255,255,0.08); }
 
+  /* ─── Hide empty state container when dashboard is visible ─── */
+  .aud-results.active #audResultsEmpty { display: none !important; }
+
   /* ─── Hide JS-rendered source elements (keep for compatibility) ─── */
   .rec-ai-summary { display: none !important; }
   .rec-quickwins { display: none !important; }
@@ -1707,11 +1711,12 @@
   /* ─── Responsive ─── */
   @media (max-width: 1024px) {
     .aud-dash-summary { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    #audResults .aud-dash-header-scores .aud-score-item { max-width: 100px; min-width: 80px; }
   }
   @media (max-width: 768px) {
     .aud-dash-header { flex-direction: column; gap: 10px; padding: 12px; }
     .aud-dash-header-scores { flex-wrap: wrap; justify-content: center; }
-    #audResults .aud-dash-header-scores .aud-score-item { max-width: 60px; }
+    #audResults .aud-dash-header-scores .aud-score-item { max-width: 90px; min-width: 70px; }
     .aud-dash-summary { grid-template-columns: 1fr; }
     .aud-dash-issues-overview { grid-template-columns: 1fr; }
     .aud-dash-grid-2col { grid-template-columns: 1fr; }
@@ -3253,9 +3258,16 @@
         console.log('[Audit]  data.bestPractices:', data.bestPractices);
         console.log('[Audit]  ════════════════════════════════════════════════════════════');
 
+        // Hide card header and empty state before showing results
+        var cardHeader = document.querySelector('#auditCard .aud-card-header');
+        var resultsEmpty = document.getElementById('audResultsEmpty');
+
         setTimeout(function() {
           try {
             loadingView.classList.remove('active');
+
+            if (cardHeader) cardHeader.style.display = 'none';
+            if (resultsEmpty) resultsEmpty.style.display = 'none';
 
             if (auditState.loadHandle) {
               auditState.loadHandle.complete();
@@ -3327,9 +3339,13 @@
               NAGRIVA_AuditLoading.showSuccessToast('Audit Completed Successfully', 'Your website has been analyzed. View your scores and recommendations below.');
             }
 
+            // Hide card glow too
+            var cardGlow = document.querySelector('#auditCard .aud-card-glow');
+            if (cardGlow) cardGlow.style.display = 'none';
+
             setTimeout(function() {
               resultsView.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 200);
+            }, 100);
           } catch (err) {
             failStep('Render Results', err, {
               step: 'Render Results',
