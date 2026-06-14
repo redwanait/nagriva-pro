@@ -1565,6 +1565,267 @@
       .seo-char-badge svg { display: none; }
       .seo-char-tooltip-trigger { margin-left: 0; }
     }
+    /* ═══ GOOGLE SERP PREVIEW MODULE ═══ */
+    .seo-serp-section { display: none; margin-top: 24px; }
+    .seo-serp-section.active { display: block; animation: seoFadeInUp 0.5s ease; }
+    .seo-serp-card {
+      position: relative;
+      background: var(--seo-card-bg);
+      border: 1px solid var(--seo-border);
+      border-radius: 24px;
+      padding: 40px 48px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+    .seo-serp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(250,204,21,0.3), transparent);
+    }
+    .seo-serp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .seo-serp-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .serp-device-toggle {
+      display: flex;
+      gap: 3px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 3px;
+    }
+    .serp-device-btn {
+      padding: 6px 14px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: var(--gray2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .serp-device-btn:hover { color: var(--white); }
+    .serp-device-btn.active {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+    }
+    .serp-preview-frame {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .serp-preview-frame.serp-mobile {
+      max-width: 375px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .serp-preview-url {
+      font-size: 14px;
+      color: #006621;
+      font-family: Arial, sans-serif;
+      line-height: 1.4;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .serp-preview-title {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1a0dab;
+      font-family: Arial, sans-serif;
+      line-height: 1.3;
+      margin-bottom: 2px;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .serp-preview-desc {
+      font-size: 14px;
+      color: #545454;
+      font-family: Arial, sans-serif;
+      line-height: 1.58;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .serp-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .serp-input-wrap { margin-bottom: 16px; }
+    .serp-input-wrap:last-child { margin-bottom: 0; }
+    .serp-input-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    .serp-input-label .serp-label-hint {
+      font-weight: 400;
+      font-size: 0.68rem;
+      color: var(--gray2);
+    }
+    .serp-field {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--white);
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    .serp-field:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(250,204,21,0.06);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.1);
+    }
+    .serp-field::placeholder { color: var(--gray2); }
+    .serp-counter {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 0.68rem;
+      color: var(--gray2);
+      font-variant-numeric: tabular-nums;
+      transition: color 0.3s ease;
+    }
+    .serp-counter .serp-count-num { font-weight: 700; transition: color 0.3s ease; }
+    .serp-counter.serp-count-ok .serp-count-num { color: #10B981; }
+    .serp-counter.serp-count-warn .serp-count-num { color: #FACC15; }
+    .serp-counter.serp-count-bad .serp-count-num { color: #EF4444; }
+    .serp-analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .serp-analysis-item {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--seo-border);
+    }
+    .serp-analysis-item-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray2);
+      margin-bottom: 8px;
+    }
+    .serp-analysis-track {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .serp-analysis-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      transition: width 0.5s cubic-bezier(0.22,1,0.36,1), background 0.4s ease;
+    }
+    .serp-analysis-fill.serp-good { background: linear-gradient(90deg, #10B981, #34D399); }
+    .serp-analysis-fill.serp-acceptable { background: linear-gradient(90deg, #FACC15, #FCD34D); }
+    .serp-analysis-fill.serp-poor { background: linear-gradient(90deg, #EF4444, #F87171); }
+    .serp-analysis-status {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--gray2);
+      transition: color 0.3s ease;
+    }
+    .serp-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .serp-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+    }
+    .serp-action-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .serp-action-copy {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #050505;
+    }
+    .serp-action-copy:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(250,204,21,0.25);
+    }
+    .serp-action-reset {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--seo-border);
+      color: var(--gray);
+    }
+    .serp-action-reset:hover {
+      border-color: rgba(250,204,21,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+    }
+    .serp-preview-anim {
+      animation: serpPreviewPop 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes serpPreviewPop {
+      0% { opacity: 0; transform: scale(0.97); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @media (max-width: 768px) {
+      .seo-serp-card { padding: 28px 20px; }
+      .serp-body { grid-template-columns: 1fr; gap: 0; }
+      .serp-analysis-grid { grid-template-columns: 1fr; }
+      .serp-preview-frame { padding: 16px 18px; }
+      .serp-preview-frame.serp-mobile { max-width: 100%; }
+      .serp-preview-title { font-size: 18px; }
+    }
+    @media (max-width: 480px) {
+      .seo-serp-card { padding: 20px 16px; border-radius: 18px; }
+      .serp-preview-frame { padding: 14px 16px; }
+      .serp-preview-title { font-size: 17px; }
+      .serp-action-btn { flex: 1; justify-content: center; }
+    }
   </style>
 <script type="application/ld+json">
 {
@@ -1879,6 +2140,96 @@
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-serp-section" id="seoSerpSection">
+    <div class="container">
+      <div class="seo-inner">
+        <div class="seo-serp-card fade-up">
+          <div class="seo-serp-header">
+            <h3>Google SERP Preview</h3>
+            <div class="serp-device-toggle">
+              <button class="serp-device-btn active" data-device="desktop">
+                <svg style="width:12px;height:12px;margin-right:4px;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                Desktop
+              </button>
+              <button class="serp-device-btn" data-device="mobile">
+                <svg style="width:12px;height:12px;margin-right:4px;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                Mobile
+              </button>
+            </div>
+          </div>
+
+          <div class="serp-preview-frame" id="serpPreviewFrame">
+            <div class="serp-preview-url" id="serpUrlDisplay">www.example.com</div>
+            <div class="serp-preview-title" id="serpTitleDisplay">Your SEO Title Here</div>
+            <div class="serp-preview-desc" id="serpDescDisplay">Your meta description will appear here…</div>
+          </div>
+
+          <div class="serp-body">
+            <div>
+              <div class="serp-input-wrap">
+                <div class="serp-input-label">
+                  <span>Meta Title</span>
+                  <span class="serp-label-hint">50–60 chars recommended</span>
+                </div>
+                <input type="text" class="serp-field" id="serpMetaTitle" placeholder="Enter SEO title..." maxlength="70">
+                <div class="serp-counter" id="serpTitleCounter">
+                  <span class="serp-count-num" id="serpTitleCount">0</span> / 60
+                </div>
+              </div>
+              <div class="serp-input-wrap">
+                <div class="serp-input-label">
+                  <span>Meta Description</span>
+                  <span class="serp-label-hint">150–160 chars recommended</span>
+                </div>
+                <textarea class="serp-field" id="serpMetaDesc" rows="2" placeholder="Enter meta description..." maxlength="220"></textarea>
+                <div class="serp-counter" id="serpDescCounter">
+                  <span class="serp-count-num" id="serpDescCount">0</span> / 160
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="serp-input-wrap">
+                <div class="serp-input-label">
+                  <span>URL</span>
+                  <span class="serp-label-hint">www.example.com/page</span>
+                </div>
+                <input type="text" class="serp-field" id="serpUrlInput" placeholder="www.example.com/page" autocomplete="off">
+              </div>
+            </div>
+          </div>
+
+          <div class="serp-analysis-grid">
+            <div class="serp-analysis-item">
+              <div class="serp-analysis-item-label">Title Length</div>
+              <div class="serp-analysis-track">
+                <div class="serp-analysis-fill" id="serpTitleBar"></div>
+              </div>
+              <div class="serp-analysis-status" id="serpTitleStatus">—</div>
+            </div>
+            <div class="serp-analysis-item">
+              <div class="serp-analysis-item-label">Meta Description Length</div>
+              <div class="serp-analysis-track">
+                <div class="serp-analysis-fill" id="serpDescBar"></div>
+              </div>
+              <div class="serp-analysis-status" id="serpDescStatus">—</div>
+            </div>
+          </div>
+
+          <div class="serp-actions">
+            <button class="serp-action-btn serp-action-copy" id="serpCopyBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy Preview Data
+            </button>
+            <button class="serp-action-btn serp-action-reset" id="serpResetBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              Reset
+            </button>
           </div>
         </div>
       </div>
@@ -2320,6 +2671,9 @@
             '<button class="seo-title-btn' + (isFaved ? ' faved' : '') + '" data-action="fav" title="Save">' +
               '<svg viewBox="0 0 24 24" fill="' + (isFaved ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>' +
             '</button>' +
+            '<button class="seo-title-btn" data-action="preview" title="SERP Preview">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
+            '</button>' +
             '<button class="seo-title-btn" data-action="copy" title="Copy">' +
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
             '</button>' +
@@ -2350,6 +2704,13 @@
             setTimeout(function() { btn.classList.remove('copied'); }, 1200);
             showToast('Copied to clipboard!');
           });
+        });
+      });
+
+      list.querySelectorAll('[data-action="preview"]').forEach(function(btn, i) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          populateSERPFromTitle(titles[i], keyword);
         });
       });
 
@@ -2404,6 +2765,13 @@
       });
       document.getElementById('titlesCount').textContent = total + ' titles across ' + STYLES.length + ' styles';
       if (intent) updateIntentUI(intent);
+      for (var ci = 0; ci < STYLES.length; ci++) {
+        var catTitles = allTitles[STYLES[ci]];
+        if (catTitles && catTitles.length > 0) {
+          populateSERPFromTitle(catTitles[0], keyword);
+          break;
+        }
+      }
     }
 
     function showSkeleton(cat) {
@@ -2820,6 +3188,137 @@
         if (!isOpen) item.classList.add('open');
       });
     });
+
+  });
+
+    /* ═══════════ GOOGLE SERP PREVIEW MODULE ═══════════ */
+
+    var serpSection = document.getElementById('seoSerpSection');
+    var serpPreviewFrame = document.getElementById('serpPreviewFrame');
+    var serpMetaTitle = document.getElementById('serpMetaTitle');
+    var serpMetaDesc = document.getElementById('serpMetaDesc');
+    var serpUrlInput = document.getElementById('serpUrlInput');
+    var serpTitleDisplay = document.getElementById('serpTitleDisplay');
+    var serpDescDisplay = document.getElementById('serpDescDisplay');
+    var serpUrlDisplay = document.getElementById('serpUrlDisplay');
+    var serpTitleCount = document.getElementById('serpTitleCount');
+    var serpDescCount = document.getElementById('serpDescCount');
+    var serpTitleBar = document.getElementById('serpTitleBar');
+    var serpDescBar = document.getElementById('serpDescBar');
+    var serpTitleStatus = document.getElementById('serpTitleStatus');
+    var serpDescStatus = document.getElementById('serpDescStatus');
+    var serpDeviceBtns = document.querySelectorAll('.serp-device-btn');
+    var serpTitleCounter = document.getElementById('serpTitleCounter');
+    var serpDescCounter = document.getElementById('serpDescCounter');
+
+    function truncateText(text, maxLen) {
+      if (text.length <= maxLen) return text;
+      return text.substring(0, maxLen - 1) + '\u2026';
+    }
+
+    function updateSERPPreview() {
+      var title = serpMetaTitle.value;
+      var desc = serpMetaDesc.value;
+      var url = serpUrlInput.value;
+
+      serpTitleDisplay.textContent = truncateText(title, 60) || 'Your SEO Title Here';
+      serpDescDisplay.textContent = truncateText(desc, 160) || 'Your meta description will appear here\u2026';
+      serpUrlDisplay.textContent = url || 'www.example.com';
+
+      var titleLen = title.length;
+      var descLen = desc.length;
+
+      serpTitleCount.textContent = titleLen;
+      serpDescCount.textContent = descLen;
+
+      var titlePct = Math.min(100, Math.round((titleLen / 65) * 100));
+      serpTitleBar.style.width = titlePct + '%';
+      var titleGood = titleLen >= 50 && titleLen <= 60;
+      var titleOk = titleLen >= 40 && titleLen <= 70;
+      serpTitleBar.className = 'serp-analysis-fill';
+      if (titleGood) serpTitleBar.classList.add('serp-good');
+      else if (titleOk) serpTitleBar.classList.add('serp-acceptable');
+      else serpTitleBar.classList.add('serp-poor');
+
+      var titleStatusText = '\u2014';
+      var titleStatusColor = 'var(--gray2)';
+      if (titleLen > 0) {
+        if (titleGood) { titleStatusText = '\u2713 Perfect'; titleStatusColor = '#10B981'; }
+        else if (titleLen < 40) { titleStatusText = '\u26A0 Too short (' + titleLen + ')'; titleStatusColor = '#F59E0B'; }
+        else if (titleLen > 60) { titleStatusText = '\u26A0 Too long (' + titleLen + ')'; titleStatusColor = '#EF4444'; }
+        else if (titleLen < 50) { titleStatusText = '\u26A0 Slightly short (' + titleLen + ')'; titleStatusColor = '#F59E0B'; }
+        else { titleStatusText = '\u26A0 Slightly long (' + titleLen + ')'; titleStatusColor = '#F59E0B'; }
+      }
+      serpTitleStatus.textContent = titleStatusText;
+      serpTitleStatus.style.color = titleStatusColor;
+
+      var descPct = Math.min(100, Math.round((descLen / 170) * 100));
+      serpDescBar.style.width = descPct + '%';
+      var descGood = descLen >= 150 && descLen <= 160;
+      var descOk = descLen >= 120 && descLen <= 200;
+      serpDescBar.className = 'serp-analysis-fill';
+      if (descGood) serpDescBar.classList.add('serp-good');
+      else if (descOk) serpDescBar.classList.add('serp-acceptable');
+      else serpDescBar.classList.add('serp-poor');
+
+      var descStatusText = '\u2014';
+      var descStatusColor = 'var(--gray2)';
+      if (descLen > 0) {
+        if (descGood) { descStatusText = '\u2713 Perfect'; descStatusColor = '#10B981'; }
+        else if (descLen < 120) { descStatusText = '\u26A0 Too short (' + descLen + ')'; descStatusColor = '#F59E0B'; }
+        else if (descLen > 160) { descStatusText = '\u26A0 Over limit (' + descLen + ')'; descStatusColor = '#EF4444'; }
+        else if (descLen < 150) { descStatusText = '\u26A0 Slightly short (' + descLen + ')'; descStatusColor = '#F59E0B'; }
+        else { descStatusText = '\u26A0 Slightly long (' + descLen + ')'; descStatusColor = '#F59E0B'; }
+      }
+      serpDescStatus.textContent = descStatusText;
+      serpDescStatus.style.color = descStatusColor;
+
+      serpTitleCounter.className = 'serp-counter';
+      if (titleGood) serpTitleCounter.classList.add('serp-count-ok');
+      else if (titleLen > 0) serpTitleCounter.classList.add('serp-count-bad');
+
+      serpDescCounter.className = 'serp-counter';
+      if (descGood) serpDescCounter.classList.add('serp-count-ok');
+      else if (descLen > 0) serpDescCounter.classList.add('serp-count-warn');
+    }
+
+    serpMetaTitle.addEventListener('input', updateSERPPreview);
+    serpMetaDesc.addEventListener('input', updateSERPPreview);
+    serpUrlInput.addEventListener('input', updateSERPPreview);
+
+    serpDeviceBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        serpDeviceBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        serpPreviewFrame.classList.toggle('serp-mobile', btn.getAttribute('data-device') === 'mobile');
+        serpPreviewFrame.classList.add('serp-preview-anim');
+        setTimeout(function() { serpPreviewFrame.classList.remove('serp-preview-anim'); }, 350);
+      });
+    });
+
+    document.getElementById('serpCopyBtn').addEventListener('click', function() {
+      var text = 'Title: ' + serpMetaTitle.value + '\nDescription: ' + serpMetaDesc.value + '\nURL: ' + serpUrlInput.value;
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('Preview data copied!');
+      });
+    });
+
+    document.getElementById('serpResetBtn').addEventListener('click', function() {
+      serpMetaTitle.value = '';
+      serpMetaDesc.value = '';
+      serpUrlInput.value = 'www.example.com';
+      updateSERPPreview();
+    });
+
+    function populateSERPFromTitle(title, keyword) {
+      serpMetaTitle.value = title;
+      var desc = 'Learn about ' + keyword + ' and how it can help your business grow. Discover key strategies, best practices, and expert tips to succeed.';
+      if (desc.length > 160) desc = desc.substring(0, 157) + '...';
+      serpMetaDesc.value = desc;
+      serpUrlInput.value = 'www.example.com/blog/' + keyword.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      updateSERPPreview();
+      serpSection.classList.add('active');
+    }
 
   });
   </script>
