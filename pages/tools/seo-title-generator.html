@@ -947,6 +947,176 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* ═══════════ CATEGORY TABS ═══════════ */
+    .seo-categories {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    .seo-categories::-webkit-scrollbar { display: none; }
+    .seo-cat-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--seo-border);
+      background: rgba(255,255,255,0.015);
+      color: var(--gray2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .seo-cat-tab:hover {
+      border-color: rgba(250,204,21,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.03);
+    }
+    .seo-cat-tab.active {
+      border-color: rgba(250,204,21,0.3);
+      color: var(--white);
+      background: rgba(250,204,21,0.08);
+    }
+    .seo-cat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+    }
+    .seo-cat-icon svg { width: 16px; height: 16px; }
+    .seo-cat-count {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.06);
+      color: var(--gray2);
+      transition: all 0.3s ease;
+    }
+    .seo-cat-tab.active .seo-cat-count {
+      background: rgba(250,204,21,0.15);
+      color: var(--accent);
+    }
+    .seo-cat-panels {
+      position: relative;
+      min-height: 200px;
+    }
+    .seo-cat-panel { display: none; }
+    .seo-cat-panel.active { display: block; }
+
+    /* ═══════════ TITLE META (score + chars) ═══════════ */
+    .seo-title-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .seo-title-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .seo-seo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      letter-spacing: 0.02em;
+    }
+    .seo-seo-badge.seo-seo-high {
+      background: rgba(34,197,94,0.1);
+      color: #10B981;
+      border: 1px solid rgba(34,197,94,0.15);
+    }
+    .seo-seo-badge.seo-seo-good {
+      background: rgba(250,204,21,0.1);
+      color: #FACC15;
+      border: 1px solid rgba(250,204,21,0.15);
+    }
+    .seo-seo-badge.seo-seo-ok {
+      background: rgba(245,158,11,0.1);
+      color: #F59E0B;
+      border: 1px solid rgba(245,158,11,0.15);
+    }
+    .seo-seo-badge.seo-seo-low {
+      background: rgba(239,68,68,0.08);
+      color: #EF4444;
+      border: 1px solid rgba(239,68,68,0.12);
+    }
+    .seo-char-count {
+      font-size: 0.68rem;
+      color: var(--gray2);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ═══════════ SKELETON LOADING ═══════════ */
+    .seo-skeleton-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 8px 0;
+    }
+    .seo-skeleton-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--seo-border);
+    }
+    .seo-skeleton-shape {
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      animation: seoShimmer 1.6s ease-in-out infinite;
+    }
+    .seo-skeleton-num {
+      width: 26px; height: 14px;
+      flex-shrink: 0;
+    }
+    .seo-skeleton-text {
+      flex: 1; height: 16px;
+    }
+    .seo-skeleton-meta {
+      width: 80px; height: 12px;
+      margin-top: 6px;
+    }
+    .seo-skeleton-btn {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    @keyframes seoShimmer {
+      0% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0.4; }
+    }
+
+    /* ═══════════ TITLE ITEM UPDATE - content layout ═══════════ */
+    .seo-title-item {
+      gap: 14px;
+      padding: 14px 20px;
+    }
+    .seo-title-text {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
     /* ═══════════ ANIMATIONS ═══════════ */
     @keyframes seoGlowPulse {
       0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
@@ -976,8 +1146,10 @@
       .seo-loading { padding: 28px 0; }
       .seo-cta { padding: 60px 0 80px; }
       .seo-faq { padding: 60px 0; }
-      .seo-title-item { padding: 14px 16px; flex-wrap: wrap; }
-      .seo-title-actions { margin-left: auto; }
+      .seo-title-item { padding: 14px 16px; }
+      .seo-seo-badge { font-size: 0.6rem; padding: 1px 6px; }
+      .seo-categories { gap: 6px; }
+      .seo-cat-tab { padding: 8px 14px; font-size: 0.78rem; }
     }
     @media (max-width: 480px) {
       .seo-card { padding: 24px 18px; border-radius: 18px; }
@@ -1172,15 +1344,65 @@
 
             <div class="seo-titles-header">
               <h3>Generated Titles</h3>
-              <span class="seo-titles-count" id="titlesCount">10 titles for your keyword</span>
+              <span class="seo-titles-count" id="titlesCount">Titles across 5 categories</span>
             </div>
 
-            <div class="seo-titles-list" id="titlesList"></div>
+            <!-- Category Tabs -->
+            <div class="seo-categories" id="seoCategories">
+              <button class="seo-cat-tab active" data-cat="list">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></span>
+                <span>List Titles</span>
+                <span class="seo-cat-count" id="catCount-list">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="numbers">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg></span>
+                <span>Number Titles</span>
+                <span class="seo-cat-count" id="catCount-numbers">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="howto">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
+                <span>How-To Titles</span>
+                <span class="seo-cat-count" id="catCount-howto">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="question">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+                <span>Question Titles</span>
+                <span class="seo-cat-count" id="catCount-question">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="power">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
+                <span>Power Word Titles</span>
+                <span class="seo-cat-count" id="catCount-power">0</span>
+              </button>
+            </div>
+
+            <!-- Category Panels -->
+            <div class="seo-cat-panels" id="seoCatPanels">
+              <div class="seo-cat-panel active" data-cat="list">
+                <div class="seo-titles-list" id="titlesList-list"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="numbers">
+                <div class="seo-titles-list" id="titlesList-numbers"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="howto">
+                <div class="seo-titles-list" id="titlesList-howto"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="question">
+                <div class="seo-titles-list" id="titlesList-question"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="power">
+                <div class="seo-titles-list" id="titlesList-power"></div>
+              </div>
+            </div>
 
             <div class="seo-titles-actions-bottom">
-              <button class="seo-titles-btn seo-titles-btn-primary" id="regenerateBtn">
+              <button class="seo-titles-btn seo-titles-btn-primary" id="generateMoreBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Generate More Variations
+              </button>
+              <button class="seo-titles-btn seo-titles-btn-secondary" id="regenerateBtn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                Regenerate
+                Regenerate All
               </button>
               <button class="seo-titles-btn seo-titles-btn-secondary" id="copyAllBtn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
@@ -1385,9 +1607,11 @@
     var loadingView = document.getElementById('seoLoading');
     var resultsView = document.getElementById('seoTitles');
     var leadSection = document.getElementById('leadSection');
-    var titlesList = document.getElementById('titlesList');
     var loadingKeyword = document.getElementById('seoLoadingKeyword');
     var loadingMsgs = document.querySelectorAll('#seoLoadingMsgs .seo-loading-msg');
+
+    var CATEGORIES = ['list', 'numbers', 'howto', 'question', 'power'];
+    var state = { titles: {} };
 
     /* ─── Toast ─── */
     var toast = document.getElementById('seoToast');
@@ -1399,98 +1623,245 @@
       toastTimer = setTimeout(function() { toast.classList.remove('active'); }, 2200);
     }
 
-    /* ─── Title templates by content type / audience ─── */
-    function generateTitles(keyword, contentType, audience) {
-      var k = keyword.charAt(0).toUpperCase() + keyword.slice(1);
-      var templates = [];
-
-      var templatesByType = {
-        blog: [
-          k + ': The Ultimate Guide for ' + audienceLabel(audience),
-          '10 Proven ' + k + ' Strategies That Actually Work',
-          'Why ' + k + ' Matters More Than Ever in 2026',
-          'How to Master ' + k + ' in 5 Simple Steps',
-          'The Complete ' + k + ' Checklist for ' + audienceLabel(audience),
-          k + ' 101: Everything ' + audienceLabel(audience) + ' Need to Know',
-          'Top 15 ' + k + ' Trends to Watch in 2026',
-          'The Beginner\'s Guide to ' + k + ': Tips & Tricks',
-          k + ' vs. Traditional Methods: Which Is Better?',
-          'How ' + k + ' Can Transform Your ' + audienceLabel(audience) + ' Strategy'
-        ],
-        landing: [
-          k + ' – ' + audienceLabel(audience) + ' Solutions That Deliver Results',
-          'Supercharge Your Growth with ' + k,
-          'The Smart ' + audienceLabel(audience) + '\'s Guide to ' + k,
-          'Unlock the Power of ' + k + ' for Your Business',
-          k + ': The #1 Solution for ' + audienceLabel(audience),
-          'Transform Your Results with ' + k + ' Today',
-          'Why Leading ' + audienceLabelPlural(audience) + ' Choose ' + k,
-          'Get Started with ' + k + ' – No Experience Required',
-          k + ' Done Right: A Better Approach for ' + audienceLabelPlural(audience),
-          'Experience the Future of ' + k
-        ],
-        product: [
-          'Top 10 ' + k + ' Products You Need in 2026',
-          'The Best ' + k + ' Tools for ' + audienceLabelPlural(audience),
-          k + ' Product Review: What Actually Works?',
-          'Compare the Best ' + k + ' Solutions for ' + audienceLabelPlural(audience),
-          'Which ' + k + ' Product Is Right for You?',
-          'Affordable ' + k + ' Products That Deliver Results',
-          'The Ultimate ' + k + ' Buying Guide',
-          'Top-Rated ' + k + ' Products Recommended by Experts',
-          k + ' vs. Competitors: An Honest Comparison',
-          'Why This ' + k + ' Product Is Going Viral'
-        ],
-        service: [
-          'Professional ' + k + ' Services for ' + audienceLabelPlural(audience),
-          'Expert ' + k + ' Services Tailored to Your Needs',
-          'Why Choose Our ' + k + ' Services?',
-          'Comprehensive ' + k + ' Solutions for ' + audienceLabelPlural(audience),
-          'Affordable ' + k + ' Services That Drive Real Results',
-          'Trusted ' + k + ' Services for Growing Businesses',
-          'End-to-End ' + k + ' Services for ' + audienceLabelPlural(audience),
-          'How Our ' + k + ' Services Helped 500+ Clients',
-          'Premium ' + k + ' Services – Book a Consultation Today',
-          'Results-Driven ' + k + ' Services for ' + audienceLabelPlural(audience)
-        ],
-        'case-study': [
-          'How We Used ' + k + ' to Increase Revenue by 300%',
-          k + ' Success Story: From Zero to Hero',
-          'Case Study: How ' + audienceLabel(audience) + ' Scaled with ' + k,
-          'The ' + k + ' Strategy That Generated 10,000+ Leads',
-          'Real Results: ' + k + ' Case Study for ' + audienceLabel(audience),
-          'How ' + audienceLabel(audience) + ' Achieved 5x Growth with ' + k,
-          k + ' Case Study: Lessons Learned & Key Takeaways',
-          'Before & After: Transforming a Business with ' + k,
-          'The ' + k + ' Playbook That Delivered a 200% ROI',
-          'Case Study: Implementing ' + k + ' for ' + audienceLabel(audience)
-        ]
-      };
-
-      return templatesByType[contentType] || templatesByType.blog;
-    }
+    function cap(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
 
     function audienceLabel(aud) {
-      var map = { beginners: 'Beginners', professionals: 'Professionals', 'small-business': 'Small Businesses', agencies: 'Agencies', general: 'Everyone' };
-      return map[aud] || 'Everyone';
+      return { beginners: 'Beginners', professionals: 'Professionals', 'small-business': 'Small Businesses', agencies: 'Agencies', general: 'Everyone' }[aud] || 'Everyone';
     }
     function audienceLabelPlural(aud) {
-      var map = { beginners: 'Beginners', professionals: 'Professionals', 'small-business': 'Small Businesses', agencies: 'Agencies', general: 'Businesses' };
-      return map[aud] || 'Businesses';
+      return { beginners: 'Beginners', professionals: 'Professionals', 'small-business': 'Small Businesses', agencies: 'Agencies', general: 'Businesses' }[aud] || 'Businesses';
     }
 
-    /* ─── Render titles ─── */
-    function renderTitles(titles, keyword) {
+    /* ─── SEO Score Calculator ─── */
+    function calcSEOScore(title, keyword) {
+      var score = 30;
+      var kw = keyword.toLowerCase();
+      var t = title.toLowerCase();
+      if (t.indexOf(kw) !== -1) score += 20;
+      var len = title.length;
+      if (len >= 50 && len <= 60) score += 20;
+      else if (len < 65) score += 10;
+      if (/\d/.test(title)) score += 15;
+      var powerWords = ['ultimate', 'proven', 'essential', 'amazing', 'incredible', 'powerful', 'expert', 'best', 'top', 'complete', 'simple', 'effective', 'advanced', 'secret', 'guide', 'transform', 'boost', 'master', 'success', 'vital'];
+      for (var pi = 0; pi < powerWords.length; pi++) {
+        if (t.indexOf(powerWords[pi]) !== -1) { score += 10; break; }
+      }
+      if (title.indexOf('?') !== -1) score += 10;
+      if (title.indexOf('!') !== -1) score += 5;
+      if (len <= 60) score += 5;
+      if (title.indexOf(':') !== -1) score += 5;
+      return Math.min(Math.round(score), 100);
+    }
+
+    function scoreLabel(s) {
+      if (s >= 80) return 'seo-seo-high';
+      if (s >= 65) return 'seo-seo-good';
+      if (s >= 50) return 'seo-seo-ok';
+      return 'seo-seo-low';
+    }
+
+    /* ─── Title Generators per Category ─── */
+    var usedTitles = {};
+
+    function resetUsed() { usedTitles = {}; }
+    function isUsed(t) { return !!usedTitles[t]; }
+    function markUsed(t) { usedTitles[t] = true; }
+
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+    function generateListTitles(keyword, contentType, audience) {
+      var k = cap(keyword);
+      var aud = audienceLabel(audience);
+      var audP = audienceLabelPlural(audience);
+      var templates = [
+        k + ': The Ultimate Guide for ' + aud,
+        '7 Essential ' + k + ' Strategies for ' + aud,
+        'The Complete ' + k + ' Checklist for ' + aud,
+        '5 Proven ' + k + ' Techniques That Deliver Results',
+        'Top 10 ' + k + ' Tips Every ' + aud + ' Should Know',
+        'The ' + aud + '\'s Guide to Mastering ' + k,
+        '8 Key ' + k + ' Skills to Develop in 2026',
+        'Essential ' + k + ' Tools for ' + audP,
+        k + ' Best Practices: A Comprehensive List',
+        '6 Crucial ' + k + ' Factors for Success'
+      ];
+      var nums = [3, 5, 7, 10, 12, 15];
+      var results = [];
+      var usedLocal = {};
+      for (var i = 0; i < templates.length && results.length < 5; i++) {
+        var t = templates[i];
+        if (/\d+/.test(t) && Math.random() > 0.5) {
+          t = t.replace(/\d+/, nums[randInt(0, nums.length - 1)]);
+        }
+        var lower = t.toLowerCase();
+        if (!usedLocal[lower] && !isUsed(t)) {
+          usedLocal[lower] = true;
+          markUsed(t);
+          results.push(t);
+        }
+      }
+      return results;
+    }
+
+    function generateNumberTitles(keyword, contentType, audience) {
+      var k = cap(keyword);
+      var aud = audienceLabel(audience);
+      var audP = audienceLabelPlural(audience);
+      var templates = [
+        'Top 10 ' + k + ' Strategies to Try This Year',
+        '7 ' + k + ' Trends Shaping the Future of ' + audP,
+        '5 Reasons Why ' + k + ' Matters for Your Business',
+        '15 ' + k + ' Statistics That Will Surprise You',
+        '3 Simple ' + k + ' Tactics for Instant Results',
+        '12 ' + k + ' Myths Debunked by Experts',
+        '9 ' + k + ' Mistakes to Avoid in 2026',
+        '20 ' + k + ' Resources for ' + aud,
+        '8 ' + k + ' Benefits You Can\'t Ignore',
+        '6 ' + k + ' Lessons from Industry Leaders'
+      ];
+      var nums = [3, 5, 7, 10, 15, 20];
+      var results = [];
+      var usedLocal = {};
+      for (var i = 0; i < templates.length && results.length < 5; i++) {
+        var t = templates[i];
+        if (/\d+/.test(t)) {
+          t = t.replace(/\d+/, nums[randInt(0, nums.length - 1)]);
+        }
+        var lower = t.toLowerCase();
+        if (!usedLocal[lower] && !isUsed(t)) {
+          usedLocal[lower] = true;
+          markUsed(t);
+          results.push(t);
+        }
+      }
+      return results;
+    }
+
+    function generateHowToTitles(keyword, contentType, audience) {
+      var k = cap(keyword);
+      var aud = audienceLabel(audience);
+      var templates = [
+        'How to Master ' + k + ' in 5 Simple Steps',
+        'How to Get Started with ' + k + ' Today',
+        'How to Leverage ' + k + ' for Maximum Growth',
+        'How to Create a Winning ' + k + ' Strategy',
+        'How to Learn ' + k + ' from Scratch',
+        'How to Optimize Your ' + k + ' Approach',
+        'How to Use ' + k + ' to Drive Results',
+        'How to Build a ' + k + ' Plan That Works',
+        'How to Choose the Right ' + k + ' Solution',
+        'How to Succeed with ' + k + ' for ' + aud
+      ];
+      var results = [];
+      var usedLocal = {};
+      for (var i = 0; i < templates.length && results.length < 5; i++) {
+        var t = templates[i];
+        var lower = t.toLowerCase();
+        if (!usedLocal[lower] && !isUsed(t)) {
+          usedLocal[lower] = true;
+          markUsed(t);
+          results.push(t);
+        }
+      }
+      return results;
+    }
+
+    function generateQuestionTitles(keyword, contentType, audience) {
+      var k = cap(keyword);
+      var aud = audienceLabel(audience);
+      var templates = [
+        'Is ' + k + ' Right for Your Business?',
+        'What Is the Best ' + k + ' Strategy for ' + aud + '?',
+        'Why Should You Invest in ' + k + '?',
+        'Can ' + k + ' Transform Your Marketing?',
+        'How Does ' + k + ' Impact Your Bottom Line?',
+        'What Are the Key Benefits of ' + k + '?',
+        'Do You Really Need ' + k + ' in 2026?',
+        'Which ' + k + ' Approach Works Best for ' + aud + '?',
+        'How Much Does ' + k + ' Actually Matter?',
+        'Are You Making These ' + k + ' Mistakes?'
+      ];
+      var results = [];
+      var usedLocal = {};
+      for (var i = 0; i < templates.length && results.length < 5; i++) {
+        var t = templates[i];
+        var lower = t.toLowerCase();
+        if (!usedLocal[lower] && !isUsed(t)) {
+          usedLocal[lower] = true;
+          markUsed(t);
+          results.push(t);
+        }
+      }
+      return results;
+    }
+
+    function generatePowerWordTitles(keyword, contentType, audience) {
+      var k = cap(keyword);
+      var aud = audienceLabel(audience);
+      var audP = audienceLabelPlural(audience);
+      var pwStart = ['Ultimate', 'Proven', 'Essential', 'Powerful', 'Expert', 'Smart', 'Effective', 'Advanced', 'Remarkable', 'Game-Changing'];
+      var pwEnd = ['That Will Transform Your Business', 'You Need to Know About', 'Every ' + aud + ' Should Master', 'for Maximum Impact', 'That Drive Real Results', 'for Unstoppable Growth', 'That Actually Work', 'for Modern ' + audP, 'Worth Your Attention', 'to Skyrocket Your Success'];
+      var results = [];
+      var usedLocal = {};
+      var attempts = 0;
+      while (results.length < 5 && attempts < 30) {
+        attempts++;
+        var pw1 = pick(pwStart);
+        var pw2 = pick(pwEnd);
+        var t = pw1 + ' ' + k + ' Strategies ' + pw2;
+        var lower = t.toLowerCase();
+        if (!usedLocal[lower] && !isUsed(t)) {
+          usedLocal[lower] = true;
+          markUsed(t);
+          results.push(t);
+        }
+      }
+      while (results.length < 3) {
+        var t = pick(pwStart) + ' ' + k + ' Guide for ' + aud;
+        if (!isUsed(t)) {
+          markUsed(t);
+          results.push(t);
+        }
+      }
+      return results;
+    }
+
+    /* ─── Master Generator ─── */
+    function generateAllCategorized(keyword, contentType, audience) {
+      resetUsed();
+      return {
+        list: generateListTitles(keyword, contentType, audience),
+        numbers: generateNumberTitles(keyword, contentType, audience),
+        howto: generateHowToTitles(keyword, contentType, audience),
+        question: generateQuestionTitles(keyword, contentType, audience),
+        power: generatePowerWordTitles(keyword, contentType, audience)
+      };
+    }
+
+    /* ─── Render categorized titles ─── */
+    function renderCategory(cat, titles, keyword) {
+      var list = document.getElementById('titlesList-' + cat);
+      if (!list) return;
       var favs = JSON.parse(localStorage.getItem('seoFavTitles') || '{}');
-      titlesList.innerHTML = '';
+      list.innerHTML = '';
       titles.forEach(function(title, idx) {
         var isFaved = favs[title] === true;
+        var score = calcSEOScore(title, keyword);
+        var scoreCls = scoreLabel(score);
+        var charCount = title.length;
         var item = document.createElement('div');
         item.className = 'seo-title-item';
-        item.style.animationDelay = (idx * 0.05) + 's';
+        item.style.animationDelay = (idx * 0.06) + 's';
         item.innerHTML =
           '<span class="seo-title-num">' + (idx + 1) + '</span>' +
-          '<span class="seo-title-text">' + title + '</span>' +
+          '<div class="seo-title-content">' +
+            '<span class="seo-title-text">' + title + '</span>' +
+            '<div class="seo-title-meta">' +
+              '<span class="seo-seo-badge ' + scoreCls + '">' + score + '</span>' +
+              '<span class="seo-char-count">' + charCount + ' chars</span>' +
+            '</div>' +
+          '</div>' +
           '<div class="seo-title-actions">' +
             '<button class="seo-title-btn' + (isFaved ? ' faved' : '') + '" data-action="fav" title="Save">' +
               '<svg viewBox="0 0 24 24" fill="' + (isFaved ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>' +
@@ -1499,15 +1870,14 @@
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
             '</button>' +
           '</div>';
-        titlesList.appendChild(item);
+        list.appendChild(item);
       });
 
-      /* ─── Title action handlers ─── */
-      titlesList.querySelectorAll('[data-action="copy"]').forEach(function(btn, i) {
+      /* ─── Copy handlers for this panel ─── */
+      list.querySelectorAll('[data-action="copy"]').forEach(function(btn, i) {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
-          var text = titles[i];
-          navigator.clipboard.writeText(text).then(function() {
+          navigator.clipboard.writeText(titles[i]).then(function() {
             btn.classList.add('copied');
             setTimeout(function() { btn.classList.remove('copied'); }, 1200);
             showToast('Copied to clipboard!');
@@ -1515,7 +1885,7 @@
         });
       });
 
-      titlesList.querySelectorAll('[data-action="fav"]').forEach(function(btn, i) {
+      list.querySelectorAll('[data-action="fav"]').forEach(function(btn, i) {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
           var text = titles[i];
@@ -1533,6 +1903,56 @@
           }
           localStorage.setItem('seoFavTitles', JSON.stringify(favs));
         });
+      });
+    }
+
+    function renderAllCategorized(allTitles, keyword) {
+      state.titles = allTitles;
+      var total = 0;
+      CATEGORIES.forEach(function(cat) {
+        var titles = allTitles[cat] || [];
+        total += titles.length;
+        renderCategory(cat, titles, keyword);
+        var countEl = document.getElementById('catCount-' + cat);
+        if (countEl) countEl.textContent = titles.length;
+      });
+      document.getElementById('titlesCount').textContent = total + ' titles across ' + CATEGORIES.length + ' categories';
+    }
+
+    /* ─── Skeleton helpers ─── */
+    function showSkeleton(cat) {
+      var list = document.getElementById('titlesList-' + cat);
+      if (!list) return;
+      var html = '';
+      for (var i = 0; i < 5; i++) {
+        html += '<div class="seo-skeleton-item" style="animation-delay:' + (i * 0.08) + 's">' +
+          '<div class="seo-skeleton-shape seo-skeleton-num"></div>' +
+          '<div class="seo-title-content">' +
+            '<div class="seo-skeleton-shape seo-skeleton-text"></div>' +
+            '<div class="seo-skeleton-shape seo-skeleton-meta"></div>' +
+          '</div>' +
+          '<div class="seo-skeleton-shape seo-skeleton-btn"></div>' +
+          '<div class="seo-skeleton-shape seo-skeleton-btn"></div>' +
+        '</div>';
+      }
+      list.innerHTML = html;
+    }
+
+    function showAllSkeletons() {
+      CATEGORIES.forEach(function(cat) { showSkeleton(cat); });
+    }
+
+    /* ─── Tab switching ─── */
+    var activeCat = 'list';
+
+    function switchTab(cat) {
+      if (cat === activeCat) return;
+      activeCat = cat;
+      document.querySelectorAll('.seo-cat-tab').forEach(function(tab) {
+        tab.classList.toggle('active', tab.getAttribute('data-cat') === cat);
+      });
+      document.querySelectorAll('.seo-cat-panel').forEach(function(panel) {
+        panel.classList.toggle('active', panel.getAttribute('data-cat') === cat);
       });
     }
 
@@ -1580,18 +2000,27 @@
 
           setTimeout(function() {
             loadingView.classList.remove('active');
+            resultsView.classList.add('active');
 
             var contentType = document.getElementById('seoContentType').value;
             var audience = document.getElementById('seoAudience').value;
-            var titles = generateTitles(keyword, contentType, audience);
 
-            renderTitles(titles, keyword);
-            updateInsights(keyword, contentType);
-            document.getElementById('titlesCount').textContent = titles.length + ' titles for "' + keyword + '"';
+            showAllSkeletons();
+            activeCat = 'list';
+            document.querySelectorAll('.seo-cat-tab').forEach(function(t) {
+              t.classList.toggle('active', t.getAttribute('data-cat') === 'list');
+            });
+            document.querySelectorAll('.seo-cat-panel').forEach(function(p) {
+              p.classList.toggle('active', p.getAttribute('data-cat') === 'list');
+            });
 
-            resultsView.classList.add('active');
+            setTimeout(function() {
+              var allTitles = generateAllCategorized(keyword, contentType, audience);
+              renderAllCategorized(allTitles, keyword);
+              updateInsights(keyword, contentType);
+            }, 400);
+
             leadSection.classList.add('active');
-            leadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, 500);
         }
         document.getElementById('seoProgressFill').style.width = Math.min(progress, 100) + '%';
@@ -1604,22 +2033,47 @@
       this.classList.remove('aud-input-error');
     });
 
-    /* ─── Regenerate ─── */
-    document.getElementById('regenerateBtn').addEventListener('click', function() {
+    /* ─── Tab click handlers ─── */
+    document.querySelectorAll('.seo-cat-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var cat = tab.getAttribute('data-cat');
+        switchTab(cat);
+      });
+    });
+
+    /* ─── Generate More Variations ─── */
+    document.getElementById('generateMoreBtn').addEventListener('click', function() {
       var keyword = document.getElementById('seoKeyword').value.trim();
       if (!keyword) { document.getElementById('seoKeyword').classList.add('aud-input-error'); return; }
       var contentType = document.getElementById('seoContentType').value;
       var audience = document.getElementById('seoAudience').value;
-      var titles = generateTitles(keyword, contentType, audience);
-      renderTitles(titles, keyword);
-      resultsView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      showAllSkeletons();
+      switchTab('list');
+
+      setTimeout(function() {
+        var allTitles = generateAllCategorized(keyword, contentType, audience);
+        renderAllCategorized(allTitles, keyword);
+        resultsView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    });
+
+    /* ─── Regenerate ─── */
+    document.getElementById('regenerateBtn').addEventListener('click', function() {
+      document.getElementById('generateMoreBtn').click();
     });
 
     /* ─── Copy All ─── */
     document.getElementById('copyAllBtn').addEventListener('click', function() {
-      var items = titlesList.querySelectorAll('.seo-title-text');
-      var texts = Array.from(items).map(function(el) { return el.textContent; }).join('\n');
-      navigator.clipboard.writeText(texts).then(function() {
+      var allTexts = [];
+      CATEGORIES.forEach(function(cat) {
+        var list = document.getElementById('titlesList-' + cat);
+        if (list) {
+          var items = list.querySelectorAll('.seo-title-text');
+          items.forEach(function(el) { allTexts.push(el.textContent); });
+        }
+      });
+      navigator.clipboard.writeText(allTexts.join('\n')).then(function() {
         showToast('All titles copied to clipboard!');
       });
     });
