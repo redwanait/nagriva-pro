@@ -1,169 +1,31 @@
 /* ════════════════════════════════════════════════════════
-   Nagriva — Supabase Authentication
-   Handles sign in, sign up, forgot password, session
-   management, and UI state for the auth system.
+   Nagriva — Authentication UI Layer
+   Manages form binding, password strength, navbar auth UI,
+   OAuth buttons, and admin/dev link visibility.
+   Delegates all state to NagrivaAuthStore.
    ════════════════════════════════════════════════════════ */
 
 'use strict';
 
 const NagrivaAuth = (() => {
-  /* ─── State ─── */
-  let currentSession = null;
-  let currentUser = null;
-  let authInitialized = false;
-
-  /* ─── DOM Refs ─── */
-  const refs = {};
-
-  function cacheRefs() {
-    refs.overlay = document.getElementById('authOverlay');
-    refs.backdrop = document.getElementById('authBackdrop');
-    refs.modal = document.getElementById('authModal');
-    refs.closeBtn = document.getElementById('authCloseBtn');
-
-    refs.tabs = document.querySelectorAll('.auth-tab');
-    refs.forms = document.querySelectorAll('.auth-form');
-
-    refs.signInForm = document.getElementById('signInForm');
-    refs.signUpForm = document.getElementById('signUpForm');
-    refs.forgotForm = document.getElementById('forgotForm');
-
-    refs.signinSubmit = document.getElementById('signinSubmit');
-    refs.signupSubmit = document.getElementById('signupSubmit');
-    refs.forgotSubmit = document.getElementById('forgotSubmit');
-
-    refs.signinMsg = document.getElementById('signinMessage');
-    refs.signupMsg = document.getElementById('signupMessage');
-    refs.forgotMsg = document.getElementById('forgotMessage');
-
-    refs.forgotSuccess = document.getElementById('forgotSuccess');
-    refs.forgotFormWrap = document.getElementById('forgotFormWrap');
-
-    refs.mobileAuthBtn = document.getElementById('mobileAuthBtn');
-    refs.mobileAuthText = document.getElementById('mobileAuthText');
-
-    refs.pwStrength = document.getElementById('passwordStrength');
-    refs.pwStrengthFill = document.getElementById('passwordStrengthFill');
-    refs.pwStrengthLabel = document.getElementById('passwordStrengthLabel');
-    refs.termsCheckbox = document.getElementById('termsCheckbox');
-  }
-
   /* ─── Helpers ─── */
   function getInitials(name) {
     if (!name) return 'U';
-    return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || 'U';
+    return name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2) || 'U';
   }
 
   function getDisplayName(user) {
     if (!user) return 'User';
-    return user.user_metadata?.full_name || user.email?.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) || 'User';
+    return user.user_metadata?.full_name || user.email?.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }) || 'User';
   }
 
-  function getEmailFromInput(form) {
-    const input = form.querySelector('.auth-input[type="email"], .auth-input[name="email"]');
-    return input ? input.value.trim() : '';
+  function getAvatarUrl(user) {
+    if (!user) return null;
+    if (user.user_metadata?.avatar_url) return user.user_metadata.avatar_url;
+    return null;
   }
 
-  function getPasswordFromInput(form) {
-    const input = form.querySelector('.auth-input[type="password"], .auth-input[name="password"]');
-    return input ? input.value.trim() : '';
-  }
-
-  function getConfirmPassword(form) {
-    const input = form.querySelector('.auth-input[name="confirmPassword"]');
-    return input ? input.value.trim() : '';
-  }
-
-  function getNameFromInput(form) {
-    const input = form.querySelector('.auth-input[name="name"]');
-    return input ? input.value.trim() : '';
-  }
-
-  function showError(msgEl, message) {
-    const icon = msgEl.querySelector('svg') || (() => {
-      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      s.setAttribute('width', '16'); s.setAttribute('height', '16');
-      s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', 'none');
-      s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '2');
-      s.setAttribute('stroke-linecap', 'round');
-      s.innerHTML = '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
-      return s;
-    })();
-    msgEl.innerHTML = '';
-    msgEl.appendChild(icon);
-    msgEl.appendChild(document.createTextNode(message));
-    msgEl.className = 'auth-message error show';
-  }
-
-  function showSuccess(msgEl, message) {
-    const icon = msgEl.querySelector('svg') || (() => {
-      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      s.setAttribute('width', '16'); s.setAttribute('height', '16');
-      s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', 'none');
-      s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '2');
-      s.setAttribute('stroke-linecap', 'round');
-      s.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>';
-      return s;
-    })();
-    msgEl.innerHTML = '';
-    msgEl.appendChild(icon);
-    msgEl.appendChild(document.createTextNode(message));
-    msgEl.className = 'auth-message success show';
-  }
-
-  function hideMessage(msgEl) {
-    if (msgEl) msgEl.className = 'auth-message';
-  }
-
-  /* ─── Password Strength ─── */
-  function getPasswordStrength(password) {
-    let score = 0;
-    if (password.length >= 8) score += 1;
-    if (password.length >= 12) score += 1;
-    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score += 1;
-    if (/\d/.test(password)) score += 1;
-    if (/[^a-zA-Z0-9]/.test(password)) score += 1;
-    return score;
-  }
-
-  function getPasswordRequirements(password) {
-    return {
-      length: password.length >= 8,
-      upper: /[A-Z]/.test(password),
-      lower: /[a-z]/.test(password),
-      number: /\d/.test(password),
-      special: /[^a-zA-Z0-9]/.test(password)
-    };
-  }
-
-  function updatePasswordStrength(password) {
-    if (!refs.pwStrength || !refs.pwStrengthFill || !refs.pwStrengthLabel) return;
-    if (!password) {
-      refs.pwStrength.classList.remove('visible');
-      return;
-    }
-    refs.pwStrength.classList.add('visible');
-    const score = getPasswordStrength(password);
-    const levels = ['weak', 'fair', 'good', 'strong'];
-    const labels = ['Weak — Try adding more characters', 'Fair — Add symbols & numbers', 'Good — Almost there', 'Strong — Great password!'];
-    if (score === 0) {
-      refs.pwStrengthFill.className = 'auth-pw-strength-fill weak';
-      refs.pwStrengthLabel.textContent = 'Too short — min 6 characters';
-      refs.pwStrengthLabel.className = 'auth-pw-strength-label weak';
-    } else {
-      const idx = Math.min(score - 1, 3);
-      refs.pwStrengthFill.className = 'auth-pw-strength-fill ' + levels[idx];
-      refs.pwStrengthLabel.textContent = labels[idx];
-      refs.pwStrengthLabel.className = 'auth-pw-strength-label ' + levels[idx];
-    }
-  }
-
-  function resetPasswordStrength() {
-    if (!refs.pwStrength) return;
-    refs.pwStrength.classList.remove('visible');
-  }
-
-  /* ─── Supabase Error Messages ─── */
+  /* ─── Error Messages ─── */
   const AUTH_ERRORS = {
     'invalid_credentials': 'Invalid email or password. Please try again.',
     'Invalid login credentials': 'Invalid email or password. Please try again.',
@@ -178,30 +40,51 @@ const NagrivaAuth = (() => {
     'rate_limit': 'Too many attempts. Please wait a moment before trying again.',
     'Too many requests': 'Too many attempts. Please wait a moment before trying again.',
     'network_error': 'Network error. Please check your connection and try again.',
-    'Email link is invalid or has expired': 'This reset link is invalid or has expired. Please request a new one.',
-    'Email not confirmed': 'Please check your email and confirm your account before signing in.',
+    'Email link is invalid or has expired': 'This reset link is invalid or has expired. Please request a new one.'
   };
 
   function getAuthErrorMessage(error) {
     if (!error) return 'An unexpected error occurred. Please try again.';
-
-    const message = error.message || error.error_description || error.toString();
-
-    for (const [key, value] of Object.entries(AUTH_ERRORS)) {
-      if (message.toLowerCase().includes(key.toLowerCase())) return value;
-    }
-
-    if (message.toLowerCase().includes('email') && message.toLowerCase().includes('exist')) {
-      return 'An account with this email already exists.';
-    }
-    if (message.toLowerCase().includes('password') && message.toLowerCase().includes('characters')) {
-      return 'Password must be at least 6 characters long.';
+    var message = error.message || error.error_description || error.toString();
+    for (var key in AUTH_ERRORS) {
+      if (message.toLowerCase().includes(key.toLowerCase())) return AUTH_ERRORS[key];
     }
     if (message.toLowerCase().includes('network') || message.toLowerCase().includes('fetch')) {
       return 'Network error. Please check your connection.';
     }
-
     return message.charAt(0).toUpperCase() + message.slice(1);
+  }
+
+  function showError(msgEl, message) {
+    if (!msgEl) return;
+    msgEl.innerHTML = '';
+    var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('width', '16'); s.setAttribute('height', '16');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', 'none');
+    s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '2');
+    s.setAttribute('stroke-linecap', 'round');
+    s.innerHTML = '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
+    msgEl.appendChild(s);
+    msgEl.appendChild(document.createTextNode(' ' + message));
+    msgEl.className = 'auth-message error show';
+  }
+
+  function showSuccess(msgEl, message) {
+    if (!msgEl) return;
+    msgEl.innerHTML = '';
+    var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('width', '16'); s.setAttribute('height', '16');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', 'none');
+    s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '2');
+    s.setAttribute('stroke-linecap', 'round');
+    s.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>';
+    msgEl.appendChild(s);
+    msgEl.appendChild(document.createTextNode(' ' + message));
+    msgEl.className = 'auth-message success show';
+  }
+
+  function hideMessage(msgEl) {
+    if (msgEl) msgEl.className = 'auth-message';
   }
 
   /* ─── Send Welcome Email ─── */
@@ -223,504 +106,152 @@ const NagrivaAuth = (() => {
     }
   }
 
-  /* ─── UI Update ─── */
-  function updateUI() {
-    if (currentSession && currentUser) {
-      if (refs.mobileAuthBtn) refs.mobileAuthBtn.style.display = 'none';
-      updateAdminLinkVisibility();
-    } else {
-      if (refs.mobileAuthBtn) {
-        refs.mobileAuthBtn.style.display = '';
-        if (refs.mobileAuthText) refs.mobileAuthText.textContent = 'Sign In';
-      }
-      var adminLink = document.getElementById('adminNavLink');
-      if (adminLink) adminLink.style.display = 'none';
-    }
-  }
-
-  /* ─── Modal Controls ─── */
-  function openModal(tab) {
-    if (!refs.overlay) return;
-    refs.overlay.style.display = 'flex';
-    requestAnimationFrame(() => {
-      refs.overlay.classList.add('active');
-    });
-    document.body.style.overflow = 'hidden';
-    switchTab(tab || 'signin');
-  }
-
-  function closeModal() {
-    if (!refs.overlay) return;
-    refs.overlay.classList.remove('active');
-    document.body.style.overflow = '';
-    hideMessage(refs.signinMsg);
-    hideMessage(refs.signupMsg);
-    hideMessage(refs.forgotMsg);
-    refs.forgotSuccess.classList.remove('show');
-    if (refs.forgotFormWrap) refs.forgotFormWrap.style.display = '';
-    setTimeout(() => {
-      if (!refs.overlay.classList.contains('active')) {
-        refs.overlay.style.display = 'none';
-      }
-    }, 500);
-  }
-
-  const FORM_IDS = { signin: 'signInForm', signup: 'signUpForm', forgot: 'forgotForm' };
-
-  function switchTab(tabId) {
-    hideMessage(refs.signinMsg);
-    hideMessage(refs.signupMsg);
-
-    refs.tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabId));
-    refs.forms.forEach(f => f.classList.toggle('active', f.id === (FORM_IDS[tabId] || '')));
-
-    if (refs.forgotSuccess) refs.forgotSuccess.classList.remove('show');
-    if (refs.forgotFormWrap) refs.forgotFormWrap.style.display = '';
-
-    resetPasswordStrength();
-
-    const titles = {
-      signin: ['Welcome Back', 'Sign in to access your dashboard and manage your projects.'],
-      signup: ['Create Your Account', 'Join Nagriva and start growing your digital presence.'],
-      forgot: ['Reset Password', 'Enter your email and we\'ll send you a reset link.']
-    };
-    const titleEl = document.getElementById('authTitle');
-    const subEl = document.getElementById('authSubtitle');
-    if (titleEl && titles[tabId]) titleEl.textContent = titles[tabId][0];
-    if (subEl && titles[tabId]) subEl.textContent = titles[tabId][1];
-  }
-
-  function openForgotPassword() {
-    switchTab('forgot');
-    if (refs.forgotSuccess) refs.forgotSuccess.classList.remove('show');
-    if (refs.forgotFormWrap) refs.forgotFormWrap.style.display = '';
-    hideMessage(refs.forgotMsg);
-  }
-
   /* ════════════════════════════════════════════
-     SUPABASE AUTH OPERATIONS
-  ════════════════════════════════════════════ */
+     NAVBAR UI
+     ════════════════════════════════════════════ */
 
-  /* ─── Sign In ─── */
-  async function handleSignIn(e) {
-    e.preventDefault();
-    hideMessage(refs.signinMsg);
+  function updateNavbarUI(user) {
+    var getStartedBtn = document.getElementById('getStartedBtn');
+    var mobileGetStartedBtn = document.getElementById('mobileGetStartedBtn');
+    var navUser = document.getElementById('navUser');
+    var navAvatar = document.getElementById('navAvatar');
+    var navAvatarInitials = document.getElementById('navAvatarInitials');
+    var navAvatarImg = document.getElementById('navAvatarImg');
+    var navDropdownName = document.getElementById('navDropdownName');
+    var navDropdownEmail = document.getElementById('navDropdownEmail');
+    var mobileMenuUser = document.getElementById('mobileMenuUser');
+    var mobileMenuUserName = document.getElementById('mobileMenuUserName');
+    var mobileMenuUserEmail = document.getElementById('mobileMenuUserEmail');
 
-    const email = getEmailFromInput(refs.signInForm);
-    const password = getPasswordFromInput(refs.signInForm);
+    if (user) {
+      if (getStartedBtn) getStartedBtn.style.display = 'none';
+      if (mobileGetStartedBtn) mobileGetStartedBtn.style.display = 'none';
 
-    if (!email) { showError(refs.signinMsg, 'Please enter your email address'); return; }
-    if (!password) { showError(refs.signinMsg, 'Please enter your password'); return; }
-    if (!/\S+@\S+\.\S+/.test(email)) { showError(refs.signinMsg, 'Please enter a valid email address'); return; }
+      if (navUser) navUser.style.display = '';
+      var name = getDisplayName(user);
+      var avatarUrl = getAvatarUrl(user);
 
-    refs.signinSubmit.classList.add('loading');
+      if (navAvatarInitials) navAvatarInitials.textContent = getInitials(name);
+      if (navDropdownName) navDropdownName.textContent = name;
+      if (navDropdownEmail) navDropdownEmail.textContent = user.email || '';
 
-    try {
-      const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        showError(refs.signinMsg, getAuthErrorMessage(error));
-        refs.signinSubmit.classList.remove('loading');
-        return;
-      }
-
-      if (data.session) {
-        closeModal();
-        refs.signInForm.reset();
-        /* ── Role-based redirect: admin users go to admin dashboard ── */
-        try {
-          const { data: profile } = await window.supabaseClient
-            .from('profiles')
-            .select('role')
-            .eq('id', data.session.user.id)
-            .single();
-          if (profile?.role === 'admin') {
-            const params = new URLSearchParams(window.location.search);
-            const redirect = params.get('redirect');
-            if (redirect && !redirect.includes('admin')) {
-              window.location.href = redirect;
-            } else {
-              window.location.href = '/pages/admin-dashboard.html';
-            }
-          } else {
-            window.location.href = getRedirectUrl();
-          }
-        } catch {
-          window.location.href = getRedirectUrl();
+      console.log('[DEBUG auth] updateNavbarUI — user:', user?.id, '| name:', name, '| avatarUrl:', avatarUrl, '| navUser elem:', !!navUser, '| navAvatarImg elem:', !!navAvatarImg, '| navAvatarInitials elem:', !!navAvatarInitials);
+      if (navAvatarImg) {
+        if (avatarUrl) {
+          navAvatarImg.src = avatarUrl;
+          navAvatarImg.style.display = 'block';
+          if (navAvatarInitials) navAvatarInitials.style.display = 'none';
+          console.log('[DEBUG auth] avatar — showing img, hiding initials');
+        } else {
+          navAvatarImg.style.display = 'none';
+          if (navAvatarInitials) navAvatarInitials.style.display = '';
+          console.log('[DEBUG auth] avatar — hiding img, showing initials');
         }
-        return;
       } else {
-        showError(refs.signinMsg, 'Unable to sign in. Please try again.');
-      }
-    } catch (err) {
-      showError(refs.signinMsg, getAuthErrorMessage(err));
-    }
-
-    refs.signinSubmit.classList.remove('loading');
-  }
-
-  /* ─── Sign Up ─── */
-  async function handleSignUp(e) {
-    e.preventDefault();
-    hideMessage(refs.signupMsg);
-
-    const name = getNameFromInput(refs.signUpForm);
-    const email = getEmailFromInput(refs.signUpForm);
-    const password = getPasswordFromInput(refs.signUpForm);
-    const confirm = getConfirmPassword(refs.signUpForm);
-
-    if (!name) { showError(refs.signupMsg, 'Please enter your full name'); return; }
-    if (!email) { showError(refs.signupMsg, 'Please enter your email address'); return; }
-    if (!/\S+@\S+\.\S+/.test(email)) { showError(refs.signupMsg, 'Please enter a valid email address'); return; }
-    if (!password) { showError(refs.signupMsg, 'Please create a password'); return; }
-    if (password.length < 6) { showError(refs.signupMsg, 'Password must be at least 6 characters'); return; }
-    if (password !== confirm) { showError(refs.signupMsg, 'Passwords do not match'); return; }
-    if (refs.termsCheckbox && !refs.termsCheckbox.checked) { showError(refs.signupMsg, 'Please agree to the Terms of Service'); return; }
-
-    refs.signupSubmit.classList.add('loading');
-
-    try {
-      const { data, error } = await window.supabaseClient.auth.signUp({
-        email,
-        password,
-        options: {
-          data: { full_name: name }
-        }
-      });
-
-      if (error) {
-        showError(refs.signupMsg, getAuthErrorMessage(error));
-        refs.signupSubmit.classList.remove('loading');
-        return;
+        console.log('[DEBUG auth] avatar — navAvatarImg element NOT FOUND in DOM');
       }
 
-      /* Check if email confirmation is required */
-      if (data?.user?.identities?.length === 0) {
-        showError(refs.signupMsg, 'An account with this email already exists.');
-        refs.signupSubmit.classList.remove('loading');
-        return;
-      }
+      if (mobileMenuUser) mobileMenuUser.style.display = '';
+      if (mobileMenuUserName) mobileMenuUserName.textContent = name;
+      if (mobileMenuUserEmail) mobileMenuUserEmail.textContent = user.email || '';
 
-      /* Trigger activity log for new client registration */
-      if (data.user && typeof NAGRIVA_ActivityLogsTrigger !== 'undefined') {
-        NAGRIVA_ActivityLogsTrigger.clientRegistered(data.user).catch(function(e) {
-          console.warn('[Auth] Failed to trigger client-registered activity log:', e.message);
-        });
-      }
-
-      /* Trigger new-client notification for admins */
-      if (data.user && typeof NAGRIVA_NotificationTriggers !== 'undefined') {
-        NAGRIVA_NotificationTriggers.newClient(data.user).catch(function(e) {
-          console.warn('[Auth] Failed to trigger new-client notification:', e.message);
-        });
-      }
-
-      /* Send welcome email via Edge Function */
-      if (data.user) {
-        sendWelcomeEmail({
-          user: data.user,
-          email: email,
-          name: name
-        }).catch(function(e) {
-          console.warn('[Auth] Failed to send welcome email:', e.message);
-        });
-      }
-
-      /* If session is null, email confirmation is enabled */
-      if (!data.session) {
-        showSuccess(refs.signupMsg,
-          'Account created! Check your email for a confirmation link. You can close this window.'
-        );
-        refs.signupSubmit.classList.remove('loading');
-        refs.signUpForm.reset();
-        return;
-      }
-
-      /* Auto-logged in (email confirmation disabled) */
-      showSuccess(refs.signupMsg, 'Account created successfully!');
-      setTimeout(() => {
-        closeModal();
-        refs.signUpForm.reset();
-        window.location.href = '/pages/dashboard.html';
-      }, 800);
-    } catch (err) {
-      showError(refs.signupMsg, getAuthErrorMessage(err));
-    }
-
-    refs.signupSubmit.classList.remove('loading');
-  }
-
-  /* ─── Forgot Password ─── */
-  async function handleForgot(e) {
-    e.preventDefault();
-    hideMessage(refs.forgotMsg);
-    if (refs.forgotSuccess) refs.forgotSuccess.classList.remove('show');
-    if (refs.forgotFormWrap) refs.forgotFormWrap.style.display = '';
-
-    const email = getEmailFromInput(refs.forgotForm);
-
-    if (!email) { showError(refs.forgotMsg, 'Please enter your email address'); return; }
-    if (!/\S+@\S+\.\S+/.test(email)) { showError(refs.forgotMsg, 'Please enter a valid email address'); return; }
-
-    refs.forgotSubmit.classList.add('loading');
-
-    try {
-      const redirectTo = window.location.origin + '/pages/reset-password.html';
-      const { error } = await window.supabaseClient.auth.resetPasswordForEmail(email, {
-        redirectTo
-      });
-
-      if (error) {
-        showError(refs.forgotMsg, getAuthErrorMessage(error));
-        refs.forgotSubmit.classList.remove('loading');
-        return;
-      }
-
-      refs.forgotSubmit.classList.remove('loading');
-      if (refs.forgotFormWrap) refs.forgotFormWrap.style.display = 'none';
-      if (refs.forgotSuccess) refs.forgotSuccess.classList.add('show');
-    } catch (err) {
-      showError(refs.forgotMsg, getAuthErrorMessage(err));
-      refs.forgotSubmit.classList.remove('loading');
+      updateAdminLinkVisibility(user);
+      updatePlanUI();
+    } else {
+      if (getStartedBtn) getStartedBtn.style.display = '';
+      if (mobileGetStartedBtn) mobileGetStartedBtn.style.display = '';
+      if (navUser) navUser.style.display = 'none';
+      if (mobileMenuUser) mobileMenuUser.style.display = 'none';
     }
   }
 
-  /* ─── Sign Out ─── */
-  async function handleSignOut() {
-    try {
-      await window.supabaseClient.auth.signOut();
-    } catch (_) {
-      /* Force local state cleanup even if API call fails */
-    }
-
-    currentSession = null;
-    currentUser = null;
-    updateUI();
-
-    window.location.href = '/pages/login.html';
-  }
-
-  /* ─── Session & Auth State ─── */
-  async function initSession() {
-    try {
-      const { data: { session } } = await window.supabaseClient.auth.getSession();
-      currentSession = session;
-      currentUser = session?.user ?? null;
-      updateUI();
-    } catch (_) {
-      updateUI();
-    }
-
-    /* Listen for auth state changes in real time */
-    window.supabaseClient.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        currentSession = session;
-        currentUser = session?.user ?? null;
-        updateUI();
-      }
-
-      if (event === 'SIGNED_OUT') {
-        currentSession = null;
-        currentUser = null;
-        updateUI();
-      }
-
-      if (event === 'USER_UPDATED') {
-        currentSession = session;
-        currentUser = session?.user ?? null;
-        updateUI();
-      }
-    });
-
-    authInitialized = true;
-  }
-
-  /* ════════════════════════════════════════════
-     EVENT BINDING
-  ════════════════════════════════════════════ */
-
-  function initPasswordToggles() {
-    document.querySelectorAll('.auth-pw-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const input = btn.parentElement.querySelector('.auth-input');
-        if (!input) return;
-        const isPw = input.type === 'password';
-        input.type = isPw ? 'text' : 'password';
-        btn.innerHTML = isPw
-          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
-          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
-      });
-    });
-  }
-
-  function initTabs() {
-    refs.tabs.forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-    });
-  }
-
-  function initPasswordStrength() {
-    const pwInput = refs.signUpForm?.querySelector('.auth-input[name="password"]');
-    if (pwInput) {
-      pwInput.addEventListener('input', () => updatePasswordStrength(pwInput.value));
-    }
-  }
-
-  function initForgotLinks() {
-    document.querySelectorAll('.auth-forgot-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        openForgotPassword();
-      });
-    });
-  }
-
-  function initFormFooterLinks() {
-    document.querySelectorAll('.auth-switch-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.tab || 'signin';
-        switchTab(target);
-      });
-    });
-  }
-
-  function initModalControls() {
-    // Auth button now links to login.html directly via <a href>
-    // No need for modal-based click handler
-
-    if (refs.mobileAuthBtn) {
-      // Mobile auth link uses <a href> natively
-    }
-
-    if (refs.closeBtn) refs.closeBtn.addEventListener('click', closeModal);
-    if (refs.backdrop) refs.backdrop.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && refs.overlay?.classList.contains('active')) closeModal();
-    });
-  }
-
+  /* ─── Avatar Dropdown ─── */
   function initDropdown() {
-    var signoutBtn = document.getElementById('signoutBtn');
-    if (signoutBtn) {
-      signoutBtn.addEventListener('click', handleSignOut);
-    }
-  }
+    var avatar = document.getElementById('navAvatar');
+    var dropdown = document.getElementById('navDropdown');
+    if (!avatar || !dropdown) return;
 
-  /* ════════════════════════════════════════════
-     OAUTH — Google & GitHub
-   ════════════════════════════════════════════ */
+    avatar.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = dropdown.classList.contains('show');
+      dropdown.classList.toggle('show');
+      avatar.setAttribute('aria-expanded', !isOpen);
+    });
 
-  function parseOAuthError(err, provider) {
-    if (!err) return 'Unable to sign in. Please try again.';
-    const msg = err.message || err.error_description || err.toString();
-    const name = provider === 'google' ? 'Google' : 'GitHub';
+    document.addEventListener('click', function(e) {
+      if (!dropdown.contains(e.target) && !avatar.contains(e.target)) {
+        dropdown.classList.remove('show');
+        avatar.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-    if (/popup|closed|was blocked/i.test(msg)) {
-      return 'Sign-in popup was blocked. Please allow popups for this site and try again.';
-    }
-    if (/network|fetch|failed to fetch|offline|enotfound|econnrefused|dns/i.test(msg)) {
-      return 'Network error. Please check your connection and try again.';
-    }
-    if (/provider|not enabled|unsupported|configuration|not configured/i.test(msg)) {
-      return name + ' sign-in is not configured. Please contact support.';
-    }
-    if (/rate.*limit|too many/i.test(msg)) {
-      return 'Too many attempts. Please wait a moment before trying again.';
-    }
-    if (/timed? ?out|timeout/i.test(msg)) {
-      return 'The request timed out. Please try again.';
-    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        dropdown.classList.remove('show');
+        avatar.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-    return 'Unable to sign in with ' + name + '. Please try again.';
-  }
-
-  async function handleOAuth(provider, btn) {
-    if (!btn || btn.disabled) return;
-
-    btn.disabled = true;
-    btn.classList.add('loading');
-
-    const form = btn.closest('form');
-    const msgEl = form ? form.querySelector('.auth-message') : null;
-    if (msgEl) hideMessage(msgEl);
-
-    try {
-      const { error } = await window.supabaseClient.auth.signInWithOAuth({
-        provider: provider,
-        options: {
-          redirectTo: window.location.origin + '/pages/dashboard.html'
-        }
+    var handleLogout = function(e) {
+      if (dropdown) {
+        dropdown.classList.remove('show');
+        if (avatar) avatar.setAttribute('aria-expanded', 'false');
+      }
+      if (!window.NagrivaAuthStore) { window.location.href = '/pages/login.html'; return; }
+      NagrivaAuthStore.signOut().then(function() {
+        window.location.href = '/pages/login.html';
       });
+    };
 
-      if (error) {
-        const message = parseOAuthError(error, provider);
-        if (msgEl) showError(msgEl, message);
-      }
-    } catch (err) {
-      const message = parseOAuthError(err, provider);
-      if (msgEl) showError(msgEl, message);
-    }
-
-    btn.disabled = false;
-    btn.classList.remove('loading');
-  }
-
-  function initGoogleOAuth() {
-    document.querySelectorAll('.ap-social-btn, .auth-social-btn').forEach(function(btn) {
-      if (btn.textContent.trim().includes('Google')) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          handleOAuth('google', btn);
-        });
-      }
+    document.querySelectorAll('[data-action="logout"], [data-action="logout-mobile"]').forEach(function(item) {
+      item.addEventListener('click', handleLogout);
     });
   }
 
-  function initGitHubOAuth() {
-    document.querySelectorAll('.ap-social-btn, .auth-social-btn').forEach(function(btn) {
-      if (btn.textContent.trim().includes('GitHub')) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          handleOAuth('github', btn);
-        });
+  /* ─── Plan UI ─── */
+  function updatePlanUI(planData) {
+    var isPro = planData ? planData.isPro : (window.NagrivaPlanManager && window.NagrivaPlanManager.isPro());
+
+    /* Desktop: swap "Join Nagriva Pro" button with "Pro Member" badge */
+    var proBtn = document.getElementById('proBtn');
+    var proMemberBtn = document.getElementById('proMemberBtn');
+    if (proBtn && proMemberBtn) {
+      if (isPro) {
+        proBtn.style.display = 'none';
+        proMemberBtn.style.display = 'inline-flex';
+      } else {
+        proBtn.style.display = '';
+        proMemberBtn.style.display = 'none';
       }
-    });
-  }
-
-  /* ─── Handle Redirect After Login ─── */
-  function getRedirectUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const redirect = params.get('redirect');
-    if (redirect) {
-      return decodeURIComponent(redirect);
     }
-    /* Default: regular users go to dashboard, admin detection
-       is handled in the sign-in handler above. */
-    return '/pages/dashboard.html';
-  }
 
-  function handleRedirect() {
-    const params = new URLSearchParams(window.location.search);
-    const requireLogin = params.get('requireLogin');
-    const redirect = params.get('redirect');
+    /* Dropdown Pro badge */
+    var navProBadge = document.getElementById('navProBadge');
+    if (navProBadge) {
+      navProBadge.style.display = isPro ? 'inline-flex' : 'none';
+    }
 
-    if (requireLogin === 'true') {
-      const dest = redirect ? '/pages/login.html?redirect=' + encodeURIComponent(redirect) : '/pages/login.html';
-      window.location.href = dest;
+    /* Mobile: swap "Join Nagriva Pro" with "Pro Member" badge */
+    var mobileProBtn = document.getElementById('mobileProBtn');
+    var mobileProBadge = document.getElementById('mobileProBadge');
+    if (mobileProBtn && mobileProBadge) {
+      if (isPro) {
+        mobileProBtn.style.display = 'none';
+        mobileProBadge.style.display = 'inline-flex';
+      } else {
+        mobileProBtn.style.display = '';
+        mobileProBadge.style.display = 'none';
+      }
     }
   }
 
-  /* ─── Dropdown Navigation Links ─── */
-
-
-  /* ─── Show admin link only for admin users ─── */
-  async function updateAdminLinkVisibility() {
+  /* ─── Admin Link Visibility ─── */
+  async function updateAdminLinkVisibility(user) {
     var adminLink = document.getElementById('adminNavLink');
     var mobileAdminLink = document.getElementById('mobileAdminNavLink');
     try {
-      var session = currentSession || (await window.supabaseClient.auth.getSession()).data.session;
-      if (!session) {
+      var session = user && window.NagrivaAuthStore ? (NagrivaAuthStore.getSession() || null) : null;
+      if (!session || !user) {
         if (adminLink) adminLink.style.display = 'none';
         if (mobileAdminLink) mobileAdminLink.style.display = 'none';
         return;
@@ -728,7 +259,7 @@ const NagrivaAuth = (() => {
       var { data: profile } = await window.supabaseClient
         .from('profiles')
         .select('role')
-        .eq('id', session.user.id)
+        .eq('id', user.id)
         .single();
       var role = profile ? profile.role : 'client';
       var isAdmin = role === 'admin';
@@ -740,65 +271,224 @@ const NagrivaAuth = (() => {
     }
   }
 
-  /* ─── Show dev link only in dev mode ─── */
+  /* ─── Dev Link Visibility ─── */
   function updateDevLinkVisibility() {
     var devLink = document.getElementById('devNavLink');
     var mobileDevLink = document.getElementById('mobileDevNavLink');
     var isDev = window.location.search.indexOf('dev=true') !== -1 ||
-                (function () { try { return localStorage.getItem('nagriva_dev_mode') === 'true' } catch (e) { return false } })();
+      (function() { try { return localStorage.getItem('nagriva_dev_mode') === 'true'; } catch (e) { return false; } })();
     if (devLink) devLink.style.display = isDev ? '' : 'none';
     if (mobileDevLink) mobileDevLink.style.display = isDev ? '' : 'none';
   }
 
-  /* ─── Init ─── */
-  async function init() {
-    cacheRefs();
-    initTabs();
-    initPasswordToggles();
-    initPasswordStrength();
-    initForgotLinks();
-    initFormFooterLinks();
-    initModalControls();
-    initGoogleOAuth();
-    initGitHubOAuth();
+  /* ════════════════════════════════════════════
+     PASSWORD STRENGTH
+     ════════════════════════════════════════════ */
 
-    /* Wire form submissions — only in modal context (standalone pages have their own handlers) */
-    if (refs.overlay) {
-      if (refs.signInForm) refs.signInForm.addEventListener('submit', handleSignIn);
-      if (refs.signUpForm) refs.signUpForm.addEventListener('submit', handleSignUp);
-      if (refs.forgotForm) refs.forgotForm.addEventListener('submit', handleForgot);
-    }
-
-    /* Initialize session and auth listener */
-    await initSession();
-
-    /* Handle redirect after login params */
-    handleRedirect();
+  function getPasswordStrength(password) {
+    var score = 0;
+    if (password.length >= 8) score += 1;
+    if (password.length >= 12) score += 1;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score += 1;
+    if (/\d/.test(password)) score += 1;
+    if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+    return score;
   }
 
-  /* ─── Re-init UI when the dynamic navbar loads ─── */
+  function updatePasswordStrength(password, strengthEl, fillEl, labelEl) {
+    if (!strengthEl || !fillEl || !labelEl) return;
+    if (!password) {
+      strengthEl.classList.remove('visible');
+      return;
+    }
+    strengthEl.classList.add('visible');
+    var score = getPasswordStrength(password);
+    var levels = ['weak', 'fair', 'good', 'strong'];
+    var labels = ['Weak \u2014 Try adding more characters', 'Fair \u2014 Add symbols & numbers', 'Good \u2014 Almost there', 'Strong \u2014 Great password!'];
+    if (score === 0) {
+      fillEl.className = 'auth-pw-strength-fill weak';
+      labelEl.textContent = 'Too short \u2014 min 6 characters';
+      labelEl.className = 'auth-pw-strength-label weak';
+    } else {
+      var idx = Math.min(score - 1, 3);
+      fillEl.className = 'auth-pw-strength-fill ' + levels[idx];
+      labelEl.textContent = labels[idx];
+      labelEl.className = 'auth-pw-strength-label ' + levels[idx];
+    }
+  }
+
+  function getPasswordRequirements(password) {
+    return {
+      length: password.length >= 8,
+      upper: /[A-Z]/.test(password),
+      lower: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[^a-zA-Z0-9]/.test(password)
+    };
+  }
+
+  /* ════════════════════════════════════════════
+     PASSWORD TOGGLE
+     ════════════════════════════════════════════ */
+
+  function initPasswordToggles() {
+    document.querySelectorAll('.auth-pw-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var input = btn.parentElement.querySelector('.auth-input');
+        if (!input) return;
+        var isPw = input.type === 'password';
+        input.type = isPw ? 'text' : 'password';
+        btn.innerHTML = isPw
+          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+      });
+    });
+  }
+
+  /* ════════════════════════════════════════════
+     OAUTH — Google
+     ════════════════════════════════════════════ */
+
+  function parseOAuthError(err) {
+    if (!err) return 'Unable to sign in. Please try again.';
+    var msg = err.message || err.error_description || err.toString();
+    if (/popup|closed|was blocked/i.test(msg)) {
+      return 'Sign-in popup was blocked. Please allow popups for this site and try again.';
+    }
+    if (/network|fetch|failed to fetch|offline|enotfound|econnrefused|dns/i.test(msg)) {
+      return 'Network error. Please check your connection and try again.';
+    }
+    if (/rate.*limit|too many/i.test(msg)) {
+      return 'Too many attempts. Please wait a moment before trying again.';
+    }
+    return 'Unable to sign in with Google. Please try again.';
+  }
+
+  async function handleGoogleOAuth(btn) {
+    if (!btn || btn.disabled) return;
+    btn.disabled = true;
+    btn.classList.add('loading');
+
+    var form = btn.closest('form');
+    var msgEl = form ? form.querySelector('.auth-message') : null;
+    if (msgEl) hideMessage(msgEl);
+
+    var params = new URLSearchParams(window.location.search);
+    var redirectTarget = params.get('redirect') || '';
+    var fromLimit = params.get('from_limit') === '1';
+
+    var redirectPath = window.location.origin + window.location.pathname;
+    var rp = new URLSearchParams();
+    if (redirectTarget) rp.set('redirect', redirectTarget);
+    if (fromLimit) rp.set('from_limit', '1');
+    var qs = rp.toString();
+    var redirectTo = redirectPath + (qs ? '?' + qs : '');
+
+    var result = await NagrivaAuthStore.signInWithGoogle(redirectTo);
+    if (result.error && msgEl) {
+      showError(msgEl, parseOAuthError(result.error));
+    }
+
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  }
+
+  function initGoogleOAuth() {
+    document.querySelectorAll('.auth-social-btn').forEach(function(btn) {
+      if (btn.textContent.includes('Google') || btn.querySelector('path[fill="#4285F4"]') || btn.innerHTML.includes('google')) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          handleGoogleOAuth(btn);
+        });
+      }
+    });
+  }
+
+  /* ════════════════════════════════════════════
+     INIT — Subscribe to auth store
+     ════════════════════════════════════════════ */
+
+  var _initialized = false;
+
+  function init() {
+    if (_initialized) return;
+    _initialized = true;
+
+    initPasswordToggles();
+    initGoogleOAuth();
+
+    /* If store not ready yet, wait for layout.js to inject it */
+    if (!window.NagrivaAuthStore) {
+      _initialized = false;
+      setTimeout(function check () {
+        if (window.NagrivaAuthStore) { init(); }
+        else { setTimeout(check, 30); }
+      }, 30);
+      return;
+    }
+
+    /* Subscribe to auth state changes from store */
+    NagrivaAuthStore.subscribe(function(state) {
+      console.log('[DEBUG auth] subscriber fired — loading:', state.loading, '| user:', state.user?.id);
+      updateNavbarUI(state.user);
+    });
+
+    /* Subscribe to plan changes */
+    if (window.NagrivaPlanManager) {
+      NagrivaPlanManager.subscribe(function(planState) {
+        console.log('[DEBUG auth] plan subscriber fired — plan:', planState.plan);
+        updatePlanUI(planState);
+      });
+    }
+
+    /* If already initialized, show current state */
+    if (NagrivaAuthStore.isAuthenticated()) {
+      console.log('[DEBUG auth] init — already authenticated, calling updateNavbarUI immediately');
+      updateNavbarUI(NagrivaAuthStore.getUser());
+    } else {
+      console.log('[DEBUG auth] init — not authenticated yet, waiting for subscriber');
+    }
+  }
+
+  /* ─── Re-init when dynamic navbar loads ─── */
   document.addEventListener('navbar:loaded', function onNavbarLoad() {
-    cacheRefs();
+    console.log('[DEBUG auth] navbar:loaded event received');
     initDropdown();
-    updateUI();
     updateDevLinkVisibility();
+    if (window.NagrivaAuthStore && NagrivaAuthStore.isAuthenticated()) {
+      console.log('[DEBUG auth] navbar:loaded — user is authenticated, updating navbar UI');
+      updateNavbarUI(NagrivaAuthStore.getUser());
+    } else {
+      console.log('[DEBUG auth] navbar:loaded — NOT authenticated (or no store), store:', !!window.NagrivaAuthStore, '| auth:', window.NagrivaAuthStore?.isAuthenticated());
+    }
+    updatePlanUI();
   });
 
-  /* ─── Public API ─── */
+  /* ════════════════════════════════════════════
+     PUBLIC API
+     ════════════════════════════════════════════ */
+
   return {
-    init,
-    getSession: () => currentSession,
-    getUser: () => currentUser,
-    openModal,
-    closeModal
+    init: init,
+    getUser: function() { return window.NagrivaAuthStore ? NagrivaAuthStore.getUser() : null; },
+    getSession: function() { return window.NagrivaAuthStore ? NagrivaAuthStore.getSession() : null; },
+    getAuthErrorMessage: getAuthErrorMessage,
+    showError: showError,
+    showSuccess: showSuccess,
+    hideMessage: hideMessage,
+    getDisplayName: getDisplayName,
+    getInitials: getInitials,
+    sendWelcomeEmail: sendWelcomeEmail,
+    updatePasswordStrength: updatePasswordStrength,
+    getPasswordRequirements: getPasswordRequirements
   };
 })();
 
-console.log('[Nagriva] Auth module loaded');
+window.NagrivaAuth = NagrivaAuth;
 
-/* ─── Auto-initialize on DOM ready ─── */
+/* ─── Auto-init ─── */
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => NagrivaAuth.init());
+  document.addEventListener('DOMContentLoaded', function() { NagrivaAuth.init(); });
 } else {
   NagrivaAuth.init();
 }

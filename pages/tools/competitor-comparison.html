@@ -22,6 +22,9 @@
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/mobile-optimizations.css">
   <link rel="stylesheet" href="/css/competitor-comparison.css">
+  <link rel="stylesheet" href="/css/free-trial-badge.css">
+  <link rel="stylesheet" href="/css/limit-modal.css">
+  <link rel="stylesheet" href="/css/celebration-modal.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -49,6 +52,7 @@
         </div>
         <h1 class="cc-hero-title">Competitor <span>Comparison</span></h1>
         <p class="cc-hero-desc">See how your website performs against competitors and discover growth opportunities.</p>
+        <div id="ftbBadge" style="margin-top:16px;"></div>
         <div class="cc-hero-stats">
           <div class="cc-hero-stat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -312,14 +316,23 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="/js/supabase-config.js"></script>
+  <script defer src="/js/auth-store.js"></script>
+  <script defer src="/js/auth.js"></script>
   <script src="/js/competitor-comparison.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (window.NAGRIVA_FreeTrialTracker) {
+        NAGRIVA_FreeTrialTracker.renderBadge('ftbBadge')
+      }
       if (window.CompetitorComparison) {
         window.CompetitorComparison.init()
       }
     })
   </script>
+  <script defer src="/js/plan-manager.js"></script>
+  <script defer src="/js/free-trial-tracker.js"></script>
+  <script defer src="/js/limit-modal.js"></script>
+  <script defer src="/js/celebration-modal.js"></script>
   <script defer src="/js/layout.js"></script>
 
   <!-- Google tag (gtag.js) -->

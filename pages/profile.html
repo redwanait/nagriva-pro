@@ -203,8 +203,29 @@
     border-top-color: #fff;
     border-radius: 50%; animation: auth-spin 0.6s linear infinite;
   }
-  .pf-btn-danger.loading .pf-btn-text { display: none; }
-  .pf-btn-danger.loading .pf-btn-spinner { display: inline-block; }
+    .pf-btn-danger.loading .pf-btn-text { display: none; }
+    .pf-btn-danger.loading .pf-btn-spinner { display: inline-block; }
+
+    /* ─── Plan Section ─── */
+    .plan-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; }
+    .plan-card h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: -0.01em; }
+    .plan-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; }
+    .plan-badge-free { background: rgba(255,255,255,0.06); color: var(--gray); border: 1px solid rgba(255,255,255,0.08); }
+    .plan-badge-pro { background: rgba(250,204,21,0.12); color: #FACC15; border: 1px solid rgba(250,204,21,0.2); }
+    .plan-badge-pro svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .plan-status { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .plan-label { font-size: 0.85rem; color: var(--white); font-weight: 500; }
+    .plan-features { list-style: none; padding: 0; margin: 0 0 20px; }
+    .plan-features li { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: var(--gray); padding: 6px 0; }
+    .plan-features li svg { width: 14px; height: 14px; flex-shrink: 0; color: #10B981; }
+    .plan-features li.feature-disabled { opacity: 0.4; }
+    .plan-features li.feature-disabled svg { color: var(--gray2); }
+    .plan-upgrade-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); border: none; color: var(--bg); background: linear-gradient(135deg, var(--accent), var(--accent2)); text-decoration: none; }
+    .plan-upgrade-btn:hover { box-shadow: 0 0 30px rgba(250,204,21,0.25); transform: translateY(-1px); }
+    .plan-upgrade-btn:active { transform: translateY(0) scale(0.98); }
+    .plan-pro-member { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; color: #FACC15; padding: 10px 20px; border-radius: 10px; background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.15); }
+    .plan-pro-member svg { width: 16px; height: 16px; }
+    .plan-card-footer { font-size: 0.72rem; color: var(--gray2); margin-top: 16px; line-height: 1.5; }
   .pf-btn-cancel {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
@@ -356,6 +377,35 @@
           </form>
         </div>
 
+        <!-- ─── Plan ─── -->
+        <div class="plan-card" id="planCard">
+          <h2>Your Plan</h2>
+          <div id="planContent">
+            <div class="plan-status">
+              <span class="plan-label" id="planLabel">Loading...</span>
+              <span class="plan-badge plan-badge-free" id="planBadge">Free</span>
+            </div>
+            <ul class="plan-features" id="planFeatures">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span>Free trial tool access</span></li>
+              <li class="feature-disabled" id="planFeatureUnlimited"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/></svg> <span>Unlimited tool usage</span></li>
+              <li class="feature-disabled" id="planFeaturePremium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/></svg> <span>Premium features</span></li>
+            </ul>
+            <div id="planActions">
+              <a href="/pages/nagriva-pro.html" class="plan-upgrade-btn" id="planUpgradeBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                Upgrade to Pro
+              </a>
+              <div class="plan-pro-member" id="planProBadge" style="display:none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                Pro Member
+              </div>
+            </div>
+            <div class="plan-card-footer" id="planFooter">
+              Manage your subscription and billing in your account settings.
+            </div>
+          </div>
+        </div>
+
         <!-- ─── Connected Providers ─── -->
         <div class="profile-card">
           <h2>Connected Providers</h2>
@@ -415,6 +465,8 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-store.js"></script>
+  <script defer src="../js/plan-manager.js"></script>
   <script defer src="../js/skeleton.js"></script>
   <script defer src="../js/loading-manager.js"></script>
   <script defer src="../js/auth-guard.js"></script>
@@ -426,7 +478,7 @@
   <script defer src="../js/toast.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var user, nameEl, emailEl, nameInput, emailInput, joinedEl;
+      var nameEl, emailEl, nameInput, emailInput, joinedEl;
 
       function showSkeletons() {
         var skel = window.NAGRIVA_Skeleton;
@@ -460,22 +512,25 @@
       function initProfile() {
         showSkeletons();
 
-        user = NagrivaAuth.getUser();
         nameEl = document.getElementById('profileName');
         emailEl = document.getElementById('profileEmail');
         nameInput = document.getElementById('profileNameInput');
         emailInput = document.getElementById('profileEmailInput');
         joinedEl = document.getElementById('profileJoined');
 
-        if (!user) {
-          var check = setInterval(function() {
-            user = NagrivaAuth.getUser();
-            if (user) { clearInterval(check); populateProfile(); }
-          }, 100);
-          setTimeout(function() { clearInterval(check); }, 5000);
-          return;
+        var _user = NagrivaAuthStore.getUser();
+        if (_user) {
+          populateProfile(_user);
+          showDeleteCard();
+        } else {
+          var _unsub = NagrivaAuthStore.subscribe(function(state) {
+            if (state.user) {
+              _unsub();
+              populateProfile(state.user);
+              showDeleteCard();
+            }
+          });
         }
-        populateProfile();
       }
 
       function getDisplayName(u) {
@@ -489,7 +544,7 @@
         return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       }
 
-      function populateProfile() {
+      function populateProfile(user) {
         var displayName = getDisplayName(user);
         if (nameEl) nameEl.textContent = displayName;
         if (emailEl) emailEl.textContent = user.email || '';
@@ -576,7 +631,8 @@
           if (error) throw error;
 
           NAGRIVA_Toast.success('Profile Updated', 'Profile updated successfully.');
-          var displayName = getDisplayName({ user_metadata: { full_name: newName }, email: user.email });
+          var _curUser = NagrivaAuthStore.getUser();
+          var displayName = getDisplayName({ user_metadata: { full_name: newName }, email: _curUser?.email || '' });
           if (nameEl) nameEl.textContent = displayName;
           ProfileAvatar.refreshAll();
         } catch (err) {
@@ -588,6 +644,52 @@
       });
 
       initProfile();
+
+      /* ─── Plan UI ─── */
+      function updateProfilePlan() {
+        var planLabel = document.getElementById('planLabel');
+        var planBadge = document.getElementById('planBadge');
+        var planUpgradeBtn = document.getElementById('planUpgradeBtn');
+        var planProBadge = document.getElementById('planProBadge');
+        var planFeatureUnlimited = document.getElementById('planFeatureUnlimited');
+        var planFeaturePremium = document.getElementById('planFeaturePremium');
+        var planFooter = document.getElementById('planFooter');
+
+        if (!window.NagrivaPlanManager) return;
+
+        if (NagrivaPlanManager.isPro()) {
+          if (planLabel) planLabel.textContent = 'Nagriva Pro';
+          if (planBadge) {
+            planBadge.className = 'plan-badge plan-badge-pro';
+            planBadge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg> Pro';
+          }
+          if (planUpgradeBtn) planUpgradeBtn.style.display = 'none';
+          if (planProBadge) planProBadge.style.display = 'inline-flex';
+          if (planFeatureUnlimited) planFeatureUnlimited.className = '';
+          if (planFeaturePremium) planFeaturePremium.className = '';
+          if (planFooter) planFooter.textContent = 'You have access to all Nagriva Pro features.';
+        } else {
+          if (planLabel) planLabel.textContent = 'Nagriva Free';
+          if (planBadge) {
+            planBadge.className = 'plan-badge plan-badge-free';
+            planBadge.textContent = 'Free';
+          }
+          if (planUpgradeBtn) planUpgradeBtn.style.display = 'inline-flex';
+          if (planProBadge) planProBadge.style.display = 'none';
+          if (planFeatureUnlimited) planFeatureUnlimited.className = 'feature-disabled';
+          if (planFeaturePremium) planFeaturePremium.className = 'feature-disabled';
+          if (planFooter) planFooter.textContent = 'Upgrade to Nagriva Pro for unlimited tool usage and premium features.';
+        }
+      }
+
+      if (window.NagrivaPlanManager) {
+        if (!NagrivaPlanManager.isLoading()) {
+          updateProfilePlan();
+        }
+        NagrivaPlanManager.subscribe(function() {
+          updateProfilePlan();
+        });
+      }
 
       /* ─── Delete Account Logic ─── */
       var deleteAccountCard = document.getElementById('deleteAccountCard');
@@ -620,13 +722,6 @@
       function closeConfirmModal() {
         if (confirmOverlay) confirmOverlay.classList.remove('active');
       }
-
-      /* Show delete card after profile populates */
-      var origPopulate = populateProfile;
-      populateProfile = function() {
-        origPopulate();
-        showDeleteCard();
-      };
 
       /* Confirm input validation */
       if (confirmInput) {
@@ -713,16 +808,6 @@
         });
       }
 
-      NagrivaAuth.onAuthStateChange = NagrivaAuth.onAuthStateChange || function() {};
-      var origHandler = window.supabaseClient.auth.onAuthStateChange;
-      if (origHandler) {
-        window.supabaseClient.auth.onAuthStateChange(function(event, session) {
-          if (event === 'USER_UPDATED') {
-            user = session?.user || null;
-            if (user) populateProfile();
-          }
-        });
-      }
     });
   </script>
   <script defer src="../js/performance-optimizer.js"></script>

@@ -1,0 +1,34 @@
+/* ════════════════════════════════════════════════════════
+   Nagriva — Free Trial Badge
+   Small usage indicator showing remaining free uses
+   ════════════════════════════════════════════════════════ */
+
+.ftb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.15);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.ftb-badge-label {
+  color: var(--gray2);
+  font-weight: 400;
+}
+
+.ftb-badge-count {
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ftb-badge-text {
+  color: var(--gray2);
+  font-weight: 400;
+}

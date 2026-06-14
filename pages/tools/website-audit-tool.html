@@ -28,6 +28,10 @@
   <link rel="stylesheet" href="/css/error-handler.css">
   <link rel="stylesheet" href="/css/audit-loading.css">
   <link rel="stylesheet" href="/css/seo-score-breakdown.css">
+  <link rel="stylesheet" href="/css/tool-access-modal.css">
+  <link rel="stylesheet" href="/css/free-trial-badge.css">
+  <link rel="stylesheet" href="/css/limit-modal.css">
+  <link rel="stylesheet" href="/css/celebration-modal.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -1813,6 +1817,7 @@
         </div>
         <h1 class="aud-hero-title">Website <span>Audit Tool</span></h1>
         <p class="aud-hero-desc">Analyze your website's SEO, performance, user experience, and technical health in seconds.</p>
+        <div id="ftbBadge" style="margin-top:16px;"></div>
         <div class="aud-hero-stats">
           <span class="aud-hero-stat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
@@ -2373,6 +2378,11 @@
     /* ─── Init Error Handler ─── */
     if (window.NAGRIVA_ErrorHandler) {
       NAGRIVA_ErrorHandler.init();
+    }
+
+    /* ─── Free Trial Badge ─── */
+    if (window.NAGRIVA_FreeTrialTracker) {
+      NAGRIVA_FreeTrialTracker.renderBadge('ftbBadge');
     }
 
     /* ─── DOM refs ─── */
@@ -3139,6 +3149,15 @@
       document.querySelectorAll('.aud-input-error').forEach(function(el) {
         el.classList.remove('aud-input-error');
       });
+
+      /* ─── Free trial check ─── */
+      if (window.NAGRIVA_FreeTrialTracker) {
+        if (!NAGRIVA_FreeTrialTracker.checkAndBlock()) {
+          window.__auditBusy = false;
+          return;
+        }
+        NAGRIVA_FreeTrialTracker.recordUse();
+      }
 
       var displayUrl = url.replace(/^https?:\/\//, '').split('/')[0];
       loadingUrlDisplay.textContent = 'Scanning ' + displayUrl + '...';
@@ -4541,6 +4560,11 @@
       : 'Hide Details<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"></polyline></svg>';
   }
 </script>
+<script defer src="/js/plan-manager.js"></script>
+<script defer src="/js/free-trial-tracker.js"></script>
+<script defer src="/js/limit-modal.js"></script>
+<script defer src="/js/celebration-modal.js"></script>
+<script defer src="/js/tool-access-modal.js"></script>
 <script defer src="../../js/layout.js"></script>
 
 <!-- Share Modal -->

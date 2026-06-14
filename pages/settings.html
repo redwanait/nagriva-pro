@@ -189,6 +189,7 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-store.js"></script>
   <script defer src="../js/auth-guard.js"></script>
   <script defer src="../js/script.js"></script>
   <script defer src="../js/i18n.js"></script>
@@ -197,8 +198,6 @@
   <script defer src="../js/loading-manager.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var user;
-
       function showSkeletons() {
         var sk = window.NAGRIVA_Skeleton;
         var lm = window.NAGRIVA_Loading;
@@ -235,22 +234,22 @@
         return u.user_metadata?.full_name || u.email?.split('@')[0] || 'User';
       }
 
-      function waitForUser(cb) {
-        user = NagrivaAuth.getUser();
-        if (user) { cb(); return; }
-        var check = setInterval(function() {
-          user = NagrivaAuth.getUser();
-          if (user) { clearInterval(check); cb(); }
-        }, 100);
-        setTimeout(function() { clearInterval(check); }, 5000);
-      }
-
       showSkeletons();
-      waitForUser(function() {
+      var _user = NagrivaAuthStore.getUser();
+      if (_user) {
         hideSkeletons();
-        document.getElementById('settingsName').value = getDisplayName(user);
-        document.getElementById('settingsEmail').value = user.email || '';
-      });
+        document.getElementById('settingsName').value = getDisplayName(_user);
+        document.getElementById('settingsEmail').value = _user.email || '';
+      } else {
+        var _unsub = NagrivaAuthStore.subscribe(function(state) {
+          if (state.user) {
+            _unsub();
+            hideSkeletons();
+            document.getElementById('settingsName').value = getDisplayName(state.user);
+            document.getElementById('settingsEmail').value = state.user.email || '';
+          }
+        });
+      }
 
       /* Account form */
       document.getElementById('settingsAccountForm').addEventListener('submit', async function(e) {
@@ -313,12 +312,8 @@
 
       /* Sign out */
       document.getElementById('settingsSignOut').addEventListener('click', async function() {
-        if (typeof NagrivaAuthGuard !== 'undefined') {
-          NagrivaAuthGuard.logout();
-        } else {
-          try { if (window.supabaseClient) await window.supabaseClient.auth.signOut(); } catch (_) {}
-          window.location.href = 'login.html';
-        }
+        await NagrivaAuthStore.signOut();
+        window.location.href = 'login.html';
       });
 
       /* Restart onboarding */

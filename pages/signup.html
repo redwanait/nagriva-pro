@@ -152,12 +152,18 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-store.js"></script>
   <script defer src="../js/auth.js"></script>
   <script>
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       var form = document.getElementById('signUpForm');
       var msg = document.getElementById('signupMessage');
       var btn = document.getElementById('signupSubmit');
+      var params = new URLSearchParams(window.location.search);
+      var redirectAfterSignup = params.get('redirect') || 'dashboard.html';
+      var fromLimit = params.get('from_limit') === '1';
+      console.log('[DEBUG signup] DOMContentLoaded — params.redirect:', params.get('redirect'), '| redirectAfterSignup:', redirectAfterSignup, '| fromLimit:', fromLimit);
+      console.log('[DEBUG signup] current href:', window.location.href);
 
       var pwInput = document.getElementById('signupPassword');
       var pwStrength = document.getElementById('signupPwStrength');
@@ -211,12 +217,16 @@
         updatePasswordUI(pwInput.value);
       });
 
-      function setMessage(type, text) {
-        msg.textContent = text;
+      function setMsg(type, text) {
+        msg.innerHTML = '';
+        var icon = type === 'error'
+          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> '
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> ';
+        msg.innerHTML = icon + text;
         msg.className = 'auth-message ' + type + ' show';
       }
 
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
         var name = form.name.value.trim();
         var email = form.email.value.trim();
@@ -224,60 +234,93 @@
         msg.className = 'auth-message';
 
         if (!name) {
-          setMessage('error', 'Enter your name.');
+          setMsg('error', 'Enter your name.');
           return;
         }
         if (!/\S+@\S+\.\S+/.test(email)) {
-          setMessage('error', 'Enter a valid email address.');
+          setMsg('error', 'Enter a valid email address.');
           return;
         }
         if (password.length < 6) {
-          setMessage('error', 'Use at least 6 characters for your password.');
+          setMsg('error', 'Use at least 6 characters for your password.');
           return;
         }
 
         btn.classList.add('loading');
-        window.supabaseClient.auth.signUp({
-          email: email,
-          password: password,
-          options: { data: { full_name: name } }
-        }).then(function(resp) {
-          if (resp.error) {
-            var text = resp.error.message || 'Unable to create your account.';
-            if (text.toLowerCase().includes('already registered') || text.toLowerCase().includes('already exists')) {
-              text = 'An account with this email already exists.';
-            }
-            setMessage('error', text);
-            return;
-          }
 
-          if (resp.data && resp.data.user) {
-            window.supabaseClient.functions.invoke('send-email', {
-              body: {
-                type: 'welcome',
-                user_id: resp.data.user.id,
-                email: email,
-                full_name: name,
-                first_name: name.split(' ')[0]
-              }
-            }).catch(function(e) {
-              console.warn('[Auth] Failed to send welcome email:', e.message);
-            });
-          }
-
-          if (resp.data && !resp.data.session) {
-            setMessage('success', 'Account created. Check your email to confirm.');
-          } else {
-            setMessage('success', 'Account created. Redirecting...');
-            window.location.href = 'dashboard.html';
-          }
-        }).catch(function() {
-          setMessage('error', 'Network error. Please try again.');
-        }).finally(function() {
-          btn.classList.remove('loading');
+        var redirectUrl = window.location.origin + (redirectAfterSignup.startsWith('/') ? '' : '/') + redirectAfterSignup;
+        if (fromLimit) {
+          redirectUrl += (redirectAfterSignup.indexOf('?') !== -1 ? '&' : '?') + 'welcome=1';
+        }
+        console.log('[DEBUG signup] Calling signUp with emailRedirectTo:', redirectUrl);
+        console.log('[DEBUG signup] isAuthenticated BEFORE signUp:', NagrivaAuthStore.isAuthenticated(), '| isLoading:', NagrivaAuthStore.isLoading());
+        var result = await NagrivaAuthStore.signUp(email, password, {
+          data: { full_name: name },
+          emailRedirectTo: redirectUrl
         });
+        btn.classList.remove('loading');
+        console.log('[DEBUG signup] signUp returned. result.error:', result.error ? result.error.message : 'NONE', '| result.data?.session:', result.data?.session ? 'EXISTS' : 'NULL/UNDEFINED', '| result.data?.user:', result.data?.user ? result.data.user.id : 'NULL/UNDEFINED');
+        console.log('[DEBUG signup] isAuthenticated AFTER signUp:', NagrivaAuthStore.isAuthenticated(), '| isLoading:', NagrivaAuthStore.isLoading());
+        console.log('[DEBUG signup] redirectAfterSignup:', redirectAfterSignup, '| fromLimit:', fromLimit);
+
+        if (result.error) {
+          console.log('[DEBUG signup] ERROR branch — redirect to dashboard? NO, showing error instead');
+          setMsg('error', NagrivaAuth.getAuthErrorMessage(result.error));
+          return;
+        }
+
+        var createdUser = result.data?.user;
+        if (createdUser) {
+          NagrivaAuth.sendWelcomeEmail({
+            user: createdUser,
+            email: email,
+            name: name
+          }).catch(function(e) {
+            console.warn('[Auth] Failed to send welcome email:', e.message);
+          });
+        }
+
+        if (result.data && !result.data.session) {
+          console.log('[DEBUG signup] NO SESSION branch — showing "check email" message, NO redirect');
+          setMsg('success', 'Account created. Check your email to confirm.');
+        } else {
+          var _finalTarget = redirectAfterSignup + (fromLimit ? (redirectAfterSignup.indexOf('?') !== -1 ? '&' : '?') + 'welcome=1' : '');
+          console.log('[DEBUG signup] REDIRECT branch — redirectAfterSignup:', JSON.stringify(redirectAfterSignup), '| fromLimit:', fromLimit, '| finalTarget:', _finalTarget);
+          setMsg('success', 'Account created. Redirecting...');
+          var sep = redirectAfterSignup.includes('?') ? '&' : '?';
+          window.location.href = _finalTarget;
+        }
       });
-    })();
+
+      function redirectIfReady() {
+        console.log('[DEBUG signup] redirectIfReady called. isLoading:', NagrivaAuthStore.isLoading(), '| isAuthenticated:', NagrivaAuthStore.isAuthenticated(), '| redirectAfterSignup:', redirectAfterSignup);
+        if (!window.NagrivaAuthStore) { console.log('[DEBUG signup] redirectIfReady — no store, returning'); return; }
+        if (NagrivaAuthStore.isLoading()) { console.log('[DEBUG signup] redirectIfReady — still loading, returning'); return; }
+        if (NagrivaAuthStore.isAuthenticated() && redirectAfterSignup) {
+          var s = redirectAfterSignup.indexOf('?') !== -1 ? '&' : '?';
+          var target = redirectAfterSignup + (fromLimit ? s + 'welcome=1' : '');
+          console.log('[DEBUG signup] redirectIfReady — REDIRECTING TO:', target);
+          window.location.href = target;
+        } else {
+          console.log('[DEBUG signup] redirectIfReady — not authenticated or no redirect, doing nothing');
+        }
+      }
+
+      if (!NagrivaAuthStore.isLoading()) {
+        console.log('[DEBUG signup] Auth store NOT loading, calling redirectIfReady immediately');
+        redirectIfReady();
+      } else {
+        console.log('[DEBUG signup] Auth store still loading, subscribing for changes');
+        var _unsub = NagrivaAuthStore.subscribe(function(st) {
+          console.log('[DEBUG signup] subscriber fired. loading:', st.loading, '| authenticated:', !!st.user, '| user:', st.user?.id);
+          if (!st.loading) { if (typeof _unsub === 'function') _unsub(); redirectIfReady(); }
+        });
+        setTimeout(function() {
+          console.log('[DEBUG signup] 5s timeout fired for redirectIfReady');
+          redirectIfReady();
+        }, 5000);
+      }
+    });
   </script>
   <script defer src="../js/performance-optimizer.js"></script>
   <script defer src="../js/lazy-loader.js"></script>

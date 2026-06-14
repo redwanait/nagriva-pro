@@ -6,6 +6,312 @@
 /* ─── MOBILE MENU OVERLAY (base hidden) ─── */
 .mobile-menu-overlay { display: none; }
 
+/* ════════════════════════════════════════════
+   NAVBAR — User Avatar & Dropdown
+   ════════════════════════════════════════════ */
+
+/* ─── Avatar container ─── */
+.nav-user {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ─── Avatar button ─── */
+.nav-avatar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px;
+  padding-right: 6px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.nav-avatar:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+.nav-avatar:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ─── Avatar image ─── */
+.nav-avatar-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: none;
+  flex-shrink: 0;
+}
+
+.nav-avatar-img.visible {
+  display: block;
+}
+
+/* ─── Avatar initials fallback ─── */
+.nav-avatar-initials {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FACC15, #F59E0B);
+  color: #050505;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+}
+
+/* ─── Chevron ─── */
+.nav-avatar-chevron {
+  color: var(--gray2);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-avatar[aria-expanded="true"] .nav-avatar-chevron {
+  transform: rotate(180deg);
+}
+
+/* ─── Dropdown panel ─── */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: rgba(10, 12, 16, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  box-shadow:
+    0 0 0 1px rgba(250, 204, 21, 0.03),
+    0 16px 48px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px) scale(0.96);
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.nav-dropdown.show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0) scale(1);
+}
+
+/* ─── Dropdown header ─── */
+.nav-dropdown-header {
+  padding: 16px 18px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-dropdown-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.nav-dropdown-email {
+  font-size: 0.78rem;
+  color: var(--gray2);
+  line-height: 1.3;
+  word-break: break-all;
+}
+
+/* ─── Dropdown Pro Badge ─── */
+.nav-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #FACC15;
+  background: rgba(250,204,21,0.1);
+  padding: 2px 8px;
+  border-radius: 99px;
+  align-self: flex-start;
+  border: 1px solid rgba(250,204,21,0.15);
+}
+.nav-pro-badge svg {
+  color: #FACC15;
+}
+
+/* ─── Desktop Pro Member Badge ─── */
+.pro-member-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #FACC15;
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.15);
+  padding: 6px 16px;
+  border-radius: 99px;
+  white-space: nowrap;
+  cursor: default;
+}
+.pro-member-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: #FACC15;
+}
+
+/* ─── Mobile Menu Pro Badge ─── */
+.mobile-menu-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-weight: 750;
+  font-size: 0.9rem;
+  color: #FACC15;
+  background: rgba(250,204,21,0.06);
+  border: 1px solid rgba(250,204,21,0.12);
+  cursor: default;
+}
+.mobile-menu-pro-badge svg {
+  color: #FACC15;
+}
+
+/* ─── Dropdown divider ─── */
+.nav-dropdown-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 8px;
+}
+
+/* ─── Dropdown items ─── */
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  font-size: 0.85rem;
+  font-weight: 450;
+  color: var(--gray);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  line-height: 1.3;
+}
+
+.nav-dropdown-item svg {
+  flex-shrink: 0;
+  color: var(--gray2);
+  transition: color 0.18s ease;
+}
+
+.nav-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+}
+
+.nav-dropdown-item:hover svg {
+  color: var(--white);
+}
+
+.nav-dropdown-item:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Danger item (Logout) ─── */
+.nav-dropdown-item--danger {
+  color: #f87171;
+}
+
+.nav-dropdown-item--danger svg {
+  color: #f87171;
+}
+
+.nav-dropdown-item--danger:hover {
+  background: rgba(248, 113, 113, 0.06);
+  color: #fca5a5;
+}
+
+.nav-dropdown-item--danger:hover svg {
+  color: #fca5a5;
+}
+
+/* ─── Mobile menu user section ─── */
+.mobile-menu-user {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 14px 12px;
+}
+
+.mobile-menu-user-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+.mobile-menu-user-email {
+  font-size: 0.78rem;
+  color: var(--gray2);
+  word-break: break-all;
+}
+
+.mobile-menu-user-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-menu-link--danger {
+  color: #f87171 !important;
+}
+
+.mobile-menu-link--danger svg {
+  color: #f87171 !important;
+}
+
+/* ─── Hide Get Started on desktop when user is logged in ─── */
+.nav-user.visible ~ .btn-get-started {
+  display: none;
+}
+
 /* ─── NAVBAR ─── */
 .navbar {
   position: fixed;

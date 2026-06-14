@@ -1,11 +1,7 @@
 /* ════════════════════════════════════════════════════════
-   Nagriva — Auth Route Guard (Reusable Module)
+   Nagriva — Auth Route Guard
    Protects pages from unauthenticated access.
    Prevents Flash of Unauthenticated Content (FOUC).
-   Works with the blocking loading overlay in <head>.
-
-   🔐 SECURITY: Session is verified via Supabase `getSession()`
-   on every page load BEFORE any protected content is shown.
    ════════════════════════════════════════════════════════ */
 
 'use strict';
@@ -64,19 +60,6 @@ var NagrivaAuthGuard = (function() {
     window.location.replace(UNAUTHORIZED_PAGE);
   }
 
-  function createShellSkeleton() {
-    if (document.getElementById('nagGuardOverlay')) return null;
-    var el = document.createElement('div');
-    el.id = 'nagGuardOverlay';
-    if (window.NAGRIVA_Skeleton && window.NAGRIVA_Skeleton.pageShell) {
-      el.innerHTML = window.NAGRIVA_Skeleton.pageShell();
-    } else {
-      el.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#050505;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;';
-      el.innerHTML = '<div style="width:40px;height:40px;border:2px solid rgba(250,204,21,0.1);border-top-color:#FACC15;border-radius:50%;animation:nagGuardSpin .8s linear infinite;"></div><span style="color:#a1a1aa;font-size:.85rem;font-family:\'DM Sans\',sans-serif;">Checking access...</span><style>@keyframes nagGuardSpin{to{transform:rotate(360deg)}}</style>';
-    }
-    return el;
-  }
-
   function removeOverlay() {
     var el = document.getElementById('nagGuardOverlay');
     if (el) {
@@ -88,14 +71,6 @@ var NagrivaAuthGuard = (function() {
       }, 350);
     } else {
       document.body.classList.add('nag-authenticated');
-    }
-  }
-
-  function showOverlay() {
-    if (document.getElementById('nagGuardOverlay')) return;
-    var el = createShellSkeleton();
-    if (el) {
-      document.body.insertBefore(el, document.body.firstChild);
     }
   }
 
@@ -120,7 +95,6 @@ var NagrivaAuthGuard = (function() {
 
     if (!window.supabaseClient) {
       logError('Supabase client not initialized');
-      showOverlay();
       return { authenticated: false, error: 'Supabase client not initialized' };
     }
 
@@ -129,7 +103,6 @@ var NagrivaAuthGuard = (function() {
 
       if (error) {
         logError('getSession error', error);
-        showOverlay();
         if (isAdminPage(page)) {
           redirectToUnauthorized();
         } else {
@@ -140,7 +113,6 @@ var NagrivaAuthGuard = (function() {
 
       if (!session) {
         logError('No session found');
-        showOverlay();
         if (isAdminPage(page)) {
           redirectToUnauthorized();
         } else {
@@ -173,7 +145,6 @@ var NagrivaAuthGuard = (function() {
       return { authenticated: true, session: session, user: session.user };
     } catch (e) {
       logError('Unexpected error during auth check', e);
-      showOverlay();
       if (isAdminPage(page)) {
         redirectToUnauthorized();
       } else {
@@ -184,13 +155,7 @@ var NagrivaAuthGuard = (function() {
   }
 
   async function logout() {
-    try {
-      if (window.supabaseClient) {
-        await window.supabaseClient.auth.signOut();
-      }
-    } catch (e) {
-      logError('Logout error', e);
-    }
+    await NagrivaAuthStore.signOut();
     window.location.replace(LOGIN_PAGE);
   }
 

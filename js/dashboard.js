@@ -29,6 +29,40 @@ window.NAGRIVA_Dashboard = (function () {
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
+  /* ─── Plan Banner ─── */
+  function updatePlanBanner() {
+    var banner = document.getElementById('dashPlanBanner');
+    var text = document.getElementById('dashPlanBannerText');
+    var btn = document.getElementById('dashPlanBannerBtn');
+    if (!banner) return;
+
+    if (!window.NagrivaPlanManager) {
+      banner.style.display = 'none';
+      return;
+    }
+
+    if (NagrivaPlanManager.isPro()) {
+      banner.style.display = '';
+      banner.className = 'dash-plan-banner dash-plan-banner-pro';
+      if (text) text.innerHTML = 'You\'re on the <strong>Nagriva Pro</strong> plan. Enjoy unlimited access!';
+      if (btn) btn.style.display = 'none';
+    } else {
+      banner.style.display = '';
+      banner.className = 'dash-plan-banner';
+      if (text) text.innerHTML = 'You\'re on the <strong>Free</strong> plan. Upgrade for unlimited tool access.';
+      if (btn) btn.style.display = 'inline-flex';
+    }
+  }
+
+  function initPlanBanner() {
+    updatePlanBanner();
+    if (window.NagrivaPlanManager) {
+      NagrivaPlanManager.subscribe(function() {
+        updatePlanBanner();
+      });
+    }
+  }
+
   function formatTimeAgo(dateStr) {
     if (!dateStr) return '';
     var now = new Date();
@@ -611,6 +645,9 @@ window.NAGRIVA_Dashboard = (function () {
       });
       return;
     }
+
+    /* ─── Plan Banner ─── */
+    initPlanBanner();
 
     try {
       await loadAll();

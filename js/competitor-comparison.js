@@ -1267,6 +1267,12 @@ window.CompetitorComparison = (function () {
       return
     }
 
+    /* ─── Free trial check ─── */
+    if (window.NAGRIVA_FreeTrialTracker) {
+      if (!NAGRIVA_FreeTrialTracker.checkAndBlock()) return;
+      NAGRIVA_FreeTrialTracker.recordUse();
+    }
+
     /* Show loading */
     var formView = document.getElementById('ccFormView')
     var loadingView = document.getElementById('ccLoadingView')

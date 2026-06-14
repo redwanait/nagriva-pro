@@ -18,6 +18,19 @@
   <link rel="stylesheet" href="../css/admin-auth.css" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="../css/client-messages.css" />
   <link rel="stylesheet" href="../css/onboarding.css" media="print" onload="this.media='all'" />
+  <style>
+    .dash-plan-banner { margin-bottom: 20px; }
+    .dash-plan-banner-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-radius: 12px; background: rgba(250,204,21,0.04); border: 1px solid rgba(250,204,21,0.1); flex-wrap: wrap; }
+    .dash-plan-banner-content { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--gray); }
+    .dash-plan-banner-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(250,204,21,0.1); flex-shrink: 0; }
+    .dash-plan-banner-icon svg { color: #FACC15; }
+    .dash-plan-banner-text strong { color: var(--white); font-weight: 600; }
+    .dash-plan-banner-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--bg); background: linear-gradient(135deg, var(--accent), var(--accent2)); text-decoration: none; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); white-space: nowrap; }
+    .dash-plan-banner-btn:hover { box-shadow: 0 0 24px rgba(250,204,21,0.2); transform: translateY(-1px); }
+    .dash-plan-banner-pro .dash-plan-banner-inner { background: rgba(250,204,21,0.06); border-color: rgba(250,204,21,0.15); }
+    .dash-plan-banner-pro .dash-plan-banner-text { color: #FACC15; }
+    .dash-plan-banner-pro .dash-plan-banner-btn { display: none; }
+  </style>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -78,6 +91,19 @@
         <div class="dash-badge">
           <span class="dash-badge-dot"></span>
           All systems operational
+        </div>
+      </div>
+
+      <!-- ─── Plan Banner ─── -->
+      <div class="dash-plan-banner" id="dashPlanBanner" style="display:none;">
+        <div class="dash-plan-banner-inner">
+          <div class="dash-plan-banner-content">
+            <span class="dash-plan-banner-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            </span>
+            <span class="dash-plan-banner-text" id="dashPlanBannerText">You're on the <strong>Free</strong> plan.</span>
+          </div>
+          <a href="/pages/nagriva-pro.html" class="dash-plan-banner-btn" id="dashPlanBannerBtn">Upgrade to Pro</a>
         </div>
       </div>
 
@@ -168,183 +194,14 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════ AUTH MODAL ══════════════════════════════ -->
-  <div class="auth-overlay" id="authOverlay" style="display:none">
-    <div class="auth-backdrop" id="authBackdrop"></div>
-    <div class="auth-ambient auth-ambient-1"></div>
-    <div class="auth-ambient auth-ambient-2"></div>
-    <div class="auth-modal" id="authModal">
-      <div class="auth-modal-glow"></div>
-      <button class="auth-close-btn" id="authCloseBtn" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <div class="auth-inner">
-        <div class="auth-header">
-          <div class="auth-logo">
-            <img src="../assets/images/branding/nagriva-logo.png" alt="Nagriva" />
-            <span class="auth-logo-text">Nagriva</span>
-          </div>
-          <h3 class="auth-title" id="authTitle">Welcome Back</h3>
-          <p class="auth-subtitle" id="authSubtitle">Sign in to access your dashboard and manage your projects.</p>
-        </div>
-        <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="signin">Sign In</button>
-          <button class="auth-tab" data-tab="signup">Sign Up</button>
-        </div>
-        <form class="auth-form active" id="signInForm" autocomplete="off">
-          <div class="auth-message" id="signinMessage"></div>
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <div class="auth-input-wrap">
-              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">
-              <span>Password</span>
-              <button type="button" class="auth-forgot-link">Forgot password?</button>
-            </label>
-            <div class="auth-input-wrap">
-              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input type="password" class="auth-input" placeholder="Enter your password" autocomplete="current-password" />
-              <button type="button" class="auth-pw-toggle" aria-label="Toggle password">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              </button>
-            </div>
-          </div>
-          <div class="auth-form-options">
-            <label class="auth-remember">
-              <input type="checkbox" checked />
-              <span class="auth-remember-label">Remember me</span>
-            </label>
-          </div>
-          <button type="submit" class="auth-submit" id="signinSubmit">
-            <span class="auth-btn-text">Sign In</span>
-            <span class="auth-btn-spinner"></span>
-            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="auth-divider"><span class="auth-divider-line"></span><span class="auth-divider-text">or continue with</span><span class="auth-divider-line"></span></div>
-          <div class="auth-social">
-            <button type="button" class="auth-social-btn google">
-              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-              <span>Continue with Google</span>
-            </button>
-            <button type="button" class="auth-social-btn github">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              <span>Continue with GitHub</span>
-            </button>
-          </div>
-          <div class="auth-form-footer">
-            <span>Don't have an account? </span>
-            <button type="button" class="auth-switch-tab" data-tab="signup">Create one</button>
-          </div>
-        </form>
-        <form class="auth-form" id="signUpForm" autocomplete="off">
-          <div class="auth-message" id="signupMessage"></div>
-          <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <div class="auth-input-wrap">
-              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <input type="text" class="auth-input" name="name" placeholder="John Doe" autocomplete="name" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <div class="auth-input-wrap">
-              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Password</label>
-            <div class="auth-input-wrap">
-              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input type="password" class="auth-input" name="password" placeholder="Create a password" autocomplete="new-password" />
-              <button type="button" class="auth-pw-toggle" aria-label="Toggle password">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              </button>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Confirm Password</label>
-            <div class="auth-input-wrap">
-              <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-              <input type="password" class="auth-input" name="confirmPassword" placeholder="Confirm your password" autocomplete="new-password" />
-              <button type="button" class="auth-pw-toggle" aria-label="Toggle password">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="auth-pw-strength" id="passwordStrength">
-            <div class="auth-pw-strength-bar">
-              <div class="auth-pw-strength-fill" id="passwordStrengthFill"></div>
-            </div>
-            <span class="auth-pw-strength-label" id="passwordStrengthLabel">Strength</span>
-          </div>
-
-          <label class="auth-terms">
-            <input type="checkbox" id="termsCheckbox" />
-            <span class="auth-terms-label">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span>
-          </label>
-
-          <button type="submit" class="auth-submit" id="signupSubmit">
-            <span class="auth-btn-text">Create Account</span>
-            <span class="auth-btn-spinner"></span>
-            <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="auth-divider"><span class="auth-divider-line"></span><span class="auth-divider-text">or continue with</span><span class="auth-divider-line"></span></div>
-          <div class="auth-social">
-            <button type="button" class="auth-social-btn google">
-              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-              <span>Continue with Google</span>
-            </button>
-            <button type="button" class="auth-social-btn github">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              <span>Continue with GitHub</span>
-            </button>
-          </div>
-          <div class="auth-form-footer">
-            <span>Already have an account? </span>
-            <button type="button" class="auth-switch-tab" data-tab="signin">Sign in</button>
-          </div>
-        </form>
-        <form class="auth-form" id="forgotForm" autocomplete="off">
-          <div class="auth-message" id="forgotMessage"></div>
-          <div id="forgotFormWrap">
-            <div class="form-group">
-              <label class="form-label">Email Address</label>
-              <div class="auth-input-wrap">
-                <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <input type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
-              </div>
-            </div>
-            <button type="submit" class="auth-submit" id="forgotSubmit">
-              <span class="auth-btn-text">Send Reset Link</span>
-              <span class="auth-btn-spinner"></span>
-              <svg class="auth-btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-          <div class="auth-forgot-success" id="forgotSuccess">
-            <div class="auth-forgot-success-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            </div>
-            <p class="auth-forgot-success-text">Check your email for a password reset link. If it doesn't appear within a few minutes, check your spam folder.</p>
-          </div>
-          <div class="auth-form-footer">
-            <span>Remember your password? </span>
-            <button type="button" class="auth-switch-tab" data-tab="signin">Back to sign in</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- Auth handled via standalone pages: /pages/login.html, /pages/signup.html -->
 
   <div id="footer-container"></div>
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/plan-manager.js"></script>
+  <script defer src="../js/auth-store.js"></script>
   <script defer src="../js/skeleton.js"></script>
   <script defer src="../js/loading-manager.js"></script>
   <script defer src="../js/auth-guard.js"></script>

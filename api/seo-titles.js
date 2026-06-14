@@ -1,6 +1,11 @@
 const OpenAI = require('openai');
 
-const SYSTEM_PROMPT = `You are an expert SEO title strategist with 15+ years of experience. Your specialty is crafting high-performing title tags that rank well in Google and drive exceptional click-through rates.
+const LANGUAGE_MAP = {
+  en: 'English', fr: 'French', es: 'Spanish', de: 'German',
+  ar: 'Arabic', pt: 'Portuguese', it: 'Italian', nl: 'Dutch'
+};
+
+const SYSTEM_PROMPT = `You are an expert multilingual SEO title strategist with 15+ years of experience. Your specialty is crafting high-performing title tags in multiple languages that rank well in Google and drive exceptional click-through rates.
 
 For every title you create, follow these principles:
 - Length: 50–60 characters (hard limit, never exceed 60)
@@ -9,7 +14,9 @@ For every title you create, follow these principles:
 - Match search intent appropriately
 - Use power words and emotional triggers naturally (no keyword stuffing)
 - Never use clickbait — maintain credibility
-- When relevant, include the current year (2026) naturally
+- When relevant, include the current year naturally
+- Generate titles in the user's selected language using natural, native phrasing
+- Adapt title structure to language-specific SEO conventions (e.g., front-loading keywords works differently in French/Spanish vs English)
 
 Generate titles in these 10 styles:
 1. List — list-style titles (e.g. "X Ways to...", "X Tips for...")
@@ -47,11 +54,14 @@ module.exports = async function handler(req, res) {
       return sendJson(405, { success: false, error: 'Method not allowed. Use POST.' });
     }
 
-    const { keyword, contentType, audience } = req.body || {};
+    const { keyword, contentType, audience, language } = req.body || {};
 
     if (!keyword || typeof keyword !== 'string' || !keyword.trim()) {
       return sendJson(400, { success: false, error: 'Keyword is required.' });
     }
+
+    const langCode = language && LANGUAGE_MAP[language] ? language : 'en';
+    const langName = LANGUAGE_MAP[langCode] || 'English';
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
@@ -60,10 +70,13 @@ module.exports = async function handler(req, res) {
 
     const openai = new OpenAI({ apiKey });
 
-    const userPrompt = `Generate SEO title tags for:
+    const userPrompt = `Generate SEO title tags in ${langName}:
 Keyword: "${keyword.trim()}"
 Content Type: ${contentType || 'blog post'}
 Target Audience: ${audience || 'general'}
+Language: ${langName} (${langCode})
+
+IMPORTANT: All titles MUST be written in ${langName}, not English. Use natural, native phrasing that would appeal to ${langName} speakers. Adapt the title structure to ${langName} SEO conventions.
 
 Return ONLY valid JSON with this structure:
 {
@@ -82,7 +95,7 @@ Return ONLY valid JSON with this structure:
   }
 }
 
-Each style must have exactly 3 titles. Every title must be 50-60 characters, include the keyword naturally, and be suitable for Google search results.`;
+Each style must have exactly 3 titles. Every title must be 50-60 characters, include the keyword naturally, be written in ${langName}, and be suitable for Google search results.`;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',

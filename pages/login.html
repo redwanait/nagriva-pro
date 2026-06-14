@@ -122,71 +122,111 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-store.js"></script>
   <script defer src="../js/auth.js"></script>
   <script>
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       var form = document.getElementById('signInForm');
       var msg = document.getElementById('signinMessage');
       var btn = document.getElementById('signinSubmit');
       var params = new URLSearchParams(window.location.search);
       var redirectAfterLogin = params.get('redirect') || 'dashboard.html';
+      var fromLimit = params.get('from_limit') === '1';
+      console.log('[DEBUG login] DOMContentLoaded — params.redirect:', params.get('redirect'), '| redirectAfterLogin:', redirectAfterLogin, '| fromLimit:', fromLimit);
+      console.log('[DEBUG login] current href:', window.location.href);
+
       if (params.get('account_deleted') === 'true') {
-        setMessage('success', 'Your account has been permanently deleted. We're sorry to see you go.');
+        setMsg('success', 'Your account has been permanently deleted. We\'re sorry to see you go.');
       }
 
-      function setMessage(type, text) {
-        msg.textContent = text;
+      function setMsg(type, text) {
+        msg.innerHTML = '';
+        var icon = type === 'error'
+          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> '
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> ';
+        msg.innerHTML = icon + text;
         msg.className = 'auth-message ' + type + ' show';
       }
 
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
         var email = form.email.value.trim();
         var password = form.password.value.trim();
         msg.className = 'auth-message';
 
         if (!email || !password) {
-          setMessage('error', 'Enter your email and password.');
+          setMsg('error', 'Enter your email and password.');
           return;
         }
 
         btn.classList.add('loading');
-        window.supabaseClient.auth.signInWithPassword({ email: email, password: password })
-          .then(async function(resp) {
-            if (resp.error) {
-              var text = resp.error.message || 'Unable to sign in.';
-              if (text.toLowerCase().includes('invalid login credentials')) text = 'Invalid email or password.';
-              if (text.toLowerCase().includes('email not confirmed')) text = 'Confirm your email before signing in.';
-              setMessage('error', text);
+
+        console.log('[DEBUG login] Calling signIn');
+        var result = await NagrivaAuthStore.signIn(email, password);
+        btn.classList.remove('loading');
+        console.log('[DEBUG login] signIn returned. result.error:', result.error ? result.error.message : 'NONE');
+
+        if (result.error) {
+          console.log('[DEBUG login] ERROR branch — showing error');
+          setMsg('error', NagrivaAuth.getAuthErrorMessage(result.error));
+          return;
+        }
+
+        console.log('[DEBUG login] SUCCESS branch. redirectAfterLogin:', redirectAfterLogin, '| fromLimit:', fromLimit, '| isAuthenticated:', NagrivaAuthStore.isAuthenticated());
+        setMsg('success', 'Signed in. Redirecting...');
+        var session = NagrivaAuthStore.getSession();
+        if (session) {
+          try {
+            var profileResp = await window.supabaseClient
+              .from('profiles')
+              .select('role')
+              .eq('id', session.user.id)
+              .single();
+            console.log('[DEBUG login] admin check — role:', profileResp.data?.role);
+            if (profileResp.data && profileResp.data.role === 'admin' && !redirectAfterLogin.includes('admin')) {
+              console.log('[DEBUG login] ADMIN redirect to admin-dashboard.html');
+              window.location.href = 'admin-dashboard.html';
               return;
             }
-
-            setMessage('success', 'Signed in. Redirecting...');
-            try {
-              var sessionResp = await window.supabaseClient.auth.getSession();
-              var session = sessionResp.data.session;
-              if (session) {
-                var profileResp = await window.supabaseClient
-                  .from('profiles')
-                  .select('role')
-                  .eq('id', session.user.id)
-                  .single();
-                if (profileResp.data && profileResp.data.role === 'admin' && !redirectAfterLogin.includes('admin')) {
-                  window.location.href = 'admin-dashboard.html';
-                  return;
-                }
-              }
-            } catch (err) {}
-            window.location.href = redirectAfterLogin;
-          })
-          .catch(function() {
-            setMessage('error', 'Network error. Please try again.');
-          })
-          .finally(function() {
-            btn.classList.remove('loading');
-          });
+          } catch (err) {
+            console.log('[DEBUG login] admin check error:', err);
+          }
+        }
+        var sep = redirectAfterLogin.includes('?') ? '&' : '?';
+        var target = redirectAfterLogin + (fromLimit ? sep + 'welcome=1' : '');
+        console.log('[DEBUG login] SETTING location.href TO:', target);
+        window.location.href = target;
       });
-    })();
+
+      function redirectIfReady() {
+        console.log('[DEBUG login] redirectIfReady called. isLoading:', NagrivaAuthStore.isLoading(), '| isAuthenticated:', NagrivaAuthStore.isAuthenticated(), '| redirectAfterLogin:', redirectAfterLogin);
+        if (!window.NagrivaAuthStore) { console.log('[DEBUG login] redirectIfReady — no store'); return; }
+        if (NagrivaAuthStore.isLoading()) { console.log('[DEBUG login] redirectIfReady — still loading'); return; }
+        if (NagrivaAuthStore.isAuthenticated() && redirectAfterLogin) {
+          var s = redirectAfterLogin.indexOf('?') !== -1 ? '&' : '?';
+          var target = redirectAfterLogin + (fromLimit ? s + 'welcome=1' : '');
+          console.log('[DEBUG login] redirectIfReady — REDIRECTING TO:', target);
+          window.location.href = target;
+        } else {
+          console.log('[DEBUG login] redirectIfReady — not authenticated or no redirect, doing nothing');
+        }
+      }
+
+      if (!NagrivaAuthStore.isLoading()) {
+        console.log('[DEBUG login] Auth store NOT loading, calling redirectIfReady immediately');
+        redirectIfReady();
+      } else {
+        console.log('[DEBUG login] Auth store still loading, subscribing for changes');
+        var _unsub = NagrivaAuthStore.subscribe(function(st) {
+          console.log('[DEBUG login] subscriber fired. loading:', st.loading, '| authenticated:', !!st.user);
+          if (!st.loading) { if (typeof _unsub === 'function') _unsub(); redirectIfReady(); }
+        });
+        setTimeout(function() {
+          console.log('[DEBUG login] 5s timeout fired for redirectIfReady');
+          redirectIfReady();
+        }, 5000);
+      }
+    });
   </script>
   <script defer src="../js/performance-optimizer.js"></script>
   <script defer src="../js/lazy-loader.js"></script>

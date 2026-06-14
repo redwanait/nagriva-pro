@@ -1,0 +1,308 @@
+/* ════════════════════════════════════════════════════════
+   Nagriva — Welcome Celebration Modal
+   Success experience shown after account creation
+   ════════════════════════════════════════════════════════ */
+
+/* ─── Overlay ─── */
+.tcm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40000;
+  background: rgba(4,4,4,0.88);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 20px;
+}
+
+.tcm-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─── Modal ─── */
+.tcm-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 36px 32px 32px;
+  text-align: center;
+  transform: scale(0.88) translateY(24px);
+  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:
+    0 0 0 1px rgba(250,204,21,0.03),
+    0 24px 80px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.tcm-overlay.active .tcm-modal {
+  transform: scale(1) translateY(0);
+}
+
+/* ─── Confetti ─── */
+.tcm-confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.tcm-confetti-piece {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: tcmConfettiFall 2.8s ease-in-out forwards;
+}
+
+.tcm-confetti-piece:nth-child(odd) {
+  border-radius: 50%;
+}
+
+@keyframes tcmConfettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(340px) rotate(720deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* ─── Checkmark ─── */
+.tcm-checkmark-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  z-index: 1;
+}
+
+.tcm-checkmark-circle-bg {
+  fill: none;
+  stroke: rgba(34,197,94,0.15);
+  stroke-width: 3;
+}
+
+.tcm-checkmark-circle {
+  fill: none;
+  stroke: #22C55E;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  animation: tcmCircle 0.6s 0.15s ease-in-out forwards;
+}
+
+.tcm-checkmark {
+  fill: none;
+  stroke: #22C55E;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: tcmCheck 0.35s 0.65s ease-in-out forwards;
+}
+
+@keyframes tcmCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes tcmCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ─── Content ─── */
+.tcm-content {
+  position: relative;
+  z-index: 1;
+}
+
+.tcm-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s 0.3s ease, transform 0.4s 0.3s ease;
+}
+
+.tcm-message {
+  font-size: 0.92rem;
+  color: var(--gray);
+  line-height: 1.5;
+  margin: 0 0 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s 0.4s ease, transform 0.4s 0.4s ease;
+}
+
+.tcm-bonus {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(250,204,21,0.12), rgba(250,204,21,0.04));
+  border: 1px solid rgba(250,204,21,0.18);
+  border-radius: 99px;
+  padding: 7px 18px;
+  margin: 16px 0 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s 0.55s ease, transform 0.4s 0.55s ease;
+}
+
+.tcm-bonus-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.tcm-subtext {
+  font-size: 0.85rem;
+  color: var(--gray2);
+  line-height: 1.5;
+  margin: 0 0 28px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s 0.65s ease, transform 0.4s 0.65s ease;
+}
+
+.tcm-btn {
+  width: 100%;
+  padding: 14px 28px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #FACC15, #F59E0B);
+  color: #050505;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s 0.75s ease, transform 0.4s 0.75s ease, box-shadow 0.3s ease;
+}
+
+.tcm-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.tcm-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.tcm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(250,204,21,0.3);
+}
+
+.tcm-btn:active {
+  transform: translateY(0);
+}
+
+.tcm-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.tcm-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ─── Active: show content with staggered animation ─── */
+.tcm-overlay.active .tcm-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tcm-overlay.active .tcm-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tcm-overlay.active .tcm-bonus {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tcm-overlay.active .tcm-subtext {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tcm-overlay.active .tcm-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .tcm-modal {
+    padding: 28px 20px 24px;
+  }
+
+  .tcm-checkmark-wrap {
+    width: 60px;
+    height: 60px;
+  }
+
+  .tcm-title {
+    font-size: 1.25rem;
+  }
+
+  .tcm-message {
+    font-size: 0.85rem;
+  }
+
+  .tcm-bonus {
+    font-size: 0.82rem;
+    padding: 6px 14px;
+  }
+
+  .tcm-subtext {
+    font-size: 0.8rem;
+  }
+
+  .tcm-btn {
+    padding: 12px 24px;
+    font-size: 0.88rem;
+  }
+}

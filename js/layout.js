@@ -81,6 +81,36 @@
     document.head.appendChild(nl);
   }
 
+  /* ─── Auth scripts (store + plan + UI) ─── */
+  function loadAuthScripts() {
+    return new Promise(function (resolve) {
+      var hasStore = window.NagrivaAuthStore ||
+        !!document.querySelector('script[src="/js/auth-store.js"], script[src="../js/auth-store.js"]');
+      var hasPlan = window.NagrivaPlanManager ||
+        !!document.querySelector('script[src="/js/plan-manager.js"], script[src="../js/plan-manager.js"]');
+      var hasAuth  = window.NagrivaAuth ||
+        !!document.querySelector('script[src="/js/auth.js"], script[src="../js/auth.js"]');
+
+      if (hasStore && hasPlan && hasAuth) { resolve(); return; }
+
+      function inject (src) {
+        return new Promise(function (res) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.onload = res;
+          s.onerror = res;
+          document.head.appendChild(s);
+        });
+      }
+
+      var chain = Promise.resolve();
+      if (!hasStore) chain = chain.then(function () { return inject('/js/auth-store.js'); });
+      if (!hasPlan)  chain = chain.then(function () { return inject('/js/plan-manager.js'); });
+      if (!hasAuth)  chain = chain.then(function () { return inject('/js/auth.js'); });
+      chain.then(function () { resolve(); });
+    });
+  }
+
   /* ─── Footer post-processing ─── */
   function processFooter (container) {
     if (window.NagrivaI18n) {
@@ -125,10 +155,12 @@
     }
   }
 
-  /* ─── Init: load all components ─── */
+  /* ─── Init: load auth, then all components ─── */
   function init () {
     loadNewsletterJS()
-    COMPONENTS.forEach(fetchComponent)
+    loadAuthScripts().then(function () {
+      COMPONENTS.forEach(fetchComponent)
+    })
   }
 
   if (document.readyState === 'loading') {
