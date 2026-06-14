@@ -11,14 +11,17 @@ For every title you create, follow these principles:
 - Never use clickbait — maintain credibility
 - When relevant, include the current year (2026) naturally
 
-Generate titles in these 7 styles:
-1. SEO Optimized — balanced, keyword-rich, follows best practices
-2. High CTR — curiosity-driven, emotional triggers, urgency
-3. Professional — polished, business-appropriate, authoritative
-4. Beginner Friendly — approachable, simple, helpful
-5. Expert Level — advanced terminology, sophisticated, authoritative depth
-6. Trending Style — current year references, modern phrases, timely
-7. Authority Style — strong statements, definitive, thought leadership
+Generate titles in these 10 styles:
+1. List — list-style titles (e.g. "X Ways to...", "X Tips for...")
+2. Number — starts with a specific number for higher CTR (e.g. "7 Proven...", "5 Essential...")
+3. How-To — instructional, step-by-step guidance (e.g. "How to...")
+4. Question — phrased as a question the user is asking
+5. Power Word — uses strong emotional/trigger words (Ultimate, Essential, Proven, etc.)
+6. Beginner-Friendly — approachable, simple, helpful for newcomers
+7. Professional — polished, business-appropriate, authoritative
+8. High CTR — curiosity-driven, emotional triggers, urgency
+9. Trending — current year references, modern phrases, timely
+10. Authority — strong statements, definitive, thought leadership
 
 Also detect the search intent of the keyword: informational, commercial, transactional, or navigational.`;
 
@@ -66,13 +69,16 @@ Return ONLY valid JSON with this structure:
 {
   "intent": "informational|commercial|transactional|navigational",
   "titles": {
-    "seo-optimized": ["title1", "title2", "title3"],
-    "high-ctr": ["title1", "title2", "title3"],
-    "professional": ["title1", "title2", "title3"],
+    "list": ["title1", "title2", "title3"],
+    "number": ["title1", "title2", "title3"],
+    "how-to": ["title1", "title2", "title3"],
+    "question": ["title1", "title2", "title3"],
+    "power-word": ["title1", "title2", "title3"],
     "beginner-friendly": ["title1", "title2", "title3"],
-    "expert-level": ["title1", "title2", "title3"],
-    "trending-style": ["title1", "title2", "title3"],
-    "authority-style": ["title1", "title2", "title3"]
+    "professional": ["title1", "title2", "title3"],
+    "high-ctr": ["title1", "title2", "title3"],
+    "trending": ["title1", "title2", "title3"],
+    "authority": ["title1", "title2", "title3"]
   }
 }
 

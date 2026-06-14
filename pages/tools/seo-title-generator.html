@@ -2,9 +2,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI SEO Title Generator — Nagriva</title>
-  <meta name="description" content="Generate intelligent, high-quality SEO titles with real AI. Get titles optimized for ranking and CTR across 7 styles in seconds.">
+  <meta name="description" content="Generate intelligent, high-quality SEO titles with real AI. Get titles optimized for ranking and CTR across 10 categories in seconds.">
   <meta property="og:title" content="AI SEO Title Generator — Nagriva">
-  <meta property="og:description" content="Generate intelligent, high-quality SEO titles with real AI. Get titles optimized for ranking and CTR across 7 styles in seconds.">
+  <meta property="og:description" content="Generate intelligent, high-quality SEO titles with real AI. Get titles optimized for ranking and CTR across 10 categories in seconds.">
   <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
   <meta property="og:url" content="https://nagriva.com/tools/seo-title-generator">
   <meta property="og:type" content="website">
@@ -564,15 +564,32 @@
       color: var(--accent);
       background: rgba(250,204,21,0.08);
     }
-    .seo-title-btn.copied {
-      border-color: rgba(34,197,94,0.3);
-      color: #10B981;
-      background: rgba(34,197,94,0.08);
-    }
     .seo-title-btn.faved {
       border-color: rgba(239,68,68,0.3);
       color: #ef4444;
       background: rgba(239,68,68,0.08);
+    }
+    .seo-title-btn[data-action="copy"] {
+      width: auto;
+      padding: 0 12px;
+      gap: 5px;
+      position: relative;
+      overflow: hidden;
+    }
+    .seo-copy-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+    .seo-title-btn[data-action="copy"]:active:not(.copied) {
+      transform: scale(0.9);
+    }
+    .seo-title-btn.copied {
+      border-color: rgba(34,197,94,0.3) !important;
+      color: #10B981 !important;
+      background: rgba(34,197,94,0.08) !important;
+      pointer-events: none;
     }
     .seo-title-btn svg { width: 14px; height: 14px; }
     .seo-titles-actions-bottom {
@@ -1826,6 +1843,433 @@
       .serp-preview-title { font-size: 17px; }
       .serp-action-btn { flex: 1; justify-content: center; }
     }
+
+    /* ═══ TOOLBAR — SEARCH & SORT ═══ */
+    .seo-titles-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .seo-search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 160px;
+    }
+    .seo-search-icon {
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 14px; height: 14px;
+      color: var(--gray2);
+      pointer-events: none;
+    }
+    .seo-search-icon svg { width: 14px; height: 14px; }
+    .seo-search-input {
+      width: 100%;
+      padding: 10px 12px 10px 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--white);
+      transition: border-color 0.3s ease, background 0.3s ease;
+      box-sizing: border-box;
+    }
+    .seo-search-input::placeholder { color: var(--gray2); }
+    .seo-search-input:focus {
+      outline: none;
+      border-color: rgba(250,204,21,0.3);
+      background: rgba(250,204,21,0.05);
+    }
+    .seo-sort-wrap {
+      position: relative;
+    }
+    .seo-sort-select {
+      appearance: none;
+      padding: 10px 34px 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--seo-border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--gray2);
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+      min-width: 140px;
+    }
+    .seo-sort-select:hover {
+      border-color: rgba(250,204,21,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .seo-sort-select:focus {
+      outline: none;
+      border-color: rgba(250,204,21,0.3);
+    }
+    .seo-sort-select option { background: #0f0f0f; color: var(--white); }
+    .seo-sort-arrow {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 12px; height: 12px;
+      color: var(--gray2);
+      pointer-events: none;
+    }
+    .seo-sort-arrow svg { width: 12px; height: 12px; }
+    .seo-all-total {
+      font-size: 0.78rem;
+      color: var(--gray2);
+      white-space: nowrap;
+    }
+
+    /* ═══ CATEGORY BADGE ═══ */
+    .seo-title-cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid;
+      transition: all 0.3s ease;
+    }
+    .seo-title-cat-badge svg { width: 9px; height: 9px; }
+
+    /* ═══ RECOMMENDED BADGE ═══ */
+    .seo-rec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, rgba(250,204,21,0.12), rgba(245,158,11,0.12));
+      border: 1px solid rgba(250,204,21,0.2);
+      color: var(--accent);
+      animation: seoFadeIn 0.4s ease;
+      margin-top: 8px;
+    }
+    .seo-rec-badge svg { width: 12px; height: 12px; }
+
+    /* ═══ EMPTY STATE ═══ */
+    .seo-empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--gray2);
+      font-size: 0.88rem;
+    }
+    .seo-empty-state svg {
+      width: 32px; height: 32px;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    /* ═══ FAVORITES FILTER ═══ */
+    .seo-fav-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--seo-border);
+      background: rgba(255,255,255,0.015);
+      color: var(--gray2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .seo-fav-filter-btn:hover {
+      border-color: rgba(250,204,21,0.2);
+      color: var(--white);
+    }
+    .seo-fav-filter-btn.active {
+      border-color: rgba(239,68,68,0.3);
+      color: #ef4444;
+      background: rgba(239,68,68,0.08);
+    }
+    .seo-fav-filter-btn svg { width: 14px; height: 14px; }
+    .seo-fav-filter-btn.active svg { fill: #ef4444; }
+
+    .seo-fav-count {
+      font-size: 0.65rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .seo-titles-toolbar { flex-direction: column; align-items: stretch; }
+      .seo-search-wrap { min-width: 0; }
+      .seo-sort-wrap { width: 100%; }
+      .seo-sort-select { width: 100%; }
+      .seo-fav-filter-btn { justify-content: center; }
+    }
+
+    /* ═══ KEYWORD SUGGESTIONS MODULE ═══ */
+    .kw-section {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--seo-border);
+      animation: seoFadeInUp 0.4s ease;
+    }
+    .kw-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .kw-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .kw-header-icon {
+      width: 22px; height: 22px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .kw-header-icon svg { width: 22px; height: 22px; }
+    .kw-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .kw-header-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(250,204,21,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(250,204,21,0.15);
+    }
+    .kw-category { margin-bottom: 18px; }
+    .kw-category-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    .kw-category-label svg {
+      width: 14px; height: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .kw-category-count {
+      font-size: 0.68rem;
+      color: var(--gray2);
+      font-weight: 400;
+      margin-left: auto;
+    }
+    .kw-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .kw-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--seo-border);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      animation: kwChipIn 0.3s ease backwards;
+      user-select: none;
+      position: relative;
+    }
+    .kw-chip:hover {
+      border-color: rgba(250,204,21,0.3);
+      color: var(--white);
+      background: rgba(250,204,21,0.06);
+      transform: translateY(-1px);
+    }
+    .kw-chip:active { transform: scale(0.95); }
+    .kw-chip.kw-recommended {
+      border-color: rgba(250,204,21,0.3);
+      background: rgba(250,204,21,0.06);
+    }
+    .kw-chip.kw-recommended .kw-chip-text::after {
+      content: ' ★';
+      color: var(--accent);
+      font-size: 0.65rem;
+    }
+    .kw-chip-icon {
+      width: 12px; height: 12px;
+      color: var(--gray2);
+      flex-shrink: 0;
+    }
+    .kw-chip-text { white-space: nowrap; }
+    .kw-chip-metrics {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 4px;
+    }
+    .kw-chip-vol, .kw-chip-diff {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 1px 5px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .kw-chip-vol--high { background: rgba(16,185,129,0.12); color: #10B981; }
+    .kw-chip-vol--medium { background: rgba(250,204,21,0.12); color: #FACC15; }
+    .kw-chip-vol--low { background: rgba(239,68,68,0.1); color: #EF4444; }
+    .kw-chip-diff--easy { background: rgba(16,185,129,0.12); color: #10B981; }
+    .kw-chip-diff--medium { background: rgba(250,204,21,0.12); color: #FACC15; }
+    .kw-chip-diff--hard { background: rgba(239,68,68,0.1); color: #EF4444; }
+    .kw-chip-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: 4px;
+    }
+    .kw-chip-copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px; height: 20px;
+      border: none;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--gray2);
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+      opacity: 0;
+    }
+    .kw-chip:hover .kw-chip-copy { opacity: 1; }
+    .kw-chip-copy:hover { color: var(--accent); background: rgba(250,204,21,0.1); }
+    .kw-chip-copy svg { width: 12px; height: 12px; }
+    .kw-chip-copy.copied { color: #10B981; opacity: 1; }
+    .kw-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: 1px solid var(--seo-border);
+      background: rgba(255,255,255,0.02);
+      color: var(--gray);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-top: 4px;
+    }
+    .kw-more-btn:hover {
+      border-color: rgba(250,204,21,0.3);
+      color: var(--white);
+      background: rgba(250,204,21,0.06);
+    }
+    .kw-more-btn svg { width: 14px; height: 14px; }
+    .kw-recent {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .kw-recent-label {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .kw-recent-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      color: var(--gray);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--seo-border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .kw-recent-chip:hover {
+      border-color: rgba(250,204,21,0.2);
+      color: var(--white);
+    }
+    .kw-recent-chip svg { width: 10px; height: 10px; }
+    .kw-inline-suggestions {
+      margin-top: 12px;
+      display: none;
+      animation: seoFadeIn 0.3s ease;
+    }
+    .kw-inline-suggestions.active { display: block; }
+    .kw-inline-label {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .kw-inline-label svg { width: 12px; height: 12px; color: var(--accent); }
+    .kw-inline-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .kw-inline-chip {
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--seo-border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .kw-inline-chip:hover {
+      border-color: rgba(250,204,21,0.2);
+      color: var(--white);
+      background: rgba(250,204,21,0.05);
+    }
+    .kw-error {
+      text-align: center;
+      padding: 20px;
+      color: var(--gray2);
+      font-size: 0.85rem;
+    }
+    @keyframes kwChipIn {
+      from { opacity: 0; transform: scale(0.9) translateY(4px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .kw-chip { font-size: 0.78rem; padding: 6px 12px; }
+      .kw-chip-vol, .kw-chip-diff { display: none; }
+      .kw-chip-copy { opacity: 1; }
+      .kw-header { flex-direction: column; align-items: flex-start; }
+      .kw-inline-chip { font-size: 0.72rem; padding: 4px 10px; }
+      .kw-recent { gap: 6px; }
+    }
   </style>
 <script type="application/ld+json">
 {
@@ -1833,7 +2277,7 @@
   "@type": "WebApplication",
   "name": "AI SEO Title Generator",
   "url": "https://nagriva.com/tools/seo-title-generator",
-  "description": "Generate intelligent, high-quality SEO titles with real AI. Get titles optimized for ranking and CTR across 7 styles.",
+  "description": "Generate intelligent, high-quality SEO titles with real AI. Get titles optimized for ranking and CTR across 10 categories.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",
   "browserRequirements": "Requires JavaScript",
@@ -1870,7 +2314,7 @@
     },
     {
       "@type": "Question", "name": "What title styles are available?",
-      "acceptedAnswer": { "@type": "Answer", "text": "We generate titles in 7 styles: SEO Optimized (balanced best practices), High CTR (curiosity-driven), Professional (polished business), Beginner Friendly (approachable), Expert Level (advanced), Trending Style (current/year), and Authority Style (thought leadership)." }
+      "acceptedAnswer": { "@type": "Answer", "text": "We generate titles across 10 categories: List, Number, How-To, Question, Power Word, Beginner-Friendly, Professional, High CTR, Trending, and Authority. Each category is designed to match different content angles and search intents." }
     },
     {
       "@type": "Question", "name": "Can I use these titles for free?",
@@ -1927,7 +2371,7 @@
 
           <div class="seo-card-header">
             <h2>AI-Powered Title Generation</h2>
-            <p>Enter your keyword — our AI analyzes intent and generates optimized titles in 7 styles.</p>
+            <p>Enter your keyword — our AI analyzes intent and generates optimized titles across 10 categories.</p>
           </div>
 
           <div id="seoFormView">
@@ -1959,6 +2403,14 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
             </form>
+          </div>
+
+          <div class="kw-inline-suggestions" id="kwInline">
+            <div class="kw-inline-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              Related Keywords
+            </div>
+            <div class="kw-inline-chips" id="kwInlineChips"></div>
           </div>
 
           <div class="seo-loading" id="seoLoading">
@@ -2008,68 +2460,126 @@
                   <span id="intentLabel">Informational</span>
                 </span>
               </div>
-              <span class="seo-titles-count" id="titlesCount">Titles across 7 styles</span>
+              <span class="seo-titles-count" id="titlesCount">Titles across 10 categories</span>
             </div>
 
             <div class="seo-categories" id="seoCategories">
-              <button class="seo-cat-tab active" data-cat="seo-optimized">
-                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></span>
-                <span>SEO Optimized</span>
-                <span class="seo-cat-count" id="catCount-seo-optimized">0</span>
+              <button class="seo-cat-tab active" data-cat="all">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg></span>
+                <span>All Titles</span>
+                <span class="seo-cat-count" id="catCount-all">0</span>
               </button>
-              <button class="seo-cat-tab" data-cat="high-ctr">
+              <button class="seo-cat-tab" data-cat="list">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></span>
+                <span>List</span>
+                <span class="seo-cat-count" id="catCount-list">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="number">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg></span>
+                <span>Number</span>
+                <span class="seo-cat-count" id="catCount-number">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="how-to">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+                <span>How-To</span>
+                <span class="seo-cat-count" id="catCount-how-to">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="question">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+                <span>Question</span>
+                <span class="seo-cat-count" id="catCount-question">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="power-word">
                 <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
-                <span>High CTR</span>
-                <span class="seo-cat-count" id="catCount-high-ctr">0</span>
+                <span>Power Word</span>
+                <span class="seo-cat-count" id="catCount-power-word">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="beginner-friendly">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+                <span>Beginner</span>
+                <span class="seo-cat-count" id="catCount-beginner-friendly">0</span>
               </button>
               <button class="seo-cat-tab" data-cat="professional">
                 <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
                 <span>Professional</span>
                 <span class="seo-cat-count" id="catCount-professional">0</span>
               </button>
-              <button class="seo-cat-tab" data-cat="beginner-friendly">
-                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
-                <span>Beginner Friendly</span>
-                <span class="seo-cat-count" id="catCount-beginner-friendly">0</span>
-              </button>
-              <button class="seo-cat-tab" data-cat="expert-level">
-                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span>
-                <span>Expert Level</span>
-                <span class="seo-cat-count" id="catCount-expert-level">0</span>
-              </button>
-              <button class="seo-cat-tab" data-cat="trending-style">
+              <button class="seo-cat-tab" data-cat="high-ctr">
                 <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
-                <span>Trending Style</span>
-                <span class="seo-cat-count" id="catCount-trending-style">0</span>
+                <span>High CTR</span>
+                <span class="seo-cat-count" id="catCount-high-ctr">0</span>
               </button>
-              <button class="seo-cat-tab" data-cat="authority-style">
+              <button class="seo-cat-tab" data-cat="trending">
+                <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></span>
+                <span>Trending</span>
+                <span class="seo-cat-count" id="catCount-trending">0</span>
+              </button>
+              <button class="seo-cat-tab" data-cat="authority">
                 <span class="seo-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg></span>
-                <span>Authority Style</span>
-                <span class="seo-cat-count" id="catCount-authority-style">0</span>
+                <span>Authority</span>
+                <span class="seo-cat-count" id="catCount-authority">0</span>
+              </button>
+            </div>
+
+            <div class="seo-titles-toolbar">
+              <div class="seo-search-wrap">
+                <span class="seo-search-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span>
+                <input type="text" class="seo-search-input" id="seoSearchInput" placeholder="Search titles..." autocomplete="off">
+              </div>
+              <div class="seo-sort-wrap">
+                <select class="seo-sort-select" id="seoSortSelect">
+                  <option value="default">Default order</option>
+                  <option value="score-desc">Highest SEO Score</option>
+                  <option value="ctr-desc">Highest CTR Potential</option>
+                  <option value="length-asc">Shortest Title</option>
+                  <option value="length-desc">Longest Title</option>
+                </select>
+                <span class="seo-sort-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </div>
+              <button class="seo-fav-filter-btn" id="seoFavFilter" title="Show only favorites">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span id="seoFavFilterLabel">Favorites</span>
+                <span class="seo-fav-count" id="seoFavCount"></span>
               </button>
             </div>
 
             <div class="seo-cat-panels" id="seoCatPanels">
-              <div class="seo-cat-panel active" data-cat="seo-optimized">
-                <div class="seo-titles-list" id="titlesList-seo-optimized"></div>
+              <div class="seo-cat-panel active" data-cat="all">
+                <div class="seo-titles-list" id="titlesList-all"></div>
               </div>
-              <div class="seo-cat-panel" data-cat="high-ctr">
-                <div class="seo-titles-list" id="titlesList-high-ctr"></div>
+              <div class="seo-cat-panel" data-cat="list">
+                <div class="seo-titles-list" id="titlesList-list"></div>
               </div>
-              <div class="seo-cat-panel" data-cat="professional">
-                <div class="seo-titles-list" id="titlesList-professional"></div>
+              <div class="seo-cat-panel" data-cat="number">
+                <div class="seo-titles-list" id="titlesList-number"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="how-to">
+                <div class="seo-titles-list" id="titlesList-how-to"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="question">
+                <div class="seo-titles-list" id="titlesList-question"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="power-word">
+                <div class="seo-titles-list" id="titlesList-power-word"></div>
               </div>
               <div class="seo-cat-panel" data-cat="beginner-friendly">
                 <div class="seo-titles-list" id="titlesList-beginner-friendly"></div>
               </div>
-              <div class="seo-cat-panel" data-cat="expert-level">
-                <div class="seo-titles-list" id="titlesList-expert-level"></div>
+              <div class="seo-cat-panel" data-cat="professional">
+                <div class="seo-titles-list" id="titlesList-professional"></div>
               </div>
-              <div class="seo-cat-panel" data-cat="trending-style">
-                <div class="seo-titles-list" id="titlesList-trending-style"></div>
+              <div class="seo-cat-panel" data-cat="high-ctr">
+                <div class="seo-titles-list" id="titlesList-high-ctr"></div>
               </div>
-              <div class="seo-cat-panel" data-cat="authority-style">
-                <div class="seo-titles-list" id="titlesList-authority-style"></div>
+              <div class="seo-cat-panel" data-cat="trending">
+                <div class="seo-titles-list" id="titlesList-trending"></div>
+              </div>
+              <div class="seo-cat-panel" data-cat="authority">
+                <div class="seo-titles-list" id="titlesList-authority"></div>
               </div>
             </div>
 
@@ -2082,10 +2592,28 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
                 Regenerate All
               </button>
-              <button class="seo-titles-btn seo-titles-btn-secondary" id="copyAllBtn">
+              <button class="seo-titles-btn seo-titles-btn-secondary" id="copyAllBtn" aria-label="Copy all titles to clipboard">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 Copy All
               </button>
+            </div>
+
+            <div class="kw-section" id="kwSection" style="display:none">
+              <div class="kw-header">
+                <div class="kw-header-left">
+                  <span class="kw-header-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  </span>
+                  <h3>Keyword Suggestions</h3>
+                  <span class="kw-header-badge" id="kwBadge">Related</span>
+                </div>
+              </div>
+              <div id="kwContent"></div>
+              <button class="kw-more-btn" id="kwMoreBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Generate More Keywords
+              </button>
+              <div class="kw-recent" id="kwRecent"></div>
             </div>
 
             <div class="seo-insights">
@@ -2293,11 +2821,11 @@
           </div>
           <div class="seo-faq-item">
             <button class="seo-faq-q">
-              <span>What are the 7 title styles?</span>
+              <span>What are the 10 title categories?</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="seo-faq-a">
-              <div class="seo-faq-a-inner">We generate titles in 7 distinct styles: SEO Optimized (balanced best practices), High CTR (curiosity-driven), Professional (polished business language), Beginner Friendly (approachable and simple), Expert Level (advanced terminology), Trending Style (current year references), and Authority Style (definitive thought leadership).</div>
+              <div class="seo-faq-a-inner">We generate titles across 10 categories: List, Number, How-To, Question, Power Word, Beginner-Friendly, Professional, High CTR, Trending, and Authority. Each category is tailored to different content angles — from listicles and how-to guides to curiosity-driven high-CTR titles and definitive authority statements.</div>
             </div>
           </div>
           <div class="seo-faq-item">
@@ -2342,7 +2870,7 @@
     </div>
   </section>
 
-  <div class="seo-toast" id="seoToast"></div>
+  <div class="seo-toast" id="seoToast" role="status" aria-live="polite"></div>
 
   <div id="footer-container"></div>
 
@@ -2366,8 +2894,59 @@
     var loadingKeyword = document.getElementById('seoLoadingKeyword');
     var loadingMsgs = document.querySelectorAll('#seoLoadingMsgs .seo-loading-msg');
 
-    var STYLES = ['seo-optimized', 'high-ctr', 'professional', 'beginner-friendly', 'expert-level', 'trending-style', 'authority-style'];
+    var STYLES = ['list', 'number', 'how-to', 'question', 'power-word', 'beginner-friendly', 'professional', 'high-ctr', 'trending', 'authority'];
+    var CATEGORY_LABELS = {
+      'list': 'List',
+      'number': 'Number',
+      'how-to': 'How-To',
+      'question': 'Question',
+      'power-word': 'Power Word',
+      'beginner-friendly': 'Beginner',
+      'professional': 'Professional',
+      'high-ctr': 'High CTR',
+      'trending': 'Trending',
+      'authority': 'Authority'
+    };
+    var CATEGORY_COLORS = {
+      'list': { bg: 'rgba(59,130,246,0.1)', text: '#3B82F6', border: 'rgba(59,130,246,0.2)' },
+      'number': { bg: 'rgba(245,158,11,0.1)', text: '#F59E0B', border: 'rgba(245,158,11,0.2)' },
+      'how-to': { bg: 'rgba(16,185,129,0.1)', text: '#10B981', border: 'rgba(16,185,129,0.2)' },
+      'question': { bg: 'rgba(139,92,246,0.1)', text: '#8B5CF6', border: 'rgba(139,92,246,0.2)' },
+      'power-word': { bg: 'rgba(239,68,68,0.1)', text: '#EF4444', border: 'rgba(239,68,68,0.2)' },
+      'beginner-friendly': { bg: 'rgba(34,197,94,0.1)', text: '#22C55E', border: 'rgba(34,197,94,0.2)' },
+      'professional': { bg: 'rgba(99,102,241,0.1)', text: '#6366F1', border: 'rgba(99,102,241,0.2)' },
+      'high-ctr': { bg: 'rgba(250,204,21,0.1)', text: '#FACC15', border: 'rgba(250,204,21,0.2)' },
+      'trending': { bg: 'rgba(236,72,153,0.1)', text: '#EC4899', border: 'rgba(236,72,153,0.2)' },
+      'authority': { bg: 'rgba(14,165,233,0.1)', text: '#0EA5E9', border: 'rgba(14,165,233,0.2)' }
+    };
+    var OLD_TO_NEW_MAP = {
+      'seo-optimized': 'list',
+      'high-ctr': 'high-ctr',
+      'professional': 'professional',
+      'beginner-friendly': 'beginner-friendly',
+      'expert-level': 'authority',
+      'trending-style': 'trending',
+      'authority-style': 'authority'
+    };
+
+    function normalizeTitles(titles) {
+      var norm = {};
+      STYLES.forEach(function(s) { norm[s] = []; });
+      for (var key in titles) {
+        if (titles.hasOwnProperty(key)) {
+          var newKey = OLD_TO_NEW_MAP[key] || key;
+          if (CATEGORY_LABELS[newKey]) {
+            norm[newKey] = (norm[newKey] || []).concat(titles[key]);
+          }
+        }
+      }
+      return norm;
+    }
+
     var state = { titles: {} };
+    var searchQuery = '';
+    var sortMode = 'default';
+    var favFilterActive = false;
 
     var toast = document.getElementById('seoToast');
     var toastTimer = null;
@@ -2378,6 +2957,31 @@
       toast.classList.add('active');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(function() { toast.classList.remove('active'); }, 2200);
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function(resolve, reject) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          ta.style.top = '-9999px';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          var ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          if (ok) resolve();
+          else reject(new Error('execCommand copy failed'));
+        } catch(e) {
+          reject(e);
+        }
+      });
     }
 
     function cap(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
@@ -2618,12 +3222,16 @@
         var alertSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
         var warnSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
         var badgeIcon = charStatus.cls === 'perfect' ? checkSvg : (charStatus.cls === 'acceptable' ? alertSvg : warnSvg);
+        var catColors = CATEGORY_COLORS[cat] || CATEGORY_COLORS['list'];
+        var catLabel = CATEGORY_LABELS[cat] || cat;
+        var catBadgeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z"></path></svg>';
         item.innerHTML =
           '<span class="seo-title-num">' + (idx + 1) + '</span>' +
           '<div class="seo-title-content">' +
             '<span class="seo-title-text" contenteditable="true">' + title + '</span>' +
             '<div class="seo-title-meta">' +
               '<span class="seo-seo-badge ' + info.cls + '">' + score + '<span class="seo-badge-sep">/100</span><span class="seo-badge-dot"></span><span class="seo-badge-label">' + info.label + '</span></span>' +
+              '<span class="seo-title-cat-badge" style="background:' + catColors.bg + ';color:' + catColors.text + ';border-color:' + catColors.border + '">' + catBadgeSvg + catLabel + '</span>' +
               '<span class="seo-ai-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> AI</span>' +
             '</div>' +
             '<div class="seo-char-section">' +
@@ -2674,8 +3282,9 @@
             '<button class="seo-title-btn" data-action="preview" title="SERP Preview">' +
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
             '</button>' +
-            '<button class="seo-title-btn" data-action="copy" title="Copy">' +
+            '<button class="seo-title-btn" data-action="copy" title="Copy" aria-label="Copy title to clipboard">' +
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+              '<span class="seo-copy-label">Copy</span>' +
             '</button>' +
           '</div>';
         list.appendChild(item);
@@ -2699,11 +3308,30 @@
       list.querySelectorAll('[data-action="copy"]').forEach(function(btn, i) {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
-          navigator.clipboard.writeText(titles[i]).then(function() {
-            btn.classList.add('copied');
-            setTimeout(function() { btn.classList.remove('copied'); }, 1200);
+          var text = titles[i];
+          if (!text) return;
+
+          var copiedSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          var copySvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+
+          btn.classList.add('copied');
+          btn.innerHTML = copiedSvg + '<span class="seo-copy-label">Copied \u2713</span>';
+          btn.setAttribute('aria-label', 'Copied to clipboard');
+
+          copyToClipboard(text).then(function() {
             showToast('Copied to clipboard!');
+          }).catch(function() {
+            showToast('Failed to copy. Try selecting the text manually.', true);
+            btn.classList.remove('copied');
+            btn.innerHTML = copySvg + '<span class="seo-copy-label">Copy</span>';
+            btn.setAttribute('aria-label', 'Copy title to clipboard');
           });
+
+          setTimeout(function() {
+            btn.classList.remove('copied');
+            btn.innerHTML = copySvg + '<span class="seo-copy-label">Copy</span>';
+            btn.setAttribute('aria-label', 'Copy title to clipboard');
+          }, 2500);
         });
       });
 
@@ -2753,8 +3381,54 @@
       }, 100);
     }
 
+    function getAllTitlesArray(allTitles) {
+      var arr = [];
+      STYLES.forEach(function(cat) {
+        var titles = allTitles[cat] || [];
+        titles.forEach(function(t) {
+          arr.push({ title: t, category: cat });
+        });
+      });
+      return arr;
+    }
+
+    function matchesSearch(title, query) {
+      if (!query) return true;
+      return title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    }
+
+    function getSortedTitles(titleObjects, sort) {
+      var arr = titleObjects.slice();
+      if (sort === 'score-desc' || sort === 'ctr-desc') {
+        arr.sort(function(a, b) {
+          var sa = calcSEOScore(a.title, state.lastKeyword || '').total;
+          var sb = calcSEOScore(b.title, state.lastKeyword || '').total;
+          return sb - sa;
+        });
+      } else if (sort === 'length-asc') {
+        arr.sort(function(a, b) { return a.title.length - b.title.length; });
+      } else if (sort === 'length-desc') {
+        arr.sort(function(a, b) { return b.title.length - a.title.length; });
+      }
+      return arr;
+    }
+
+    function getFavTitles() {
+      return JSON.parse(localStorage.getItem('seoFavTitles') || '{}');
+    }
+
+    function updateFavCount() {
+      var favs = getFavTitles();
+      var countEl = document.getElementById('seoFavCount');
+      if (countEl) {
+        var count = Object.keys(favs).length;
+        countEl.textContent = count > 0 ? count : '';
+      }
+    }
+
     function renderAllCategorized(allTitles, keyword, intent) {
       state.titles = allTitles;
+      state.lastKeyword = keyword;
       var total = 0;
       STYLES.forEach(function(cat) {
         var titles = allTitles[cat] || [];
@@ -2763,8 +3437,15 @@
         var countEl = document.getElementById('catCount-' + cat);
         if (countEl) countEl.textContent = titles.length;
       });
-      document.getElementById('titlesCount').textContent = total + ' titles across ' + STYLES.length + ' styles';
+
+      var allArr = getAllTitlesArray(allTitles);
+      renderAllCategory(allArr, keyword);
+
+      document.getElementById('catCount-all').textContent = total;
+      document.getElementById('titlesCount').textContent = total + ' titles across ' + STYLES.length + ' categories';
       if (intent) updateIntentUI(intent);
+      updateFavCount();
+
       for (var ci = 0; ci < STYLES.length; ci++) {
         var catTitles = allTitles[STYLES[ci]];
         if (catTitles && catTitles.length > 0) {
@@ -2772,6 +3453,279 @@
           break;
         }
       }
+
+      applyCurrentFilters();
+    }
+
+    function applyCurrentFilters() {
+      var allArr = getAllTitlesArray(state.titles);
+      var filtered = allArr.filter(function(item) {
+        if (favFilterActive) {
+          var favs = getFavTitles();
+          if (!favs[item.title]) return false;
+        }
+        return matchesSearch(item.title, searchQuery);
+      });
+      var sorted = getSortedTitles(filtered, sortMode);
+      renderAllCategory(sorted, state.lastKeyword);
+      updateCategoryViews();
+    }
+
+    function updateCategoryViews() {
+      STYLES.forEach(function(cat) {
+        var titles = state.titles[cat] || [];
+        var filtered = titles.filter(function(t) {
+          if (favFilterActive) {
+            var favs = getFavTitles();
+            if (!favs[t]) return false;
+          }
+          return matchesSearch(t, searchQuery);
+        });
+        var sorted = getSortedTitles(filtered.map(function(t) { return { title: t, category: cat }; }), sortMode);
+        renderCategory(cat, sorted.map(function(o) { return o.title; }), state.lastKeyword);
+        var countEl = document.getElementById('catCount-' + cat);
+        if (countEl) countEl.textContent = filtered.length;
+      });
+    }
+
+    function renderAllCategory(titleObjects, keyword) {
+      var list = document.getElementById('titlesList-all');
+      if (!list) return;
+      list.innerHTML = '';
+      if (titleObjects.length === 0) {
+        list.innerHTML = '<div class="seo-empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><div>No titles match your search</div></div>';
+        return;
+      }
+      var favs = getFavTitles();
+      var grouped = {};
+      titleObjects.forEach(function(item) {
+        if (!grouped[item.category]) grouped[item.category] = [];
+        grouped[item.category].push(item.title);
+      });
+      var globalIdx = 0;
+      STYLES.forEach(function(cat) {
+        var titles = grouped[cat] || [];
+        if (titles.length === 0) return;
+        var catColors = CATEGORY_COLORS[cat] || CATEGORY_COLORS['list'];
+        var catLabel = CATEGORY_LABELS[cat] || cat;
+        var catBadgeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z"></path></svg>';
+        titles.forEach(function(title) {
+          var isFaved = favs[title] === true;
+          var result = calcSEOScore(title, keyword);
+          var score = result.total;
+          var bd = result.breakdown;
+          var info = scoreInfo(score);
+          var charCount = title.length;
+          var charStatus = getCharStatus(charCount);
+          var progressPct = Math.min(100, Math.round((charCount / 60) * 100));
+          var tips = suggestImprovements(bd, title, keyword);
+          var factorIcon = function(s, m) {
+            if (s >= m) return '<svg class="seo-sf-icon seo-sf-ok" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.15"/><path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+            if (s > 0)  return '<svg class="seo-sf-icon seo-sf-half" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.12"/><circle cx="10" cy="10" r="4" fill="currentColor"/></svg>';
+            return '<svg class="seo-sf-icon seo-sf-no" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.1"/><path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+          };
+          var factorRow = function(label, key, max) {
+            var s = bd[key].score;
+            var m = bd[key].max;
+            var pct = Math.round(s/m*100);
+            var fill = s >= m ? '100%' : (s > 0 ? Math.round(s/m*100) + '%' : '0%');
+            var cls = s >= m ? 'seo-sf-full' : (s > 0 ? 'seo-sf-partial' : 'seo-sf-empty');
+            return '<div class="seo-score-factor ' + cls + '">' +
+              factorIcon(s, m) +
+              '<span class="seo-sf-label">' + label + '</span>' +
+              '<span class="seo-sf-bar"><span class="seo-sf-fill" style="width:' + fill + '"></span></span>' +
+              '<span class="seo-sf-pts">' + s + '/' + m + '</span>' +
+            '</div>';
+          };
+          var suggestionsHtml = '';
+          if (tips.length > 0) {
+            suggestionsHtml = '<div class="seo-score-suggestions"><span class="seo-ss-head">Suggestions</span>';
+            for (var ti = 0; ti < tips.length; ti++) {
+              suggestionsHtml += '<span class="seo-ss-item"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 4v5M8 11.5v.5"/></svg>' + tips[ti] + '</span>';
+            }
+            suggestionsHtml += '</div>';
+          }
+          var checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          var alertSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+          var warnSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+          var badgeIcon = charStatus.cls === 'perfect' ? checkSvg : (charStatus.cls === 'acceptable' ? alertSvg : warnSvg);
+          globalIdx++;
+          var item = document.createElement('div');
+          item.className = 'seo-title-item';
+          item.style.animationDelay = ((globalIdx - 1) * 0.04) + 's';
+          item.innerHTML =
+            '<span class="seo-title-num">' + globalIdx + '</span>' +
+            '<div class="seo-title-content">' +
+              '<span class="seo-title-text" contenteditable="true">' + title + '</span>' +
+              '<div class="seo-title-meta">' +
+                '<span class="seo-seo-badge ' + info.cls + '">' + score + '<span class="seo-badge-sep">/100</span><span class="seo-badge-dot"></span><span class="seo-badge-label">' + info.label + '</span></span>' +
+                '<span class="seo-title-cat-badge" style="background:' + catColors.bg + ';color:' + catColors.text + ';border-color:' + catColors.border + '">' + catBadgeSvg + catLabel + '</span>' +
+                '<span class="seo-ai-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> AI</span>' +
+              '</div>' +
+              '<div class="seo-char-section">' +
+                '<div class="seo-char-progress-wrap">' +
+                  '<div class="seo-char-progress">' +
+                    '<div class="seo-char-progress-fill ' + charStatus.cls + '" style="width:' + progressPct + '%"></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="seo-char-info">' +
+                  '<span class="seo-char-counter ' + charStatus.cls + '">' +
+                    '<span class="seo-char-count-num">' + charCount + '</span> / 60 Characters' +
+                  '</span>' +
+                  '<span class="seo-char-badge ' + charStatus.cls + '">' + badgeIcon + charStatus.label + '</span>' +
+                  '<span class="seo-char-warning' + (charCount > 60 ? ' active' : '') + '" title="Exceeds Google\'s recommended 60-character limit">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>' +
+                  '</span>' +
+                  '<span class="seo-char-tooltip-trigger" title="Google\'s recommended title length is 50\u201360 characters. Titles within this range display fully in search results and perform best for SEO.">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>' +
+                  '</span>' +
+                '</div>' +
+              '</div>' +
+              '<div class="seo-score-card">' +
+                '<div class="seo-sc-top">' +
+                  '<div class="seo-sc-progress-wrap" title="SEO score based on 5 factors: Keyword, Length, Power Words, Numbers, Readability">' +
+                    '<div class="seo-sc-progress">' +
+                      '<div class="seo-sc-fill ' + info.cls + '" style="width:0%"></div>' +
+                    '</div>' +
+                    '<span class="seo-sc-pct">' + score + '%</span>' +
+                  '</div>' +
+                  '<button class="seo-sc-toggle" data-toggle aria-label="Toggle score breakdown" title="View score breakdown">' +
+                    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="7 8 10 11 13 8"/></svg>' +
+                  '</button>' +
+                '</div>' +
+                '<div class="seo-sc-body">' +
+                  factorRow('Keyword Optimization', 'keyword', 25) +
+                  factorRow('Length Optimization', 'length', 25) +
+                  factorRow('Power Words', 'powerWords', 20) +
+                  factorRow('Numbers', 'numbers', 15) +
+                  factorRow('Readability', 'readability', 15) +
+                  suggestionsHtml +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="seo-title-actions">' +
+              '<button class="seo-title-btn' + (isFaved ? ' faved' : '') + '" data-action="fav" title="Save">' +
+                '<svg viewBox="0 0 24 24" fill="' + (isFaved ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>' +
+              '</button>' +
+              '<button class="seo-title-btn" data-action="preview" title="SERP Preview">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
+              '</button>' +
+              '<button class="seo-title-btn" data-action="copy" title="Copy" aria-label="Copy title to clipboard">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+                '<span class="seo-copy-label">Copy</span>' +
+              '</button>' +
+            '</div>';
+          list.appendChild(item);
+          var titleTextEl = item.querySelector('.seo-title-text');
+          if (titleTextEl) {
+            (function(it, origTitle) {
+              titleTextEl.addEventListener('input', function() {
+                updateCharCounter(it);
+              });
+              titleTextEl.addEventListener('blur', function() {
+                var t = this.textContent.replace(/\s+/g, ' ').trim();
+                if (t.length === 0) { this.textContent = origTitle; updateCharCounter(it); }
+                else { this.textContent = t; }
+              });
+              titleTextEl.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+              });
+            })(item, title);
+          }
+        });
+      });
+
+      list.querySelectorAll('[data-action="copy"]').forEach(function(btn, i) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var idx = Array.from(list.querySelectorAll('[data-action="copy"]')).indexOf(btn);
+          var allItems = list.querySelectorAll('.seo-title-item');
+          if (idx >= 0 && idx < allItems.length) {
+            var textEl = allItems[idx].querySelector('.seo-title-text');
+            if (textEl) {
+              var text = textEl.textContent.replace(/\s+/g, ' ').trim();
+              var copiedSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+              var copySvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+              btn.classList.add('copied');
+              btn.innerHTML = copiedSvg + '<span class="seo-copy-label">Copied \u2713</span>';
+              btn.setAttribute('aria-label', 'Copied to clipboard');
+              copyToClipboard(text).then(function() {
+                showToast('Copied to clipboard!');
+              }).catch(function() {
+                showToast('Failed to copy. Try selecting the text manually.', true);
+                btn.classList.remove('copied');
+                btn.innerHTML = copySvg + '<span class="seo-copy-label">Copy</span>';
+                btn.setAttribute('aria-label', 'Copy title to clipboard');
+              });
+              setTimeout(function() {
+                btn.classList.remove('copied');
+                btn.innerHTML = copySvg + '<span class="seo-copy-label">Copy</span>';
+                btn.setAttribute('aria-label', 'Copy title to clipboard');
+              }, 2500);
+            }
+          }
+        });
+      });
+
+      list.querySelectorAll('[data-action="preview"]').forEach(function(btn, i) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var idx = Array.from(list.querySelectorAll('[data-action="preview"]')).indexOf(btn);
+          var allItems = list.querySelectorAll('.seo-title-item');
+          if (idx >= 0 && idx < allItems.length) {
+            var textEl = allItems[idx].querySelector('.seo-title-text');
+            if (textEl) {
+              populateSERPFromTitle(textEl.textContent.replace(/\s+/g, ' ').trim(), keyword);
+            }
+          }
+        });
+      });
+
+      list.querySelectorAll('[data-action="fav"]').forEach(function(btn, i) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var idx = Array.from(list.querySelectorAll('[data-action="fav"]')).indexOf(btn);
+          var allItems = list.querySelectorAll('.seo-title-item');
+          if (idx >= 0 && idx < allItems.length) {
+            var textEl = allItems[idx].querySelector('.seo-title-text');
+            if (textEl) {
+              var text = textEl.textContent.replace(/\s+/g, ' ').trim();
+              var favs = JSON.parse(localStorage.getItem('seoFavTitles') || '{}');
+              if (favs[text]) {
+                delete favs[text];
+                btn.classList.remove('faved');
+                btn.querySelector('svg').setAttribute('fill', 'none');
+                showToast('Removed from favorites');
+              } else {
+                favs[text] = true;
+                btn.classList.add('faved');
+                btn.querySelector('svg').setAttribute('fill', 'currentColor');
+                showToast('Saved to favorites!');
+              }
+              localStorage.setItem('seoFavTitles', JSON.stringify(favs));
+              updateFavCount();
+            }
+          }
+        });
+      });
+
+      list.querySelectorAll('.seo-sc-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var body = btn.closest('.seo-score-card').querySelector('.seo-sc-body');
+          var isOpen = body.classList.contains('open');
+          body.classList.toggle('open');
+          btn.classList.toggle('open');
+        });
+      });
+
+      setTimeout(function() {
+        list.querySelectorAll('.seo-sc-fill').forEach(function(fill) {
+          var pct = fill.parentElement.parentElement.querySelector('.seo-sc-pct');
+          var target = parseInt(pct.textContent);
+          fill.style.width = target + '%';
+        });
+      }, 100);
     }
 
     function showSkeleton(cat) {
@@ -2794,9 +3748,10 @@
 
     function showAllSkeletons() {
       STYLES.forEach(function(cat) { showSkeleton(cat); });
+      showSkeleton('all');
     }
 
-    var activeCat = 'seo-optimized';
+    var activeCat = 'all';
 
     function switchTab(cat) {
       if (cat === activeCat) return;
@@ -2840,15 +3795,55 @@
     };
 
     var titlePatterns = {
-      'seo-optimized': [
-        '{Keyword}: {Adj} Guide for {Audience}',
-        '{Keyword} — {Adj} Strategies for {Year}',
-        '{Keyword} Best Practices: {Adj} Overview',
-        'The {Adj} Guide to {Keyword}',
-        '{Keyword} for {Audience}: {Adj} Tips',
-        '{Adj} {Keyword} Resources for {Audience}',
-        '{Keyword} Essentials: What Every {Audience} Needs',
-        '{Adj} {Keyword} Techniques That Work'
+      'list': [
+        '{Keyword}: {Adj} Tips for {Audience}',
+        'Top Ways to Master {Keyword} in {Year}',
+        'Essential {Keyword} Strategies for {Audience}',
+        'Key {Keyword} Techniques Every {Audience} Needs',
+        '{Adj} {Keyword} Ideas to Try in {Year}',
+        'Best {Keyword} Approaches for {Audience}',
+        'Creative {Keyword} Methods That Work',
+        '{Keyword} Strategies: {Adj} Options for {Audience}'
+      ],
+      'number': [
+        '{Num} {Adj} {Keyword} Strategies That Work',
+        '{Num} Essential {Keyword} Tips for {Audience}',
+        'Top {Num} {Keyword} Techniques for {Year}',
+        '{Num} {Adj} Ways to Master {Keyword}',
+        '{Num} {Keyword} Mistakes to Avoid in {Year}',
+        '{Num} Proven {Keyword} Methods for {Audience}',
+        '{Num} {Adj} {Keyword} Ideas You Need to Try',
+        '{Num} Best Practices for {Keyword} Success'
+      ],
+      'how-to': [
+        'How to Master {Keyword}: A Step-by-Step Guide',
+        'How to Get Started with {Keyword} in {Year}',
+        'How to Use {Keyword} to Grow Your Business',
+        '{Keyword}: How to Get It Right in {Year}',
+        'How to Choose the Best {Keyword} for {Audience}',
+        'How to Implement {Keyword} Like a Pro',
+        'How to Leverage {Keyword} for {Audience} Success',
+        'How to Optimize {Keyword} for Maximum Results'
+      ],
+      'question': [
+        'Is {Keyword} Right for Your Business?',
+        'What Is {Keyword} and Why Does It Matter?',
+        'Can {Keyword} Transform Your Strategy in {Year}?',
+        'Why Should {Audience} Care About {Keyword}?',
+        'How Does {Keyword} Impact Your Growth?',
+        'What Every {Audience} Should Know About {Keyword}',
+        'Is {Keyword} Worth the Investment in {Year}?',
+        'Do You Really Need {Keyword} for Success?'
+      ],
+      'power-word': [
+        'Ultimate {Keyword} Guide for {Audience}',
+        'Proven {Keyword} Strategies for Maximum Impact',
+        'Essential {Keyword} Tips Every {Audience} Needs',
+        'Powerful {Keyword} Techniques to Transform Results',
+        'The Definitive {Keyword} Resource for {Year}',
+        'Game-Changing {Keyword} Ideas for {Audience}',
+        'Actionable {Keyword} Insights for {Audience}',
+        'Remarkable {Keyword} Strategies That Deliver'
       ],
       'high-ctr': [
         '{PowerH} {Keyword} Strategies You Need in {Year}',
@@ -2880,17 +3875,7 @@
         '{Keyword} for {Audience}: Where to Start',
         'The {Adj} Beginner\'s Guide to {Keyword}'
       ],
-      'expert-level': [
-        '{Adj} {Keyword} Strategies for Seasoned Professionals',
-        'Mastering {Keyword}: {Adj} Techniques for Experts',
-        '{Keyword} Deep Dive: {Adj} Insights',
-        '{Adj} {Keyword} Analysis and Strategies for {Year}',
-        'The {Adj} Guide to Advanced {Keyword}',
-        '{Keyword} for Experts: {Adj} Methodologies',
-        '{Adj} {Keyword} Optimization at Scale',
-        '{Keyword} Architecture: {Adj} Approaches'
-      ],
-      'trending-style': [
+      'trending': [
         '{Keyword} Trends to Watch in {Year}',
         '{Keyword} in {Year}: What\'s Changed and What\'s Next',
         'The Future of {Keyword}: {Year} Predictions',
@@ -2900,7 +3885,7 @@
         '{Adj} {Keyword} Innovations Reshaping {Year}',
         '{Keyword} in {Year}: Key Trends and Insights'
       ],
-      'authority-style': [
+      'authority': [
         'The Definitive Guide to {Keyword} for {Audience}',
         '{Keyword}: The Complete Guide for {Audience}',
         '{Adj} {Keyword}: The Authority\'s Perspective',
@@ -2971,11 +3956,13 @@
         while (titles.length < 3 && attempts < 40) {
           attempts++;
           var pattern = shuffled[titles.length % shuffled.length];
+          var numList = ['5', '7', '10', '3', '8', '15', '12', '4', '6', '9'];
           var t = pattern
             .replace(/{Keyword}/g, k)
             .replace(/{Audience}/g, aud)
             .replace(/{Year}/g, year)
             .replace(/{Adj}/g, adj)
+            .replace(/{Num}/g, pick(numList))
             .replace(/{PowerH}/g, pick(powerWords.high))
             .replace(/{PowerE}/g, pick(powerWords.emotional));
 
@@ -3062,18 +4049,19 @@
             resultsView.classList.add('active');
 
             showAllSkeletons();
-            activeCat = 'seo-optimized';
+            activeCat = 'all';
             document.querySelectorAll('.seo-cat-tab').forEach(function(t) {
-              t.classList.toggle('active', t.getAttribute('data-cat') === 'seo-optimized');
+              t.classList.toggle('active', t.getAttribute('data-cat') === 'all');
             });
             document.querySelectorAll('.seo-cat-panel').forEach(function(p) {
-              p.classList.toggle('active', p.getAttribute('data-cat') === 'seo-optimized');
+              p.classList.toggle('active', p.getAttribute('data-cat') === 'all');
             });
 
             callAIApi(keyword, contentType, audience).then(function(data) {
               if (data.success && data.titles) {
                 updateGenerationModeUI(true);
-                renderAllCategorized(data.titles, keyword, data.intent);
+                var normalized = normalizeTitles(data.titles);
+                renderAllCategorized(normalized, keyword, data.intent);
                 updateInsights(keyword, contentType, data.intent || detectIntent(keyword, contentType));
               } else {
                 throw new Error((data && data.error) || 'Generation failed');
@@ -3085,6 +4073,9 @@
               renderAllCategorized(result.titles, keyword, result.intent);
               updateInsights(keyword, contentType, result.intent);
             });
+
+            var kwSuggestions = generateKeywordSuggestions(keyword);
+            if (kwSuggestions) renderKeywordSection(kwSuggestions, keyword);
 
             leadSection.classList.add('active');
           }, 500);
@@ -3126,13 +4117,14 @@
       var audience = document.getElementById('seoAudience').value;
 
       showAllSkeletons();
-      switchTab('seo-optimized');
+      switchTab('all');
       leadSection.classList.add('active');
 
       callAIApi(keyword, contentType, audience).then(function(data) {
         if (data.success && data.titles) {
           updateGenerationModeUI(true);
-          renderAllCategorized(data.titles, keyword, data.intent);
+          var normalized = normalizeTitles(data.titles);
+          renderAllCategorized(normalized, keyword, data.intent);
         } else {
           throw new Error('Generation failed');
         }
@@ -3142,6 +4134,9 @@
         renderAllCategorized(result.titles, keyword, result.intent);
       });
 
+      var kwSuggest = generateKeywordSuggestions(keyword);
+      if (kwSuggest) renderKeywordSection(kwSuggest, keyword);
+
       resultsView.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
@@ -3149,19 +4144,7 @@
       document.getElementById('generateMoreBtn').click();
     });
 
-    document.getElementById('copyAllBtn').addEventListener('click', function() {
-      var allTexts = [];
-      STYLES.forEach(function(cat) {
-        var list = document.getElementById('titlesList-' + cat);
-        if (list) {
-          var items = list.querySelectorAll('.seo-title-text');
-          items.forEach(function(el) { allTexts.push(el.textContent); });
-        }
-      });
-      navigator.clipboard.writeText(allTexts.join('\n')).then(function() {
-        showToast('All titles copied to clipboard!');
-      });
-    });
+    // copyAllBtn handler is at the bottom of the script
 
     document.getElementById('leadSubmit').addEventListener('click', function() {
       var name = document.getElementById('leadName').value.trim();
@@ -3188,8 +4171,6 @@
         if (!isOpen) item.classList.add('open');
       });
     });
-
-  });
 
     /* ═══════════ GOOGLE SERP PREVIEW MODULE ═══════════ */
 
@@ -3320,6 +4301,422 @@
       serpSection.classList.add('active');
     }
 
+    /* ═══════════ SEARCH, SORT, FAVORITES ═══════════ */
+
+    var searchInput = document.getElementById('seoSearchInput');
+    var sortSelect = document.getElementById('seoSortSelect');
+    var favFilterBtn = document.getElementById('seoFavFilter');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        searchQuery = this.value.trim();
+        applyCurrentFilters();
+      });
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        sortMode = this.value;
+        applyCurrentFilters();
+      });
+    }
+
+    if (favFilterBtn) {
+      favFilterBtn.addEventListener('click', function() {
+        favFilterActive = !favFilterActive;
+        favFilterBtn.classList.toggle('active', favFilterActive);
+        applyCurrentFilters();
+      });
+    }
+
+    /* ═══════════ DETECT RECOMMENDED CATEGORY ═══════════ */
+
+    function getRecommendedCategory(intent) {
+      var map = {
+        'informational': 'how-to',
+        'commercial': 'number',
+        'transactional': 'power-word',
+        'navigational': 'list'
+      };
+      return map[intent] || 'list';
+    }
+
+    function showRecommendedCategory(intent) {
+      var recCat = getRecommendedCategory(intent);
+      var label = CATEGORY_LABELS[recCat] || 'List';
+      var container = document.getElementById('seoCatPanels');
+      if (!container) return;
+      var existing = container.querySelector('.seo-rec-badge');
+      if (existing) existing.remove();
+      var badge = document.createElement('div');
+      badge.className = 'seo-rec-badge';
+      badge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Recommended: ' + label + ' Titles based on ' + intentLabel(intent) + ' intent';
+      var parent = container.parentElement;
+      if (parent) parent.insertBefore(badge, container.nextSibling);
+    }
+
+    updateInsights = (function(orig) {
+      return function(keyword, contentType, intent) {
+        orig(keyword, contentType, intent);
+        showRecommendedCategory(intent || detectIntent(keyword, contentType));
+      };
+    })(updateInsights);
+
+    /* ═══════════ COPY ALL HANDLER ═══════════ */
+
+    document.getElementById('copyAllBtn').addEventListener('click', function() {
+      var allTexts = [];
+      STYLES.forEach(function(cat) {
+        var list = document.getElementById('titlesList-' + cat);
+        if (list) {
+          var items = list.querySelectorAll('.seo-title-text');
+          items.forEach(function(el) { allTexts.push(el.textContent); });
+        }
+      });
+      if (allTexts.length === 0) {
+        showToast('No titles to copy.', true);
+        return;
+      }
+      var formatted = allTexts.map(function(t, i) {
+        return (i + 1) + '. ' + t;
+      }).join('\n');
+      var btn = document.getElementById('copyAllBtn');
+      var origHtml = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied (' + allTexts.length + ' titles) \u2713';
+      btn.style.pointerEvents = 'none';
+      btn.setAttribute('aria-label', 'All titles copied');
+      copyToClipboard(formatted).then(function() {
+        showToast(allTexts.length + ' titles copied to clipboard!');
+      }).catch(function() {
+        showToast('Failed to copy titles. Please try again.', true);
+        btn.innerHTML = origHtml;
+        btn.style.pointerEvents = '';
+        btn.setAttribute('aria-label', 'Copy all titles to clipboard');
+      });
+      setTimeout(function() {
+        btn.innerHTML = origHtml;
+        btn.style.pointerEvents = '';
+        btn.setAttribute('aria-label', 'Copy all titles to clipboard');
+      }, 2500);
+    });
+
+    /* ═══════════ KEYWORD SUGGESTIONS MODULE ═══════════ */
+
+    var kwState = { suggestions: null, keyword: '' };
+
+    var KW_CAT_ICONS = {
+      'primary': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>',
+      'long-tail': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>',
+      'questions': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
+      'related': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+      'trending': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>'
+    };
+    var KW_CAT_LABELS = {
+      'primary': 'Primary Keywords',
+      'long-tail': 'Long-Tail Keywords',
+      'questions': 'Question Keywords',
+      'related': 'Related Search Terms',
+      'trending': 'Trending Variations'
+    };
+
+    function generateKeywordSuggestions(keyword) {
+      var kw = keyword.toLowerCase().trim();
+      if (!kw) return null;
+      var words = kw.split(/\s+/);
+      var K = keyword.trim().replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+
+      var pick = function(arr) { return arr[Math.floor(Math.random() * arr.length)]; };
+      var shuffle = function(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+      var unique = function(arr) { var seen = {}; return arr.filter(function(item) { if (seen[item]) return false; seen[item] = true; return true; }); };
+
+      var prefixes = ['Digital', 'AI', 'Online', 'Smart', 'Cloud', 'Automated', 'Professional', 'Modern', 'Enterprise', 'Advanced', 'Intelligent'];
+      var suffixes = ['Software', 'Tools', 'Solutions', 'Platform', 'Services', 'Apps', 'Systems', 'Technology', 'Automation', 'Management', 'Strategy', 'Optimization'];
+      var longTailPrefixes = ['Best', 'Top', 'Leading', 'Affordable', 'Free', 'Premium', 'Enterprise', 'Essential', 'Powerful', 'Ultimate'];
+      var longTailSuffixes = ['for Small Business', 'for Enterprise', 'for Startups', 'for Content Creation', 'for Productivity', 'for Marketing', 'for Beginners', 'for Professionals', 'for Teams', 'for Remote Work', 'for Growth', 'for Ecommerce', 'for Sales', 'for Agencies'];
+      var questionStems = ['What Are the Best', 'How Do', 'Why Use', 'Which', 'What Is', 'How to Choose', 'What Are', 'Is', 'Are', 'When to Use', 'How Does', 'What Makes'];
+      var relatedGens = [function(k) { return k + ' Services'; }, function(k) { return k + ' Consulting'; }, function(k) { return k + ' Agency'; }, function(k) { return k + ' Experts'; }, function(k) { return k + ' Specialists'; }, function(k) { return k + ' Guide'; }, function(k) { return k + ' Examples'; }, function(k) { return k + ' Benefits'; }, function(k) { return 'Types of ' + k; }, function(k) { return k + ' Pricing'; }];
+      var trendMods = ['2026', 'Trending', 'Popular', 'Modern', 'Latest', 'Next-Gen', 'Future of', 'Cutting-Edge', 'Emerging', 'New'];
+
+      var seen = {};
+      var result = [];
+      var i, candidate, vol, diff, isRec;
+
+      function addIfUnique(text, cat, vol, diff, rec) {
+        var key = text.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (seen[key]) return false;
+        seen[key] = true;
+        result.push({ text: text, category: cat, volume: vol || 'medium', difficulty: diff || 'medium', recommended: rec || false });
+        return true;
+      }
+
+      function volWeight(highChance, medChance) {
+        var r = Math.random();
+        return r < highChance ? 'high' : (r < highChance + medChance ? 'medium' : 'low');
+      }
+
+      function diffWeight(easyChance, medChance) {
+        var r = Math.random();
+        return r < easyChance ? 'easy' : (r < easyChance + medChance ? 'medium' : 'hard');
+      }
+
+      // Primary Keywords
+      addIfUnique(K, 'primary', volWeight(0.5, 0.3), diffWeight(0.1, 0.4), true);
+      var pShuffled = shuffle(prefixes.concat(suffixes));
+      for (i = 0; i < pShuffled.length && result.filter(function(r) { return r.category === 'primary'; }).length < 7; i++) {
+        var isPref = i % 2 === 0;
+        candidate = isPref ? (pShuffled[i] + ' ' + K) : (K + ' ' + pShuffled[i]);
+        if (addIfUnique(candidate, 'primary', volWeight(0.4, 0.3), diffWeight(0.15, 0.4))) {
+          var pRec = result.filter(function(r) { return r.category === 'primary'; }).length <= 2;
+          if (pRec) result[result.length - 1].recommended = true;
+        }
+      }
+
+      // Long-Tail Keywords
+      var ltPrefixes = shuffle(longTailPrefixes);
+      var ltSuffixes = shuffle(longTailSuffixes);
+      for (i = 0; i < Math.min(ltPrefixes.length, ltSuffixes.length) && result.filter(function(r) { return r.category === 'long-tail'; }).length < 8; i++) {
+        candidate = ltPrefixes[i] + ' ' + K + ' ' + ltSuffixes[i];
+        var ltVol = volWeight(0.2, 0.3);
+        var ltDiff = diffWeight(0.4, 0.35);
+        addIfUnique(candidate, 'long-tail', ltVol, ltDiff, ltVol !== 'low' && ltDiff !== 'hard');
+      }
+      if (result.filter(function(r) { return r.category === 'long-tail'; }).length < 3) {
+        for (i = 0; i < 5; i++) {
+          candidate = pick(longTailPrefixes) + ' ' + K + ' ' + pick(longTailSuffixes);
+          addIfUnique(candidate, 'long-tail', volWeight(0.15, 0.3), diffWeight(0.5, 0.3), false);
+        }
+      }
+
+      // Question Keywords
+      var qStems = shuffle(questionStems);
+      for (i = 0; i < qStems.length && result.filter(function(r) { return r.category === 'questions'; }).length < 6; i++) {
+        var stem = qStems[i];
+        var kwNoun = pick(suffixes);
+        if (stem === 'How Do' || stem === 'How Does') {
+          candidate = stem + ' ' + K + ' Work?';
+        } else if (stem === 'How to Choose') {
+          candidate = 'How to Choose the Right ' + K + '?';
+        } else if (stem === 'Is' || stem === 'Are') {
+          candidate = stem + ' ' + K + ' Worth It?';
+        } else if (stem === 'What Makes') {
+          candidate = stem + ' ' + K + ' Effective?';
+        } else if (stem === 'When to Use') {
+          candidate = stem + ' ' + K + '?';
+        } else if (stem === 'Why Use') {
+          candidate = stem + ' ' + K + '?';
+        } else {
+          candidate = stem + ' ' + K + '?';
+        }
+        var qVol = volWeight(0.3, 0.3);
+        var qDiff = diffWeight(0.3, 0.4);
+        addIfUnique(candidate, 'questions', qVol, qDiff, qVol !== 'low' && qDiff !== 'hard');
+      }
+
+      // Related Search Terms
+      var rGens = shuffle(relatedGens);
+      for (i = 0; i < rGens.length && result.filter(function(r) { return r.category === 'related'; }).length < 6; i++) {
+        candidate = rGens[i](K);
+        var rVol = volWeight(0.3, 0.35);
+        var rDiff = diffWeight(0.35, 0.35);
+        addIfUnique(candidate, 'related', rVol, rDiff, rVol !== 'low' && rDiff === 'easy');
+      }
+
+      // Trending Variations
+      var tMods = shuffle(trendMods);
+      for (i = 0; i < tMods.length && result.filter(function(r) { return r.category === 'trending'; }).length < 5; i++) {
+        candidate = tMods[i] + ' ' + K;
+        var tVol = volWeight(0.5, 0.3);
+        var tDiff = diffWeight(0.2, 0.4);
+        addIfUnique(candidate, 'trending', tVol, tDiff, tVol === 'high' && tDiff !== 'hard');
+        if (Math.random() > 0.5 && result.filter(function(r) { return r.category === 'trending'; }).length < 5) {
+          var tsCandidate = tMods[i] + ' ' + K + ' ' + pick(suffixes);
+          var tsVol = volWeight(0.4, 0.3);
+          var tsDiff = diffWeight(0.25, 0.4);
+          addIfUnique(tsCandidate, 'trending', tsVol, tsDiff, false);
+        }
+      }
+
+      var grouped = { 'primary': [], 'long-tail': [], 'questions': [], 'related': [], 'trending': [] };
+      result.forEach(function(item) {
+        if (grouped[item.category]) grouped[item.category].push(item);
+      });
+
+      return grouped;
+    }
+
+    function renderKeywordSection(suggestions, keyword) {
+      var section = document.getElementById('kwSection');
+      var content = document.getElementById('kwContent');
+      var badge = document.getElementById('kwBadge');
+      if (!section || !content) return;
+
+      content.innerHTML = '';
+      var total = 0;
+      var cats = ['primary', 'long-tail', 'questions', 'related', 'trending'];
+      cats.forEach(function(cat) {
+        var items = suggestions[cat] || [];
+        if (items.length === 0) return;
+        total += items.length;
+
+        var catDiv = document.createElement('div');
+        catDiv.className = 'kw-category';
+
+        var label = document.createElement('div');
+        label.className = 'kw-category-label';
+        label.innerHTML = (KW_CAT_ICONS[cat] || '') + '<span>' + KW_CAT_LABELS[cat] + '</span><span class="kw-category-count">' + items.length + ' keywords</span>';
+        catDiv.appendChild(label);
+
+        var chips = document.createElement('div');
+        chips.className = 'kw-chips';
+
+        items.forEach(function(item, idx) {
+          var chip = document.createElement('span');
+          chip.className = 'kw-chip' + (item.recommended ? ' kw-recommended' : '');
+          chip.style.animationDelay = (idx * 0.05) + 's';
+          chip.title = 'Click to generate titles for "' + item.text + '"';
+
+          var volCls = 'kw-chip-vol--' + (item.volume || 'medium');
+          var diffCls = 'kw-chip-diff--' + (item.difficulty || 'medium');
+
+          chip.innerHTML =
+            '<span class="kw-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>' +
+            '<span class="kw-chip-text">' + item.text + '</span>' +
+            '<span class="kw-chip-metrics">' +
+              '<span class="kw-chip-vol ' + volCls + '">SV: ' + item.volume + '</span>' +
+              '<span class="kw-chip-diff ' + diffCls + '">' + item.difficulty + '</span>' +
+            '</span>' +
+            '<span class="kw-chip-actions">' +
+              '<button class="kw-chip-copy" title="Copy keyword"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>' +
+            '</span>';
+
+          var itemText = item.text;
+
+          chip.addEventListener('click', function(e) {
+            if (e.target.closest('.kw-chip-copy')) return;
+            document.getElementById('seoKeyword').value = itemText;
+            form.dispatchEvent(new Event('submit'));
+          });
+
+          var copyBtn = chip.querySelector('.kw-chip-copy');
+          copyBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            copyToClipboard(itemText).then(function() {
+              copyBtn.classList.add('copied');
+              copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+              setTimeout(function() {
+                copyBtn.classList.remove('copied');
+                copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+              }, 2000);
+              showToast('Keyword copied to clipboard!');
+            });
+          });
+
+          chips.appendChild(chip);
+        });
+
+        catDiv.appendChild(chips);
+        content.appendChild(catDiv);
+      });
+
+      if (badge) badge.textContent = total + ' keywords';
+      section.style.display = 'block';
+      section.style.animation = 'none';
+      section.offsetHeight;
+      section.style.animation = '';
+
+      saveRecentKeyword(keyword);
+      renderRecentKeywords();
+    }
+
+    function saveRecentKeyword(keyword) {
+      var recents = JSON.parse(localStorage.getItem('seoRecentKeywords') || '[]');
+      var kw = keyword.trim().toLowerCase();
+      recents = recents.filter(function(r) { return r.toLowerCase() !== kw; });
+      recents.unshift(keyword.trim());
+      if (recents.length > 8) recents = recents.slice(0, 8);
+      localStorage.setItem('seoRecentKeywords', JSON.stringify(recents));
+    }
+
+    function renderRecentKeywords() {
+      var container = document.getElementById('kwRecent');
+      if (!container) return;
+      var recents = JSON.parse(localStorage.getItem('seoRecentKeywords') || '[]');
+      if (recents.length === 0) { container.innerHTML = ''; return; }
+      var html = '<span class="kw-recent-label">Recent Keywords:</span>';
+      recents.forEach(function(r) {
+        html += '<span class="kw-recent-chip" data-kw="' + r.replace(/"/g, '&quot;') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' + r + '</span>';
+      });
+      container.innerHTML = html;
+
+      container.querySelectorAll('.kw-recent-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          var kwVal = this.getAttribute('data-kw');
+          document.getElementById('seoKeyword').value = kwVal;
+          form.dispatchEvent(new Event('submit'));
+        });
+      });
+    }
+
+    function generateInlineSuggestions(keyword) {
+      var container = document.getElementById('kwInlineChips');
+      var wrapper = document.getElementById('kwInline');
+      if (!container || !wrapper) return;
+      var kwVal = keyword.trim().toLowerCase();
+      if (kwVal.length < 3) { wrapper.classList.remove('active'); return; }
+
+      var suggestions = generateKeywordSuggestions(keyword);
+      if (!suggestions) { wrapper.classList.remove('active'); return; }
+
+      var allChips = [];
+      Object.keys(suggestions).forEach(function(cat) {
+        (suggestions[cat] || []).forEach(function(item) {
+          allChips.push(item.text);
+        });
+      });
+
+      var shuffled = allChips.sort(function() { return Math.random() - 0.5; }).slice(0, 6);
+
+      container.innerHTML = '';
+      shuffled.forEach(function(text) {
+        var chip = document.createElement('span');
+        chip.className = 'kw-inline-chip';
+        chip.textContent = text;
+        chip.addEventListener('click', function() {
+          document.getElementById('seoKeyword').value = text;
+          form.dispatchEvent(new Event('submit'));
+        });
+        container.appendChild(chip);
+      });
+
+      wrapper.classList.add('active');
+    }
+
+    var kwInput = document.getElementById('seoKeyword');
+    var inlineTimer = null;
+    if (kwInput) {
+      kwInput.addEventListener('input', function() {
+        var inp = this;
+        clearTimeout(inlineTimer);
+        inlineTimer = setTimeout(function() {
+          generateInlineSuggestions(inp.value);
+        }, 400);
+      });
+    }
+
+    var kwMoreBtn = document.getElementById('kwMoreBtn');
+    if (kwMoreBtn) {
+      kwMoreBtn.addEventListener('click', function() {
+        var kwVal = document.getElementById('seoKeyword').value.trim();
+        if (!kwVal) { showToast('Enter a keyword first', true); return; }
+        var suggestions = generateKeywordSuggestions(kwVal);
+        if (suggestions) {
+          renderKeywordSection(suggestions, kwVal);
+          showToast('Generated more keyword suggestions!');
+        }
+      });
+    }
+
+    renderRecentKeywords();
   });
   </script>
 <script defer src="../../js/layout.js"></script>
