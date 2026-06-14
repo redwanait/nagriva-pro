@@ -1380,13 +1380,33 @@
       .seo-loading { padding: 28px 0; }
       .seo-cta { padding: 60px 0 80px; }
       .seo-faq { padding: 60px 0; }
-      .seo-title-item { padding: 14px 16px; }
-      .seo-seo-badge { font-size: 0.6rem; padding: 1px 6px; }
+      .seo-title-item { padding: 12px 12px; }
+      .seo-seo-badge { font-size: 0.65rem; padding: 2px 8px; }
+      .seo-badge-label { display: none; }
+      .seo-badge-dot { display: none; }
       .seo-categories { gap: 6px; }
       .seo-cat-tab { padding: 8px 14px; font-size: 0.78rem; }
       .seo-titles-header { flex-direction: column; align-items: flex-start; }
+      .seo-sc-pct { font-size: 0.65rem; min-width: 26px; }
+      .seo-sf-label { font-size: 0.72rem; }
+      .seo-sf-bar { width: 36px; }
+      .seo-sf-pts { font-size: 0.62rem; min-width: 28px; }
     }
     @media (max-width: 480px) {
+      .seo-card { padding: 24px 18px; border-radius: 18px; }
+      .seo-lead-card { padding: 24px 18px; border-radius: 18px; }
+      .seo-input { padding: 14px 14px 14px 42px; font-size: 0.88rem; }
+      .seo-select { padding: 12px 38px 12px 14px; font-size: 0.85rem; }
+      .seo-submit { padding: 16px 24px; font-size: 0.92rem; }
+      .seo-lead-input { padding: 12px 16px; font-size: 0.85rem; }
+      .seo-lead-btn { padding: 14px 24px; }
+      .seo-faq-q { padding: 14px 18px; font-size: 0.85rem; }
+      .seo-faq-a-inner { padding: 0 18px 14px; }
+      .seo-cta-btn { padding: 14px 24px; font-size: 0.88rem; }
+      .seo-card-header h2 { font-size: 1.2rem; }
+      .seo-title-text { font-size: 0.85rem; }
+      .seo-titles-actions-bottom { flex-direction: column; }
+      .seo-titles-btn { width: 100%; justify-content: center; }
       .seo-card { padding: 24px 18px; border-radius: 18px; }
       .seo-lead-card { padding: 24px 18px; border-radius: 18px; }
       .seo-input { padding: 14px 14px 14px 42px; font-size: 0.88rem; }
@@ -2201,6 +2221,21 @@
       document.querySelectorAll('.seo-cat-panel').forEach(function(panel) {
         panel.classList.toggle('active', panel.getAttribute('data-cat') === cat);
       });
+      setTimeout(function() {
+        var panel = document.querySelector('.seo-cat-panel.active');
+        if (panel) {
+          var fills = panel.querySelectorAll('.seo-sc-fill');
+          fills.forEach(function(fill) {
+            fill.style.transition = 'none';
+            fill.style.width = '0%';
+            var pct = fill.parentElement.parentElement.querySelector('.seo-sc-pct');
+            var target = parseInt(pct ? pct.textContent : '0');
+            fill.offsetHeight;
+            fill.style.transition = '';
+            fill.style.width = target + '%';
+          });
+        }
+      }, 50);
     }
 
     function updateInsights(keyword, contentType, intent) {
