@@ -1369,6 +1369,142 @@
 
     @keyframes seoScoreFill { from { width: 0%; } }
 
+    /* ═══ CHARACTER COUNTER SYSTEM ═══ */
+    .seo-char-section {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      animation: seoFadeIn 0.3s ease;
+    }
+    .seo-char-progress-wrap {
+      margin-bottom: 6px;
+    }
+    .seo-char-progress {
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .seo-char-progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .seo-char-progress-fill.perfect { background: linear-gradient(90deg, #10B981, #34D399); }
+    .seo-char-progress-fill.acceptable { background: linear-gradient(90deg, #FACC15, #FCD34D); }
+    .seo-char-progress-fill.too-short { background: linear-gradient(90deg, #EF4444, #F87171); }
+    .seo-char-progress-fill.too-long { background: linear-gradient(90deg, #EF4444, #F87171); }
+    .seo-char-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .seo-char-counter {
+      font-size: 0.7rem;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      color: var(--gray2);
+      transition: color 0.3s ease;
+    }
+    .seo-char-counter .seo-char-count-num {
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    .seo-char-counter.perfect .seo-char-count-num { color: #10B981; }
+    .seo-char-counter.acceptable .seo-char-count-num { color: #FACC15; }
+    .seo-char-counter.too-short .seo-char-count-num { color: #EF4444; }
+    .seo-char-counter.too-long .seo-char-count-num { color: #EF4444; }
+    .seo-char-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    .seo-char-badge svg { width: 10px; height: 10px; }
+    .seo-char-badge.perfect {
+      background: rgba(16,185,129,0.12);
+      color: #10B981;
+      border: 1px solid rgba(16,185,129,0.2);
+    }
+    .seo-char-badge.acceptable {
+      background: rgba(250,204,21,0.12);
+      color: #FACC15;
+      border: 1px solid rgba(250,204,21,0.2);
+    }
+    .seo-char-badge.too-short {
+      background: rgba(239,68,68,0.1);
+      color: #EF4444;
+      border: 1px solid rgba(239,68,68,0.15);
+    }
+    .seo-char-badge.too-long {
+      background: rgba(239,68,68,0.1);
+      color: #EF4444;
+      border: 1px solid rgba(239,68,68,0.15);
+    }
+    .seo-char-warning {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #F59E0B;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: help;
+    }
+    .seo-char-warning.active { opacity: 1; }
+    .seo-char-warning svg { width: 14px; height: 14px; }
+    .seo-char-tooltip-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray2);
+      cursor: help;
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+      margin-left: auto;
+    }
+    .seo-char-tooltip-trigger:hover { opacity: 1; color: var(--accent); }
+    .seo-char-tooltip-trigger svg { width: 12px; height: 12px; }
+    .seo-title-text[contenteditable="true"] {
+      cursor: text;
+      outline: none;
+      border-radius: 4px;
+      padding: 1px 4px;
+      margin: -1px -4px;
+      transition: background 0.2s ease;
+    }
+    .seo-title-text[contenteditable="true"]:hover {
+      background: rgba(250,204,21,0.04);
+    }
+    .seo-title-text[contenteditable="true"]:focus {
+      background: rgba(250,204,21,0.06);
+      box-shadow: 0 0 0 1px rgba(250,204,21,0.15);
+    }
+    .seo-title-text[contenteditable="true"]:hover::after {
+      content: 'Click to edit';
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 0;
+      font-size: 0.6rem;
+      color: var(--gray2);
+      background: rgba(0,0,0,0.8);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .seo-title-text-wrap {
+      position: relative;
+    }
+
     @media (max-width: 768px) {
       .seo-card { padding: 32px 24px; }
       .seo-lead-card { padding: 32px 24px; }
@@ -1391,6 +1527,10 @@
       .seo-sf-label { font-size: 0.72rem; }
       .seo-sf-bar { width: 36px; }
       .seo-sf-pts { font-size: 0.62rem; min-width: 28px; }
+      .seo-char-section { margin-top: 8px; padding-top: 6px; }
+      .seo-char-counter { font-size: 0.65rem; }
+      .seo-char-badge { font-size: 0.55rem; padding: 1px 6px; }
+      .seo-char-badge svg { width: 8px; height: 8px; }
     }
     @media (max-width: 480px) {
       .seo-card { padding: 24px 18px; border-radius: 18px; }
@@ -1421,6 +1561,9 @@
       .seo-title-text { font-size: 0.85rem; }
       .seo-titles-actions-bottom { flex-direction: column; }
       .seo-titles-btn { width: 100%; justify-content: center; }
+      .seo-char-info { gap: 4px; }
+      .seo-char-badge svg { display: none; }
+      .seo-char-tooltip-trigger { margin-left: 0; }
     }
   </style>
 <script type="application/ld+json">
@@ -2036,6 +2179,42 @@
       }
     }
 
+    function getCharStatus(len) {
+      if (len >= 50 && len <= 60) return { cls: 'perfect', label: 'Perfect Length' };
+      if ((len >= 40 && len <= 49) || (len >= 61 && len <= 70)) return { cls: 'acceptable', label: 'Acceptable' };
+      if (len < 40) return { cls: 'too-short', label: 'Too Short' };
+      return { cls: 'too-long', label: 'Too Long' };
+    }
+
+    function updateCharCounter(item) {
+      var textEl = item.querySelector('.seo-title-text');
+      if (!textEl) return;
+      var text = textEl.textContent.replace(/\s+/g, ' ').trim();
+      var len = text.length;
+      var status = getCharStatus(len);
+      var progressPct = Math.min(100, Math.round((len / 60) * 100));
+      var countNum = item.querySelector('.seo-char-count-num');
+      var counter = item.querySelector('.seo-char-counter');
+      var badge = item.querySelector('.seo-char-badge');
+      var fill = item.querySelector('.seo-char-progress-fill');
+      var warning = item.querySelector('.seo-char-warning');
+      var checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      var alertSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+      var warnSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+      if (countNum) countNum.textContent = len;
+      if (counter) counter.className = 'seo-char-counter ' + status.cls;
+      if (badge) {
+        badge.className = 'seo-char-badge ' + status.cls;
+        var bIcon = status.cls === 'perfect' ? checkSvg : (status.cls === 'acceptable' ? alertSvg : warnSvg);
+        badge.innerHTML = bIcon + status.label;
+      }
+      if (fill) {
+        fill.className = 'seo-char-progress-fill ' + status.cls;
+        fill.style.width = progressPct + '%';
+      }
+      if (warning) warning.classList.toggle('active', len > 60);
+    }
+
     function renderCategory(cat, titles, keyword) {
       var list = document.getElementById('titlesList-' + cat);
       if (!list) return;
@@ -2048,6 +2227,8 @@
         var bd = result.breakdown;
         var info = scoreInfo(score);
         var charCount = title.length;
+        var charStatus = getCharStatus(charCount);
+        var progressPct = Math.min(100, Math.round((charCount / 60) * 100));
         var tips = suggestImprovements(bd, title, keyword);
 
         var factorIcon = function(s, m) {
@@ -2082,14 +2263,36 @@
         var item = document.createElement('div');
         item.className = 'seo-title-item';
         item.style.animationDelay = (idx * 0.06) + 's';
+        var checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        var alertSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+        var warnSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+        var badgeIcon = charStatus.cls === 'perfect' ? checkSvg : (charStatus.cls === 'acceptable' ? alertSvg : warnSvg);
         item.innerHTML =
           '<span class="seo-title-num">' + (idx + 1) + '</span>' +
           '<div class="seo-title-content">' +
-            '<span class="seo-title-text">' + title + '</span>' +
+            '<span class="seo-title-text" contenteditable="true">' + title + '</span>' +
             '<div class="seo-title-meta">' +
               '<span class="seo-seo-badge ' + info.cls + '">' + score + '<span class="seo-badge-sep">/100</span><span class="seo-badge-dot"></span><span class="seo-badge-label">' + info.label + '</span></span>' +
-              '<span class="seo-char-count">' + charCount + ' chars</span>' +
               '<span class="seo-ai-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> AI</span>' +
+            '</div>' +
+            '<div class="seo-char-section">' +
+              '<div class="seo-char-progress-wrap">' +
+                '<div class="seo-char-progress">' +
+                  '<div class="seo-char-progress-fill ' + charStatus.cls + '" style="width:' + progressPct + '%"></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="seo-char-info">' +
+                '<span class="seo-char-counter ' + charStatus.cls + '">' +
+                  '<span class="seo-char-count-num">' + charCount + '</span> / 60 Characters' +
+                '</span>' +
+                '<span class="seo-char-badge ' + charStatus.cls + '">' + badgeIcon + charStatus.label + '</span>' +
+                '<span class="seo-char-warning' + (charCount > 60 ? ' active' : '') + '" title="Exceeds Google\'s recommended 60-character limit">' +
+                  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>' +
+                '</span>' +
+                '<span class="seo-char-tooltip-trigger" title="Google\'s recommended title length is 50–60 characters. Titles within this range display fully in search results and perform best for SEO.">' +
+                  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>' +
+                '</span>' +
+              '</div>' +
             '</div>' +
             '<div class="seo-score-card">' +
               '<div class="seo-sc-top">' +
@@ -2122,6 +2325,21 @@
             '</button>' +
           '</div>';
         list.appendChild(item);
+
+        var titleTextEl = item.querySelector('.seo-title-text');
+        if (titleTextEl) {
+          titleTextEl.addEventListener('input', function() {
+            updateCharCounter(item);
+          });
+          titleTextEl.addEventListener('blur', function() {
+            var t = this.textContent.replace(/\s+/g, ' ').trim();
+            if (t.length === 0) { this.textContent = title; updateCharCounter(item); }
+            else { this.textContent = t; }
+          });
+          titleTextEl.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+          });
+        }
       });
 
       list.querySelectorAll('[data-action="copy"]').forEach(function(btn, i) {
