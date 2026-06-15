@@ -4,6 +4,7 @@
    Reads plan from profiles table, caches in memory,
    and notifies listeners on changes.
    ════════════════════════════════════════════════════════ */
+console.log('[PLAN VERSION] build-2026-06-15-email-fix');
 
 'use strict';
 
