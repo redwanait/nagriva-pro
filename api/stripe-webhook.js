@@ -10,6 +10,16 @@
 
 const Stripe = require('stripe');
 
+// Read raw body from request stream (Vercel auto-parses JSON otherwise)
+function buffer(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', chunk => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -36,8 +46,9 @@ module.exports = async (req, res) => {
   let event;
 
   try {
+    const rawBody = await buffer(req);
     event = stripe.webhooks.constructEvent(
-      req.body,
+      rawBody,
       sig,
       STRIPE_WEBHOOK_SECRET
     );
@@ -310,3 +321,9 @@ async function handleInvoicePaymentFailed(invoice, supabase) {
     console.warn('[Stripe Webhook] subscriptions update on invoice.payment_failed failed:', subErr.message || subErr);
   }
 }
+
+module.exports.config = {
+  api: {
+    bodyParser: false
+  }
+};
