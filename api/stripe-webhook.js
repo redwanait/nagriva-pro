@@ -110,10 +110,15 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
 
   // Save Stripe customer ID to the user's profile
   if (customerId) {
-    await supabase
+    const { error: customerError } = await supabase
       .from('profiles')
       .update({ stripe_customer_id: customerId })
       .eq('id', userId);
+
+    if (customerError) {
+      console.error('[Stripe Webhook] stripe_customer_id update failed:', customerError);
+      throw customerError;
+    }
   }
 
   if (!subscriptionId) {
@@ -123,9 +128,21 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
   const plan = (subscription.status === 'active' || subscription.status === 'trialing') ? 'pro' : 'free';
 
-  // Update profiles.plan FIRST — critical: do this before subscriptions upsert
-  // so the plan change survives even if the subscriptions table doesn't exist yet
-  await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
+  console.log('[Stripe Webhook] Updating profile', {
+    userId,
+    plan,
+    customerId
+  });
+
+  const { data: planData, error: planError } = await supabase
+    .from('profiles')
+    .update({ plan: plan })
+    .eq('id', userId);
+
+  if (planError) {
+    console.error('[Stripe Webhook] profiles.plan update failed:', planError);
+    throw planError;
+  }
 
   const subscriptionData = {
     user_id: userId,
@@ -139,21 +156,25 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
     canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null
   };
 
-  // Upsert subscription — wrapped in try/catch so a missing table doesn't block the plan update
-  try {
-    const { data: existing } = await supabase
-      .from('subscriptions')
-      .select('id')
-      .eq('stripe_subscription_id', subscriptionId)
-      .maybeSingle();
+  // Upsert subscription
+  const { data: existingSub } = await supabase
+    .from('subscriptions')
+    .select('id')
+    .eq('stripe_subscription_id', subscriptionId)
+    .maybeSingle();
 
-    if (existing) {
-      await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
-    } else {
-      await supabase.from('subscriptions').insert(subscriptionData);
+  if (existingSub) {
+    const { error: updateSubError } = await supabase.from('subscriptions').update(subscriptionData).eq('id', existingSub.id);
+    if (updateSubError) {
+      console.error('[Stripe Webhook] subscription update failed:', updateSubError);
+      throw updateSubError;
     }
-  } catch (subErr) {
-    console.warn('[Stripe Webhook] subscriptions upsert failed (table may not exist yet):', subErr.message || subErr);
+  } else {
+    const { error: insertSubError } = await supabase.from('subscriptions').insert(subscriptionData);
+    if (insertSubError) {
+      console.error('[Stripe Webhook] subscription insert failed:', insertSubError);
+      throw insertSubError;
+    }
   }
 }
 
@@ -168,15 +189,19 @@ async function handleSubscriptionUpdated(subscription, supabase) {
     return;
   }
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('id')
     .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
+  if (profileError) {
+    console.error('[Stripe Webhook] profile lookup failed:', profileError);
+    throw profileError;
+  }
+
   if (!profile) {
-    // Try the checkout session's client_reference_id as a fallback
-    console.warn('[Stripe Webhook] No profile found for customer:', customerId, '- cannot sync subscription');
+    console.warn('[Stripe Webhook] No profile found for customer:', customerId);
     return;
   }
 
@@ -184,8 +209,12 @@ async function handleSubscriptionUpdated(subscription, supabase) {
   const status = subscription.status;
   const plan = (status === 'active' || status === 'trialing') ? 'pro' : 'free';
 
-  // Update plan on profiles FIRST
-  await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
+  const { error: planUpdateError } = await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
+
+  if (planUpdateError) {
+    console.error('[Stripe Webhook] profiles.plan update failed:', planUpdateError);
+    throw planUpdateError;
+  }
 
   const subscriptionData = {
     user_id: userId,
@@ -199,48 +228,53 @@ async function handleSubscriptionUpdated(subscription, supabase) {
     canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null
   };
 
-  // Upsert subscription — wrapped in try/catch so a missing table doesn't block the plan update
-  try {
-    const { data: existing } = await supabase
-      .from('subscriptions')
-      .select('id')
-      .eq('stripe_subscription_id', subscription.id)
-      .maybeSingle();
+  // Upsert subscription
+  const { data: existing } = await supabase
+    .from('subscriptions')
+    .select('id')
+    .eq('stripe_subscription_id', subscription.id)
+    .maybeSingle();
 
-    if (existing) {
-      await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
-    } else {
-      await supabase.from('subscriptions').insert(subscriptionData);
+  if (existing) {
+    const { error: updateError } = await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
+    if (updateError) {
+      console.error('[Stripe Webhook] subscription update failed:', updateError);
+      throw updateError;
     }
-  } catch (subErr) {
-    console.warn('[Stripe Webhook] subscriptions upsert failed (table may not exist yet):', subErr.message || subErr);
+  } else {
+    const { error: insertError } = await supabase.from('subscriptions').insert(subscriptionData);
+    if (insertError) {
+      console.error('[Stripe Webhook] subscription insert failed:', insertError);
+      throw insertError;
+    }
   }
 }
 
 /* ─── Handle customer.subscription.deleted ─── */
 async function handleSubscriptionDeleted(subscription, supabase) {
-  // Try to find the user via customer ID
   const customerId = subscription.customer;
   let userId = null;
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('id')
     .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
+  if (profileError) {
+    console.error('[Stripe Webhook] profile lookup failed:', profileError);
+    throw profileError;
+  }
+
   if (profile) {
     userId = profile.id;
   } else {
-    // Fallback: look up via subscriptions table
-    try {
-      const { data: existing } = await supabase
-        .from('subscriptions')
-        .select('user_id')
-        .eq('stripe_subscription_id', subscription.id)
-        .maybeSingle();
-      if (existing) userId = existing.user_id;
-    } catch (_) {}
+    const { data: existing } = await supabase
+      .from('subscriptions')
+      .select('user_id')
+      .eq('stripe_subscription_id', subscription.id)
+      .maybeSingle();
+    if (existing) userId = existing.user_id;
   }
 
   if (!userId) {
@@ -248,21 +282,25 @@ async function handleSubscriptionDeleted(subscription, supabase) {
     return;
   }
 
-  // Update profiles.plan FIRST
-  await supabase.from('profiles').update({ plan: 'free' }).eq('id', userId);
+  const { error: planUpdateError } = await supabase.from('profiles').update({ plan: 'free' }).eq('id', userId);
 
-  // Try to update subscriptions table
-  try {
-    await supabase
-      .from('subscriptions')
-      .update({
-        status: 'canceled',
-        plan: 'free',
-        canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : new Date().toISOString()
-      })
-      .eq('stripe_subscription_id', subscription.id);
-  } catch (subErr) {
-    console.warn('[Stripe Webhook] subscriptions update failed:', subErr.message || subErr);
+  if (planUpdateError) {
+    console.error('[Stripe Webhook] profiles.plan update failed:', planUpdateError);
+    throw planUpdateError;
+  }
+
+  const { error: subUpdateError } = await supabase
+    .from('subscriptions')
+    .update({
+      status: 'canceled',
+      plan: 'free',
+      canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : new Date().toISOString()
+    })
+    .eq('stripe_subscription_id', subscription.id);
+
+  if (subUpdateError) {
+    console.error('[Stripe Webhook] subscriptions update failed:', subUpdateError);
+    throw subUpdateError;
   }
 }
 
@@ -270,28 +308,36 @@ async function handleSubscriptionDeleted(subscription, supabase) {
 async function handleInvoicePaid(invoice, supabase) {
   if (!invoice.subscription) return;
 
-  // Look up user via customer ID on the invoice
   const customerId = invoice.customer;
   if (!customerId) return;
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('id')
     .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
-  if (profile) {
-    await supabase.from('profiles').update({ plan: 'pro' }).eq('id', profile.id);
+  if (profileError) {
+    console.error('[Stripe Webhook] profile lookup failed:', profileError);
+    throw profileError;
   }
 
-  // Update subscriptions table if it exists
-  try {
-    await supabase
-      .from('subscriptions')
-      .update({ status: 'active', plan: 'pro' })
-      .eq('stripe_subscription_id', invoice.subscription);
-  } catch (subErr) {
-    console.warn('[Stripe Webhook] subscriptions update on invoice.paid failed:', subErr.message || subErr);
+  if (profile) {
+    const { error: planUpdateError } = await supabase.from('profiles').update({ plan: 'pro' }).eq('id', profile.id);
+    if (planUpdateError) {
+      console.error('[Stripe Webhook] profiles.plan update failed:', planUpdateError);
+      throw planUpdateError;
+    }
+  }
+
+  const { error: subUpdateError } = await supabase
+    .from('subscriptions')
+    .update({ status: 'active', plan: 'pro' })
+    .eq('stripe_subscription_id', invoice.subscription);
+
+  if (subUpdateError) {
+    console.error('[Stripe Webhook] subscriptions update failed:', subUpdateError);
+    throw subUpdateError;
   }
 }
 
@@ -302,23 +348,33 @@ async function handleInvoicePaymentFailed(invoice, supabase) {
   const customerId = invoice.customer;
   if (!customerId) return;
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('id')
     .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
-  if (profile) {
-    await supabase.from('profiles').update({ plan: 'free' }).eq('id', profile.id);
+  if (profileError) {
+    console.error('[Stripe Webhook] profile lookup failed:', profileError);
+    throw profileError;
   }
 
-  try {
-    await supabase
-      .from('subscriptions')
-      .update({ status: 'past_due', plan: 'free' })
-      .eq('stripe_subscription_id', invoice.subscription);
-  } catch (subErr) {
-    console.warn('[Stripe Webhook] subscriptions update on invoice.payment_failed failed:', subErr.message || subErr);
+  if (profile) {
+    const { error: planUpdateError } = await supabase.from('profiles').update({ plan: 'free' }).eq('id', profile.id);
+    if (planUpdateError) {
+      console.error('[Stripe Webhook] profiles.plan update failed:', planUpdateError);
+      throw planUpdateError;
+    }
+  }
+
+  const { error: subUpdateError } = await supabase
+    .from('subscriptions')
+    .update({ status: 'past_due', plan: 'free' })
+    .eq('stripe_subscription_id', invoice.subscription);
+
+  if (subUpdateError) {
+    console.error('[Stripe Webhook] subscriptions update failed:', subUpdateError);
+    throw subUpdateError;
   }
 }
 
