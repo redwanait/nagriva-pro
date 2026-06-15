@@ -99,8 +99,8 @@ module.exports = async (req, res) => {
 
 /* ─── Handle checkout.session.completed ─── */
 async function handleCheckoutCompleted(session, supabase, stripe) {
-  const userId = session.client_reference_id || session.metadata?.user_id;
-  if (!userId) {
+  const authUserId = session.client_reference_id || session.metadata?.user_id;
+  if (!authUserId) {
     console.error('[Stripe Webhook] No user_id in checkout session');
     return;
   }
@@ -108,12 +108,58 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
   const customerId = session.customer;
   const subscriptionId = session.subscription;
 
+  // Resolve profile ID — profiles.id may differ from auth.users.id
+  const email = session.customer_details?.email || session.customer_email;
+  let profileId = null;
+
+  if (email) {
+    console.log('[Stripe Webhook] Looking up profile by email:', email);
+    const { data: profileByEmail, error: emailLookupError } = await supabase
+      .from('profiles')
+      .select('id')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (emailLookupError) {
+      console.error('[Stripe Webhook] profile lookup by email failed:', emailLookupError);
+      throw emailLookupError;
+    }
+
+    if (profileByEmail) {
+      profileId = profileByEmail.id;
+      console.log('[Stripe Webhook] Resolved profile ID by email:', profileId);
+    }
+  }
+
+  if (!profileId) {
+    // Fallback: try lookup by auth user ID
+    console.log('[Stripe Webhook] Looking up profile by auth user ID:', authUserId);
+    const { data: profileById, error: idLookupError } = await supabase
+      .from('profiles')
+      .select('id')
+      .eq('id', authUserId)
+      .maybeSingle();
+
+    if (idLookupError) {
+      console.error('[Stripe Webhook] profile lookup by id failed:', idLookupError);
+      throw idLookupError;
+    }
+
+    if (profileById) {
+      profileId = profileById.id;
+    } else {
+      // Last resort: fallback to row-level insert will match auth user
+      console.warn('[Stripe Webhook] Could not resolve profile ID, using auth user ID as fallback');
+      profileId = authUserId;
+    }
+  }
+
   // Save Stripe customer ID to the user's profile
   if (customerId) {
     const { error: customerError } = await supabase
       .from('profiles')
       .update({ stripe_customer_id: customerId })
-      .eq('id', userId);
+      .eq('id', profileId);
 
     if (customerError) {
       console.error('[Stripe Webhook] stripe_customer_id update failed:', customerError);
@@ -129,15 +175,15 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
   const plan = (subscription.status === 'active' || subscription.status === 'trialing') ? 'pro' : 'free';
 
   console.log('[Stripe Webhook] Updating profile', {
-    userId,
+    profileId,
     plan,
     customerId
   });
 
-  const { data: planData, error: planError } = await supabase
+  const { error: planError } = await supabase
     .from('profiles')
     .update({ plan: plan })
-    .eq('id', userId);
+    .eq('id', profileId);
 
   if (planError) {
     console.error('[Stripe Webhook] profiles.plan update failed:', planError);
@@ -145,7 +191,7 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
   }
 
   const subscriptionData = {
-    user_id: userId,
+    user_id: profileId,
     stripe_subscription_id: subscriptionId,
     stripe_customer_id: customerId,
     stripe_price_id: subscription.items?.data?.[0]?.price?.id || null,
@@ -155,6 +201,8 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
     current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
     canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null
   };
+
+  console.log('[Stripe Webhook] Inserting subscription for profileId:', profileId);
 
   // Upsert subscription
   const { data: existingSub } = await supabase
