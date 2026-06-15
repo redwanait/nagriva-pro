@@ -176,6 +176,8 @@ const NagrivaSubscriptionManager = (() => {
       return;
     }
 
+    bindCheckoutButtons();
+
     const user = NagrivaAuthStore.getUser();
     if (user) {
       fetchSubscription(user.id);
@@ -192,7 +194,10 @@ const NagrivaSubscriptionManager = (() => {
   }
 
   /* ─── Bind checkout buttons ─── */
+  let _buttonsBound = false;
   function bindCheckoutButtons() {
+    if (_buttonsBound) return;
+    _buttonsBound = true;
     document.querySelectorAll('[data-checkout]').forEach(btn => {
       btn.addEventListener('click', async function(e) {
         e.preventDefault();

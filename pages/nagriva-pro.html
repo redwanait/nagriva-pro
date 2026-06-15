@@ -738,51 +738,49 @@
       yearlyCard.style.display = 'none';
     }
 
-    /* Plan state management */
-    function updatePricingUI() {
-      var isPro = window.NagrivaPlanManager && NagrivaPlanManager.isPro();
-      var freeCurrent = document.getElementById('nvCurrentFree');
-      var monthlyBtn = document.getElementById('nvUpgradeMonthly');
-      var yearlyBtn = document.getElementById('nvUpgradeYearly');
-      var monthlyManage = document.getElementById('nvManageMonthly');
-      var yearlyManage = document.getElementById('nvManageYearly');
-      var monthlyBtnText = document.getElementById('nvMonthlyBtnText');
-      var yearlyBtnText = document.getElementById('nvYearlyBtnText');
-      var heroJoinBtn = document.getElementById('nvHeroJoinBtn');
+    /* Plan state management — wrapped in DOMContentLoaded so deferred modules are ready */
+    document.addEventListener('DOMContentLoaded', function() {
+      function updatePricingUI() {
+        var isPro = window.NagrivaPlanManager && NagrivaPlanManager.isPro();
+        var freeCurrent = document.getElementById('nvCurrentFree');
+        var monthlyBtn = document.getElementById('nvUpgradeMonthly');
+        var yearlyBtn = document.getElementById('nvUpgradeYearly');
+        var monthlyManage = document.getElementById('nvManageMonthly');
+        var yearlyManage = document.getElementById('nvManageYearly');
+        var monthlyBtnText = document.getElementById('nvMonthlyBtnText');
+        var yearlyBtnText = document.getElementById('nvYearlyBtnText');
+        var heroJoinBtn = document.getElementById('nvHeroJoinBtn');
 
-      if (isPro) {
-        if (freeCurrent) freeCurrent.textContent = 'Downgrade';
-        if (monthlyBtn) monthlyBtn.style.display = 'none';
-        if (yearlyBtn) yearlyBtn.style.display = 'none';
-        if (monthlyManage) monthlyManage.style.display = '';
-        if (yearlyManage) yearlyManage.style.display = '';
-        if (heroJoinBtn) heroJoinBtn.textContent = 'Manage Subscription';
+        if (isPro) {
+          if (freeCurrent) freeCurrent.textContent = 'Downgrade';
+          if (monthlyBtn) monthlyBtn.style.display = 'none';
+          if (yearlyBtn) yearlyBtn.style.display = 'none';
+          if (monthlyManage) monthlyManage.style.display = '';
+          if (yearlyManage) yearlyManage.style.display = '';
+          if (heroJoinBtn) heroJoinBtn.textContent = 'Manage Subscription';
 
-        /* Check subscription type */
-        var sub = window.NagrivaSubscriptionManager && NagrivaSubscriptionManager.getSubscription();
-        if (sub) {
-          if (monthlyBtnText) monthlyBtnText.textContent = 'Current Plan';
-          if (yearlyBtnText) yearlyBtnText.textContent = 'Current Plan';
+          var sub = window.NagrivaSubscriptionManager && NagrivaSubscriptionManager.getSubscription();
+          if (sub) {
+            if (monthlyBtnText) monthlyBtnText.textContent = 'Current Plan';
+            if (yearlyBtnText) yearlyBtnText.textContent = 'Current Plan';
+          }
+        } else {
+          if (freeCurrent) freeCurrent.textContent = 'Current Plan';
+          if (monthlyBtn) monthlyBtn.style.display = '';
+          if (yearlyBtn) yearlyBtn.style.display = '';
+          if (monthlyManage) monthlyManage.style.display = 'none';
+          if (yearlyManage) yearlyManage.style.display = 'none';
+          if (monthlyBtnText) monthlyBtnText.textContent = 'Upgrade to Pro';
+          if (yearlyBtnText) yearlyBtnText.textContent = 'Upgrade to Pro';
+          if (heroJoinBtn) heroJoinBtn.textContent = 'Join Nagriva Pro';
         }
-      } else {
-        if (freeCurrent) freeCurrent.textContent = 'Current Plan';
-        if (monthlyBtn) monthlyBtn.style.display = '';
-        if (yearlyBtn) yearlyBtn.style.display = '';
-        if (monthlyManage) monthlyManage.style.display = 'none';
-        if (yearlyManage) yearlyManage.style.display = 'none';
-        if (monthlyBtnText) monthlyBtnText.textContent = 'Upgrade to Pro';
-        if (yearlyBtnText) yearlyBtnText.textContent = 'Upgrade to Pro';
-        if (heroJoinBtn) heroJoinBtn.textContent = 'Join Nagriva Pro';
       }
-    }
 
-    if (window.NagrivaPlanManager) {
-      if (!NagrivaPlanManager.isLoading()) updatePricingUI();
-      NagrivaPlanManager.subscribe(function() { updatePricingUI(); });
-    }
-    if (window.NagrivaSubscriptionManager) {
-      NagrivaSubscriptionManager.bindCheckoutButtons();
-    }
+      if (window.NagrivaPlanManager) {
+        if (!NagrivaPlanManager.isLoading()) updatePricingUI();
+        NagrivaPlanManager.subscribe(function() { if (!NagrivaPlanManager.isLoading()) updatePricingUI(); });
+      }
+    });
   })();
   </script>
 
