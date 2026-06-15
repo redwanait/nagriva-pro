@@ -176,6 +176,7 @@ const NagrivaSubscriptionManager = (() => {
       return;
     }
 
+    console.log('[SubscriptionManager] init: NagrivaAuthStore found, binding checkout buttons');
     bindCheckoutButtons();
 
     const user = NagrivaAuthStore.getUser();
@@ -193,48 +194,50 @@ const NagrivaSubscriptionManager = (() => {
     });
   }
 
-  /* ─── Bind checkout buttons ─── */
+  /* ─── Bind checkout buttons via event delegation ─── */
   let _buttonsBound = false;
   function bindCheckoutButtons() {
     if (_buttonsBound) return;
     _buttonsBound = true;
-    document.querySelectorAll('[data-checkout]').forEach(btn => {
-      btn.addEventListener('click', async function(e) {
-        e.preventDefault();
-        const priceId = this.getAttribute('data-checkout');
-        const originalText = this.textContent;
-        this.disabled = true;
-        this.textContent = 'Redirecting...';
 
-        try {
-          await redirectToCheckout(priceId);
-        } catch (err) {
-          this.textContent = 'Error - Try Again';
-          this.disabled = false;
-          setTimeout(() => {
-            this.textContent = originalText;
-          }, 3000);
-        }
+    console.log('[SubscriptionManager] bindCheckoutButtons: attaching delegation listeners');
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-checkout]');
+      if (!btn) return;
+      console.log('[SubscriptionManager] checkout click detected on:', btn.id || btn.className, 'priceId:', btn.getAttribute('data-checkout'));
+      e.preventDefault();
+      var priceId = btn.getAttribute('data-checkout');
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Redirecting...';
+
+      redirectToCheckout(priceId).catch(function(err) {
+        console.error('[SubscriptionManager] checkout click error:', err);
+        btn.textContent = 'Error - Try Again';
+        btn.disabled = false;
+        setTimeout(function() {
+          btn.textContent = originalText;
+        }, 3000);
       });
     });
 
-    // Bind portal buttons
-    document.querySelectorAll('[data-portal]').forEach(btn => {
-      btn.addEventListener('click', async function(e) {
-        e.preventDefault();
-        const originalText = this.textContent;
-        this.disabled = true;
-        this.textContent = 'Opening...';
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-portal]');
+      if (!btn) return;
+      console.log('[SubscriptionManager] portal click detected on:', btn.id || btn.className);
+      e.preventDefault();
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Opening...';
 
-        try {
-          await redirectToPortal();
-        } catch (err) {
-          this.textContent = 'Error - Try Again';
-          this.disabled = false;
-          setTimeout(() => {
-            this.textContent = originalText;
-          }, 3000);
-        }
+      redirectToPortal().catch(function(err) {
+        console.error('[SubscriptionManager] portal click error:', err);
+        btn.textContent = 'Error - Try Again';
+        btn.disabled = false;
+        setTimeout(function() {
+          btn.textContent = originalText;
+        }, 3000);
       });
     });
   }
