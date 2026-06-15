@@ -59,6 +59,7 @@ const NagrivaPlanManager = (() => {
       return 'free';
     }
 
+    console.log('[PLAN DEBUG] userId', userId);
     console.log('[PlanManager] fetchPlan called — userId:', userId, '| cached _userId:', _userId, '| cached _plan:', _plan, '| _loading:', _loading, '| forceRefresh:', forceRefresh);
     if (!forceRefresh && userId === _userId && !_loading) {
       console.log('[PlanManager] CACHE HIT — returning cached plan:', _plan, 'without querying Supabase');
@@ -74,19 +75,27 @@ const NagrivaPlanManager = (() => {
     console.log('[PLAN FLOW] notify #1', { plan: _plan, isPro: isPro(), isFree: isFree(), loading: _loading });
     _notify();
 
-    console.log('[PlanManager] QUERYING — from: profiles | select: plan | eq id:', userId);
     try {
+      const { data: authUser } = await window.supabaseClient.auth.getUser();
+      const email = authUser?.user?.email;
+
+      console.log('[PLAN FIX] auth email', email);
+      console.log('[PlanManager] QUERYING — from: profiles | select: plan | eq email:', email);
+
       const { data, error } = await window.supabaseClient
         .from('profiles')
         .select('plan')
-        .eq('id', userId)
+        .eq('email', email)
         .maybeSingle();
 
+      console.log('[PLAN FIX] profile result', data);
+      console.log('[PLAN DEBUG] query result', data, error);
       console.log('[PlanManager] Supabase profile response', data, error);
       console.log('[PLAN FLOW] query result', data, error);
       console.log('[PlanManager] profile.plan value:', data?.plan, '| cached _plan:', _plan);
       console.log('[PlanManager] Cache guard condition — forceRefresh:', forceRefresh, '| userId === _userId:', userId === _userId, '| !_loading:', !_loading, '| result:', !forceRefresh && userId === _userId && !_loading);
 
+      console.log('[PLAN DEBUG] plan before set', _plan);
       if (error) {
         console.warn('[PlanManager] fetch error:', error);
         _plan = 'free';
@@ -95,9 +104,11 @@ const NagrivaPlanManager = (() => {
       } else {
         _plan = 'free';
       }
+      console.log('[PLAN DEBUG] plan after set', _plan);
     } catch (e) {
       console.warn('[PlanManager] fetch exception:', e);
       _plan = 'free';
+      console.log('[PLAN DEBUG] plan after set (catch)', _plan);
     }
 
     console.log('[PlanManager] Fresh plan from Supabase:', _plan);
