@@ -211,8 +211,12 @@ const NagrivaAuth = (() => {
   /* ─── Plan UI ─── */
   function updatePlanUI(planData) {
     var isPro = planData ? planData.isPro : (window.NagrivaPlanManager && window.NagrivaPlanManager.isPro());
+    var userId = window.NagrivaAuthStore ? NagrivaAuthStore.getUser()?.id : null;
+    var subStatus = window.NagrivaSubscriptionManager ? NagrivaSubscriptionManager.getSubscription()?.status : null;
 
-    /* Desktop: swap "Join Nagriva Pro" button with "Pro Member" badge */
+    console.log('[DEBUG BADGE] User ID:', userId, '| Plan:', planData?.plan || NagrivaPlanManager?.getPlan(), '| isPro:', isPro, '| Subscription status:', subStatus, '| Badge rendering:', isPro ? 'PRO' : 'FREE');
+
+    /* Desktop: swap "Join Nagriva Pro" button with "Manage Subscription" button */
     var proBtn = document.getElementById('proBtn');
     var proMemberBtn = document.getElementById('proMemberBtn');
     if (proBtn && proMemberBtn) {
@@ -250,7 +254,7 @@ const NagrivaAuth = (() => {
       navFreeBadge.style.display = isPro ? 'none' : 'inline-flex';
     }
 
-    /* Mobile: swap "Join Nagriva Pro" with "Pro Member" badge */
+    /* Mobile: swap "Join Nagriva Pro" with "Manage Subscription" button */
     var mobileProBtn = document.getElementById('mobileProBtn');
     var mobileProBadge = document.getElementById('mobileProBadge');
     if (mobileProBtn && mobileProBadge) {
@@ -261,6 +265,34 @@ const NagrivaAuth = (() => {
         mobileProBtn.style.display = '';
         mobileProBadge.style.display = 'none';
       }
+    }
+  }
+
+  /* ─── Manage Subscription Handlers ─── */
+  function initManageSubscription() {
+    var handlePortal = function(e) {
+      e.preventDefault();
+      if (window.NagrivaSubscriptionManager) {
+        console.log('[DEBUG BADGE] Opening manage subscription portal...');
+        NagrivaSubscriptionManager.redirectToPortal().catch(function(err) {
+          console.error('[Auth] Manage Subscription error:', err);
+        });
+      } else {
+        console.warn('[Auth] NagrivaSubscriptionManager not available');
+        window.location.href = '/pages/settings.html';
+      }
+    };
+
+    var proMemberBtn = document.getElementById('proMemberBtn');
+    if (proMemberBtn) {
+      proMemberBtn.removeEventListener('click', handlePortal);
+      proMemberBtn.addEventListener('click', handlePortal);
+    }
+
+    var mobileProBadge = document.getElementById('mobileProBadge');
+    if (mobileProBadge) {
+      mobileProBadge.removeEventListener('click', handlePortal);
+      mobileProBadge.addEventListener('click', handlePortal);
     }
   }
 
@@ -450,6 +482,9 @@ const NagrivaAuth = (() => {
     NagrivaAuthStore.subscribe(function(state) {
       console.log('[DEBUG auth] subscriber fired — loading:', state.loading, '| user:', state.user?.id);
       updateNavbarUI(state.user);
+      if (state.user) {
+        setTimeout(initManageSubscription, 0);
+      }
     });
 
     /* Subscribe to plan changes */
@@ -465,6 +500,7 @@ const NagrivaAuth = (() => {
     if (NagrivaAuthStore.isAuthenticated()) {
       console.log('[DEBUG auth] init — already authenticated, calling updateNavbarUI immediately');
       updateNavbarUI(NagrivaAuthStore.getUser());
+      initManageSubscription();
     } else {
       console.log('[DEBUG auth] init — not authenticated yet, waiting for subscriber');
     }
@@ -474,6 +510,7 @@ const NagrivaAuth = (() => {
   document.addEventListener('navbar:loaded', function onNavbarLoad() {
     console.log('[DEBUG auth] navbar:loaded event received');
     initDropdown();
+    initManageSubscription();
     updateDevLinkVisibility();
     if (window.NagrivaAuthStore && NagrivaAuthStore.isAuthenticated()) {
       console.log('[DEBUG auth] navbar:loaded — user is authenticated, updating navbar UI');

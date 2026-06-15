@@ -221,7 +221,8 @@
   padding: 6px 16px;
   border-radius: 99px;
   white-space: nowrap;
-  cursor: default;
+  cursor: pointer;
+  font-family: inherit;
 }
 .pro-member-icon {
   width: 14px;
@@ -244,7 +245,8 @@
   color: #FACC15;
   background: rgba(250,204,21,0.06);
   border: 1px solid rgba(250,204,21,0.12);
-  cursor: default;
+  cursor: pointer;
+  font-family: inherit;
 }
 .mobile-menu-pro-badge svg {
   color: #FACC15;

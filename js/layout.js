@@ -88,10 +88,12 @@
         !!document.querySelector('script[src="/js/auth-store.js"], script[src="../js/auth-store.js"]');
       var hasPlan = window.NagrivaPlanManager ||
         !!document.querySelector('script[src="/js/plan-manager.js"], script[src="../js/plan-manager.js"]');
+      var hasSub = window.NagrivaSubscriptionManager ||
+        !!document.querySelector('script[src="/js/subscription-manager.js"], script[src="../js/subscription-manager.js"]');
       var hasAuth  = window.NagrivaAuth ||
         !!document.querySelector('script[src="/js/auth.js"], script[src="../js/auth.js"]');
 
-      if (hasStore && hasPlan && hasAuth) { resolve(); return; }
+      if (hasStore && hasPlan && hasSub && hasAuth) { resolve(); return; }
 
       function inject (src) {
         return new Promise(function (res) {
@@ -106,6 +108,7 @@
       var chain = Promise.resolve();
       if (!hasStore) chain = chain.then(function () { return inject('/js/auth-store.js'); });
       if (!hasPlan)  chain = chain.then(function () { return inject('/js/plan-manager.js'); });
+      if (!hasSub)   chain = chain.then(function () { return inject('/js/subscription-manager.js'); });
       if (!hasAuth)  chain = chain.then(function () { return inject('/js/auth.js'); });
       chain.then(function () { resolve(); });
     });

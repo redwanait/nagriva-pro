@@ -77,19 +77,14 @@ const NagrivaPlanManager = (() => {
     _notify();
 
     try {
-      const { data: authUser } = await window.supabaseClient.auth.getUser();
-      const email = authUser?.user?.email;
-
-      console.log('[PLAN FIX] auth email', email);
-      console.log('[PlanManager] QUERYING — from: profiles | select: plan | eq email:', email);
+      console.log('[PlanManager] QUERYING — from: profiles | select: plan | eq id:', userId);
 
       const { data, error } = await window.supabaseClient
         .from('profiles')
         .select('plan')
-        .eq('email', email)
+        .eq('id', userId)
         .maybeSingle();
 
-      console.log('[PLAN FIX] profile result', data);
       console.log('[PLAN DEBUG] query result', data, error);
       console.log('[PlanManager] Supabase profile response', data, error);
       console.log('[PLAN FLOW] query result', data, error);
