@@ -106,12 +106,15 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
   }
 
   if (!subscriptionId) {
-    // One-time payment or no subscription (shouldn't happen for subscription products)
     return;
   }
 
-  // Fetch full subscription details from Stripe
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const plan = (subscription.status === 'active' || subscription.status === 'trialing') ? 'pro' : 'free';
+
+  // Update profiles.plan FIRST — critical: do this before subscriptions upsert
+  // so the plan change survives even if the subscriptions table doesn't exist yet
+  await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
 
   const subscriptionData = {
     user_id: userId,
@@ -119,54 +122,64 @@ async function handleCheckoutCompleted(session, supabase, stripe) {
     stripe_customer_id: customerId,
     stripe_price_id: subscription.items?.data?.[0]?.price?.id || null,
     status: subscription.status,
-    plan: subscription.status === 'active' || subscription.status === 'trialing' ? 'pro' : 'free',
+    plan: plan,
     current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
     current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
     canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null
   };
 
-  // Upsert subscription record
-  const { data: existing } = await supabase
-    .from('subscriptions')
-    .select('id')
-    .eq('stripe_subscription_id', subscriptionId)
-    .maybeSingle();
+  // Upsert subscription — wrapped in try/catch so a missing table doesn't block the plan update
+  try {
+    const { data: existing } = await supabase
+      .from('subscriptions')
+      .select('id')
+      .eq('stripe_subscription_id', subscriptionId)
+      .maybeSingle();
 
-  if (existing) {
-    await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
-  } else {
-    await supabase.from('subscriptions').insert(subscriptionData);
+    if (existing) {
+      await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
+    } else {
+      await supabase.from('subscriptions').insert(subscriptionData);
+    }
+  } catch (subErr) {
+    console.warn('[Stripe Webhook] subscriptions upsert failed (table may not exist yet):', subErr.message || subErr);
   }
-
-  // Manually sync plan (trigger will handle after insert)
-  const plan = (subscription.status === 'active' || subscription.status === 'trialing') ? 'pro' : 'free';
-  await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
 }
 
 /* ─── Handle customer.subscription.updated ─── */
 async function handleSubscriptionUpdated(subscription, supabase) {
-  const userId = subscription.metadata?.user_id;
-  if (!userId) {
-    // Look up user by customer ID
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('stripe_customer_id', subscription.customer)
-      .maybeSingle();
-    if (!profile) {
-      console.error('[Stripe Webhook] No user found for customer:', subscription.customer);
-      return;
-    }
-    var userId = profile.id;
+  // Stripe subscriptions created via Checkout do NOT inherit metadata from the
+  // Checkout Session, so subscription.metadata.user_id will be undefined.
+  // We always look up the user by stripe_customer_id instead.
+  const customerId = subscription.customer;
+  if (!customerId) {
+    console.error('[Stripe Webhook] No customer on subscription');
+    return;
   }
 
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('stripe_customer_id', customerId)
+    .maybeSingle();
+
+  if (!profile) {
+    // Try the checkout session's client_reference_id as a fallback
+    console.warn('[Stripe Webhook] No profile found for customer:', customerId, '- cannot sync subscription');
+    return;
+  }
+
+  const userId = profile.id;
   const status = subscription.status;
   const plan = (status === 'active' || status === 'trialing') ? 'pro' : 'free';
+
+  // Update plan on profiles FIRST
+  await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
 
   const subscriptionData = {
     user_id: userId,
     stripe_subscription_id: subscription.id,
-    stripe_customer_id: subscription.customer,
+    stripe_customer_id: customerId,
     stripe_price_id: subscription.items?.data?.[0]?.price?.id || null,
     status: status,
     plan: plan,
@@ -175,67 +188,99 @@ async function handleSubscriptionUpdated(subscription, supabase) {
     canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null
   };
 
-  const { data: existing } = await supabase
-    .from('subscriptions')
-    .select('id')
-    .eq('stripe_subscription_id', subscription.id)
-    .maybeSingle();
+  // Upsert subscription — wrapped in try/catch so a missing table doesn't block the plan update
+  try {
+    const { data: existing } = await supabase
+      .from('subscriptions')
+      .select('id')
+      .eq('stripe_subscription_id', subscription.id)
+      .maybeSingle();
 
-  if (existing) {
-    await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
-  } else {
-    await supabase.from('subscriptions').insert(subscriptionData);
+    if (existing) {
+      await supabase.from('subscriptions').update(subscriptionData).eq('id', existing.id);
+    } else {
+      await supabase.from('subscriptions').insert(subscriptionData);
+    }
+  } catch (subErr) {
+    console.warn('[Stripe Webhook] subscriptions upsert failed (table may not exist yet):', subErr.message || subErr);
   }
-
-  // Directly sync plan as well
-  await supabase.from('profiles').update({ plan: plan }).eq('id', userId);
 }
 
 /* ─── Handle customer.subscription.deleted ─── */
 async function handleSubscriptionDeleted(subscription, supabase) {
-  const { data: existing } = await supabase
-    .from('subscriptions')
-    .select('user_id')
-    .eq('stripe_subscription_id', subscription.id)
+  // Try to find the user via customer ID
+  const customerId = subscription.customer;
+  let userId = null;
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
-  if (!existing) {
-    console.error('[Stripe Webhook] No subscription record found for:', subscription.id);
+  if (profile) {
+    userId = profile.id;
+  } else {
+    // Fallback: look up via subscriptions table
+    try {
+      const { data: existing } = await supabase
+        .from('subscriptions')
+        .select('user_id')
+        .eq('stripe_subscription_id', subscription.id)
+        .maybeSingle();
+      if (existing) userId = existing.user_id;
+    } catch (_) {}
+  }
+
+  if (!userId) {
+    console.error('[Stripe Webhook] No user found for deleted subscription:', subscription.id);
     return;
   }
 
-  const userId = existing.user_id;
-
-  await supabase
-    .from('subscriptions')
-    .update({
-      status: 'canceled',
-      plan: 'free',
-      canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : new Date().toISOString()
-    })
-    .eq('stripe_subscription_id', subscription.id);
-
+  // Update profiles.plan FIRST
   await supabase.from('profiles').update({ plan: 'free' }).eq('id', userId);
+
+  // Try to update subscriptions table
+  try {
+    await supabase
+      .from('subscriptions')
+      .update({
+        status: 'canceled',
+        plan: 'free',
+        canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : new Date().toISOString()
+      })
+      .eq('stripe_subscription_id', subscription.id);
+  } catch (subErr) {
+    console.warn('[Stripe Webhook] subscriptions update failed:', subErr.message || subErr);
+  }
 }
 
 /* ─── Handle invoice.paid ─── */
 async function handleInvoicePaid(invoice, supabase) {
   if (!invoice.subscription) return;
 
-  // Ensure subscription is marked active
-  const subscriptionId = invoice.subscription;
-  const { data: sub } = await supabase
-    .from('subscriptions')
-    .select('id, user_id')
-    .eq('stripe_subscription_id', subscriptionId)
+  // Look up user via customer ID on the invoice
+  const customerId = invoice.customer;
+  if (!customerId) return;
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
-  if (sub) {
+  if (profile) {
+    await supabase.from('profiles').update({ plan: 'pro' }).eq('id', profile.id);
+  }
+
+  // Update subscriptions table if it exists
+  try {
     await supabase
       .from('subscriptions')
       .update({ status: 'active', plan: 'pro' })
-      .eq('id', sub.id);
-    await supabase.from('profiles').update({ plan: 'pro' }).eq('id', sub.user_id);
+      .eq('stripe_subscription_id', invoice.subscription);
+  } catch (subErr) {
+    console.warn('[Stripe Webhook] subscriptions update on invoice.paid failed:', subErr.message || subErr);
   }
 }
 
@@ -243,18 +288,25 @@ async function handleInvoicePaid(invoice, supabase) {
 async function handleInvoicePaymentFailed(invoice, supabase) {
   if (!invoice.subscription) return;
 
-  const subscriptionId = invoice.subscription;
-  const { data: sub } = await supabase
-    .from('subscriptions')
-    .select('id, user_id')
-    .eq('stripe_subscription_id', subscriptionId)
+  const customerId = invoice.customer;
+  if (!customerId) return;
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('stripe_customer_id', customerId)
     .maybeSingle();
 
-  if (sub) {
+  if (profile) {
+    await supabase.from('profiles').update({ plan: 'free' }).eq('id', profile.id);
+  }
+
+  try {
     await supabase
       .from('subscriptions')
       .update({ status: 'past_due', plan: 'free' })
-      .eq('id', sub.id);
-    await supabase.from('profiles').update({ plan: 'free' }).eq('id', sub.user_id);
+      .eq('stripe_subscription_id', invoice.subscription);
+  } catch (subErr) {
+    console.warn('[Stripe Webhook] subscriptions update on invoice.payment_failed failed:', subErr.message || subErr);
   }
 }
