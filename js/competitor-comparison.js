@@ -1271,6 +1271,9 @@ window.CompetitorComparison = (function () {
     if (window.NAGRIVA_FreeTrialTracker) {
       if (!NAGRIVA_FreeTrialTracker.checkAndBlock()) return;
       NAGRIVA_FreeTrialTracker.recordUse();
+      if (window.NAGRIVA_ToolAnalytics) {
+        NAGRIVA_ToolAnalytics.trackToolUse('competitor-comparison');
+      }
     }
 
     /* Show loading */

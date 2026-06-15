@@ -31,6 +31,11 @@ var NagrivaAuthGuard = (function() {
     'admin-dashboard.html'
   ];
 
+  var PRO_REQUIRED_PAGES = [
+    'pro-only.html',
+    'pro-features.html'
+  ];
+
   function getCurrentPage() {
     return window.location.pathname.split('/').pop();
   }
@@ -49,6 +54,10 @@ var NagrivaAuthGuard = (function() {
 
   function isAdminPage(page) {
     return ADMIN_PAGES.indexOf(page) !== -1;
+  }
+
+  function isProRequiredPage(page) {
+    return PRO_REQUIRED_PAGES.indexOf(page) !== -1;
   }
 
   function redirectToLogin() {
@@ -119,6 +128,28 @@ var NagrivaAuthGuard = (function() {
           redirectToLogin();
         }
         return { authenticated: false };
+      }
+
+      if (isProRequiredPage(page)) {
+        try {
+          var { data: profile, error: profileError } = await window.supabaseClient
+            .from('profiles')
+            .select('plan')
+            .eq('id', session.user.id)
+            .single();
+
+          var isPro = profile && profile.plan === 'pro';
+
+          if (!isPro) {
+            logError('Pro access denied for user ' + session.user.id);
+            window.location.replace('/pages/nagriva-pro.html?pro_required=1');
+            return { authenticated: true, authorized: false };
+          }
+        } catch (profileErr) {
+          logError('Profile fetch failed', profileErr);
+          window.location.replace('/pages/nagriva-pro.html?pro_required=1');
+          return { authenticated: false, error: profileErr };
+        }
       }
 
       if (isAdminPage(page)) {

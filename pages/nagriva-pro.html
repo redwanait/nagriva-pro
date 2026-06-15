@@ -151,7 +151,7 @@
           Get access to advanced SEO tools, AI-powered features, premium resources, and exclusive growth solutions designed for serious creators, marketers, and businesses.
         </p>
         <div class="nv-hero-actions">
-          <a href="#early-access" class="nv-hero-btn-primary">
+          <a href="#pricing" class="nv-hero-btn-primary" id="nvHeroJoinBtn">
             Join Nagriva Pro
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -161,7 +161,7 @@
         </div>
         <div class="nv-hero-trust">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          No credit card required. Join the waitlist for free.
+          Start free &middot; Upgrade anytime &middot; Cancel anytime
         </div>
       </div>
 
@@ -469,23 +469,108 @@
     </div>
   </section>
 
-  <!-- ═══ EARLY ACCESS ═══ -->
-  <section class="nv-section nv-early lazy-section lazy-section--small" id="early-access">
+  <!-- ═══ PRICING ═══ -->
+  <section class="nv-section nv-pricing lazy-section lazy-section--large" id="pricing">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-tag">✦ Early Access</div>
-        <h2 class="section-title">Become an <span class="text-gradient">Early Member</span></h2>
-        <p class="section-desc">Join the waiting list and be the first to access Nagriva Pro when new premium features launch.</p>
+        <div class="section-tag">✦ Pricing</div>
+        <h2 class="section-title">Choose Your <span class="text-gradient">Plan</span></h2>
+        <p class="section-desc">Start free, upgrade when you need more power.</p>
       </div>
-      <div class="nv-early-card fade-up">
-        <h3 class="nv-early-title">Get Early Access</h3>
-        <p class="nv-early-sub">Sign up to join the waitlist. You'll be notified as soon as Pro features are available.</p>
-        <form class="nv-early-form" id="nvEarlyForm">
-          <input type="text" class="nv-early-input" placeholder="Your name" required aria-label="Your name">
-          <input type="email" class="nv-early-input" placeholder="Your email address" required aria-label="Your email address">
-          <button type="submit" class="nv-early-btn">Join Waitlist</button>
-        </form>
-        <p class="nv-early-privacy">Your information is safe. No spam, unsubscribe anytime.</p>
+
+      <div class="nv-billing-toggle fade-up">
+        <span class="nv-billing-label" id="billingMonthlyLabel">Monthly</span>
+        <button class="nv-billing-switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle yearly billing">
+          <span class="nv-billing-switch-knob"></span>
+        </button>
+        <span class="nv-billing-label" id="billingYearlyLabel">
+          Yearly
+          <span class="nv-billing-save">Save 20%</span>
+        </span>
+      </div>
+
+      <div class="nv-pricing-grid fade-up">
+        <div class="nv-plan-card nv-plan-free">
+          <div class="nv-plan-header">
+            <div class="nv-plan-name">Free</div>
+            <div class="nv-plan-price">
+              <span class="nv-plan-amount">$0</span>
+              <span class="nv-plan-period">/forever</span>
+            </div>
+            <p class="nv-plan-desc">Perfect for getting started with basic SEO tools.</p>
+          </div>
+          <ul class="nv-plan-features">
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Basic SEO Tools</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 1 Website Audit / day</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Basic Keyword Research</li>
+            <li class="nv-plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> AI-Powered Insights</li>
+            <li class="nv-plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Advanced Analytics</li>
+            <li class="nv-plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Export & Share</li>
+          </ul>
+          <div class="nv-plan-action">
+            <span class="nv-plan-current" id="nvCurrentFree">Current Plan</span>
+          </div>
+        </div>
+
+        <div class="nv-plan-card nv-plan-pro nv-plan-featured" id="nvPlanMonthly">
+          <div class="nv-plan-popular">Most Popular</div>
+          <div class="nv-plan-header">
+            <div class="nv-plan-name">Pro Monthly</div>
+            <div class="nv-plan-price">
+              <span class="nv-plan-amount" id="nvMonthlyAmount">$29</span>
+              <span class="nv-plan-period" id="nvMonthlyPeriod">/month</span>
+            </div>
+            <p class="nv-plan-desc">Unlock unlimited tools and premium features.</p>
+          </div>
+          <ul class="nv-plan-features">
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> All Free Features</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Tool Usage</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> AI-Powered Insights</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced Analytics</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Export & Share</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Priority Support</li>
+          </ul>
+          <div class="nv-plan-action">
+            <button class="nv-plan-btn" data-checkout="price_1TiVkkBz7eLMEaEQprypvh6i" id="nvUpgradeMonthly">
+              <span class="nv-plan-btn-text" id="nvMonthlyBtnText">Upgrade to Pro</span>
+            </button>
+            <span class="nv-plan-manage-btn" id="nvManageMonthly" style="display:none;">
+              <button class="nv-plan-btn nv-plan-btn-secondary" data-portal>Manage Subscription</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="nv-plan-card nv-plan-pro" id="nvPlanYearly">
+          <div class="nv-plan-header">
+            <div class="nv-plan-name">Pro Yearly</div>
+            <div class="nv-plan-price">
+              <span class="nv-plan-amount" id="nvYearlyAmount">$279</span>
+              <span class="nv-plan-period" id="nvYearlyPeriod">/year</span>
+            </div>
+            <p class="nv-plan-desc">Best value — save 20% with annual billing.</p>
+          </div>
+          <ul class="nv-plan-features">
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> All Free Features</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Tool Usage</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> AI-Powered Insights</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced Analytics</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Export & Share</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Priority Support</li>
+          </ul>
+          <div class="nv-plan-action">
+            <button class="nv-plan-btn" data-checkout="price_1TiVkkBz7eLMEaEQjOpt08wF" id="nvUpgradeYearly">
+              <span class="nv-plan-btn-text" id="nvYearlyBtnText">Upgrade to Pro</span>
+            </button>
+            <span class="nv-plan-manage-btn" id="nvManageYearly" style="display:none;">
+              <button class="nv-plan-btn nv-plan-btn-secondary" data-portal>Manage Subscription</button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nv-pricing-trust fade-up">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Secure payments via Stripe &middot; Cancel anytime &middot; No hidden fees</span>
       </div>
     </div>
   </section>
@@ -583,13 +668,13 @@
         <h2 class="nv-cta-title">Ready to <span class="text-gradient">Grow Faster</span>?</h2>
         <p class="nv-cta-sub">Start building smarter with Nagriva.</p>
         <div class="nv-cta-actions">
-          <a href="#early-access" class="nv-hero-btn-primary">
+          <a href="#pricing" class="nv-hero-btn-primary" id="nvCtaJoinBtn">
             Join Nagriva Pro
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
           <a href="/pages/contact.html" class="nv-hero-btn-secondary">Contact Sales</a>
         </div>
-        <p class="nv-cta-note">No credit card required. Join the waitlist for free.</p>
+        <p class="nv-cta-note">Start free &middot; Upgrade anytime &middot; Cancel anytime</p>
       </div>
     </div>
   </section>
@@ -599,6 +684,9 @@
   <!-- ═══ SCRIPTS ═══ -->
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
+  <script defer src="../js/auth-store.js"></script>
+  <script defer src="../js/plan-manager.js"></script>
+  <script defer src="../js/subscription-manager.js"></script>
   <script defer src="../js/script.js"></script>
   <script defer src="../js/i18n.js"></script>
   <script defer src="../js/auth.js"></script>
@@ -624,26 +712,77 @@
   })();
   </script>
 
-  <!-- Early Access Form -->
+  <!-- Pricing & Subscription Init -->
   <script>
   (function() {
     'use strict';
-    var form = document.getElementById('nvEarlyForm');
-    if (!form) return;
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = form.querySelector('.nv-early-btn');
-      var origText = btn.textContent;
-      btn.textContent = 'You\'re on the list!';
-      btn.style.pointerEvents = 'none';
-      btn.style.opacity = '0.7';
-      setTimeout(function() {
-        btn.textContent = origText;
-        btn.style.pointerEvents = '';
-        btn.style.opacity = '';
-        form.reset();
-      }, 3000);
-    });
+
+    /* Billing toggle */
+    var toggle = document.getElementById('billingToggle');
+    var monthlyCard = document.getElementById('nvPlanMonthly');
+    var yearlyCard = document.getElementById('nvPlanYearly');
+    var monthlyAmount = document.getElementById('nvMonthlyAmount');
+    var yearlyAmount = document.getElementById('nvYearlyAmount');
+    var monthlyPeriod = document.getElementById('nvMonthlyPeriod');
+    var yearlyPeriod = document.getElementById('nvYearlyPeriod');
+
+    if (toggle && monthlyCard && yearlyCard) {
+      toggle.addEventListener('click', function() {
+        var isYearly = this.getAttribute('aria-checked') === 'true';
+        this.setAttribute('aria-checked', String(!isYearly));
+        this.classList.toggle('active');
+        monthlyCard.style.display = isYearly ? '' : 'none';
+        yearlyCard.style.display = isYearly ? 'none' : '';
+      });
+      monthlyCard.style.display = '';
+      yearlyCard.style.display = 'none';
+    }
+
+    /* Plan state management */
+    function updatePricingUI() {
+      var isPro = window.NagrivaPlanManager && NagrivaPlanManager.isPro();
+      var freeCurrent = document.getElementById('nvCurrentFree');
+      var monthlyBtn = document.getElementById('nvUpgradeMonthly');
+      var yearlyBtn = document.getElementById('nvUpgradeYearly');
+      var monthlyManage = document.getElementById('nvManageMonthly');
+      var yearlyManage = document.getElementById('nvManageYearly');
+      var monthlyBtnText = document.getElementById('nvMonthlyBtnText');
+      var yearlyBtnText = document.getElementById('nvYearlyBtnText');
+      var heroJoinBtn = document.getElementById('nvHeroJoinBtn');
+
+      if (isPro) {
+        if (freeCurrent) freeCurrent.textContent = 'Downgrade';
+        if (monthlyBtn) monthlyBtn.style.display = 'none';
+        if (yearlyBtn) yearlyBtn.style.display = 'none';
+        if (monthlyManage) monthlyManage.style.display = '';
+        if (yearlyManage) yearlyManage.style.display = '';
+        if (heroJoinBtn) heroJoinBtn.textContent = 'Manage Subscription';
+
+        /* Check subscription type */
+        var sub = window.NagrivaSubscriptionManager && NagrivaSubscriptionManager.getSubscription();
+        if (sub) {
+          if (monthlyBtnText) monthlyBtnText.textContent = 'Current Plan';
+          if (yearlyBtnText) yearlyBtnText.textContent = 'Current Plan';
+        }
+      } else {
+        if (freeCurrent) freeCurrent.textContent = 'Current Plan';
+        if (monthlyBtn) monthlyBtn.style.display = '';
+        if (yearlyBtn) yearlyBtn.style.display = '';
+        if (monthlyManage) monthlyManage.style.display = 'none';
+        if (yearlyManage) yearlyManage.style.display = 'none';
+        if (monthlyBtnText) monthlyBtnText.textContent = 'Upgrade to Pro';
+        if (yearlyBtnText) yearlyBtnText.textContent = 'Upgrade to Pro';
+        if (heroJoinBtn) heroJoinBtn.textContent = 'Join Nagriva Pro';
+      }
+    }
+
+    if (window.NagrivaPlanManager) {
+      if (!NagrivaPlanManager.isLoading()) updatePricingUI();
+      NagrivaPlanManager.subscribe(function() { updatePricingUI(); });
+    }
+    if (window.NagrivaSubscriptionManager) {
+      NagrivaSubscriptionManager.bindCheckoutButtons();
+    }
   })();
   </script>
 

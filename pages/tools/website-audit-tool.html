@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="/css/free-trial-badge.css">
   <link rel="stylesheet" href="/css/limit-modal.css">
   <link rel="stylesheet" href="/css/celebration-modal.css">
+  <link rel="stylesheet" href="/css/pro-locker.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -2110,7 +2111,7 @@
               </div>
 
               <!-- ═══ SECTION 6: Download Report CTA ═══ -->
-              <div class="aud-dash-cta" id="recExport" style="display:none;">
+              <div class="aud-dash-cta" id="recExport" style="display:none;" data-pro-feature="export" data-pro-tip="Export reports with <strong>Nagriva Pro</strong>">
                 <div class="aud-dash-cta-text">
                   <h3>Export Your Audit Report</h3>
                   <p>Download a complete PDF report or share with your team.</p>
@@ -2154,7 +2155,7 @@
               <div id="seoScoreBreakdown" style="display:none;">
                 <div id="sbEmpty" style="padding:20px 0;"></div>
               </div>
-              <div class="ai-section" id="aiInsightsContainer" style="display:none;">
+              <div class="ai-section" id="aiInsightsContainer" style="display:none;" data-pro-feature="insights" data-pro-tip="AI-powered insights with <strong>Nagriva Pro</strong>">
                 <div id="aiInsightsEmpty" style="padding:20px 0;"></div>
               </div>
             </div>
@@ -2358,6 +2359,7 @@
   <script defer src="/js/empty-state.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/auth-store.js"></script>
   <script defer src="/modules/leads/leads-api.js"></script>
   <script defer src="/modules/reports/reports-api.js"></script>
   <script defer src="/js/script.js"></script>
@@ -3157,6 +3159,9 @@
           return;
         }
         NAGRIVA_FreeTrialTracker.recordUse();
+        if (window.NAGRIVA_ToolAnalytics) {
+          NAGRIVA_ToolAnalytics.trackToolUse('website-audit');
+        }
       }
 
       var displayUrl = url.replace(/^https?:\/\//, '').split('/')[0];
@@ -4561,7 +4566,9 @@
   }
 </script>
 <script defer src="/js/plan-manager.js"></script>
+<script defer src="/js/pro-locker.js"></script>
 <script defer src="/js/free-trial-tracker.js"></script>
+<script defer src="/js/tool-analytics.js"></script>
 <script defer src="/js/limit-modal.js"></script>
 <script defer src="/js/celebration-modal.js"></script>
 <script defer src="/js/tool-access-modal.js"></script>

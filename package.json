@@ -4,6 +4,8 @@
   "private": true,
   "description": "Nagriva — AI-powered brand growth platform",
   "dependencies": {
-    "openai": "^4.0.0"
+    "openai": "^4.0.0",
+    "stripe": "^17.0.0",
+    "@supabase/supabase-js": "^2.0.0"
   }
 }

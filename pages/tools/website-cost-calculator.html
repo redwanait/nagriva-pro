@@ -1539,6 +1539,9 @@
       if (window.NAGRIVA_FreeTrialTracker) {
         if (!NAGRIVA_FreeTrialTracker.checkAndBlock()) return;
         NAGRIVA_FreeTrialTracker.recordUse();
+        if (window.NAGRIVA_ToolAnalytics) {
+          NAGRIVA_ToolAnalytics.trackToolUse('website-cost-calculator');
+        }
       }
 
       /* ─── Show loading ─── */
@@ -1704,6 +1707,7 @@
   </script>
 <script defer src="/js/plan-manager.js"></script>
 <script defer src="/js/free-trial-tracker.js"></script>
+<script defer src="/js/tool-analytics.js"></script>
 <script defer src="/js/limit-modal.js"></script>
 <script defer src="/js/celebration-modal.js"></script>
 <script defer src="/js/tool-access-modal.js"></script>

@@ -71,6 +71,10 @@
     { "src": "^/tools/seo-title-generator$", "dest": "/pages/tools/seo-title-generator.html" },
     { "src": "^/tools/competitor-comparison$", "dest": "/pages/tools/competitor-comparison.html" },
 
+    { "src": "^/api/create-checkout-session$", "dest": "/api/create-checkout-session.js" },
+    { "src": "^/api/create-portal-session$", "dest": "/api/create-portal-session.js" },
+    { "src": "^/api/stripe-webhook$", "dest": "/api/stripe-webhook.js" },
+
     {
       "src": "/.*",
       "dest": "/pages/404.html",
@@ -103,7 +107,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://bemcdcfdaccfdtmnzuwh.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://bemcdcfdaccfdtmnzuwh.supabase.co https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://bemcdcfdaccfdtmnzuwh.supabase.co wss://bemcdcfdaccfdtmnzuwh.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://cdn.jsdelivr.net; frame-src 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://bemcdcfdaccfdtmnzuwh.supabase.co https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://bemcdcfdaccfdtmnzuwh.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://q.stripe.com; connect-src 'self' https://bemcdcfdaccfdtmnzuwh.supabase.co wss://bemcdcfdaccfdtmnzuwh.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://cdn.jsdelivr.net https://api.stripe.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com; form-action 'self'; base-uri 'self'; object-src 'none'"
         }
       ]
     }

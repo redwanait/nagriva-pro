@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/css/free-trial-badge.css">
   <link rel="stylesheet" href="/css/limit-modal.css">
   <link rel="stylesheet" href="/css/celebration-modal.css">
+  <link rel="stylesheet" href="/css/pro-locker.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -221,7 +222,7 @@
         </div>
 
         <!-- AI Insights -->
-        <div class="cc-insights-section">
+        <div class="cc-insights-section" data-pro-feature="insights" data-pro-tip="AI-powered insights with <strong>Nagriva Pro</strong>">
           <div class="cc-insights-card">
             <div class="cc-insights-header">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -235,7 +236,7 @@
         </div>
 
         <!-- Charts -->
-        <div class="cc-charts-section">
+        <div class="cc-charts-section" data-pro-feature="analytics" data-pro-tip="Advanced charts with <strong>Nagriva Pro</strong>">
           <div class="cc-section-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             <h3>Visual Comparison</h3>
@@ -270,7 +271,7 @@
         </div>
 
         <!-- Export -->
-        <div class="cc-export-section">
+        <div class="cc-export-section" data-pro-feature="export" data-pro-tip="Export reports with <strong>Nagriva Pro</strong>">
           <div class="cc-export-bar">
             <span class="cc-export-label">Export Report:</span>
             <button class="cc-export-btn cc-export-btn--primary" id="ccExportPdf">
@@ -330,7 +331,9 @@
     })
   </script>
   <script defer src="/js/plan-manager.js"></script>
+  <script defer src="/js/pro-locker.js"></script>
   <script defer src="/js/free-trial-tracker.js"></script>
+  <script defer src="/js/tool-analytics.js"></script>
   <script defer src="/js/limit-modal.js"></script>
   <script defer src="/js/celebration-modal.js"></script>
   <script defer src="/js/layout.js"></script>

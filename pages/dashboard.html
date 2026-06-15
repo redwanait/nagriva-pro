@@ -86,7 +86,8 @@
       <div class="dash-header">
         <div class="dash-greeting">
           <h1>Welcome back<span id="dashUserName"></span></h1>
-          <p>Here's what's happening with your projects.</p>
+          <span class="dash-greeting-badge dash-greeting-badge-pro" id="dashGreetingBadge">PRO</span>
+          <p>Your analytics, projects, and activity at a glance.</p>
         </div>
         <div class="dash-badge">
           <span class="dash-badge-dot"></span>
@@ -201,6 +202,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
   <script defer src="../js/plan-manager.js"></script>
+  <script defer src="../js/subscription-manager.js"></script>
   <script defer src="../js/auth-store.js"></script>
   <script defer src="../js/skeleton.js"></script>
   <script defer src="../js/loading-manager.js"></script>
@@ -212,6 +214,7 @@
   <script defer src="../modules/orders/orders-api.js"></script>
   <script defer src="../js/orders.js"></script>
   <script defer src="../js/empty-state.js"></script>
+  <script defer src="../js/tool-analytics.js"></script>
   <script defer src="../js/dashboard.js"></script>
   <script defer src="../js/onboarding.js"></script>
   <script>
@@ -227,6 +230,23 @@
         } catch (e) { /* silent */ }
       }
 
+      /* Plan greeting badge */
+      function updateDashGreetingBadge() {
+        var badge = document.getElementById('dashGreetingBadge');
+        if (!badge || !window.NagrivaPlanManager) return;
+        if (NagrivaPlanManager.isPro()) {
+          badge.className = 'dash-greeting-badge dash-greeting-badge-pro';
+          badge.textContent = 'PRO';
+        } else {
+          badge.className = 'dash-greeting-badge dash-greeting-badge-free';
+          badge.textContent = 'FREE';
+        }
+      }
+      if (window.NagrivaPlanManager) {
+        if (!NagrivaPlanManager.isLoading()) updateDashGreetingBadge();
+        NagrivaPlanManager.subscribe(function () { updateDashGreetingBadge(); });
+      }
+
       try {
         var admin = await NagrivaAdminAuth.isAdmin(true);
         var link = document.getElementById('adminLink');
@@ -235,6 +255,24 @@
 
       if (window.NAGRIVA_Dashboard) {
         window.NAGRIVA_Dashboard.init();
+      }
+
+      /* Handle checkout success */
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('checkout') === 'success') {
+        if (window.NagrivaPlanManager) {
+          NagrivaPlanManager.refreshPlan();
+        }
+        if (window.NagrivaSubscriptionManager) {
+          NagrivaSubscriptionManager.fetchSubscription(NagrivaAuthStore.getUser()?.id);
+        }
+        /* Show toast */
+        if (window.NAGRIVA_Toast) {
+          NAGRIVA_Toast.success('Welcome to Nagriva Pro!', 'Your subscription is active.');
+        }
+        /* Clean URL */
+        var cleanUrl = window.location.pathname;
+        window.history.replaceState({}, '', cleanUrl);
       }
     });
   </script>

@@ -64,15 +64,11 @@ const NagrivaPlanManager = (() => {
         .from('profiles')
         .select('plan')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
       if (error) {
-        if (error.code === 'PGRST116') {
-          _plan = 'free';
-        } else {
-          console.warn('[PlanManager] fetch error:', error);
-          _plan = 'free';
-        }
+        console.warn('[PlanManager] fetch error:', error);
+        _plan = 'free';
       } else {
         _plan = (data && data.plan) || 'free';
       }
@@ -106,6 +102,22 @@ const NagrivaPlanManager = (() => {
     });
   }
 
+  /* ─── Force refresh plan from server ─── */
+  async function refreshPlan() {
+    const user = window.NagrivaAuthStore ? NagrivaAuthStore.getUser() : null;
+    if (user) {
+      return await fetchPlan(user.id);
+    }
+    return 'free';
+  }
+
+  /* ─── Directly set plan (used by subscription manager on checkout success) ─── */
+  function setPlan(plan) {
+    if (plan !== 'free' && plan !== 'pro') return;
+    _plan = plan;
+    _notify();
+  }
+
   return {
     init: init,
     getPlan: getPlan,
@@ -113,6 +125,8 @@ const NagrivaPlanManager = (() => {
     isFree: isFree,
     isLoading: isLoading,
     fetchPlan: fetchPlan,
+    refreshPlan: refreshPlan,
+    setPlan: setPlan,
     subscribe: subscribe
   };
 })();

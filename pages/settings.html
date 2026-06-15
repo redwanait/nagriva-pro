@@ -131,6 +131,35 @@
           </form>
         </div>
 
+        <!-- Subscription / Plan -->
+        <div class="settings-card" id="subscriptionSettingsCard">
+          <h2>Subscription & Plan</h2>
+          <div class="settings-desc">Manage your Nagriva Pro subscription and billing.</div>
+          <div style="padding: 12px 0;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+              <span class="dash-greeting-badge" id="settingsPlanBadge" style="font-size:0.7rem;padding:4px 12px;">FREE</span>
+              <span style="font-size:0.88rem;color:var(--gray);" id="settingsPlanText">You're on the Free plan.</span>
+            </div>
+            <div id="settingsProInfo" style="display:none;">
+              <div style="font-size:0.82rem;color:var(--gray2);margin-bottom:8px;">
+                Your subscription is <strong id="settingsSubStatus" style="color:#10B981;">active</strong>.
+                <span id="settingsSubPeriod"></span>
+              </div>
+              <div style="font-size:0.78rem;color:var(--gray2);margin-bottom:16px;" id="settingsSubRenewal"></div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="sf-btn primary" id="settingsUpgradeBtn" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                Upgrade to Pro
+              </button>
+              <button class="sf-btn secondary" id="settingsManageSubBtn" type="button" style="display:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Manage Subscription
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- Preferences -->
         <div class="settings-card">
           <h2>Preferences</h2>
@@ -190,6 +219,8 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="../js/supabase-config.js"></script>
   <script defer src="../js/auth-store.js"></script>
+  <script defer src="../js/plan-manager.js"></script>
+  <script defer src="../js/subscription-manager.js"></script>
   <script defer src="../js/auth-guard.js"></script>
   <script defer src="../js/script.js"></script>
   <script defer src="../js/i18n.js"></script>
@@ -309,6 +340,86 @@
       document.getElementById('emailNotifToggle').addEventListener('click', function() {
         this.classList.toggle('active');
       });
+
+      /* ─── Subscription Plan UI ─── */
+      function updateSubscriptionUI() {
+        var badge = document.getElementById('settingsPlanBadge');
+        var text = document.getElementById('settingsPlanText');
+        var upgradeBtn = document.getElementById('settingsUpgradeBtn');
+        var manageBtn = document.getElementById('settingsManageSubBtn');
+        var proInfo = document.getElementById('settingsProInfo');
+        var statusEl = document.getElementById('settingsSubStatus');
+        var periodEl = document.getElementById('settingsSubPeriod');
+        var renewalEl = document.getElementById('settingsSubRenewal');
+
+        var isPro = window.NagrivaPlanManager && NagrivaPlanManager.isPro();
+        var sub = window.NagrivaSubscriptionManager && NagrivaSubscriptionManager.getSubscription();
+
+        if (badge) {
+          badge.textContent = isPro ? 'PRO' : 'FREE';
+          badge.className = 'dash-greeting-badge ' + (isPro ? 'dash-greeting-badge-pro' : 'dash-greeting-badge-free');
+        }
+        if (text) {
+          text.textContent = isPro ? 'You\'re on the Nagriva Pro plan.' : 'You\'re on the Free plan.';
+        }
+        if (upgradeBtn) {
+          upgradeBtn.style.display = isPro ? 'none' : '';
+        }
+        if (manageBtn) {
+          manageBtn.style.display = isPro ? '' : 'none';
+        }
+        if (proInfo) {
+          proInfo.style.display = isPro && sub ? '' : 'none';
+        }
+        if (statusEl && sub) {
+          var statusMap = { active: 'active', trialing: 'in trial', past_due: 'past due', canceled: 'cancelled' };
+          statusEl.textContent = statusMap[sub.status] || sub.status;
+          statusEl.style.color = sub.status === 'active' || sub.status === 'trialing' ? '#10B981' : '#f87171';
+        }
+        if (periodEl && sub && sub.current_period_end) {
+          var endDate = new Date(sub.current_period_end);
+          periodEl.textContent = ' Current billing period ends ' + endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + '.';
+        }
+        if (renewalEl && sub) {
+          if (sub.status === 'canceled' && sub.current_period_end) {
+            var cancelDate = new Date(sub.current_period_end);
+            renewalEl.textContent = 'Access to Pro continues until ' + cancelDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + '.';
+          } else if (sub.status === 'active' && sub.current_period_end) {
+            var renewDate = new Date(sub.current_period_end);
+            renewalEl.textContent = 'Next billing date: ' + renewDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + '.';
+          }
+        }
+      }
+
+      if (window.NagrivaPlanManager) {
+        NagrivaPlanManager.subscribe(function() { updateSubscriptionUI(); });
+      }
+      if (window.NagrivaSubscriptionManager) {
+        NagrivaSubscriptionManager.bindCheckoutButtons();
+      }
+      setTimeout(updateSubscriptionUI, 500);
+
+      /* Upgrade button */
+      var upgradeBtn = document.getElementById('settingsUpgradeBtn');
+      if (upgradeBtn) {
+        upgradeBtn.addEventListener('click', function() {
+          window.location.href = '/pages/nagriva-pro.html#pricing';
+        });
+      }
+
+      /* Manage subscription button */
+      var manageBtn = document.getElementById('settingsManageSubBtn');
+      if (manageBtn) {
+        manageBtn.addEventListener('click', async function() {
+          if (window.NagrivaSubscriptionManager) {
+            try {
+              await NagrivaSubscriptionManager.redirectToPortal();
+            } catch (e) {
+              console.error('Portal error:', e);
+            }
+          }
+        });
+      }
 
       /* Sign out */
       document.getElementById('settingsSignOut').addEventListener('click', async function() {

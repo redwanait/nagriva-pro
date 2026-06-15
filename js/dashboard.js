@@ -1,7 +1,7 @@
-/* ════════════════════════════════════════════
+/* ════════════════════════════════════════════════
    Nagriva — Premium Client Dashboard
    Supabase integrated · Real-time · Skeleton loaders
-   ════════════════════════════════════════════ */
+   ════════════════════════════════════════════════ */
 window.NAGRIVA_Dashboard = (function () {
   'use strict';
 
@@ -12,7 +12,9 @@ window.NAGRIVA_Dashboard = (function () {
     orders: null,
     activity: null,
     messages: null,
-    projects: null
+    projects: null,
+    analytics: null,
+    toolActivity: null
   };
 
   /* ─── Helpers ─── */
@@ -50,7 +52,10 @@ window.NAGRIVA_Dashboard = (function () {
       banner.style.display = '';
       banner.className = 'dash-plan-banner';
       if (text) text.innerHTML = 'You\'re on the <strong>Free</strong> plan. Upgrade for unlimited tool access.';
-      if (btn) btn.style.display = 'inline-flex';
+      if (btn) {
+        btn.style.display = 'inline-flex';
+        btn.href = '/pages/nagriva-pro.html#pricing';
+      }
     }
   }
 
@@ -135,7 +140,7 @@ window.NAGRIVA_Dashboard = (function () {
      ════════════════════════════════════════════ */
   function skeletonStats() {
     var html = '';
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 7; i++) {
       html += '<div class="dash-stat-skel dash-fade-in">' +
         '<div class="dash-stat-skel-icon"></div>' +
         '<div class="dash-stat-skel-value"></div>' +
@@ -193,10 +198,9 @@ window.NAGRIVA_Dashboard = (function () {
     return '<div class="dash-empty">' +
       '<div class="dash-empty-icon">' + window.NAGRIVA_EmptyState.icons['bar-chart-3'] + '</div>' +
       '<h3 class="dash-empty-title">No recent activity</h3>' +
-      '<p class="dash-empty-desc">Your actions and project updates will appear here.</p>' +
+      '<p class="dash-empty-desc">Your tool usage and order updates will appear here.</p>' +
       '<div class="dash-empty-actions">' +
-      '<a href="services.html" class="dash-empty-btn dash-empty-btn-primary">' + window.NAGRIVA_EmptyState.icons.compass + ' Explore Services</a>' +
-      '<a href="dashboard.html" class="dash-empty-btn dash-empty-btn-secondary">' + window.NAGRIVA_EmptyState.icons['arrow-right'] + ' View Dashboard</a>' +
+      '<a href="../pages/tools/website-audit-tool.html" class="dash-empty-btn dash-empty-btn-primary">' + window.NAGRIVA_EmptyState.icons.compass + ' Try a Tool</a>' +
       '</div></div>';
   }
 
@@ -258,16 +262,43 @@ window.NAGRIVA_Dashboard = (function () {
     if (!el) return;
 
     var svg = window.NAGRIVA_EmptyState ? window.NAGRIVA_EmptyState.icons : {};
+
+    function toolIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>';
+    }
+    function starIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>';
+    }
+    function clockIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+    }
+    function calendarIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+    }
+    function activityIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>';
+    }
+    function shieldIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+    }
+    function userIcon() {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+    }
+
+    var formatTool = window.NAGRIVA_ToolAnalytics ? NAGRIVA_ToolAnalytics.formatToolName : function (n) { return n || 'N/A'; };
+
     var items = [
-      { icon: svg['package'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>', value: stats.totalOrders, label: 'Total Orders', change: 'All time orders', id: 'statTotalOrders' },
-      { icon: svg['folder-kanban'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 7h12"/><path d="M8 12h12"/><path d="M8 17h8"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>', value: stats.activeProjects, label: 'Active Projects', change: 'Currently in progress', id: 'statActive' },
-      { icon: svg['check-circle'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', value: stats.completedProjects, label: 'Completed Projects', change: 'Delivered orders', id: 'statCompleted' },
-      { icon: svg['dollar-sign'] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', value: stats.totalSpent, label: 'Total Spent', change: 'In MAD', id: 'statTotalSpent', isCurrency: true }
+      { icon: toolIcon(), value: stats.totalUses, label: 'Total Tool Uses', change: 'Lifetime tool usage', id: 'statTotalUses', isCounter: true },
+      { icon: starIcon(), value: formatTool(stats.mostUsedTool), label: 'Most Used Tool', change: 'Top tool by usage', id: 'statMostUsed', isCounter: false },
+      { icon: clockIcon(), value: formatTool(stats.lastUsedTool), label: 'Last Used Tool', change: stats.lastUsedAt ? formatTimeAgo(stats.lastUsedAt) : 'Never', id: 'statLastUsed', isCounter: false },
+      { icon: activityIcon(), value: stats.totalSessions, label: 'Total Sessions', change: 'Days with tool activity', id: 'statSessions', isCounter: true },
+      { icon: shieldIcon(), value: stats.remainingFreeUses, label: 'Remaining Free Uses', change: stats.plan === 'pro' ? 'Pro plan' : 'Free plan allowance', id: 'statRemaining', isCounter: false },
+      { icon: userIcon(), value: stats.plan === 'pro' ? 'Pro' : 'Free', label: 'Current Plan', change: stats.plan === 'pro' ? 'Unlimited access' : 'Upgrade for more', id: 'statPlan', isCounter: false },
+      { icon: calendarIcon(), value: stats.memberSince ? formatDate(stats.memberSince) : '—', label: 'Member Since', change: 'Account created', id: 'statMemberSince', isCounter: false }
     ];
 
     var cardsHtml = '';
-    items.forEach(function (item, i) {
-      var displayVal = item.isCurrency ? item.value.toLocaleString('en-US') + ' MAD' : item.value;
+    items.forEach(function (item) {
       cardsHtml += '<div class="dash-stat-card dash-fade-in">' +
         '<div class="dash-stat-icon">' + item.icon + '</div>' +
         '<div class="dash-stat-value"><span class="dash-counter" id="' + item.id + '">0</span></div>' +
@@ -281,17 +312,15 @@ window.NAGRIVA_Dashboard = (function () {
       el.innerHTML = cardsHtml;
     }
 
-    var el2 = document.getElementById('dashStats');
-    if (!el2) return;
     items.forEach(function (item) {
       var target = document.getElementById(item.id);
       if (!target) return;
-      if (item.isCurrency) {
-        target.textContent = item.value.toLocaleString('en-US') + ' MAD';
-      } else {
+      if (item.isCounter) {
         requestAnimationFrame(function () {
           animateCounter(target, item.value);
         });
+      } else {
+        target.textContent = item.value;
       }
     });
   }
@@ -324,19 +353,51 @@ window.NAGRIVA_Dashboard = (function () {
     else { container.innerHTML = html; }
   }
 
-  function renderActivity(activities) {
+  function renderActivity(activity, toolActivity) {
     var container = document.getElementById('dashActivity');
     if (!container) return;
-    if (!activities || activities.length === 0) {
+
+    var combined = [];
+
+    if (toolActivity) {
+      toolActivity.forEach(function (t) {
+        combined.push({
+          type: 'tool',
+          action: window.NAGRIVA_ToolAnalytics ? NAGRIVA_ToolAnalytics.formatToolName(t.tool_name) : t.tool_name,
+          description: 'Used ' + (window.NAGRIVA_ToolAnalytics ? NAGRIVA_ToolAnalytics.formatToolName(t.tool_name) : t.tool_name) + ' tool',
+          created_at: t.created_at
+        });
+      });
+    }
+
+    if (activity) {
+      activity.forEach(function (a) {
+        combined.push({
+          type: 'order',
+          action: a.action || 'Update',
+          description: a.description || '',
+          created_at: a.created_at
+        });
+      });
+    }
+
+    combined.sort(function (a, b) {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
+    combined = combined.slice(0, 10);
+
+    if (combined.length === 0) {
       var emptyHtml = emptyActivity();
       if (window.NAGRIVA_Loading) { window.NAGRIVA_Loading.hide(container, emptyHtml); }
       else { container.innerHTML = emptyHtml; }
       return;
     }
+
     var html = '';
-    activities.slice(0, 5).forEach(function (a) {
+    combined.forEach(function (a) {
+      var dotClass = a.type === 'tool' ? 'active' : 'pending';
       html += '<div class="dash-activity-item">' +
-        '<span class="dash-activity-dot active"></span>' +
+        '<span class="dash-activity-dot ' + dotClass + '"></span>' +
         '<span class="dash-activity-text"><strong>' + escapeHtml(a.action || 'Update') + '</strong> \u2014 ' + escapeHtml(a.description || '') + '</span>' +
         '<span class="dash-activity-time">' + formatTimeAgo(a.created_at) + '</span></div>';
     });
@@ -430,6 +491,21 @@ window.NAGRIVA_Dashboard = (function () {
     return { totalOrders: totalOrders, activeProjects: activeProjects, completedProjects: completedProjects, totalSpent: totalSpent };
   }
 
+  async function fetchAnalytics() {
+    if (!_user) return;
+
+    if (window.NAGRIVA_ToolAnalytics) {
+      try {
+        _data.analytics = await NAGRIVA_ToolAnalytics.getUserStats(_user.id);
+        _data.toolActivity = await NAGRIVA_ToolAnalytics.getRecentActivity(_user.id, 10);
+      } catch (e) {
+        console.warn('[Dashboard] analytics fetch error:', e);
+        _data.analytics = null;
+        _data.toolActivity = null;
+      }
+    }
+  }
+
   async function loadAll() {
     if (!_user) return;
 
@@ -489,6 +565,7 @@ window.NAGRIVA_Dashboard = (function () {
     }
 
     _data.stats = await fetchStats();
+    await fetchAnalytics();
   }
 
   /* ════════════════════════════════════════════
@@ -501,7 +578,7 @@ window.NAGRIVA_Dashboard = (function () {
     var statsGrid = document.getElementById('dashStats');
     if (statsGrid) {
       if (lm) {
-        lm.show(statsGrid, (sk ? sk.stats(5) : skeletonStats()));
+        lm.show(statsGrid, (sk ? sk.stats(7) : skeletonStats()));
       } else {
         statsGrid.innerHTML = skeletonStats();
       }
@@ -544,9 +621,13 @@ window.NAGRIVA_Dashboard = (function () {
      RENDER ALL
      ════════════════════════════════════════════ */
   function renderAll() {
-    renderStats(_data.stats);
+    if (_data.analytics) {
+      renderStats(_data.analytics);
+    } else {
+      renderStats({ totalUses: 0, mostUsedTool: 'N/A', lastUsedTool: 'N/A', lastUsedAt: null, remainingFreeUses: '—', plan: '—', memberSince: null, totalSessions: 0 });
+    }
     renderOrders(_data.orders);
-    renderActivity(_data.activity);
+    renderActivity(_data.activity, _data.toolActivity);
     renderMessages(_data.messages);
     renderProjects(_data.projects);
   }
@@ -598,7 +679,6 @@ window.NAGRIVA_Dashboard = (function () {
         .subscribe();
       _subscriptions.push(msgSub);
 
-      if (orderIds.length > 0) {
       var projectSub = window.supabaseClient
         .channel('dash-projects')
         .on('postgres_changes',
@@ -608,8 +688,15 @@ window.NAGRIVA_Dashboard = (function () {
         .subscribe();
       _subscriptions.push(projectSub);
     }
-    }
 
+    var toolUsageSub = window.supabaseClient
+      .channel('dash-tool-usage')
+      .on('postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'tool_usage', filter: 'user_id=eq.' + _user.id },
+        function () { refresh(); }
+      )
+      .subscribe();
+    _subscriptions.push(toolUsageSub);
   }
 
   /* ════════════════════════════════════════════

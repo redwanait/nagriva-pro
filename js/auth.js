@@ -225,10 +225,29 @@ const NagrivaAuth = (() => {
       }
     }
 
+    /* Avatar plan badge */
+    var avatarBadge = document.getElementById('navAvatarBadge');
+    if (avatarBadge) {
+      avatarBadge.style.display = 'inline-flex';
+      if (isPro) {
+        avatarBadge.className = 'nav-avatar-badge nav-avatar-badge-pro';
+        avatarBadge.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M3 20h18"/></svg> PRO';
+      } else {
+        avatarBadge.className = 'nav-avatar-badge nav-avatar-badge-free';
+        avatarBadge.textContent = 'FREE';
+      }
+    }
+
     /* Dropdown Pro badge */
     var navProBadge = document.getElementById('navProBadge');
     if (navProBadge) {
       navProBadge.style.display = isPro ? 'inline-flex' : 'none';
+    }
+
+    /* Dropdown Free badge */
+    var navFreeBadge = document.getElementById('navFreeBadge');
+    if (navFreeBadge) {
+      navFreeBadge.style.display = isPro ? 'none' : 'inline-flex';
     }
 
     /* Mobile: swap "Join Nagriva Pro" with "Pro Member" badge */

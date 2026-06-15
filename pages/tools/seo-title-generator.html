@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="/css/free-trial-badge.css">
   <link rel="stylesheet" href="/css/limit-modal.css">
   <link rel="stylesheet" href="/css/celebration-modal.css">
+  <link rel="stylesheet" href="/css/pro-locker.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
@@ -5889,7 +5890,7 @@
     </div>
   </section>
 
-  <section class="seo-improve-section" id="seoImproveSection">
+  <section class="seo-improve-section" id="seoImproveSection" data-pro-feature="insights" data-pro-tip="AI Title Improver with <strong>Nagriva Pro</strong>">
     <div class="container">
       <div class="seo-inner">
         <div class="seo-improve-card fade-up">
@@ -6131,8 +6132,8 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
               Clear All Saved Titles
             </button>
-            <button class="seo-titles-btn seo-titles-btn-secondary" id="exportSavedBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <button class="seo-titles-btn seo-titles-btn-secondary" id="exportSavedBtn" data-pro-feature="export" data-pro-tip="Export titles with <strong>Nagriva Pro</strong>">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Export Saved Titles
             </button>
           </div>
@@ -6714,6 +6715,7 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/auth-store.js"></script>
   <script defer src="/js/script.js"></script>
   <script defer src="/js/i18n.js"></script>
   <script defer src="/js/auth.js"></script>
@@ -8116,6 +8118,9 @@
       if (window.NAGRIVA_FreeTrialTracker) {
         if (!NAGRIVA_FreeTrialTracker.checkAndBlock()) return;
         NAGRIVA_FreeTrialTracker.recordUse();
+        if (window.NAGRIVA_ToolAnalytics) {
+          NAGRIVA_ToolAnalytics.trackToolUse('seo-title-generator');
+        }
       }
       loadingKeyword.textContent = 'Analyzing "' + keyword + '"...';
 
@@ -11446,7 +11451,9 @@
   </div>
 
 <script defer src="/js/plan-manager.js"></script>
+<script defer src="/js/pro-locker.js"></script>
 <script defer src="/js/free-trial-tracker.js"></script>
+<script defer src="/js/tool-analytics.js"></script>
 <script defer src="/js/limit-modal.js"></script>
 <script defer src="/js/celebration-modal.js"></script>
 <script defer src="/js/tool-access-modal.js"></script>
