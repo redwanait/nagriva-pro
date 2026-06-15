@@ -456,6 +456,7 @@ const NagrivaAuth = (() => {
     if (window.NagrivaPlanManager) {
       NagrivaPlanManager.subscribe(function(planState) {
         console.log('[DEBUG auth] plan subscriber fired — plan:', planState.plan);
+        console.log('[PLAN FLOW] subscriber received', planState);
         updatePlanUI(planState);
       });
     }

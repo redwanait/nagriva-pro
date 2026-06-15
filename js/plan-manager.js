@@ -40,6 +40,10 @@ const NagrivaPlanManager = (() => {
 
   function _notify() {
     const snapshot = { plan: _plan, isPro: isPro(), isFree: isFree(), loading: _loading };
+    console.log('[PLAN FLOW] listeners count', _listeners.length);
+    console.log('[PLAN TRACE] source=', _loading && !_userId ? 'init' : _loading ? 'loading' : 'resolved');
+    console.log('[PLAN TRACE] profile.plan=', _plan);
+    console.log('[PLAN TRACE] cachedPlan=', _plan, '| _loading=', _loading, '| _userId=', _userId);
     _listeners.forEach(fn => {
       try { fn(snapshot); } catch (e) { console.warn('[PlanManager] listener error:', e); }
     });
@@ -67,6 +71,7 @@ const NagrivaPlanManager = (() => {
 
     _loading = true;
     _userId = userId;
+    console.log('[PLAN FLOW] notify #1', { plan: _plan, isPro: isPro(), isFree: isFree(), loading: _loading });
     _notify();
 
     console.log('[PlanManager] QUERYING — from: profiles | select: plan | eq id:', userId);
@@ -78,6 +83,7 @@ const NagrivaPlanManager = (() => {
         .maybeSingle();
 
       console.log('[PlanManager] Supabase profile response', data, error);
+      console.log('[PLAN FLOW] query result', data, error);
       console.log('[PlanManager] profile.plan value:', data?.plan, '| cached _plan:', _plan);
       console.log('[PlanManager] Cache guard condition — forceRefresh:', forceRefresh, '| userId === _userId:', userId === _userId, '| !_loading:', !_loading, '| result:', !forceRefresh && userId === _userId && !_loading);
 
@@ -96,6 +102,7 @@ const NagrivaPlanManager = (() => {
 
     console.log('[PlanManager] Fresh plan from Supabase:', _plan);
     _loading = false;
+    console.log('[PLAN FLOW] notify #2', { plan: _plan, isPro: isPro(), isFree: isFree(), loading: _loading });
     _notify();
     return _plan;
   }

@@ -62,7 +62,8 @@ window.NAGRIVA_Dashboard = (function () {
   function initPlanBanner() {
     updatePlanBanner();
     if (window.NagrivaPlanManager) {
-      NagrivaPlanManager.subscribe(function() {
+      NagrivaPlanManager.subscribe(function(planState) {
+        console.log('[PLAN FLOW] subscriber received', planState);
         updatePlanBanner();
       });
     }

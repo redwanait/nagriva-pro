@@ -686,7 +686,8 @@
         if (!NagrivaPlanManager.isLoading()) {
           updateProfilePlan();
         }
-        NagrivaPlanManager.subscribe(function() {
+        NagrivaPlanManager.subscribe(function(planState) {
+          console.log('[PLAN FLOW] subscriber received', planState);
           updateProfilePlan();
         });
       }

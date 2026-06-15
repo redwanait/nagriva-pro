@@ -858,7 +858,7 @@
 
       if (window.NagrivaPlanManager) {
         if (!NagrivaPlanManager.isLoading()) updatePricingUI();
-        NagrivaPlanManager.subscribe(function() { if (!NagrivaPlanManager.isLoading()) updatePricingUI(); });
+        NagrivaPlanManager.subscribe(function(planState) { console.log('[PLAN FLOW] subscriber received', planState); if (!NagrivaPlanManager.isLoading()) updatePricingUI(); });
       }
     });
   })();

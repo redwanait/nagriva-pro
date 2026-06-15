@@ -244,7 +244,7 @@
       }
       if (window.NagrivaPlanManager) {
         if (!NagrivaPlanManager.isLoading()) updateDashGreetingBadge();
-        NagrivaPlanManager.subscribe(function () { updateDashGreetingBadge(); });
+        NagrivaPlanManager.subscribe(function (planState) { console.log('[PLAN FLOW] subscriber received', planState); updateDashGreetingBadge(); });
       }
 
       try {

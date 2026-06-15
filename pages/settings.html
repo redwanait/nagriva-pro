@@ -392,7 +392,7 @@
       }
 
       if (window.NagrivaPlanManager) {
-        NagrivaPlanManager.subscribe(function() { updateSubscriptionUI(); });
+        NagrivaPlanManager.subscribe(function(planState) { console.log('[PLAN FLOW] subscriber received', planState); updateSubscriptionUI(); });
       }
       setTimeout(updateSubscriptionUI, 500);
 

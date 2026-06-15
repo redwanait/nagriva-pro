@@ -346,6 +346,7 @@
       }
       /* Re-scan when plan changes (unlock if upgraded) */
       NagrivaPlanManager.subscribe(function (state) {
+        console.log('[PLAN FLOW] subscriber received', state);
         if (state.loading) return
         if (state.isPro) {
           unlockAll()
