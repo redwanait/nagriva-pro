@@ -46,12 +46,16 @@ window.NAGRIVA_ToolAnalytics = (function () {
     var uid = getUserId(userId);
     if (!uid) return null;
 
-    if (_cache.stats && isCacheValid()) return _cache.stats;
+    if (_cache.stats && isCacheValid()) {
+      console.log('[ToolAnalytics] CACHE HIT — returning cached stats with plan:', _cache.stats.plan);
+      return _cache.stats;
+    }
 
     var plan = 'free';
     if (window.NagrivaPlanManager) {
       plan = NagrivaPlanManager.getPlan();
     }
+    console.log('[ToolAnalytics] plan from NagrivaPlanManager.getPlan():', plan);
 
     try {
       var memberSince = null;
@@ -142,6 +146,7 @@ window.NAGRIVA_ToolAnalytics = (function () {
 
     _cache.stats = stats;
     _cache.lastFetch = Date.now();
+    console.log('[ToolAnalytics] CACHING stats — plan:', stats.plan, '| stats object:', JSON.stringify(stats));
     return stats;
   }
 

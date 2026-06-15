@@ -14,6 +14,7 @@ const NagrivaPlanManager = (() => {
   const _listeners = [];
 
   function getPlan() {
+    console.log('[PlanManager] getPlan() called — returning:', _plan);
     return _plan;
   }
 
@@ -44,8 +45,9 @@ const NagrivaPlanManager = (() => {
     });
   }
 
-  async function fetchPlan(userId) {
+  async function fetchPlan(userId, forceRefresh = false) {
     if (!userId) {
+      console.log('[PlanManager] fetchPlan(null) — clearing plan to free');
       _plan = 'free';
       _loading = false;
       _userId = null;
@@ -53,18 +55,29 @@ const NagrivaPlanManager = (() => {
       return 'free';
     }
 
-    if (userId === _userId && !_loading) return _plan;
+    console.log('[PlanManager] fetchPlan called — userId:', userId, '| cached _userId:', _userId, '| cached _plan:', _plan, '| _loading:', _loading, '| forceRefresh:', forceRefresh);
+    if (!forceRefresh && userId === _userId && !_loading) {
+      console.log('[PlanManager] CACHE HIT — returning cached plan:', _plan, 'without querying Supabase');
+      return _plan;
+    }
+
+    if (forceRefresh) {
+      console.log('[PlanManager] Force refresh triggered');
+    }
 
     _loading = true;
     _userId = userId;
     _notify();
 
+    console.log('[PlanManager] QUERYING — from: profiles | select: plan | eq id:', userId);
     try {
       const { data, error } = await window.supabaseClient
         .from('profiles')
         .select('plan')
         .eq('id', userId)
         .maybeSingle();
+
+      console.log('[PlanManager] RAW RESPONSE — data:', JSON.stringify(data), '| error:', error ? JSON.stringify(error) : null);
 
       if (error) {
         console.warn('[PlanManager] fetch error:', error);
@@ -77,6 +90,7 @@ const NagrivaPlanManager = (() => {
       _plan = 'free';
     }
 
+    console.log('[PlanManager] Fresh plan from Supabase:', _plan);
     _loading = false;
     _notify();
     return _plan;
@@ -106,7 +120,7 @@ const NagrivaPlanManager = (() => {
   async function refreshPlan() {
     const user = window.NagrivaAuthStore ? NagrivaAuthStore.getUser() : null;
     if (user) {
-      return await fetchPlan(user.id);
+      return await fetchPlan(user.id, true);
     }
     return 'free';
   }
