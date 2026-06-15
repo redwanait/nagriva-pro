@@ -77,13 +77,17 @@ const NagrivaPlanManager = (() => {
         .eq('id', userId)
         .maybeSingle();
 
-      console.log('[PlanManager] RAW RESPONSE — data:', JSON.stringify(data), '| error:', error ? JSON.stringify(error) : null);
+      console.log('[PlanManager] Supabase profile response', data, error);
+      console.log('[PlanManager] profile.plan value:', data?.plan, '| cached _plan:', _plan);
+      console.log('[PlanManager] Cache guard condition — forceRefresh:', forceRefresh, '| userId === _userId:', userId === _userId, '| !_loading:', !_loading, '| result:', !forceRefresh && userId === _userId && !_loading);
 
       if (error) {
         console.warn('[PlanManager] fetch error:', error);
         _plan = 'free';
+      } else if (data) {
+        _plan = data.plan;
       } else {
-        _plan = (data && data.plan) || 'free';
+        _plan = 'free';
       }
     } catch (e) {
       console.warn('[PlanManager] fetch exception:', e);
@@ -132,6 +136,13 @@ const NagrivaPlanManager = (() => {
     _notify();
   }
 
+  /* ─── Clear in-memory cache ─── */
+  function clearCache() {
+    console.log('[PlanManager] clearCache() — resetting _userId to null, _plan to null');
+    _userId = null;
+    _plan = null;
+  }
+
   return {
     init: init,
     getPlan: getPlan,
@@ -141,6 +152,7 @@ const NagrivaPlanManager = (() => {
     fetchPlan: fetchPlan,
     refreshPlan: refreshPlan,
     setPlan: setPlan,
+    clearCache: clearCache,
     subscribe: subscribe
   };
 })();

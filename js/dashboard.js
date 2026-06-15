@@ -736,6 +736,11 @@ window.NAGRIVA_Dashboard = (function () {
     /* ─── Plan Banner ─── */
     initPlanBanner();
 
+    /* Fresh plan from Supabase before loading stats */
+    if (window.NagrivaPlanManager) {
+      await NagrivaPlanManager.refreshPlan();
+    }
+
     try {
       await loadAll();
       renderAll();
