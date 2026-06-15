@@ -717,14 +717,94 @@
   (function() {
     'use strict';
 
+    /* ── DIRECT CHECKOUT CLICK HANDLER ── */
+    /* Attached immediately during parsing — no deferred script dependency */
+
+    function getCheckoutToken() {
+      return new Promise(function(resolve, reject) {
+        function tryGet() {
+          if (window.NagrivaAuthStore && NagrivaAuthStore.getSession()) {
+            resolve(NagrivaAuthStore.getSession().access_token);
+          } else if (window.NagrivaAuthStore && !NagrivaAuthStore.isLoading()) {
+            reject(new Error('Not authenticated'));
+          } else {
+            setTimeout(tryGet, 100);
+          }
+        }
+        tryGet();
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-checkout]');
+      if (!btn) return;
+      console.log('[NagrivaPro] Checkout click:', btn.id, 'price:', btn.getAttribute('data-checkout'));
+      e.preventDefault();
+
+      var priceId = btn.getAttribute('data-checkout');
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Redirecting...';
+
+      getCheckoutToken().then(function(token) {
+        return fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({ priceId: priceId, mode: 'subscription' })
+        });
+      }).then(function(res) {
+        return res.json().then(function(data) {
+          if (!res.ok) throw new Error(data.error || 'Request failed');
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            throw new Error('No checkout URL returned');
+          }
+        });
+      }).catch(function(err) {
+        console.error('[NagrivaPro] Checkout error:', err);
+        btn.textContent = 'Error - Try Again';
+        btn.disabled = false;
+        setTimeout(function() { btn.textContent = originalText; }, 3000);
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-portal]');
+      if (!btn) return;
+      console.log('[NagrivaPro] Portal click:', btn.id);
+      e.preventDefault();
+
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Opening...';
+
+      getCheckoutToken().then(function(token) {
+        return fetch('/api/create-portal-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
+        });
+      }).then(function(res) {
+        return res.json().then(function(data) {
+          if (!res.ok) throw new Error(data.error || 'Request failed');
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            throw new Error('No portal URL returned');
+          }
+        });
+      }).catch(function(err) {
+        console.error('[NagrivaPro] Portal error:', err);
+        btn.textContent = 'Error - Try Again';
+        btn.disabled = false;
+        setTimeout(function() { btn.textContent = originalText; }, 3000);
+      });
+    });
+
     /* Billing toggle */
     var toggle = document.getElementById('billingToggle');
     var monthlyCard = document.getElementById('nvPlanMonthly');
     var yearlyCard = document.getElementById('nvPlanYearly');
-    var monthlyAmount = document.getElementById('nvMonthlyAmount');
-    var yearlyAmount = document.getElementById('nvYearlyAmount');
-    var monthlyPeriod = document.getElementById('nvMonthlyPeriod');
-    var yearlyPeriod = document.getElementById('nvYearlyPeriod');
 
     if (toggle && monthlyCard && yearlyCard) {
       toggle.addEventListener('click', function() {
@@ -738,7 +818,7 @@
       yearlyCard.style.display = 'none';
     }
 
-    /* Plan state management — wrapped in DOMContentLoaded so deferred modules are ready */
+    /* Plan state management — on DOMContentLoaded */
     document.addEventListener('DOMContentLoaded', function() {
       function updatePricingUI() {
         var isPro = window.NagrivaPlanManager && NagrivaPlanManager.isPro();

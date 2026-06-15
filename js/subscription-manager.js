@@ -176,9 +176,6 @@ const NagrivaSubscriptionManager = (() => {
       return;
     }
 
-    console.log('[SubscriptionManager] init: NagrivaAuthStore found, binding checkout buttons');
-    bindCheckoutButtons();
-
     const user = NagrivaAuthStore.getUser();
     if (user) {
       fetchSubscription(user.id);
@@ -191,54 +188,6 @@ const NagrivaSubscriptionManager = (() => {
         _subscription = null;
         _loading = false;
       }
-    });
-  }
-
-  /* ─── Bind checkout buttons via event delegation ─── */
-  let _buttonsBound = false;
-  function bindCheckoutButtons() {
-    if (_buttonsBound) return;
-    _buttonsBound = true;
-
-    console.log('[SubscriptionManager] bindCheckoutButtons: attaching delegation listeners');
-
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('[data-checkout]');
-      if (!btn) return;
-      console.log('[SubscriptionManager] checkout click detected on:', btn.id || btn.className, 'priceId:', btn.getAttribute('data-checkout'));
-      e.preventDefault();
-      var priceId = btn.getAttribute('data-checkout');
-      var originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Redirecting...';
-
-      redirectToCheckout(priceId).catch(function(err) {
-        console.error('[SubscriptionManager] checkout click error:', err);
-        btn.textContent = 'Error - Try Again';
-        btn.disabled = false;
-        setTimeout(function() {
-          btn.textContent = originalText;
-        }, 3000);
-      });
-    });
-
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('[data-portal]');
-      if (!btn) return;
-      console.log('[SubscriptionManager] portal click detected on:', btn.id || btn.className);
-      e.preventDefault();
-      var originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Opening...';
-
-      redirectToPortal().catch(function(err) {
-        console.error('[SubscriptionManager] portal click error:', err);
-        btn.textContent = 'Error - Try Again';
-        btn.disabled = false;
-        setTimeout(function() {
-          btn.textContent = originalText;
-        }, 3000);
-      });
     });
   }
 
@@ -256,7 +205,6 @@ const NagrivaSubscriptionManager = (() => {
     getPeriodStart: getPeriodStart,
     formatDate: formatDate,
     formatShortDate: formatShortDate,
-    bindCheckoutButtons: bindCheckoutButtons,
     STRIPE_MONTHLY_PRICE_ID: STRIPE_MONTHLY_PRICE_ID,
     STRIPE_YEARLY_PRICE_ID: STRIPE_YEARLY_PRICE_ID
   };

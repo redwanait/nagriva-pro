@@ -394,9 +394,6 @@
       if (window.NagrivaPlanManager) {
         NagrivaPlanManager.subscribe(function() { updateSubscriptionUI(); });
       }
-      if (window.NagrivaSubscriptionManager) {
-        NagrivaSubscriptionManager.bindCheckoutButtons();
-      }
       setTimeout(updateSubscriptionUI, 500);
 
       /* Upgrade button */
