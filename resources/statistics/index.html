@@ -1,50 +1,1032 @@
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Statistics — Nagriva | Data & Research for Digital Growth</title>
-  <meta name="description" content="Access the latest industry statistics, data, and research on SEO, web design, social media, AI automation, and digital marketing.">
+  <title>Statistics Hub — Nagriva | Data & Research for Digital Growth</title>
+  <meta name="description" content="Access 700+ industry statistics across SEO, web design, social media, AI automation, and digital marketing. Data-driven insights for your growth strategy.">
   <link rel="canonical" href="https://nagriva.com/resources/statistics">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" /></noscript>
   <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/footer.css">
   <link rel="stylesheet" href="../../css/mobile-optimizations.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       STATISTICS HUB — Nagriva Data & Research
+       ════════════════════════════════════════════════════════════ */
+
+    /* ─── Keyframes ─── */
+    @keyframes stFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes stPulseGlow {
+      0%, 100% { box-shadow: 0 0 12px rgba(250,204,21,0.06); }
+      50% { box-shadow: 0 0 24px rgba(250,204,21,0.15); }
+    }
+    @keyframes stCountIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes stShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* ─── Hero ─── */
+    .st-hero {
+      position: relative;
+      padding: calc(var(--navbar-height) + 60px) 0 80px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .st-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .st-hero-glow {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(250,204,21,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .st-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
+    }
+    .st-hero-float {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+    .st-hero-float--1 {
+      top: 5%;
+      right: -5%;
+      width: 350px;
+      height: 350px;
+      background: rgba(250,204,21,0.05);
+      animation: stFloat 14s ease-in-out infinite;
+    }
+    .st-hero-float--2 {
+      bottom: 5%;
+      left: -5%;
+      width: 280px;
+      height: 280px;
+      background: rgba(99,102,241,0.03);
+      animation: stFloat 18s ease-in-out infinite reverse;
+    }
+    .st-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .st-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FCD34D;
+      background: rgba(250,204,21,0.08);
+      border: 1px solid rgba(250,204,21,0.2);
+      border-radius: 99px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .st-hero-badge svg { width: 13px; height: 13px; }
+    .st-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .st-hl {
+      background: linear-gradient(135deg, #FACC15 0%, #F59E0B 50%, #FACC15 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: stShimmer 4s ease-in-out infinite;
+    }
+    .st-hero-sub {
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* ─── Search ─── */
+    .st-search-wrap {
+      position: relative;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .st-search {
+      width: 100%;
+      height: 52px;
+      padding: 0 48px 0 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--white);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    .st-search::placeholder { color: rgba(255,255,255,0.2); }
+    .st-search:focus {
+      border-color: rgba(250,204,21,0.3);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.05), 0 0 30px rgba(250,204,21,0.04);
+      background: rgba(255,255,255,0.05);
+    }
+    .st-search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: rgba(255,255,255,0.15);
+      pointer-events: none;
+    }
+    .st-search-hint {
+      position: absolute;
+      right: 44px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 4px;
+      pointer-events: none;
+    }
+    .st-search-hint kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 4px;
+      font-size: 0.6rem;
+      font-family: inherit;
+      color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+    }
+
+    /* ─── Hero Stats Bar ─── */
+    .st-hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      position: relative;
+      z-index: 1;
+    }
+    .st-hero-stat {
+      text-align: center;
+    }
+    .st-hero-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .st-hero-stat-num span { color: #FACC15; }
+    .st-hero-stat-label {
+      font-size: 0.72rem;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+    .st-hero-stat-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ─── Sections Shared ─── */
+    .st-section {
+      padding: 80px 0;
+    }
+    .st-section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .st-section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FCD34D;
+      background: rgba(250,204,21,0.06);
+      border: 1px solid rgba(250,204,21,0.12);
+      border-radius: 99px;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+    }
+    .st-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .st-section-title .st-hl { font-weight: 800; }
+    .st-section-desc {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ─── Category Cards ─── */
+    .st-categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .st-cat-card {
+      position: relative;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 28px 24px 24px;
+      text-decoration: none;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .st-cat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      opacity: 0;
+      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(250,204,21,0.04), transparent 60%);
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .st-cat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(250,204,21,0.2);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 24px rgba(250,204,21,0.06);
+    }
+    .st-cat-card:hover::before { opacity: 1; }
+    .st-cat-card:active { transform: translateY(-2px); }
+    .st-cat-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(250,204,21,0.08);
+      color: #FACC15;
+      margin-bottom: 16px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .st-cat-card:hover .st-cat-icon {
+      background: rgba(250,204,21,0.14);
+      transform: scale(1.05);
+    }
+    .st-cat-icon svg { width: 22px; height: 22px; }
+    .st-cat-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .st-cat-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .st-cat-badge {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #FACC15;
+      background: rgba(250,204,21,0.08);
+      border: 1px solid rgba(250,204,21,0.12);
+      border-radius: 99px;
+      padding: 3px 10px;
+      white-space: nowrap;
+    }
+    .st-cat-desc {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .st-cat-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(250,204,21,0.8);
+      transition: color 0.3s, gap 0.3s;
+    }
+    .st-cat-card:hover .st-cat-cta { color: #FACC15; gap: 10px; }
+    .st-cat-cta svg { width: 14px; height: 14px; transition: transform 0.3s; }
+    .st-cat-card:hover .st-cat-cta svg { transform: translateX(3px); }
+
+    .st-no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray2);
+      font-size: 0.9rem;
+    }
+    .st-no-results strong { color: var(--gray); }
+
+    /* ─── Quick Facts / Industry Insights ─── */
+    .st-insights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .st-insight-card {
+      position: relative;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .st-insight-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(250,204,21,0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 20px rgba(250,204,21,0.05);
+    }
+    .st-insight-stat {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 2.6vw, 2rem);
+      font-weight: 800;
+      color: #FACC15;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+    }
+    .st-insight-stat .st-counter { line-height: 1; }
+    .st-insight-stat .st-pct { font-size: 0.75em; font-weight: 700; }
+    .st-insight-stat .st-suffix { font-size: 0.75em; font-weight: 700; }
+    .st-insight-text {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .st-insight-source {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.68rem;
+      color: var(--gray2);
+      letter-spacing: 0.02em;
+    }
+    .st-insight-source span { color: rgba(250,204,21,0.4); }
+
+    /* ─── Trending Reports ─── */
+    .st-reports {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .st-report-card {
+      position: relative;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 24px;
+      text-decoration: none;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .st-report-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(250,204,21,0.2);
+      box-shadow: 0 20px 44px rgba(0,0,0,0.4), 0 0 20px rgba(250,204,21,0.06);
+    }
+    .st-report-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FCD34D;
+      background: rgba(250,204,21,0.07);
+      border: 1px solid rgba(250,204,21,0.12);
+      border-radius: 99px;
+      padding: 3px 10px;
+      margin-bottom: 14px;
+    }
+    .st-report-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .st-report-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .st-report-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: var(--gray2);
+    }
+    .st-report-meta-item svg { width: 13px; height: 13px; opacity: 0.5; }
+    .st-report-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(250,204,21,0.8);
+      transition: color 0.3s, gap 0.3s;
+    }
+    .st-report-card:hover .st-report-btn { color: #FACC15; gap: 10px; }
+    .st-report-btn svg { width: 13px; height: 13px; transition: transform 0.3s; }
+    .st-report-card:hover .st-report-btn svg { transform: translateX(3px); }
+
+    /* ─── Newsletter ─── */
+    .st-subscribe {
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(250,204,21,0.08);
+      border-radius: 20px;
+      padding: 56px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .st-subscribe::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(250,204,21,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .st-subscribe-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .st-subscribe h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .st-subscribe p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .st-subscribe-form {
+      display: flex;
+      gap: 10px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .st-subscribe-input {
+      flex: 1;
+      height: 48px;
+      padding: 0 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--white);
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .st-subscribe-input::placeholder { color: rgba(255,255,255,0.18); }
+    .st-subscribe-input:focus {
+      border-color: rgba(250,204,21,0.35);
+      box-shadow: 0 0 0 3px rgba(250,204,21,0.05);
+    }
+    .st-subscribe-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: linear-gradient(135deg, #FACC15 0%, #F59E0B 100%);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .st-subscribe-btn:hover {
+      box-shadow: 0 0 24px rgba(250,204,21,0.25);
+      transform: translateY(-1px);
+    }
+    .st-subscribe-btn svg { width: 15px; height: 15px; }
+    .st-subscribe-note {
+      font-size: 0.7rem;
+      color: var(--gray2);
+      margin-top: 14px;
+    }
+
+    /* ─── Scroll Reveal ─── */
+    .st-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+    .st-reveal.visible { opacity: 1; transform: translateY(0); }
+    .st-r-1 { transition-delay: 0.04s; }
+    .st-r-2 { transition-delay: 0.08s; }
+    .st-r-3 { transition-delay: 0.12s; }
+    .st-r-4 { transition-delay: 0.16s; }
+    .st-r-5 { transition-delay: 0.2s; }
+    .st-r-6 { transition-delay: 0.24s; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .st-categories { grid-template-columns: repeat(2, 1fr); }
+      .st-reports { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .st-hero { padding: calc(var(--navbar-height) + 40px) 0 60px; }
+      .st-section { padding: 56px 0; }
+      .st-hero-stats { gap: 20px; flex-wrap: wrap; }
+      .st-hero-stat-divider { display: none; }
+      .st-categories { grid-template-columns: 1fr; }
+      .st-insights { grid-template-columns: 1fr; }
+      .st-reports { grid-template-columns: 1fr; }
+      .st-section-header { margin-bottom: 32px; }
+      .st-subscribe { padding: 40px 24px; }
+      .st-subscribe-form { flex-direction: column; }
+      .st-search-hint { display: none; }
+    }
+    @media (max-width: 480px) {
+      .st-hero h1 { font-size: 1.7rem; }
+      .st-hero-stat-num { font-size: 1.2rem; }
+    }
+  </style>
 </head>
 <body data-page="statistics">
+
   <div id="navbar-container"></div>
-  <section class="section" style="padding-top:140px">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag">✦ Statistics</div>
-        <h1 class="section-title">Data & <span class="text-gradient">Research</span></h1>
-        <p class="section-desc">Industry statistics, benchmarks, and data-driven insights to inform your digital growth strategy.</p>
+
+  <main>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="st-hero">
+      <div class="st-hero-bg">
+        <div class="st-hero-glow"></div>
+        <div class="st-hero-grid"></div>
+        <div class="st-hero-float st-hero-float--1"></div>
+        <div class="st-hero-float st-hero-float--2"></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px">
-        <a href="/pages/statistics/seo-statistics.html" style="background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px;text-decoration:none;transition:all 0.4s ease">
-          <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(250,204,21,0.08);color:#FACC15;margin-bottom:18px">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <div class="st-hero-inner st-reveal">
+        <div class="st-hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+          Data-Driven Insights
+        </div>
+        <h1>Statistics <span class="st-hl">Hub</span></h1>
+        <p class="st-hero-sub">Curated industry benchmarks, data points, and research across SEO, web design, social media, AI automation, and digital marketing.</p>
+        <div class="st-search-wrap">
+          <input class="st-search" type="text" placeholder="Search Industry Statistics..." aria-label="Search statistics" id="stSearch" autocomplete="off">
+          <span class="st-search-hint"><kbd>&#8984;</kbd> <kbd>K</kbd></span>
+          <svg class="st-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="st-hero-stats">
+          <div class="st-hero-stat">
+            <div class="st-hero-stat-num"><span>700</span>+</div>
+            <div class="st-hero-stat-label">Statistics</div>
           </div>
-          <h3 style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:8px">SEO Statistics 2026</h3>
-          <p style="font-size:0.85rem;color:var(--gray);line-height:1.6;margin-bottom:16px">100+ data-driven facts about Google, organic traffic, mobile SEO, local search, and link building.</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:#FACC15">View Statistics <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-        <div style="background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-          <p style="font-size:0.9rem;color:var(--gray2)">More statistics pages coming soon:<br>Web Design Stats, Social Media Stats, AI Automation Stats</p>
+          <div class="st-hero-stat-divider"></div>
+          <div class="st-hero-stat">
+            <div class="st-hero-stat-num"><span>6</span></div>
+            <div class="st-hero-stat-label">Categories</div>
+          </div>
+          <div class="st-hero-stat-divider"></div>
+          <div class="st-hero-stat">
+            <div class="st-hero-stat-num"><span>4</span></div>
+            <div class="st-hero-stat-label">Reports</div>
+          </div>
+          <div class="st-hero-stat-divider"></div>
+          <div class="st-hero-stat">
+            <div class="st-hero-stat-num"><span>2026</span></div>
+            <div class="st-hero-stat-label">Latest Data</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ═══════════════ FEATURED CATEGORIES ═══════════════ -->
+    <section class="st-section" id="categories">
+      <div class="container">
+        <div class="st-section-header st-reveal">
+          <div class="st-section-tag">Browse Categories</div>
+          <h2 class="st-section-title">Featured Statistics <span class="st-hl">Categories</span></h2>
+          <p class="st-section-desc">Explore data across every dimension of digital growth — from search algorithms to social engagement.</p>
+        </div>
+        <div class="st-categories" id="stCategories">
+          <a href="/pages/statistics/seo-statistics.html" class="st-cat-card st-reveal st-r-1" data-category="seo">
+            <div class="st-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="st-cat-card-header">
+              <h3 class="st-cat-title">SEO Statistics</h3>
+              <span class="st-cat-badge">120+ Stats</span>
+            </div>
+            <p class="st-cat-desc">Organic traffic benchmarks, Google ranking factors, keyword trends, backlink data, local SEO insights, and Core Web Vitals research.</p>
+            <span class="st-cat-cta">Explore Data <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+
+          <div class="st-cat-card st-reveal st-r-2" data-category="web-design">
+            <div class="st-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20V8l10-6 10 6v12"/><path d="M2 20h20"/><path d="M6 14v4"/><path d="M10 12v6"/><path d="M14 10v8"/><path d="M18 8v10"/></svg>
+            </div>
+            <div class="st-cat-card-header">
+              <h3 class="st-cat-title">Web Design Statistics</h3>
+              <span class="st-cat-badge">90+ Stats</span>
+            </div>
+            <p class="st-cat-desc">UI/UX benchmarks, conversion rate data, mobile design trends, page speed research, accessibility compliance stats, and layout performance metrics.</p>
+            <span class="st-cat-cta">Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-cat-card st-reveal st-r-3" data-category="digital-marketing">
+            <div class="st-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="st-cat-card-header">
+              <h3 class="st-cat-title">Digital Marketing Statistics</h3>
+              <span class="st-cat-badge">140+ Stats</span>
+            </div>
+            <p class="st-cat-desc">PPC benchmarks, email marketing metrics, content marketing ROI, conversion rates, video marketing data, and omnichannel performance trends.</p>
+            <span class="st-cat-cta">Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-cat-card st-reveal st-r-4" data-category="ai-automation">
+            <div class="st-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 0 1 10 10c0 5-4 8-10 8"/><path d="M2 12a10 10 0 0 1 10-10"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="st-cat-card-header">
+              <h3 class="st-cat-title">AI Automation Statistics</h3>
+              <span class="st-cat-badge">110+ Stats</span>
+            </div>
+            <p class="st-cat-desc">AI adoption rates, automation ROI, LLM usage trends, chatbot effectiveness, workflow automation benchmarks, and AI content statistics.</p>
+            <span class="st-cat-cta">Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-cat-card st-reveal st-r-5" data-category="social-media">
+            <div class="st-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </div>
+            <div class="st-cat-card-header">
+              <h3 class="st-cat-title">Social Media Statistics</h3>
+              <span class="st-cat-badge">130+ Stats</span>
+            </div>
+            <p class="st-cat-desc">Platform demographics, engagement rates, video consumption data, influencer marketing ROI, social commerce trends, and algorithm insights.</p>
+            <span class="st-cat-cta">Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-cat-card st-reveal st-r-6" data-category="small-business">
+            <div class="st-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+            </div>
+            <div class="st-cat-card-header">
+              <h3 class="st-cat-title">Small Business Statistics</h3>
+              <span class="st-cat-badge">110+ Stats</span>
+            </div>
+            <p class="st-cat-desc">SMB growth benchmarks, digital adoption data, local marketing trends, small business revenue stats, and entrepreneurship research.</p>
+            <span class="st-cat-cta">Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-no-results" id="stNoResults" style="display:none">
+            <p>No categories found for "<strong id="stQueryDisplay"></strong>".<br>Try searching for SEO, Marketing, AI, Social Media, or Web Design.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ LATEST INDUSTRY INSIGHTS ═══════════════ -->
+    <section class="st-section">
+      <div class="container">
+        <div class="st-section-header st-reveal">
+          <div class="st-section-tag">Quick Facts</div>
+          <h2 class="st-section-title">Latest Industry <span class="st-hl">Insights</span></h2>
+          <p class="st-section-desc">The numbers that define today's digital landscape — sourced from leading research and industry reports.</p>
+        </div>
+        <div class="st-insights">
+          <div class="st-insight-card st-reveal st-r-1">
+            <div class="st-insight-stat">
+              <span class="st-counter" data-target="93">0</span><span class="st-pct">%</span>
+            </div>
+            <p class="st-insight-text">of online experiences begin with a search engine, making SEO the cornerstone of digital visibility.</p>
+            <span class="st-insight-source"><span>—</span> Google Research</span>
+          </div>
+
+          <div class="st-insight-card st-reveal st-r-2">
+            <div class="st-insight-stat">
+              <span class="st-counter" data-target="75">0</span><span class="st-pct">%</span>
+            </div>
+            <p class="st-insight-text">of users never scroll past the first page of Google search results — page-one ranking is critical.</p>
+            <span class="st-insight-source"><span>—</span> Backlinko</span>
+          </div>
+
+          <div class="st-insight-card st-reveal st-r-3">
+            <div class="st-insight-stat">
+              <span class="st-counter" data-target="53">0</span><span class="st-pct">%</span>
+            </div>
+            <p class="st-insight-text">of mobile visitors leave a page that takes more than 3 seconds to load — speed directly impacts revenue.</p>
+            <span class="st-insight-source"><span>—</span> Google Think</span>
+          </div>
+
+          <div class="st-insight-card st-reveal st-r-4">
+            <div class="st-insight-stat">
+              <span class="st-counter" data-target="10">0</span><span class="st-suffix">+ hrs</span>
+            </div>
+            <p class="st-insight-text">Businesses using AI automation save an average of 10+ hours weekly on repetitive tasks and workflows.</p>
+            <span class="st-insight-source"><span>—</span> McKinsey Digital</span>
+          </div>
+
+          <div class="st-insight-card st-reveal st-r-5">
+            <div class="st-insight-stat">
+              <span class="st-counter" data-target="81">0</span><span class="st-pct">%</span>
+            </div>
+            <p class="st-insight-text">of consumers research online before making a purchase — digital presence drives buying decisions.</p>
+            <span class="st-insight-source"><span>—</span> Retail Dive</span>
+          </div>
+
+          <div class="st-insight-card st-reveal st-r-6">
+            <div class="st-insight-stat">
+              <span class="st-counter" data-target="67">0</span><span class="st-pct">%</span>
+            </div>
+            <p class="st-insight-text">of businesses report that blogging generates more leads and significantly higher conversion rates than non-bloggers.</p>
+            <span class="st-insight-source"><span>—</span> HubSpot</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ TRENDING REPORTS ═══════════════ -->
+    <section class="st-section">
+      <div class="container">
+        <div class="st-section-header st-reveal">
+          <div class="st-section-tag">Research Reports</div>
+          <h2 class="st-section-title">Trending <span class="st-hl">Reports</span></h2>
+          <p class="st-section-desc">Curated collections of the most relevant statistics for each category, updated quarterly.</p>
+        </div>
+        <div class="st-reports">
+          <a href="/pages/statistics/seo-statistics.html" class="st-report-card st-reveal st-r-1">
+            <span class="st-report-tag">SEO</span>
+            <h3 class="st-report-title">SEO Statistics 2026</h3>
+            <div class="st-report-meta">
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                120 Stats
+              </span>
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Updated Jun 2026
+              </span>
+            </div>
+            <span class="st-report-btn">Read Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+
+          <div class="st-report-card st-reveal st-r-2">
+            <span class="st-report-tag">AI & Marketing</span>
+            <h3 class="st-report-title">AI Marketing Statistics 2026</h3>
+            <div class="st-report-meta">
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                110 Stats
+              </span>
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Updated May 2026
+              </span>
+            </div>
+            <span class="st-report-btn">Read Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-report-card st-reveal st-r-3">
+            <span class="st-report-tag">Web Design</span>
+            <h3 class="st-report-title">Web Design Trends 2026</h3>
+            <div class="st-report-meta">
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                90 Stats
+              </span>
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Updated Apr 2026
+              </span>
+            </div>
+            <span class="st-report-btn">Read Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <div class="st-report-card st-reveal st-r-4">
+            <span class="st-report-tag">Social Media</span>
+            <h3 class="st-report-title">Social Media Usage Stats 2026</h3>
+            <div class="st-report-meta">
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                130 Stats
+              </span>
+              <span class="st-report-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Updated Jun 2026
+              </span>
+            </div>
+            <span class="st-report-btn">Read Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ NEWSLETTER ═══════════════ -->
+    <section class="st-section" style="padding-bottom:60px">
+      <div class="container">
+        <div class="st-subscribe st-reveal">
+          <div class="st-subscribe-inner">
+            <h2>Get New Research &amp; Statistics Monthly</h2>
+            <p>Receive fresh industry data and reports directly in your inbox.</p>
+            <form class="st-subscribe-form" onsubmit="event.preventDefault();alert('Thanks for subscribing! You\'ll receive monthly research updates.')">
+              <input class="st-subscribe-input" type="email" placeholder="Enter your email" required aria-label="Email address">
+              <button class="st-subscribe-btn" type="submit">
+                Subscribe
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </form>
+            <p class="st-subscribe-note">No spam, ever. Unsubscribe anytime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <div id="footer-container"></div>
+
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="/js/supabase-config.js"></script>
-  <script defer src="/js/script.js"></script>
-  <script defer src="/js/i18n.js"></script>
-  <script defer src="/js/auth.js"></script>
-  <script defer src="/js/performance-optimizer.js"></script>
-  <script defer src="/js/lazy-loader.js"></script>
+  <script defer src="../../js/supabase-config.js"></script>
+  <script defer src="../../js/auth.js"></script>
+  <script defer src="../../js/script.js"></script>
+  <script defer src="../../js/i18n.js"></script>
+  <script defer src="../../js/lazy-loader.js"></script>
   <div id="cookie-consent-container"></div>
-<script defer src="../js/layout.js"></script>
+  <script defer src="../../js/layout.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      /* ─── Scroll Reveal ─── */
+      var revealEls = document.querySelectorAll('.st-reveal');
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+      /* ─── Animated Counters ─── */
+      var counters = document.querySelectorAll('.st-counter');
+      var counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var target = parseInt(el.getAttribute('data-target'), 10);
+            var current = 0;
+            var duration = 1600;
+            var stepTime = Math.floor(duration / target);
+            if (stepTime < 12) stepTime = 12;
+            var timer = setInterval(function() {
+              current += 1;
+              el.textContent = current;
+              if (current >= target) {
+                el.textContent = target;
+                clearInterval(timer);
+              }
+            }, stepTime);
+            counterObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.3 });
+      counters.forEach(function(el) { counterObserver.observe(el); });
+
+      /* ─── Search ─── */
+      var searchInput = document.getElementById('stSearch');
+      var categoryCards = document.querySelectorAll('.st-cat-card');
+      var noResults = document.getElementById('stNoResults');
+      var queryDisplay = document.getElementById('stQueryDisplay');
+
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.blur();
+        }
+      });
+
+      searchInput.addEventListener('input', function() {
+        var q = this.value.toLowerCase().trim();
+        var visibleCount = 0;
+
+        categoryCards.forEach(function(card) {
+          var title = card.querySelector('.st-cat-title').textContent.toLowerCase();
+          var desc = card.querySelector('.st-cat-desc').textContent.toLowerCase();
+          var category = (card.getAttribute('data-category') || '').toLowerCase();
+          var match = !q || title.includes(q) || desc.includes(q) || category.includes(q);
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+
+        if (noResults) {
+          if (q && visibleCount === 0) {
+            noResults.style.display = 'block';
+            queryDisplay.textContent = q;
+          } else {
+            noResults.style.display = 'none';
+          }
+        }
+      });
+
+      /* ─── Cursor Glow on Category Cards ─── */
+      categoryCards.forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mx', x + '%');
+          card.style.setProperty('--my', y + '%');
+        });
+      });
+
+    });
+  </script>
 </body></html>

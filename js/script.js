@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initBeforeAfterSliders();
   initServiceCTA();
+  initAIAdvisor();
   /* Defer homepage services load to after paint */
   requestIdleCallback(function() { initHomepageServices(); }, { timeout: 3000 });
 });
@@ -1077,4 +1078,115 @@ function injectArticleSchema(articleData) {
     }
   });
   document.head.appendChild(script);
+}
+
+/* ════════════════════════════════════════════
+   NAGRIVA AI ADVISOR — Chat Interface
+   ════════════════════════════════════════════ */
+function initAIAdvisor() {
+  var chatEl = document.getElementById('aiChat');
+  var input = document.getElementById('aiInput');
+  var btn = document.getElementById('aiBtn');
+  var prompts = document.getElementById('aiPrompts');
+  var videoWrap = document.getElementById('aiVideoWrap');
+  var recs = document.getElementById('aiRecs');
+
+  if (!input || !btn || !chatEl) return;
+
+  var isAnalyzing = false;
+  var hasSubmitted = false;
+
+  var aiResponses = {
+    'improve my seo': 'Great choice! Based on your goal, I recommend starting with Local SEO to target nearby customers, optimizing your Google Business Profile, and conducting a full site audit for technical SEO improvements.',
+    'build a website': 'Excellent! A professional website is the foundation of your digital presence. I recommend our Website Development package with modern design, mobile optimization, and fast loading speeds tailored to your industry.',
+    'automate my business': 'Smart move! I recommend automating repetitive tasks with AI-powered workflows, CRM integration, and automated email marketing to save time and increase efficiency.',
+    'generate more leads': 'Perfect focus! I suggest a combination of SEO-optimized landing pages, targeted Google Ads campaigns, and lead capture automation to consistently bring in qualified prospects.'
+  };
+
+  var defaultResponse = 'Thanks for reaching out! Our team will analyze your specific needs and create a customized growth plan. Would you like to schedule a free consultation to discuss further?';
+
+  /* ─── Prompt clicks ─── */
+  if (prompts) {
+    prompts.addEventListener('click', function(e) {
+      var promptBtn = e.target.closest('.ai-prompt');
+      if (!promptBtn) return;
+      var text = promptBtn.getAttribute('data-prompt');
+      if (text) {
+        input.value = text;
+        handleSend();
+      }
+    });
+  }
+
+  /* ─── Send events ─── */
+  btn.addEventListener('click', handleSend);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  function handleSend() {
+    var text = input.value.trim();
+    if (!text || isAnalyzing) return;
+    isAnalyzing = true;
+
+    /* Hide prompts on first submit */
+    if (!hasSubmitted) {
+      hasSubmitted = true;
+      if (prompts) prompts.classList.add('hidden');
+    }
+
+    /* ─── Append user message ─── */
+    appendMsg(text, 'user');
+
+    input.value = '';
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    /* ─── Thinking dots ─── */
+    var dotsEl = document.createElement('div');
+    dotsEl.className = 'ai-msg ai-msg--thinking';
+    dotsEl.innerHTML = '<span></span><span></span><span></span>';
+    chatEl.appendChild(dotsEl);
+    chatEl.scrollTop = chatEl.scrollHeight;
+
+    /* ─── Simulated AI response ─── */
+    setTimeout(function() {
+      /* Remove thinking dots */
+      if (dotsEl.parentNode) dotsEl.parentNode.removeChild(dotsEl);
+
+      var reply = getAIResponse(text);
+      appendMsg(reply, 'ai');
+
+      isAnalyzing = false;
+      btn.classList.remove('loading');
+      btn.disabled = false;
+
+      /* ─── Crossfade video → recs ─── */
+      if (videoWrap && recs) {
+        videoWrap.classList.add('hidden');
+        recs.classList.add('visible');
+      }
+    }, 1400 + Math.random() * 600);
+  }
+
+  function appendMsg(text, role) {
+    var el = document.createElement('div');
+    el.className = 'ai-msg ' + (role === 'user' ? 'ai-msg--user' : 'ai-msg--ai');
+    el.textContent = text;
+    chatEl.appendChild(el);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function getAIResponse(text) {
+    var lower = text.toLowerCase();
+    for (var key in aiResponses) {
+      if (lower.indexOf(key) !== -1) {
+        return aiResponses[key];
+      }
+    }
+    return defaultResponse;
+  }
 }

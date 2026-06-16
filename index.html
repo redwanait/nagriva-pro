@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="/css/mobile-optimizations.css">
   <link rel="stylesheet" href="/css/performance.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/floating-elements.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/testimonials.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/services-categories.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/homepage-pricing.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/admin-auth.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/onboarding.css" media="print" onload="this.media='all'">
@@ -317,6 +320,7 @@
       </div>
     </div>
   </section>
+
   <!-- ══════════════════════════ MARQUEE ══════════════════════════ -->
   <section class="marquee-section">
     <div class="marquee-track">
@@ -345,72 +349,208 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════ SERVICES ══════════════════════════ -->
-  <section class="sv-section section lazy-section" id="services">
+  <!-- ══════════════════════════ HOW NAGRIVA WORKS ══════════════════════════ -->
+  <section class="hiw-section section lazy-section" id="how-it-works">
+    <div class="hiw-bg-glow"></div>
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-tag" data-i18n="services.tag">What we do</div>
-        <h2 class="section-title" data-i18n="services.title">Everything You Need to <span style="color:#FACC15">Grow</span></h2>
-        <p class="section-desc" data-i18n="services.subtitle">End-to-end digital solutions crafted to position your brand ahead of the competition.</p>
+        <div class="section-tag">✦ HOW IT WORKS</div>
+        <h2 class="section-title">How <span class="text-gradient">Nagriva</span> Works</h2>
+        <p class="section-desc">A simple process to transform your business with professional websites, SEO, and AI automation.</p>
       </div>
 
-      <div class="sv-grid" id="homepageServices">
-        <div id="serviceSkeleton" class="sv-skeleton-grid">
-          <div class="sv-skeleton-card">
-            <div class="sv-skeleton-media"></div>
-            <div class="sv-skeleton-body">
-              <div class="sv-skeleton-line w70"></div>
-              <div class="sv-skeleton-line w50"></div>
-              <div class="sv-skeleton-line w40"></div>
+      <div class="hiw-grid">
+        <!-- ═══ CARD 1 — VIDEO ═══ -->
+        <div class="hiw-card fade-up" style="--delay:0s">
+          <div class="hiw-media">
+            <video autoplay muted loop playsinline preload="metadata" class="hiw-video">
+              <source src="/assets/images/nagriva%20video%20/hiw-client.mp4" type="video/mp4">
+            </video>
+            <div class="hiw-media-overlay"></div>
+            <div class="hiw-step-badge">
+              <span class="hiw-step-number">01</span>
             </div>
           </div>
-          <div class="sv-skeleton-card">
-            <div class="sv-skeleton-media"></div>
-            <div class="sv-skeleton-body">
-              <div class="sv-skeleton-line w70"></div>
-              <div class="sv-skeleton-line w50"></div>
-              <div class="sv-skeleton-line w40"></div>
+          <div class="hiw-body">
+            <span class="hiw-step-label">Step 01</span>
+            <h3 class="hiw-title">Choose Your Service</h3>
+            <p class="hiw-desc">Explore Website Development, SEO, AI Automation, and Digital Marketing solutions tailored to your business goals.</p>
+            <a href="/pages/services.html" class="hiw-cta">
+              <span>Explore Services</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- ═══ CARD 2 — STRATEGY ═══ -->
+        <div class="hiw-card fade-up" style="--delay:0.1s">
+          <div class="hiw-media">
+            <img src="https://pub-a953705e56184b6098d69f52bb0c5c44.r2.dev/ChatGPT%20Image%20Jun%2016%2C%202026%2C%2011_27_36%20PM.png" alt="Get a Custom Strategy" class="hiw-image" loading="lazy">
+            <div class="hiw-media-overlay"></div>
+            <div class="hiw-step-badge">
+              <span class="hiw-step-number">02</span>
             </div>
           </div>
-          <div class="sv-skeleton-card">
-            <div class="sv-skeleton-media"></div>
-            <div class="sv-skeleton-body">
-              <div class="sv-skeleton-line w70"></div>
-              <div class="sv-skeleton-line w50"></div>
-              <div class="sv-skeleton-line w40"></div>
+          <div class="hiw-body">
+            <span class="hiw-step-label">Step 02</span>
+            <h3 class="hiw-title">Get a Custom Strategy</h3>
+            <p class="hiw-desc">Our team analyzes your business and creates a tailored growth plan based on your objectives and budget.</p>
+            <a href="/pages/services.html" class="hiw-cta">
+              <span>View Process</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- ═══ CARD 3 — LAUNCH ═══ -->
+        <div class="hiw-card fade-up" style="--delay:0.2s">
+          <div class="hiw-media">
+            <img src="https://pub-a953705e56184b6098d69f52bb0c5c44.r2.dev/ChatGPT%20Image%20Jun%2016%2C%202026%2C%2011_27_41%20PM.png" alt="Launch & Grow" class="hiw-image" loading="lazy">
+            <div class="hiw-media-overlay"></div>
+            <div class="hiw-step-badge">
+              <span class="hiw-step-number">03</span>
             </div>
           </div>
-          <div class="sv-skeleton-card">
-            <div class="sv-skeleton-media"></div>
-            <div class="sv-skeleton-body">
-              <div class="sv-skeleton-line w70"></div>
-              <div class="sv-skeleton-line w50"></div>
-              <div class="sv-skeleton-line w40"></div>
-            </div>
-          </div>
-          <div class="sv-skeleton-card">
-            <div class="sv-skeleton-media"></div>
-            <div class="sv-skeleton-body">
-              <div class="sv-skeleton-line w70"></div>
-              <div class="sv-skeleton-line w50"></div>
-              <div class="sv-skeleton-line w40"></div>
-            </div>
-          </div>
-          <div class="sv-skeleton-card">
-            <div class="sv-skeleton-media"></div>
-            <div class="sv-skeleton-body">
-              <div class="sv-skeleton-line w70"></div>
-              <div class="sv-skeleton-line w50"></div>
-              <div class="sv-skeleton-line w40"></div>
-            </div>
+          <div class="hiw-body">
+            <span class="hiw-step-label">Step 03</span>
+            <h3 class="hiw-title">Launch &amp; Grow</h3>
+            <p class="hiw-desc">We build, optimize, and support your project to help you generate more traffic, leads, and revenue.</p>
+            <a href="/pages/contact.html" class="hiw-cta">
+              <span>Start Project</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="services-cta-wrapper fade-up" id="servicesCta" style="display:none;">
-        <a href="/pages/services.html" class="services-cta-btn" data-cta="tertiary" data-cta-action="see-services">
-          <span>View All Services</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+  <!-- ══════════════════════════ SERVICES CATEGORIES ══════════════════════════ -->
+  <section class="sc-section section lazy-section lazy-section--large" id="services">
+    <div class="sc-bg"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">SERVICES</div>
+        <h2 class="section-title">Solutions For Every Stage Of <span class="text-gradient">Business Growth</span></h2>
+        <p class="section-desc">Explore the services Nagriva offers to help businesses grow, automate, and scale online.</p>
+      </div>
+
+      <div class="sc-grid">
+        <a href="/pages/services/website-development.html" class="sc-card fade-up" style="--delay:0s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+          <h3 class="sc-card-title">Website Development</h3>
+          <p class="sc-card-desc">Professional websites built to generate leads and grow your business.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/seo.html" class="sc-card fade-up" style="--delay:0.04s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <h3 class="sc-card-title">SEO Optimization</h3>
+          <p class="sc-card-desc">Data-driven SEO strategies that improve rankings and drive organic traffic.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/ai-automation.html" class="sc-card fade-up" style="--delay:0.08s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3 class="sc-card-title">AI Automation</h3>
+          <p class="sc-card-desc">Smart automation solutions that save time and streamline your workflows.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/social-media.html" class="sc-card fade-up" style="--delay:0.12s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </div>
+          <h3 class="sc-card-title">Digital Marketing</h3>
+          <p class="sc-card-desc">Targeted campaigns that amplify your reach and maximize your ROI.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/services/ecommerce-stores.html" class="sc-card fade-up" style="--delay:0.16s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          </div>
+          <h3 class="sc-card-title">E-Commerce Stores</h3>
+          <p class="sc-card-desc">High-converting online stores designed to showcase and sell your products.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/branding.html" class="sc-card fade-up" style="--delay:0s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+          </div>
+          <h3 class="sc-card-title">Branding &amp; Design</h3>
+          <p class="sc-card-desc">Strategic brand identities and visual designs that make you stand out.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/services/blog-creation.html" class="sc-card fade-up" style="--delay:0.04s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          </div>
+          <h3 class="sc-card-title">Content Marketing</h3>
+          <p class="sc-card-desc">Engaging content that attracts, educates, and converts your audience.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/strategy.html" class="sc-card fade-up" style="--delay:0.08s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          </div>
+          <h3 class="sc-card-title">Analytics &amp; Growth</h3>
+          <p class="sc-card-desc">Actionable insights and growth strategies powered by real-time data.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/contact.html" class="sc-card fade-up" style="--delay:0.12s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3 class="sc-card-title">Business Consulting</h3>
+          <p class="sc-card-desc">Expert guidance to help you make smarter decisions and scale faster.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+
+        <a href="/pages/contact.html" class="sc-card fade-up" style="--delay:0.16s">
+          <div class="sc-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-3-3m3 3 3-3"></path><path d="M5 21h14"></path></svg>
+          </div>
+          <h3 class="sc-card-title">Custom Solutions</h3>
+          <p class="sc-card-desc">Tailored digital solutions built around your specific business needs.</p>
+          <span class="sc-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="sc-footer fade-up" style="--delay:0.2s">
+        <a href="/pages/services.html">
+          View All Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
     </div>
@@ -629,6 +769,263 @@
         <h2 class="tf-cta-title">Ready to Transform Your Website?</h2>
         <p class="tf-cta-desc">Let's build a modern website that helps your business grow.</p>
         <a href="/pages/contact.html" class="btn-primary">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CLIENT TESTIMONIALS ══════════════════════════ -->
+  <section class="ts-section section lazy-section lazy-section--xl" id="testimonials">
+    <div class="ts-bg-wave"></div>
+    <div class="ts-particles">
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+      <div class="ts-particle"></div>
+    </div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">CLIENT SUCCESS</div>
+        <h2 class="section-title">Trusted by Businesses That Want <span class="text-gradient">Real Growth</span></h2>
+        <p class="section-desc">See how businesses use Nagriva to grow online, generate leads, and improve their digital presence.</p>
+      </div>
+
+
+
+      <div class="ts-test-grid">
+        <div class="ts-test-card fade-up" style="--delay:0.04s">
+          <div class="ts-test-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="ts-test-quote-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+          </div>
+          <p class="ts-test-text">"We needed a modern website and Nagriva delivered beyond expectations. Our online inquiries increased significantly."</p>
+          <div class="ts-test-author">
+            <div class="ts-test-avatar">AB</div>
+            <div class="ts-test-info">
+              <div class="ts-test-name">Ahmed Benali</div>
+              <div class="ts-test-role">Founder</div>
+              <div class="ts-test-company">Atlas Solutions</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ts-test-card fade-up" style="--delay:0.1s">
+          <div class="ts-test-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="ts-test-quote-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+          </div>
+          <p class="ts-test-text">"Nagriva helped us improve our SEO strategy and generate more organic traffic within months."</p>
+          <div class="ts-test-author">
+            <div class="ts-test-avatar">SE</div>
+            <div class="ts-test-info">
+              <div class="ts-test-name">Sara El Idrissi</div>
+              <div class="ts-test-role">Marketing Manager</div>
+              <div class="ts-test-company">Digital Growth Hub</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ts-test-card fade-up" style="--delay:0.16s">
+          <div class="ts-test-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="ts-test-quote-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+          </div>
+          <p class="ts-test-text">"The AI automation solutions saved us hours every week and improved our workflow dramatically."</p>
+          <div class="ts-test-author">
+            <div class="ts-test-avatar">YA</div>
+            <div class="ts-test-info">
+              <div class="ts-test-name">Youssef Amrani</div>
+              <div class="ts-test-role">CEO</div>
+              <div class="ts-test-company">Smart Operations</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ts-test-card fade-up" style="--delay:0.04s">
+          <div class="ts-test-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="ts-test-quote-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+          </div>
+          <p class="ts-test-text">"Our brand identity was completely transformed. The design team understood our vision perfectly and brought it to life."</p>
+          <div class="ts-test-author">
+            <div class="ts-test-avatar">LK</div>
+            <div class="ts-test-info">
+              <div class="ts-test-name">Leila Karim</div>
+              <div class="ts-test-role">Creative Director</div>
+              <div class="ts-test-company">Studio Nova</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ts-test-card fade-up" style="--delay:0.1s">
+          <div class="ts-test-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="ts-test-quote-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+          </div>
+          <p class="ts-test-text">"The social media strategy Nagriva built for us doubled our engagement in just three months. Highly recommended."</p>
+          <div class="ts-test-author">
+            <div class="ts-test-avatar">MB</div>
+            <div class="ts-test-info">
+              <div class="ts-test-name">Mehdi Boussaid</div>
+              <div class="ts-test-role">Growth Lead</div>
+              <div class="ts-test-company">Elevate Ventures</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ts-test-card fade-up" style="--delay:0.16s">
+          <div class="ts-test-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="ts-test-quote-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+          </div>
+          <p class="ts-test-text">"From the initial consultation to the final launch, everything was seamless. Our e-commerce sales have never been better."</p>
+          <div class="ts-test-author">
+            <div class="ts-test-avatar">NF</div>
+            <div class="ts-test-info">
+              <div class="ts-test-name">Nadia Fassi</div>
+              <div class="ts-test-role">E-commerce Manager</div>
+              <div class="ts-test-company">TrendStyle Store</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts-mobile-indicator"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PRICING ══════════════════════════ -->
+  <section class="hp-pricing section lazy-section lazy-section--xl" id="pricing">
+    <div class="hp-pricing-bg"></div>
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">PRICING</div>
+        <h2 class="section-title">Choose Your <span class="text-gradient">Growth Plan</span></h2>
+        <p class="section-desc">Flexible options designed for businesses at every stage.</p>
+      </div>
+
+      <div class="hp-cards">
+        <div class="hp-card fade-up" style="--delay:0s">
+          <div class="hp-card-header">
+            <h3 class="hp-card-name">Basic</h3>
+            <p class="hp-card-desc">Perfect for businesses exploring Nagriva tools and resources.</p>
+          </div>
+          <div class="hp-card-divider"></div>
+          <ul class="hp-card-features">
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Access to free tools
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              SEO title generator
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Website cost calculator
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Blog resources
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Statistics &amp; research library
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Community support
+            </li>
+          </ul>
+          <a href="/pages/signup.html" class="hp-card-btn btn-primary">Get Started Free</a>
+        </div>
+
+        <div class="hp-card hp-card--featured fade-up" style="--delay:0.1s">
+          <div class="hp-card-badge">MOST POPULAR</div>
+          <div class="hp-card-header">
+            <h3 class="hp-card-name">Nagriva Pro</h3>
+            <p class="hp-card-desc">Unlock premium services, advanced tools, and personalized growth support.</p>
+          </div>
+          <div class="hp-card-divider"></div>
+          <ul class="hp-card-features">
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Everything in Basic
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Priority support
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Advanced SEO audits
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              AI business recommendations
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Premium marketing resources
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Custom strategy consultation
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Early access to new tools
+            </li>
+            <li class="hp-card-feature">
+              <svg class="hp-card-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Exclusive business insights
+            </li>
+          </ul>
+          <a href="/pages/nagriva-pro.html" class="hp-card-btn hp-btn-accent">Upgrade to Pro</a>
+        </div>
       </div>
     </div>
   </section>
@@ -919,8 +1316,594 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════ NAGRIVA AI ADVISOR ══════════════════════════ -->
+  <section class="section lazy-section" id="ai-advisor">
+    <style>
+      .ai-card {
+        position: relative;
+        background: rgba(11,15,15,0.5);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border: 1px solid rgba(250,204,21,0.15);
+        border-radius: 28px;
+        padding: 32px 44px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 52px;
+        align-items: stretch;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 60px rgba(250,204,21,0.03);
+        min-height: 440px;
+      }
+      .ai-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(250,204,21,0.05) 0%, transparent 50%, rgba(250,204,21,0.03) 100%);
+        pointer-events: none;
+      }
+      .ai-glow {
+        position: absolute;
+        top: -160px; right: -120px;
+        width: 600px; height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(250,204,21,0.08) 0%, transparent 70%);
+        filter: blur(120px);
+        pointer-events: none;
+        animation: aiGlowPulse 6s ease-in-out infinite alternate;
+      }
+      @keyframes aiGlowPulse {
+        0% { opacity: 0.5; transform: scale(1); }
+        100% { opacity: 1; transform: scale(1.1); }
+      }
 
+      /* ─── Left ─── */
+      .ai-left {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        justify-content: center;
+      }
 
+      /* ─── Chat Header ─── */
+      .ai-chat-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ai-chat-avatar {
+        width: 36px; height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #FACC15, #F59E0B);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ai-chat-avatar svg { width: 18px; height: 18px; }
+      .ai-chat-name {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--gray2);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .ai-chat-title {
+        font-family: 'Syne', sans-serif;
+        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      .ai-desc {
+        font-size: 0.82rem;
+        color: var(--gray);
+        line-height: 1.6;
+        max-width: 440px;
+        margin-bottom: 2px;
+      }
+
+      /* ─── Chat Messages ─── */
+      .ai-chat {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 150px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(250,204,21,0.15) transparent;
+      }
+      .ai-chat::-webkit-scrollbar { width: 3px; }
+      .ai-chat::-webkit-scrollbar-thumb { background: rgba(250,204,21,0.2); border-radius: 99px; }
+      .ai-msg {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        padding: 9px 14px;
+        border-radius: 14px;
+        max-width: 92%;
+        animation: aiMsgIn 0.3s ease forwards;
+        word-break: break-word;
+      }
+      .ai-msg--user {
+        background: rgba(250,204,21,0.08);
+        border: 1px solid rgba(250,204,21,0.12);
+        color: var(--white);
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+      }
+      .ai-msg--ai {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        color: var(--gray);
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+      }
+      .ai-msg--thinking {
+        background: transparent;
+        border: none;
+        align-self: flex-start;
+        padding: 12px 4px;
+        display: flex;
+        gap: 5px;
+      }
+      .ai-msg--thinking span {
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: aiDotBounce 1.4s ease-in-out infinite;
+      }
+      .ai-msg--thinking span:nth-child(2) { animation-delay: 0.2s; }
+      .ai-msg--thinking span:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes aiDotBounce {
+        0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+        30% { transform: translateY(-6px); opacity: 1; }
+      }
+      @keyframes aiMsgIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ─── Chat Input ─── */
+      .ai-chat-input-wrap {
+        position: relative;
+      }
+      .ai-chat-input-inner {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0,0,0,0.4);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        padding: 4px 4px 4px 14px;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      }
+      .ai-chat-input-inner:focus-within {
+        border-color: rgba(250,204,21,0.2);
+        box-shadow: 0 0 0 1px rgba(250,204,21,0.05);
+      }
+      .ai-chat-input-icon {
+        width: 16px; height: 16px;
+        flex-shrink: 0;
+        opacity: 0.5;
+      }
+      .ai-chat-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        padding: 10px 0;
+        outline: none;
+        min-width: 0;
+      }
+      .ai-chat-input::placeholder {
+        color: var(--gray2);
+        font-size: 0.85rem;
+        opacity: 0.5;
+      }
+      .ai-chat-send {
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #FACC15, #F59E0B);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .ai-chat-send:hover {
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(250,204,21,0.3);
+      }
+      .ai-chat-send:active { transform: scale(0.95); }
+      .ai-chat-send svg {
+        width: 16px; height: 16px;
+        color: #050505;
+        transition: transform 0.2s ease;
+      }
+      .ai-chat-send:hover svg { transform: translateX(1px); }
+
+      .ai-chat-send .ai-btn-spinner {
+        display: none;
+        width: 14px; height: 14px;
+        border: 2px solid rgba(17,17,17,0.25);
+        border-top-color: #111;
+        border-radius: 50%;
+        animation: aiSpin 0.6s linear infinite;
+      }
+      .ai-chat-send.loading svg { display: none; }
+      .ai-chat-send.loading .ai-btn-spinner { display: block; }
+      .ai-chat-send.loading { pointer-events: none; opacity: 0.85; }
+      @keyframes aiSpin { to { transform: rotate(360deg); } }
+
+      /* ─── Prompts ─── */
+      .ai-chat-prompts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .ai-chat-prompts.hidden { display: none; }
+      .ai-prompt {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--gray);
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        padding: 6px 12px;
+        border-radius: 99px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+      .ai-prompt svg {
+        width: 12px; height: 12px;
+        flex-shrink: 0;
+      }
+      .ai-prompt:hover {
+        color: var(--accent);
+        background: rgba(250,204,21,0.08);
+        border-color: rgba(250,204,21,0.2);
+        transform: translateY(-1px);
+      }
+
+      /* ─── Right ─── */
+      .ai-right {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: stretch;
+      }
+
+      /* ─── Video ─── */
+      .ai-video-wrap {
+        position: relative;
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #000;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+      }
+      .ai-video-wrap.hidden {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        inset: 0;
+      }
+      .ai-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        transition: transform 0.6s ease;
+        display: block;
+      }
+      .ai-video-wrap:hover .ai-video { transform: scale(1.04); }
+      .ai-video-overlay {
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background: linear-gradient(135deg, rgba(5,5,5,0.55) 0%, transparent 45%, rgba(5,5,5,0.35) 100%);
+        pointer-events: none;
+      }
+      .ai-video-badge {
+        position: absolute;
+        bottom: 18px;
+        left: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 15px;
+        background: rgba(5,5,5,0.75);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(250,204,21,0.2);
+        border-radius: 99px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--accent);
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .ai-video-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+      /* ─── Recommendation Panel ─── */
+      .ai-recs {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(0,0,0,0.3);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 24px;
+        gap: 16px;
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      .ai-recs.visible {
+        display: flex;
+        animation: aiRecsIn 0.5s ease 0.2s forwards;
+      }
+      @keyframes aiRecsIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .ai-recs-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .ai-recs-badge {
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #050505;
+        background: var(--accent);
+        padding: 3px 8px;
+        border-radius: 6px;
+        line-height: 1;
+      }
+      .ai-recs-header h3 {
+        font-family: 'Syne', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--white);
+      }
+      .ai-recs-divider {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      }
+      .ai-recs-body {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .ai-recs-label {
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--gray2);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+      }
+      .ai-recs-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .ai-recs-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        color: var(--white);
+        font-weight: 500;
+        opacity: 0;
+        animation: aiRecItem 0.4s ease forwards;
+      }
+      .ai-recs-item:nth-child(1) { animation-delay: 0.3s; }
+      .ai-recs-item:nth-child(2) { animation-delay: 0.4s; }
+      .ai-recs-item:nth-child(3) { animation-delay: 0.5s; }
+      @keyframes aiRecItem {
+        from { opacity: 0; transform: translateX(-6px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .ai-recs-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+      .ai-recs-details {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .ai-recs-detail {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 0;
+      }
+      .ai-recs-detail + .ai-recs-detail {
+        border-top: 1px solid rgba(255,255,255,0.04);
+      }
+      .ai-recs-detail-label {
+        font-size: 0.68rem;
+        font-weight: 500;
+        color: var(--gray2);
+      }
+      .ai-recs-detail-value {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--white);
+      }
+      .ai-recs-detail-value--high { color: var(--success); }
+      .ai-recs-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 24px;
+        border-radius: 99px;
+        background: linear-gradient(135deg, #FACC15, #F59E0B);
+        color: #050505;
+        font-weight: 600;
+        font-size: 0.82rem;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-top: 4px;
+        opacity: 0;
+        animation: aiRecBtn 0.5s ease 0.7s forwards;
+      }
+      @keyframes aiRecBtn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .ai-recs-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 36px rgba(250,204,21,0.25);
+      }
+
+      /* ─── Responsive ─── */
+      @media (max-width: 1024px) {
+        .ai-card { gap: 36px; padding: 28px 32px; }
+        .ai-chat-title { font-size: 1.3rem; }
+      }
+      @media (max-width: 768px) {
+        .ai-card {
+          grid-template-columns: 1fr;
+          gap: 28px;
+          padding: 28px 24px;
+          min-height: auto;
+        }
+        .ai-left { order: 1; gap: 12px; }
+        .ai-right { order: 0; }
+        .ai-desc { max-width: 100%; }
+        .ai-video-wrap { min-height: 240px; }
+        .ai-video-wrap.hidden { position: relative; }
+        .ai-chat { max-height: 120px; }
+      }
+      @media (max-width: 480px) {
+        .ai-card { padding: 20px 16px; gap: 24px; border-radius: 22px; }
+        .ai-chat-title { font-size: 1.15rem; }
+        .ai-desc { font-size: 0.78rem; }
+        .ai-chat-input-inner { padding: 3px 3px 3px 12px; }
+        .ai-chat-input { font-size: 0.8rem; padding: 8px 0; }
+        .ai-chat-send { width: 32px; height: 32px; }
+        .ai-chat-send svg { width: 14px; height: 14px; }
+        .ai-video-wrap { min-height: 200px; }
+        .ai-video-badge { bottom: 12px; left: 12px; padding: 5px 12px; font-size: 0.65rem; }
+        .ai-prompt { font-size: 0.68rem; padding: 5px 10px; }
+        .ai-recs { padding: 18px; }
+      }
+    </style>
+
+    <div class="container">
+      <div class="ai-card fade-up">
+        <div class="ai-glow"></div>
+
+        <!-- ─── LEFT ─── -->
+        <div class="ai-left">
+          <!-- Chat Header -->
+          <div class="ai-chat-header">
+            <div class="ai-chat-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#050505" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7h7l-5.5 4 2 7-5.5-4-5.5 4 2-7L3 9h7z"/></svg>
+            </div>
+            <div>
+              <div class="ai-chat-name">AI Assistant</div>
+              <h2 class="ai-chat-title">Ask Nagriva AI Anything</h2>
+            </div>
+          </div>
+
+          <p class="ai-desc">
+            Describe your business goals, challenges, or project ideas and receive personalized recommendations.
+          </p>
+
+          <!-- Chat Messages -->
+          <div class="ai-chat" id="aiChat"></div>
+
+          <!-- Input -->
+          <div class="ai-chat-input-wrap">
+            <div class="ai-chat-input-inner">
+              <svg class="ai-chat-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7h7l-5.5 4 2 7-5.5-4-5.5 4 2-7L3 9h7z"/></svg>
+              <input class="ai-chat-input" id="aiInput" placeholder="Ask Anything..." autocomplete="off">
+              <button class="ai-chat-send" id="aiBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="12" x2="2" y2="12"/><polyline points="19 9 22 12 19 15"/></svg>
+                <span class="ai-btn-spinner"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Suggested Prompts -->
+          <div class="ai-chat-prompts" id="aiPrompts">
+            <button class="ai-prompt" data-prompt="Improve my SEO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Improve my SEO</button>
+            <button class="ai-prompt" data-prompt="Build a website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Build a website</button>
+            <button class="ai-prompt" data-prompt="Automate my business"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Automate my business</button>
+            <button class="ai-prompt" data-prompt="Generate more leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Generate more leads</button>
+          </div>
+        </div>
+
+        <!-- ─── RIGHT ─── -->
+        <div class="ai-right">
+          <!-- Video (default state) -->
+          <div class="ai-video-wrap" id="aiVideoWrap">
+            <video class="ai-video" autoplay muted loop playsinline>
+              <source src="/assets/images/nagriva%20video%20/hiw-client.mp4" type="video/mp4">
+            </video>
+            <div class="ai-video-overlay"></div>
+            <div class="ai-video-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7h7l-5.5 4 2 7-5.5-4-5.5 4 2-7L3 9h7z"/></svg>
+              AI-Powered Growth
+            </div>
+          </div>
+
+          <!-- Recommendation Panel (shown after submit) -->
+          <div class="ai-recs" id="aiRecs">
+            <div class="ai-recs-header">
+              <span class="ai-recs-badge">AI</span>
+              <h3>Recommended Growth Plan</h3>
+            </div>
+            <div class="ai-recs-divider"></div>
+            <div class="ai-recs-body">
+              <div>
+                <div class="ai-recs-label">Recommended Services</div>
+                <div class="ai-recs-list">
+                  <div class="ai-recs-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Website Development</div>
+                  <div class="ai-recs-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Local SEO</div>
+                  <div class="ai-recs-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Google Business Profile</div>
+                </div>
+              </div>
+              <div class="ai-recs-details">
+                <div class="ai-recs-detail">
+                  <span class="ai-recs-detail-label">Estimated Timeline</span>
+                  <span class="ai-recs-detail-value">2-4 Weeks</span>
+                </div>
+                <div class="ai-recs-detail">
+                  <span class="ai-recs-detail-label">Expected Growth</span>
+                  <span class="ai-recs-detail-value ai-recs-detail-value--high">High</span>
+                </div>
+                <div class="ai-recs-detail">
+                  <span class="ai-recs-detail-label">Recommended Plan</span>
+                  <span class="ai-recs-detail-value">Professional Package</span>
+                </div>
+              </div>
+            </div>
+            <a href="/pages/services.html" class="ai-recs-btn">Start Project →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- ══════════════════════════ FAQ — Premium Redesign ══════════════════════════ -->
   <section class="section lazy-section lazy-section--xl" id="faq">
@@ -1238,6 +2221,7 @@
     })();
   </script>
 <div id="cookie-consent-container"></div>
-<script defer src="/js/newsletter.js"></script>
-<script defer src="/js/layout.js"></script>
+  <script defer src="/js/newsletter.js"></script>
+  <script defer src="/js/testimonials.js"></script>
+  <script defer src="/js/layout.js"></script>
 </body></html>
