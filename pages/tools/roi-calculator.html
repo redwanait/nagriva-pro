@@ -1,0 +1,475 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROI Calculator — Nagriva</title>
+  <meta name="description" content="Calculate your return on investment for marketing campaigns and business initiatives. Get instant ROI percentage, net profit, and return amount.">
+  <meta property="og:title" content="ROI Calculator — Nagriva">
+  <meta property="og:description" content="Calculate your return on investment for marketing campaigns and business initiatives.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/tools/roi-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ROI Calculator — Nagriva">
+  <meta name="twitter:description" content="Calculate your return on investment for marketing campaigns and business initiatives.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/tools/roi-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+  <link rel="stylesheet" href="/css/performance.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root { --roi-max-w: 900px; --roi-card-bg: rgba(255,255,255,0.02); --roi-glass: rgba(255,255,255,0.04); --roi-border: rgba(255,255,255,0.08); }
+    .roi-hero { position: relative; overflow: hidden; padding: calc(var(--navbar-height) + 40px) 0 20px; }
+    .roi-hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .roi-hero-glow { position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.08) 0%, transparent 70%); filter: blur(120px); animation: roiGlowPulse 8s ease-in-out infinite; }
+    .roi-hero-glow-2 { position: absolute; bottom: -120px; right: -120px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%); filter: blur(80px); animation: roiGlowPulse2 12s ease-in-out infinite; }
+    .roi-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%); -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%); }
+    .roi-hero .container { position: relative; z-index: 1; }
+    .roi-hero-content { max-width: 720px; margin: 0 auto; text-align: center; }
+    .roi-hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.2); padding: 5px 14px; border-radius: 99px; margin-bottom: 20px; }
+    .roi-hero-tag svg { width: 12px; height: 12px; }
+    .roi-hero-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; color: var(--white); line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .roi-hero-title span { background: linear-gradient(135deg, #FACC15, #FCD34D); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .roi-hero-desc { font-size: 1.02rem; color: var(--gray); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+    .roi-hero-stats { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
+    .roi-hero-stat { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--gray2); }
+    .roi-hero-stat svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+    .roi-hero-stat strong { color: var(--white); font-weight: 600; }
+    .roi-hero-stat-div { width: 4px; height: 4px; border-radius: 50%; background: var(--gray2); opacity: 0.25; }
+
+    .roi-section { padding: 40px 0 80px; }
+    .roi-card { max-width: var(--roi-max-w); margin: 0 auto; background: var(--roi-card-bg); border: 1px solid var(--roi-border); border-radius: var(--r); padding: 48px; }
+    .roi-card-header { text-align: center; margin-bottom: 36px; }
+    .roi-card-header h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .roi-card-header p { font-size: 0.9rem; color: var(--gray); }
+
+    .roi-form { display: flex; flex-direction: column; gap: 24px; }
+    .roi-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .roi-field { display: flex; flex-direction: column; gap: 6px; }
+    .roi-field label { font-size: 0.82rem; font-weight: 600; color: var(--gray2); letter-spacing: 0.02em; }
+    .roi-field .roi-input-wrap { position: relative; }
+    .roi-field .roi-input-wrap .roi-currency { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; color: var(--gray2); font-weight: 500; pointer-events: none; }
+    .roi-field input, .roi-field select { width: 100%; padding: 14px 16px 14px 32px; background: rgba(255,255,255,0.03); border: 1px solid var(--roi-border); border-radius: var(--r-sm); color: var(--white); font-size: 0.95rem; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .roi-field input:focus, .roi-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(250,204,21,0.08); }
+    .roi-field input::placeholder { color: var(--gray2); opacity: 0.5; }
+    .roi-field select { padding-left: 14px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23949494' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+    .roi-field select option { background: #1a1a1a; color: var(--white); }
+
+    .roi-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px 32px; border-radius: 99px; font-size: 0.95rem; font-weight: 600; font-family: 'DM Sans', sans-serif; border: none; cursor: pointer; background: linear-gradient(135deg, #FACC15, #F59E0B); color: #050505; transition: transform 0.3s ease, box-shadow 0.3s ease; margin-top: 8px; }
+    .roi-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(250,204,21,0.3); }
+    .roi-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+    .roi-btn:hover svg { transform: translateX(4px); }
+    .roi-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .roi-loading { display: none; flex-direction: column; align-items: center; gap: 20px; padding: 32px 0; }
+    .roi-loading.active { display: flex; }
+    .roi-spinner { width: 40px; height: 40px; border: 3px solid var(--roi-border); border-top-color: var(--accent); border-radius: 50%; animation: roiSpin 0.7s linear infinite; }
+    .roi-progress-wrap { width: 100%; max-width: 400px; height: 4px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+    .roi-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #FACC15, #F59E0B); border-radius: 99px; transition: width 0.3s ease; }
+    .roi-progress-text { font-size: 0.8rem; color: var(--gray2); }
+    .roi-loading-text { font-size: 0.88rem; color: var(--gray); }
+
+    .roi-results { display: none; }
+    .roi-results.active { display: block; }
+    .roi-results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .roi-result-card { background: rgba(255,255,255,0.03); border: 1px solid var(--roi-border); border-radius: var(--r-sm); padding: 24px; text-align: center; }
+    .roi-result-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray2); margin-bottom: 8px; }
+    .roi-result-value { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--white); }
+    .roi-result-value.good { color: #10B981; }
+    .roi-result-value.warn { color: #F59E0B; }
+    .roi-result-value.bad { color: #EF4444; }
+    .roi-result-sub { font-size: 0.78rem; color: var(--gray2); margin-top: 4px; }
+
+    .roi-gauge-wrap { max-width: 400px; margin: 0 auto 24px; text-align: center; }
+    .roi-gauge-bar { height: 12px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+    .roi-gauge-fill { height: 100%; border-radius: 99px; transition: width 0.8s ease; width: 0%; }
+    .roi-gauge-fill.good { background: linear-gradient(90deg, #10B981, #34D399); }
+    .roi-gauge-fill.warn { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
+    .roi-gauge-fill.bad { background: linear-gradient(90deg, #EF4444, #F87171); }
+    .roi-gauge-label { font-size: 0.78rem; color: var(--gray2); }
+
+    .roi-verdict { text-align: center; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--roi-border); border-radius: var(--r-sm); margin-bottom: 24px; }
+    .roi-verdict h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .roi-verdict p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+    .roi-actions { display: flex; gap: 12px; }
+    .roi-actions .roi-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 1; padding: 14px 24px; border-radius: 99px; font-size: 0.88rem; font-weight: 600; font-family: 'DM Sans', sans-serif; text-decoration: none; border: 1px solid var(--roi-border); background: rgba(255,255,255,0.02); color: var(--gray); cursor: pointer; transition: border-color 0.3s ease, color 0.3s ease; }
+    .roi-actions .roi-btn-secondary:hover { border-color: rgba(250,204,21,0.3); color: var(--white); }
+    .roi-actions .roi-btn-secondary svg { width: 14px; height: 14px; }
+
+    .roi-faq { padding: 80px 0; border-top: 1px solid var(--border); }
+    .roi-faq-list { max-width: 700px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 12px; }
+    .roi-faq-item { border: 1px solid var(--roi-border); border-radius: var(--r-sm); background: rgba(255,255,255,0.008); overflow: hidden; transition: border-color 0.3s ease; }
+    .roi-faq-item:hover { border-color: rgba(250,204,21,0.12); }
+    .roi-faq-question { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 20px 24px; font-family: 'Syne', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--white); background: none; border: none; cursor: pointer; text-align: left; gap: 16px; transition: color 0.3s ease; }
+    .roi-faq-question:hover { color: var(--accent); }
+    .roi-faq-question svg { width: 16px; height: 16px; color: var(--gray2); flex-shrink: 0; transition: transform 0.3s ease, color 0.3s ease; }
+    .roi-faq-question:hover svg { color: var(--accent); }
+    .roi-faq-item.open .roi-faq-question svg { transform: rotate(180deg); }
+    .roi-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .roi-faq-answer-inner { padding: 0 24px 20px; font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+    .roi-cta { padding: 0 0 80px; }
+    .roi-cta-card { max-width: var(--roi-max-w); margin: 0 auto; background: rgba(250,204,21,0.03); border: 1px solid rgba(250,204,21,0.15); border-radius: var(--r); padding: 48px; text-align: center; }
+    .roi-cta-card h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .roi-cta-card p { font-size: 0.9rem; color: var(--gray); margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    @keyframes roiSpin { to { transform: rotate(360deg); } }
+    @keyframes roiGlowPulse { 0%,100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.12); } }
+    @keyframes roiGlowPulse2 { 0%,100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.15); } }
+
+    @media (max-width: 768px) {
+      .roi-card { padding: 32px 24px; }
+      .roi-form-row { grid-template-columns: 1fr; gap: 16px; }
+      .roi-results-grid { grid-template-columns: 1fr; gap: 12px; }
+      .roi-hero-stats { flex-direction: column; gap: 8px; }
+      .roi-hero-stat-div { display: none; }
+      .roi-actions { flex-direction: column; }
+      .roi-faq-question { padding: 16px 20px; font-size: 0.85rem; }
+      .roi-faq-answer-inner { padding: 0 20px 16px; }
+    }
+    @media (max-width: 480px) {
+      .roi-card { padding: 24px 16px; }
+      .roi-result-value { font-size: 1.3rem; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ROI Calculator",
+  "url": "https://nagriva.com/tools/roi-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "description": "Calculate your return on investment for marketing campaigns and business initiatives."
+}
+</script>
+</head>
+<body data-page="tools">
+
+<div id="navbar-container"></div>
+
+<section class="roi-hero">
+  <div class="roi-hero-bg">
+    <div class="roi-hero-glow"></div>
+    <div class="roi-hero-glow-2"></div>
+    <div class="roi-hero-grid"></div>
+  </div>
+  <div class="container">
+    <div class="roi-hero-content fade-up">
+      <div class="roi-hero-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        ROI Calculator
+      </div>
+      <h1 class="roi-hero-title">Marketing ROI <span>Calculator</span></h1>
+      <p class="roi-hero-desc">Calculate your return on investment instantly. Understand which campaigns drive profit and where to optimize your spend.</p>
+      <div class="roi-hero-stats">
+        <span class="roi-hero-stat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          <strong>Instant</strong> Results
+        </span>
+        <span class="roi-hero-stat-div"></span>
+        <span class="roi-hero-stat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+          <strong>Profit</strong> Analysis
+        </span>
+        <span class="roi-hero-stat-div"></span>
+        <span class="roi-hero-stat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          <strong>Campaign</strong> Insights
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roi-section section lazy-section">
+  <div class="container">
+    <div class="roi-card fade-up">
+      <div class="roi-card-header">
+        <h2>Calculate Your ROI</h2>
+        <p>Enter your investment and revenue figures below.</p>
+      </div>
+
+      <div class="roi-form" id="roiForm">
+        <div class="roi-form-row">
+          <div class="roi-field">
+            <label for="roiInvestment">Total Investment Cost</label>
+            <div class="roi-input-wrap">
+              <span class="roi-currency">$</span>
+              <input type="number" id="roiInvestment" placeholder="0.00" min="0" step="0.01" required>
+            </div>
+          </div>
+          <div class="roi-field">
+            <label for="roiRevenue">Total Revenue Generated</label>
+            <div class="roi-input-wrap">
+              <span class="roi-currency">$</span>
+              <input type="number" id="roiRevenue" placeholder="0.00" min="0" step="0.01" required>
+            </div>
+          </div>
+        </div>
+        <div class="roi-form-row">
+          <div class="roi-field">
+            <label for="roiCampaign">Campaign Type (Optional)</label>
+            <select id="roiCampaign">
+              <option value="">Select campaign type</option>
+              <option value="social">Social Media</option>
+              <option value="search">Search Ads</option>
+              <option value="email">Email Marketing</option>
+              <option value="content">Content Marketing</option>
+              <option value="influencer">Influencer Marketing</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="roi-field" style="justify-content:flex-end;">
+            <label style="opacity:0;pointer-events:none;">.</label>
+            <button class="roi-btn" id="roiCalcBtn">
+              Calculate ROI
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="roi-loading" id="roiLoading">
+        <div class="roi-spinner"></div>
+        <div class="roi-progress-wrap">
+          <div class="roi-progress-fill" id="roiProgressFill"></div>
+        </div>
+        <span class="roi-progress-text" id="roiProgressText">0%</span>
+        <span class="roi-loading-text">Crunching the numbers...</span>
+      </div>
+
+      <div class="roi-results" id="roiResults">
+        <div class="roi-results-grid">
+          <div class="roi-result-card">
+            <div class="roi-result-label">ROI</div>
+            <div class="roi-result-value" id="roiResultPct">0%</div>
+            <div class="roi-result-sub">Return on Investment</div>
+          </div>
+          <div class="roi-result-card">
+            <div class="roi-result-label">Net Profit</div>
+            <div class="roi-result-value" id="roiResultProfit">$0.00</div>
+            <div class="roi-result-sub">Revenue − Investment</div>
+          </div>
+          <div class="roi-result-card">
+            <div class="roi-result-label">Return Amount</div>
+            <div class="roi-result-value" id="roiResultReturn">$0.00</div>
+            <div class="roi-result-sub">Total revenue generated</div>
+          </div>
+        </div>
+
+        <div class="roi-gauge-wrap">
+          <div class="roi-gauge-bar">
+            <div class="roi-gauge-fill" id="roiGaugeFill"></div>
+          </div>
+          <span class="roi-gauge-label" id="roiGaugeLabel">Performance Rating</span>
+        </div>
+
+        <div class="roi-verdict" id="roiVerdict">
+          <h4>Verdict</h4>
+          <p id="roiVerdictText">Enter your figures to see the verdict.</p>
+        </div>
+
+        <div class="roi-actions">
+          <button class="roi-btn-secondary" id="roiRecalcBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            Recalculate
+          </button>
+          <a href="/pages/contact" class="roi-btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Get Expert Help
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roi-faq section lazy-section" id="roiFaq">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">✦ FAQ</div>
+      <h2 class="section-title">ROI Calculator <span class="text-gradient">FAQ</span></h2>
+      <p class="section-desc">Common questions about calculating return on investment.</p>
+    </div>
+    <div class="roi-faq-list fade-up" id="roiFaqList">
+      <div class="roi-faq-item open">
+        <button class="roi-faq-question">
+          <span>How is ROI calculated?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="roi-faq-answer">
+          <div class="roi-faq-answer-inner">ROI is calculated as ((Revenue − Investment) ÷ Investment) × 100. This gives you the percentage return on your investment. A positive ROI means you earned more than you spent.</div>
+        </div>
+      </div>
+      <div class="roi-faq-item">
+        <button class="roi-faq-question">
+          <span>What is considered a good ROI?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="roi-faq-answer">
+          <div class="roi-faq-answer-inner">A 5:1 ratio (500% ROI) is generally considered excellent. 2:1 (200%) is good, and anything above 1:1 (100%) means you're profiting. Industry benchmarks vary — digital marketing often targets 300-500% ROI.</div>
+        </div>
+      </div>
+      <div class="roi-faq-item">
+        <button class="roi-faq-question">
+          <span>What costs should I include in my investment?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="roi-faq-answer">
+          <div class="roi-faq-answer-inner">Include all direct costs: ad spend, software/tools, labor hours, creative production, agency fees, and any overhead directly attributable to the campaign. The more accurate your costs, the more reliable your ROI calculation.</div>
+        </div>
+      </div>
+      <div class="roi-faq-item">
+        <button class="roi-faq-question">
+          <span>Can this calculator help with budget planning?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="roi-faq-answer">
+          <div class="roi-faq-answer-inner">Yes. By understanding your ROI, you can identify which channels and campaigns deliver the best returns and allocate your budget more effectively. Use it to compare scenarios before committing spend.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roi-cta section lazy-section">
+  <div class="container">
+    <div class="roi-cta-card fade-up">
+      <h3>Ready to Grow Your Business?</h3>
+      <p>Let our team help you build data-driven marketing campaigns that deliver real results.</p>
+      <a href="/pages/contact" class="btn-primary">
+        Get Started
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-container"></div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/js/supabase-config.js"></script>
+<script defer src="/js/script.js"></script>
+<script defer src="/js/i18n.js"></script>
+<script defer src="/js/auth.js"></script>
+<script defer src="/js/performance-optimizer.js"></script>
+<script defer src="/js/lazy-loader.js"></script>
+
+<script defer>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('roiForm');
+  var calcBtn = document.getElementById('roiCalcBtn');
+  var loading = document.getElementById('roiLoading');
+  var progressFill = document.getElementById('roiProgressFill');
+  var progressText = document.getElementById('roiProgressText');
+  var results = document.getElementById('roiResults');
+  var resultPct = document.getElementById('roiResultPct');
+  var resultProfit = document.getElementById('roiResultProfit');
+  var resultReturn = document.getElementById('roiResultReturn');
+  var gaugeFill = document.getElementById('roiGaugeFill');
+  var gaugeLabel = document.getElementById('roiGaugeLabel');
+  var verdictText = document.getElementById('roiVerdictText');
+  var recalcBtn = document.getElementById('roiRecalcBtn');
+  var investmentInput = document.getElementById('roiInvestment');
+  var revenueInput = document.getElementById('roiRevenue');
+
+  function formatCurrency(n) {
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function calculate() {
+    var investment = parseFloat(investmentInput.value) || 0;
+    var revenue = parseFloat(revenueInput.value) || 0;
+
+    if (investment <= 0 || revenue <= 0) {
+      alert('Please enter both investment cost and revenue generated (must be greater than zero).');
+      return false;
+    }
+
+    form.style.display = 'none';
+    loading.classList.add('active');
+    results.classList.remove('active');
+    progressFill.style.width = '0%';
+    progressText.textContent = '0%';
+
+    var pct = 0;
+    var interval = setInterval(function() {
+      pct += Math.random() * 8 + 3;
+      if (pct >= 100) { pct = 100; clearInterval(interval); }
+      progressFill.style.width = pct + '%';
+      progressText.textContent = Math.round(pct) + '%';
+    }, 100);
+
+    setTimeout(function() {
+      clearInterval(interval);
+      progressFill.style.width = '100%';
+      progressText.textContent = '100%';
+
+      var netProfit = revenue - investment;
+      var roiPct = investment > 0 ? ((netProfit / investment) * 100) : 0;
+      var isGood, verdict, gaugeClass;
+
+      if (roiPct >= 500) { isGood = 'good'; verdict = 'Excellent ROI! Your campaign delivered outstanding returns. This level of performance indicates a highly effective strategy.'; }
+      else if (roiPct >= 200) { isGood = 'good'; verdict = 'Great ROI! Your campaign is performing well above average. Consider scaling your investment in this channel.'; }
+      else if (roiPct >= 100) { isGood = 'good'; verdict = 'Positive ROI — your campaign is profitable. Look for opportunities to optimize and increase returns further.'; }
+      else if (roiPct >= 0) { isGood = 'warn'; verdict = 'Break-even or low positive ROI. Review your campaign strategy and explore optimization opportunities.'; }
+      else { isGood = 'bad'; verdict = 'Negative ROI — your campaign is running at a loss. We recommend reviewing your strategy, targeting, and execution.'; }
+
+      var gaugeWidth = Math.min(Math.abs(roiPct) / 10, 100);
+      if (roiPct < 0) gaugeWidth = Math.min(Math.abs(roiPct) / 5, 100);
+
+      resultPct.textContent = roiPct.toFixed(1) + '%';
+      resultPct.className = 'roi-result-value ' + isGood;
+      resultProfit.textContent = (netProfit >= 0 ? '+' : '') + formatCurrency(netProfit);
+      resultProfit.className = 'roi-result-value ' + isGood;
+      resultReturn.textContent = formatCurrency(revenue);
+
+      gaugeFill.style.width = gaugeWidth + '%';
+      gaugeFill.className = 'roi-gauge-fill ' + isGood;
+      gaugeLabel.textContent = roiPct >= 500 ? 'Outstanding' : roiPct >= 200 ? 'Great' : roiPct >= 100 ? 'Good' : roiPct >= 0 ? 'Fair' : 'Needs Improvement';
+
+      verdictText.textContent = verdict;
+
+      loading.classList.remove('active');
+      results.classList.add('active');
+    }, 1400);
+
+    return true;
+  }
+
+  calcBtn.addEventListener('click', calculate);
+
+  recalcBtn.addEventListener('click', function() {
+    form.style.display = '';
+    results.classList.remove('active');
+    progressFill.style.width = '0%';
+    progressText.textContent = '0%';
+    investmentInput.value = '';
+    revenueInput.value = '';
+  });
+
+  /* FAQ accordion */
+  var faqItems = document.querySelectorAll('.roi-faq-item');
+  faqItems.forEach(function(item) {
+    var question = item.querySelector('.roi-faq-question');
+    question.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+      faqItems.forEach(function(i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+});
+</script>
+<script defer src="../../js/layout.js"></script>
+</body></html>

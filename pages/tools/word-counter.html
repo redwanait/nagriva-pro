@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Counter — Nagriva</title>
+  <meta name="description" content="Count words, characters, sentences, and paragraphs in real-time. Free online word counter tool.">
+  <meta property="og:title" content="Word Counter — Nagriva">
+  <meta property="og:description" content="Count words, characters, sentences, and paragraphs in real-time.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/tools/word-counter">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Word Counter — Nagriva">
+  <meta name="twitter:description" content="Count words, characters, sentences, and paragraphs in real-time.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/tools/word-counter">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+  <link rel="stylesheet" href="/css/performance.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root { --wc-max-w: 900px; --wc-card-bg: rgba(255,255,255,0.02); --wc-glass: rgba(255,255,255,0.04); --wc-border: rgba(255,255,255,0.08); }
+    .wc-hero { position: relative; overflow: hidden; padding: calc(var(--navbar-height) + 40px) 0 20px; }
+    .wc-hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .wc-hero-glow { position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.08) 0%, transparent 70%); filter: blur(120px); animation: wcGlowPulse 8s ease-in-out infinite; }
+    .wc-hero-glow-2 { position: absolute; bottom: -120px; right: -120px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%); filter: blur(80px); animation: wcGlowPulse2 12s ease-in-out infinite; }
+    .wc-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%); -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%); }
+    .wc-hero .container { position: relative; z-index: 1; }
+    .wc-hero-content { max-width: 720px; margin: 0 auto; text-align: center; }
+    .wc-hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.2); padding: 5px 14px; border-radius: 99px; margin-bottom: 20px; }
+    .wc-hero-tag svg { width: 12px; height: 12px; }
+    .wc-hero-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; color: var(--white); line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .wc-hero-title span { background: linear-gradient(135deg, #FACC15, #FCD34D); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .wc-hero-desc { font-size: 1.02rem; color: var(--gray); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+    .wc-hero-stats { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
+    .wc-hero-stat { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--gray2); }
+    .wc-hero-stat svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+    .wc-hero-stat strong { color: var(--white); font-weight: 600; }
+    .wc-hero-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray2); opacity: 0.3; }
+    .wc-section { padding: 40px 0 60px; }
+    .wc-inner { max-width: var(--wc-max-w); margin: 0 auto; }
+    .wc-card { position: relative; background: var(--wc-card-bg); border: 1px solid var(--wc-border); border-radius: 24px; padding: 48px 56px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); overflow: hidden; transition: border-color 0.4s ease, box-shadow 0.4s ease; }
+    .wc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(250,204,21,0.3), transparent); }
+    .wc-card-glow { position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%); pointer-events: none; }
+    .wc-card-header { text-align: center; margin-bottom: 32px; }
+    .wc-card-header h2 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .wc-card-header p { font-size: 0.88rem; color: var(--gray); }
+    .wc-textarea { width: 100%; padding: 20px; border-radius: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--wc-border); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--white); transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; box-sizing: border-box; resize: vertical; min-height: 250px; line-height: 1.6; }
+    .wc-textarea::placeholder { color: var(--gray2); }
+    .wc-textarea:hover { border-color: rgba(250,204,21,0.2); background: rgba(255,255,255,0.04); }
+    .wc-textarea:focus { outline: none; border-color: var(--accent); background: rgba(250,204,21,0.06); box-shadow: 0 0 0 3px rgba(250,204,21,0.1); }
+    .wc-stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 24px; }
+    .wc-stat-item { background: rgba(255,255,255,0.015); border: 1px solid var(--wc-border); border-radius: 14px; padding: 20px 16px; text-align: center; transition: border-color 0.3s ease; }
+    .wc-stat-item:hover { border-color: rgba(250,204,21,0.12); }
+    .wc-stat-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.12); display: flex; align-items: center; justify-content: center; color: var(--accent); margin: 0 auto 10px; }
+    .wc-stat-icon svg { width: 14px; height: 14px; }
+    .wc-stat-value { font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.2; }
+    .wc-stat-label { font-size: 0.7rem; font-weight: 500; color: var(--gray2); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+    .wc-submit { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px 32px; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: #050505; background: linear-gradient(135deg, #FACC15, #F59E0B); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; margin-top: 20px; }
+    .wc-submit::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent); transform: translateX(-100%); transition: transform 0.6s ease; }
+    .wc-submit:hover::before { transform: translateX(100%); }
+    .wc-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(250,204,21,0.3); }
+    .wc-submit:active { transform: translateY(0); }
+    .wc-submit svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+    .wc-submit:hover svg { transform: translateX(4px); }
+    .wc-faq { padding: 60px 0; border-top: 1px solid var(--border); }
+    .wc-faq-inner { max-width: 700px; margin: 0 auto; }
+    .wc-faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 40px; }
+    .wc-faq-item { border: 1px solid var(--border); border-radius: var(--r-sm); background: rgba(255,255,255,0.008); overflow: hidden; transition: border-color 0.3s ease; }
+    .wc-faq-item:hover { border-color: rgba(250,204,21,0.12); }
+    .wc-faq-q { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 18px 22px; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--white); background: none; border: none; cursor: pointer; text-align: left; gap: 14px; transition: color 0.3s ease; }
+    .wc-faq-q:hover { color: var(--accent); }
+    .wc-faq-q svg { width: 14px; height: 14px; color: var(--gray2); flex-shrink: 0; transition: transform 0.3s ease, color 0.3s ease; }
+    .wc-faq-q:hover svg { color: var(--accent); }
+    .wc-faq-item.open .wc-faq-q svg { transform: rotate(180deg); }
+    .wc-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .wc-faq-a-inner { padding: 0 22px 18px; font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+    .wc-faq-item.open .wc-faq-a { max-height: 250px; }
+    .wc-cta { padding: 60px 0 80px; text-align: center; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+    .wc-cta-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%); filter: blur(100px); pointer-events: none; }
+    .wc-cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .wc-cta-inner h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--white); line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .wc-cta-inner h2 span { background: linear-gradient(135deg, #FACC15, #FCD34D); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .wc-cta-inner p { color: var(--gray); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
+    .wc-cta-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    @keyframes wcGlowPulse { 0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.12); } }
+    @keyframes wcGlowPulse2 { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.15); } }
+    @keyframes wcFadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { .wc-card { padding: 32px 24px; } .wc-hero-stats { gap: 14px; flex-direction: column; } .wc-hero-dot { display: none; } .wc-stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; } .wc-faq { padding: 40px 0; } .wc-cta { padding: 40px 0 60px; } }
+    @media (max-width: 480px) { .wc-card { padding: 24px 18px; border-radius: 18px; } .wc-textarea { padding: 16px; font-size: 0.88rem; min-height: 180px; } .wc-submit { padding: 16px 24px; font-size: 0.92rem; } .wc-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .wc-stat-item { padding: 14px 10px; } .wc-stat-value { font-size: 1.1rem; } .wc-faq-q { padding: 14px 18px; font-size: 0.85rem; } .wc-faq-a-inner { padding: 0 18px 14px; } .wc-card-header h2 { font-size: 1.25rem; } }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Word Counter",
+  "url": "https://nagriva.com/tools/word-counter",
+  "description": "Count words, characters, sentences, and paragraphs in real-time.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body data-page="word-counter">
+  <div id="navbar-container"></div>
+  <section class="wc-hero">
+    <div class="wc-hero-bg"><div class="wc-hero-glow"></div><div class="wc-hero-glow-2"></div><div class="wc-hero-grid"></div></div>
+    <div class="container"><div class="wc-hero-content fade-up">
+      <div class="wc-hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Writing Tool</div>
+      <h1 class="wc-hero-title">Word <span>Counter</span></h1>
+      <p class="wc-hero-desc">Count words, characters, sentences, and paragraphs in your content instantly with real-time analysis.</p>
+      <div class="wc-hero-stats">
+        <span class="wc-hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg><strong>Real-time</strong> Analysis</span>
+        <span class="wc-hero-dot"></span>
+        <span class="wc-hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><strong>100%</strong> Free</span>
+        <span class="wc-hero-dot"></span>
+        <span class="wc-hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><strong>Instant</strong> Results</span>
+      </div>
+    </div></div>
+  </section>
+  <section class="wc-section" id="counter">
+    <div class="container"><div class="wc-inner">
+      <div class="wc-card fade-up" id="counterCard">
+        <div class="wc-card-glow"></div>
+        <div class="wc-card-header"><h2>Analyze Your Text</h2><p>Paste or type your content below to get instant word and character counts.</p></div>
+        <textarea class="wc-textarea" id="textInput" placeholder="Paste or type your text here..." spellcheck="true"></textarea>
+        <div class="wc-stats-grid" id="statsGrid">
+          <div class="wc-stat-item"><div class="wc-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><div class="wc-stat-value" id="wordCount">0</div><div class="wc-stat-label">Words</div></div>
+          <div class="wc-stat-item"><div class="wc-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><div class="wc-stat-value" id="charCount">0</div><div class="wc-stat-label">Characters</div></div>
+          <div class="wc-stat-item"><div class="wc-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><div class="wc-stat-value" id="charNoSpaceCount">0</div><div class="wc-stat-label">No Spaces</div></div>
+          <div class="wc-stat-item"><div class="wc-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><div class="wc-stat-value" id="sentenceCount">0</div><div class="wc-stat-label">Sentences</div></div>
+          <div class="wc-stat-item"><div class="wc-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><div class="wc-stat-value" id="paragraphCount">0</div><div class="wc-stat-label">Paragraphs</div></div>
+        </div>
+        <button class="wc-submit" id="clearBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          Clear Text
+        </button>
+      </div>
+    </div></div>
+  </section>
+  <section class="wc-faq" id="faq">
+    <div class="container"><div class="wc-faq-inner">
+      <div class="section-header fade-up"><div class="section-tag">✦ FAQ</div><h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2><p class="section-desc">Everything you need to know about the Word Counter.</p></div>
+      <div class="wc-faq-list fade-up">
+        <div class="wc-faq-item open"><button class="wc-faq-q"><span>Is the word counter real-time?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="wc-faq-a"><div class="wc-faq-a-inner">Yes, all statistics update in real-time as you type or paste content. You don't need to click any button to get updated counts.</div></div></div>
+        <div class="wc-faq-item"><button class="wc-faq-q"><span>What counts as a word?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="wc-faq-a"><div class="wc-faq-a-inner">A word is defined as any sequence of characters separated by spaces. Hyphenated words count as one word, and numbers are counted as words too.</div></div></div>
+      </div>
+    </div></div>
+  </section>
+  <section class="wc-cta"><div class="wc-cta-glow"></div><div class="container"><div class="wc-cta-inner fade-up"><h2>Need Professional <span>Content Writing?</span></h2><p>Get high-quality, SEO-optimized content from our expert writers.</p><div class="wc-cta-actions"><a href="/pages/services/blog-creation.html" class="btn-primary">Explore Content Services<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a><a href="/pages/contact.html" class="btn-secondary">Contact Us</a></div></div></div></section>
+  <div id="footer-container"></div>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      var textarea = document.getElementById('textInput');
+      var wordEl = document.getElementById('wordCount');
+      var charEl = document.getElementById('charCount');
+      var charNoSpaceEl = document.getElementById('charNoSpaceCount');
+      var sentenceEl = document.getElementById('sentenceCount');
+      var paraEl = document.getElementById('paragraphCount');
+      document.querySelectorAll('.wc-faq-item').forEach(function(item) {
+        item.querySelector('.wc-faq-q').addEventListener('click', function() {
+          var o = item.classList.contains('open');
+          document.querySelectorAll('.wc-faq-item').forEach(function(i) { i.classList.remove('open'); });
+          if (!o) item.classList.add('open');
+        });
+      });
+      function updateCounts() {
+        var text = textarea.value;
+        var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        var chars = text.length;
+        var charsNoSpace = text.replace(/\s/g, '').length;
+        var sentences = text ? text.split(/[.!?]+\s*/).filter(function(s) { return s.trim().length > 0; }).length : 0;
+        var paragraphs = text ? text.split(/\n\s*\n/).filter(function(p) { return p.trim().length > 0; }).length : 0;
+        if (text.trim() && paragraphs === 0) paragraphs = 1;
+        wordEl.textContent = words;
+        charEl.textContent = chars;
+        charNoSpaceEl.textContent = charsNoSpace;
+        sentenceEl.textContent = sentences;
+        paraEl.textContent = paragraphs;
+      }
+      textarea.addEventListener('input', updateCounts);
+      document.getElementById('clearBtn').addEventListener('click', function() { textarea.value = ''; updateCounts(); textarea.focus(); });
+      updateCounts();
+    });
+  </script>
+<script defer src="../../js/layout.js"></script>
+</body></html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading Time Calculator — Nagriva</title>
+  <meta name="description" content="Calculate estimated reading time and speaking time for any content. Free online reading time calculator tool.">
+  <meta property="og:title" content="Reading Time Calculator — Nagriva">
+  <meta property="og:description" content="Calculate estimated reading time and speaking time for any content.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/tools/reading-time-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reading Time Calculator — Nagriva">
+  <meta name="twitter:description" content="Calculate estimated reading time and speaking time for any content.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/tools/reading-time-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+  <link rel="stylesheet" href="/css/performance.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    :root { --rt-max-w: 900px; --rt-card-bg: rgba(255,255,255,0.02); --rt-glass: rgba(255,255,255,0.04); --rt-border: rgba(255,255,255,0.08); }
+    .rt-hero { position: relative; overflow: hidden; padding: calc(var(--navbar-height) + 40px) 0 20px; }
+    .rt-hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .rt-hero-glow { position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.08) 0%, transparent 70%); filter: blur(120px); animation: rtGlowPulse 8s ease-in-out infinite; }
+    .rt-hero-glow-2 { position: absolute; bottom: -120px; right: -120px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%); filter: blur(80px); animation: rtGlowPulse2 12s ease-in-out infinite; }
+    .rt-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%); -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 25%, transparent 72%); }
+    .rt-hero .container { position: relative; z-index: 1; }
+    .rt-hero-content { max-width: 720px; margin: 0 auto; text-align: center; }
+    .rt-hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.2); padding: 5px 14px; border-radius: 99px; margin-bottom: 20px; }
+    .rt-hero-tag svg { width: 12px; height: 12px; }
+    .rt-hero-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; color: var(--white); line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .rt-hero-title span { background: linear-gradient(135deg, #FACC15, #FCD34D); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .rt-hero-desc { font-size: 1.02rem; color: var(--gray); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+    .rt-hero-stats { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
+    .rt-hero-stat { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--gray2); }
+    .rt-hero-stat svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+    .rt-hero-stat strong { color: var(--white); font-weight: 600; }
+    .rt-hero-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray2); opacity: 0.3; }
+    .rt-section { padding: 40px 0 60px; }
+    .rt-inner { max-width: var(--rt-max-w); margin: 0 auto; }
+    .rt-card { position: relative; background: var(--rt-card-bg); border: 1px solid var(--rt-border); border-radius: 24px; padding: 48px 56px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); overflow: hidden; transition: border-color 0.4s ease, box-shadow 0.4s ease; }
+    .rt-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(250,204,21,0.3), transparent); }
+    .rt-card-glow { position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%); pointer-events: none; }
+    .rt-card-header { text-align: center; margin-bottom: 32px; }
+    .rt-card-header h2 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .rt-card-header p { font-size: 0.88rem; color: var(--gray); }
+    .rt-textarea { width: 100%; padding: 20px; border-radius: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--rt-border); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--white); transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; box-sizing: border-box; resize: vertical; min-height: 220px; line-height: 1.6; }
+    .rt-textarea::placeholder { color: var(--gray2); }
+    .rt-textarea:hover { border-color: rgba(250,204,21,0.2); background: rgba(255,255,255,0.04); }
+    .rt-textarea:focus { outline: none; border-color: var(--accent); background: rgba(250,204,21,0.06); box-shadow: 0 0 0 3px rgba(250,204,21,0.1); }
+    .rt-submit { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px 32px; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: #050505; background: linear-gradient(135deg, #FACC15, #F59E0B); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; margin-top: 20px; }
+    .rt-submit::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent); transform: translateX(-100%); transition: transform 0.6s ease; }
+    .rt-submit:hover::before { transform: translateX(100%); }
+    .rt-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(250,204,21,0.3); }
+    .rt-submit:active { transform: translateY(0); }
+    .rt-submit svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+    .rt-submit:hover svg { transform: translateX(4px); }
+    .rt-results { display: none; margin-top: 24px; }
+    .rt-results.active { display: block; animation: rtFadeInUp 0.5s ease; }
+    .rt-results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .rt-result-item { background: rgba(255,255,255,0.015); border: 1px solid var(--rt-border); border-radius: 16px; padding: 24px; text-align: center; transition: border-color 0.3s ease; }
+    .rt-result-item:hover { border-color: rgba(250,204,21,0.12); }
+    .rt-result-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.12); display: flex; align-items: center; justify-content: center; color: var(--accent); margin: 0 auto 12px; }
+    .rt-result-icon svg { width: 16px; height: 16px; }
+    .rt-result-label { font-size: 0.75rem; font-weight: 500; color: var(--gray2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .rt-result-value { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
+    .rt-result-desc { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .rt-faq { padding: 60px 0; border-top: 1px solid var(--border); }
+    .rt-faq-inner { max-width: 700px; margin: 0 auto; }
+    .rt-faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 40px; }
+    .rt-faq-item { border: 1px solid var(--border); border-radius: var(--r-sm); background: rgba(255,255,255,0.008); overflow: hidden; transition: border-color 0.3s ease; }
+    .rt-faq-item:hover { border-color: rgba(250,204,21,0.12); }
+    .rt-faq-q { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 18px 22px; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--white); background: none; border: none; cursor: pointer; text-align: left; gap: 14px; transition: color 0.3s ease; }
+    .rt-faq-q:hover { color: var(--accent); }
+    .rt-faq-q svg { width: 14px; height: 14px; color: var(--gray2); flex-shrink: 0; transition: transform 0.3s ease, color 0.3s ease; }
+    .rt-faq-q:hover svg { color: var(--accent); }
+    .rt-faq-item.open .rt-faq-q svg { transform: rotate(180deg); }
+    .rt-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .rt-faq-a-inner { padding: 0 22px 18px; font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+    .rt-faq-item.open .rt-faq-a { max-height: 250px; }
+    .rt-cta { padding: 60px 0 80px; text-align: center; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+    .rt-cta-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(250,204,21,0.05) 0%, transparent 70%); filter: blur(100px); pointer-events: none; }
+    .rt-cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .rt-cta-inner h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--white); line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .rt-cta-inner h2 span { background: linear-gradient(135deg, #FACC15, #FCD34D); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .rt-cta-inner p { color: var(--gray); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
+    .rt-cta-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    @keyframes rtGlowPulse { 0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.12); } }
+    @keyframes rtGlowPulse2 { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.15); } }
+    @keyframes rtFadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { .rt-card { padding: 32px 24px; } .rt-hero-stats { gap: 14px; flex-direction: column; } .rt-hero-dot { display: none; } .rt-results-grid { grid-template-columns: 1fr; gap: 12px; } .rt-faq { padding: 40px 0; } .rt-cta { padding: 40px 0 60px; } }
+    @media (max-width: 480px) { .rt-card { padding: 24px 18px; border-radius: 18px; } .rt-textarea { padding: 16px; font-size: 0.88rem; min-height: 160px; } .rt-submit { padding: 16px 24px; font-size: 0.92rem; } .rt-result-item { padding: 18px; } .rt-result-value { font-size: 1.1rem; } .rt-faq-q { padding: 14px 18px; font-size: 0.85rem; } .rt-faq-a-inner { padding: 0 18px 14px; } .rt-card-header h2 { font-size: 1.25rem; } }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Reading Time Calculator",
+  "url": "https://nagriva.com/tools/reading-time-calculator",
+  "description": "Calculate estimated reading time and speaking time for any content.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body data-page="reading-time-calculator">
+  <div id="navbar-container"></div>
+  <section class="rt-hero">
+    <div class="rt-hero-bg"><div class="rt-hero-glow"></div><div class="rt-hero-glow-2"></div><div class="rt-hero-grid"></div></div>
+    <div class="container"><div class="rt-hero-content fade-up">
+      <div class="rt-hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Content Tool</div>
+      <h1 class="rt-hero-title">Reading Time <span>Calculator</span></h1>
+      <p class="rt-hero-desc">Calculate estimated reading time, word count, and speaking time for any piece of content.</p>
+      <div class="rt-hero-stats">
+        <span class="rt-hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg><strong>200</strong> WPM Reading Speed</span>
+        <span class="rt-hero-dot"></span>
+        <span class="rt-hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><strong>100%</strong> Free</span>
+        <span class="rt-hero-dot"></span>
+        <span class="rt-hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><strong>Instant</strong> Results</span>
+      </div>
+    </div></div>
+  </section>
+  <section class="rt-section" id="calculator">
+    <div class="container"><div class="rt-inner">
+      <div class="rt-card fade-up" id="calcCard">
+        <div class="rt-card-glow"></div>
+        <div class="rt-card-header"><h2>Calculate Reading Time</h2><p>Paste your content below to calculate reading and speaking time.</p></div>
+        <textarea class="rt-textarea" id="rtTextInput" placeholder="Paste or type your content here..." spellcheck="true"></textarea>
+        <button class="rt-submit" id="rtCalcBtn">Calculate Reading Time<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="rt-results" id="rtResults">
+          <div class="rt-results-grid">
+            <div class="rt-result-item"><div class="rt-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><div class="rt-result-label">Word Count</div><div class="rt-result-value" id="rtWordCount">0</div><div class="rt-result-desc">Total words in your content</div></div>
+            <div class="rt-result-item"><div class="rt-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><div class="rt-result-label">Reading Time</div><div class="rt-result-value" id="rtReadingTime">0 min</div><div class="rt-result-desc">At 200 WPM reading speed</div></div>
+            <div class="rt-result-item"><div class="rt-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><div class="rt-result-label">Speaking Time</div><div class="rt-result-value" id="rtSpeakingTime">0 min</div><div class="rt-result-desc">Average speaking pace</div></div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+  <section class="rt-faq" id="faq">
+    <div class="container"><div class="rt-faq-inner">
+      <div class="section-header fade-up"><div class="section-tag">✦ FAQ</div><h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2><p class="section-desc">Everything you need to know about the Reading Time Calculator.</p></div>
+      <div class="rt-faq-list fade-up">
+        <div class="rt-faq-item open"><button class="rt-faq-q"><span>What reading speed do you use?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="rt-faq-a"><div class="rt-faq-a-inner">We use the standard average reading speed of 200 words per minute (WPM). This is the most commonly accepted average for adult readers.</div></div></div>
+        <div class="rt-faq-item"><button class="rt-faq-q"><span>How is speaking time calculated?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="rt-faq-a"><div class="rt-faq-a-inner">Speaking time is calculated at approximately 150 WPM, which is the average conversational speaking pace for presentations and voice-overs.</div></div></div>
+      </div>
+    </div></div>
+  </section>
+  <section class="rt-cta"><div class="rt-cta-glow"></div><div class="container"><div class="rt-cta-inner fade-up"><h2>Need Engaging <span>Content?</span></h2><p>Our team creates optimized content tailored to your audience.</p><div class="rt-cta-actions"><a href="/pages/services/blog-creation.html" class="btn-primary">Explore Content Services<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a><a href="/pages/contact.html" class="btn-secondary">Contact Us</a></div></div></div></section>
+  <div id="footer-container"></div>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      var textarea = document.getElementById('rtTextInput');
+      var calcBtn = document.getElementById('rtCalcBtn');
+      var results = document.getElementById('rtResults');
+      var wordEl = document.getElementById('rtWordCount');
+      var readingEl = document.getElementById('rtReadingTime');
+      var speakingEl = document.getElementById('rtSpeakingTime');
+      document.querySelectorAll('.rt-faq-item').forEach(function(item) {
+        item.querySelector('.rt-faq-q').addEventListener('click', function() {
+          var o = item.classList.contains('open');
+          document.querySelectorAll('.rt-faq-item').forEach(function(i) { i.classList.remove('open'); });
+          if (!o) item.classList.add('open');
+        });
+      });
+      function formatTime(minutes) {
+        if (minutes < 1) return 'Less than 1 min';
+        var m = Math.floor(minutes);
+        var s = Math.round((minutes - m) * 60);
+        if (m === 0) return s + ' sec';
+        if (s === 0) return m + ' min';
+        return m + ' min ' + s + ' sec';
+      }
+      calcBtn.addEventListener('click', function() {
+        var text = textarea.value.trim();
+        if (!text) { results.classList.remove('active'); return; }
+        var words = text.split(/\s+/).length;
+        var readingMinutes = words / 200;
+        var speakingMinutes = words / 150;
+        wordEl.textContent = words;
+        readingEl.textContent = formatTime(readingMinutes);
+        speakingEl.textContent = formatTime(speakingMinutes);
+        results.classList.add('active');
+      });
+      textarea.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && e.ctrlKey) calcBtn.click();
+      });
+    });
+  </script>
+<script defer src="../../js/layout.js"></script>
+</body></html>
