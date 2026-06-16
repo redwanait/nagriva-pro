@@ -48,9 +48,9 @@ window.NagrivaOnboarding = (function () {
       desc: 'Learn from expert articles on digital growth, SEO, branding, and more.'
     },
     {
-      target: '.btn-get-started',
-      title: 'Get Started',
-      desc: 'Start your journey with Nagriva today.'
+      target: '.btn-login',
+      title: 'Login',
+      desc: 'Sign in to your Nagriva account.'
     }
   ]
 
@@ -93,7 +93,7 @@ window.NagrivaOnboarding = (function () {
         '.nav-link[data-page="services"]': '.nav-link[data-page="services"]',
         '.nav-link[data-page="pricing"]': '.nav-link[data-page="pricing"]',
         '.nav-link[data-page="blog"]': '.nav-link[data-page="blog"]',
-        '.btn-get-started': '.btn-get-started'
+        '.btn-login': '.btn-login'
       }
       var fb = QA_FALLBACKS[selector]
       if (fb) {

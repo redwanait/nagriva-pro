@@ -1,0 +1,409 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon — Nagriva Pro</title>
+  <meta name="description" content="Premium Pro and Agency plans are launching soon.">
+  <meta name="robots" content="noindex, follow">
+  <meta property="og:title" content="Coming Soon — Nagriva Pro">
+  <meta property="og:description" content="Premium Pro and Agency plans are launching soon.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/pages/coming-soon">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Coming Soon — Nagriva Pro">
+  <meta name="twitter:description" content="Premium Pro and Agency plans are launching soon.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/pages/coming-soon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"></noscript>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { min-height: 100%; }
+    body {
+      min-height: 100vh;
+      background: #050505;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── Animated Background ─── */
+    .bg-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-glow::before,
+    .bg-glow::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: bgDrift 12s ease-in-out infinite alternate;
+    }
+    .bg-glow::before {
+      width: 500px;
+      height: 500px;
+      background: rgba(250,204,21,0.04);
+      top: -10%;
+      left: -5%;
+      animation-duration: 14s;
+    }
+    .bg-glow::after {
+      width: 400px;
+      height: 400px;
+      background: rgba(250,204,21,0.03);
+      bottom: -8%;
+      right: -5%;
+      animation-duration: 10s;
+      animation-delay: -4s;
+    }
+    @keyframes bgDrift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 40px) scale(1.15); }
+    }
+
+    /* ─── Grid pattern ─── */
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+
+    .cs-container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* ─── Logo ─── */
+    .cs-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeSlideDown 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+    }
+    .cs-logo svg {
+      width: 32px;
+      height: 32px;
+    }
+    .cs-logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #1a1200;
+    }
+    .cs-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── Badge ─── */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FACC15;
+      background: rgba(250,204,21,0.08);
+      border: 1px solid rgba(250,204,21,0.12);
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    }
+    .cs-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── Title ─── */
+    .cs-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+    }
+    .cs-title .gold {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cs-title-glow {
+      display: inline-block;
+      position: relative;
+    }
+    .cs-title-glow::after {
+      content: '';
+      position: absolute;
+      inset: -8px -20px;
+      background: radial-gradient(ellipse at center, rgba(250,204,21,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* ─── Description ─── */
+    .cs-desc {
+      font-size: 1.05rem;
+      color: #A1A1AA;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
+    }
+
+    /* ─── Countdown / Status bar ─── */
+    .cs-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s forwards;
+    }
+    .cs-status-bar {
+      width: 200px;
+      height: 4px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .cs-status-fill {
+      height: 100%;
+      width: 35%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #FACC15, #F59E0B);
+      animation: fillProgress 2s cubic-bezier(0.4,0,0.2,1) 1.2s forwards;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+    @keyframes fillProgress {
+      to { transform: scaleX(1); }
+    }
+    .cs-status-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #71717A;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── Features preview ─── */
+    .cs-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 1.1s forwards;
+    }
+    .cs-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: #A1A1AA;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .cs-feature:hover {
+      background: rgba(250,204,21,0.04);
+      border-color: rgba(250,204,21,0.08);
+    }
+    .cs-feature svg {
+      width: 15px;
+      height: 15px;
+      color: #10B981;
+      flex-shrink: 0;
+    }
+
+    /* ─── CTA ─── */
+    .cs-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 1.3s forwards;
+    }
+    .cs-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+     
+    }
+    .cs-btn-primary {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #1a1200;
+      border: none;
+      box-shadow: 0 0 24px rgba(250,204,21,0.12);
+    }
+    .cs-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(250,204,21,0.25);
+    }
+    .cs-btn-ghost {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .cs-btn-ghost:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.16);
+      transform: translateY(-3px);
+    }
+
+    /* ─── Keyframes ─── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      .cs-title { font-size: 2.2rem; }
+      .cs-desc { font-size: 0.95rem; }
+      .cs-features { grid-template-columns: 1fr; }
+      .cs-actions { flex-direction: column; width: 100%; }
+      .cs-btn { width: 100%; justify-content: center; }
+      .cs-status { flex-direction: column; gap: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cs-logo, .cs-badge, .cs-title, .cs-desc, .cs-status, .cs-features, .cs-actions {
+        animation: none;
+        opacity: 1;
+      }
+      .cs-status-fill { animation: none; transform: scaleX(1); }
+      .bg-glow::before, .bg-glow::after { animation: none; }
+      .cs-badge-dot { animation: none; }
+      .cs-title-glow::after { animation: none; }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .cs-btn-primary:hover, .cs-btn-ghost:hover { transform: none !important; }
+      .cs-feature:hover { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.04); }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="bg-grid"></div>
+
+  <div class="cs-container">
+
+
+    <div class="cs-badge">
+      <span class="cs-badge-dot"></span>
+      Launching Soon
+    </div>
+
+    <h1 class="cs-title">
+      Premium Plans<br>
+      <span class="cs-title-glow"><span class="gold">Coming Soon</span></span>
+    </h1>
+
+    <p class="cs-desc">
+      We're putting the final touches on our Pro and Agency plans.<br>
+      Powerful features, seamless workflows — built to scale your growth.
+    </p>
+
+    <div class="cs-status">
+      <div class="cs-status-bar">
+        <div class="cs-status-fill"></div>
+      </div>
+      <span class="cs-status-label">Launch Progress</span>
+    </div>
+
+    <div class="cs-features">
+      <div class="cs-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> AI-Powered Automation</div>
+      <div class="cs-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Websites</div>
+      <div class="cs-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> White Label Reports</div>
+      <div class="cs-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Support</div>
+    </div>
+
+    <div class="cs-actions">
+      <a href="../index.html" class="cs-btn cs-btn-primary">
+        Back to Home
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -358,9 +358,65 @@
   color: #f87171 !important;
 }
 
-/* ─── Hide Get Started on desktop when user is logged in ─── */
-.nav-user.visible ~ .btn-get-started {
-  display: none;
+/* ─── LOGIN BUTTON ─── */
+.btn-login {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 7px 22px;
+  min-width: 120px;
+  text-align: center;
+  border-radius: 99px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-login:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.btn-login:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ─── PRO BADGE (desktop) ─── */
+.pro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: #FACC15;
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  padding: 7px 16px;
+  border-radius: 99px;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.06);
+}
+
+/* ─── MOBILE PRO BADGE ─── */
+.mobile-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-weight: 750;
+  font-size: 0.9rem;
+  color: #FACC15;
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.15);
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.25);
 }
 
 /* ─── NAVBAR ─── */
@@ -671,6 +727,15 @@
     padding: 6px 16px;
     min-width: auto;
   }
+  .btn-login {
+    font-size: 0.75rem;
+    padding: 6px 16px;
+    min-width: auto;
+  }
+  .pro-badge {
+    font-size: 0.72rem;
+    padding: 6px 14px;
+  }
 }
 
 /* ─── MOBILE ─── */
@@ -678,7 +743,9 @@
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .btn-get-started { display: none; }
+  .btn-login { display: none; }
   .btn-pro { display: none; }
+  .pro-badge { display: none; }
   .navbar {
     background: rgba(4,6,8,0.92);
     backdrop-filter: blur(26px) saturate(200%);

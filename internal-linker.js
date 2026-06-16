@@ -460,7 +460,7 @@ function shouldSkipElement($el) {
     '.sv-ind-btn, .sv-industry-cta-btn, .sv-cta-btn, ' +
     '.auth-form, #signInForm, #signUpForm, #forgotForm, ' +
     '.auth-social, .auth-tabs, ' +
-    '.beta-announcement, .blog-cta-form, .newsletter-input-wrap'
+    '.blog-cta-form, .newsletter-input-wrap'
   );
   if (forbidden.length > 0) return true;
 

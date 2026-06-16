@@ -111,8 +111,8 @@ const NagrivaAuth = (() => {
      ════════════════════════════════════════════ */
 
   function updateNavbarUI(user) {
-    var getStartedBtn = document.getElementById('getStartedBtn');
-    var mobileGetStartedBtn = document.getElementById('mobileGetStartedBtn');
+    var loginBtn = document.getElementById('loginBtn');
+    var mobileLoginBtn = document.getElementById('mobileLoginBtn');
     var navUser = document.getElementById('navUser');
     var navAvatar = document.getElementById('navAvatar');
     var navAvatarInitials = document.getElementById('navAvatarInitials');
@@ -124,8 +124,8 @@ const NagrivaAuth = (() => {
     var mobileMenuUserEmail = document.getElementById('mobileMenuUserEmail');
 
     if (user) {
-      if (getStartedBtn) getStartedBtn.style.display = 'none';
-      if (mobileGetStartedBtn) mobileGetStartedBtn.style.display = 'none';
+      if (loginBtn) loginBtn.style.display = 'none';
+      if (mobileLoginBtn) mobileLoginBtn.style.display = 'none';
 
       if (navUser) navUser.style.display = '';
       var name = getDisplayName(user);
@@ -155,13 +155,16 @@ const NagrivaAuth = (() => {
       if (mobileMenuUserName) mobileMenuUserName.textContent = name;
       if (mobileMenuUserEmail) mobileMenuUserEmail.textContent = user.email || '';
 
+      try { localStorage.setItem('nagriva_auth_user', JSON.stringify({ id: user.id, email: user.email, user_metadata: user.user_metadata })); } catch (e) {}
+
       updateAdminLinkVisibility(user);
       updatePlanUI();
     } else {
-      if (getStartedBtn) getStartedBtn.style.display = '';
-      if (mobileGetStartedBtn) mobileGetStartedBtn.style.display = '';
+      if (loginBtn) loginBtn.style.display = '';
+      if (mobileLoginBtn) mobileLoginBtn.style.display = '';
       if (navUser) navUser.style.display = 'none';
       if (mobileMenuUser) mobileMenuUser.style.display = 'none';
+      try { localStorage.removeItem('nagriva_auth_user'); } catch (e) {}
     }
   }
 
@@ -197,6 +200,7 @@ const NagrivaAuth = (() => {
         dropdown.classList.remove('show');
         if (avatar) avatar.setAttribute('aria-expanded', 'false');
       }
+      try { localStorage.removeItem('nagriva_auth_user'); } catch (e) {}
       if (!window.NagrivaAuthStore) { window.location.href = '/pages/login.html'; return; }
       NagrivaAuthStore.signOut().then(function() {
         window.location.href = '/pages/login.html';
@@ -216,15 +220,18 @@ const NagrivaAuth = (() => {
 
     console.log('[DEBUG BADGE] User ID:', userId, '| Plan:', planData?.plan || NagrivaPlanManager?.getPlan(), '| isPro:', isPro, '| Subscription status:', subStatus, '| Badge rendering:', isPro ? 'PRO' : 'FREE');
 
-    /* Desktop: swap "Join Nagriva Pro" button with "Manage Subscription" button */
+    /* Desktop: swap "Join Nagriva Pro" button with PRO badge + "Manage Subscription" button */
     var proBtn = document.getElementById('proBtn');
+    var proBadgeNav = document.getElementById('proBadgeNav');
     var proMemberBtn = document.getElementById('proMemberBtn');
-    if (proBtn && proMemberBtn) {
+    if (proBtn && proBadgeNav && proMemberBtn) {
       if (isPro) {
         proBtn.style.display = 'none';
+        proBadgeNav.style.display = 'inline-flex';
         proMemberBtn.style.display = 'inline-flex';
       } else {
         proBtn.style.display = '';
+        proBadgeNav.style.display = 'none';
         proMemberBtn.style.display = 'none';
       }
     }
@@ -254,15 +261,18 @@ const NagrivaAuth = (() => {
       navFreeBadge.style.display = isPro ? 'none' : 'inline-flex';
     }
 
-    /* Mobile: swap "Join Nagriva Pro" with "Manage Subscription" button */
+    /* Mobile: swap "Join Nagriva Pro" with PRO badge + "Manage Subscription" button */
     var mobileProBtn = document.getElementById('mobileProBtn');
+    var mobileProBadgeNav = document.getElementById('mobileProBadgeNav');
     var mobileProBadge = document.getElementById('mobileProBadge');
-    if (mobileProBtn && mobileProBadge) {
+    if (mobileProBtn && mobileProBadgeNav && mobileProBadge) {
       if (isPro) {
         mobileProBtn.style.display = 'none';
+        mobileProBadgeNav.style.display = 'inline-flex';
         mobileProBadge.style.display = 'inline-flex';
       } else {
         mobileProBtn.style.display = '';
+        mobileProBadgeNav.style.display = 'none';
         mobileProBadge.style.display = 'none';
       }
     }
@@ -478,6 +488,12 @@ const NagrivaAuth = (() => {
       return;
     }
 
+    /* Immediate UI from localStorage before Supabase confirms */
+    var storedUser = (function() { try { var d = localStorage.getItem('nagriva_auth_user'); return d ? JSON.parse(d) : null; } catch (e) { return null; } })();
+    if (storedUser) {
+      updateNavbarUI(storedUser);
+    }
+
     /* Subscribe to auth state changes from store */
     NagrivaAuthStore.subscribe(function(state) {
       console.log('[DEBUG auth] subscriber fired — loading:', state.loading, '| user:', state.user?.id);
@@ -516,7 +532,12 @@ const NagrivaAuth = (() => {
       console.log('[DEBUG auth] navbar:loaded — user is authenticated, updating navbar UI');
       updateNavbarUI(NagrivaAuthStore.getUser());
     } else {
-      console.log('[DEBUG auth] navbar:loaded — NOT authenticated (or no store), store:', !!window.NagrivaAuthStore, '| auth:', window.NagrivaAuthStore?.isAuthenticated());
+      var storedUser = (function() { try { var d = localStorage.getItem('nagriva_auth_user'); return d ? JSON.parse(d) : null; } catch (e) { return null; } })();
+      if (storedUser) {
+        updateNavbarUI(storedUser);
+      } else {
+        console.log('[DEBUG auth] navbar:loaded — NOT authenticated (or no store), store:', !!window.NagrivaAuthStore, '| auth:', window.NagrivaAuthStore?.isAuthenticated());
+      }
     }
     updatePlanUI();
   });

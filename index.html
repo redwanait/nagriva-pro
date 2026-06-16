@@ -177,19 +177,7 @@
 
   <div id="navbar-container"></div>
 
-  <!-- ══════════════════════════ BETA ANNOUNCEMENT ══════════════════════════ -->
-  <div class="beta-announcement" id="betaAnnouncement">
-    <div class="beta-announcement-inner">
-      <span class="beta-announcement-text"><strong>Nagriva</strong> is currently in Public Beta. We're improving the platform every day and welcome your feedback.</span>
-      <a href="/pages/contact.html" class="beta-announcement-btn">
-        Send Feedback
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </a>
-    </div>
-    <button class="beta-announcement-close" id="betaAnnouncementClose" aria-label="Dismiss">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    </button>
-  </div>
+
 
   <!-- Auth handled via standalone pages: login.html, signup.html -->
 
@@ -932,21 +920,7 @@
   </section>
 
 
-  <!-- ══════════════════════════ BETA STATUS ══════════════════════════ -->
-  <section class="beta-section lazy-section lazy-section--small" id="beta-status">
-    <div class="beta-section-bg">
-      <div class="beta-section-glow"></div>
-    </div>
-    <div class="container">
-      <div class="beta-section-content fade-up">
-        <span class="beta-section-badge">✦ Public Beta</span>
-        <h2 class="beta-section-title">Constantly Improving For Better Results</h2>
-        <p class="beta-section-desc">
-          You're among the first users helping shape the future of Nagriva. Some features may still be evolving as we continue improving the platform.
-        </p>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ══════════════════════════ FAQ — Premium Redesign ══════════════════════════ -->
   <section class="section lazy-section lazy-section--xl" id="faq">
@@ -1246,23 +1220,6 @@
   <!-- Performance optimizer + lazy loader (deferred, executes after critical) -->
   <script defer="" src="/js/performance-optimizer.js"></script>
   <script defer="" src="/js/lazy-loader.js"></script>
-  <script>
-    /* ─── Beta announcement dismiss ─── */
-    (function(){
-      var closeBtn = document.getElementById('betaAnnouncementClose');
-      var banner = document.getElementById('betaAnnouncement');
-      if (closeBtn && banner) {
-        try {
-          var dismissed = localStorage.getItem('betaBannerDismissed');
-          if (dismissed === 'true') { banner.classList.add('hidden'); }
-        } catch(e) {}
-        closeBtn.addEventListener('click', function(){
-          banner.classList.add('hidden');
-          try { localStorage.setItem('betaBannerDismissed', 'true'); } catch(e) {}
-        });
-      }
-    })();
-  </script>
   <script>
     /* ─── Minimal critical init (runs before defer) ─── */
     (function() {

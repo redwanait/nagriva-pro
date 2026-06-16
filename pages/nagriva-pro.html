@@ -101,7 +101,7 @@
         "name": "When will premium features launch?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We are currently rolling out premium features in phases. Join the waiting list to get early access and be the first to try new features as they launch."
+          "text": "We are continuously releasing new premium features. Join the waiting list to be the first to try new features as they launch."
         }
       },
       {
@@ -478,17 +478,6 @@
         <p class="section-desc">Start free, upgrade when you need more power.</p>
       </div>
 
-      <div class="nv-billing-toggle fade-up">
-        <span class="nv-billing-label" id="billingMonthlyLabel">Monthly</span>
-        <button class="nv-billing-switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle yearly billing">
-          <span class="nv-billing-switch-knob"></span>
-        </button>
-        <span class="nv-billing-label" id="billingYearlyLabel">
-          Yearly
-          <span class="nv-billing-save">Save 20%</span>
-        </span>
-      </div>
-
       <div class="nv-pricing-grid fade-up">
         <div class="nv-plan-card nv-plan-free">
           <div class="nv-plan-header">
@@ -515,7 +504,7 @@
         <div class="nv-plan-card nv-plan-pro nv-plan-featured" id="nvPlanMonthly">
           <div class="nv-plan-popular">Most Popular</div>
           <div class="nv-plan-header">
-            <div class="nv-plan-name">Pro Monthly</div>
+            <div class="nv-plan-name">Pro</div>
             <div class="nv-plan-price">
               <span class="nv-plan-amount" id="nvMonthlyAmount">$29</span>
               <span class="nv-plan-period" id="nvMonthlyPeriod">/month</span>
@@ -531,7 +520,7 @@
             <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Priority Support</li>
           </ul>
           <div class="nv-plan-action">
-            <button class="nv-plan-btn" data-checkout="price_1TiVkkBz7eLMEaEQprypvh6i" id="nvUpgradeMonthly">
+            <button class="nv-plan-btn" onclick="location.href='coming-soon.html'" id="nvUpgradeMonthly">
               <span class="nv-plan-btn-text" id="nvMonthlyBtnText">Upgrade to Pro</span>
             </button>
             <span class="nv-plan-manage-btn" id="nvManageMonthly" style="display:none;">
@@ -540,28 +529,32 @@
           </div>
         </div>
 
-        <div class="nv-plan-card nv-plan-pro" id="nvPlanYearly">
+        <!-- ─── AGENCY ─── -->
+        <div class="nv-plan-card nv-plan-pro nv-plan-featured nv-plan-agency">
+          <div class="nv-plan-best-value">BEST VALUE</div>
           <div class="nv-plan-header">
-            <div class="nv-plan-name">Pro Yearly</div>
+            <div class="nv-plan-name">AGENCY</div>
             <div class="nv-plan-price">
-              <span class="nv-plan-amount" id="nvYearlyAmount">$279</span>
-              <span class="nv-plan-period" id="nvYearlyPeriod">/year</span>
+              <span class="nv-plan-amount">$79</span>
+              <span class="nv-plan-period">/month</span>
             </div>
-            <p class="nv-plan-desc">Best value — save 20% with annual billing.</p>
+            <p class="nv-plan-desc">Perfect for agencies, teams, and power users managing multiple websites.</p>
           </div>
           <ul class="nv-plan-features">
-            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> All Free Features</li>
-            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Tool Usage</li>
-            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> AI-Powered Insights</li>
-            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced Analytics</li>
-            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Export & Share</li>
-            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Priority Support</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Everything in Pro</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Websites</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> White Label Reports</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Team Collaboration</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> API Access</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced AI Automation</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Client Management Dashboard</li>
+            <li class="nv-plan-feature included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Support</li>
           </ul>
           <div class="nv-plan-action">
-            <button class="nv-plan-btn" data-checkout="price_1TiVkkBz7eLMEaEQjOpt08wF" id="nvUpgradeYearly">
-              <span class="nv-plan-btn-text" id="nvYearlyBtnText">Upgrade to Pro</span>
+            <button class="nv-plan-btn" onclick="location.href='coming-soon.html'" id="nvUpgradeAgency">
+              <span class="nv-plan-btn-text" id="nvAgencyBtnText">Start Agency Plan</span>
             </button>
-            <span class="nv-plan-manage-btn" id="nvManageYearly" style="display:none;">
+            <span class="nv-plan-manage-btn" id="nvManageAgency" style="display:none;">
               <button class="nv-plan-btn nv-plan-btn-secondary" data-portal>Manage Subscription</button>
             </span>
           </div>
@@ -617,7 +610,7 @@
             </svg>
           </button>
           <div class="nv-faq-a">
-            <p>We are currently rolling out premium features in phases. By joining the waiting list, you will get early access and be among the first to try new features as they become available.</p>
+            <p>We are continuously releasing new premium features. By joining the waiting list, you will be among the first to try new features as they become available.</p>
           </div>
         </div>
         <div class="nv-faq-item">
@@ -717,141 +710,40 @@
   (function() {
     'use strict';
 
-    /* ── DIRECT CHECKOUT CLICK HANDLER ── */
-    /* Attached immediately during parsing — no deferred script dependency */
-
-    function getCheckoutToken() {
-      return new Promise(function(resolve, reject) {
-        function tryGet() {
-          if (window.NagrivaAuthStore && NagrivaAuthStore.getSession()) {
-            resolve(NagrivaAuthStore.getSession().access_token);
-          } else if (window.NagrivaAuthStore && !NagrivaAuthStore.isLoading()) {
-            reject(new Error('Not authenticated'));
-          } else {
-            setTimeout(tryGet, 100);
-          }
-        }
-        tryGet();
-      });
-    }
-
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('[data-checkout]');
-      if (!btn) return;
-      console.log('[NagrivaPro] Checkout click:', btn.id, 'price:', btn.getAttribute('data-checkout'));
-      e.preventDefault();
-
-      var priceId = btn.getAttribute('data-checkout');
-      var originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Redirecting...';
-
-      getCheckoutToken().then(function(token) {
-        return fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-          body: JSON.stringify({ priceId: priceId, mode: 'subscription' })
-        });
-      }).then(function(res) {
-        return res.json().then(function(data) {
-          if (!res.ok) throw new Error(data.error || 'Request failed');
-          if (data.url) {
-            window.location.href = data.url;
-          } else {
-            throw new Error('No checkout URL returned');
-          }
-        });
-      }).catch(function(err) {
-        console.error('[NagrivaPro] Checkout error:', err);
-        btn.textContent = 'Error - Try Again';
-        btn.disabled = false;
-        setTimeout(function() { btn.textContent = originalText; }, 3000);
-      });
-    });
-
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('[data-portal]');
-      if (!btn) return;
-      console.log('[NagrivaPro] Portal click:', btn.id);
-      e.preventDefault();
-
-      var originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Opening...';
-
-      getCheckoutToken().then(function(token) {
-        return fetch('/api/create-portal-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-        });
-      }).then(function(res) {
-        return res.json().then(function(data) {
-          if (!res.ok) throw new Error(data.error || 'Request failed');
-          if (data.url) {
-            window.location.href = data.url;
-          } else {
-            throw new Error('No portal URL returned');
-          }
-        });
-      }).catch(function(err) {
-        console.error('[NagrivaPro] Portal error:', err);
-        btn.textContent = 'Error - Try Again';
-        btn.disabled = false;
-        setTimeout(function() { btn.textContent = originalText; }, 3000);
-      });
-    });
-
-    /* Billing toggle */
-    var toggle = document.getElementById('billingToggle');
-    var monthlyCard = document.getElementById('nvPlanMonthly');
-    var yearlyCard = document.getElementById('nvPlanYearly');
-
-    if (toggle && monthlyCard && yearlyCard) {
-      toggle.addEventListener('click', function() {
-        var isYearly = this.getAttribute('aria-checked') === 'true';
-        this.setAttribute('aria-checked', String(!isYearly));
-        this.classList.toggle('active');
-        monthlyCard.style.display = isYearly ? '' : 'none';
-        yearlyCard.style.display = isYearly ? 'none' : '';
-      });
-      monthlyCard.style.display = '';
-      yearlyCard.style.display = 'none';
-    }
-
     /* Plan state management — on DOMContentLoaded */
     document.addEventListener('DOMContentLoaded', function() {
       function updatePricingUI() {
         var isPro = window.NagrivaPlanManager && NagrivaPlanManager.isPro();
         var freeCurrent = document.getElementById('nvCurrentFree');
         var monthlyBtn = document.getElementById('nvUpgradeMonthly');
-        var yearlyBtn = document.getElementById('nvUpgradeYearly');
+        var agencyBtn = document.getElementById('nvUpgradeAgency');
         var monthlyManage = document.getElementById('nvManageMonthly');
-        var yearlyManage = document.getElementById('nvManageYearly');
+        var agencyManage = document.getElementById('nvManageAgency');
         var monthlyBtnText = document.getElementById('nvMonthlyBtnText');
-        var yearlyBtnText = document.getElementById('nvYearlyBtnText');
+        var agencyBtnText = document.getElementById('nvAgencyBtnText');
         var heroJoinBtn = document.getElementById('nvHeroJoinBtn');
 
         if (isPro) {
           if (freeCurrent) freeCurrent.textContent = 'Downgrade';
           if (monthlyBtn) monthlyBtn.style.display = 'none';
-          if (yearlyBtn) yearlyBtn.style.display = 'none';
+          if (agencyBtn) agencyBtn.style.display = 'none';
           if (monthlyManage) monthlyManage.style.display = '';
-          if (yearlyManage) yearlyManage.style.display = '';
+          if (agencyManage) agencyManage.style.display = '';
           if (heroJoinBtn) heroJoinBtn.textContent = 'Manage Subscription';
 
           var sub = window.NagrivaSubscriptionManager && NagrivaSubscriptionManager.getSubscription();
           if (sub) {
             if (monthlyBtnText) monthlyBtnText.textContent = 'Current Plan';
-            if (yearlyBtnText) yearlyBtnText.textContent = 'Current Plan';
+            if (agencyBtnText) agencyBtnText.textContent = 'Current Plan';
           }
         } else {
           if (freeCurrent) freeCurrent.textContent = 'Current Plan';
           if (monthlyBtn) monthlyBtn.style.display = '';
-          if (yearlyBtn) yearlyBtn.style.display = '';
+          if (agencyBtn) agencyBtn.style.display = '';
           if (monthlyManage) monthlyManage.style.display = 'none';
-          if (yearlyManage) yearlyManage.style.display = 'none';
+          if (agencyManage) agencyManage.style.display = 'none';
           if (monthlyBtnText) monthlyBtnText.textContent = 'Upgrade to Pro';
-          if (yearlyBtnText) yearlyBtnText.textContent = 'Upgrade to Pro';
+          if (agencyBtnText) agencyBtnText.textContent = 'Start Agency Plan';
           if (heroJoinBtn) heroJoinBtn.textContent = 'Join Nagriva Pro';
         }
       }
