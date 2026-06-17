@@ -370,7 +370,7 @@
         <div class="hiw-card fade-up" style="--delay:0s">
           <div class="hiw-media">
             <video autoplay muted loop playsinline preload="metadata" class="hiw-video">
-              <source src="/assets/images/nagriva%20video%20/hiw-client.mp4" type="video/mp4">
+              <source src="/assets/images/nagriva-video/hiw-client.mp4" type="video/mp4">
             </video>
             <div class="hiw-media-overlay"></div>
             <div class="hiw-step-badge">
@@ -476,39 +476,75 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════ APPROACH ══════════════════════════ -->
-  <section class="results section lazy-section" id="approach">
-    <div class="results-bg"></div>
+  <!-- ══════════════════════════ HOW NAGRIVA WORKS ══════════════════════════ -->
+  <section class="hnw-section section lazy-section lazy-section--xl" id="how-nagriva-works">
+    <div class="hnw-bg"></div>
     <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-tag" data-i18n="approach.tag">✦ How we deliver</div>
-        <h2 class="section-title" data-i18n="approach.title">Built for <span class="text-gradient">Performance</span></h2>
-        <p class="section-desc" data-i18n="approach.subtitle">Every project is engineered for speed, clarity, and <a href="/pages/strategy.html">measurable</a> business impact.</p>
+      <div class="section-header hnw-header fade-up">
+        <div class="section-tag">✦ How Nagriva Works</div>
+        <h2 class="section-title hnw-title">Built for <span class="text-gradient">Results</span></h2>
+        <p class="section-desc hnw-subtitle">From strategy to launch, every project is designed to generate measurable business growth.</p>
       </div>
-      <div class="stats-grid">
-        <div class="stat-card fade-up" style="--delay:0s">
-          <div class="stat-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 18 8 12 12 15 17 8 21 11"></polyline></svg>
+
+      <div class="hnw-video-wrapper fade-up" style="--delay:0.1s">
+        <div class="hnw-video-container" id="hnwVideoContainer">
+          <video class="hnw-video" id="hnwVideo" autoplay muted loop playsinline preload="auto">
+            <source src="/assets/images/nagriva-video/hiw-client.mp4" type="video/mp4">
+          </video>
+          <div class="hnw-controls" id="hnwControls">
+            <div class="hnv-progress-wrap">
+              <div class="hnv-progress-track" id="hnvProgressTrack">
+                <div class="hnv-progress-fill" id="hnvProgressFill"></div>
+                <div class="hnv-progress-thumb" id="hnvProgressThumb"></div>
+              </div>
+            </div>
+            <div class="hnv-buttons">
+              <button class="hnv-btn" id="hnvPlayBtn" aria-label="Play">
+                <svg class="hnv-icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg class="hnv-icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </button>
+              <button class="hnv-btn" id="hnvMuteBtn" aria-label="Mute">
+                <svg class="hnv-icon-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <svg class="hnv-icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <button class="hnv-btn" id="hnvReplayBtn" aria-label="Replay">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              </button>
+            </div>
           </div>
-          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">Transparent Process</div>
         </div>
-        <div class="stat-card fade-up" style="--delay:0.07s">
-          <div class="stat-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      </div>
+
+      <div class="hnw-steps fade-up" style="--delay:0.2s">
+        <div class="hnw-step">
+          <div class="hnw-step-header">
+            <span class="hnw-step-num">01</span>
+            <div class="hnw-step-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
           </div>
-          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">Fast Delivery</div>
+          <h3 class="hnw-step-title">Discovery &amp; Strategy</h3>
+          <p class="hnw-step-desc">We analyze your business goals, audience, and opportunities to create a clear growth plan.</p>
         </div>
-        <div class="stat-card fade-up" style="--delay:0.14s">
-          <div class="stat-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"></polygon></svg>
+        <div class="hnw-step">
+          <div class="hnw-step-header">
+            <span class="hnw-step-num">02</span>
+            <div class="hnw-step-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 15 15 15 15 21"></polyline><polyline points="3 9 9 9 9 3"></polyline><path d="M21 3l-6 6"></path><path d="M3 21l6-6"></path></svg>
+            </div>
           </div>
-          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">SEO Optimized</div>
+          <h3 class="hnw-step-title">Build &amp; Optimize</h3>
+          <p class="hnw-step-desc">We design, develop, and optimize websites, SEO systems, and automation workflows.</p>
         </div>
-        <div class="stat-card fade-up" style="--delay:0.21s">
-          <div class="stat-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        <div class="hnw-step">
+          <div class="hnw-step-header">
+            <span class="hnw-step-num">03</span>
+            <div class="hnw-step-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
           </div>
-          <div class="stat-label" style="font-size:1rem;font-weight:600;color:var(--white);">AI-Powered Workflow</div>
+          <h3 class="hnw-step-title">Launch &amp; Scale</h3>
+          <p class="hnw-step-desc">Track performance, generate leads, and continuously improve your results.</p>
         </div>
       </div>
     </div>
@@ -1777,7 +1813,7 @@
           <!-- Video (default state) -->
           <div class="ai-video-wrap" id="aiVideoWrap">
             <video class="ai-video" autoplay muted loop playsinline>
-              <source src="/assets/images/nagriva%20video%20/hiw-client.mp4" type="video/mp4">
+              <source src="/assets/images/nagriva-video/hiw-client.mp4" type="video/mp4">
             </video>
             <div class="ai-video-overlay"></div>
             <div class="ai-video-badge">
@@ -1864,6 +1900,102 @@
       });
     })();
   </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var container = document.getElementById('hnwVideoContainer');
+      var video = document.getElementById('hnwVideo');
+      if (!container || !video) return;
+
+      var playBtn = document.getElementById('hnvPlayBtn');
+      var muteBtn = document.getElementById('hnvMuteBtn');
+      var replayBtn = document.getElementById('hnvReplayBtn');
+      var progressTrack = document.getElementById('hnvProgressTrack');
+      var progressFill = document.getElementById('hnvProgressFill');
+      var progressThumb = document.getElementById('hnvProgressThumb');
+
+      var isDragging = false;
+
+      /* ─── Play / Pause ─── */
+      function togglePlay() {
+        if (video.paused || video.ended) {
+          video.play();
+          container.classList.add('playing');
+        } else {
+          video.pause();
+          container.classList.remove('playing');
+        }
+      }
+
+      playBtn.addEventListener('click', togglePlay);
+      video.addEventListener('click', togglePlay);
+
+      video.addEventListener('play', function() { container.classList.add('playing'); });
+      video.addEventListener('pause', function() { container.classList.remove('playing'); });
+
+      /* ─── Mute / Unmute ─── */
+      muteBtn.addEventListener('click', function() {
+        video.muted = !video.muted;
+        container.classList.toggle('muted', video.muted);
+      });
+
+      video.addEventListener('volumechange', function() {
+        container.classList.toggle('muted', video.muted);
+      });
+
+      /* ─── Replay ─── */
+      replayBtn.addEventListener('click', function() {
+        video.currentTime = 0;
+        video.play();
+        container.classList.add('playing');
+      });
+
+      /* ─── Progress ─── */
+      function updateProgress() {
+        if (video.duration) {
+          var pct = (video.currentTime / video.duration) * 100;
+          progressFill.style.width = pct + '%';
+          progressThumb.style.left = pct + '%';
+        }
+      }
+
+      video.addEventListener('timeupdate', updateProgress);
+
+      function seekTo(e) {
+        var rect = progressTrack.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width;
+        x = Math.max(0, Math.min(1, x));
+        video.currentTime = x * video.duration;
+      }
+
+      progressTrack.addEventListener('click', seekTo);
+
+      progressTrack.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        seekTo(e);
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (isDragging) seekTo(e);
+      });
+
+      document.addEventListener('mouseup', function() {
+        isDragging = false;
+      });
+
+      /* ─── Mobile: always show controls ─── */
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        container.classList.add('touch-device');
+      }
+
+      /* ─── Show controls on mobile ─── */
+      var controls = document.getElementById('hnwControls');
+      if (controls && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+        controls.classList.add('visible');
+      }
+    });
+  </script>
+
 <div id="cookie-consent-container"></div>
   <script defer src="/js/newsletter.js"></script>
   <script defer src="/js/testimonials.js"></script>

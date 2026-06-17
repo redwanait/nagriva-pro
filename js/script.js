@@ -311,7 +311,7 @@ function initSmoothScroll() {
       const target = document.querySelector(anchor.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
-      const navHeight = 68;
+      const navHeight = 60;
       const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
       window.scrollTo({ top, behavior: 'smooth' });
     });
@@ -351,7 +351,7 @@ function initActiveNavLink() {
         }
       });
     },
-    { threshold: 0.4, rootMargin: '-68px 0px 0px 0px' }
+    { threshold: 0.4, rootMargin: '-60px 0px 0px 0px' }
   );
 
   sections.forEach(section => observer.observe(section));

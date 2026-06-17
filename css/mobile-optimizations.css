@@ -305,6 +305,11 @@ html {
   .np-card:hover, .np-card--featured:hover { transform: none !important; box-shadow: none !important; border-color: rgba(255,255,255,0.06) !important; }
   .np-card::before { display: none !important; }
   .np-btn-accent:hover { transform: none !important; box-shadow: none !important; }
+
+  .hnw-step:hover .hnw-step-icon { background: rgba(250,204,21,0.08) !important; border-color: rgba(250,204,21,0.15) !important; }
+  .hnw-step:hover .hnw-step-title { color: var(--white) !important; }
+  .hnw-step:hover .hnw-step-desc { color: var(--gray) !important; }
+  .hnw-step:hover { transform: none !important; }
 }
 
 /* ─── Reduced motion user preference ─── */
@@ -317,4 +322,5 @@ html {
   .glass-dot { animation: none !important; }
   .sp-cta-orb { animation: none !important; }
   .blog-hero-glow { animation: none !important; }
+
 }
