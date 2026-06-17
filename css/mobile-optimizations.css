@@ -206,10 +206,10 @@ html {
 
   /* ─── Footer compact ─── */
   .footer { padding: 28px 0 0 !important; }
-  .footer-grid { gap: 16px !important; }
-  .footer-desc { font-size: 0.75rem !important; max-width: 100% !important; }
+  .footer-grid { gap: 20px !important; }
   .footer-bottom { padding-bottom: 16px !important; }
   .footer-legal { flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .footer-social-section { padding: 24px 0 !important; }
 
   /* ─── Marquee compact ─── */
   .marquee-section { padding: 20px 0 !important; }

@@ -118,20 +118,6 @@
   function processFooter (container) {
     if (window.NagrivaI18n) {
       NagrivaI18n.translate()
-      var langSel = document.getElementById('langSelect')
-      var curSel  = document.getElementById('currencySelect')
-      if (langSel) {
-        langSel.value = NagrivaI18n.getLang()
-        langSel.addEventListener('change', function () {
-          NagrivaI18n.setLang(this.value)
-        })
-      }
-      if (curSel) {
-        curSel.value = NagrivaI18n.getCurrency()
-        curSel.addEventListener('change', function () {
-          NagrivaI18n.setCurrency(this.value)
-        })
-      }
     }
 
     var cookieLink = container.querySelector('.cookie-preferences-link')
@@ -142,11 +128,6 @@
           NagrivaCookieConsent.openPreferences()
         }
       })
-    }
-
-    /* Re-init newsletter forms loaded dynamically */
-    if (window.NAGRIVA_Newsletter) {
-      NAGRIVA_Newsletter.init()
     }
   }
 
