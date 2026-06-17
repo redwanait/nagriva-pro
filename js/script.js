@@ -35,6 +35,7 @@ document.addEventListener('navbar:loaded', () => {
   initNavbar();
   initHamburger();
   initActiveNavLink();
+  initNavDropdowns();
 });
 
 /* ════════════════════════════════════════════
@@ -154,7 +155,10 @@ function initHamburger() {
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   if (backdrop) backdrop.addEventListener('click', closeMenu);
 
-  overlay.querySelectorAll('.mobile-menu-link').forEach(link => {
+  overlay.querySelectorAll('.mobile-menu-link:not(.mobile-menu-link--dd)').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+  overlay.querySelectorAll('.mobile-menu-sublink').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
 
@@ -351,6 +355,114 @@ function initActiveNavLink() {
   );
 
   sections.forEach(section => observer.observe(section));
+}
+
+/* ════════════════════════════════════════════
+   NAVBAR — Desktop & Mobile Dropdowns
+════════════════════════════════════════════ */
+function initNavDropdowns() {
+  /* ─── Desktop: hover + click toggle ─── */
+  document.querySelectorAll('.nav-dd-wrapper').forEach(wrapper => {
+    const btn = wrapper.querySelector('.nav-link--dd');
+    const menu = wrapper.querySelector('.nav-dd-menu');
+    if (!btn || !menu) return;
+
+    let closeTimeout;
+
+    function open() {
+      clearTimeout(closeTimeout);
+      btn.setAttribute('aria-expanded', 'true');
+      menu.classList.add('show');
+    }
+
+    function close() {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('show');
+    }
+
+    wrapper.addEventListener('mouseenter', open);
+    wrapper.addEventListener('mouseleave', () => {
+      closeTimeout = setTimeout(close, 80);
+    });
+
+    /* Click toggle (touch/keyboard support) */
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.nav-dd-menu.show').forEach(m => {
+        if (m !== menu) {
+          const ob = m.closest('.nav-dd-wrapper')?.querySelector('.nav-link--dd');
+          m.classList.remove('show');
+          ob?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      if (menu.classList.contains('show')) {
+        close();
+      } else {
+        open();
+      }
+    });
+
+    /* Keyboard: close on Escape */
+    menu.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        close();
+        btn.focus();
+      }
+    });
+
+    /* Close on focusout */
+    wrapper.addEventListener('focusout', e => {
+      if (!wrapper.contains(e.relatedTarget)) close();
+    });
+  });
+
+  /* ─── Close desktop dropdowns on outside click ─── */
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.nav-dd-menu.show').forEach(menu => {
+      const wrapper = menu.closest('.nav-dd-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        const btn = wrapper.querySelector('.nav-link--dd');
+        menu.classList.remove('show');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  /* ─── Mobile: accordion toggle ─── */
+  document.querySelectorAll('.mobile-menu-link--dd').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const group = btn.closest('.mobile-menu-group');
+      if (!group) return;
+      const sublist = group.querySelector('.mobile-menu-sublist');
+      if (!sublist) return;
+      const isOpen = sublist.classList.contains('open');
+
+      /* Close sibling sublists (accordion) */
+      const parent = group.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.mobile-menu-sublist.open').forEach(sl => {
+          if (sl !== sublist) {
+            sl.classList.remove('open');
+            sl.style.maxHeight = '0';
+            const otherBtn = sl.closest('.mobile-menu-group')?.querySelector('.mobile-menu-link--dd');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      /* Toggle current */
+      if (isOpen) {
+        sublist.classList.remove('open');
+        sublist.style.maxHeight = '0';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        sublist.classList.add('open');
+        sublist.style.maxHeight = sublist.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 }
 
 /* ════════════════════════════════════════════

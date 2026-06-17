@@ -7,10 +7,46 @@
 
     <ul class="nav-links" id="navLinks">
       <li><a href="/" class="nav-link" data-page="home" data-i18n="nav.home">Home</a></li>
-      <li><a href="/pages/services.html" class="nav-link" data-page="services" data-i18n="nav.services">Services</a></li>
+      <li class="nav-dd-wrapper">
+        <button class="nav-link nav-link--dd" data-dd="services" aria-haspopup="true" aria-expanded="false">
+          <span data-i18n="nav.services">Services</span>
+          <svg class="nav-link-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dd-menu" data-dd-menu="services" role="menu">
+          <a href="/pages/services/website-development.html" class="nav-dd-link" role="menuitem">Website Development</a>
+          <a href="/pages/seo.html" class="nav-dd-link" role="menuitem">SEO Optimization</a>
+          <a href="/pages/ai-automation.html" class="nav-dd-link" role="menuitem">AI Automation</a>
+          <a href="/pages/social-media.html" class="nav-dd-link" role="menuitem">Digital Marketing</a>
+          <a href="/pages/services/ecommerce-stores.html" class="nav-dd-link" role="menuitem">E-Commerce Solutions</a>
+        </div>
+      </li>
       <li><a href="/pages/tools.html" class="nav-link" data-page="tools">Tools</a></li>
-      <li><a href="/industries/index.html" class="nav-link" data-page="industries">Industries</a></li>
-      <li><a href="/pages/resources.html" class="nav-link" data-page="resources">Resources</a></li>
+      <li class="nav-dd-wrapper">
+        <button class="nav-link nav-link--dd" data-dd="resources" aria-haspopup="true" aria-expanded="false">
+          <span>Resources</span>
+          <svg class="nav-link-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dd-menu" data-dd-menu="resources" role="menu">
+          <a href="/pages/blog.html" class="nav-dd-link" role="menuitem">Blog</a>
+          <a href="/pages/tools.html" class="nav-dd-link" role="menuitem">Free Tools</a>
+          <a href="/resources/statistics/index.html" class="nav-dd-link" role="menuitem">Statistics &amp; Research</a>
+          <a href="/pages/results.html" class="nav-dd-link" role="menuitem">Case Studies</a>
+          <a href="/resources/guides/index.html" class="nav-dd-link" role="menuitem">Guides</a>
+        </div>
+      </li>
+      <li class="nav-dd-wrapper">
+        <button class="nav-link nav-link--dd" data-dd="industries" aria-haspopup="true" aria-expanded="false">
+          <span>Industries</span>
+          <svg class="nav-link-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dd-menu" data-dd-menu="industries" role="menu">
+          <a href="/pages/healthcare-websites.html" class="nav-dd-link" role="menuitem">Healthcare</a>
+          <a href="/pages/restaurant-websites.html" class="nav-dd-link" role="menuitem">Restaurants</a>
+          <a href="/pages/real-estate-websites.html" class="nav-dd-link" role="menuitem">Real Estate</a>
+          <a href="/pages/ecommerce-websites.html" class="nav-dd-link" role="menuitem">E-Commerce</a>
+          <a href="/pages/lawyer-websites.html" class="nav-dd-link" role="menuitem">Professional Services</a>
+        </div>
+      </li>
       <li><a href="/pages/results.html" class="nav-link" data-page="results" data-i18n="nav.results">Results</a></li>
       <li><a href="/pages/pricing.html" class="nav-link" data-page="pricing" data-i18n="nav.pricing">Pricing</a></li>
     </ul>
@@ -97,28 +133,48 @@
         </svg>
         <span data-i18n="nav.home">Home</span>
       </a>
-      <a href="/pages/services.html" class="mobile-menu-link" data-page="services">
-        <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="7" height="7"/>
-          <rect x="14" y="3" width="7" height="7"/>
-          <rect x="14" y="14" width="7" height="7"/>
-          <rect x="3" y="14" width="7" height="7"/>
-        </svg>
-        <span data-i18n="nav.services">Services</span>
-      </a>
+      <div class="mobile-menu-group" data-mobile-dd="services">
+        <button class="mobile-menu-link mobile-menu-link--dd" data-mobile-dd-btn="services">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          <span data-i18n="nav.services">Services</span>
+          <svg class="mobile-menu-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-menu-sublist" data-mobile-sublist="services">
+          <a href="/pages/services/website-development.html" class="mobile-menu-sublink">Website Development</a>
+          <a href="/pages/seo.html" class="mobile-menu-sublink">SEO Optimization</a>
+          <a href="/pages/ai-automation.html" class="mobile-menu-sublink">AI Automation</a>
+          <a href="/pages/social-media.html" class="mobile-menu-sublink">Digital Marketing</a>
+          <a href="/pages/services/ecommerce-stores.html" class="mobile-menu-sublink">E-Commerce Solutions</a>
+        </div>
+      </div>
       <a href="/pages/tools.html" class="mobile-menu-link" data-page="tools">
         <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line>
         </svg>
         <span>Tools</span>
       </a>
-      <a href="/industries/index.html" class="mobile-menu-link" data-page="industries">
-        <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
-        <span>Industries</span>
-      </a>
+      <div class="mobile-menu-group" data-mobile-dd="industries">
+        <button class="mobile-menu-link mobile-menu-link--dd" data-mobile-dd-btn="industries">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Industries</span>
+          <svg class="mobile-menu-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-menu-sublist" data-mobile-sublist="industries">
+          <a href="/pages/healthcare-websites.html" class="mobile-menu-sublink">Healthcare</a>
+          <a href="/pages/restaurant-websites.html" class="mobile-menu-sublink">Restaurants</a>
+          <a href="/pages/real-estate-websites.html" class="mobile-menu-sublink">Real Estate</a>
+          <a href="/pages/ecommerce-websites.html" class="mobile-menu-sublink">E-Commerce</a>
+          <a href="/pages/lawyer-websites.html" class="mobile-menu-sublink">Professional Services</a>
+        </div>
+      </div>
       <a href="/pages/results.html" class="mobile-menu-link" data-page="results">
         <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="20" x2="18" y2="10"/>
@@ -134,13 +190,23 @@
         </svg>
         <span data-i18n="nav.pricing">Pricing</span>
       </a>
-      <a href="/pages/resources.html" class="mobile-menu-link" data-page="resources">
-        <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-        </svg>
-        <span>Resources</span>
-      </a>
+      <div class="mobile-menu-group" data-mobile-dd="resources">
+        <button class="mobile-menu-link mobile-menu-link--dd" data-mobile-dd-btn="resources">
+          <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+          <span>Resources</span>
+          <svg class="mobile-menu-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-menu-sublist" data-mobile-sublist="resources">
+          <a href="/pages/blog.html" class="mobile-menu-sublink">Blog</a>
+          <a href="/pages/tools.html" class="mobile-menu-sublink">Free Tools</a>
+          <a href="/resources/statistics/index.html" class="mobile-menu-sublink">Statistics &amp; Research</a>
+          <a href="/pages/results.html" class="mobile-menu-sublink">Case Studies</a>
+          <a href="/resources/guides/index.html" class="mobile-menu-sublink">Guides</a>
+        </div>
+      </div>
       <a href="/pages/contact.html" class="mobile-menu-link" data-page="contact">
         <svg class="mobile-menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
