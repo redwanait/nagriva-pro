@@ -188,20 +188,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 16px;
   flex-wrap: wrap;
+}
+
+.payment-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+
+.payment-card:hover {
+  transform: translateY(-2px);
 }
 
 .payment-logo {
   height: 28px;
   width: auto;
-  opacity: 0.8;
-  transition: opacity 0.28s cubic-bezier(0.4,0,0.2,1);
+  max-width: 70px;
   object-fit: contain;
-}
-
-.payment-logo:hover {
-  opacity: 1;
+  display: block;
 }
 
 .footer-payments-trust {
@@ -281,10 +292,14 @@
     justify-content: center;
   }
   .footer-payments-logos {
-    gap: 20px;
+    gap: 12px;
+  }
+  .payment-card {
+    padding: 8px 10px;
   }
   .payment-logo {
-    height: 24px;
+    height: 22px;
+    max-width: 56px;
   }
 }
 
