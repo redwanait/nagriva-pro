@@ -4502,8 +4502,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .mobile-menu-cta-row {
     display: flex;
     gap: 8px;
-    margin-bottom: 4px;
-    padding: 0 0 4px;
+    margin-bottom: 0;
+    padding: 0;
   }
   .mobile-menu-cta-row .mobile-menu-cta {
     flex: 1;
@@ -4552,9 +4552,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     box-shadow: 0 0 32px rgba(250,204,21,0.25);
   }
   .mobile-menu-trust {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    font-size: 0.72rem;
+    margin-top: 12px;
+    margin-bottom: 0;
+    font-size: 0.7rem;
     color: var(--gray2);
     letter-spacing: 0.02em;
     text-align: center;

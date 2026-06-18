@@ -318,8 +318,8 @@
 
 /* ─── Mobile menu user section ─── */
 .mobile-menu-user {
-  margin-top: 6px;
-  padding-top: 6px;
+  margin-top: 4px;
+  padding-top: 4px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -335,7 +335,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 0 0 2px;
+  padding: 0;
 }
 
 .mobile-menu-link--danger {
@@ -348,20 +348,20 @@
 
 /* ─── Mobile menu section label ─── */
 .mobile-menu-section-label {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gray2);
-  padding: 16px 14px 6px;
+  padding: 14px 14px 6px;
 }
 
 /* ─── Mobile menu user card (compact) ─── */
 .mobile-menu-user-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 14px 10px;
+  gap: 12px;
+  padding: 6px 14px 8px;
 }
 
 .mobile-menu-user-avatar {
@@ -410,7 +410,7 @@
 .mobile-menu-divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.05);
-  margin: 4px 14px;
+  margin: 2px 14px;
 }
 
 /* ─── Mobile menu bottom section ─── */
@@ -422,37 +422,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-}
-
-/* ─── Mobile menu sticky bottom CTA ─── */
-.mobile-menu-sticky-cta {
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: calc(100% + 48px);
-  margin: 16px -24px 0;
-  padding: 14px 24px;
-  border-radius: 0 0 24px 24px;
-  background: linear-gradient(135deg, #FACC15, #F59E0B, #F59E0B);
-  color: #1a1200;
-  font-weight: 750;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border-radius: 0 0 24px 24px;
-  box-shadow:
-    0 -1px 2px rgba(0,0,0,0.3),
-    0 0 24px rgba(255,215,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.3);
-  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, filter 0.25s ease;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.08);
-  z-index: 1;
-}
-
-.mobile-menu-sticky-cta:active {
-  transform: scale(0.98);
 }
 
 /* ─── LOGIN BUTTON ─── */
@@ -752,9 +721,9 @@
 
 /* ─── MOBILE MENU PRO BUTTON ─── */
 .mobile-menu-pro-row {
-  margin-top: 6px;
+  margin-top: 8px;
   margin-bottom: 0;
-  padding: 0 0 4px;
+  padding: 0;
 }
 .mobile-menu-pro-btn {
   display: flex;
@@ -762,7 +731,7 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 14px 20px;
+  padding: 12px 20px;
   background: linear-gradient(135deg, #FACC15, #F59E0B, #F59E0B);
   border-radius: 14px;
   color: #1a1200;
@@ -944,7 +913,7 @@
     background: linear-gradient(180deg, rgba(12,14,18,0.94), rgba(8,10,14,0.96));
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 24px;
-    padding: 20px 24px 0;
+    padding: 20px 24px 24px;
     transform: scale(0.93) translateY(18px);
     transition: transform 0.4s cubic-bezier(0.32,0.72,0,1);
     box-shadow:
@@ -962,24 +931,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4px;
-    padding-bottom: 12px;
+    margin-bottom: 8px;
+    padding-bottom: 14px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
   }
   .mobile-menu-logo-wrap {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
   .mobile-menu-logo-img {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
   }
   .mobile-menu-logo-text {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1rem;
+    font-size: 1.15rem;
     letter-spacing: 0.08em;
     color: var(--white);
   }
@@ -987,9 +956,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     color: var(--gray);
     background: rgba(255,255,255,0.04);
     transition: background 0.2s, color 0.2s;
@@ -1107,7 +1076,7 @@
 .mobile-menu-link--dd {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 14px;
   background: none;
   border: none;
   cursor: pointer;
@@ -1126,6 +1095,7 @@
 }
 
 .mobile-menu-link--dd .mobile-menu-chevron {
+  margin-left: auto;
   transition: transform 0.3s ease;
 }
 
