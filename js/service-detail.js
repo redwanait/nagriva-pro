@@ -143,70 +143,6 @@
     });
   }
 
-  /* ─── PACKAGE SELECTION STATE ─── */
-  window.selectedPackage = null;
-
-  function extractPackageFromElement(el, index) {
-    var nameEl = el.querySelector('.fv-pkg-name');
-    var priceEl = el.querySelector('.fv-price-amount');
-    var metaItems = el.querySelectorAll('.fv-meta-item');
-
-    if (!nameEl) return null;
-
-    var name = nameEl.textContent.trim();
-    var price = priceEl ? priceEl.textContent.trim().replace(/,/g, '') : '0';
-    var delivery = metaItems[0] ? metaItems[0].textContent.trim() : '';
-    var revisions = metaItems[1] ? metaItems[1].textContent.trim() : '';
-
-    return {
-      id: index,
-      name: name,
-      price: price,
-      delivery: delivery,
-      revisions: revisions
-    };
-  }
-
-  function updateSelectedPackage(index) {
-    var packages = document.querySelectorAll('.fv-pkg-data');
-    if (packages[index]) {
-      window.selectedPackage = extractPackageFromElement(packages[index], index);
-      console.log("Package Selected:", window.selectedPackage);
-    }
-  }
-
-  /* ─── PACKAGE TABS ─── */
-  function initPackageTabs() {
-    var tabs = document.querySelectorAll('.fv-pkg-tab');
-    var packages = document.querySelectorAll('.fv-pkg-data');
-
-    if (!tabs.length || !packages.length) return;
-
-    function activatePackage(index) {
-      tabs.forEach(function (t, i) {
-        t.classList.toggle('active', i === index);
-      });
-      packages.forEach(function (p, i) {
-        p.style.display = i === index ? 'block' : 'none';
-      });
-      updateSelectedPackage(index);
-    }
-
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () {
-        activatePackage(i);
-      });
-    });
-
-    // Activate the "Most Popular" tab by default (usually index 1)
-    var featuredIdx = 1;
-    if (tabs[featuredIdx] && tabs[featuredIdx].classList.contains('fv-pkg-tab')) {
-      activatePackage(featuredIdx);
-    } else {
-      activatePackage(0);
-    }
-  }
-
   /* ─── FAQ ACCORDION ─── */
   function initFAQ() {
     var items = document.querySelectorAll('.fv-faq-item');
@@ -253,65 +189,12 @@
     });
   }
 
-  /* ─── ORDER NOW AUTH CHECK ─── */
-  function initOrderNowButtons() {
-    var buttons = document.querySelectorAll('.fv-cta--primary');
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        var href = btn.getAttribute('href');
-        if (!href || !href.includes('checkout.html')) return;
-
-        e.preventDefault();
-
-        // Build checkout URL from selectedPackage
-        var pkg = window.selectedPackage;
-        if (!pkg) {
-          console.warn('No package selected, falling back to href:', href);
-          window.location.href = href;
-          return;
-        }
-
-        var baseUrl = href.split('?')[0];
-        var existingParams = new URL(href, window.location.origin).searchParams;
-        var service = existingParams.get('service') || '';
-
-        var checkoutUrl = baseUrl + '?' +
-          'service=' + encodeURIComponent(service) +
-          '&pkg=' + encodeURIComponent(pkg.id) +
-          '&package=' + encodeURIComponent(pkg.name) +
-          '&price=' + encodeURIComponent(pkg.price) +
-          '&delivery=' + encodeURIComponent(pkg.delivery) +
-          '&revisions=' + encodeURIComponent(pkg.revisions);
-
-        console.log("Selected Package:", pkg);
-        console.log("Redirecting to:", checkoutUrl);
-
-        if (window.supabaseClient) {
-          window.supabaseClient.auth.getSession().then(function (result) {
-            if (result.data.session) {
-              window.location.href = checkoutUrl;
-            } else {
-              var redirect = encodeURIComponent(checkoutUrl);
-              window.location.href = '/pages/login.html?redirect=' + redirect;
-            }
-          }).catch(function () {
-            window.location.href = '/pages/login.html?redirect=' + encodeURIComponent(checkoutUrl);
-          });
-        } else {
-          window.location.href = '/pages/login.html?redirect=' + encodeURIComponent(checkoutUrl);
-        }
-      });
-    });
-  }
-
   /* ─── INIT ─── */
   document.addEventListener('DOMContentLoaded', function () {
     loadGallery();
     initGallery();
-    initPackageTabs();
     initFAQ();
     initScrollAnimations();
-    initOrderNowButtons();
   });
 
 })();

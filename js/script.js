@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFAQ();
   initSmoothScroll();
   initBeforeAfterSliders();
-  initServiceCTA();
+  // initServiceCTA removed — all service CTAs now point to WhatsApp directly
   initAIAdvisor();
   /* Defer homepage services load to after paint */
   requestIdleCallback(function() { initHomepageServices(); }, { timeout: 3000 });
@@ -846,45 +846,7 @@ requestIdleCallback(function () {
   }, { timeout: 3000 });
 })();
 
-/* ════════════════════════════════════════════
-   SERVICE PAGE CTA REBINDING
-   Auto-converts primary CTAs on service pages
-   to "Order Now" → checkout.html
-════════════════════════════════════════════ */
-function initServiceCTA() {
-  var path = window.location.pathname.split('/').pop().replace('.html', '');
 
-  var slugMap = {
-    'seo': 'seo-optimization',
-    'branding': 'brand-identity',
-    'social-media': 'social-media-growth',
-    'strategy': 'performance-marketing',
-    'ai-automation': 'ai-automation',
-    'website-development': 'website-development',
-    'ecommerce-stores': 'ecommerce-stores',
-    'blog-creation': 'blog-creation',
-    'video-editing': 'video-editing'
-  };
-
-  var service = slugMap[path] || path;
-  if (!service) return;
-
-  var orderUrl = '/pages/checkout.html?service=' + service + '&pkg=1';
-
-  document.querySelectorAll('.sp-btn--primary, .sp-cta-btn, .fv-cta--primary').forEach(function (btn) {
-    var href = btn.getAttribute('href') || '';
-    if (!href.includes('checkout.html')) {
-      btn.setAttribute('href', orderUrl);
-    }
-  });
-
-  document.querySelectorAll('.svc-hero-actions .btn-primary').forEach(function (btn) {
-    var href = btn.getAttribute('href') || '';
-    if (!href.includes('checkout.html')) {
-      btn.setAttribute('href', orderUrl);
-    }
-  });
-}
 
 /* ════════════════════════════════════════════
    HOMEPAGE SERVICES — Dynamic from Supabase

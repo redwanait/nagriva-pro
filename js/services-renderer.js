@@ -225,7 +225,10 @@ window.ServicesRenderer = (function () {
         var pkgPrice = encodeURIComponent(pkg.price.replace(/,/g, ''));
         var pkgDelivery = encodeURIComponent(pkg.delivery);
         var pkgRevisions = encodeURIComponent(pkg.revisions);
-        var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=' + i + '&package=' + pkgName + '&price=' + pkgPrice + '&delivery=' + pkgDelivery + '&revisions=' + pkgRevisions;
+        var serviceSlug = data.slug;
+        var serviceName = serviceSlug.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        var waMsg = 'Hello%20Nagriva%20Team%2C%0AI%20would%20like%20to%20order%20the%20' + encodeURIComponent(serviceName) + '%20service.%0APlease%20provide%20details%20about%20the%20next%20steps%20and%20project%20requirements.';
+        var orderHref = 'https://wa.me/212728427278?text=' + waMsg;
 
         div.innerHTML =
           '<div class="fv-pkg-name">' + (pkg.featured ? pkg.name + ' &bull; Most Popular' : pkg.name) + '</div>' +
@@ -236,9 +239,9 @@ window.ServicesRenderer = (function () {
           '</div>' +
           '<div class="fv-features-title">What\'s Included</div>' +
           '<ul class="fv-features">' + featuresHtml + '</ul>' +
-          '<a href="' + orderHref + '" class="fv-cta fv-cta--primary" data-service="cta-primary">Order Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>' +
+          '<a href="' + orderHref + '" target="_blank" rel="noopener" class="fv-cta fv-cta--primary" data-service="cta-primary">Start Project <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>' +
           '<a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="fv-cta fv-cta--secondary">Book a Free Call</a>' +
-          '<div class="fv-sidebar-trust">' + ICONS.lock + 'Secure checkout &bull; Money-back guarantee</div>';
+          '<div class="fv-sidebar-trust">' + ICONS.lock + 'Discuss your project directly with our team on WhatsApp</div>';
 
         dataContainer.appendChild(div);
       });
@@ -267,7 +270,10 @@ window.ServicesRenderer = (function () {
     var pkgPrice = encodeURIComponent(mostPopular.price.replace(/,/g, ''));
     var pkgDelivery = encodeURIComponent(mostPopular.delivery);
     var pkgRevisions = encodeURIComponent(mostPopular.revisions);
-    var orderHref = '/pages/checkout.html?service=' + data.slug + '&pkg=' + pkgIndex + '&package=' + pkgName + '&price=' + pkgPrice + '&delivery=' + pkgDelivery + '&revisions=' + pkgRevisions;
+    var serviceSlug = data.slug;
+    var serviceName = serviceSlug.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+    var waMsg = 'Hello%20Nagriva%20Team%2C%0AI%20would%20like%20to%20order%20the%20' + encodeURIComponent(serviceName) + '%20service.%0APlease%20provide%20details%20about%20the%20next%20steps%20and%20project%20requirements.';
+    var orderHref = 'https://wa.me/212728427278?text=' + waMsg;
     primaryLinks.forEach(function (link) {
       if (packagesContainer && packagesContainer.contains(link)) return;
       link.href = orderHref;

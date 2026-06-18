@@ -133,13 +133,13 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 22px;
-  padding: 32px 28px;
+  padding: 28px 26px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
-              border-color 0.4s ease,
-              box-shadow 0.5s ease;
+  gap: 14px;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.35s ease,
+              box-shadow 0.4s ease;
   will-change: transform;
 }
 
@@ -166,12 +166,11 @@
 }
 
 .ts-test-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  border-color: rgba(250,204,21,0.25);
+  transform: translateY(-4px);
+  border-color: rgba(250,204,21,0.2);
   box-shadow:
-    0 24px 48px rgba(0,0,0,0.35),
-    0 0 30px rgba(250,204,21,0.06),
-    0 0 60px rgba(250,204,21,0.03);
+    0 16px 40px rgba(0,0,0,0.3),
+    0 0 20px rgba(250,204,21,0.05);
 }
 
 .ts-test-card:hover::before { opacity: 1; }
@@ -180,31 +179,43 @@
 
 .ts-test-stars {
   display: flex;
+  align-items: center;
   gap: 3px;
   color: #FACC15;
 }
 
 .ts-test-stars svg {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   filter: drop-shadow(0 0 4px rgba(250,204,21,0.3));
 }
 
-.ts-test-quote-icon {
-  color: rgba(250,204,21,0.15);
-  line-height: 1;
-  margin-bottom: -8px;
+.ts-test-rating {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FACC15;
+  margin-right: 4px;
+  letter-spacing: -0.02em;
 }
 
-.ts-test-quote-icon svg {
-  width: 28px;
-  height: 28px;
+.ts-test-project-label {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(250,204,21,0.85);
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.12);
+  border-radius: 20px;
+  padding: 3px 10px;
+  letter-spacing: 0.02em;
+  align-self: flex-start;
 }
 
 .ts-test-text {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: #d4d4d8;
-  line-height: 1.75;
+  line-height: 1.7;
   flex: 1;
   font-style: italic;
 }
@@ -213,24 +224,30 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255,255,255,0.04);
 }
 
 .ts-test-avatar {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #000;
   flex-shrink: 0;
   background: linear-gradient(135deg, #FACC15, #F59E0B);
-  box-shadow: 0 0 12px rgba(250,204,21,0.2);
+  box-shadow: 0 0 0 2px rgba(250,204,21,0.15), 0 0 16px rgba(250,204,21,0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.ts-test-card:hover .ts-test-avatar {
+  box-shadow: 0 0 0 2px rgba(250,204,21,0.3), 0 0 20px rgba(250,204,21,0.25);
+  transform: scale(1.05);
 }
 
 .ts-test-info {
@@ -239,22 +256,41 @@
 }
 
 .ts-test-name {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #fff;
 }
 
 .ts-test-role {
-  font-size: 0.72rem;
-  color: #71717a;
+  font-size: 0.7rem;
+  color: #a1a1aa;
   margin-top: 1px;
 }
 
-.ts-test-company {
-  font-size: 0.7rem;
-  color: rgba(250,204,21,0.6);
+.ts-test-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin-top: auto;
+}
+
+.ts-test-delivery {
+  font-size: 0.68rem;
+  color: #71717a;
   font-weight: 500;
-  margin-top: 2px;
+}
+
+.ts-test-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.15);
+  border-radius: 20px;
+  padding: 2px 8px;
+  letter-spacing: 0.01em;
 }
 
 .ts-mobile-indicator {
