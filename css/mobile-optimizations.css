@@ -306,10 +306,7 @@ html {
   .np-card::before { display: none !important; }
   .np-btn-accent:hover { transform: none !important; box-shadow: none !important; }
 
-  .hnw-step:hover .hnw-step-icon { background: rgba(250,204,21,0.08) !important; border-color: rgba(250,204,21,0.15) !important; }
-  .hnw-step:hover .hnw-step-title { color: var(--white) !important; }
-  .hnw-step:hover .hnw-step-desc { color: var(--gray) !important; }
-  .hnw-step:hover { transform: none !important; }
+
 }
 
 /* ─── Reduced motion user preference ─── */

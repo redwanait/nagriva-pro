@@ -36,6 +36,7 @@ document.addEventListener('navbar:loaded', () => {
   initHamburger();
   initActiveNavLink();
   initNavDropdowns();
+  initLangSwitcher();
 });
 
 /* ════════════════════════════════════════════
@@ -1301,4 +1302,153 @@ function initAIAdvisor() {
     }
     return defaultResponse;
   }
+}
+
+/* ════════════════════════════════════════════
+   LANGUAGE SWITCHER
+════════════════════════════════════════════ */
+function initLangSwitcher() {
+  var btn = document.getElementById('navLangBtn');
+  var dropdown = document.getElementById('navLangDropdown');
+  if (!btn || !dropdown) return;
+
+  function open() {
+    btn.setAttribute('aria-expanded', 'true');
+    dropdown.classList.add('show');
+  }
+
+  function close() {
+    btn.setAttribute('aria-expanded', 'false');
+    dropdown.classList.remove('show');
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (dropdown.classList.contains('show')) {
+      close();
+    } else {
+      /* Close other open nav dropdowns */
+      document.querySelectorAll('.nav-dd-menu.show').forEach(function (m) {
+        m.classList.remove('show');
+        var ob = m.closest('.nav-dd-wrapper')?.querySelector('.nav-link--dd');
+        if (ob) ob.setAttribute('aria-expanded', 'false');
+      });
+      open();
+    }
+  });
+
+  dropdown.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { close(); btn.focus(); }
+  });
+
+  /* Outside click */
+  document.addEventListener('click', function (e) {
+    var wrapper = btn.closest('.nav-lang-switcher');
+    if (wrapper && !wrapper.contains(e.target) && dropdown.classList.contains('show')) {
+      close();
+    }
+  });
+
+  /* Language option click */
+  dropdown.querySelectorAll('.nav-lang-option').forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var lang = opt.getAttribute('data-lang');
+      var name = opt.querySelector('.nav-lang-name')?.textContent || lang.toUpperCase();
+
+      /* Update active state */
+      dropdown.querySelectorAll('.nav-lang-option').forEach(function (o) {
+        o.classList.remove('active');
+      });
+      opt.classList.add('active');
+
+      /* Update button text */
+      var current = btn.querySelector('.nav-lang-current');
+      if (current) current.textContent = lang.toUpperCase();
+
+      close();
+
+      /* Show toast */
+      showLangToast('🚀 Feature in Beta', 'Language switching is currently in Beta and is not available yet. Multi-language support will be released in a future update.');
+    });
+  });
+}
+
+/* ════════════════════════════════════════════
+   LANGUAGE TOAST NOTIFICATION
+════════════════════════════════════════════ */
+function showLangToast(title, message) {
+  var container = document.getElementById('langToastContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'lang-toast-container';
+    container.id = 'langToastContainer';
+    document.body.appendChild(container);
+  }
+
+  var toast = document.createElement('div');
+  toast.className = 'lang-toast';
+
+  toast.innerHTML =
+    '<div class="lang-toast-icon">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+        '<circle cx="12" cy="12" r="10"/>' +
+        '<line x1="12" y1="16" x2="12" y2="12"/>' +
+        '<line x1="12" y1="8" x2="12.01" y2="8"/>' +
+      '</svg>' +
+    '</div>' +
+    '<div class="lang-toast-content">' +
+      '<div class="lang-toast-title">' + escapeHtml(title) + '</div>' +
+      '<div class="lang-toast-msg">' + escapeHtml(message) + '</div>' +
+    '</div>' +
+    '<button class="lang-toast-close">' +
+      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">' +
+        '<line x1="18" y1="6" x2="6" y2="18"/>' +
+        '<line x1="6" y1="6" x2="18" y2="18"/>' +
+      '</svg>' +
+    '</button>' +
+    '<div class="lang-toast-progress"></div>';
+
+  container.appendChild(toast);
+
+  /* Remove existing toasts after delay */
+  var existing = container.querySelectorAll('.lang-toast:not(.visible)');
+  existing.forEach(function (t) { if (t.parentNode) t.parentNode.removeChild(t); });
+
+  requestAnimationFrame(function () {
+    toast.classList.add('visible');
+    requestAnimationFrame(function () {
+      var bar = toast.querySelector('.lang-toast-progress');
+      if (bar) {
+        bar.style.transition = 'transform 4000ms linear';
+        bar.style.transform = 'scaleX(0)';
+      }
+    });
+  });
+
+  toast.querySelector('.lang-toast-close').addEventListener('click', function () {
+    dismissLangToast(toast);
+  });
+
+  var dismissTimeout = setTimeout(function () {
+    dismissLangToast(toast);
+  }, 4000);
+
+  toast._dismissTimeout = dismissTimeout;
+}
+
+function dismissLangToast(toast) {
+  if (toast._dismissed) return;
+  toast._dismissed = true;
+  toast.classList.remove('visible');
+  toast.classList.add('hiding');
+  if (toast._dismissTimeout) clearTimeout(toast._dismissTimeout);
+  setTimeout(function () {
+    if (toast.parentNode) toast.parentNode.removeChild(toast);
+  }, 400);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
