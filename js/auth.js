@@ -121,7 +121,10 @@ const NagrivaAuth = (() => {
     var navDropdownEmail = document.getElementById('navDropdownEmail');
     var mobileMenuUser = document.getElementById('mobileMenuUser');
     var mobileMenuUserName = document.getElementById('mobileMenuUserName');
-    var mobileMenuUserEmail = document.getElementById('mobileMenuUserEmail');
+    var mobileMenuUserInitials = document.getElementById('mobileMenuUserInitials');
+    var mobileMenuUserImg = document.getElementById('mobileMenuUserImg');
+    var mobileMenuBottomLinks = document.getElementById('mobileMenuBottomLinks');
+    var mobileLoginRow = document.getElementById('mobileLoginRow');
 
     if (user) {
       if (loginBtn) loginBtn.style.display = 'none';
@@ -153,7 +156,19 @@ const NagrivaAuth = (() => {
 
       if (mobileMenuUser) mobileMenuUser.style.display = '';
       if (mobileMenuUserName) mobileMenuUserName.textContent = name;
-      if (mobileMenuUserEmail) mobileMenuUserEmail.textContent = user.email || '';
+      if (mobileMenuUserInitials) mobileMenuUserInitials.textContent = getInitials(name);
+      if (mobileMenuUserImg) {
+        if (avatarUrl) {
+          mobileMenuUserImg.src = avatarUrl;
+          mobileMenuUserImg.style.display = 'block';
+          if (mobileMenuUserInitials) mobileMenuUserInitials.style.display = 'none';
+        } else {
+          mobileMenuUserImg.style.display = 'none';
+          if (mobileMenuUserInitials) mobileMenuUserInitials.style.display = '';
+        }
+      }
+      if (mobileMenuBottomLinks) mobileMenuBottomLinks.style.display = '';
+      if (mobileLoginRow) mobileLoginRow.style.display = 'none';
 
       try { localStorage.setItem('nagriva_auth_user', JSON.stringify({ id: user.id, email: user.email, user_metadata: user.user_metadata })); } catch (e) {}
 
@@ -164,6 +179,8 @@ const NagrivaAuth = (() => {
       if (mobileLoginBtn) mobileLoginBtn.style.display = '';
       if (navUser) navUser.style.display = 'none';
       if (mobileMenuUser) mobileMenuUser.style.display = 'none';
+      if (mobileMenuBottomLinks) mobileMenuBottomLinks.style.display = 'none';
+      if (mobileLoginRow) mobileLoginRow.style.display = '';
       try { localStorage.removeItem('nagriva_auth_user'); } catch (e) {}
     }
   }
