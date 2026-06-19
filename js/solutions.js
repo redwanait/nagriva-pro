@@ -46,47 +46,73 @@
 
   var isAnimating = false;
 
-  function switchService(serviceKey) {
-    if (isAnimating) return;
-    var data = solutionsData[serviceKey];
-    if (!data) return;
+  function preloadImages() {
+    var keys = Object.keys(solutionsData);
+    for (var i = 0; i < keys.length; i++) {
+      var img = new Image();
+      img.src = solutionsData[keys[i]].image;
+    }
+  }
 
-    isAnimating = true;
+  function updateContent(data) {
+    image.src = data.image;
+    image.alt = data.title;
+    titleEl.textContent = data.title;
+    descEl.textContent = data.desc;
 
-    var contentEl = panel.querySelector('.solutions-content');
-    contentEl.classList.add('solutions-content--exiting');
+    benefitsEl.innerHTML = '';
+    for (var i = 0; i < data.benefits.length; i++) {
+      var li = document.createElement('li');
+      li.textContent = data.benefits[i];
+      benefitsEl.appendChild(li);
+    }
 
-    setTimeout(function () {
-      image.src = data.image;
-      image.alt = data.title;
-      titleEl.textContent = data.title;
-      descEl.textContent = data.desc;
+    priceEl.textContent = data.price;
+    ctaPrimary.href = data.link;
+  }
 
-      benefitsEl.innerHTML = '';
-      for (var i = 0; i < data.benefits.length; i++) {
-        var li = document.createElement('li');
-        li.textContent = data.benefits[i];
-        benefitsEl.appendChild(li);
-      }
-
-      priceEl.textContent = data.price;
-      ctaPrimary.href = data.link;
-
-      contentEl.classList.remove('solutions-content--exiting');
-      contentEl.classList.add('solutions-content--entering');
-
-      setTimeout(function () {
-        contentEl.classList.remove('solutions-content--entering');
-        isAnimating = false;
-      }, 400);
-    }, 250);
-
+  function updatePills(serviceKey) {
     var pills = document.querySelectorAll('.solutions-pill');
     for (var j = 0; j < pills.length; j++) {
       pills[j].classList.remove('active');
     }
     var activePill = document.querySelector('.solutions-pill[data-service="' + serviceKey + '"]');
     if (activePill) activePill.classList.add('active');
+  }
+
+  function switchService(serviceKey) {
+    if (isAnimating) return;
+    var data = solutionsData[serviceKey];
+    if (!data) return;
+
+    isAnimating = true;
+    updatePills(serviceKey);
+
+    var contentEl = panel.querySelector('.solutions-content');
+
+    // Initial load — skip animation
+    if (!titleEl.textContent) {
+      updateContent(data);
+      isAnimating = false;
+      return;
+    }
+
+    // Exit current content
+    contentEl.classList.add('solutions-content--exiting');
+
+    setTimeout(function () {
+      // Swap image + text simultaneously (images are preloaded, instant from cache)
+      updateContent(data);
+
+      // Enter new content
+      contentEl.classList.remove('solutions-content--exiting');
+      contentEl.classList.add('solutions-content--entering');
+
+      setTimeout(function () {
+        contentEl.classList.remove('solutions-content--entering');
+        isAnimating = false;
+      }, 250);
+    }, 200);
   }
 
   var pills = document.querySelectorAll('.solutions-pill');
@@ -96,6 +122,8 @@
       switchService(serviceKey);
     });
   }
+
+  preloadImages();
 
   var firstActive = document.querySelector('.solutions-pill.active');
   if (firstActive) {

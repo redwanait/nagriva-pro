@@ -4435,6 +4435,13 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .process-section::after { opacity: 0.3 !important; }
 }
 
+/* ─── Grid ─── */
+.tf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
 /* ════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════ */
@@ -4468,6 +4475,12 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .c-stat-card { padding: 14px 14px; }
   .c-stat-2 { transform: translateX(4px); }
   .c-stat-4 { transform: translateX(-2px); }
+}
+
+/* ─── Transformations responsive ─── */
+@media (max-width: 1024px) {
+  .tf-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .tf-visual { height: 220px; }
 }
 
 /* — Mobile — */
@@ -4607,8 +4620,15 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .pj-visual { height: 180px; }
   .pj-card-large .pj-visual { height: 200px; }
   .pj-card-large .pj-title { font-size: 1.05rem; }
-  .tf-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-  .tf-visual { height: 240px; }
+  .tf-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .tf-grid > .tf-card {
+    width: 100%;
+  }
+  .tf-visual { height: 260px; }
 
   /* Process */
   .process-cards { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
@@ -5802,13 +5822,6 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 .transformations .container { position: relative; z-index: 1; }
 
-/* ─── Grid ─── */
-.tf-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
 /* ─── Card ─── */
 .tf-card {
   position: relative;
@@ -6076,12 +6089,6 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
-}
-
-/* ─── Transformations responsive ─── */
-@media (max-width: 1024px) {
-  .tf-grid { gap: 16px; }
-  .tf-visual { height: 220px; }
 }
 
 /* ─── Android-specific overrides (class set via JS) ─── */

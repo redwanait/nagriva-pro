@@ -167,60 +167,6 @@
   font-size: 0.6rem;
 }
 
-/* ─── Secure Payments ─── */
-.footer-payments {
-  padding: 28px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-  text-align: center;
-}
-
-.footer-payments-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 20px;
-}
-
-.footer-payments-logos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.payment-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
-}
-
-.payment-card:hover {
-  transform: translateY(-2px);
-}
-
-.payment-logo {
-  height: 28px;
-  width: auto;
-  max-width: 70px;
-  object-fit: contain;
-  display: block;
-}
-
-.footer-payments-trust {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.15);
-  margin-top: 16px;
-}
-
 /* ─── RTL Footer ─── */
 [dir="rtl"] .footer-grid {
   text-align: right;
@@ -241,9 +187,6 @@
 }
 [dir="rtl"] .footer-bottom {
   flex-direction: row;
-}
-[dir="rtl"] .footer-payments-logos {
-  flex-direction: row-reverse;
 }
 
 /* ─── RESPONSIVE ─── */
@@ -290,16 +233,6 @@
   }
   .footer-social {
     justify-content: center;
-  }
-  .footer-payments-logos {
-    gap: 12px;
-  }
-  .payment-card {
-    padding: 8px 10px;
-  }
-  .payment-logo {
-    height: 22px;
-    max-width: 56px;
   }
 }
 
