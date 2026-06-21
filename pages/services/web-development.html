@@ -1,0 +1,1183 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Development Services — Nagriva</title>
+  <meta name="description" content="Browse premium web development services. Dentist websites, lawyer websites, restaurant websites, real estate sites, business sites, landing pages, and more.">
+  <meta property="og:title" content="Web Development Services — Nagriva">
+  <meta property="og:description" content="Browse premium web development services. Dentist, lawyer, restaurant, real estate, business, portfolio, landing pages, and car rental websites.">
+  <meta property="og:image" content="/assets/images/branding/nagriva-og.png">
+  <meta property="og:url" content="https://nagriva.com/pages/services/web-development">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nagriva">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Web Development Services — Nagriva">
+  <meta name="twitter:description" content="Browse premium web development services for every industry.">
+  <meta name="twitter:image" content="/assets/images/branding/nagriva-og.png">
+  <link rel="canonical" href="https://nagriva.com/pages/services/web-development.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/mobile-optimizations.css">
+  <link rel="stylesheet" href="/css/performance.css">
+  <link rel="stylesheet" href="/css/auth.css" media="print" onload="this.media='all'">
+  <style>
+    :root { --wd-gap: 100px; }
+
+    /* ─── HERO (compact marketplace style) ─── */
+    .wd-hero {
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--navbar-height) + 48px) 0 60px;
+    }
+    .wd-hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .wd-hero-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%);
+      filter: blur(100px);
+    }
+    .wd-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+    }
+    .wd-hero .container { position: relative; z-index: 1; }
+    .wd-hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .wd-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(250,204,21,0.08);
+      border: 1px solid rgba(250,204,21,0.16);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .wd-hero-badge-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: wdPulse 2s ease-in-out infinite;
+    }
+    .wd-hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .wd-hero-title span {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .wd-hero-desc {
+      font-size: 0.95rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── SERVICE CARDS MARKETPLACE ─── */
+    .wd-market {
+      padding: 0 0 var(--wd-gap);
+    }
+    .wd-market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wd-card {
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.012);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1),
+                  border-color 0.4s ease,
+                  box-shadow 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .wd-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(250,204,21,0.25);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(250,204,21,0.08),
+        0 0 60px rgba(250,204,21,0.05);
+    }
+
+    /* ─── Card Image (prepared for future service images) ─── */
+    .wd-card-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: rgba(255,255,255,0.015);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wd-card-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 0;
+    }
+    .wd-card:hover .wd-card-img img {
+      transform: scale(1.03);
+    }
+    .wd-card-img svg {
+      width: 56px;
+      height: 56px;
+      color: rgba(255,255,255,0.06);
+      transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1),
+                  color 0.4s ease;
+      z-index: 1;
+    }
+    .wd-card:hover .wd-card-img svg {
+      transform: scale(1.15);
+      color: rgba(250,204,21,0.08);
+    }
+    .wd-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(5,5,5,0.85));
+      pointer-events: none;
+      z-index: 2;
+    }
+    .wd-card-img:has(img) svg {
+      display: none;
+    }
+    .wd-card-img-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(250,204,21,0.04), transparent 70%);
+      filter: blur(40px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      z-index: 0;
+    }
+    .wd-card:hover .wd-card-img-glow {
+      opacity: 1;
+    }
+    .wd-card-img-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      background: rgba(250,204,21,0.1);
+      border: 1px solid rgba(250,204,21,0.2);
+      padding: 4px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .wd-card-img-tag svg {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Card Body ─── */
+    .wd-card-body {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+    .wd-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .wd-card-desc {
+      font-size: 0.76rem;
+      color: var(--gray2);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+    .wd-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .wd-card-rating-stars {
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+    .wd-card-rating-stars svg {
+      width: 11px;
+      height: 11px;
+      fill: #f5a623;
+    }
+    .wd-card-rating-score {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .wd-card-rating-count {
+      font-size: 0.68rem;
+      color: var(--gray2);
+    }
+    .wd-card-rating-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+    .wd-card-price {
+      margin-bottom: 16px;
+    }
+    .wd-card-price-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray2);
+      display: block;
+      margin-bottom: 3px;
+      opacity: 0.75;
+    }
+    .wd-card-price-amount {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .wd-card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    /* ─── Carousel / Pagination ─── */
+    .wd-market-grid {
+      position: relative;
+      min-height: 500px;
+    }
+    .wd-card--exit {
+      animation: wdCardExit 0.35s ease forwards;
+      pointer-events: none;
+    }
+    .wd-card--enter {
+      animation: wdCardEnter 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+    @keyframes wdCardExit {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-12px) scale(0.98); }
+    }
+    @keyframes wdCardEnter {
+      0% { opacity: 0; transform: translateY(20px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .wd-market-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding-top: 36px;
+    }
+    .wd-market-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 99px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--white);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .wd-market-nav-btn:hover {
+      background: rgba(250,204,21,0.06);
+      border-color: rgba(250,204,21,0.25);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .wd-market-nav-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+    .wd-market-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    .wd-market-nav-btn svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .wd-market-nav-btn--prev:hover svg {
+      transform: translateX(-2px);
+    }
+    .wd-market-nav-btn--next:hover svg {
+      transform: translateX(2px);
+    }
+    .wd-market-nav-page {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray2);
+      min-width: 64px;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .wd-market-nav-page .current {
+      color: var(--white);
+    }
+    .wd-card-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 18px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      font-family: inherit;
+    }
+    .wd-card-btn--primary {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #050505;
+    }
+    .wd-card-btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(250,204,21,0.3);
+    }
+    .wd-card-btn--primary svg {
+      width: 13px;
+      height: 13px;
+      transition: transform 0.3s ease;
+    }
+    .wd-card-btn--primary:hover svg {
+      transform: translateX(3px);
+    }
+    .wd-card-btn--secondary {
+      background: transparent;
+      border: 1px solid rgba(250,204,21,0.2);
+      color: var(--accent);
+    }
+    .wd-card-btn--secondary:hover {
+      background: rgba(250,204,21,0.06);
+      border-color: rgba(250,204,21,0.4);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .wd-card-btn--secondary svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ─── CUSTOM PROJECT CTA ─── */
+    .wd-custom {
+      padding: 0 0 var(--wd-gap);
+    }
+    .wd-custom-card {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid rgba(250,204,21,0.08);
+      background: linear-gradient(135deg, rgba(250,204,21,0.03), rgba(245,158,11,0.02));
+      padding: 56px 48px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .wd-custom-glow {
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(250,204,21,0.04), transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .wd-custom-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .wd-custom-card h2 span {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .wd-custom-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .wd-custom-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .wd-custom-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 99px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .wd-custom-btn--primary {
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #050505;
+    }
+    .wd-custom-btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(250,204,21,0.25);
+    }
+    .wd-custom-btn--primary svg {
+      width: 15px; height: 15px;
+      transition: transform 0.3s ease;
+    }
+    .wd-custom-btn--primary:hover svg { transform: translateX(4px); }
+    .wd-custom-btn--secondary {
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      background: rgba(255,255,255,0.03);
+    }
+    .wd-custom-btn--secondary:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    @keyframes wdPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .wd-market-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .wd-custom-card { padding: 40px 28px; }
+    }
+    @media (max-width: 600px) {
+      :root { --wd-gap: 80px; }
+      .wd-hero { padding: calc(var(--navbar-height) + 32px) 0 40px; }
+      .wd-market-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .wd-card-img { aspect-ratio: 16 / 9; }
+      .wd-custom-actions { flex-direction: column; width: 100%; }
+      .wd-custom-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Nagriva",
+  "url": "https://nagriva.com",
+  "logo": "https://nagriva.com/assets/images/branding/nagriva-logo.png",
+  "description": "Nagriva is a digital growth agency offering web design, SEO, branding, AI automation, social media management, and performance marketing services.",
+  "sameAs": [
+    "https://www.instagram.com/nagriva.co/",
+    "https://x.com/nag_riva",
+    "https://www.facebook.com/profile.php?id=61575750526639",
+    "https://www.youtube.com/channel/UCTlY_icbUlIjdcuPZdtTeTQ",
+    "https://wa.me/212728427278"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Nagriva",
+  "url": "https://nagriva.com",
+  "description": "Nagriva is a digital growth agency offering web design, SEO, branding, AI automation, social media management, and performance marketing services."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nagriva.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://nagriva.com/pages/services.html" },
+    { "@type": "ListItem", "position": 3, "name": "Web Development" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Web Development Services",
+  "description": "Premium web development services for every industry.",
+  "url": "https://nagriva.com/pages/services/web-development.html",
+  "numberOfItems": 9,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Dentist Website" },
+    { "@type": "ListItem", "position": 2, "name": "Lawyer Website" },
+    { "@type": "ListItem", "position": 3, "name": "Restaurant Website" },
+    { "@type": "ListItem", "position": 4, "name": "Real Estate Website" },
+    { "@type": "ListItem", "position": 5, "name": "Business Website" },
+    { "@type": "ListItem", "position": 6, "name": "Portfolio Website" },
+    { "@type": "ListItem", "position": 7, "name": "Landing Page" },
+    { "@type": "ListItem", "position": 8, "name": "Car Rental Website" },
+    { "@type": "ListItem", "position": 9, "name": "Custom Web App" }
+  ]
+}
+</script>
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/favicon/android-chrome-512x512.png?v=4">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/android-chrome-192x192.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico?v=4">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body data-page="services">
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NJP8X4CBH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NJP8X4CBH2');
+</script>
+
+  <div id="navbar-container"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO (compact marketplace)
+       ════════════════════════════════════════════ -->
+  <section class="wd-hero section">
+    <div class="wd-hero-bg">
+      <div class="wd-hero-glow"></div>
+      <div class="wd-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="wd-hero-inner fade-up">
+        <div class="wd-hero-badge">
+          <span class="wd-hero-badge-dot"></span>
+          Web Development
+        </div>
+        <h1 class="wd-hero-title">
+          Premium <span>Websites</span><br>
+          for Every Industry
+        </h1>
+        <p class="wd-hero-desc">
+          Browse our catalog of hand-crafted website services. Each built to convert, optimize, and perform.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       SERVICE CARDS MARKETPLACE
+       ════════════════════════════════════════════ -->
+  <section class="wd-market lazy-section">
+    <div class="container">
+      <div class="wd-market-grid fade-up">
+
+        <!-- 1 ─── Dentist Website ─── -->
+        <div class="wd-card" style="--delay:0s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7z"/></svg>Most Popular</span>
+            <img src="/assets/images/web-development-service/Dentist%20Website.png" alt="Dentist Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Dentist Website</h3>
+            <p class="wd-card-desc">Patient-focused design with online booking, service showcases, and trust-building features.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.9</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">128 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$1,799</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Dentist%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/dentist-websites.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 ─── Lawyer Website ─── -->
+        <div class="wd-card" style="--delay:0.04s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Recommended</span>
+            <img src="/assets/images/web-development-service/Lawyer%20Website.png" alt="Lawyer Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Lawyer Website</h3>
+            <p class="wd-card-desc">Authority-driven sites with case management, client intake forms, and reputation features.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.9</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">96 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$1,899</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Lawyer%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/lawyer-websites.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 ─── Restaurant Website ─── -->
+        <div class="wd-card" style="--delay:0.08s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Best Seller</span>
+            <img src="/assets/images/web-development-service/Restaurant%20Website.png" alt="Restaurant Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <path d="M3 3h18v18H3z"></path>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <path d="M21 15l-5-5L5 21"></path>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Restaurant Website</h3>
+            <p class="wd-card-desc">Mouth-watering menus, online reservations, location pages, and gallery showcases.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.8</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">112 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$1,699</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Restaurant%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/restaurant-websites.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 ─── Real Estate Website ─── -->
+        <div class="wd-card" style="--delay:0.12s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12l4 8-10 12L2 12z"/></svg>Premium</span>
+            <img src="/assets/images/web-development-service/Real%20Estate%20Website.png" alt="Real Estate Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Real Estate Website</h3>
+            <p class="wd-card-desc">Property listings, virtual tours, mortgage calculators, and agent lead capture systems.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.9</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">84 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$2,299</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Real%20Estate%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/real-estate-websites.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 ─── Business Website ─── -->
+        <div class="wd-card" style="--delay:0.16s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 8 6 10 6 14a6 6 0 0 0 12 0c0-4-4-6-6-12z"/></svg>High Demand</span>
+            <img src="/assets/images/web-development-service/Business%20Website.png" alt="Business Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+              <line x1="12" y1="12" x2="12.01" y2="12"></line>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Business Website</h3>
+            <p class="wd-card-desc">Professional corporate sites that establish credibility, showcase services, and generate leads.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.8</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">156 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$1,499</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Business%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/services/website-development.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 ─── Portfolio Website ─── -->
+        <div class="wd-card" style="--delay:0.2s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/></svg>New</span>
+            <img src="/assets/images/web-development-service/Portfolio%20Website.png" alt="Portfolio Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"></polygon>
+              <line x1="12" y1="22" x2="12" y2="15.5"></line>
+              <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Portfolio Website</h3>
+            <p class="wd-card-desc">Stunning showcase sites for creatives, photographers, designers, and agencies.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.7</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">63 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$1,599</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Portfolio%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/services/website-development.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 ─── Landing Page ─── -->
+        <div class="wd-card" style="--delay:0.24s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12l4 8-10 12L2 12z"/></svg>Premium</span>
+            <img src="/assets/images/web-development-service/Landing%20Page.png" alt="Landing Page" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Landing Page</h3>
+            <p class="wd-card-desc">High-conversion pages designed for product launches, campaigns, and lead generation.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.9</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">147 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$899</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Landing%20Page." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/services/website-development.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 ─── Car Rental Website ─── -->
+        <div class="wd-card" style="--delay:0.28s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Best Seller</span>
+            <img src="/assets/images/web-development-service/Car%20Rental%20Website.png" alt="Car Rental Website" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <path d="M5 17h14M5 17a2 2 0 0 1-2-2V9l3-4h12l3 4v6a2 2 0 0 1-2 2M5 17a2 2 0 1 0 4 0m6 0a2 2 0 1 0 4 0"></path>
+              <line x1="7" y1="9" x2="17" y2="9"></line>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Car Rental Website</h3>
+            <p class="wd-card-desc">Booking systems, fleet management, availability calendars, and location-based search.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.8</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">72 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$2,499</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20order%20a%20Car%20Rental%20Website." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/services/website-development.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 ─── Custom Web App ─── -->
+        <div class="wd-card" style="--delay:0.32s">
+          <div class="wd-card-img">
+            <div class="wd-card-img-glow"></div>
+            <span class="wd-card-img-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Enterprise</span>
+            <img src="/assets/images/web-development-service/Custom%20Web%20App.png" alt="Custom Web App" loading="lazy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <div class="wd-card-body">
+            <h3 class="wd-card-title">Custom Web App</h3>
+            <p class="wd-card-desc">Tailored web applications with databases, user authentication, dashboards, and scalable architecture.</p>
+            <div class="wd-card-rating">
+              <div class="wd-card-rating-stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="wd-card-rating-score">4.9</span>
+              <span class="wd-card-rating-dot"></span>
+              <span class="wd-card-rating-count">48 reviews</span>
+            </div>
+            <div class="wd-card-price">
+              <span class="wd-card-price-label">Starting From</span>
+              <span class="wd-card-price-amount">$3,499</span>
+            </div>
+            <div class="wd-card-actions">
+              <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20inquire%20about%20a%20Custom%20Web%20App." target="_blank" rel="noopener" class="wd-card-btn wd-card-btn--primary">
+                Order Service
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="/pages/services/website-development.html" class="wd-card-btn wd-card-btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                View Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <nav class="wd-market-nav fade-up" aria-label="Service pages">
+        <button class="wd-market-nav-btn wd-market-nav-btn--prev" id="wdNavPrev" aria-label="Previous page" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Previous</span>
+        </button>
+        <span class="wd-market-nav-page" id="wdPageIndicator"><span class="current" id="wdPageCurrent">1</span> / <span id="wdPageTotal">3</span></span>
+        <button class="wd-market-nav-btn wd-market-nav-btn--next" id="wdNavNext" aria-label="Next page">
+          <span>Next</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </nav>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       CUSTOM PROJECT CTA
+       ════════════════════════════════════════════ -->
+  <section class="wd-custom lazy-section">
+    <div class="container">
+      <div class="wd-custom-card fade-up">
+        <div class="wd-custom-glow"></div>
+        <h2>Need Something <span>Custom?</span></h2>
+        <p>Don't see exactly what you're looking for? Tell us about your project and we'll build a tailored solution for your business.</p>
+        <div class="wd-custom-actions">
+          <a href="https://wa.me/212728427278?text=Hello%20Nagriva%20Team%2C%20I'd%20like%20to%20discuss%20a%20custom%20web%20development%20project." target="_blank" rel="noopener" class="wd-custom-btn wd-custom-btn--primary">
+            Contact Us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="https://calendly.com/redwanaitlhadj16/30min" target="_blank" rel="noopener" class="wd-custom-btn wd-custom-btn--secondary">
+            Get Free Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/js/supabase-config.js"></script>
+  <script defer src="/js/services-api.js"></script>
+  <script defer src="/js/toast.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/i18n.js"></script>
+  <script defer src="/js/auth.js"></script>
+  <script defer src="/js/performance-optimizer.js"></script>
+  <script defer src="/js/lazy-loader.js"></script>
+  <div id="cookie-consent-container"></div>
+<script defer src="/js/layout.js"></script>
+
+<script>
+(function() {
+  'use strict';
+
+  var PER_PAGE = 3;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.wd-market-grid .wd-card'));
+  var total = cards.length;
+  var totalPages = Math.ceil(total / PER_PAGE);
+  var currentPage = 1;
+  var animating = false;
+
+  var prevBtn = document.getElementById('wdNavPrev');
+  var nextBtn = document.getElementById('wdNavNext');
+  var pageCurrent = document.getElementById('wdPageCurrent');
+  var pageTotal = document.getElementById('wdPageTotal');
+
+  if (!cards.length || totalPages <= 1) return;
+
+  pageTotal.textContent = totalPages;
+
+  function updateNav() {
+    pageCurrent.textContent = currentPage;
+    prevBtn.disabled = currentPage <= 1;
+    nextBtn.disabled = currentPage >= totalPages;
+  }
+
+  function goToPage(page) {
+    if (animating) return;
+    if (page < 1 || page > totalPages) return;
+    if (page === currentPage) return;
+    animating = true;
+
+    var start = (page - 1) * PER_PAGE;
+    var end = Math.min(start + PER_PAGE, total);
+    var prevStart = (currentPage - 1) * PER_PAGE;
+    var prevEnd = Math.min(prevStart + PER_PAGE, total);
+
+    for (var i = prevStart; i < prevEnd; i++) {
+      cards[i].classList.add('wd-card--exit');
+    }
+
+    setTimeout(function() {
+      for (var i = 0; i < total; i++) {
+        cards[i].style.display = 'none';
+        cards[i].classList.remove('wd-card--exit', 'wd-card--enter');
+      }
+
+      for (var j = start; j < end; j++) {
+        cards[j].style.display = 'flex';
+        void cards[j].offsetWidth;
+        cards[j].classList.add('wd-card--enter');
+      }
+
+      currentPage = page;
+      updateNav();
+
+      setTimeout(function() {
+        for (var k = start; k < end; k++) {
+          cards[k].classList.remove('wd-card--enter');
+        }
+        animating = false;
+      }, 500);
+    }, 350);
+  }
+
+  prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
+  nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
+
+  for (var i = PER_PAGE; i < total; i++) {
+    cards[i].style.display = 'none';
+  }
+  updateNav();
+})();
+</script>
+
+</body></html>
